@@ -23,9 +23,10 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsDeviceAdminService       *jni.GlobalRef
-	midDeviceAdminServiceCtor   jni.MethodID
-	midDeviceAdminServiceOnBind jni.MethodID
+	clsDeviceAdminService         *jni.GlobalRef
+	midDeviceAdminServiceCtor     jni.MethodID
+	midDeviceAdminServiceOnBind   jni.MethodID
+	midDeviceAdminServiceToString jni.MethodID
 
 	clsFreezePeriod         *jni.GlobalRef
 	midFreezePeriodCtor     jni.MethodID
@@ -36,6 +37,7 @@ var (
 	clsDevicePolicyResourcesManager                     *jni.GlobalRef
 	midDevicePolicyResourcesManagerGetDrawableAsIcon3   jni.MethodID
 	midDevicePolicyResourcesManagerGetDrawableAsIcon4_1 jni.MethodID
+	midDevicePolicyResourcesManagerToString             jni.MethodID
 
 	clsPackagePolicy                 *jni.GlobalRef
 	midPackagePolicyCtor             jni.MethodID
@@ -45,6 +47,7 @@ var (
 	midPackagePolicyGetPolicyType    jni.MethodID
 	midPackagePolicyHashCode         jni.MethodID
 	midPackagePolicyWriteToParcel    jni.MethodID
+	midPackagePolicyToString         jni.MethodID
 
 	clsPreferentialNetworkServiceConfig                                     *jni.GlobalRef
 	midPreferentialNetworkServiceConfigDescribeContents                     jni.MethodID
@@ -67,6 +70,7 @@ var (
 	midPreferentialNetworkServiceConfigBuilderSetIncludedUids                       jni.MethodID
 	midPreferentialNetworkServiceConfigBuilderSetNetworkId                          jni.MethodID
 	midPreferentialNetworkServiceConfigBuilderSetShouldBlockNonMatchingNetworks     jni.MethodID
+	midPreferentialNetworkServiceConfigBuilderToString                              jni.MethodID
 
 	clsDnsEvent                             *jni.GlobalRef
 	midDnsEventDescribeContents             jni.MethodID
@@ -95,6 +99,7 @@ var (
 	clsFactoryResetProtectionPolicyBuilder                                 *jni.GlobalRef
 	midFactoryResetProtectionPolicyBuilderBuild                            jni.MethodID
 	midFactoryResetProtectionPolicyBuilderSetFactoryResetProtectionEnabled jni.MethodID
+	midFactoryResetProtectionPolicyBuilderToString                         jni.MethodID
 
 	clsDevicePolicyManager                                               *jni.GlobalRef
 	midDevicePolicyManagerAcknowledgeDeviceCompliant                     jni.MethodID
@@ -378,16 +383,20 @@ var (
 	midDevicePolicyManagerWipeData1                                      jni.MethodID
 	midDevicePolicyManagerWipeData2_1                                    jni.MethodID
 	midDevicePolicyManagerWipeDevice                                     jni.MethodID
+	midDevicePolicyManagerToString                                       jni.MethodID
 	midDevicePolicyManagerIsMtePolicyEnforced                            jni.MethodID
 
 	clsDevicePolicyManagerInstallSystemUpdateCallback                     *jni.GlobalRef
 	midDevicePolicyManagerInstallSystemUpdateCallbackOnInstallUpdateError jni.MethodID
+	midDevicePolicyManagerInstallSystemUpdateCallbackToString             jni.MethodID
 
 	clsDevicePolicyManagerOnClearApplicationUserDataListener                             *jni.GlobalRef
 	midDevicePolicyManagerOnClearApplicationUserDataListenerOnApplicationUserDataCleared jni.MethodID
+	midDevicePolicyManagerOnClearApplicationUserDataListenerToString                     jni.MethodID
 
-	clsSecurityLog     *jni.GlobalRef
-	midSecurityLogCtor jni.MethodID
+	clsSecurityLog         *jni.GlobalRef
+	midSecurityLogCtor     jni.MethodID
+	midSecurityLogToString jni.MethodID
 
 	clsSecurityLogSecurityEvent                 *jni.GlobalRef
 	midSecurityLogSecurityEventDescribeContents jni.MethodID
@@ -399,6 +408,7 @@ var (
 	midSecurityLogSecurityEventGetTimeNanos     jni.MethodID
 	midSecurityLogSecurityEventHashCode         jni.MethodID
 	midSecurityLogSecurityEventWriteToParcel    jni.MethodID
+	midSecurityLogSecurityEventToString         jni.MethodID
 
 	clsManagedSubscriptionsPolicy                 *jni.GlobalRef
 	midManagedSubscriptionsPolicyCtor             jni.MethodID
@@ -413,10 +423,12 @@ var (
 	midPolicyUpdateReceiverOnPolicyChanged   jni.MethodID
 	midPolicyUpdateReceiverOnPolicySetResult jni.MethodID
 	midPolicyUpdateReceiverOnReceive         jni.MethodID
+	midPolicyUpdateReceiverToString          jni.MethodID
 
 	clsPolicyUpdateResult              *jni.GlobalRef
 	midPolicyUpdateResultCtor          jni.MethodID
 	midPolicyUpdateResultGetResultCode jni.MethodID
+	midPolicyUpdateResultToString      jni.MethodID
 
 	clsDeviceAdminReceiver                                             *jni.GlobalRef
 	midDeviceAdminReceiverCtor                                         jni.MethodID
@@ -454,12 +466,14 @@ var (
 	midDeviceAdminReceiverOnUserStarted                                jni.MethodID
 	midDeviceAdminReceiverOnUserStopped                                jni.MethodID
 	midDeviceAdminReceiverOnUserSwitched                               jni.MethodID
+	midDeviceAdminReceiverToString                                     jni.MethodID
 
 	clsUnsafeStateException                 *jni.GlobalRef
 	midUnsafeStateExceptionDescribeContents jni.MethodID
 	midUnsafeStateExceptionGetMessage       jni.MethodID
 	midUnsafeStateExceptionGetReasons       jni.MethodID
 	midUnsafeStateExceptionWriteToParcel    jni.MethodID
+	midUnsafeStateExceptionToString         jni.MethodID
 
 	clsDelegatedAdminReceiver                        *jni.GlobalRef
 	midDelegatedAdminReceiverCtor                    jni.MethodID
@@ -467,10 +481,12 @@ var (
 	midDelegatedAdminReceiverOnNetworkLogsAvailable  jni.MethodID
 	midDelegatedAdminReceiverOnReceive               jni.MethodID
 	midDelegatedAdminReceiverOnSecurityLogsAvailable jni.MethodID
+	midDelegatedAdminReceiverToString                jni.MethodID
 
 	clsTargetUser         *jni.GlobalRef
 	midTargetUserEquals   jni.MethodID
 	midTargetUserHashCode jni.MethodID
+	midTargetUserToString jni.MethodID
 
 	clsWifiSsidPolicy                 *jni.GlobalRef
 	midWifiSsidPolicyCtor             jni.MethodID
@@ -480,11 +496,14 @@ var (
 	midWifiSsidPolicyGetSsids         jni.MethodID
 	midWifiSsidPolicyHashCode         jni.MethodID
 	midWifiSsidPolicyWriteToParcel    jni.MethodID
+	midWifiSsidPolicyToString         jni.MethodID
 
 	clsDevicePolicyIdentifiers                                *jni.GlobalRef
+	midDevicePolicyIdentifiersToString                        jni.MethodID
 	midDevicePolicyIdentifiersGetIdentifierForUserRestriction jni.MethodID
 
-	clsDevicePolicyResources *jni.GlobalRef
+	clsDevicePolicyResources         *jni.GlobalRef
+	midDevicePolicyResourcesToString jni.MethodID
 
 	clsConnectEvent                 *jni.GlobalRef
 	midConnectEventDescribeContents jni.MethodID
@@ -518,6 +537,7 @@ var (
 	midNetworkEventGetPackageName   jni.MethodID
 	midNetworkEventGetTimestamp     jni.MethodID
 	midNetworkEventWriteToParcel    jni.MethodID
+	midNetworkEventToString         jni.MethodID
 
 	clsSystemUpdatePolicy                             *jni.GlobalRef
 	midSystemUpdatePolicyDescribeContents             jni.MethodID
@@ -535,6 +555,7 @@ var (
 	midSystemUpdatePolicyValidationFailedExceptionDescribeContents jni.MethodID
 	midSystemUpdatePolicyValidationFailedExceptionGetErrorCode     jni.MethodID
 	midSystemUpdatePolicyValidationFailedExceptionWriteToParcel    jni.MethodID
+	midSystemUpdatePolicyValidationFailedExceptionToString         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -568,6 +589,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDeviceAdminServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceAdminService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceAdminServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceAdminService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -633,6 +661,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDevicePolicyResourcesManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevicePolicyResourcesManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/admin/PackagePolicy")
@@ -683,6 +718,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPackagePolicyWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackagePolicy)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPackagePolicyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackagePolicy)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -829,6 +871,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPreferentialNetworkServiceConfigBuilderSetShouldBlockNonMatchingNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferentialNetworkServiceConfigBuilder)), "setShouldBlockNonMatchingNetworks", "(Z)Landroid/app/admin/PreferentialNetworkServiceConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPreferentialNetworkServiceConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferentialNetworkServiceConfigBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1009,6 +1058,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFactoryResetProtectionPolicyBuilderSetFactoryResetProtectionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFactoryResetProtectionPolicyBuilder)), "setFactoryResetProtectionEnabled", "(Z)Landroid/app/admin/FactoryResetProtectionPolicy$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFactoryResetProtectionPolicyBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFactoryResetProtectionPolicyBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2992,6 +3048,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDevicePolicyManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevicePolicyManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midDevicePolicyManagerIsMtePolicyEnforced, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDevicePolicyManager)), "isMtePolicyEnforced", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3016,6 +3079,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDevicePolicyManagerInstallSystemUpdateCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevicePolicyManagerInstallSystemUpdateCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/admin/DevicePolicyManager$OnClearApplicationUserDataListener")
@@ -3033,6 +3103,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDevicePolicyManagerOnClearApplicationUserDataListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevicePolicyManagerOnClearApplicationUserDataListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/admin/SecurityLog")
@@ -3044,6 +3121,13 @@ func doInit(env *jni.Env) error {
 		clsSecurityLog = env.NewGlobalRef(&c.Object)
 		midSecurityLogCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSecurityLog)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midSecurityLogToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSecurityLog)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3114,6 +3198,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSecurityLogSecurityEventWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSecurityLogSecurityEvent)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSecurityLogSecurityEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSecurityLogSecurityEvent)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3207,6 +3298,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPolicyUpdateReceiverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPolicyUpdateReceiver)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/admin/PolicyUpdateResult")
@@ -3222,6 +3320,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPolicyUpdateResultGetResultCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPolicyUpdateResult)), "getResultCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPolicyUpdateResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPolicyUpdateResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3480,6 +3585,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDeviceAdminReceiverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceAdminReceiver)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/admin/UnsafeStateException")
@@ -3512,6 +3624,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midUnsafeStateExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnsafeStateException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUnsafeStateExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnsafeStateException)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3560,6 +3679,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDelegatedAdminReceiverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDelegatedAdminReceiver)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/admin/TargetUser")
@@ -3578,6 +3704,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTargetUserHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTargetUser)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTargetUserToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTargetUser)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3640,6 +3773,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiSsidPolicyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiSsidPolicy)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/admin/DevicePolicyIdentifiers")
@@ -3649,6 +3789,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDevicePolicyIdentifiers = env.NewGlobalRef(&c.Object)
+
+		midDevicePolicyIdentifiersToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevicePolicyIdentifiers)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midDevicePolicyIdentifiersGetIdentifierForUserRestriction, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDevicePolicyIdentifiers)), "getIdentifierForUserRestriction", "(Ljava/lang/String;)Ljava/lang/String;")
 		if err != nil {
@@ -3666,6 +3813,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDevicePolicyResources = env.NewGlobalRef(&c.Object)
+
+		midDevicePolicyResourcesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevicePolicyResources)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -3883,6 +4037,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNetworkEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkEvent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/admin/SystemUpdatePolicy")
@@ -3988,6 +4149,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSystemUpdatePolicyValidationFailedExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSystemUpdatePolicyValidationFailedException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSystemUpdatePolicyValidationFailedExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSystemUpdatePolicyValidationFailedException)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

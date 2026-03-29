@@ -26,6 +26,7 @@ var (
 	clsListenerService                           *jni.GlobalRef
 	midListenerServiceOnBind                     jni.MethodID
 	midListenerServiceOnCurrentVrActivityChanged jni.MethodID
+	midListenerServiceToString                   jni.MethodID
 	midListenerServiceIsVrModePackageEnabled     jni.MethodID
 )
 
@@ -63,6 +64,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midListenerServiceOnCurrentVrActivityChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onCurrentVrActivityChanged", "(Landroid/content/ComponentName;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

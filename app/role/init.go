@@ -27,6 +27,7 @@ var (
 	midManagerCreateRequestRoleIntent jni.MethodID
 	midManagerIsRoleAvailable         jni.MethodID
 	midManagerIsRoleHeld              jni.MethodID
+	midManagerToString                jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -70,6 +71,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerIsRoleHeld, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRoleHeld", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

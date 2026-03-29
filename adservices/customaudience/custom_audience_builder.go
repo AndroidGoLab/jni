@@ -389,3 +389,30 @@ func (m *CustomAudienceBuilder) SetUserBiddingSignals(arg0 *jni.Object) (*jni.Ob
 	})
 	return result, callErr
 }
+
+// ToString calls android.adservices.customaudience.CustomAudience$Builder.toString.
+func (m *CustomAudienceBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCustomAudienceBuilderToString == nil {
+			callErr = fmt.Errorf("android.adservices.customaudience.CustomAudience$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCustomAudienceBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

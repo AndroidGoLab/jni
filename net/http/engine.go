@@ -217,6 +217,33 @@ func (m *Engine) Shutdown() error {
 	return callErr
 }
 
+// ToString calls android.net.http.HttpEngine.toString.
+func (m *Engine) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midEngineToString == nil {
+			callErr = fmt.Errorf("android.net.http.HttpEngine.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midEngineToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetVersionString calls android.net.http.HttpEngine.getVersionString.
 func (m *Engine) GetVersionString() (string, error) {
 	var result string

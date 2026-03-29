@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsSdkExtensions                    *jni.GlobalRef
+	midSdkExtensionsToString            jni.MethodID
 	midSdkExtensionsGetExtensionVersion jni.MethodID
 )
 
@@ -52,6 +53,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSdkExtensions = env.NewGlobalRef(&c.Object)
+
+		midSdkExtensionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkExtensions)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midSdkExtensionsGetExtensionVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSdkExtensions)), "getExtensionVersion", "(I)I")
 		if err != nil {

@@ -118,3 +118,30 @@ func (m *PointFEvaluator) Evaluate3_1(
 	})
 	return result, callErr
 }
+
+// ToString calls android.animation.PointFEvaluator.toString.
+func (m *PointFEvaluator) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPointFEvaluatorToString == nil {
+			callErr = fmt.Errorf("android.animation.PointFEvaluator.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPointFEvaluatorToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

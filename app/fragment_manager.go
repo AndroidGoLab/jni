@@ -745,6 +745,33 @@ func (m *FragmentManager) UnregisterFragmentLifecycleCallbacks(arg0 *jni.Object)
 	return callErr
 }
 
+// ToString calls android.app.FragmentManager.toString.
+func (m *FragmentManager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFragmentManagerToString == nil {
+			callErr = fmt.Errorf("android.app.FragmentManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFragmentManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // EnableDebugLogging calls android.app.FragmentManager.enableDebugLogging.
 func (m *FragmentManager) EnableDebugLogging(arg0 bool) error {
 

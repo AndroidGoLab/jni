@@ -30,10 +30,12 @@ var (
 	midBleRssiRangingParamsGetRangingUpdateRate    jni.MethodID
 	midBleRssiRangingParamsHashCode                jni.MethodID
 	midBleRssiRangingParamsWriteToParcel           jni.MethodID
+	midBleRssiRangingParamsToString                jni.MethodID
 
 	clsBleRssiRangingParamsBuilder                     *jni.GlobalRef
 	midBleRssiRangingParamsBuilderBuild                jni.MethodID
 	midBleRssiRangingParamsBuilderSetRangingUpdateRate jni.MethodID
+	midBleRssiRangingParamsBuilderToString             jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -104,6 +106,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBleRssiRangingParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/ranging/ble/rssi/BleRssiRangingParams$Builder")
@@ -122,6 +131,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBleRssiRangingParamsBuilderSetRangingUpdateRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParamsBuilder)), "setRangingUpdateRate", "(I)Landroid/ranging/ble/rssi/BleRssiRangingParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBleRssiRangingParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

@@ -42,12 +42,14 @@ var (
 	midToastSetText1_1          jni.MethodID
 	midToastSetView             jni.MethodID
 	midToastShow                jni.MethodID
+	midToastToString            jni.MethodID
 	midToastMakeText3           jni.MethodID
 	midToastMakeText3_1         jni.MethodID
 
 	clsCallback              *jni.GlobalRef
 	midCallbackOnToastHidden jni.MethodID
 	midCallbackOnToastShown  jni.MethodID
+	midCallbackToString      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -199,6 +201,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midToastToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midToastMakeText3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "makeText", "(Landroid/content/Context;II)Landroid/widget/Toast;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -231,6 +240,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCallbackOnToastShown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallback)), "onToastShown", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

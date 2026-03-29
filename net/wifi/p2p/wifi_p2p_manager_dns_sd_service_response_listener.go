@@ -60,3 +60,30 @@ func (m *WifiP2pManagerDnsSdServiceResponseListener) OnDnsSdServiceAvailable(
 	})
 	return callErr
 }
+
+// ToString calls android.net.wifi.p2p.WifiP2pManager$DnsSdServiceResponseListener.toString.
+func (m *WifiP2pManagerDnsSdServiceResponseListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWifiP2pManagerDnsSdServiceResponseListenerToString == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager$DnsSdServiceResponseListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWifiP2pManagerDnsSdServiceResponseListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

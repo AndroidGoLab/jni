@@ -60,16 +60,19 @@ var (
 	midScanFilterBuilderSetServiceSolicitationUuid2_1  jni.MethodID
 	midScanFilterBuilderSetServiceUuid1                jni.MethodID
 	midScanFilterBuilderSetServiceUuid2_1              jni.MethodID
+	midScanFilterBuilderToString                       jni.MethodID
 
 	clsBluetoothLeScanner                        *jni.GlobalRef
 	midBluetoothLeScannerFlushPendingScanResults jni.MethodID
 	midBluetoothLeScannerStartScan               jni.MethodID
 	midBluetoothLeScannerStopScan1               jni.MethodID
 	midBluetoothLeScannerStopScan1_1             jni.MethodID
+	midBluetoothLeScannerToString                jni.MethodID
 
 	clsAdvertiseCallback               *jni.GlobalRef
 	midAdvertiseCallbackOnStartFailure jni.MethodID
 	midAdvertiseCallbackOnStartSuccess jni.MethodID
+	midAdvertiseCallbackToString       jni.MethodID
 
 	clsTransportDiscoveryData                     *jni.GlobalRef
 	midTransportDiscoveryDataCtor                 jni.MethodID
@@ -105,6 +108,7 @@ var (
 	midAdvertisingSetCallbackOnPeriodicAdvertisingEnabled           jni.MethodID
 	midAdvertisingSetCallbackOnPeriodicAdvertisingParametersUpdated jni.MethodID
 	midAdvertisingSetCallbackOnScanResponseDataSet                  jni.MethodID
+	midAdvertisingSetCallbackToString                               jni.MethodID
 
 	clsScanResult                               *jni.GlobalRef
 	midScanResultCtor                           jni.MethodID
@@ -133,6 +137,7 @@ var (
 	midBluetoothLeAdvertiserStartAdvertisingSet8_1 jni.MethodID
 	midBluetoothLeAdvertiserStopAdvertising        jni.MethodID
 	midBluetoothLeAdvertiserStopAdvertisingSet     jni.MethodID
+	midBluetoothLeAdvertiserToString               jni.MethodID
 
 	clsAdvertiseData                            *jni.GlobalRef
 	midAdvertiseDataDescribeContents            jni.MethodID
@@ -156,21 +161,25 @@ var (
 	midAdvertiseDataBuilderBuild                      jni.MethodID
 	midAdvertiseDataBuilderSetIncludeDeviceName       jni.MethodID
 	midAdvertiseDataBuilderSetIncludeTxPowerLevel     jni.MethodID
+	midAdvertiseDataBuilderToString                   jni.MethodID
 
 	clsScanCallback             *jni.GlobalRef
 	midScanCallbackOnScanFailed jni.MethodID
 	midScanCallbackOnScanResult jni.MethodID
+	midScanCallbackToString     jni.MethodID
 
 	clsPeriodicAdvertisingParameters                  *jni.GlobalRef
 	midPeriodicAdvertisingParametersDescribeContents  jni.MethodID
 	midPeriodicAdvertisingParametersGetIncludeTxPower jni.MethodID
 	midPeriodicAdvertisingParametersGetInterval       jni.MethodID
 	midPeriodicAdvertisingParametersWriteToParcel     jni.MethodID
+	midPeriodicAdvertisingParametersToString          jni.MethodID
 
 	clsPeriodicAdvertisingParametersBuilder                  *jni.GlobalRef
 	midPeriodicAdvertisingParametersBuilderBuild             jni.MethodID
 	midPeriodicAdvertisingParametersBuilderSetIncludeTxPower jni.MethodID
 	midPeriodicAdvertisingParametersBuilderSetInterval       jni.MethodID
+	midPeriodicAdvertisingParametersBuilderToString          jni.MethodID
 
 	clsTransportBlock                       *jni.GlobalRef
 	midTransportBlockCtor                   jni.MethodID
@@ -184,6 +193,7 @@ var (
 	midTransportBlockToByteArray            jni.MethodID
 	midTransportBlockTotalBytes             jni.MethodID
 	midTransportBlockWriteToParcel          jni.MethodID
+	midTransportBlockToString               jni.MethodID
 
 	clsAdvertisingSet                                 *jni.GlobalRef
 	midAdvertisingSetEnableAdvertising                jni.MethodID
@@ -193,6 +203,7 @@ var (
 	midAdvertisingSetSetPeriodicAdvertisingEnabled    jni.MethodID
 	midAdvertisingSetSetPeriodicAdvertisingParameters jni.MethodID
 	midAdvertisingSetSetScanResponseData              jni.MethodID
+	midAdvertisingSetToString                         jni.MethodID
 
 	clsAdvertiseSettings                 *jni.GlobalRef
 	midAdvertiseSettingsDescribeContents jni.MethodID
@@ -211,6 +222,7 @@ var (
 	midAdvertiseSettingsBuilderSetDiscoverable  jni.MethodID
 	midAdvertiseSettingsBuilderSetTimeout       jni.MethodID
 	midAdvertiseSettingsBuilderSetTxPowerLevel  jni.MethodID
+	midAdvertiseSettingsBuilderToString         jni.MethodID
 
 	clsScanSettings                     *jni.GlobalRef
 	midScanSettingsDescribeContents     jni.MethodID
@@ -221,6 +233,7 @@ var (
 	midScanSettingsGetScanMode          jni.MethodID
 	midScanSettingsGetScanResultType    jni.MethodID
 	midScanSettingsWriteToParcel        jni.MethodID
+	midScanSettingsToString             jni.MethodID
 
 	clsScanSettingsBuilder                *jni.GlobalRef
 	midScanSettingsBuilderBuild           jni.MethodID
@@ -231,6 +244,7 @@ var (
 	midScanSettingsBuilderSetPhy          jni.MethodID
 	midScanSettingsBuilderSetReportDelay  jni.MethodID
 	midScanSettingsBuilderSetScanMode     jni.MethodID
+	midScanSettingsBuilderToString        jni.MethodID
 
 	clsAdvertisingSetParameters                 *jni.GlobalRef
 	midAdvertisingSetParametersDescribeContents jni.MethodID
@@ -259,6 +273,7 @@ var (
 	midAdvertisingSetParametersBuilderSetScannable      jni.MethodID
 	midAdvertisingSetParametersBuilderSetSecondaryPhy   jni.MethodID
 	midAdvertisingSetParametersBuilderSetTxPowerLevel   jni.MethodID
+	midAdvertisingSetParametersBuilderToString          jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -535,6 +550,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScanFilterBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanFilterBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/BluetoothLeScanner")
@@ -573,6 +595,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBluetoothLeScannerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBluetoothLeScanner)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/AdvertiseCallback")
@@ -591,6 +620,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAdvertiseCallbackOnStartSuccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvertiseCallback)), "onStartSuccess", "(Landroid/bluetooth/le/AdvertiseSettings;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdvertiseCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvertiseCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -827,6 +863,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdvertisingSetCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvertisingSetCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/ScanResult")
@@ -1012,6 +1055,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBluetoothLeAdvertiserToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBluetoothLeAdvertiser)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/AdvertiseData")
@@ -1165,6 +1215,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdvertiseDataBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvertiseDataBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/ScanCallback")
@@ -1183,6 +1240,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScanCallbackOnScanResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanCallback)), "onScanResult", "(ILandroid/bluetooth/le/ScanResult;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScanCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1227,6 +1291,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPeriodicAdvertisingParametersToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPeriodicAdvertisingParameters)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/PeriodicAdvertisingParameters$Builder")
@@ -1252,6 +1323,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPeriodicAdvertisingParametersBuilderSetInterval, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPeriodicAdvertisingParametersBuilder)), "setInterval", "(I)Landroid/bluetooth/le/PeriodicAdvertisingParameters$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPeriodicAdvertisingParametersBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPeriodicAdvertisingParametersBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1342,6 +1420,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTransportBlockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportBlock)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/AdvertisingSet")
@@ -1395,6 +1480,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAdvertisingSetSetScanResponseData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvertisingSet)), "setScanResponseData", "(Landroid/bluetooth/le/AdvertiseData;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdvertisingSetToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvertisingSet)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1519,6 +1611,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdvertiseSettingsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvertiseSettingsBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/ScanSettings")
@@ -1585,6 +1684,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScanSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanSettings)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/bluetooth/le/ScanSettings$Builder")
@@ -1645,6 +1751,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScanSettingsBuilderSetScanMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanSettingsBuilder)), "setScanMode", "(I)Landroid/bluetooth/le/ScanSettings$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScanSettingsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanSettingsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1833,6 +1946,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAdvertisingSetParametersBuilderSetTxPowerLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvertisingSetParametersBuilder)), "setTxPowerLevel", "(I)Landroid/bluetooth/le/AdvertisingSetParameters$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdvertisingSetParametersBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvertisingSetParametersBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

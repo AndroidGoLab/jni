@@ -247,6 +247,33 @@ func (m *ResponseCache) Size() (int64, error) {
 	return result, callErr
 }
 
+// ToString calls android.net.http.HttpResponseCache.toString.
+func (m *ResponseCache) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midResponseCacheToString == nil {
+			callErr = fmt.Errorf("android.net.http.HttpResponseCache.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midResponseCacheToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstalled calls android.net.http.HttpResponseCache.getInstalled.
 func (m *ResponseCache) GetInstalled() (*jni.Object, error) {
 	var result *jni.Object

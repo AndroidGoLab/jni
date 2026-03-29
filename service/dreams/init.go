@@ -69,6 +69,7 @@ var (
 	midDreamServiceSetInteractive                     jni.MethodID
 	midDreamServiceSetScreenBright                    jni.MethodID
 	midDreamServiceWakeUp                             jni.MethodID
+	midDreamServiceToString                           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -403,6 +404,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDreamServiceWakeUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "wakeUp", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDreamServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

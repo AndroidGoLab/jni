@@ -54,12 +54,14 @@ var (
 
 	clster                    *jni.GlobalRef
 	midterCtor                jni.MethodID
+	midterToString            jni.MethodID
 	midterFormatFileSize      jni.MethodID
 	midterFormatIpAddress     jni.MethodID
 	midterFormatShortFileSize jni.MethodID
 
 	clsDateFormat                       *jni.GlobalRef
 	midDateFormatCtor                   jni.MethodID
+	midDateFormatToString               jni.MethodID
 	midDateFormatFormat2                jni.MethodID
 	midDateFormatFormat2_1              jni.MethodID
 	midDateFormatFormat2_2              jni.MethodID
@@ -73,6 +75,7 @@ var (
 
 	clsDateUtils                             *jni.GlobalRef
 	midDateUtilsCtor                         jni.MethodID
+	midDateUtilsToString                     jni.MethodID
 	midDateUtilsFormatDateRange5             jni.MethodID
 	midDateUtilsFormatDateRange6_1           jni.MethodID
 	midDateUtilsFormatDateRange4_2           jni.MethodID
@@ -318,6 +321,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clster)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midterFormatFileSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clster)), "formatFileSize", "(Landroid/content/Context;J)Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -350,6 +360,13 @@ func doInit(env *jni.Env) error {
 		clsDateFormat = env.NewGlobalRef(&c.Object)
 		midDateFormatCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDateFormatToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -434,6 +451,13 @@ func doInit(env *jni.Env) error {
 		clsDateUtils = env.NewGlobalRef(&c.Object)
 		midDateUtilsCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateUtils)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDateUtilsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateUtils)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

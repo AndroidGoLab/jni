@@ -67,10 +67,13 @@ var (
 	midProviderUncanonicalize              jni.MethodID
 	midProviderUpdate3                     jni.MethodID
 	midProviderUpdate4_1                   jni.MethodID
+	midProviderToString                    jni.MethodID
 
-	clsProviderCallingIdentity *jni.GlobalRef
+	clsProviderCallingIdentity         *jni.GlobalRef
+	midProviderCallingIdentityToString jni.MethodID
 
-	clsProviderPipeDataWriter *jni.GlobalRef
+	clsProviderPipeDataWriter         *jni.GlobalRef
+	midProviderPipeDataWriterToString jni.MethodID
 
 	clsProviderResult                 *jni.GlobalRef
 	midProviderResultCtor             jni.MethodID
@@ -98,6 +101,7 @@ var (
 	midCursorLoaderOnCanceled1_1          jni.MethodID
 	midCursorLoaderLoadInBackground0_1    jni.MethodID
 	midCursorLoaderDeliverResult1_1       jni.MethodID
+	midCursorLoaderToString               jni.MethodID
 
 	clsComponentName                     *jni.GlobalRef
 	midComponentNameCtor                 jni.MethodID
@@ -235,17 +239,21 @@ var (
 	midIntentFilterTypesIterator                 jni.MethodID
 	midIntentFilterWriteToParcel                 jni.MethodID
 	midIntentFilterWriteToXml                    jni.MethodID
+	midIntentFilterToString                      jni.MethodID
 	midIntentFilterCreate                        jni.MethodID
 
-	clsIntentFilterAuthorityEntry        *jni.GlobalRef
-	midIntentFilterAuthorityEntryEquals  jni.MethodID
-	midIntentFilterAuthorityEntryGetHost jni.MethodID
-	midIntentFilterAuthorityEntryGetPort jni.MethodID
-	midIntentFilterAuthorityEntryMatch   jni.MethodID
+	clsIntentFilterAuthorityEntry         *jni.GlobalRef
+	midIntentFilterAuthorityEntryEquals   jni.MethodID
+	midIntentFilterAuthorityEntryGetHost  jni.MethodID
+	midIntentFilterAuthorityEntryGetPort  jni.MethodID
+	midIntentFilterAuthorityEntryMatch    jni.MethodID
+	midIntentFilterAuthorityEntryToString jni.MethodID
 
-	clsIntentFilterMalformedMimeTypeException *jni.GlobalRef
+	clsIntentFilterMalformedMimeTypeException         *jni.GlobalRef
+	midIntentFilterMalformedMimeTypeExceptionToString jni.MethodID
 
-	clsQuickViewConstants *jni.GlobalRef
+	clsQuickViewConstants         *jni.GlobalRef
+	midQuickViewConstantsToString jni.MethodID
 
 	clsRestrictionsManager                                   *jni.GlobalRef
 	midRestrictionsManagerCreateLocalApprovalIntent          jni.MethodID
@@ -255,10 +263,12 @@ var (
 	midRestrictionsManagerHasRestrictionsProvider            jni.MethodID
 	midRestrictionsManagerNotifyPermissionResponse           jni.MethodID
 	midRestrictionsManagerRequestPermission                  jni.MethodID
+	midRestrictionsManagerToString                           jni.MethodID
 
 	clsSyncInfo                 *jni.GlobalRef
 	midSyncInfoDescribeContents jni.MethodID
 	midSyncInfoWriteToParcel    jni.MethodID
+	midSyncInfoToString         jni.MethodID
 
 	clsClipDescription                        *jni.GlobalRef
 	midClipDescriptionCtor                    jni.MethodID
@@ -281,6 +291,7 @@ var (
 	clsMutableContextWrapper               *jni.GlobalRef
 	midMutableContextWrapperCtor           jni.MethodID
 	midMutableContextWrapperSetBaseContext jni.MethodID
+	midMutableContextWrapperToString       jni.MethodID
 
 	clsEntity                *jni.GlobalRef
 	midEntityCtor            jni.MethodID
@@ -289,7 +300,8 @@ var (
 	midEntityGetSubValues    jni.MethodID
 	midEntityToString        jni.MethodID
 
-	clsEntityNamedContentValues *jni.GlobalRef
+	clsEntityNamedContentValues         *jni.GlobalRef
+	midEntityNamedContentValuesToString jni.MethodID
 
 	clsPeriodicSync                 *jni.GlobalRef
 	midPeriodicSyncCtor             jni.MethodID
@@ -300,6 +312,7 @@ var (
 
 	clsComponentCallbacks2             *jni.GlobalRef
 	midComponentCallbacks2OnTrimMemory jni.MethodID
+	midComponentCallbacks2ToString     jni.MethodID
 
 	clsLoader                       *jni.GlobalRef
 	midLoaderCtor                   jni.MethodID
@@ -325,10 +338,13 @@ var (
 	clsLoaderForceLoadContentObserver                         *jni.GlobalRef
 	midLoaderForceLoadContentObserverDeliverSelfNotifications jni.MethodID
 	midLoaderForceLoadContentObserverOnChange                 jni.MethodID
+	midLoaderForceLoadContentObserverToString                 jni.MethodID
 
-	clsLoaderOnLoadCanceledListener *jni.GlobalRef
+	clsLoaderOnLoadCanceledListener         *jni.GlobalRef
+	midLoaderOnLoadCanceledListenerToString jni.MethodID
 
-	clsLoaderOnLoadCompleteListener *jni.GlobalRef
+	clsLoaderOnLoadCompleteListener         *jni.GlobalRef
+	midLoaderOnLoadCompleteListenerToString jni.MethodID
 
 	clsLocusId                 *jni.GlobalRef
 	midLocusIdCtor             jni.MethodID
@@ -355,6 +371,7 @@ var (
 	midQueryMapCtor           jni.MethodID
 	midQueryMapRequery        jni.MethodID
 	midQueryMapSetKeepUpdated jni.MethodID
+	midQueryMapToString       jni.MethodID
 
 	clsIntentSender                                 *jni.GlobalRef
 	midIntentSenderDescribeContents                 jni.MethodID
@@ -372,16 +389,20 @@ var (
 
 	clsIntentSenderOnFinished               *jni.GlobalRef
 	midIntentSenderOnFinishedOnSendFinished jni.MethodID
+	midIntentSenderOnFinishedToString       jni.MethodID
 
-	clsIntentSenderSendIntentException *jni.GlobalRef
+	clsIntentSenderSendIntentException         *jni.GlobalRef
+	midIntentSenderSendIntentExceptionToString jni.MethodID
 
-	clsUriMatcher       *jni.GlobalRef
-	midUriMatcherCtor   jni.MethodID
-	midUriMatcherAddURI jni.MethodID
-	midUriMatcherMatch  jni.MethodID
+	clsUriMatcher         *jni.GlobalRef
+	midUriMatcherCtor     jni.MethodID
+	midUriMatcherAddURI   jni.MethodID
+	midUriMatcherMatch    jni.MethodID
+	midUriMatcherToString jni.MethodID
 
-	clsReceiverCallNotAllowedException     *jni.GlobalRef
-	midReceiverCallNotAllowedExceptionCtor jni.MethodID
+	clsReceiverCallNotAllowedException         *jni.GlobalRef
+	midReceiverCallNotAllowedExceptionCtor     jni.MethodID
+	midReceiverCallNotAllowedExceptionToString jni.MethodID
 
 	clsSearchRecentSuggestionsProvider         *jni.GlobalRef
 	midSearchRecentSuggestionsProviderCtor     jni.MethodID
@@ -391,35 +412,44 @@ var (
 	midSearchRecentSuggestionsProviderOnCreate jni.MethodID
 	midSearchRecentSuggestionsProviderQuery    jni.MethodID
 	midSearchRecentSuggestionsProviderUpdate   jni.MethodID
+	midSearchRecentSuggestionsProviderToString jni.MethodID
 
 	clsUris               *jni.GlobalRef
 	midUrisCtor           jni.MethodID
+	midUrisToString       jni.MethodID
 	midUrisAppendId       jni.MethodID
 	midUrisParseId        jni.MethodID
 	midUrisRemoveId       jni.MethodID
 	midUrisWithAppendedId jni.MethodID
 
-	clsDialogInterface        *jni.GlobalRef
-	midDialogInterfaceCancel  jni.MethodID
-	midDialogInterfaceDismiss jni.MethodID
+	clsDialogInterface         *jni.GlobalRef
+	midDialogInterfaceCancel   jni.MethodID
+	midDialogInterfaceDismiss  jni.MethodID
+	midDialogInterfaceToString jni.MethodID
 
 	clsDialogInterfaceOnCancelListener         *jni.GlobalRef
 	midDialogInterfaceOnCancelListenerOnCancel jni.MethodID
+	midDialogInterfaceOnCancelListenerToString jni.MethodID
 
-	clsDialogInterfaceOnClickListener        *jni.GlobalRef
-	midDialogInterfaceOnClickListenerOnClick jni.MethodID
+	clsDialogInterfaceOnClickListener         *jni.GlobalRef
+	midDialogInterfaceOnClickListenerOnClick  jni.MethodID
+	midDialogInterfaceOnClickListenerToString jni.MethodID
 
 	clsDialogInterfaceOnDismissListener          *jni.GlobalRef
 	midDialogInterfaceOnDismissListenerOnDismiss jni.MethodID
+	midDialogInterfaceOnDismissListenerToString  jni.MethodID
 
-	clsDialogInterfaceOnKeyListener      *jni.GlobalRef
-	midDialogInterfaceOnKeyListenerOnKey jni.MethodID
+	clsDialogInterfaceOnKeyListener         *jni.GlobalRef
+	midDialogInterfaceOnKeyListenerOnKey    jni.MethodID
+	midDialogInterfaceOnKeyListenerToString jni.MethodID
 
-	clsDialogInterfaceOnMultiChoiceClickListener        *jni.GlobalRef
-	midDialogInterfaceOnMultiChoiceClickListenerOnClick jni.MethodID
+	clsDialogInterfaceOnMultiChoiceClickListener         *jni.GlobalRef
+	midDialogInterfaceOnMultiChoiceClickListenerOnClick  jni.MethodID
+	midDialogInterfaceOnMultiChoiceClickListenerToString jni.MethodID
 
-	clsDialogInterfaceOnShowListener       *jni.GlobalRef
-	midDialogInterfaceOnShowListenerOnShow jni.MethodID
+	clsDialogInterfaceOnShowListener         *jni.GlobalRef
+	midDialogInterfaceOnShowListenerOnShow   jni.MethodID
+	midDialogInterfaceOnShowListenerToString jni.MethodID
 
 	clsAbstractThreadedSyncAdapter                     *jni.GlobalRef
 	midAbstractThreadedSyncAdapterGetContext           jni.MethodID
@@ -429,6 +459,7 @@ var (
 	midAbstractThreadedSyncAdapterOnSyncCanceled0      jni.MethodID
 	midAbstractThreadedSyncAdapterOnSyncCanceled1_1    jni.MethodID
 	midAbstractThreadedSyncAdapterOnUnsyncableAccount  jni.MethodID
+	midAbstractThreadedSyncAdapterToString             jni.MethodID
 
 	clsRestrictionEntry                       *jni.GlobalRef
 	midRestrictionEntryCtor                   jni.MethodID
@@ -466,6 +497,7 @@ var (
 	clsSyncContext                     *jni.GlobalRef
 	midSyncContextGetSyncContextBinder jni.MethodID
 	midSyncContextOnFinished           jni.MethodID
+	midSyncContextToString             jni.MethodID
 
 	clsUriPermission                  *jni.GlobalRef
 	midUriPermissionDescribeContents  jni.MethodID
@@ -603,6 +635,7 @@ var (
 	midContextWrapperUnregisterDeviceIdChangeListener    jni.MethodID
 	midContextWrapperUnregisterReceiver                  jni.MethodID
 	midContextWrapperUpdateServiceGroup                  jni.MethodID
+	midContextWrapperToString                            jni.MethodID
 
 	clsAttributionSource                    *jni.GlobalRef
 	midAttributionSourceCheckCallingUid     jni.MethodID
@@ -628,6 +661,7 @@ var (
 	midAttributionSourceBuilderSetNext           jni.MethodID
 	midAttributionSourceBuilderSetPackageName    jni.MethodID
 	midAttributionSourceBuilderSetPid            jni.MethodID
+	midAttributionSourceBuilderToString          jni.MethodID
 
 	clsProviderClient                                *jni.GlobalRef
 	midProviderClientBulkInsert                      jni.MethodID
@@ -657,10 +691,12 @@ var (
 	midProviderClientUncanonicalize                  jni.MethodID
 	midProviderClientUpdate3                         jni.MethodID
 	midProviderClientUpdate4_1                       jni.MethodID
+	midProviderClientToString                        jni.MethodID
 
 	clsOperationApplicationException                            *jni.GlobalRef
 	midOperationApplicationExceptionCtor                        jni.MethodID
 	midOperationApplicationExceptionGetNumSuccessfulYieldPoints jni.MethodID
+	midOperationApplicationExceptionToString                    jni.MethodID
 
 	clsResources                           *jni.GlobalRef
 	midResourcesCtor                       jni.MethodID
@@ -718,11 +754,13 @@ var (
 	midResourcesParseBundleExtras          jni.MethodID
 	midResourcesRemoveLoaders              jni.MethodID
 	midResourcesUpdateConfiguration        jni.MethodID
+	midResourcesToString                   jni.MethodID
 	midResourcesGetAttributeSetSourceResId jni.MethodID
 	midResourcesGetSystem                  jni.MethodID
 	midResourcesRegisterResourcePaths      jni.MethodID
 
-	clsResourcesNotFoundException *jni.GlobalRef
+	clsResourcesNotFoundException         *jni.GlobalRef
+	midResourcesNotFoundExceptionToString jni.MethodID
 
 	clsResourcesTheme                            *jni.GlobalRef
 	midResourcesThemeApplyStyle                  jni.MethodID
@@ -742,8 +780,9 @@ var (
 	midResourcesThemeSetTo                       jni.MethodID
 	midResourcesThemeToString                    jni.MethodID
 
-	clsActivityNotFoundException     *jni.GlobalRef
-	midActivityNotFoundExceptionCtor jni.MethodID
+	clsActivityNotFoundException         *jni.GlobalRef
+	midActivityNotFoundExceptionCtor     jni.MethodID
+	midActivityNotFoundExceptionToString jni.MethodID
 
 	clsAsyncQueryHandler                *jni.GlobalRef
 	midAsyncQueryHandlerCancelOperation jni.MethodID
@@ -752,17 +791,21 @@ var (
 	midAsyncQueryHandlerStartInsert     jni.MethodID
 	midAsyncQueryHandlerStartQuery      jni.MethodID
 	midAsyncQueryHandlerStartUpdate     jni.MethodID
+	midAsyncQueryHandlerToString        jni.MethodID
 
-	clsAsyncQueryHandlerWorkerArgs *jni.GlobalRef
+	clsAsyncQueryHandlerWorkerArgs         *jni.GlobalRef
+	midAsyncQueryHandlerWorkerArgsToString jni.MethodID
 
 	clsAsyncQueryHandlerWorkerHandler              *jni.GlobalRef
 	midAsyncQueryHandlerWorkerHandlerHandleMessage jni.MethodID
+	midAsyncQueryHandlerWorkerHandlerToString      jni.MethodID
 
 	clsAsyncTaskLoader                           *jni.GlobalRef
 	midAsyncTaskLoaderCancelLoadInBackground     jni.MethodID
 	midAsyncTaskLoaderDump                       jni.MethodID
 	midAsyncTaskLoaderIsLoadInBackgroundCanceled jni.MethodID
 	midAsyncTaskLoaderSetUpdateThrottle          jni.MethodID
+	midAsyncTaskLoaderToString                   jni.MethodID
 
 	clsUriRelativeFilterGroup                      *jni.GlobalRef
 	midUriRelativeFilterGroupCtor                  jni.MethodID
@@ -774,13 +817,15 @@ var (
 	midUriRelativeFilterGroupMatchData             jni.MethodID
 	midUriRelativeFilterGroupToString              jni.MethodID
 
-	clsEntityIterator      *jni.GlobalRef
-	midEntityIteratorClose jni.MethodID
-	midEntityIteratorReset jni.MethodID
+	clsEntityIterator         *jni.GlobalRef
+	midEntityIteratorClose    jni.MethodID
+	midEntityIteratorReset    jni.MethodID
+	midEntityIteratorToString jni.MethodID
 
 	clsSyncRequest                 *jni.GlobalRef
 	midSyncRequestDescribeContents jni.MethodID
 	midSyncRequestWriteToParcel    jni.MethodID
+	midSyncRequestToString         jni.MethodID
 
 	clsSyncRequestBuilder                          *jni.GlobalRef
 	midSyncRequestBuilderBuild                     jni.MethodID
@@ -796,6 +841,7 @@ var (
 	midSyncRequestBuilderSetSyncAdapter            jni.MethodID
 	midSyncRequestBuilderSyncOnce                  jni.MethodID
 	midSyncRequestBuilderSyncPeriodic              jni.MethodID
+	midSyncRequestBuilderToString                  jni.MethodID
 
 	clsProviderOperation                                   *jni.GlobalRef
 	midProviderOperationApply                              jni.MethodID
@@ -838,10 +884,12 @@ var (
 	midProviderOperationBuilderWithValueBackReferences       jni.MethodID
 	midProviderOperationBuilderWithValues                    jni.MethodID
 	midProviderOperationBuilderWithYieldAllowed              jni.MethodID
+	midProviderOperationBuilderToString                      jni.MethodID
 
 	clsComponentCallbacks                       *jni.GlobalRef
 	midComponentCallbacksOnConfigurationChanged jni.MethodID
 	midComponentCallbacksOnLowMemory            jni.MethodID
+	midComponentCallbacksToString               jni.MethodID
 
 	clsSyncStats                 *jni.GlobalRef
 	midSyncStatsCtor             jni.MethodID
@@ -871,6 +919,7 @@ var (
 	midBroadcastReceiverSetResultCode            jni.MethodID
 	midBroadcastReceiverSetResultData            jni.MethodID
 	midBroadcastReceiverSetResultExtras          jni.MethodID
+	midBroadcastReceiverToString                 jni.MethodID
 
 	clsBroadcastReceiverPendingResult                    *jni.GlobalRef
 	midBroadcastReceiverPendingResultAbortBroadcast      jni.MethodID
@@ -884,24 +933,29 @@ var (
 	midBroadcastReceiverPendingResultSetResultCode       jni.MethodID
 	midBroadcastReceiverPendingResultSetResultData       jni.MethodID
 	midBroadcastReceiverPendingResultSetResultExtras     jni.MethodID
+	midBroadcastReceiverPendingResultToString            jni.MethodID
 
 	clsSyncStatusObserver                *jni.GlobalRef
 	midSyncStatusObserverOnStatusChanged jni.MethodID
+	midSyncStatusObserverToString        jni.MethodID
 
 	clsServiceConnection                      *jni.GlobalRef
 	midServiceConnectionOnServiceConnected    jni.MethodID
 	midServiceConnectionOnServiceDisconnected jni.MethodID
+	midServiceConnectionToString              jni.MethodID
 
 	clsContextParams                                *jni.GlobalRef
 	midContextParamsGetAttributionTag               jni.MethodID
 	midContextParamsGetNextAttributionSource        jni.MethodID
 	midContextParamsShouldRegisterAttributionSource jni.MethodID
+	midContextParamsToString                        jni.MethodID
 
 	clsContextParamsBuilder                                   *jni.GlobalRef
 	midContextParamsBuilderBuild                              jni.MethodID
 	midContextParamsBuilderSetAttributionTag                  jni.MethodID
 	midContextParamsBuilderSetNextAttributionSource           jni.MethodID
 	midContextParamsBuilderSetShouldRegisterAttributionSource jni.MethodID
+	midContextParamsBuilderToString                           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -1231,6 +1285,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midProviderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProvider)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/ContentProvider$CallingIdentity")
@@ -1241,6 +1302,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsProviderCallingIdentity = env.NewGlobalRef(&c.Object)
 
+		midProviderCallingIdentityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderCallingIdentity)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/ContentProvider$PipeDataWriter")
@@ -1250,6 +1318,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsProviderPipeDataWriter = env.NewGlobalRef(&c.Object)
+
+		midProviderPipeDataWriterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderPipeDataWriter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1420,6 +1495,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCursorLoaderDeliverResult1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorLoader)), "deliverResult", "(Ljava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCursorLoaderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorLoader)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2350,6 +2432,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIntentFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntentFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midIntentFilterCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIntentFilter)), "create", "(Ljava/lang/String;Ljava/lang/String;)Landroid/content/IntentFilter;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2395,6 +2484,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIntentFilterAuthorityEntryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntentFilterAuthorityEntry)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/IntentFilter$MalformedMimeTypeException")
@@ -2405,6 +2501,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsIntentFilterMalformedMimeTypeException = env.NewGlobalRef(&c.Object)
 
+		midIntentFilterMalformedMimeTypeExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntentFilterMalformedMimeTypeException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/QuickViewConstants")
@@ -2414,6 +2517,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsQuickViewConstants = env.NewGlobalRef(&c.Object)
+
+		midQuickViewConstantsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuickViewConstants)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -2474,6 +2584,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRestrictionsManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestrictionsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/SyncInfo")
@@ -2492,6 +2609,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSyncInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSyncInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2638,6 +2762,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMutableContextWrapperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMutableContextWrapper)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/Entity")
@@ -2689,6 +2820,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsEntityNamedContentValues = env.NewGlobalRef(&c.Object)
+
+		midEntityNamedContentValuesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEntityNamedContentValues)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -2743,6 +2881,13 @@ func doInit(env *jni.Env) error {
 		clsComponentCallbacks2 = env.NewGlobalRef(&c.Object)
 
 		midComponentCallbacks2OnTrimMemory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComponentCallbacks2)), "onTrimMemory", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midComponentCallbacks2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComponentCallbacks2)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2913,6 +3058,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLoaderForceLoadContentObserverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoaderForceLoadContentObserver)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/Loader$OnLoadCanceledListener")
@@ -2923,6 +3075,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsLoaderOnLoadCanceledListener = env.NewGlobalRef(&c.Object)
 
+		midLoaderOnLoadCanceledListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoaderOnLoadCanceledListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/Loader$OnLoadCompleteListener")
@@ -2932,6 +3091,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsLoaderOnLoadCompleteListener = env.NewGlobalRef(&c.Object)
+
+		midLoaderOnLoadCompleteListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoaderOnLoadCompleteListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -3094,6 +3260,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midQueryMapToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQueryMap)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/IntentSender")
@@ -3205,6 +3378,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIntentSenderOnFinishedToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntentSenderOnFinished)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/IntentSender$SendIntentException")
@@ -3214,6 +3394,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsIntentSenderSendIntentException = env.NewGlobalRef(&c.Object)
+
+		midIntentSenderSendIntentExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntentSenderSendIntentException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -3243,6 +3430,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUriMatcherToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUriMatcher)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/ReceiverCallNotAllowedException")
@@ -3254,6 +3448,13 @@ func doInit(env *jni.Env) error {
 		clsReceiverCallNotAllowedException = env.NewGlobalRef(&c.Object)
 		midReceiverCallNotAllowedExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiverCallNotAllowedException)), "<init>", "(Ljava/lang/String;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midReceiverCallNotAllowedExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiverCallNotAllowedException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3313,6 +3514,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSearchRecentSuggestionsProviderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSearchRecentSuggestionsProvider)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/ContentUris")
@@ -3324,6 +3532,13 @@ func doInit(env *jni.Env) error {
 		clsUris = env.NewGlobalRef(&c.Object)
 		midUrisCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUris)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midUrisToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUris)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3379,6 +3594,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDialogInterfaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterface)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/DialogInterface$OnCancelListener")
@@ -3390,6 +3612,13 @@ func doInit(env *jni.Env) error {
 		clsDialogInterfaceOnCancelListener = env.NewGlobalRef(&c.Object)
 
 		midDialogInterfaceOnCancelListenerOnCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterfaceOnCancelListener)), "onCancel", "(Landroid/content/DialogInterface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogInterfaceOnCancelListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterfaceOnCancelListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3413,6 +3642,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDialogInterfaceOnClickListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterfaceOnClickListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/DialogInterface$OnDismissListener")
@@ -3424,6 +3660,13 @@ func doInit(env *jni.Env) error {
 		clsDialogInterfaceOnDismissListener = env.NewGlobalRef(&c.Object)
 
 		midDialogInterfaceOnDismissListenerOnDismiss, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterfaceOnDismissListener)), "onDismiss", "(Landroid/content/DialogInterface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogInterfaceOnDismissListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterfaceOnDismissListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3447,6 +3690,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDialogInterfaceOnKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterfaceOnKeyListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/DialogInterface$OnMultiChoiceClickListener")
@@ -3464,6 +3714,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDialogInterfaceOnMultiChoiceClickListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterfaceOnMultiChoiceClickListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/DialogInterface$OnShowListener")
@@ -3475,6 +3732,13 @@ func doInit(env *jni.Env) error {
 		clsDialogInterfaceOnShowListener = env.NewGlobalRef(&c.Object)
 
 		midDialogInterfaceOnShowListenerOnShow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterfaceOnShowListener)), "onShow", "(Landroid/content/DialogInterface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogInterfaceOnShowListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogInterfaceOnShowListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3534,6 +3798,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAbstractThreadedSyncAdapterOnUnsyncableAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractThreadedSyncAdapter)), "onUnsyncableAccount", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAbstractThreadedSyncAdapterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractThreadedSyncAdapter)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3782,6 +4053,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSyncContextOnFinished, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncContext)), "onFinished", "(Landroid/content/SyncResult;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSyncContextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncContext)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4736,6 +5014,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContextWrapperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContextWrapper)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/AttributionSource")
@@ -4897,6 +5182,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAttributionSourceBuilderSetPid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributionSourceBuilder)), "setPid", "(I)Landroid/content/AttributionSource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAttributionSourceBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttributionSourceBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5102,6 +5394,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midProviderClientToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderClient)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/OperationApplicationException")
@@ -5117,6 +5416,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midOperationApplicationExceptionGetNumSuccessfulYieldPoints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOperationApplicationException)), "getNumSuccessfulYieldPoints", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOperationApplicationExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOperationApplicationException)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5515,6 +5821,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midResourcesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midResourcesGetAttributeSetSourceResId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsResources)), "getAttributeSetSourceResId", "(Landroid/util/AttributeSet;)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -5545,6 +5858,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsResourcesNotFoundException = env.NewGlobalRef(&c.Object)
+
+		midResourcesNotFoundExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResourcesNotFoundException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5682,6 +6002,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midActivityNotFoundExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityNotFoundException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/AsyncQueryHandler")
@@ -5734,6 +6061,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAsyncQueryHandlerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAsyncQueryHandler)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/AsyncQueryHandler$WorkerArgs")
@@ -5743,6 +6077,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAsyncQueryHandlerWorkerArgs = env.NewGlobalRef(&c.Object)
+
+		midAsyncQueryHandlerWorkerArgsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAsyncQueryHandlerWorkerArgs)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5755,6 +6096,13 @@ func doInit(env *jni.Env) error {
 		clsAsyncQueryHandlerWorkerHandler = env.NewGlobalRef(&c.Object)
 
 		midAsyncQueryHandlerWorkerHandlerHandleMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAsyncQueryHandlerWorkerHandler)), "handleMessage", "(Landroid/os/Message;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAsyncQueryHandlerWorkerHandlerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAsyncQueryHandlerWorkerHandler)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5793,6 +6141,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAsyncTaskLoaderSetUpdateThrottle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAsyncTaskLoader)), "setUpdateThrottle", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAsyncTaskLoaderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAsyncTaskLoader)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5886,6 +6241,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEntityIteratorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEntityIterator)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/SyncRequest")
@@ -5904,6 +6266,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSyncRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSyncRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6005,6 +6374,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSyncRequestBuilderSyncPeriodic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncRequestBuilder)), "syncPeriodic", "(JJ)Landroid/content/SyncRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSyncRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6297,6 +6673,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midProviderOperationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderOperationBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/ComponentCallbacks")
@@ -6315,6 +6698,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midComponentCallbacksOnLowMemory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComponentCallbacks)), "onLowMemory", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midComponentCallbacksToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComponentCallbacks)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6513,6 +6903,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBroadcastReceiverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiver)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/BroadcastReceiver$PendingResult")
@@ -6600,6 +6997,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBroadcastReceiverPendingResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBroadcastReceiverPendingResult)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/SyncStatusObserver")
@@ -6611,6 +7015,13 @@ func doInit(env *jni.Env) error {
 		clsSyncStatusObserver = env.NewGlobalRef(&c.Object)
 
 		midSyncStatusObserverOnStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncStatusObserver)), "onStatusChanged", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSyncStatusObserverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncStatusObserver)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6635,6 +7046,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midServiceConnectionOnServiceDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceConnection)), "onServiceDisconnected", "(Landroid/content/ComponentName;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceConnectionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceConnection)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6666,6 +7084,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midContextParamsShouldRegisterAttributionSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContextParams)), "shouldRegisterAttributionSource", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContextParams)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6704,6 +7129,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midContextParamsBuilderSetShouldRegisterAttributionSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContextParamsBuilder)), "setShouldRegisterAttributionSource", "(Z)Landroid/content/ContextParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContextParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

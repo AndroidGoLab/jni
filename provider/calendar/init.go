@@ -24,63 +24,88 @@ var (
 	initErr  error
 
 	clsContract                                       *jni.GlobalRef
+	midContractToString                               jni.MethodID
 	midContractStartViewCalendarEventInManagedProfile jni.MethodID
 
-	clsContractAttendees      *jni.GlobalRef
-	midContractAttendeesQuery jni.MethodID
+	clsContractAttendees         *jni.GlobalRef
+	midContractAttendeesToString jni.MethodID
+	midContractAttendeesQuery    jni.MethodID
 
-	clsContractAttendeesColumns *jni.GlobalRef
+	clsContractAttendeesColumns         *jni.GlobalRef
+	midContractAttendeesColumnsToString jni.MethodID
 
-	clsContractCalendarAlerts *jni.GlobalRef
+	clsContractCalendarAlerts         *jni.GlobalRef
+	midContractCalendarAlertsToString jni.MethodID
 
-	clsContractCalendarAlertsColumns *jni.GlobalRef
+	clsContractCalendarAlertsColumns         *jni.GlobalRef
+	midContractCalendarAlertsColumnsToString jni.MethodID
 
-	clsContractCalendarCache *jni.GlobalRef
+	clsContractCalendarCache         *jni.GlobalRef
+	midContractCalendarCacheToString jni.MethodID
 
-	clsContractCalendarCacheColumns *jni.GlobalRef
+	clsContractCalendarCacheColumns         *jni.GlobalRef
+	midContractCalendarCacheColumnsToString jni.MethodID
 
-	clsContractCalendarColumns *jni.GlobalRef
+	clsContractCalendarColumns         *jni.GlobalRef
+	midContractCalendarColumnsToString jni.MethodID
 
 	clsContractCalendarEntity                  *jni.GlobalRef
+	midContractCalendarEntityToString          jni.MethodID
 	midContractCalendarEntityNewEntityIterator jni.MethodID
 
-	clsContractCalendarSyncColumns *jni.GlobalRef
+	clsContractCalendarSyncColumns         *jni.GlobalRef
+	midContractCalendarSyncColumnsToString jni.MethodID
 
-	clsContractCalendars *jni.GlobalRef
+	clsContractCalendars         *jni.GlobalRef
+	midContractCalendarsToString jni.MethodID
 
-	clsContractColors *jni.GlobalRef
+	clsContractColors         *jni.GlobalRef
+	midContractColorsToString jni.MethodID
 
-	clsContractColorsColumns *jni.GlobalRef
+	clsContractColorsColumns         *jni.GlobalRef
+	midContractColorsColumnsToString jni.MethodID
 
-	clsContractEventDays      *jni.GlobalRef
-	midContractEventDaysQuery jni.MethodID
+	clsContractEventDays         *jni.GlobalRef
+	midContractEventDaysToString jni.MethodID
+	midContractEventDaysQuery    jni.MethodID
 
-	clsContractEventDaysColumns *jni.GlobalRef
+	clsContractEventDaysColumns         *jni.GlobalRef
+	midContractEventDaysColumnsToString jni.MethodID
 
-	clsContractEvents *jni.GlobalRef
+	clsContractEvents         *jni.GlobalRef
+	midContractEventsToString jni.MethodID
 
-	clsContractEventsColumns *jni.GlobalRef
+	clsContractEventsColumns         *jni.GlobalRef
+	midContractEventsColumnsToString jni.MethodID
 
 	clsContractEventsEntity                     *jni.GlobalRef
+	midContractEventsEntityToString             jni.MethodID
 	midContractEventsEntityNewEntityIterator2   jni.MethodID
 	midContractEventsEntityNewEntityIterator2_1 jni.MethodID
 
-	clsContractExtendedProperties *jni.GlobalRef
+	clsContractExtendedProperties         *jni.GlobalRef
+	midContractExtendedPropertiesToString jni.MethodID
 
-	clsContractExtendedPropertiesColumns *jni.GlobalRef
+	clsContractExtendedPropertiesColumns         *jni.GlobalRef
+	midContractExtendedPropertiesColumnsToString jni.MethodID
 
 	clsContractInstances         *jni.GlobalRef
+	midContractInstancesToString jni.MethodID
 	midContractInstancesQuery4   jni.MethodID
 	midContractInstancesQuery5_1 jni.MethodID
 
-	clsContractReminders      *jni.GlobalRef
-	midContractRemindersQuery jni.MethodID
+	clsContractReminders         *jni.GlobalRef
+	midContractRemindersToString jni.MethodID
+	midContractRemindersQuery    jni.MethodID
 
-	clsContractRemindersColumns *jni.GlobalRef
+	clsContractRemindersColumns         *jni.GlobalRef
+	midContractRemindersColumnsToString jni.MethodID
 
-	clsContractSyncColumns *jni.GlobalRef
+	clsContractSyncColumns         *jni.GlobalRef
+	midContractSyncColumnsToString jni.MethodID
 
-	clsContractSyncState *jni.GlobalRef
+	clsContractSyncState         *jni.GlobalRef
+	midContractSyncStateToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -109,6 +134,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContract = env.NewGlobalRef(&c.Object)
 
+		midContractToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midContractStartViewCalendarEventInManagedProfile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "startViewCalendarEventInManagedProfile", "(Landroid/content/Context;JJJZI)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -125,6 +157,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractAttendees = env.NewGlobalRef(&c.Object)
+
+		midContractAttendeesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractAttendees)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractAttendeesQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractAttendees)), "query", "(Landroid/content/ContentResolver;J[Ljava/lang/String;)Landroid/database/Cursor;")
 		if err != nil {
@@ -143,6 +182,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractAttendeesColumns = env.NewGlobalRef(&c.Object)
 
+		midContractAttendeesColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractAttendeesColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarAlerts")
@@ -152,6 +198,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractCalendarAlerts = env.NewGlobalRef(&c.Object)
+
+		midContractCalendarAlertsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarAlerts)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -163,6 +216,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractCalendarAlertsColumns = env.NewGlobalRef(&c.Object)
 
+		midContractCalendarAlertsColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarAlertsColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarCache")
@@ -172,6 +232,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractCalendarCache = env.NewGlobalRef(&c.Object)
+
+		midContractCalendarCacheToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarCache)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -183,6 +250,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractCalendarCacheColumns = env.NewGlobalRef(&c.Object)
 
+		midContractCalendarCacheColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarCacheColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarColumns")
@@ -193,6 +267,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractCalendarColumns = env.NewGlobalRef(&c.Object)
 
+		midContractCalendarColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarEntity")
@@ -202,6 +283,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractCalendarEntity = env.NewGlobalRef(&c.Object)
+
+		midContractCalendarEntityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarEntity)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractCalendarEntityNewEntityIterator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarEntity)), "newEntityIterator", "(Landroid/database/Cursor;)Landroid/content/EntityIterator;")
 		if err != nil {
@@ -220,6 +308,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractCalendarSyncColumns = env.NewGlobalRef(&c.Object)
 
+		midContractCalendarSyncColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarSyncColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$Calendars")
@@ -229,6 +324,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractCalendars = env.NewGlobalRef(&c.Object)
+
+		midContractCalendarsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendars)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -240,6 +342,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractColors = env.NewGlobalRef(&c.Object)
 
+		midContractColorsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractColors)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$ColorsColumns")
@@ -250,6 +359,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractColorsColumns = env.NewGlobalRef(&c.Object)
 
+		midContractColorsColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractColorsColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$EventDays")
@@ -259,6 +375,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractEventDays = env.NewGlobalRef(&c.Object)
+
+		midContractEventDaysToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractEventDays)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractEventDaysQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractEventDays)), "query", "(Landroid/content/ContentResolver;II[Ljava/lang/String;)Landroid/database/Cursor;")
 		if err != nil {
@@ -277,6 +400,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractEventDaysColumns = env.NewGlobalRef(&c.Object)
 
+		midContractEventDaysColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractEventDaysColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$Events")
@@ -286,6 +416,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractEvents = env.NewGlobalRef(&c.Object)
+
+		midContractEventsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractEvents)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -297,6 +434,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractEventsColumns = env.NewGlobalRef(&c.Object)
 
+		midContractEventsColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractEventsColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$EventsEntity")
@@ -306,6 +450,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractEventsEntity = env.NewGlobalRef(&c.Object)
+
+		midContractEventsEntityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractEventsEntity)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractEventsEntityNewEntityIterator2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractEventsEntity)), "newEntityIterator", "(Landroid/database/Cursor;Landroid/content/ContentProviderClient;)Landroid/content/EntityIterator;")
 		if err != nil {
@@ -331,6 +482,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractExtendedProperties = env.NewGlobalRef(&c.Object)
 
+		midContractExtendedPropertiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractExtendedProperties)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$ExtendedPropertiesColumns")
@@ -341,6 +499,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractExtendedPropertiesColumns = env.NewGlobalRef(&c.Object)
 
+		midContractExtendedPropertiesColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractExtendedPropertiesColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$Instances")
@@ -350,6 +515,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractInstances = env.NewGlobalRef(&c.Object)
+
+		midContractInstancesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractInstances)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractInstancesQuery4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractInstances)), "query", "(Landroid/content/ContentResolver;[Ljava/lang/String;JJ)Landroid/database/Cursor;")
 		if err != nil {
@@ -375,6 +547,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractReminders = env.NewGlobalRef(&c.Object)
 
+		midContractRemindersToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractReminders)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midContractRemindersQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractReminders)), "query", "(Landroid/content/ContentResolver;J[Ljava/lang/String;)Landroid/database/Cursor;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -392,6 +571,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractRemindersColumns = env.NewGlobalRef(&c.Object)
 
+		midContractRemindersColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractRemindersColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$SyncColumns")
@@ -402,6 +588,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractSyncColumns = env.NewGlobalRef(&c.Object)
 
+		midContractSyncColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$SyncState")
@@ -411,6 +604,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractSyncState = env.NewGlobalRef(&c.Object)
+
+		midContractSyncStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

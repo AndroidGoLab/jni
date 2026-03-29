@@ -29,6 +29,7 @@ var (
 	midSessionConfigurationGetRemoteApplicationVersion jni.MethodID
 	midSessionConfigurationGetRemoteVendorIds          jni.MethodID
 	midSessionConfigurationIsIkeExtensionEnabled       jni.MethodID
+	midSessionConfigurationToString                    jni.MethodID
 
 	clsSessionConfigurationBuilder                              *jni.GlobalRef
 	midSessionConfigurationBuilderAddIkeExtension               jni.MethodID
@@ -39,16 +40,19 @@ var (
 	midSessionConfigurationBuilderClearRemoteVendorIds          jni.MethodID
 	midSessionConfigurationBuilderSetEapInfo                    jni.MethodID
 	midSessionConfigurationBuilderSetRemoteApplicationVersion   jni.MethodID
+	midSessionConfigurationBuilderToString                      jni.MethodID
 
 	clsSessionConnectionInfo                 *jni.GlobalRef
 	midSessionConnectionInfoCtor             jni.MethodID
 	midSessionConnectionInfoGetLocalAddress  jni.MethodID
 	midSessionConnectionInfoGetNetwork       jni.MethodID
 	midSessionConnectionInfoGetRemoteAddress jni.MethodID
+	midSessionConnectionInfoToString         jni.MethodID
 
 	clsChildSaProposal                                 *jni.GlobalRef
 	midChildSaProposalEquals                           jni.MethodID
 	midChildSaProposalHashCode                         jni.MethodID
+	midChildSaProposalToString                         jni.MethodID
 	midChildSaProposalGetSupportedEncryptionAlgorithms jni.MethodID
 	midChildSaProposalGetSupportedIntegrityAlgorithms  jni.MethodID
 
@@ -57,11 +61,13 @@ var (
 	midChildSaProposalBuilderAddEncryptionAlgorithm jni.MethodID
 	midChildSaProposalBuilderAddIntegrityAlgorithm  jni.MethodID
 	midChildSaProposalBuilderBuild                  jni.MethodID
+	midChildSaProposalBuilderToString               jni.MethodID
 
 	clsDerAsn1DnIdentification         *jni.GlobalRef
 	midDerAsn1DnIdentificationCtor     jni.MethodID
 	midDerAsn1DnIdentificationEquals   jni.MethodID
 	midDerAsn1DnIdentificationHashCode jni.MethodID
+	midDerAsn1DnIdentificationToString jni.MethodID
 
 	clsSaProposal                       *jni.GlobalRef
 	midSaProposalEquals                 jni.MethodID
@@ -88,6 +94,7 @@ var (
 	midSessionParamsGetSoftLifetimeSeconds          jni.MethodID
 	midSessionParamsHasIkeOption                    jni.MethodID
 	midSessionParamsHashCode                        jni.MethodID
+	midSessionParamsToString                        jni.MethodID
 
 	clsSessionParamsBuilder                                *jni.GlobalRef
 	midSessionParamsBuilderAddIkeOption                    jni.MethodID
@@ -105,10 +112,12 @@ var (
 	midSessionParamsBuilderSetRemoteIdentification         jni.MethodID
 	midSessionParamsBuilderSetRetransmissionTimeoutsMillis jni.MethodID
 	midSessionParamsBuilderSetServerHostname               jni.MethodID
+	midSessionParamsBuilderToString                        jni.MethodID
 
 	clsSessionParamsIkeAuthConfig         *jni.GlobalRef
 	midSessionParamsIkeAuthConfigEquals   jni.MethodID
 	midSessionParamsIkeAuthConfigHashCode jni.MethodID
+	midSessionParamsIkeAuthConfigToString jni.MethodID
 
 	clsSessionParamsIkeAuthDigitalSignLocalConfig                            *jni.GlobalRef
 	midSessionParamsIkeAuthDigitalSignLocalConfigEquals                      jni.MethodID
@@ -116,43 +125,52 @@ var (
 	midSessionParamsIkeAuthDigitalSignLocalConfigGetIntermediateCertificates jni.MethodID
 	midSessionParamsIkeAuthDigitalSignLocalConfigGetPrivateKey               jni.MethodID
 	midSessionParamsIkeAuthDigitalSignLocalConfigHashCode                    jni.MethodID
+	midSessionParamsIkeAuthDigitalSignLocalConfigToString                    jni.MethodID
 
 	clsSessionParamsIkeAuthDigitalSignRemoteConfig                *jni.GlobalRef
 	midSessionParamsIkeAuthDigitalSignRemoteConfigEquals          jni.MethodID
 	midSessionParamsIkeAuthDigitalSignRemoteConfigGetRemoteCaCert jni.MethodID
 	midSessionParamsIkeAuthDigitalSignRemoteConfigHashCode        jni.MethodID
+	midSessionParamsIkeAuthDigitalSignRemoteConfigToString        jni.MethodID
 
 	clsSessionParamsIkeAuthEapConfig             *jni.GlobalRef
 	midSessionParamsIkeAuthEapConfigEquals       jni.MethodID
 	midSessionParamsIkeAuthEapConfigGetEapConfig jni.MethodID
 	midSessionParamsIkeAuthEapConfigHashCode     jni.MethodID
+	midSessionParamsIkeAuthEapConfigToString     jni.MethodID
 
 	clsSessionParamsIkeAuthPskConfig         *jni.GlobalRef
 	midSessionParamsIkeAuthPskConfigEquals   jni.MethodID
 	midSessionParamsIkeAuthPskConfigGetPsk   jni.MethodID
 	midSessionParamsIkeAuthPskConfigHashCode jni.MethodID
+	midSessionParamsIkeAuthPskConfigToString jni.MethodID
 
 	clsRfc822AddrIdentification         *jni.GlobalRef
 	midRfc822AddrIdentificationCtor     jni.MethodID
 	midRfc822AddrIdentificationEquals   jni.MethodID
 	midRfc822AddrIdentificationHashCode jni.MethodID
+	midRfc822AddrIdentificationToString jni.MethodID
 
 	clsTrafficSelector         *jni.GlobalRef
 	midTrafficSelectorCtor     jni.MethodID
 	midTrafficSelectorEquals   jni.MethodID
 	midTrafficSelectorHashCode jni.MethodID
+	midTrafficSelectorToString jni.MethodID
 
 	clsChildSessionConfiguration                            *jni.GlobalRef
 	midChildSessionConfigurationGetInboundTrafficSelectors  jni.MethodID
 	midChildSessionConfigurationGetOutboundTrafficSelectors jni.MethodID
+	midChildSessionConfigurationToString                    jni.MethodID
 
-	clsChildSessionConfigurationBuilder      *jni.GlobalRef
-	midChildSessionConfigurationBuilderBuild jni.MethodID
+	clsChildSessionConfigurationBuilder         *jni.GlobalRef
+	midChildSessionConfigurationBuilderBuild    jni.MethodID
+	midChildSessionConfigurationBuilderToString jni.MethodID
 
 	clsIkeSaProposal                                  *jni.GlobalRef
 	midIkeSaProposalEquals                            jni.MethodID
 	midIkeSaProposalGetPseudorandomFunctions          jni.MethodID
 	midIkeSaProposalHashCode                          jni.MethodID
+	midIkeSaProposalToString                          jni.MethodID
 	midIkeSaProposalGetSupportedEncryptionAlgorithms  jni.MethodID
 	midIkeSaProposalGetSupportedIntegrityAlgorithms   jni.MethodID
 	midIkeSaProposalGetSupportedPseudorandomFunctions jni.MethodID
@@ -163,6 +181,7 @@ var (
 	midSaProposalBuilderAddIntegrityAlgorithm   jni.MethodID
 	midSaProposalBuilderAddPseudorandomFunction jni.MethodID
 	midSaProposalBuilderBuild                   jni.MethodID
+	midSaProposalBuilderToString                jni.MethodID
 
 	clsSession                  *jni.GlobalRef
 	midSessionCtor              jni.MethodID
@@ -172,16 +191,19 @@ var (
 	midSessionFinalize          jni.MethodID
 	midSessionKill              jni.MethodID
 	midSessionOpenChildSession  jni.MethodID
+	midSessionToString          jni.MethodID
 
 	clsIpv4AddrIdentification         *jni.GlobalRef
 	midIpv4AddrIdentificationCtor     jni.MethodID
 	midIpv4AddrIdentificationEquals   jni.MethodID
 	midIpv4AddrIdentificationHashCode jni.MethodID
+	midIpv4AddrIdentificationToString jni.MethodID
 
 	clsIpv6AddrIdentification         *jni.GlobalRef
 	midIpv6AddrIdentificationCtor     jni.MethodID
 	midIpv6AddrIdentificationEquals   jni.MethodID
 	midIpv6AddrIdentificationHashCode jni.MethodID
+	midIpv6AddrIdentificationToString jni.MethodID
 
 	clsTunnelConnectionParams                                *jni.GlobalRef
 	midTunnelConnectionParamsCtor                            jni.MethodID
@@ -189,28 +211,34 @@ var (
 	midTunnelConnectionParamsGetIkeSessionParams             jni.MethodID
 	midTunnelConnectionParamsGetTunnelModeChildSessionParams jni.MethodID
 	midTunnelConnectionParamsHashCode                        jni.MethodID
+	midTunnelConnectionParamsToString                        jni.MethodID
 
-	clsIdentification *jni.GlobalRef
+	clsIdentification         *jni.GlobalRef
+	midIdentificationToString jni.MethodID
 
 	clsSessionCallback         *jni.GlobalRef
 	midSessionCallbackOnClosed jni.MethodID
 	midSessionCallbackOnOpened jni.MethodID
+	midSessionCallbackToString jni.MethodID
 
 	clsChildSessionCallback                        *jni.GlobalRef
 	midChildSessionCallbackOnClosed                jni.MethodID
 	midChildSessionCallbackOnIpSecTransformCreated jni.MethodID
 	midChildSessionCallbackOnIpSecTransformDeleted jni.MethodID
 	midChildSessionCallbackOnOpened                jni.MethodID
+	midChildSessionCallbackToString                jni.MethodID
 
 	clsKeyIdIdentification         *jni.GlobalRef
 	midKeyIdIdentificationCtor     jni.MethodID
 	midKeyIdIdentificationEquals   jni.MethodID
 	midKeyIdIdentificationHashCode jni.MethodID
+	midKeyIdIdentificationToString jni.MethodID
 
 	clsFqdnIdentification         *jni.GlobalRef
 	midFqdnIdentificationCtor     jni.MethodID
 	midFqdnIdentificationEquals   jni.MethodID
 	midFqdnIdentificationHashCode jni.MethodID
+	midFqdnIdentificationToString jni.MethodID
 
 	clsChildSessionParams                            *jni.GlobalRef
 	midChildSessionParamsEquals                      jni.MethodID
@@ -220,11 +248,13 @@ var (
 	midChildSessionParamsGetOutboundTrafficSelectors jni.MethodID
 	midChildSessionParamsGetSoftLifetimeSeconds      jni.MethodID
 	midChildSessionParamsHashCode                    jni.MethodID
+	midChildSessionParamsToString                    jni.MethodID
 
 	clsTunnelModeChildSessionParams                         *jni.GlobalRef
 	midTunnelModeChildSessionParamsEquals                   jni.MethodID
 	midTunnelModeChildSessionParamsGetConfigurationRequests jni.MethodID
 	midTunnelModeChildSessionParamsHashCode                 jni.MethodID
+	midTunnelModeChildSessionParamsToString                 jni.MethodID
 
 	clsTunnelModeChildSessionParamsBuilder                             *jni.GlobalRef
 	midTunnelModeChildSessionParamsBuilderAddChildSaProposal           jni.MethodID
@@ -237,25 +267,34 @@ var (
 	midTunnelModeChildSessionParamsBuilderAddOutboundTrafficSelectors  jni.MethodID
 	midTunnelModeChildSessionParamsBuilderBuild                        jni.MethodID
 	midTunnelModeChildSessionParamsBuilderSetLifetimeSeconds           jni.MethodID
+	midTunnelModeChildSessionParamsBuilderToString                     jni.MethodID
 
 	clsTunnelModeChildSessionParamsConfigRequestIpv4Address           *jni.GlobalRef
 	midTunnelModeChildSessionParamsConfigRequestIpv4AddressGetAddress jni.MethodID
+	midTunnelModeChildSessionParamsConfigRequestIpv4AddressToString   jni.MethodID
 
-	clsTunnelModeChildSessionParamsConfigRequestIpv4DhcpServer *jni.GlobalRef
+	clsTunnelModeChildSessionParamsConfigRequestIpv4DhcpServer         *jni.GlobalRef
+	midTunnelModeChildSessionParamsConfigRequestIpv4DhcpServerToString jni.MethodID
 
-	clsTunnelModeChildSessionParamsConfigRequestIpv4DnsServer *jni.GlobalRef
+	clsTunnelModeChildSessionParamsConfigRequestIpv4DnsServer         *jni.GlobalRef
+	midTunnelModeChildSessionParamsConfigRequestIpv4DnsServerToString jni.MethodID
 
-	clsTunnelModeChildSessionParamsConfigRequestIpv4Netmask *jni.GlobalRef
+	clsTunnelModeChildSessionParamsConfigRequestIpv4Netmask         *jni.GlobalRef
+	midTunnelModeChildSessionParamsConfigRequestIpv4NetmaskToString jni.MethodID
 
 	clsTunnelModeChildSessionParamsConfigRequestIpv6Address                *jni.GlobalRef
 	midTunnelModeChildSessionParamsConfigRequestIpv6AddressGetAddress      jni.MethodID
 	midTunnelModeChildSessionParamsConfigRequestIpv6AddressGetPrefixLength jni.MethodID
+	midTunnelModeChildSessionParamsConfigRequestIpv6AddressToString        jni.MethodID
 
-	clsTunnelModeChildSessionParamsConfigRequestIpv6DnsServer *jni.GlobalRef
+	clsTunnelModeChildSessionParamsConfigRequestIpv6DnsServer         *jni.GlobalRef
+	midTunnelModeChildSessionParamsConfigRequestIpv6DnsServerToString jni.MethodID
 
-	clsTunnelModeChildSessionParamsTunnelModeChildConfigRequest *jni.GlobalRef
+	clsTunnelModeChildSessionParamsTunnelModeChildConfigRequest         *jni.GlobalRef
+	midTunnelModeChildSessionParamsTunnelModeChildConfigRequestToString jni.MethodID
 
-	clsTransportModeChildSessionParams *jni.GlobalRef
+	clsTransportModeChildSessionParams         *jni.GlobalRef
+	midTransportModeChildSessionParamsToString jni.MethodID
 
 	clsTransportModeChildSessionParamsBuilder                            *jni.GlobalRef
 	midTransportModeChildSessionParamsBuilderAddChildSaProposal          jni.MethodID
@@ -263,6 +302,7 @@ var (
 	midTransportModeChildSessionParamsBuilderAddOutboundTrafficSelectors jni.MethodID
 	midTransportModeChildSessionParamsBuilderBuild                       jni.MethodID
 	midTransportModeChildSessionParamsBuilderSetLifetimeSeconds          jni.MethodID
+	midTransportModeChildSessionParamsBuilderToString                    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -320,6 +360,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionConfigurationIsIkeExtensionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfiguration)), "isIkeExtensionEnabled", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigurationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfiguration)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -392,6 +439,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionConfigurationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigurationBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeSessionConnectionInfo")
@@ -427,6 +481,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionConnectionInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConnectionInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/ChildSaProposal")
@@ -445,6 +506,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midChildSaProposalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChildSaProposal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChildSaProposalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChildSaProposal)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -503,6 +571,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midChildSaProposalBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChildSaProposalBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeDerAsn1DnIdentification")
@@ -525,6 +600,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDerAsn1DnIdentificationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDerAsn1DnIdentification)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDerAsn1DnIdentificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDerAsn1DnIdentification)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -705,6 +787,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeSessionParams$Builder")
@@ -820,6 +909,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParamsBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeSessionParams$IkeAuthConfig")
@@ -838,6 +934,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionParamsIkeAuthConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParamsIkeAuthConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionParamsIkeAuthConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParamsIkeAuthConfig)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -889,6 +992,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionParamsIkeAuthDigitalSignLocalConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParamsIkeAuthDigitalSignLocalConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeSessionParams$IkeAuthDigitalSignRemoteConfig")
@@ -914,6 +1024,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionParamsIkeAuthDigitalSignRemoteConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParamsIkeAuthDigitalSignRemoteConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionParamsIkeAuthDigitalSignRemoteConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParamsIkeAuthDigitalSignRemoteConfig)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -951,6 +1068,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionParamsIkeAuthEapConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParamsIkeAuthEapConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeSessionParams$IkeAuthPskConfig")
@@ -976,6 +1100,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionParamsIkeAuthPskConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParamsIkeAuthPskConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionParamsIkeAuthPskConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionParamsIkeAuthPskConfig)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1010,6 +1141,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRfc822AddrIdentificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822AddrIdentification)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeTrafficSelector")
@@ -1032,6 +1170,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTrafficSelectorHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrafficSelector)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrafficSelectorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrafficSelector)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1062,6 +1207,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midChildSessionConfigurationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChildSessionConfiguration)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/ChildSessionConfiguration$Builder")
@@ -1073,6 +1225,13 @@ func doInit(env *jni.Env) error {
 		clsChildSessionConfigurationBuilder = env.NewGlobalRef(&c.Object)
 
 		midChildSessionConfigurationBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChildSessionConfigurationBuilder)), "build", "()Landroid/net/ipsec/ike/ChildSessionConfiguration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChildSessionConfigurationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChildSessionConfigurationBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1104,6 +1263,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midIkeSaProposalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeSaProposal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIkeSaProposalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeSaProposal)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1176,6 +1342,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSaProposalBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSaProposalBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeSession")
@@ -1232,6 +1405,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeIpv4AddrIdentification")
@@ -1260,6 +1440,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIpv4AddrIdentificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpv4AddrIdentification)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeIpv6AddrIdentification")
@@ -1282,6 +1469,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midIpv6AddrIdentificationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpv6AddrIdentification)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIpv6AddrIdentificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpv6AddrIdentification)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1330,6 +1524,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTunnelConnectionParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelConnectionParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeIdentification")
@@ -1339,6 +1540,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsIdentification = env.NewGlobalRef(&c.Object)
+
+		midIdentificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIdentification)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1358,6 +1566,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionCallbackOnOpened, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionCallback)), "onOpened", "(Landroid/net/ipsec/ike/IkeSessionConfiguration;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1402,6 +1617,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midChildSessionCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChildSessionCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeKeyIdIdentification")
@@ -1430,6 +1652,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midKeyIdIdentificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyIdIdentification)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/IkeFqdnIdentification")
@@ -1452,6 +1681,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFqdnIdentificationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFqdnIdentification)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFqdnIdentificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFqdnIdentification)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1517,6 +1753,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midChildSessionParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChildSessionParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/TunnelModeChildSessionParams")
@@ -1542,6 +1785,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTunnelModeChildSessionParamsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParams)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTunnelModeChildSessionParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParams)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1628,6 +1878,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTunnelModeChildSessionParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParamsBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/TunnelModeChildSessionParams$ConfigRequestIpv4Address")
@@ -1645,6 +1902,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTunnelModeChildSessionParamsConfigRequestIpv4AddressToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParamsConfigRequestIpv4Address)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/TunnelModeChildSessionParams$ConfigRequestIpv4DhcpServer")
@@ -1654,6 +1918,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTunnelModeChildSessionParamsConfigRequestIpv4DhcpServer = env.NewGlobalRef(&c.Object)
+
+		midTunnelModeChildSessionParamsConfigRequestIpv4DhcpServerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParamsConfigRequestIpv4DhcpServer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1665,6 +1936,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsTunnelModeChildSessionParamsConfigRequestIpv4DnsServer = env.NewGlobalRef(&c.Object)
 
+		midTunnelModeChildSessionParamsConfigRequestIpv4DnsServerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParamsConfigRequestIpv4DnsServer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/TunnelModeChildSessionParams$ConfigRequestIpv4Netmask")
@@ -1674,6 +1952,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTunnelModeChildSessionParamsConfigRequestIpv4Netmask = env.NewGlobalRef(&c.Object)
+
+		midTunnelModeChildSessionParamsConfigRequestIpv4NetmaskToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParamsConfigRequestIpv4Netmask)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1699,6 +1984,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTunnelModeChildSessionParamsConfigRequestIpv6AddressToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParamsConfigRequestIpv6Address)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/TunnelModeChildSessionParams$ConfigRequestIpv6DnsServer")
@@ -1708,6 +2000,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTunnelModeChildSessionParamsConfigRequestIpv6DnsServer = env.NewGlobalRef(&c.Object)
+
+		midTunnelModeChildSessionParamsConfigRequestIpv6DnsServerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParamsConfigRequestIpv6DnsServer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1719,6 +2018,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsTunnelModeChildSessionParamsTunnelModeChildConfigRequest = env.NewGlobalRef(&c.Object)
 
+		midTunnelModeChildSessionParamsTunnelModeChildConfigRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTunnelModeChildSessionParamsTunnelModeChildConfigRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ipsec/ike/TransportModeChildSessionParams")
@@ -1728,6 +2034,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTransportModeChildSessionParams = env.NewGlobalRef(&c.Object)
+
+		midTransportModeChildSessionParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportModeChildSessionParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1768,6 +2081,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTransportModeChildSessionParamsBuilderSetLifetimeSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportModeChildSessionParamsBuilder)), "setLifetimeSeconds", "(II)Landroid/net/ipsec/ike/TransportModeChildSessionParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransportModeChildSessionParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportModeChildSessionParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

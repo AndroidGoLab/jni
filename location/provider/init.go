@@ -50,6 +50,7 @@ var (
 	midPropertiesBuilderSetHasSatelliteRequirement jni.MethodID
 	midPropertiesBuilderSetHasSpeedSupport         jni.MethodID
 	midPropertiesBuilderSetPowerUsage              jni.MethodID
+	midPropertiesBuilderToString                   jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -250,6 +251,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPropertiesBuilderSetPowerUsage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setPowerUsage", "(I)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPropertiesBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

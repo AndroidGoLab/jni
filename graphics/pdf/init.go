@@ -31,6 +31,7 @@ var (
 	midTypefaceHashCode                jni.MethodID
 	midTypefaceIsBold                  jni.MethodID
 	midTypefaceIsItalic                jni.MethodID
+	midTypefaceToString                jni.MethodID
 	midTypefaceCreate2                 jni.MethodID
 	midTypefaceCreate3_1               jni.MethodID
 	midTypefaceCreate2_2               jni.MethodID
@@ -47,12 +48,14 @@ var (
 	midTypefaceBuilderSetItalic                   jni.MethodID
 	midTypefaceBuilderSetTtcIndex                 jni.MethodID
 	midTypefaceBuilderSetWeight                   jni.MethodID
+	midTypefaceBuilderToString                    jni.MethodID
 
 	clsTypefaceCustomFallbackBuilder                          *jni.GlobalRef
 	midTypefaceCustomFallbackBuilderAddCustomFallback         jni.MethodID
 	midTypefaceCustomFallbackBuilderBuild                     jni.MethodID
 	midTypefaceCustomFallbackBuilderSetStyle                  jni.MethodID
 	midTypefaceCustomFallbackBuilderSetSystemFallback         jni.MethodID
+	midTypefaceCustomFallbackBuilderToString                  jni.MethodID
 	midTypefaceCustomFallbackBuilderGetMaxCustomFallbackCount jni.MethodID
 
 	clsDocument           *jni.GlobalRef
@@ -62,16 +65,19 @@ var (
 	midDocumentGetPages   jni.MethodID
 	midDocumentStartPage  jni.MethodID
 	midDocumentWriteTo    jni.MethodID
+	midDocumentToString   jni.MethodID
 
 	clsDocumentPage          *jni.GlobalRef
 	midDocumentPageGetCanvas jni.MethodID
 	midDocumentPageGetInfo   jni.MethodID
+	midDocumentPageToString  jni.MethodID
 
 	clsDocumentPageInfo               *jni.GlobalRef
 	midDocumentPageInfoGetContentRect jni.MethodID
 	midDocumentPageInfoGetPageHeight  jni.MethodID
 	midDocumentPageInfoGetPageNumber  jni.MethodID
 	midDocumentPageInfoGetPageWidth   jni.MethodID
+	midDocumentPageInfoToString       jni.MethodID
 
 	clsCanvas                       *jni.GlobalRef
 	midCanvasCtor                   jni.MethodID
@@ -190,14 +196,17 @@ var (
 	midCanvasSetMatrix              jni.MethodID
 	midCanvasSkew                   jni.MethodID
 	midCanvasTranslate              jni.MethodID
+	midCanvasToString               jni.MethodID
 
-	clsCanvasEdgeType        *jni.GlobalRef
-	midCanvasEdgeTypeValues  jni.MethodID
-	midCanvasEdgeTypeValueOf jni.MethodID
+	clsCanvasEdgeType         *jni.GlobalRef
+	midCanvasEdgeTypeToString jni.MethodID
+	midCanvasEdgeTypeValues   jni.MethodID
+	midCanvasEdgeTypeValueOf  jni.MethodID
 
-	clsCanvasVertexMode        *jni.GlobalRef
-	midCanvasVertexModeValues  jni.MethodID
-	midCanvasVertexModeValueOf jni.MethodID
+	clsCanvasVertexMode         *jni.GlobalRef
+	midCanvasVertexModeToString jni.MethodID
+	midCanvasVertexModeValues   jni.MethodID
+	midCanvasVertexModeValueOf  jni.MethodID
 
 	clsRendererPreV                             *jni.GlobalRef
 	midRendererPreVCtor                         jni.MethodID
@@ -207,6 +216,7 @@ var (
 	midRendererPreVGetPdfFormType               jni.MethodID
 	midRendererPreVOpenPage                     jni.MethodID
 	midRendererPreVWrite                        jni.MethodID
+	midRendererPreVToString                     jni.MethodID
 
 	clsRendererPreVPage                            *jni.GlobalRef
 	midRendererPreVPageApplyEdit                   jni.MethodID
@@ -225,6 +235,7 @@ var (
 	midRendererPreVPageRender                      jni.MethodID
 	midRendererPreVPageSearchText                  jni.MethodID
 	midRendererPreVPageSelectContent               jni.MethodID
+	midRendererPreVPageToString                    jni.MethodID
 
 	clsBitmap                       *jni.GlobalRef
 	midBitmapAsShared               jni.MethodID
@@ -280,6 +291,7 @@ var (
 	midBitmapSetPremultiplied       jni.MethodID
 	midBitmapSetWidth               jni.MethodID
 	midBitmapWriteToParcel          jni.MethodID
+	midBitmapToString               jni.MethodID
 	midBitmapCreateBitmap1          jni.MethodID
 	midBitmapCreateBitmap5_1        jni.MethodID
 	midBitmapCreateBitmap7_2        jni.MethodID
@@ -298,20 +310,24 @@ var (
 	midBitmapCreateScaledBitmap     jni.MethodID
 	midBitmapWrapHardwareBuffer     jni.MethodID
 
-	clsBitmapCompressFormat        *jni.GlobalRef
-	midBitmapCompressFormatValues  jni.MethodID
-	midBitmapCompressFormatValueOf jni.MethodID
+	clsBitmapCompressFormat         *jni.GlobalRef
+	midBitmapCompressFormatToString jni.MethodID
+	midBitmapCompressFormatValues   jni.MethodID
+	midBitmapCompressFormatValueOf  jni.MethodID
 
-	clsBitmapConfig        *jni.GlobalRef
-	midBitmapConfigValues  jni.MethodID
-	midBitmapConfigValueOf jni.MethodID
+	clsBitmapConfig         *jni.GlobalRef
+	midBitmapConfigToString jni.MethodID
+	midBitmapConfigValues   jni.MethodID
+	midBitmapConfigValueOf  jni.MethodID
 
 	clsLoadParams            *jni.GlobalRef
 	midLoadParamsGetPassword jni.MethodID
+	midLoadParamsToString    jni.MethodID
 
 	clsLoadParamsBuilder            *jni.GlobalRef
 	midLoadParamsBuilderBuild       jni.MethodID
 	midLoadParamsBuilderSetPassword jni.MethodID
+	midLoadParamsBuilderToString    jni.MethodID
 
 	clsRenderer                             *jni.GlobalRef
 	midRendererCtor                         jni.MethodID
@@ -322,6 +338,7 @@ var (
 	midRendererOpenPage                     jni.MethodID
 	midRendererShouldScaleForPrinting       jni.MethodID
 	midRendererWrite                        jni.MethodID
+	midRendererToString                     jni.MethodID
 
 	clsRendererPage                            *jni.GlobalRef
 	midRendererPageApplyEdit                   jni.MethodID
@@ -341,6 +358,7 @@ var (
 	midRendererPageRender4_1                   jni.MethodID
 	midRendererPageSearchText                  jni.MethodID
 	midRendererPageSelectContent               jni.MethodID
+	midRendererPageToString                    jni.MethodID
 
 	clsParcelFileDescriptor                         *jni.GlobalRef
 	midParcelFileDescriptorCtor                     jni.MethodID
@@ -368,28 +386,34 @@ var (
 	midParcelFileDescriptorOpen                     jni.MethodID
 	midParcelFileDescriptorParseMode                jni.MethodID
 
-	clsParcelFileDescriptorAutoCloseInputStream        *jni.GlobalRef
-	midParcelFileDescriptorAutoCloseInputStreamClose   jni.MethodID
-	midParcelFileDescriptorAutoCloseInputStreamRead0   jni.MethodID
-	midParcelFileDescriptorAutoCloseInputStreamRead1_1 jni.MethodID
-	midParcelFileDescriptorAutoCloseInputStreamRead3_2 jni.MethodID
+	clsParcelFileDescriptorAutoCloseInputStream         *jni.GlobalRef
+	midParcelFileDescriptorAutoCloseInputStreamClose    jni.MethodID
+	midParcelFileDescriptorAutoCloseInputStreamRead0    jni.MethodID
+	midParcelFileDescriptorAutoCloseInputStreamRead1_1  jni.MethodID
+	midParcelFileDescriptorAutoCloseInputStreamRead3_2  jni.MethodID
+	midParcelFileDescriptorAutoCloseInputStreamToString jni.MethodID
 
-	clsParcelFileDescriptorAutoCloseOutputStream      *jni.GlobalRef
-	midParcelFileDescriptorAutoCloseOutputStreamClose jni.MethodID
+	clsParcelFileDescriptorAutoCloseOutputStream         *jni.GlobalRef
+	midParcelFileDescriptorAutoCloseOutputStreamClose    jni.MethodID
+	midParcelFileDescriptorAutoCloseOutputStreamToString jni.MethodID
 
-	clsParcelFileDescriptorFileDescriptorDetachedException *jni.GlobalRef
+	clsParcelFileDescriptorFileDescriptorDetachedException         *jni.GlobalRef
+	midParcelFileDescriptorFileDescriptorDetachedExceptionToString jni.MethodID
 
-	clsParcelFileDescriptorOnCloseListener        *jni.GlobalRef
-	midParcelFileDescriptorOnCloseListenerOnClose jni.MethodID
+	clsParcelFileDescriptorOnCloseListener         *jni.GlobalRef
+	midParcelFileDescriptorOnCloseListenerOnClose  jni.MethodID
+	midParcelFileDescriptorOnCloseListenerToString jni.MethodID
 
 	clsRenderParams               *jni.GlobalRef
 	midRenderParamsGetRenderFlags jni.MethodID
 	midRenderParamsGetRenderMode  jni.MethodID
+	midRenderParamsToString       jni.MethodID
 
 	clsRenderParamsBuilder                  *jni.GlobalRef
 	midRenderParamsBuilderBuild             jni.MethodID
 	midRenderParamsBuilderSetRenderFlags1   jni.MethodID
 	midRenderParamsBuilderSetRenderFlags2_1 jni.MethodID
+	midRenderParamsBuilderToString          jni.MethodID
 
 	clsPaint                           *jni.GlobalRef
 	midPaintCtor                       jni.MethodID
@@ -523,14 +547,17 @@ var (
 	midPaintSetUnderlineText           jni.MethodID
 	midPaintSetWordSpacing             jni.MethodID
 	midPaintSetXfermode                jni.MethodID
+	midPaintToString                   jni.MethodID
 
-	clsPaintAlign        *jni.GlobalRef
-	midPaintAlignValues  jni.MethodID
-	midPaintAlignValueOf jni.MethodID
+	clsPaintAlign         *jni.GlobalRef
+	midPaintAlignToString jni.MethodID
+	midPaintAlignValues   jni.MethodID
+	midPaintAlignValueOf  jni.MethodID
 
-	clsPaintCap        *jni.GlobalRef
-	midPaintCapValues  jni.MethodID
-	midPaintCapValueOf jni.MethodID
+	clsPaintCap         *jni.GlobalRef
+	midPaintCapToString jni.MethodID
+	midPaintCapValues   jni.MethodID
+	midPaintCapValueOf  jni.MethodID
 
 	clsPaintFontMetrics         *jni.GlobalRef
 	midPaintFontMetricsEquals   jni.MethodID
@@ -544,13 +571,15 @@ var (
 	midPaintFontMetricsIntSet1_1   jni.MethodID
 	midPaintFontMetricsIntToString jni.MethodID
 
-	clsPaintJoin        *jni.GlobalRef
-	midPaintJoinValues  jni.MethodID
-	midPaintJoinValueOf jni.MethodID
+	clsPaintJoin         *jni.GlobalRef
+	midPaintJoinToString jni.MethodID
+	midPaintJoinValues   jni.MethodID
+	midPaintJoinValueOf  jni.MethodID
 
-	clsPaintStyle        *jni.GlobalRef
-	midPaintStyleValues  jni.MethodID
-	midPaintStyleValueOf jni.MethodID
+	clsPaintStyle         *jni.GlobalRef
+	midPaintStyleToString jni.MethodID
+	midPaintStyleValues   jni.MethodID
+	midPaintStyleValueOf  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -622,6 +651,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTypefaceIsItalic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "isItalic", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTypefaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeface)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -736,6 +772,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTypefaceBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Typeface$CustomFallbackBuilder")
@@ -768,6 +811,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTypefaceCustomFallbackBuilderSetSystemFallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceCustomFallbackBuilder)), "setSystemFallback", "(Ljava/lang/String;)Landroid/graphics/Typeface$CustomFallbackBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTypefaceCustomFallbackBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceCustomFallbackBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -830,6 +880,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDocumentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocument)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/pdf/PdfDocument$Page")
@@ -848,6 +905,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDocumentPageGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentPage)), "getInfo", "()Landroid/graphics/pdf/PdfDocument$PageInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDocumentPageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentPage)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -886,6 +950,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDocumentPageInfoGetPageWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentPageInfo)), "getPageWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDocumentPageInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentPageInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1711,6 +1782,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCanvasToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvas)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Canvas$EdgeType")
@@ -1720,6 +1798,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCanvasEdgeType = env.NewGlobalRef(&c.Object)
+
+		midCanvasEdgeTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvasEdgeType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midCanvasEdgeTypeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCanvasEdgeType)), "values", "()[Landroid/graphics/Canvas$EdgeType;")
 		if err != nil {
@@ -1744,6 +1829,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCanvasVertexMode = env.NewGlobalRef(&c.Object)
+
+		midCanvasVertexModeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCanvasVertexMode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midCanvasVertexModeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCanvasVertexMode)), "values", "()[Landroid/graphics/Canvas$VertexMode;")
 		if err != nil {
@@ -1809,6 +1901,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRendererPreVWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPreV)), "write", "(Landroid/os/ParcelFileDescriptor;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRendererPreVToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPreV)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1931,6 +2030,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRendererPreVPageSelectContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPreVPage)), "selectContent", "(Landroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;)Landroid/graphics/pdf/models/selection/PageSelection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRendererPreVPageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPreVPage)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2318,6 +2424,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBitmapToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midBitmapCreateBitmap1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmap)), "createBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2447,6 +2560,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsBitmapCompressFormat = env.NewGlobalRef(&c.Object)
 
+		midBitmapCompressFormatToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapCompressFormat)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midBitmapCompressFormatValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmapCompressFormat)), "values", "()[Landroid/graphics/Bitmap$CompressFormat;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2470,6 +2590,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBitmapConfig = env.NewGlobalRef(&c.Object)
+
+		midBitmapConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midBitmapConfigValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBitmapConfig)), "values", "()[Landroid/graphics/Bitmap$Config;")
 		if err != nil {
@@ -2502,6 +2629,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLoadParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoadParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/pdf/LoadParams$Builder")
@@ -2520,6 +2654,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midLoadParamsBuilderSetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoadParamsBuilder)), "setPassword", "(Ljava/lang/String;)Landroid/graphics/pdf/LoadParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLoadParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoadParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2583,6 +2724,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRendererWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "write", "(Landroid/os/ParcelFileDescriptor;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRendererToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderer)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2712,6 +2860,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRendererPageSelectContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "selectContent", "(Landroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;)Landroid/graphics/pdf/models/selection/PageSelection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRendererPageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRendererPage)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2931,6 +3086,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midParcelFileDescriptorAutoCloseInputStreamToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptorAutoCloseInputStream)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/ParcelFileDescriptor$AutoCloseOutputStream")
@@ -2948,6 +3110,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midParcelFileDescriptorAutoCloseOutputStreamToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptorAutoCloseOutputStream)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/ParcelFileDescriptor$FileDescriptorDetachedException")
@@ -2957,6 +3126,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsParcelFileDescriptorFileDescriptorDetachedException = env.NewGlobalRef(&c.Object)
+
+		midParcelFileDescriptorFileDescriptorDetachedExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptorFileDescriptorDetachedException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -2969,6 +3145,13 @@ func doInit(env *jni.Env) error {
 		clsParcelFileDescriptorOnCloseListener = env.NewGlobalRef(&c.Object)
 
 		midParcelFileDescriptorOnCloseListenerOnClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptorOnCloseListener)), "onClose", "(Ljava/io/IOException;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midParcelFileDescriptorOnCloseListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelFileDescriptorOnCloseListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2993,6 +3176,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRenderParamsGetRenderMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderParams)), "getRenderMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderParams)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3024,6 +3214,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRenderParamsBuilderSetRenderFlags2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderParamsBuilder)), "setRenderFlags", "(II)Landroid/graphics/pdf/RenderParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3954,6 +4151,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPaintToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaint)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Paint$Align")
@@ -3963,6 +4167,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPaintAlign = env.NewGlobalRef(&c.Object)
+
+		midPaintAlignToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintAlign)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midPaintAlignValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPaintAlign)), "values", "()[Landroid/graphics/Paint$Align;")
 		if err != nil {
@@ -3987,6 +4198,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPaintCap = env.NewGlobalRef(&c.Object)
+
+		midPaintCapToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintCap)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midPaintCapValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPaintCap)), "values", "()[Landroid/graphics/Paint$Cap;")
 		if err != nil {
@@ -4088,6 +4306,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsPaintJoin = env.NewGlobalRef(&c.Object)
 
+		midPaintJoinToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintJoin)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midPaintJoinValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPaintJoin)), "values", "()[Landroid/graphics/Paint$Join;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -4111,6 +4336,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPaintStyle = env.NewGlobalRef(&c.Object)
+
+		midPaintStyleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintStyle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midPaintStyleValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPaintStyle)), "values", "()[Landroid/graphics/Paint$Style;")
 		if err != nil {

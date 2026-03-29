@@ -35,6 +35,7 @@ var (
 
 	clsVerificationManager                               *jni.GlobalRef
 	midVerificationManagerGetDomainVerificationUserState jni.MethodID
+	midVerificationManagerToString                       jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -130,6 +131,13 @@ func doInit(env *jni.Env) error {
 		clsVerificationManager = env.NewGlobalRef(&c.Object)
 
 		midVerificationManagerGetDomainVerificationUserState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationManager)), "getDomainVerificationUserState", "(Ljava/lang/String;)Landroid/content/pm/verify/domain/DomainVerificationUserState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVerificationManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

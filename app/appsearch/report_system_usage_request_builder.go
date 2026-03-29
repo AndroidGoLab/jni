@@ -87,3 +87,30 @@ func (m *ReportSystemUsageRequestBuilder) SetUsageTimestampMillis(arg0 int64) (*
 	})
 	return result, callErr
 }
+
+// ToString calls android.app.appsearch.ReportSystemUsageRequest$Builder.toString.
+func (m *ReportSystemUsageRequestBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midReportSystemUsageRequestBuilderToString == nil {
+			callErr = fmt.Errorf("android.app.appsearch.ReportSystemUsageRequest$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midReportSystemUsageRequestBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

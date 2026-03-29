@@ -30,6 +30,7 @@ var (
 	midTvAdServiceInfoGetServiceInfo    jni.MethodID
 	midTvAdServiceInfoGetSupportedTypes jni.MethodID
 	midTvAdServiceInfoWriteToParcel     jni.MethodID
+	midTvAdServiceInfoToString          jni.MethodID
 
 	clsTvAdView                                   *jni.GlobalRef
 	midTvAdViewCtor                               jni.MethodID
@@ -60,9 +61,11 @@ var (
 	midTvAdViewSetZOrderOnTop                     jni.MethodID
 	midTvAdViewStartAdService                     jni.MethodID
 	midTvAdViewStopAdService                      jni.MethodID
+	midTvAdViewToString                           jni.MethodID
 
 	clsTvAdViewOnUnhandledInputEventListener                      *jni.GlobalRef
 	midTvAdViewOnUnhandledInputEventListenerOnUnhandledInputEvent jni.MethodID
+	midTvAdViewOnUnhandledInputEventListenerToString              jni.MethodID
 
 	clsTvAdViewTvAdCallback                            *jni.GlobalRef
 	midTvAdViewTvAdCallbackOnRequestCurrentChannelUri  jni.MethodID
@@ -71,22 +74,26 @@ var (
 	midTvAdViewTvAdCallbackOnRequestSigning            jni.MethodID
 	midTvAdViewTvAdCallbackOnRequestTrackInfoList      jni.MethodID
 	midTvAdViewTvAdCallbackOnStateChanged              jni.MethodID
+	midTvAdViewTvAdCallbackToString                    jni.MethodID
 
 	clsTvAdManager                   *jni.GlobalRef
 	midTvAdManagerGetTvAdServiceList jni.MethodID
 	midTvAdManagerRegisterCallback   jni.MethodID
 	midTvAdManagerSendAppLinkCommand jni.MethodID
 	midTvAdManagerUnregisterCallback jni.MethodID
+	midTvAdManagerToString           jni.MethodID
 
 	clsTvAdManagerTvAdServiceCallback                   *jni.GlobalRef
 	midTvAdManagerTvAdServiceCallbackOnAdServiceAdded   jni.MethodID
 	midTvAdManagerTvAdServiceCallbackOnAdServiceRemoved jni.MethodID
 	midTvAdManagerTvAdServiceCallbackOnAdServiceUpdated jni.MethodID
+	midTvAdManagerTvAdServiceCallbackToString           jni.MethodID
 
 	clsTvAdService                 *jni.GlobalRef
 	midTvAdServiceOnAppLinkCommand jni.MethodID
 	midTvAdServiceOnBind           jni.MethodID
 	midTvAdServiceOnCreateSession  jni.MethodID
+	midTvAdServiceToString         jni.MethodID
 
 	clsTvAdServiceSession                          *jni.GlobalRef
 	midTvAdServiceSessionIsMediaViewEnabled        jni.MethodID
@@ -121,6 +128,7 @@ var (
 	midTvAdServiceSessionRequestTrackInfoList      jni.MethodID
 	midTvAdServiceSessionSendTvAdSessionData       jni.MethodID
 	midTvAdServiceSessionSetMediaViewEnabled       jni.MethodID
+	midTvAdServiceSessionToString                  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -182,6 +190,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTvAdServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvAdServiceInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -391,6 +406,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTvAdViewToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdView)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/tv/ad/TvAdView$OnUnhandledInputEventListener")
@@ -402,6 +424,13 @@ func doInit(env *jni.Env) error {
 		clsTvAdViewOnUnhandledInputEventListener = env.NewGlobalRef(&c.Object)
 
 		midTvAdViewOnUnhandledInputEventListenerOnUnhandledInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdViewOnUnhandledInputEventListener)), "onUnhandledInputEvent", "(Landroid/view/InputEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvAdViewOnUnhandledInputEventListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdViewOnUnhandledInputEventListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -460,6 +489,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTvAdViewTvAdCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdViewTvAdCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/tv/ad/TvAdManager")
@@ -498,6 +534,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTvAdManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/tv/ad/TvAdManager$TvAdServiceCallback")
@@ -529,6 +572,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTvAdManagerTvAdServiceCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdManagerTvAdServiceCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/tv/ad/TvAdService")
@@ -554,6 +604,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTvAdServiceOnCreateSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdService)), "onCreateSession", "(Ljava/lang/String;Ljava/lang/String;)Landroid/media/tv/ad/TvAdService$Session;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvAdServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -788,6 +845,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTvAdServiceSessionSetMediaViewEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceSession)), "setMediaViewEnabled", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvAdServiceSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceSession)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

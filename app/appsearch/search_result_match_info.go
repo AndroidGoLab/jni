@@ -348,3 +348,30 @@ func (m *SearchResultMatchInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) erro
 	})
 	return callErr
 }
+
+// ToString calls android.app.appsearch.SearchResult$MatchInfo.toString.
+func (m *SearchResultMatchInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchResultMatchInfoToString == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SearchResult$MatchInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchResultMatchInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

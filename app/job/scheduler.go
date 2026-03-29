@@ -436,3 +436,30 @@ func (m *Scheduler) Schedule(arg0 *jni.Object) (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.app.job.JobScheduler.toString.
+func (m *Scheduler) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchedulerToString == nil {
+			callErr = fmt.Errorf("android.app.job.JobScheduler.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSchedulerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

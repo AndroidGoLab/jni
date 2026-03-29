@@ -26,10 +26,12 @@ var (
 	clsRequestPreparer                   *jni.GlobalRef
 	midRequestPreparerGetView            jni.MethodID
 	midRequestPreparerOnPrepareExtraData jni.MethodID
+	midRequestPreparerToString           jni.MethodID
 
 	clsEventSource                                *jni.GlobalRef
 	midEventSourceSendAccessibilityEvent          jni.MethodID
 	midEventSourceSendAccessibilityEventUnchecked jni.MethodID
+	midEventSourceToString                        jni.MethodID
 
 	clsWindowInfo                         *jni.GlobalRef
 	midWindowInfoCtor                     jni.MethodID
@@ -255,6 +257,7 @@ var (
 	midNodeInfoCollectionInfoGetRowCount                           jni.MethodID
 	midNodeInfoCollectionInfoGetSelectionMode                      jni.MethodID
 	midNodeInfoCollectionInfoIsHierarchical                        jni.MethodID
+	midNodeInfoCollectionInfoToString                              jni.MethodID
 	midNodeInfoCollectionInfoObtain3                               jni.MethodID
 	midNodeInfoCollectionInfoObtain4_1                             jni.MethodID
 
@@ -267,6 +270,7 @@ var (
 	midNodeInfoCollectionItemInfoGetRowTitle    jni.MethodID
 	midNodeInfoCollectionItemInfoIsHeading      jni.MethodID
 	midNodeInfoCollectionItemInfoIsSelected     jni.MethodID
+	midNodeInfoCollectionItemInfoToString       jni.MethodID
 	midNodeInfoCollectionItemInfoObtain5        jni.MethodID
 	midNodeInfoCollectionItemInfoObtain6_1      jni.MethodID
 
@@ -274,12 +278,14 @@ var (
 	midNodeInfoExtraRenderingInfoGetLayoutSize   jni.MethodID
 	midNodeInfoExtraRenderingInfoGetTextSizeInPx jni.MethodID
 	midNodeInfoExtraRenderingInfoGetTextSizeUnit jni.MethodID
+	midNodeInfoExtraRenderingInfoToString        jni.MethodID
 
 	clsNodeInfoRangeInfo           *jni.GlobalRef
 	midNodeInfoRangeInfoGetCurrent jni.MethodID
 	midNodeInfoRangeInfoGetMax     jni.MethodID
 	midNodeInfoRangeInfoGetMin     jni.MethodID
 	midNodeInfoRangeInfoGetType    jni.MethodID
+	midNodeInfoRangeInfoToString   jni.MethodID
 	midNodeInfoRangeInfoObtain     jni.MethodID
 
 	clsNodeInfoTouchDelegateInfo                   *jni.GlobalRef
@@ -288,6 +294,7 @@ var (
 	midNodeInfoTouchDelegateInfoGetRegionCount     jni.MethodID
 	midNodeInfoTouchDelegateInfoGetTargetForRegion jni.MethodID
 	midNodeInfoTouchDelegateInfoWriteToParcel      jni.MethodID
+	midNodeInfoTouchDelegateInfoToString           jni.MethodID
 
 	clsCaptioningManager                                 *jni.GlobalRef
 	midCaptioningManagerAddCaptioningChangeListener      jni.MethodID
@@ -299,6 +306,7 @@ var (
 	midCaptioningManagerIsSystemAudioCaptioningEnabled   jni.MethodID
 	midCaptioningManagerIsSystemAudioCaptioningUiEnabled jni.MethodID
 	midCaptioningManagerRemoveCaptioningChangeListener   jni.MethodID
+	midCaptioningManagerToString                         jni.MethodID
 
 	clsCaptioningManagerCaptionStyle                   *jni.GlobalRef
 	midCaptioningManagerCaptionStyleGetTypeface        jni.MethodID
@@ -307,6 +315,7 @@ var (
 	midCaptioningManagerCaptionStyleHasEdgeType        jni.MethodID
 	midCaptioningManagerCaptionStyleHasForegroundColor jni.MethodID
 	midCaptioningManagerCaptionStyleHasWindowColor     jni.MethodID
+	midCaptioningManagerCaptionStyleToString           jni.MethodID
 
 	clsCaptioningManagerCaptioningChangeListener                                 *jni.GlobalRef
 	midCaptioningManagerCaptioningChangeListenerOnEnabledChanged                 jni.MethodID
@@ -315,6 +324,7 @@ var (
 	midCaptioningManagerCaptioningChangeListenerOnSystemAudioCaptioningChanged   jni.MethodID
 	midCaptioningManagerCaptioningChangeListenerOnSystemAudioCaptioningUiChanged jni.MethodID
 	midCaptioningManagerCaptioningChangeListenerOnUserStyleChanged               jni.MethodID
+	midCaptioningManagerCaptioningChangeListenerToString                         jni.MethodID
 
 	clsManager                                               *jni.GlobalRef
 	midManagerAddAccessibilityRequestPreparer                jni.MethodID
@@ -343,22 +353,28 @@ var (
 	midManagerRemoveHighContrastTextStateChangeListener      jni.MethodID
 	midManagerRemoveTouchExplorationStateChangeListener      jni.MethodID
 	midManagerSendAccessibilityEvent                         jni.MethodID
+	midManagerToString                                       jni.MethodID
 	midManagerIsAccessibilityButtonSupported                 jni.MethodID
 
 	clsManagerAccessibilityServicesStateChangeListener                                    *jni.GlobalRef
 	midManagerAccessibilityServicesStateChangeListenerOnAccessibilityServicesStateChanged jni.MethodID
+	midManagerAccessibilityServicesStateChangeListenerToString                            jni.MethodID
 
 	clsManagerAccessibilityStateChangeListener                            *jni.GlobalRef
 	midManagerAccessibilityStateChangeListenerOnAccessibilityStateChanged jni.MethodID
+	midManagerAccessibilityStateChangeListenerToString                    jni.MethodID
 
 	clsManagerAudioDescriptionRequestedChangeListener                                   *jni.GlobalRef
 	midManagerAudioDescriptionRequestedChangeListenerOnAudioDescriptionRequestedChanged jni.MethodID
+	midManagerAudioDescriptionRequestedChangeListenerToString                           jni.MethodID
 
 	clsManagerHighContrastTextStateChangeListener                               *jni.GlobalRef
 	midManagerHighContrastTextStateChangeListenerOnHighContrastTextStateChanged jni.MethodID
+	midManagerHighContrastTextStateChangeListenerToString                       jni.MethodID
 
 	clsManagerTouchExplorationStateChangeListener                               *jni.GlobalRef
 	midManagerTouchExplorationStateChangeListenerOnTouchExplorationStateChanged jni.MethodID
+	midManagerTouchExplorationStateChangeListenerToString                       jni.MethodID
 
 	clsEvent                              *jni.GlobalRef
 	midEventCtor                          jni.MethodID
@@ -454,6 +470,7 @@ var (
 	midNodeProviderFindAccessibilityNodeInfosByText    jni.MethodID
 	midNodeProviderFindFocus                           jni.MethodID
 	midNodeProviderPerformAction                       jni.MethodID
+	midNodeProviderToString                            jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -496,6 +513,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRequestPreparerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestPreparer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/accessibility/AccessibilityEventSource")
@@ -514,6 +538,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midEventSourceSendAccessibilityEventUnchecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventSource)), "sendAccessibilityEventUnchecked", "(Landroid/view/accessibility/AccessibilityEvent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventSourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventSource)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2073,6 +2104,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNodeInfoCollectionInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNodeInfoCollectionInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midNodeInfoCollectionInfoObtain3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNodeInfoCollectionInfo)), "obtain", "(IIZ)Landroid/view/accessibility/AccessibilityNodeInfo$CollectionInfo;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2153,6 +2191,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNodeInfoCollectionItemInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNodeInfoCollectionItemInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midNodeInfoCollectionItemInfoObtain5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNodeInfoCollectionItemInfo)), "obtain", "(IIIIZ)Landroid/view/accessibility/AccessibilityNodeInfo$CollectionItemInfo;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2198,6 +2243,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNodeInfoExtraRenderingInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNodeInfoExtraRenderingInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/accessibility/AccessibilityNodeInfo$RangeInfo")
@@ -2230,6 +2282,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNodeInfoRangeInfoGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNodeInfoRangeInfo)), "getType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNodeInfoRangeInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNodeInfoRangeInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2282,6 +2341,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNodeInfoTouchDelegateInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNodeInfoTouchDelegateInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNodeInfoTouchDelegateInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNodeInfoTouchDelegateInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2361,6 +2427,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCaptioningManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptioningManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/accessibility/CaptioningManager$CaptionStyle")
@@ -2413,6 +2486,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCaptioningManagerCaptionStyleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptioningManagerCaptionStyle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/accessibility/CaptioningManager$CaptioningChangeListener")
@@ -2459,6 +2539,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCaptioningManagerCaptioningChangeListenerOnUserStyleChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptioningManagerCaptioningChangeListener)), "onUserStyleChanged", "(Landroid/view/accessibility/CaptioningManager$CaptionStyle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCaptioningManagerCaptioningChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptioningManagerCaptioningChangeListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2657,6 +2744,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midManagerIsAccessibilityButtonSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAccessibilityButtonSupported", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2681,6 +2775,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerAccessibilityServicesStateChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAccessibilityServicesStateChangeListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/accessibility/AccessibilityManager$AccessibilityStateChangeListener")
@@ -2692,6 +2793,13 @@ func doInit(env *jni.Env) error {
 		clsManagerAccessibilityStateChangeListener = env.NewGlobalRef(&c.Object)
 
 		midManagerAccessibilityStateChangeListenerOnAccessibilityStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAccessibilityStateChangeListener)), "onAccessibilityStateChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerAccessibilityStateChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAccessibilityStateChangeListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2715,6 +2823,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerAudioDescriptionRequestedChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAudioDescriptionRequestedChangeListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/accessibility/AccessibilityManager$HighContrastTextStateChangeListener")
@@ -2732,6 +2847,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerHighContrastTextStateChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerHighContrastTextStateChangeListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/accessibility/AccessibilityManager$TouchExplorationStateChangeListener")
@@ -2743,6 +2865,13 @@ func doInit(env *jni.Env) error {
 		clsManagerTouchExplorationStateChangeListener = env.NewGlobalRef(&c.Object)
 
 		midManagerTouchExplorationStateChangeListenerOnTouchExplorationStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerTouchExplorationStateChangeListener)), "onTouchExplorationStateChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerTouchExplorationStateChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerTouchExplorationStateChangeListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3390,6 +3519,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNodeProviderPerformAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNodeProvider)), "performAction", "(IILandroid/os/Bundle;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNodeProviderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNodeProvider)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

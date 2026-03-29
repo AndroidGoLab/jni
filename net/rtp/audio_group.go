@@ -170,3 +170,30 @@ func (m *AudioGroup) SetMode(arg0 int32) error {
 	})
 	return callErr
 }
+
+// ToString calls android.net.rtp.AudioGroup.toString.
+func (m *AudioGroup) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioGroupToString == nil {
+			callErr = fmt.Errorf("android.net.rtp.AudioGroup.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioGroupToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

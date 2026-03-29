@@ -96,3 +96,30 @@ func (m *StartForegroundCalledOnStoppedServiceException) WriteToParcel(arg0 *jni
 	})
 	return callErr
 }
+
+// ToString calls android.app.StartForegroundCalledOnStoppedServiceException.toString.
+func (m *StartForegroundCalledOnStoppedServiceException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midStartForegroundCalledOnStoppedServiceExceptionToString == nil {
+			callErr = fmt.Errorf("android.app.StartForegroundCalledOnStoppedServiceException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midStartForegroundCalledOnStoppedServiceExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

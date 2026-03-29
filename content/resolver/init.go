@@ -65,6 +65,7 @@ var (
 	midCursorSetNotificationUri        jni.MethodID
 	midCursorUnregisterContentObserver jni.MethodID
 	midCursorUnregisterDataSetObserver jni.MethodID
+	midCursorToString                  jni.MethodID
 
 	clsContentResolver                                        *jni.GlobalRef
 	midContentResolverAcquireContentProviderClient1           jni.MethodID
@@ -113,6 +114,7 @@ var (
 	midContentResolverUnregisterContentObserver               jni.MethodID
 	midContentResolverUpdate3                                 jni.MethodID
 	midContentResolverUpdate4_1                               jni.MethodID
+	midContentResolverToString                                jni.MethodID
 	midContentResolverAddPeriodicSync                         jni.MethodID
 	midContentResolverAddStatusChangeListener                 jni.MethodID
 	midContentResolverCancelSync2                             jni.MethodID
@@ -141,6 +143,7 @@ var (
 	midContentResolverMimeTypeInfoGetContentDescription jni.MethodID
 	midContentResolverMimeTypeInfoGetIcon               jni.MethodID
 	midContentResolverMimeTypeInfoGetLabel              jni.MethodID
+	midContentResolverMimeTypeInfoToString              jni.MethodID
 
 	clsUri                             *jni.GlobalRef
 	midUriBuildUpon                    jni.MethodID
@@ -517,6 +520,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCursorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursor)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/ContentResolver")
@@ -849,6 +859,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContentResolverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentResolver)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midContentResolverAddPeriodicSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContentResolver)), "addPeriodicSync", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;J)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1035,6 +1052,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midContentResolverMimeTypeInfoGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentResolverMimeTypeInfo)), "getLabel", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentResolverMimeTypeInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentResolverMimeTypeInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

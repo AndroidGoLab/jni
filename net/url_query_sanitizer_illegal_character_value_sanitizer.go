@@ -55,3 +55,30 @@ func (m *UrlQuerySanitizerIllegalCharacterValueSanitizer) Sanitize(arg0 string) 
 	})
 	return result, callErr
 }
+
+// ToString calls android.net.UrlQuerySanitizer$IllegalCharacterValueSanitizer.toString.
+func (m *UrlQuerySanitizerIllegalCharacterValueSanitizer) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUrlQuerySanitizerIllegalCharacterValueSanitizerToString == nil {
+			callErr = fmt.Errorf("android.net.UrlQuerySanitizer$IllegalCharacterValueSanitizer.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUrlQuerySanitizerIllegalCharacterValueSanitizerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

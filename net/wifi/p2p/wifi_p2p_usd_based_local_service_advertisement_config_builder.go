@@ -87,3 +87,30 @@ func (m *WifiP2pUsdBasedLocalServiceAdvertisementConfigBuilder) SetFrequencyMhz(
 	})
 	return result, callErr
 }
+
+// ToString calls android.net.wifi.p2p.WifiP2pUsdBasedLocalServiceAdvertisementConfig$Builder.toString.
+func (m *WifiP2pUsdBasedLocalServiceAdvertisementConfigBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderToString == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pUsdBasedLocalServiceAdvertisementConfig$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

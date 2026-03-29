@@ -30,6 +30,7 @@ var (
 	midNfcBarcodeGetTag      jni.MethodID
 	midNfcBarcodeGetType     jni.MethodID
 	midNfcBarcodeIsConnected jni.MethodID
+	midNfcBarcodeToString    jni.MethodID
 	midNfcBarcodeGet         jni.MethodID
 
 	clsNdefFormatable               *jni.GlobalRef
@@ -39,6 +40,7 @@ var (
 	midNdefFormatableFormatReadOnly jni.MethodID
 	midNdefFormatableGetTag         jni.MethodID
 	midNdefFormatableIsConnected    jni.MethodID
+	midNdefFormatableToString       jni.MethodID
 	midNdefFormatableGet            jni.MethodID
 
 	clsMifareUltralight                       *jni.GlobalRef
@@ -53,6 +55,7 @@ var (
 	midMifareUltralightSetTimeout             jni.MethodID
 	midMifareUltralightTransceive             jni.MethodID
 	midMifareUltralightWritePage              jni.MethodID
+	midMifareUltralightToString               jni.MethodID
 	midMifareUltralightGet                    jni.MethodID
 
 	clsNfcA                       *jni.GlobalRef
@@ -66,6 +69,7 @@ var (
 	midNfcAIsConnected            jni.MethodID
 	midNfcASetTimeout             jni.MethodID
 	midNfcATransceive             jni.MethodID
+	midNfcAToString               jni.MethodID
 	midNfcAGet                    jni.MethodID
 
 	clsMifareClassic                           *jni.GlobalRef
@@ -92,6 +96,7 @@ var (
 	midMifareClassicTransceive                 jni.MethodID
 	midMifareClassicTransfer                   jni.MethodID
 	midMifareClassicWriteBlock                 jni.MethodID
+	midMifareClassicToString                   jni.MethodID
 	midMifareClassicGet                        jni.MethodID
 
 	clsNfcV                       *jni.GlobalRef
@@ -103,6 +108,7 @@ var (
 	midNfcVGetTag                 jni.MethodID
 	midNfcVIsConnected            jni.MethodID
 	midNfcVTransceive             jni.MethodID
+	midNfcVToString               jni.MethodID
 	midNfcVGet                    jni.MethodID
 
 	clsNfcB                       *jni.GlobalRef
@@ -114,6 +120,7 @@ var (
 	midNfcBGetTag                 jni.MethodID
 	midNfcBIsConnected            jni.MethodID
 	midNfcBTransceive             jni.MethodID
+	midNfcBToString               jni.MethodID
 	midNfcBGet                    jni.MethodID
 
 	clsTagTechnology            *jni.GlobalRef
@@ -121,6 +128,7 @@ var (
 	midTagTechnologyConnect     jni.MethodID
 	midTagTechnologyGetTag      jni.MethodID
 	midTagTechnologyIsConnected jni.MethodID
+	midTagTechnologyToString    jni.MethodID
 
 	clsNfcF                       *jni.GlobalRef
 	midNfcFClose                  jni.MethodID
@@ -133,6 +141,7 @@ var (
 	midNfcFIsConnected            jni.MethodID
 	midNfcFSetTimeout             jni.MethodID
 	midNfcFTransceive             jni.MethodID
+	midNfcFToString               jni.MethodID
 	midNfcFGet                    jni.MethodID
 )
 
@@ -204,6 +213,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNfcBarcodeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcBarcode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midNfcBarcodeGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNfcBarcode)), "get", "(Landroid/nfc/Tag;)Landroid/nfc/tech/NfcBarcode;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -257,6 +273,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNdefFormatableIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdefFormatable)), "isConnected", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNdefFormatableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdefFormatable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -357,6 +380,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMifareUltralightToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMifareUltralight)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midMifareUltralightGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMifareUltralight)), "get", "(Landroid/nfc/Tag;)Landroid/nfc/tech/MifareUltralight;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -438,6 +468,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNfcATransceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcA)), "transceive", "([B)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNfcAToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcA)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -622,6 +659,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMifareClassicToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMifareClassic)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midMifareClassicGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMifareClassic)), "get", "(Landroid/nfc/Tag;)Landroid/nfc/tech/MifareClassic;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -689,6 +733,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNfcVTransceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcV)), "transceive", "([B)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNfcVToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcV)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -768,6 +819,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNfcBToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcB)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midNfcBGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNfcB)), "get", "(Landroid/nfc/Tag;)Landroid/nfc/tech/NfcB;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -807,6 +865,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTagTechnologyIsConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTagTechnology)), "isConnected", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTagTechnologyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTagTechnology)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -887,6 +952,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNfcFTransceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcF)), "transceive", "([B)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNfcFToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcF)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

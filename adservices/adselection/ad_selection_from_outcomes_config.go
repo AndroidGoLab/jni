@@ -251,3 +251,30 @@ func (m *AdSelectionFromOutcomesConfig) WriteToParcel(arg0 *jni.Object, arg1 int
 	})
 	return callErr
 }
+
+// ToString calls android.adservices.adselection.AdSelectionFromOutcomesConfig.toString.
+func (m *AdSelectionFromOutcomesConfig) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAdSelectionFromOutcomesConfigToString == nil {
+			callErr = fmt.Errorf("android.adservices.adselection.AdSelectionFromOutcomesConfig.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAdSelectionFromOutcomesConfigToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

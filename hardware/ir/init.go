@@ -27,10 +27,12 @@ var (
 	midConsumerIrManagerGetCarrierFrequencies jni.MethodID
 	midConsumerIrManagerHasIrEmitter          jni.MethodID
 	midConsumerIrManagerTransmit              jni.MethodID
+	midConsumerIrManagerToString              jni.MethodID
 
 	clsConsumerIrManagerCarrierFrequencyRange                *jni.GlobalRef
 	midConsumerIrManagerCarrierFrequencyRangeGetMaxFrequency jni.MethodID
 	midConsumerIrManagerCarrierFrequencyRangeGetMinFrequency jni.MethodID
+	midConsumerIrManagerCarrierFrequencyRangeToString        jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -80,6 +82,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midConsumerIrManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/ConsumerIrManager$CarrierFrequencyRange")
@@ -98,6 +107,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConsumerIrManagerCarrierFrequencyRangeGetMinFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManagerCarrierFrequencyRange)), "getMinFrequency", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConsumerIrManagerCarrierFrequencyRangeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManagerCarrierFrequencyRange)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

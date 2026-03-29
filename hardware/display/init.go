@@ -58,11 +58,13 @@ var (
 	midManagerGetMatchContentFrameRateUserPreference jni.MethodID
 	midManagerRegisterDisplayListener                jni.MethodID
 	midManagerUnregisterDisplayListener              jni.MethodID
+	midManagerToString                               jni.MethodID
 
 	clsManagerDisplayListener                 *jni.GlobalRef
 	midManagerDisplayListenerOnDisplayAdded   jni.MethodID
 	midManagerDisplayListenerOnDisplayChanged jni.MethodID
 	midManagerDisplayListenerOnDisplayRemoved jni.MethodID
+	midManagerDisplayListenerToString         jni.MethodID
 
 	clsVirtualDisplayConfig                        *jni.GlobalRef
 	midVirtualDisplayConfigDescribeContents        jni.MethodID
@@ -83,6 +85,7 @@ var (
 
 	clsVirtualDisplayConfigBrightnessListener                    *jni.GlobalRef
 	midVirtualDisplayConfigBrightnessListenerOnBrightnessChanged jni.MethodID
+	midVirtualDisplayConfigBrightnessListenerToString            jni.MethodID
 
 	clsVirtualDisplayConfigBuilder                        *jni.GlobalRef
 	midVirtualDisplayConfigBuilderAddDisplayCategory      jni.MethodID
@@ -93,6 +96,7 @@ var (
 	midVirtualDisplayConfigBuilderSetFlags                jni.MethodID
 	midVirtualDisplayConfigBuilderSetRequestedRefreshRate jni.MethodID
 	midVirtualDisplayConfigBuilderSetSurface              jni.MethodID
+	midVirtualDisplayConfigBuilderToString                jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -345,6 +349,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/display/DisplayManager$DisplayListener")
@@ -370,6 +381,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerDisplayListenerOnDisplayRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDisplayListener)), "onDisplayRemoved", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerDisplayListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDisplayListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -508,6 +526,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midVirtualDisplayConfigBrightnessListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplayConfigBrightnessListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/display/VirtualDisplayConfig$Builder")
@@ -568,6 +593,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midVirtualDisplayConfigBuilderSetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplayConfigBuilder)), "setSurface", "(Landroid/view/Surface;)Landroid/hardware/display/VirtualDisplayConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVirtualDisplayConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplayConfigBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

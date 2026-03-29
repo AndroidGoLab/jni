@@ -25,8 +25,10 @@ var (
 
 	clsOnBackInvokedCallback              *jni.GlobalRef
 	midOnBackInvokedCallbackOnBackInvoked jni.MethodID
+	midOnBackInvokedCallbackToString      jni.MethodID
 
-	clsOnBackAnimationCallback *jni.GlobalRef
+	clsOnBackAnimationCallback         *jni.GlobalRef
+	midOnBackAnimationCallbackToString jni.MethodID
 
 	clsBackEvent                   *jni.GlobalRef
 	midBackEventCtor               jni.MethodID
@@ -41,20 +43,24 @@ var (
 	clsOnBackInvokedDispatcher                                *jni.GlobalRef
 	midOnBackInvokedDispatcherRegisterOnBackInvokedCallback   jni.MethodID
 	midOnBackInvokedDispatcherUnregisterOnBackInvokedCallback jni.MethodID
+	midOnBackInvokedDispatcherToString                        jni.MethodID
 
 	clsSplashScreen                             *jni.GlobalRef
 	midSplashScreenClearOnExitAnimationListener jni.MethodID
 	midSplashScreenSetOnExitAnimationListener   jni.MethodID
 	midSplashScreenSetSplashScreenTheme         jni.MethodID
+	midSplashScreenToString                     jni.MethodID
 
 	clsSplashScreenOnExitAnimationListener                   *jni.GlobalRef
 	midSplashScreenOnExitAnimationListenerOnSplashScreenExit jni.MethodID
+	midSplashScreenOnExitAnimationListenerToString           jni.MethodID
 
 	clsInputTransferToken                 *jni.GlobalRef
 	midInputTransferTokenDescribeContents jni.MethodID
 	midInputTransferTokenEquals           jni.MethodID
 	midInputTransferTokenHashCode         jni.MethodID
 	midInputTransferTokenWriteToParcel    jni.MethodID
+	midInputTransferTokenToString         jni.MethodID
 
 	clsTrustedPresentationThresholds                              *jni.GlobalRef
 	midTrustedPresentationThresholdsCtor                          jni.MethodID
@@ -73,6 +79,7 @@ var (
 	midSurfaceSyncGroupAdd2_1         jni.MethodID
 	midSurfaceSyncGroupAddTransaction jni.MethodID
 	midSurfaceSyncGroupMarkSyncReady  jni.MethodID
+	midSurfaceSyncGroupToString       jni.MethodID
 
 	clsSplashScreenView                         *jni.GlobalRef
 	midSplashScreenViewGetIconAnimationDuration jni.MethodID
@@ -80,8 +87,10 @@ var (
 	midSplashScreenViewGetIconView              jni.MethodID
 	midSplashScreenViewRemove                   jni.MethodID
 	midSplashScreenViewSetAlpha                 jni.MethodID
+	midSplashScreenViewToString                 jni.MethodID
 
 	clsSystemOnBackInvokedCallbacks                            *jni.GlobalRef
+	midSystemOnBackInvokedCallbacksToString                    jni.MethodID
 	midSystemOnBackInvokedCallbacksFinishAndRemoveTaskCallback jni.MethodID
 	midSystemOnBackInvokedCallbacksMoveTaskToBackCallback      jni.MethodID
 )
@@ -119,6 +128,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOnBackInvokedCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnBackInvokedCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/window/OnBackAnimationCallback")
@@ -128,6 +144,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsOnBackAnimationCallback = env.NewGlobalRef(&c.Object)
+
+		midOnBackAnimationCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnBackAnimationCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -216,6 +239,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOnBackInvokedDispatcherToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnBackInvokedDispatcher)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/window/SplashScreen")
@@ -247,6 +277,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSplashScreenToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSplashScreen)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/window/SplashScreen$OnExitAnimationListener")
@@ -258,6 +295,13 @@ func doInit(env *jni.Env) error {
 		clsSplashScreenOnExitAnimationListener = env.NewGlobalRef(&c.Object)
 
 		midSplashScreenOnExitAnimationListenerOnSplashScreenExit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSplashScreenOnExitAnimationListener)), "onSplashScreenExit", "(Landroid/window/SplashScreenView;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSplashScreenOnExitAnimationListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSplashScreenOnExitAnimationListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -296,6 +340,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInputTransferTokenWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputTransferToken)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInputTransferTokenToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputTransferToken)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -414,6 +465,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSurfaceSyncGroupToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceSyncGroup)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/window/SplashScreenView")
@@ -459,6 +517,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSplashScreenViewToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSplashScreenView)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/window/SystemOnBackInvokedCallbacks")
@@ -468,6 +533,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSystemOnBackInvokedCallbacks = env.NewGlobalRef(&c.Object)
+
+		midSystemOnBackInvokedCallbacksToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSystemOnBackInvokedCallbacks)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midSystemOnBackInvokedCallbacksFinishAndRemoveTaskCallback, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSystemOnBackInvokedCallbacks)), "finishAndRemoveTaskCallback", "(Landroid/app/Activity;)Landroid/window/OnBackInvokedCallback;")
 		if err != nil {

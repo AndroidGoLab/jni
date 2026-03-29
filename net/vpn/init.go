@@ -33,6 +33,7 @@ var (
 	midServiceProtect1_1            jni.MethodID
 	midServiceProtect1_2            jni.MethodID
 	midServiceSetUnderlyingNetworks jni.MethodID
+	midServiceToString              jni.MethodID
 	midServicePrepare               jni.MethodID
 
 	clsServiceBuilder                         *jni.GlobalRef
@@ -57,6 +58,7 @@ var (
 	midServiceBuilderSetMtu                   jni.MethodID
 	midServiceBuilderSetSession               jni.MethodID
 	midServiceBuilderSetUnderlyingNetworks    jni.MethodID
+	midServiceBuilderToString                 jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -139,6 +141,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midServiceSetUnderlyingNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "setUnderlyingNetworks", "([Landroid/net/Network;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -303,6 +312,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midServiceBuilderSetUnderlyingNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setUnderlyingNetworks", "([Landroid/net/Network;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

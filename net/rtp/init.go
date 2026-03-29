@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsAudioCodec          *jni.GlobalRef
+	midAudioCodecToString  jni.MethodID
 	midAudioCodecGetCodec  jni.MethodID
 	midAudioCodecGetCodecs jni.MethodID
 
@@ -34,6 +35,7 @@ var (
 	midAudioGroupGetStreams jni.MethodID
 	midAudioGroupSendDtmf   jni.MethodID
 	midAudioGroupSetMode    jni.MethodID
+	midAudioGroupToString   jni.MethodID
 
 	clsAudioStream            *jni.GlobalRef
 	midAudioStreamCtor        jni.MethodID
@@ -44,6 +46,7 @@ var (
 	midAudioStreamJoin        jni.MethodID
 	midAudioStreamSetCodec    jni.MethodID
 	midAudioStreamSetDtmfType jni.MethodID
+	midAudioStreamToString    jni.MethodID
 
 	clsStream                 *jni.GlobalRef
 	midStreamAssociate        jni.MethodID
@@ -55,6 +58,7 @@ var (
 	midStreamIsBusy           jni.MethodID
 	midStreamRelease          jni.MethodID
 	midStreamSetMode          jni.MethodID
+	midStreamToString         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -82,6 +86,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAudioCodec = env.NewGlobalRef(&c.Object)
+
+		midAudioCodecToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioCodec)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midAudioCodecGetCodec, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAudioCodec)), "getCodec", "(ILjava/lang/String;Ljava/lang/String;)Landroid/net/rtp/AudioCodec;")
 		if err != nil {
@@ -146,6 +157,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAudioGroupToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioGroup)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/rtp/AudioStream")
@@ -203,6 +221,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAudioStreamSetDtmfType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "setDtmfType", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioStreamToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -276,6 +301,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStreamSetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStream)), "setMode", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStreamToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStream)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

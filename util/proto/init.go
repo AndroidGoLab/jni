@@ -39,6 +39,7 @@ var (
 	midOutputStreamWrite2_5            jni.MethodID
 	midOutputStreamWrite2_6            jni.MethodID
 	midOutputStreamWriteTag            jni.MethodID
+	midOutputStreamToString            jni.MethodID
 	midOutputStreamCheckFieldId        jni.MethodID
 	midOutputStreamGetFieldCountString jni.MethodID
 	midOutputStreamGetFieldIdString    jni.MethodID
@@ -171,6 +172,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midOutputStreamWriteTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "writeTag", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOutputStreamToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

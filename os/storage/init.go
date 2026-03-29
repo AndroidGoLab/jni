@@ -25,6 +25,7 @@ var (
 
 	clsOnObbStateChangeListener                 *jni.GlobalRef
 	midOnObbStateChangeListenerOnObbStateChange jni.MethodID
+	midOnObbStateChangeListenerToString         jni.MethodID
 
 	clsVolume                             *jni.GlobalRef
 	midVolumeCreateAccessIntent           jni.MethodID
@@ -72,9 +73,11 @@ var (
 	midManagerSetCacheBehaviorTombstone                jni.MethodID
 	midManagerUnmountObb                               jni.MethodID
 	midManagerUnregisterStorageVolumeCallback          jni.MethodID
+	midManagerToString                                 jni.MethodID
 
 	clsManagerStorageVolumeCallback               *jni.GlobalRef
 	midManagerStorageVolumeCallbackOnStateChanged jni.MethodID
+	midManagerStorageVolumeCallbackToString       jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -104,6 +107,13 @@ func doInit(env *jni.Env) error {
 		clsOnObbStateChangeListener = env.NewGlobalRef(&c.Object)
 
 		midOnObbStateChangeListenerOnObbStateChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnObbStateChangeListener)), "onObbStateChange", "(Ljava/lang/String;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOnObbStateChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnObbStateChangeListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -431,6 +441,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/storage/StorageManager$StorageVolumeCallback")
@@ -442,6 +459,13 @@ func doInit(env *jni.Env) error {
 		clsManagerStorageVolumeCallback = env.NewGlobalRef(&c.Object)
 
 		midManagerStorageVolumeCallbackOnStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerStorageVolumeCallback)), "onStateChanged", "(Landroid/os/storage/StorageVolume;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerStorageVolumeCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerStorageVolumeCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

@@ -23,8 +23,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAdIdManager    *jni.GlobalRef
-	midAdIdManagerGet jni.MethodID
+	clsAdIdManager         *jni.GlobalRef
+	midAdIdManagerToString jni.MethodID
+	midAdIdManagerGet      jni.MethodID
 
 	clsAdId                         *jni.GlobalRef
 	midAdIdCtor                     jni.MethodID
@@ -60,6 +61,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAdIdManager = env.NewGlobalRef(&c.Object)
+
+		midAdIdManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdIdManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midAdIdManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdIdManager)), "get", "(Landroid/content/Context;)Landroid/adservices/adid/AdIdManager;")
 		if err != nil {

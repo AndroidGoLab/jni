@@ -23,12 +23,15 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManifest     *jni.GlobalRef
-	midManifestCtor jni.MethodID
+	clsManifest         *jni.GlobalRef
+	midManifestCtor     jni.MethodID
+	midManifestToString jni.MethodID
 
-	clsManifestpermission *jni.GlobalRef
+	clsManifestpermission         *jni.GlobalRef
+	midManifestpermissionToString jni.MethodID
 
-	clsManifestpermission_group *jni.GlobalRef
+	clsManifestpermission_group         *jni.GlobalRef
+	midManifestpermission_groupToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -61,6 +64,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManifestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManifest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/Manifest$permission")
@@ -71,6 +81,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsManifestpermission = env.NewGlobalRef(&c.Object)
 
+		midManifestpermissionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManifestpermission)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/Manifest$permission_group")
@@ -80,6 +97,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsManifestpermission_group = env.NewGlobalRef(&c.Object)
+
+		midManifestpermission_groupToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManifestpermission_group)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

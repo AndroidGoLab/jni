@@ -29,6 +29,7 @@ var (
 	midServiceOnCreateEngine0   jni.MethodID
 	midServiceOnCreateEngine1_1 jni.MethodID
 	midServiceOnDestroy         jni.MethodID
+	midServiceToString          jni.MethodID
 
 	clsServiceEngine                              *jni.GlobalRef
 	midServiceEngineGetDesiredMinimumHeight       jni.MethodID
@@ -57,6 +58,7 @@ var (
 	midServiceEngineOnZoomChanged                 jni.MethodID
 	midServiceEngineSetOffsetNotificationsEnabled jni.MethodID
 	midServiceEngineSetTouchEventsEnabled         jni.MethodID
+	midServiceEngineToString                      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -114,6 +116,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midServiceOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onDestroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -306,6 +315,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midServiceEngineSetTouchEventsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "setTouchEventsEnabled", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceEngineToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

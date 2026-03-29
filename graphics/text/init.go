@@ -40,12 +40,14 @@ var (
 	midLineBreakConfigBuilderSetHyphenation        jni.MethodID
 	midLineBreakConfigBuilderSetLineBreakStyle     jni.MethodID
 	midLineBreakConfigBuilderSetLineBreakWordStyle jni.MethodID
+	midLineBreakConfigBuilderToString              jni.MethodID
 
 	clsMeasuredText                  *jni.GlobalRef
 	midMeasuredTextGetBounds         jni.MethodID
 	midMeasuredTextGetCharWidthAt    jni.MethodID
 	midMeasuredTextGetFontMetricsInt jni.MethodID
 	midMeasuredTextGetWidth          jni.MethodID
+	midMeasuredTextToString          jni.MethodID
 
 	clsMeasuredTextBuilder                         *jni.GlobalRef
 	midMeasuredTextBuilderAppendReplacementRun     jni.MethodID
@@ -55,8 +57,10 @@ var (
 	midMeasuredTextBuilderSetComputeHyphenation1   jni.MethodID
 	midMeasuredTextBuilderSetComputeHyphenation1_1 jni.MethodID
 	midMeasuredTextBuilderSetComputeLayout         jni.MethodID
+	midMeasuredTextBuilderToString                 jni.MethodID
 
 	clsRunShaper                *jni.GlobalRef
+	midRunShaperToString        jni.MethodID
 	midRunShaperShapeTextRun9   jni.MethodID
 	midRunShaperShapeTextRun9_1 jni.MethodID
 
@@ -81,6 +85,7 @@ var (
 
 	clsLineBreaker                  *jni.GlobalRef
 	midLineBreakerComputeLineBreaks jni.MethodID
+	midLineBreakerToString          jni.MethodID
 
 	clsLineBreakerBuilder                        *jni.GlobalRef
 	midLineBreakerBuilderBuild                   jni.MethodID
@@ -89,6 +94,7 @@ var (
 	midLineBreakerBuilderSetIndents              jni.MethodID
 	midLineBreakerBuilderSetJustificationMode    jni.MethodID
 	midLineBreakerBuilderSetUseBoundsForWidth    jni.MethodID
+	midLineBreakerBuilderToString                jni.MethodID
 
 	clsLineBreakerParagraphConstraints                       *jni.GlobalRef
 	midLineBreakerParagraphConstraintsGetDefaultTabStop      jni.MethodID
@@ -99,6 +105,7 @@ var (
 	midLineBreakerParagraphConstraintsSetIndent              jni.MethodID
 	midLineBreakerParagraphConstraintsSetTabStops            jni.MethodID
 	midLineBreakerParagraphConstraintsSetWidth               jni.MethodID
+	midLineBreakerParagraphConstraintsToString               jni.MethodID
 
 	clsLineBreakerResult                       *jni.GlobalRef
 	midLineBreakerResultGetEndLineHyphenEdit   jni.MethodID
@@ -109,6 +116,7 @@ var (
 	midLineBreakerResultGetLineWidth           jni.MethodID
 	midLineBreakerResultGetStartLineHyphenEdit jni.MethodID
 	midLineBreakerResultHasLineTab             jni.MethodID
+	midLineBreakerResultToString               jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -245,6 +253,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLineBreakConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/text/MeasuredText")
@@ -277,6 +292,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMeasuredTextGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasuredText)), "getWidth", "(II)F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMeasuredTextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasuredText)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -342,6 +364,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMeasuredTextBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasuredTextBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/text/TextRunShaper")
@@ -351,6 +380,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsRunShaper = env.NewGlobalRef(&c.Object)
+
+		midRunShaperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRunShaper)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midRunShaperShapeTextRun9, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRunShaper)), "shapeTextRun", "([CIIIIFFZLandroid/graphics/Paint;)Landroid/graphics/text/PositionedGlyphs;")
 		if err != nil {
@@ -512,6 +548,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLineBreakerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreaker)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/text/LineBreaker$Builder")
@@ -558,6 +601,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midLineBreakerBuilderSetUseBoundsForWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakerBuilder)), "setUseBoundsForWidth", "(Z)Landroid/graphics/text/LineBreaker$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLineBreakerBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakerBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -630,6 +680,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLineBreakerParagraphConstraintsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakerParagraphConstraints)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/text/LineBreaker$Result")
@@ -690,6 +747,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midLineBreakerResultHasLineTab, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakerResult)), "hasLineTab", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLineBreakerResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakerResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

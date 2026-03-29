@@ -45,3 +45,30 @@ func NewMutableByte(vm *jni.VM, arg0 int8) (*MutableByte, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.util.MutableByte.toString.
+func (m *MutableByte) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMutableByteToString == nil {
+			callErr = fmt.Errorf("android.util.MutableByte.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMutableByteToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

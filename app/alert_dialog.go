@@ -602,3 +602,30 @@ func (m *AlertDialog) SetView5_1(
 	})
 	return callErr
 }
+
+// ToString calls android.app.AlertDialog.toString.
+func (m *AlertDialog) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlertDialogToString == nil {
+			callErr = fmt.Errorf("android.app.AlertDialog.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlertDialogToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

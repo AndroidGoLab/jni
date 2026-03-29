@@ -39,8 +39,10 @@ var (
 	midDeviceManagerGetVirtualDevices               jni.MethodID
 	midDeviceManagerRegisterVirtualDeviceListener   jni.MethodID
 	midDeviceManagerUnregisterVirtualDeviceListener jni.MethodID
+	midDeviceManagerToString                        jni.MethodID
 
-	clsDeviceManagerVirtualDeviceListener *jni.GlobalRef
+	clsDeviceManagerVirtualDeviceListener         *jni.GlobalRef
+	midDeviceManagerVirtualDeviceListenerToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -170,6 +172,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDeviceManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/virtual/VirtualDeviceManager$VirtualDeviceListener")
@@ -179,6 +188,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDeviceManagerVirtualDeviceListener = env.NewGlobalRef(&c.Object)
+
+		midDeviceManagerVirtualDeviceListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceManagerVirtualDeviceListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

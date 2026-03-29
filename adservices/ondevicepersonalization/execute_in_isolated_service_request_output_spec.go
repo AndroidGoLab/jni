@@ -73,6 +73,33 @@ func (m *ExecuteInIsolatedServiceRequestOutputSpec) GetOutputType() (int32, erro
 	return result, callErr
 }
 
+// ToString calls android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec.toString.
+func (m *ExecuteInIsolatedServiceRequestOutputSpec) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midExecuteInIsolatedServiceRequestOutputSpecToString == nil {
+			callErr = fmt.Errorf("android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midExecuteInIsolatedServiceRequestOutputSpecToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // BuildBestValueSpec calls android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec.buildBestValueSpec.
 func (m *ExecuteInIsolatedServiceRequestOutputSpec) BuildBestValueSpec(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object

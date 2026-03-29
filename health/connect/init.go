@@ -39,6 +39,7 @@ var (
 	midHealthConnectManagerReadMedicalResources3_1         jni.MethodID
 	midHealthConnectManagerUpdateRecords                   jni.MethodID
 	midHealthConnectManagerUpsertMedicalResources          jni.MethodID
+	midHealthConnectManagerToString                        jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -166,6 +167,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midHealthConnectManagerUpsertMedicalResources, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "upsertMedicalResources", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHealthConnectManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

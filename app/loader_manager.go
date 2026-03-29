@@ -77,6 +77,33 @@ func (m *LoaderManager) Dump(
 	return callErr
 }
 
+// ToString calls android.app.LoaderManager.toString.
+func (m *LoaderManager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLoaderManagerToString == nil {
+			callErr = fmt.Errorf("android.app.LoaderManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLoaderManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // EnableDebugLogging calls android.app.LoaderManager.enableDebugLogging.
 func (m *LoaderManager) EnableDebugLogging(arg0 bool) error {
 

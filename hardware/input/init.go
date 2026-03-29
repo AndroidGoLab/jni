@@ -32,11 +32,13 @@ var (
 	midManagerIsStylusPointerIconEnabled         jni.MethodID
 	midManagerUnregisterInputDeviceListener      jni.MethodID
 	midManagerVerifyInputEvent                   jni.MethodID
+	midManagerToString                           jni.MethodID
 
 	clsManagerInputDeviceListener                     *jni.GlobalRef
 	midManagerInputDeviceListenerOnInputDeviceAdded   jni.MethodID
 	midManagerInputDeviceListenerOnInputDeviceChanged jni.MethodID
 	midManagerInputDeviceListenerOnInputDeviceRemoved jni.MethodID
+	midManagerInputDeviceListenerToString             jni.MethodID
 
 	clsHostUsiVersion                 *jni.GlobalRef
 	midHostUsiVersionDescribeContents jni.MethodID
@@ -130,6 +132,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/input/InputManager$InputDeviceListener")
@@ -155,6 +164,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerInputDeviceListenerOnInputDeviceRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerInputDeviceListener)), "onInputDeviceRemoved", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerInputDeviceListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerInputDeviceListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

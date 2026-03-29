@@ -126,3 +126,30 @@ func (m *AgentHelper) OnRestore(
 	})
 	return callErr
 }
+
+// ToString calls android.app.backup.BackupAgentHelper.toString.
+func (m *AgentHelper) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAgentHelperToString == nil {
+			callErr = fmt.Errorf("android.app.backup.BackupAgentHelper.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAgentHelperToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

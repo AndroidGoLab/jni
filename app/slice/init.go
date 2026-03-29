@@ -48,6 +48,7 @@ var (
 	midBuilderAddSubSlice     jni.MethodID
 	midBuilderBuild           jni.MethodID
 	midBuilderSetCallerNeeded jni.MethodID
+	midBuilderToString        jni.MethodID
 
 	clsProvider                          *jni.GlobalRef
 	midProviderAttachInfo                jni.MethodID
@@ -64,6 +65,7 @@ var (
 	midProviderQuery5_1                  jni.MethodID
 	midProviderQuery6_2                  jni.MethodID
 	midProviderUpdate                    jni.MethodID
+	midProviderToString                  jni.MethodID
 
 	clsItem                 *jni.GlobalRef
 	midItemDescribeContents jni.MethodID
@@ -80,12 +82,14 @@ var (
 	midItemGetText          jni.MethodID
 	midItemHasHint          jni.MethodID
 	midItemWriteToParcel    jni.MethodID
+	midItemToString         jni.MethodID
 
 	clsMetrics           *jni.GlobalRef
 	midMetricsCtor       jni.MethodID
 	midMetricsLogHidden  jni.MethodID
 	midMetricsLogTouch   jni.MethodID
 	midMetricsLogVisible jni.MethodID
+	midMetricsToString   jni.MethodID
 
 	clsManager                      *jni.GlobalRef
 	midManagerCheckSlicePermission  jni.MethodID
@@ -96,6 +100,7 @@ var (
 	midManagerMapIntentToUri        jni.MethodID
 	midManagerRevokeSlicePermission jni.MethodID
 	midManagerUnpinSlice            jni.MethodID
+	midManagerToString              jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -281,6 +286,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/slice/SliceProvider")
@@ -383,6 +395,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midProviderUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProvider)), "update", "(Landroid/net/Uri;Landroid/content/ContentValues;Ljava/lang/String;[Ljava/lang/String;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midProviderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProvider)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -497,6 +516,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midItemToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsItem)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/slice/SliceMetrics")
@@ -526,6 +552,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMetricsLogVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "logVisible", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMetricsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetrics)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -592,6 +625,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerUnpinSlice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unpinSlice", "(Landroid/net/Uri;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

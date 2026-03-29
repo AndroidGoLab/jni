@@ -36,6 +36,7 @@ var (
 	midComplexChannelBuilderBuild            jni.MethodID
 	midComplexChannelBuilderSetChannel       jni.MethodID
 	midComplexChannelBuilderSetPreambleIndex jni.MethodID
+	midComplexChannelBuilderToString         jni.MethodID
 
 	clsAddress                         *jni.GlobalRef
 	midAddressDescribeContents         jni.MethodID
@@ -72,6 +73,7 @@ var (
 	midRangingParamsBuilderSetSlotDuration      jni.MethodID
 	midRangingParamsBuilderSetSubSessionId      jni.MethodID
 	midRangingParamsBuilderSetSubSessionKeyInfo jni.MethodID
+	midRangingParamsBuilderToString             jni.MethodID
 
 	clsRangingCapabilities                                          *jni.GlobalRef
 	midRangingCapabilitiesDescribeContents                          jni.MethodID
@@ -191,6 +193,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midComplexChannelBuilderSetPreambleIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComplexChannelBuilder)), "setPreambleIndex", "(I)Landroid/ranging/uwb/UwbComplexChannel$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midComplexChannelBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComplexChannelBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -431,6 +440,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRangingParamsBuilderSetSubSessionKeyInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingParamsBuilder)), "setSubSessionKeyInfo", "([B)Landroid/ranging/uwb/UwbRangingParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRangingParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

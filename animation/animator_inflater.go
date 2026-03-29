@@ -45,6 +45,33 @@ func NewAnimatorInflater(vm *jni.VM) (*AnimatorInflater, error) {
 	return &t, nil
 }
 
+// ToString calls android.animation.AnimatorInflater.toString.
+func (m *AnimatorInflater) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAnimatorInflaterToString == nil {
+			callErr = fmt.Errorf("android.animation.AnimatorInflater.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAnimatorInflaterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // LoadAnimator calls android.animation.AnimatorInflater.loadAnimator.
 func (m *AnimatorInflater) LoadAnimator(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object

@@ -42,3 +42,30 @@ func NewAliasActivity(vm *jni.VM) (*AliasActivity, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.app.AliasActivity.toString.
+func (m *AliasActivity) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAliasActivityToString == nil {
+			callErr = fmt.Errorf("android.app.AliasActivity.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAliasActivityToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

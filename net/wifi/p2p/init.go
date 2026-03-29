@@ -51,6 +51,7 @@ var (
 	midWifiP2pConfigBuilderSetPairingBootstrappingConfig         jni.MethodID
 	midWifiP2pConfigBuilderSetPassphrase                         jni.MethodID
 	midWifiP2pConfigBuilderSetPccModeConnectionType              jni.MethodID
+	midWifiP2pConfigBuilderToString                              jni.MethodID
 
 	clsWifiP2pUsdBasedLocalServiceAdvertisementConfig                 *jni.GlobalRef
 	midWifiP2pUsdBasedLocalServiceAdvertisementConfigDescribeContents jni.MethodID
@@ -61,6 +62,7 @@ var (
 	clsWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilder                *jni.GlobalRef
 	midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderBuild           jni.MethodID
 	midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderSetFrequencyMhz jni.MethodID
+	midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderToString        jni.MethodID
 
 	clsWifiP2pDiscoveryConfig                 *jni.GlobalRef
 	midWifiP2pDiscoveryConfigDescribeContents jni.MethodID
@@ -72,6 +74,7 @@ var (
 	clsWifiP2pDiscoveryConfigBuilder                *jni.GlobalRef
 	midWifiP2pDiscoveryConfigBuilderBuild           jni.MethodID
 	midWifiP2pDiscoveryConfigBuilderSetFrequencyMhz jni.MethodID
+	midWifiP2pDiscoveryConfigBuilderToString        jni.MethodID
 
 	clsWifiP2pPairingBootstrappingConfig                 *jni.GlobalRef
 	midWifiP2pPairingBootstrappingConfigCtor             jni.MethodID
@@ -153,6 +156,7 @@ var (
 	midWifiP2pUsdBasedServiceDiscoveryConfigBuilderBuild             jni.MethodID
 	midWifiP2pUsdBasedServiceDiscoveryConfigBuilderSetBand           jni.MethodID
 	midWifiP2pUsdBasedServiceDiscoveryConfigBuilderSetFrequenciesMhz jni.MethodID
+	midWifiP2pUsdBasedServiceDiscoveryConfigBuilderToString          jni.MethodID
 
 	clsWifiP2pGroup                   *jni.GlobalRef
 	midWifiP2pGroupCtor               jni.MethodID
@@ -226,56 +230,73 @@ var (
 	midWifiP2pManagerStopListening                             jni.MethodID
 	midWifiP2pManagerStopPeerDiscovery                         jni.MethodID
 	midWifiP2pManagerUnregisterWifiP2pListener                 jni.MethodID
+	midWifiP2pManagerToString                                  jni.MethodID
 	midWifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytes jni.MethodID
 
 	clsWifiP2pManagerActionListener          *jni.GlobalRef
 	midWifiP2pManagerActionListenerOnFailure jni.MethodID
 	midWifiP2pManagerActionListenerOnSuccess jni.MethodID
+	midWifiP2pManagerActionListenerToString  jni.MethodID
 
-	clsWifiP2pManagerChannel      *jni.GlobalRef
-	midWifiP2pManagerChannelClose jni.MethodID
+	clsWifiP2pManagerChannel         *jni.GlobalRef
+	midWifiP2pManagerChannelClose    jni.MethodID
+	midWifiP2pManagerChannelToString jni.MethodID
 
 	clsWifiP2pManagerChannelListener                      *jni.GlobalRef
 	midWifiP2pManagerChannelListenerOnChannelDisconnected jni.MethodID
+	midWifiP2pManagerChannelListenerToString              jni.MethodID
 
 	clsWifiP2pManagerConnectionInfoListener                          *jni.GlobalRef
 	midWifiP2pManagerConnectionInfoListenerOnConnectionInfoAvailable jni.MethodID
+	midWifiP2pManagerConnectionInfoListenerToString                  jni.MethodID
 
 	clsWifiP2pManagerDeviceInfoListener                      *jni.GlobalRef
 	midWifiP2pManagerDeviceInfoListenerOnDeviceInfoAvailable jni.MethodID
+	midWifiP2pManagerDeviceInfoListenerToString              jni.MethodID
 
 	clsWifiP2pManagerDiscoveryStateListener                          *jni.GlobalRef
 	midWifiP2pManagerDiscoveryStateListenerOnDiscoveryStateAvailable jni.MethodID
+	midWifiP2pManagerDiscoveryStateListenerToString                  jni.MethodID
 
 	clsWifiP2pManagerDnsSdServiceResponseListener                        *jni.GlobalRef
 	midWifiP2pManagerDnsSdServiceResponseListenerOnDnsSdServiceAvailable jni.MethodID
+	midWifiP2pManagerDnsSdServiceResponseListenerToString                jni.MethodID
 
-	clsWifiP2pManagerDnsSdTxtRecordListener *jni.GlobalRef
+	clsWifiP2pManagerDnsSdTxtRecordListener         *jni.GlobalRef
+	midWifiP2pManagerDnsSdTxtRecordListenerToString jni.MethodID
 
 	clsWifiP2pManagerExternalApproverRequestListener                      *jni.GlobalRef
 	midWifiP2pManagerExternalApproverRequestListenerOnAttached            jni.MethodID
 	midWifiP2pManagerExternalApproverRequestListenerOnConnectionRequested jni.MethodID
 	midWifiP2pManagerExternalApproverRequestListenerOnDetached            jni.MethodID
 	midWifiP2pManagerExternalApproverRequestListenerOnPinGenerated        jni.MethodID
+	midWifiP2pManagerExternalApproverRequestListenerToString              jni.MethodID
 
 	clsWifiP2pManagerGroupInfoListener                     *jni.GlobalRef
 	midWifiP2pManagerGroupInfoListenerOnGroupInfoAvailable jni.MethodID
+	midWifiP2pManagerGroupInfoListenerToString             jni.MethodID
 
 	clsWifiP2pManagerNetworkInfoListener                       *jni.GlobalRef
 	midWifiP2pManagerNetworkInfoListenerOnNetworkInfoAvailable jni.MethodID
+	midWifiP2pManagerNetworkInfoListenerToString               jni.MethodID
 
 	clsWifiP2pManagerP2pStateListener                    *jni.GlobalRef
 	midWifiP2pManagerP2pStateListenerOnP2pStateAvailable jni.MethodID
+	midWifiP2pManagerP2pStateListenerToString            jni.MethodID
 
 	clsWifiP2pManagerPeerListListener                 *jni.GlobalRef
 	midWifiP2pManagerPeerListListenerOnPeersAvailable jni.MethodID
+	midWifiP2pManagerPeerListListenerToString         jni.MethodID
 
 	clsWifiP2pManagerServiceResponseListener                   *jni.GlobalRef
 	midWifiP2pManagerServiceResponseListenerOnServiceAvailable jni.MethodID
+	midWifiP2pManagerServiceResponseListenerToString           jni.MethodID
 
-	clsWifiP2pManagerUpnpServiceResponseListener *jni.GlobalRef
+	clsWifiP2pManagerUpnpServiceResponseListener         *jni.GlobalRef
+	midWifiP2pManagerUpnpServiceResponseListenerToString jni.MethodID
 
-	clsWifiP2pManagerWifiP2pListener *jni.GlobalRef
+	clsWifiP2pManagerWifiP2pListener         *jni.GlobalRef
+	midWifiP2pManagerWifiP2pListenerToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -486,6 +507,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pUsdBasedLocalServiceAdvertisementConfig")
@@ -542,6 +570,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderSetFrequencyMhz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilder)), "setFrequencyMhz", "(I)Landroid/net/wifi/p2p/WifiP2pUsdBasedLocalServiceAdvertisementConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -611,6 +646,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWifiP2pDiscoveryConfigBuilderSetFrequencyMhz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDiscoveryConfigBuilder)), "setFrequencyMhz", "(I)Landroid/net/wifi/p2p/WifiP2pDiscoveryConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDiscoveryConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDiscoveryConfigBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1141,6 +1183,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pUsdBasedServiceDiscoveryConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceDiscoveryConfigBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pGroup")
@@ -1634,6 +1683,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midWifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytes, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "getP2pMaxAllowedVendorElementsLengthBytes", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1665,6 +1721,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pManagerActionListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerActionListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$Channel")
@@ -1676,6 +1739,13 @@ func doInit(env *jni.Env) error {
 		clsWifiP2pManagerChannel = env.NewGlobalRef(&c.Object)
 
 		midWifiP2pManagerChannelClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerChannel)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pManagerChannelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerChannel)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1699,6 +1769,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pManagerChannelListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerChannelListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$ConnectionInfoListener")
@@ -1710,6 +1787,13 @@ func doInit(env *jni.Env) error {
 		clsWifiP2pManagerConnectionInfoListener = env.NewGlobalRef(&c.Object)
 
 		midWifiP2pManagerConnectionInfoListenerOnConnectionInfoAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerConnectionInfoListener)), "onConnectionInfoAvailable", "(Landroid/net/wifi/p2p/WifiP2pInfo;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pManagerConnectionInfoListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerConnectionInfoListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1733,6 +1817,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pManagerDeviceInfoListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerDeviceInfoListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$DiscoveryStateListener")
@@ -1744,6 +1835,13 @@ func doInit(env *jni.Env) error {
 		clsWifiP2pManagerDiscoveryStateListener = env.NewGlobalRef(&c.Object)
 
 		midWifiP2pManagerDiscoveryStateListenerOnDiscoveryStateAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerDiscoveryStateListener)), "onDiscoveryStateAvailable", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pManagerDiscoveryStateListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerDiscoveryStateListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1767,6 +1865,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pManagerDnsSdServiceResponseListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerDnsSdServiceResponseListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$DnsSdTxtRecordListener")
@@ -1776,6 +1881,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsWifiP2pManagerDnsSdTxtRecordListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerDnsSdTxtRecordListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerDnsSdTxtRecordListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1815,6 +1927,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pManagerExternalApproverRequestListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerExternalApproverRequestListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$GroupInfoListener")
@@ -1826,6 +1945,13 @@ func doInit(env *jni.Env) error {
 		clsWifiP2pManagerGroupInfoListener = env.NewGlobalRef(&c.Object)
 
 		midWifiP2pManagerGroupInfoListenerOnGroupInfoAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerGroupInfoListener)), "onGroupInfoAvailable", "(Landroid/net/wifi/p2p/WifiP2pGroup;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pManagerGroupInfoListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerGroupInfoListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1849,6 +1975,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pManagerNetworkInfoListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerNetworkInfoListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$P2pStateListener")
@@ -1860,6 +1993,13 @@ func doInit(env *jni.Env) error {
 		clsWifiP2pManagerP2pStateListener = env.NewGlobalRef(&c.Object)
 
 		midWifiP2pManagerP2pStateListenerOnP2pStateAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerP2pStateListener)), "onP2pStateAvailable", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pManagerP2pStateListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerP2pStateListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1883,6 +2023,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pManagerPeerListListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerPeerListListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$ServiceResponseListener")
@@ -1900,6 +2047,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiP2pManagerServiceResponseListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerServiceResponseListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$UpnpServiceResponseListener")
@@ -1910,6 +2064,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsWifiP2pManagerUpnpServiceResponseListener = env.NewGlobalRef(&c.Object)
 
+		midWifiP2pManagerUpnpServiceResponseListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerUpnpServiceResponseListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$WifiP2pListener")
@@ -1919,6 +2080,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsWifiP2pManagerWifiP2pListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerWifiP2pListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerWifiP2pListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

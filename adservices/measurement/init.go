@@ -30,10 +30,12 @@ var (
 	midWebSourceParamsHashCode           jni.MethodID
 	midWebSourceParamsIsDebugKeyAllowed  jni.MethodID
 	midWebSourceParamsWriteToParcel      jni.MethodID
+	midWebSourceParamsToString           jni.MethodID
 
 	clsWebSourceParamsBuilder                   *jni.GlobalRef
 	midWebSourceParamsBuilderBuild              jni.MethodID
 	midWebSourceParamsBuilderSetDebugKeyAllowed jni.MethodID
+	midWebSourceParamsBuilderToString           jni.MethodID
 
 	clsDeletionRequest                 *jni.GlobalRef
 	midDeletionRequestGetDeletionMode  jni.MethodID
@@ -42,6 +44,7 @@ var (
 	midDeletionRequestGetMatchBehavior jni.MethodID
 	midDeletionRequestGetOriginUris    jni.MethodID
 	midDeletionRequestGetStart         jni.MethodID
+	midDeletionRequestToString         jni.MethodID
 
 	clsDeletionRequestBuilder                 *jni.GlobalRef
 	midDeletionRequestBuilderBuild            jni.MethodID
@@ -49,6 +52,7 @@ var (
 	midDeletionRequestBuilderSetEnd           jni.MethodID
 	midDeletionRequestBuilderSetMatchBehavior jni.MethodID
 	midDeletionRequestBuilderSetStart         jni.MethodID
+	midDeletionRequestBuilderToString         jni.MethodID
 
 	clsWebTriggerParams                   *jni.GlobalRef
 	midWebTriggerParamsDescribeContents   jni.MethodID
@@ -57,10 +61,12 @@ var (
 	midWebTriggerParamsHashCode           jni.MethodID
 	midWebTriggerParamsIsDebugKeyAllowed  jni.MethodID
 	midWebTriggerParamsWriteToParcel      jni.MethodID
+	midWebTriggerParamsToString           jni.MethodID
 
 	clsWebTriggerParamsBuilder                   *jni.GlobalRef
 	midWebTriggerParamsBuilderBuild              jni.MethodID
 	midWebTriggerParamsBuilderSetDebugKeyAllowed jni.MethodID
+	midWebTriggerParamsBuilderToString           jni.MethodID
 
 	clsWebTriggerRegistrationRequest                 *jni.GlobalRef
 	midWebTriggerRegistrationRequestDescribeContents jni.MethodID
@@ -69,12 +75,15 @@ var (
 	midWebTriggerRegistrationRequestGetTriggerParams jni.MethodID
 	midWebTriggerRegistrationRequestHashCode         jni.MethodID
 	midWebTriggerRegistrationRequestWriteToParcel    jni.MethodID
+	midWebTriggerRegistrationRequestToString         jni.MethodID
 
-	clsWebTriggerRegistrationRequestBuilder      *jni.GlobalRef
-	midWebTriggerRegistrationRequestBuilderBuild jni.MethodID
+	clsWebTriggerRegistrationRequestBuilder         *jni.GlobalRef
+	midWebTriggerRegistrationRequestBuilderBuild    jni.MethodID
+	midWebTriggerRegistrationRequestBuilderToString jni.MethodID
 
-	clsManager    *jni.GlobalRef
-	midManagerGet jni.MethodID
+	clsManager         *jni.GlobalRef
+	midManagerToString jni.MethodID
+	midManagerGet      jni.MethodID
 
 	clsWebSourceRegistrationRequest                       *jni.GlobalRef
 	midWebSourceRegistrationRequestDescribeContents       jni.MethodID
@@ -87,6 +96,7 @@ var (
 	midWebSourceRegistrationRequestGetWebDestination      jni.MethodID
 	midWebSourceRegistrationRequestHashCode               jni.MethodID
 	midWebSourceRegistrationRequestWriteToParcel          jni.MethodID
+	midWebSourceRegistrationRequestToString               jni.MethodID
 
 	clsWebSourceRegistrationRequestBuilder                       *jni.GlobalRef
 	midWebSourceRegistrationRequestBuilderBuild                  jni.MethodID
@@ -94,6 +104,7 @@ var (
 	midWebSourceRegistrationRequestBuilderSetInputEvent          jni.MethodID
 	midWebSourceRegistrationRequestBuilderSetVerifiedDestination jni.MethodID
 	midWebSourceRegistrationRequestBuilderSetWebDestination      jni.MethodID
+	midWebSourceRegistrationRequestBuilderToString               jni.MethodID
 
 	clsSourceRegistrationRequest                    *jni.GlobalRef
 	midSourceRegistrationRequestDescribeContents    jni.MethodID
@@ -102,10 +113,12 @@ var (
 	midSourceRegistrationRequestGetRegistrationUris jni.MethodID
 	midSourceRegistrationRequestHashCode            jni.MethodID
 	midSourceRegistrationRequestWriteToParcel       jni.MethodID
+	midSourceRegistrationRequestToString            jni.MethodID
 
 	clsSourceRegistrationRequestBuilder              *jni.GlobalRef
 	midSourceRegistrationRequestBuilderBuild         jni.MethodID
 	midSourceRegistrationRequestBuilderSetInputEvent jni.MethodID
+	midSourceRegistrationRequestBuilderToString      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -176,6 +189,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWebSourceParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebSourceParams$Builder")
@@ -194,6 +214,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWebSourceParamsBuilderSetDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParamsBuilder)), "setDebugKeyAllowed", "(Z)Landroid/adservices/measurement/WebSourceParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebSourceParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -252,6 +279,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDeletionRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/DeletionRequest$Builder")
@@ -291,6 +325,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDeletionRequestBuilderSetStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "setStart", "(Ljava/time/Instant;)Landroid/adservices/measurement/DeletionRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeletionRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -349,6 +390,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWebTriggerParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebTriggerParams$Builder")
@@ -367,6 +415,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWebTriggerParamsBuilderSetDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParamsBuilder)), "setDebugKeyAllowed", "(Z)Landroid/adservices/measurement/WebTriggerParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -425,6 +480,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWebTriggerRegistrationRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebTriggerRegistrationRequest$Builder")
@@ -442,6 +504,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWebTriggerRegistrationRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequestBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/MeasurementManager")
@@ -451,6 +520,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsManager = env.NewGlobalRef(&c.Object)
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "get", "(Landroid/content/Context;)Landroid/adservices/measurement/MeasurementManager;")
 		if err != nil {
@@ -539,6 +615,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWebSourceRegistrationRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebSourceRegistrationRequest$Builder")
@@ -578,6 +661,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWebSourceRegistrationRequestBuilderSetWebDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "setWebDestination", "(Landroid/net/Uri;)Landroid/adservices/measurement/WebSourceRegistrationRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebSourceRegistrationRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -636,6 +726,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSourceRegistrationRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/SourceRegistrationRequest$Builder")
@@ -654,6 +751,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSourceRegistrationRequestBuilderSetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequestBuilder)), "setInputEvent", "(Landroid/view/InputEvent;)Landroid/adservices/measurement/SourceRegistrationRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSourceRegistrationRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

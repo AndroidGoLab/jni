@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsDeviceTypes                *jni.GlobalRef
+	midDeviceTypesToString        jni.MethodID
 	midDeviceTypesValidDeviceType jni.MethodID
 
 	clsProviderService                               *jni.GlobalRef
@@ -31,6 +32,7 @@ var (
 	midProviderServiceCreatePublisherForSuggested    jni.MethodID
 	midProviderServiceOnBind                         jni.MethodID
 	midProviderServiceOnUnbind                       jni.MethodID
+	midProviderServiceToString                       jni.MethodID
 	midProviderServiceRequestAddControl              jni.MethodID
 
 	clsControl                   *jni.GlobalRef
@@ -49,6 +51,7 @@ var (
 	midControlGetZone            jni.MethodID
 	midControlIsAuthRequired     jni.MethodID
 	midControlWriteToParcel      jni.MethodID
+	midControlToString           jni.MethodID
 
 	clsControlStatefulBuilder                   *jni.GlobalRef
 	midControlStatefulBuilderBuild              jni.MethodID
@@ -65,6 +68,7 @@ var (
 	midControlStatefulBuilderSetSubtitle        jni.MethodID
 	midControlStatefulBuilderSetTitle           jni.MethodID
 	midControlStatefulBuilderSetZone            jni.MethodID
+	midControlStatefulBuilderToString           jni.MethodID
 
 	clsControlStatelessBuilder               *jni.GlobalRef
 	midControlStatelessBuilderBuild          jni.MethodID
@@ -77,6 +81,7 @@ var (
 	midControlStatelessBuilderSetSubtitle    jni.MethodID
 	midControlStatelessBuilderSetTitle       jni.MethodID
 	midControlStatelessBuilderSetZone        jni.MethodID
+	midControlStatelessBuilderToString       jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -104,6 +109,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDeviceTypes = env.NewGlobalRef(&c.Object)
+
+		midDeviceTypesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceTypes)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midDeviceTypesValidDeviceType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDeviceTypes)), "validDeviceType", "(I)Z")
 		if err != nil {
@@ -144,6 +156,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midProviderServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "onUnbind", "(Landroid/content/Intent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midProviderServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -272,6 +291,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midControlToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControl)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/Control$StatefulBuilder")
@@ -380,6 +406,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midControlStatefulBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlStatefulBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/Control$StatelessBuilder")
@@ -454,6 +487,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midControlStatelessBuilderSetZone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlStatelessBuilder)), "setZone", "(Ljava/lang/CharSequence;)Landroid/service/controls/Control$StatelessBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midControlStatelessBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlStatelessBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

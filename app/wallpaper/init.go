@@ -47,6 +47,7 @@ var (
 	midDescriptionBuilderSetId                 jni.MethodID
 	midDescriptionBuilderSetThumbnail          jni.MethodID
 	midDescriptionBuilderSetTitle              jni.MethodID
+	midDescriptionBuilderToString              jni.MethodID
 
 	clsInstance                 *jni.GlobalRef
 	midInstanceCtor             jni.MethodID
@@ -57,6 +58,7 @@ var (
 	midInstanceGetInfo          jni.MethodID
 	midInstanceHashCode         jni.MethodID
 	midInstanceWriteToParcel    jni.MethodID
+	midInstanceToString         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -242,6 +244,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDescriptionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDescriptionBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/wallpaper/WallpaperInstance")
@@ -299,6 +308,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInstanceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstance)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInstanceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstance)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

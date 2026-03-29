@@ -95,12 +95,14 @@ var (
 	midRegionUnion              jni.MethodID
 	midRegionWriteToParcel      jni.MethodID
 
-	clsRegionOp        *jni.GlobalRef
-	midRegionOpValues  jni.MethodID
-	midRegionOpValueOf jni.MethodID
+	clsRegionOp         *jni.GlobalRef
+	midRegionOpToString jni.MethodID
+	midRegionOpValues   jni.MethodID
+	midRegionOpValueOf  jni.MethodID
 
-	clsDrawFilter     *jni.GlobalRef
-	midDrawFilterCtor jni.MethodID
+	clsDrawFilter         *jni.GlobalRef
+	midDrawFilterCtor     jni.MethodID
+	midDrawFilterToString jni.MethodID
 
 	clsSurfaceTexture                            *jni.GlobalRef
 	midSurfaceTextureCtor                        jni.MethodID
@@ -115,14 +117,18 @@ var (
 	midSurfaceTextureSetDefaultBufferSize        jni.MethodID
 	midSurfaceTextureSetOnFrameAvailableListener jni.MethodID
 	midSurfaceTextureUpdateTexImage              jni.MethodID
+	midSurfaceTextureToString                    jni.MethodID
 
 	clsSurfaceTextureOnFrameAvailableListener                 *jni.GlobalRef
 	midSurfaceTextureOnFrameAvailableListenerOnFrameAvailable jni.MethodID
+	midSurfaceTextureOnFrameAvailableListenerToString         jni.MethodID
 
-	clsSurfaceTextureOutOfResourcesException *jni.GlobalRef
+	clsSurfaceTextureOutOfResourcesException         *jni.GlobalRef
+	midSurfaceTextureOutOfResourcesExceptionToString jni.MethodID
 
-	clsColorFilter     *jni.GlobalRef
-	midColorFilterCtor jni.MethodID
+	clsColorFilter         *jni.GlobalRef
+	midColorFilterCtor     jni.MethodID
+	midColorFilterToString jni.MethodID
 
 	clsColorMatrix              *jni.GlobalRef
 	midColorMatrixCtor          jni.MethodID
@@ -139,6 +145,7 @@ var (
 	midColorMatrixSetSaturation jni.MethodID
 	midColorMatrixSetScale      jni.MethodID
 	midColorMatrixSetYUV2RGB    jni.MethodID
+	midColorMatrixToString      jni.MethodID
 
 	clsRecordingCanvas                       *jni.GlobalRef
 	midRecordingCanvasDisableZ               jni.MethodID
@@ -205,6 +212,7 @@ var (
 	midRecordingCanvasIsOpaque               jni.MethodID
 	midRecordingCanvasSetBitmap              jni.MethodID
 	midRecordingCanvasSetDensity             jni.MethodID
+	midRecordingCanvasToString               jni.MethodID
 
 	clsRectF                 *jni.GlobalRef
 	midRectFCtor             jni.MethodID
@@ -295,12 +303,14 @@ var (
 	midMatrixToShortString jni.MethodID
 	midMatrixToString      jni.MethodID
 
-	clsMatrixScaleToFit        *jni.GlobalRef
-	midMatrixScaleToFitValues  jni.MethodID
-	midMatrixScaleToFitValueOf jni.MethodID
+	clsMatrixScaleToFit         *jni.GlobalRef
+	midMatrixScaleToFitToString jni.MethodID
+	midMatrixScaleToFitValues   jni.MethodID
+	midMatrixScaleToFitValueOf  jni.MethodID
 
-	clsPathEffect     *jni.GlobalRef
-	midPathEffectCtor jni.MethodID
+	clsPathEffect         *jni.GlobalRef
+	midPathEffectCtor     jni.MethodID
+	midPathEffectToString jni.MethodID
 
 	clsHardwareRenderer                       *jni.GlobalRef
 	midHardwareRendererCtor                   jni.MethodID
@@ -317,6 +327,7 @@ var (
 	midHardwareRendererSetSurface             jni.MethodID
 	midHardwareRendererStart                  jni.MethodID
 	midHardwareRendererStop                   jni.MethodID
+	midHardwareRendererToString               jni.MethodID
 	midHardwareRendererIsDrawingEnabled       jni.MethodID
 	midHardwareRendererSetDrawingEnabled      jni.MethodID
 
@@ -325,9 +336,11 @@ var (
 	midHardwareRendererFrameRenderRequestSetVsyncTime           jni.MethodID
 	midHardwareRendererFrameRenderRequestSetWaitForPresent      jni.MethodID
 	midHardwareRendererFrameRenderRequestSyncAndDraw            jni.MethodID
+	midHardwareRendererFrameRenderRequestToString               jni.MethodID
 
-	clsMaskFilter     *jni.GlobalRef
-	midMaskFilterCtor jni.MethodID
+	clsMaskFilter         *jni.GlobalRef
+	midMaskFilterCtor     jni.MethodID
+	midMaskFilterToString jni.MethodID
 
 	clsRuntimeColorFilter                    *jni.GlobalRef
 	midRuntimeColorFilterCtor                jni.MethodID
@@ -347,6 +360,7 @@ var (
 	midRuntimeColorFilterSetIntUniform4_2    jni.MethodID
 	midRuntimeColorFilterSetIntUniform5_3    jni.MethodID
 	midRuntimeColorFilterSetIntUniform2_4    jni.MethodID
+	midRuntimeColorFilterToString            jni.MethodID
 
 	clsPointF                 *jni.GlobalRef
 	midPointFCtor             jni.MethodID
@@ -419,18 +433,22 @@ var (
 	midPathToggleInverseFillType jni.MethodID
 	midPathTransform1            jni.MethodID
 	midPathTransform2_1          jni.MethodID
+	midPathToString              jni.MethodID
 
-	clsPathDirection        *jni.GlobalRef
-	midPathDirectionValues  jni.MethodID
-	midPathDirectionValueOf jni.MethodID
+	clsPathDirection         *jni.GlobalRef
+	midPathDirectionToString jni.MethodID
+	midPathDirectionValues   jni.MethodID
+	midPathDirectionValueOf  jni.MethodID
 
-	clsPathFillType        *jni.GlobalRef
-	midPathFillTypeValues  jni.MethodID
-	midPathFillTypeValueOf jni.MethodID
+	clsPathFillType         *jni.GlobalRef
+	midPathFillTypeToString jni.MethodID
+	midPathFillTypeValues   jni.MethodID
+	midPathFillTypeValueOf  jni.MethodID
 
-	clsPathOp        *jni.GlobalRef
-	midPathOpValues  jni.MethodID
-	midPathOpValueOf jni.MethodID
+	clsPathOp         *jni.GlobalRef
+	midPathOpToString jni.MethodID
+	midPathOpValues   jni.MethodID
+	midPathOpValueOf  jni.MethodID
 
 	clsPathMeasure            *jni.GlobalRef
 	midPathMeasureCtor        jni.MethodID
@@ -441,32 +459,40 @@ var (
 	midPathMeasureIsClosed    jni.MethodID
 	midPathMeasureNextContour jni.MethodID
 	midPathMeasureSetPath     jni.MethodID
+	midPathMeasureToString    jni.MethodID
 
-	clsPorterDuffXfermode     *jni.GlobalRef
-	midPorterDuffXfermodeCtor jni.MethodID
+	clsPorterDuffXfermode         *jni.GlobalRef
+	midPorterDuffXfermodeCtor     jni.MethodID
+	midPorterDuffXfermodeToString jni.MethodID
 
 	clsPorterDuffColorFilter         *jni.GlobalRef
 	midPorterDuffColorFilterCtor     jni.MethodID
 	midPorterDuffColorFilterEquals   jni.MethodID
 	midPorterDuffColorFilterHashCode jni.MethodID
+	midPorterDuffColorFilterToString jni.MethodID
 
-	clsPorterDuff     *jni.GlobalRef
-	midPorterDuffCtor jni.MethodID
+	clsPorterDuff         *jni.GlobalRef
+	midPorterDuffCtor     jni.MethodID
+	midPorterDuffToString jni.MethodID
 
-	clsPorterDuffMode        *jni.GlobalRef
-	midPorterDuffModeValues  jni.MethodID
-	midPorterDuffModeValueOf jni.MethodID
+	clsPorterDuffMode         *jni.GlobalRef
+	midPorterDuffModeToString jni.MethodID
+	midPorterDuffModeValues   jni.MethodID
+	midPorterDuffModeValueOf  jni.MethodID
 
-	clsBlendMode        *jni.GlobalRef
-	midBlendModeValues  jni.MethodID
-	midBlendModeValueOf jni.MethodID
+	clsBlendMode         *jni.GlobalRef
+	midBlendModeToString jni.MethodID
+	midBlendModeValues   jni.MethodID
+	midBlendModeValueOf  jni.MethodID
 
 	clsPostProcessor              *jni.GlobalRef
 	midPostProcessorOnPostProcess jni.MethodID
+	midPostProcessorToString      jni.MethodID
 
 	clsColorMatrixColorFilter               *jni.GlobalRef
 	midColorMatrixColorFilterCtor           jni.MethodID
 	midColorMatrixColorFilterGetColorMatrix jni.MethodID
+	midColorMatrixColorFilterToString       jni.MethodID
 
 	clsColor                  *jni.GlobalRef
 	midColorCtor              jni.MethodID
@@ -542,16 +568,19 @@ var (
 	midPointToString         jni.MethodID
 	midPointWriteToParcel    jni.MethodID
 
-	clsPaintFlagsDrawFilter     *jni.GlobalRef
-	midPaintFlagsDrawFilterCtor jni.MethodID
+	clsPaintFlagsDrawFilter         *jni.GlobalRef
+	midPaintFlagsDrawFilterCtor     jni.MethodID
+	midPaintFlagsDrawFilterToString jni.MethodID
 
-	clsCornerPathEffect     *jni.GlobalRef
-	midCornerPathEffectCtor jni.MethodID
+	clsCornerPathEffect         *jni.GlobalRef
+	midCornerPathEffectCtor     jni.MethodID
+	midCornerPathEffectToString jni.MethodID
 
-	clsMeshSpecification        *jni.GlobalRef
-	midMeshSpecificationMake5   jni.MethodID
-	midMeshSpecificationMake6_1 jni.MethodID
-	midMeshSpecificationMake7_2 jni.MethodID
+	clsMeshSpecification         *jni.GlobalRef
+	midMeshSpecificationToString jni.MethodID
+	midMeshSpecificationMake5    jni.MethodID
+	midMeshSpecificationMake6_1  jni.MethodID
+	midMeshSpecificationMake7_2  jni.MethodID
 
 	clsMeshSpecificationAttribute          *jni.GlobalRef
 	midMeshSpecificationAttributeGetName   jni.MethodID
@@ -572,6 +601,7 @@ var (
 	midMovieIsOpaque        jni.MethodID
 	midMovieSetTime         jni.MethodID
 	midMovieWidth           jni.MethodID
+	midMovieToString        jni.MethodID
 	midMovieDecodeByteArray jni.MethodID
 	midMovieDecodeFile      jni.MethodID
 	midMovieDecodeStream    jni.MethodID
@@ -584,14 +614,17 @@ var (
 	midHardwareBufferRendererSetContentRoot         jni.MethodID
 	midHardwareBufferRendererSetLightSourceAlpha    jni.MethodID
 	midHardwareBufferRendererSetLightSourceGeometry jni.MethodID
+	midHardwareBufferRendererToString               jni.MethodID
 
 	clsHardwareBufferRendererRenderRequest                   *jni.GlobalRef
 	midHardwareBufferRendererRenderRequestSetBufferTransform jni.MethodID
 	midHardwareBufferRendererRenderRequestSetColorSpace      jni.MethodID
+	midHardwareBufferRendererRenderRequestToString           jni.MethodID
 
 	clsHardwareBufferRendererRenderResult          *jni.GlobalRef
 	midHardwareBufferRendererRenderResultGetFence  jni.MethodID
 	midHardwareBufferRendererRenderResultGetStatus jni.MethodID
+	midHardwareBufferRendererRenderResultToString  jni.MethodID
 
 	clsInsets                 *jni.GlobalRef
 	midInsetsDescribeContents jni.MethodID
@@ -606,23 +639,27 @@ var (
 	midInsetsOf4_1            jni.MethodID
 	midInsetsSubtract         jni.MethodID
 
-	clsPathIterator        *jni.GlobalRef
-	midPathIteratorHasNext jni.MethodID
-	midPathIteratorNext0   jni.MethodID
-	midPathIteratorNext2_1 jni.MethodID
-	midPathIteratorPeek    jni.MethodID
-	midPathIteratorNext0_2 jni.MethodID
+	clsPathIterator         *jni.GlobalRef
+	midPathIteratorHasNext  jni.MethodID
+	midPathIteratorNext0    jni.MethodID
+	midPathIteratorNext2_1  jni.MethodID
+	midPathIteratorPeek     jni.MethodID
+	midPathIteratorNext0_2  jni.MethodID
+	midPathIteratorToString jni.MethodID
 
 	clsPathIteratorSegment               *jni.GlobalRef
 	midPathIteratorSegmentGetConicWeight jni.MethodID
 	midPathIteratorSegmentGetPoints      jni.MethodID
 	midPathIteratorSegmentGetVerb        jni.MethodID
+	midPathIteratorSegmentToString       jni.MethodID
 
-	clsEmbossMaskFilter     *jni.GlobalRef
-	midEmbossMaskFilterCtor jni.MethodID
+	clsEmbossMaskFilter         *jni.GlobalRef
+	midEmbossMaskFilterCtor     jni.MethodID
+	midEmbossMaskFilterToString jni.MethodID
 
-	clsSumPathEffect     *jni.GlobalRef
-	midSumPathEffectCtor jni.MethodID
+	clsSumPathEffect         *jni.GlobalRef
+	midSumPathEffectCtor     jni.MethodID
+	midSumPathEffectToString jni.MethodID
 
 	clsCamera              *jni.GlobalRef
 	midCameraCtor          jni.MethodID
@@ -640,6 +677,7 @@ var (
 	midCameraSave          jni.MethodID
 	midCameraSetLocation   jni.MethodID
 	midCameraTranslate     jni.MethodID
+	midCameraToString      jni.MethodID
 
 	clsParcelableColorSpace                 *jni.GlobalRef
 	midParcelableColorSpaceCtor             jni.MethodID
@@ -648,6 +686,7 @@ var (
 	midParcelableColorSpaceGetColorSpace    jni.MethodID
 	midParcelableColorSpaceHashCode         jni.MethodID
 	midParcelableColorSpaceWriteToParcel    jni.MethodID
+	midParcelableColorSpaceToString         jni.MethodID
 	midParcelableColorSpaceIsParcelable     jni.MethodID
 
 	clsMesh                   *jni.GlobalRef
@@ -665,12 +704,15 @@ var (
 	midMeshSetIntUniform4_2   jni.MethodID
 	midMeshSetIntUniform5_3   jni.MethodID
 	midMeshSetIntUniform2_4   jni.MethodID
+	midMeshToString           jni.MethodID
 
-	clsXfermode     *jni.GlobalRef
-	midXfermodeCtor jni.MethodID
+	clsXfermode         *jni.GlobalRef
+	midXfermodeCtor     jni.MethodID
+	midXfermodeToString jni.MethodID
 
-	clsRadialGradient     *jni.GlobalRef
-	midRadialGradientCtor jni.MethodID
+	clsRadialGradient         *jni.GlobalRef
+	midRadialGradientCtor     jni.MethodID
+	midRadialGradientToString jni.MethodID
 
 	clsImageDecoder                            *jni.GlobalRef
 	midImageDecoderClose                       jni.MethodID
@@ -693,6 +735,7 @@ var (
 	midImageDecoderSetTargetSampleSize         jni.MethodID
 	midImageDecoderSetTargetSize               jni.MethodID
 	midImageDecoderSetUnpremultipliedRequired  jni.MethodID
+	midImageDecoderToString                    jni.MethodID
 	midImageDecoderCreateSource2               jni.MethodID
 	midImageDecoderCreateSource2_1             jni.MethodID
 	midImageDecoderCreateSource2_2             jni.MethodID
@@ -708,20 +751,25 @@ var (
 	clsImageDecoderDecodeException          *jni.GlobalRef
 	midImageDecoderDecodeExceptionGetError  jni.MethodID
 	midImageDecoderDecodeExceptionGetSource jni.MethodID
+	midImageDecoderDecodeExceptionToString  jni.MethodID
 
 	clsImageDecoderImageInfo              *jni.GlobalRef
 	midImageDecoderImageInfoGetColorSpace jni.MethodID
 	midImageDecoderImageInfoGetMimeType   jni.MethodID
 	midImageDecoderImageInfoGetSize       jni.MethodID
 	midImageDecoderImageInfoIsAnimated    jni.MethodID
+	midImageDecoderImageInfoToString      jni.MethodID
 
 	clsImageDecoderOnHeaderDecodedListener                *jni.GlobalRef
 	midImageDecoderOnHeaderDecodedListenerOnHeaderDecoded jni.MethodID
+	midImageDecoderOnHeaderDecodedListenerToString        jni.MethodID
 
 	clsImageDecoderOnPartialImageListener               *jni.GlobalRef
 	midImageDecoderOnPartialImageListenerOnPartialImage jni.MethodID
+	midImageDecoderOnPartialImageListenerToString       jni.MethodID
 
-	clsImageDecoderSource *jni.GlobalRef
+	clsImageDecoderSource         *jni.GlobalRef
+	midImageDecoderSourceToString jni.MethodID
 
 	clsYuvImage                *jni.GlobalRef
 	midYuvImageCtor            jni.MethodID
@@ -733,6 +781,7 @@ var (
 	midYuvImageGetWidth        jni.MethodID
 	midYuvImageGetYuvData      jni.MethodID
 	midYuvImageGetYuvFormat    jni.MethodID
+	midYuvImageToString        jni.MethodID
 
 	clsRuntimeXfermode                    *jni.GlobalRef
 	midRuntimeXfermodeCtor                jni.MethodID
@@ -752,6 +801,7 @@ var (
 	midRuntimeXfermodeSetIntUniform4_2    jni.MethodID
 	midRuntimeXfermodeSetIntUniform5_3    jni.MethodID
 	midRuntimeXfermodeSetIntUniform2_4    jni.MethodID
+	midRuntimeXfermodeToString            jni.MethodID
 
 	clsRuntimeShader                    *jni.GlobalRef
 	midRuntimeShaderCtor                jni.MethodID
@@ -772,15 +822,18 @@ var (
 	midRuntimeShaderSetIntUniform4_2    jni.MethodID
 	midRuntimeShaderSetIntUniform5_3    jni.MethodID
 	midRuntimeShaderSetIntUniform2_4    jni.MethodID
+	midRuntimeShaderToString            jni.MethodID
 
 	clsImageFormat                *jni.GlobalRef
 	midImageFormatCtor            jni.MethodID
+	midImageFormatToString        jni.MethodID
 	midImageFormatGetBitsPerPixel jni.MethodID
 
 	clsLightingColorFilter                 *jni.GlobalRef
 	midLightingColorFilterCtor             jni.MethodID
 	midLightingColorFilterGetColorAdd      jni.MethodID
 	midLightingColorFilterGetColorMultiply jni.MethodID
+	midLightingColorFilterToString         jni.MethodID
 
 	clsBitmapRegionDecoder               *jni.GlobalRef
 	midBitmapRegionDecoderDecodeRegion   jni.MethodID
@@ -788,6 +841,7 @@ var (
 	midBitmapRegionDecoderGetWidth       jni.MethodID
 	midBitmapRegionDecoderIsRecycled     jni.MethodID
 	midBitmapRegionDecoderRecycle        jni.MethodID
+	midBitmapRegionDecoderToString       jni.MethodID
 	midBitmapRegionDecoderNewInstance1   jni.MethodID
 	midBitmapRegionDecoderNewInstance3_1 jni.MethodID
 	midBitmapRegionDecoderNewInstance4_2 jni.MethodID
@@ -826,9 +880,10 @@ var (
 	midColorSpaceGetFromDataSpace    jni.MethodID
 	midColorSpaceMatch               jni.MethodID
 
-	clsColorSpaceAdaptation        *jni.GlobalRef
-	midColorSpaceAdaptationValues  jni.MethodID
-	midColorSpaceAdaptationValueOf jni.MethodID
+	clsColorSpaceAdaptation         *jni.GlobalRef
+	midColorSpaceAdaptationToString jni.MethodID
+	midColorSpaceAdaptationValues   jni.MethodID
+	midColorSpaceAdaptationValueOf  jni.MethodID
 
 	clsColorSpaceConnector                *jni.GlobalRef
 	midColorSpaceConnectorGetDestination  jni.MethodID
@@ -836,19 +891,23 @@ var (
 	midColorSpaceConnectorGetSource       jni.MethodID
 	midColorSpaceConnectorTransform3      jni.MethodID
 	midColorSpaceConnectorTransform1_1    jni.MethodID
+	midColorSpaceConnectorToString        jni.MethodID
 
 	clsColorSpaceModel                  *jni.GlobalRef
 	midColorSpaceModelGetComponentCount jni.MethodID
+	midColorSpaceModelToString          jni.MethodID
 	midColorSpaceModelValues            jni.MethodID
 	midColorSpaceModelValueOf           jni.MethodID
 
-	clsColorSpaceNamed        *jni.GlobalRef
-	midColorSpaceNamedValues  jni.MethodID
-	midColorSpaceNamedValueOf jni.MethodID
+	clsColorSpaceNamed         *jni.GlobalRef
+	midColorSpaceNamedToString jni.MethodID
+	midColorSpaceNamedValues   jni.MethodID
+	midColorSpaceNamedValueOf  jni.MethodID
 
-	clsColorSpaceRenderIntent        *jni.GlobalRef
-	midColorSpaceRenderIntentValues  jni.MethodID
-	midColorSpaceRenderIntentValueOf jni.MethodID
+	clsColorSpaceRenderIntent         *jni.GlobalRef
+	midColorSpaceRenderIntentToString jni.MethodID
+	midColorSpaceRenderIntentValues   jni.MethodID
+	midColorSpaceRenderIntentValueOf  jni.MethodID
 
 	clsColorSpaceRgb                       *jni.GlobalRef
 	midColorSpaceRgbEquals                 jni.MethodID
@@ -874,6 +933,7 @@ var (
 	midColorSpaceRgbToLinear3              jni.MethodID
 	midColorSpaceRgbToLinear1_1            jni.MethodID
 	midColorSpaceRgbToXyz                  jni.MethodID
+	midColorSpaceRgbToString               jni.MethodID
 
 	clsPicture                             *jni.GlobalRef
 	midPictureCtor                         jni.MethodID
@@ -883,6 +943,7 @@ var (
 	midPictureGetHeight                    jni.MethodID
 	midPictureGetWidth                     jni.MethodID
 	midPictureRequiresHardwareAcceleration jni.MethodID
+	midPictureToString                     jni.MethodID
 
 	clsGainmap                                   *jni.GlobalRef
 	midGainmapCtor                               jni.MethodID
@@ -908,8 +969,10 @@ var (
 	midGainmapSetRatioMax                        jni.MethodID
 	midGainmapSetRatioMin                        jni.MethodID
 	midGainmapWriteToParcel                      jni.MethodID
+	midGainmapToString                           jni.MethodID
 
 	clsRenderEffect                           *jni.GlobalRef
+	midRenderEffectToString                   jni.MethodID
 	midRenderEffectCreateBitmapEffect1        jni.MethodID
 	midRenderEffectCreateBitmapEffect3_1      jni.MethodID
 	midRenderEffectCreateBlendModeEffect      jni.MethodID
@@ -923,8 +986,9 @@ var (
 	midRenderEffectCreateRuntimeShaderEffect  jni.MethodID
 	midRenderEffectCreateShaderEffect         jni.MethodID
 
-	clsLinearGradient     *jni.GlobalRef
-	midLinearGradientCtor jni.MethodID
+	clsLinearGradient         *jni.GlobalRef
+	midLinearGradientCtor     jni.MethodID
+	midLinearGradientToString jni.MethodID
 
 	clsOutline                *jni.GlobalRef
 	midOutlineCtor            jni.MethodID
@@ -945,30 +1009,38 @@ var (
 	midOutlineSetRect4_1      jni.MethodID
 	midOutlineSetRoundRect2   jni.MethodID
 	midOutlineSetRoundRect5_1 jni.MethodID
+	midOutlineToString        jni.MethodID
 
-	clsComposePathEffect     *jni.GlobalRef
-	midComposePathEffectCtor jni.MethodID
+	clsComposePathEffect         *jni.GlobalRef
+	midComposePathEffectCtor     jni.MethodID
+	midComposePathEffectToString jni.MethodID
 
-	clsSweepGradient     *jni.GlobalRef
-	midSweepGradientCtor jni.MethodID
+	clsSweepGradient         *jni.GlobalRef
+	midSweepGradientCtor     jni.MethodID
+	midSweepGradientToString jni.MethodID
 
-	clsDashPathEffect     *jni.GlobalRef
-	midDashPathEffectCtor jni.MethodID
+	clsDashPathEffect         *jni.GlobalRef
+	midDashPathEffectCtor     jni.MethodID
+	midDashPathEffectToString jni.MethodID
 
-	clsBlurMaskFilter     *jni.GlobalRef
-	midBlurMaskFilterCtor jni.MethodID
+	clsBlurMaskFilter         *jni.GlobalRef
+	midBlurMaskFilterCtor     jni.MethodID
+	midBlurMaskFilterToString jni.MethodID
 
-	clsBlurMaskFilterBlur        *jni.GlobalRef
-	midBlurMaskFilterBlurValues  jni.MethodID
-	midBlurMaskFilterBlurValueOf jni.MethodID
+	clsBlurMaskFilterBlur         *jni.GlobalRef
+	midBlurMaskFilterBlurToString jni.MethodID
+	midBlurMaskFilterBlurValues   jni.MethodID
+	midBlurMaskFilterBlurValueOf  jni.MethodID
 
 	clsPixelFormat                   *jni.GlobalRef
 	midPixelFormatCtor               jni.MethodID
+	midPixelFormatToString           jni.MethodID
 	midPixelFormatFormatHasAlpha     jni.MethodID
 	midPixelFormatGetPixelFormatInfo jni.MethodID
 
 	clsBitmapFactory                        *jni.GlobalRef
 	midBitmapFactoryCtor                    jni.MethodID
+	midBitmapFactoryToString                jni.MethodID
 	midBitmapFactoryDecodeByteArray3        jni.MethodID
 	midBitmapFactoryDecodeByteArray4_1      jni.MethodID
 	midBitmapFactoryDecodeFile1             jni.MethodID
@@ -983,13 +1055,16 @@ var (
 
 	clsBitmapFactoryOptions                    *jni.GlobalRef
 	midBitmapFactoryOptionsRequestCancelDecode jni.MethodID
+	midBitmapFactoryOptionsToString            jni.MethodID
 
-	clsPathDashPathEffect     *jni.GlobalRef
-	midPathDashPathEffectCtor jni.MethodID
+	clsPathDashPathEffect         *jni.GlobalRef
+	midPathDashPathEffectCtor     jni.MethodID
+	midPathDashPathEffectToString jni.MethodID
 
-	clsPathDashPathEffectStyle        *jni.GlobalRef
-	midPathDashPathEffectStyleValues  jni.MethodID
-	midPathDashPathEffectStyleValueOf jni.MethodID
+	clsPathDashPathEffectStyle         *jni.GlobalRef
+	midPathDashPathEffectStyleToString jni.MethodID
+	midPathDashPathEffectStyleValues   jni.MethodID
+	midPathDashPathEffectStyleValueOf  jni.MethodID
 
 	clsNinePatch                     *jni.GlobalRef
 	midNinePatchCtor                 jni.MethodID
@@ -1005,14 +1080,17 @@ var (
 	midNinePatchGetWidth             jni.MethodID
 	midNinePatchHasAlpha             jni.MethodID
 	midNinePatchSetPaint             jni.MethodID
+	midNinePatchToString             jni.MethodID
 	midNinePatchIsNinePatchChunk     jni.MethodID
 
-	clsRegionIterator     *jni.GlobalRef
-	midRegionIteratorCtor jni.MethodID
-	midRegionIteratorNext jni.MethodID
+	clsRegionIterator         *jni.GlobalRef
+	midRegionIteratorCtor     jni.MethodID
+	midRegionIteratorNext     jni.MethodID
+	midRegionIteratorToString jni.MethodID
 
-	clsDiscretePathEffect     *jni.GlobalRef
-	midDiscretePathEffectCtor jni.MethodID
+	clsDiscretePathEffect         *jni.GlobalRef
+	midDiscretePathEffectCtor     jni.MethodID
+	midDiscretePathEffectToString jni.MethodID
 
 	clsRenderNode                              *jni.GlobalRef
 	midRenderNodeCtor                          jni.MethodID
@@ -1084,6 +1162,7 @@ var (
 	midRenderNodeSetTranslationY               jni.MethodID
 	midRenderNodeSetTranslationZ               jni.MethodID
 	midRenderNodeSetUseCompositingLayer        jni.MethodID
+	midRenderNodeToString                      jni.MethodID
 
 	clsBitmapShader                   *jni.GlobalRef
 	midBitmapShaderCtor               jni.MethodID
@@ -1092,15 +1171,18 @@ var (
 	midBitmapShaderSetFilterMode      jni.MethodID
 	midBitmapShaderSetMaxAnisotropy   jni.MethodID
 	midBitmapShaderSetOverrideGainmap jni.MethodID
+	midBitmapShaderToString           jni.MethodID
 
 	clsShader               *jni.GlobalRef
 	midShaderCtor           jni.MethodID
 	midShaderGetLocalMatrix jni.MethodID
 	midShaderSetLocalMatrix jni.MethodID
+	midShaderToString       jni.MethodID
 
-	clsShaderTileMode        *jni.GlobalRef
-	midShaderTileModeValues  jni.MethodID
-	midShaderTileModeValueOf jni.MethodID
+	clsShaderTileMode         *jni.GlobalRef
+	midShaderTileModeToString jni.MethodID
+	midShaderTileModeValues   jni.MethodID
+	midShaderTileModeValueOf  jni.MethodID
 
 	clsMatrix44           *jni.GlobalRef
 	midMatrix44Ctor       jni.MethodID
@@ -1127,6 +1209,7 @@ var (
 	midBlendModeColorFilterGetColor jni.MethodID
 	midBlendModeColorFilterGetMode  jni.MethodID
 	midBlendModeColorFilterHashCode jni.MethodID
+	midBlendModeColorFilterToString jni.MethodID
 
 	clsInterpolator                 *jni.GlobalRef
 	midInterpolatorCtor             jni.MethodID
@@ -1139,13 +1222,16 @@ var (
 	midInterpolatorSetRepeatMirror  jni.MethodID
 	midInterpolatorTimeToValues1    jni.MethodID
 	midInterpolatorTimeToValues2_1  jni.MethodID
+	midInterpolatorToString         jni.MethodID
 
-	clsInterpolatorResult        *jni.GlobalRef
-	midInterpolatorResultValues  jni.MethodID
-	midInterpolatorResultValueOf jni.MethodID
+	clsInterpolatorResult         *jni.GlobalRef
+	midInterpolatorResultToString jni.MethodID
+	midInterpolatorResultValues   jni.MethodID
+	midInterpolatorResultValueOf  jni.MethodID
 
-	clsComposeShader     *jni.GlobalRef
-	midComposeShaderCtor jni.MethodID
+	clsComposeShader         *jni.GlobalRef
+	midComposeShaderCtor     jni.MethodID
+	midComposeShaderToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -1664,6 +1750,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsRegionOp = env.NewGlobalRef(&c.Object)
 
+		midRegionOpToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRegionOp)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midRegionOpValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRegionOp)), "values", "()[Landroid/graphics/Region$Op;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1689,6 +1782,13 @@ func doInit(env *jni.Env) error {
 		clsDrawFilter = env.NewGlobalRef(&c.Object)
 		midDrawFilterCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawFilter)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDrawFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1783,6 +1883,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSurfaceTextureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceTexture)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/SurfaceTexture$OnFrameAvailableListener")
@@ -1800,6 +1907,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSurfaceTextureOnFrameAvailableListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceTextureOnFrameAvailableListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/SurfaceTexture$OutOfResourcesException")
@@ -1809,6 +1923,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSurfaceTextureOutOfResourcesException = env.NewGlobalRef(&c.Object)
+
+		midSurfaceTextureOutOfResourcesExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSurfaceTextureOutOfResourcesException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1821,6 +1942,13 @@ func doInit(env *jni.Env) error {
 		clsColorFilter = env.NewGlobalRef(&c.Object)
 		midColorFilterCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorFilter)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midColorFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1923,6 +2051,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midColorMatrixSetYUV2RGB, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorMatrix)), "setYUV2RGB", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorMatrixToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorMatrix)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2381,6 +2516,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRecordingCanvasSetDensity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecordingCanvas)), "setDensity", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRecordingCanvasToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecordingCanvas)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3006,6 +3148,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsMatrixScaleToFit = env.NewGlobalRef(&c.Object)
 
+		midMatrixScaleToFitToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrixScaleToFit)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midMatrixScaleToFitValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrixScaleToFit)), "values", "()[Landroid/graphics/Matrix$ScaleToFit;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3031,6 +3180,13 @@ func doInit(env *jni.Env) error {
 		clsPathEffect = env.NewGlobalRef(&c.Object)
 		midPathEffectCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathEffect)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midPathEffectToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathEffect)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3139,6 +3295,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midHardwareRendererToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHardwareRenderer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midHardwareRendererIsDrawingEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsHardwareRenderer)), "isDrawingEnabled", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3191,6 +3354,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midHardwareRendererFrameRenderRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHardwareRendererFrameRenderRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/MaskFilter")
@@ -3202,6 +3372,13 @@ func doInit(env *jni.Env) error {
 		clsMaskFilter = env.NewGlobalRef(&c.Object)
 		midMaskFilterCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMaskFilter)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midMaskFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMaskFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3325,6 +3502,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRuntimeColorFilterSetIntUniform2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRuntimeColorFilter)), "setIntUniform", "(Ljava/lang/String;[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRuntimeColorFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRuntimeColorFilter)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3821,6 +4005,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPathToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPath)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Path$Direction")
@@ -3830,6 +4021,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPathDirection = env.NewGlobalRef(&c.Object)
+
+		midPathDirectionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathDirection)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midPathDirectionValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPathDirection)), "values", "()[Landroid/graphics/Path$Direction;")
 		if err != nil {
@@ -3855,6 +4053,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsPathFillType = env.NewGlobalRef(&c.Object)
 
+		midPathFillTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathFillType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midPathFillTypeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPathFillType)), "values", "()[Landroid/graphics/Path$FillType;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3878,6 +4083,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPathOp = env.NewGlobalRef(&c.Object)
+
+		midPathOpToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathOp)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midPathOpValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPathOp)), "values", "()[Landroid/graphics/Path$Op;")
 		if err != nil {
@@ -3956,6 +4168,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPathMeasureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathMeasure)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/PorterDuffXfermode")
@@ -3967,6 +4186,13 @@ func doInit(env *jni.Env) error {
 		clsPorterDuffXfermode = env.NewGlobalRef(&c.Object)
 		midPorterDuffXfermodeCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPorterDuffXfermode)), "<init>", "(Landroid/graphics/PorterDuff$Mode;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midPorterDuffXfermodeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPorterDuffXfermode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3998,6 +4224,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPorterDuffColorFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPorterDuffColorFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/PorterDuff")
@@ -4012,6 +4245,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPorterDuffToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPorterDuff)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/PorterDuff$Mode")
@@ -4021,6 +4261,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPorterDuffMode = env.NewGlobalRef(&c.Object)
+
+		midPorterDuffModeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPorterDuffMode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midPorterDuffModeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPorterDuffMode)), "values", "()[Landroid/graphics/PorterDuff$Mode;")
 		if err != nil {
@@ -4045,6 +4292,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBlendMode = env.NewGlobalRef(&c.Object)
+
+		midBlendModeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBlendMode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midBlendModeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBlendMode)), "values", "()[Landroid/graphics/BlendMode;")
 		if err != nil {
@@ -4077,6 +4331,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPostProcessorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPostProcessor)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/ColorMatrixColorFilter")
@@ -4092,6 +4353,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midColorMatrixColorFilterGetColorMatrix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorMatrixColorFilter)), "getColorMatrix", "(Landroid/graphics/ColorMatrix;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorMatrixColorFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorMatrixColorFilter)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4616,6 +4884,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPaintFlagsDrawFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintFlagsDrawFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/CornerPathEffect")
@@ -4630,6 +4905,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCornerPathEffectToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCornerPathEffect)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/MeshSpecification")
@@ -4639,6 +4921,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMeshSpecification = env.NewGlobalRef(&c.Object)
+
+		midMeshSpecificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeshSpecification)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midMeshSpecificationMake5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMeshSpecification)), "make", "([Landroid/graphics/MeshSpecification$Attribute;I[Landroid/graphics/MeshSpecification$Varying;Ljava/lang/String;Ljava/lang/String;)Landroid/graphics/MeshSpecification;")
 		if err != nil {
@@ -4789,6 +5078,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMovieToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovie)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midMovieDecodeByteArray, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMovie)), "decodeByteArray", "([BII)Landroid/graphics/Movie;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -4866,6 +5162,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midHardwareBufferRendererToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHardwareBufferRenderer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/HardwareBufferRenderer$RenderRequest")
@@ -4890,6 +5193,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midHardwareBufferRendererRenderRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHardwareBufferRendererRenderRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/HardwareBufferRenderer$RenderResult")
@@ -4908,6 +5218,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midHardwareBufferRendererRenderResultGetStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHardwareBufferRendererRenderResult)), "getStatus", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHardwareBufferRendererRenderResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHardwareBufferRendererRenderResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5046,6 +5363,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPathIteratorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathIterator)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/PathIterator$Segment")
@@ -5077,6 +5401,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPathIteratorSegmentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathIteratorSegment)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/EmbossMaskFilter")
@@ -5091,6 +5422,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEmbossMaskFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEmbossMaskFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/SumPathEffect")
@@ -5102,6 +5440,13 @@ func doInit(env *jni.Env) error {
 		clsSumPathEffect = env.NewGlobalRef(&c.Object)
 		midSumPathEffectCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSumPathEffect)), "<init>", "(Landroid/graphics/PathEffect;Landroid/graphics/PathEffect;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midSumPathEffectToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSumPathEffect)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -5217,6 +5562,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCameraToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCamera)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/ParcelableColorSpace")
@@ -5260,6 +5612,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midParcelableColorSpaceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelableColorSpace)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midParcelableColorSpaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParcelableColorSpace)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5378,6 +5737,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMeshToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMesh)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Xfermode")
@@ -5392,6 +5758,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midXfermodeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsXfermode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/RadialGradient")
@@ -5403,6 +5776,13 @@ func doInit(env *jni.Env) error {
 		clsRadialGradient = env.NewGlobalRef(&c.Object)
 		midRadialGradientCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRadialGradient)), "<init>", "(FFFFFF[J[FLandroid/graphics/Shader$TileMode;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midRadialGradientToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRadialGradient)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -5556,6 +5936,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midImageDecoderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageDecoder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midImageDecoderCreateSource2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsImageDecoder)), "createSource", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/graphics/ImageDecoder$Source;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -5657,6 +6044,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midImageDecoderDecodeExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageDecoderDecodeException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/ImageDecoder$ImageInfo")
@@ -5695,6 +6089,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midImageDecoderImageInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageDecoderImageInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/ImageDecoder$OnHeaderDecodedListener")
@@ -5706,6 +6107,13 @@ func doInit(env *jni.Env) error {
 		clsImageDecoderOnHeaderDecodedListener = env.NewGlobalRef(&c.Object)
 
 		midImageDecoderOnHeaderDecodedListenerOnHeaderDecoded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageDecoderOnHeaderDecodedListener)), "onHeaderDecoded", "(Landroid/graphics/ImageDecoder;Landroid/graphics/ImageDecoder$ImageInfo;Landroid/graphics/ImageDecoder$Source;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midImageDecoderOnHeaderDecodedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageDecoderOnHeaderDecodedListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5729,6 +6137,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midImageDecoderOnPartialImageListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageDecoderOnPartialImageListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/ImageDecoder$Source")
@@ -5738,6 +6153,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsImageDecoderSource = env.NewGlobalRef(&c.Object)
+
+		midImageDecoderSourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageDecoderSource)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5803,6 +6225,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midYuvImageGetYuvFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsYuvImage)), "getYuvFormat", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midYuvImageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsYuvImage)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5929,6 +6358,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRuntimeXfermodeSetIntUniform2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRuntimeXfermode)), "setIntUniform", "(Ljava/lang/String;[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRuntimeXfermodeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRuntimeXfermode)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6068,6 +6504,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRuntimeShaderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRuntimeShader)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/ImageFormat")
@@ -6079,6 +6522,13 @@ func doInit(env *jni.Env) error {
 		clsImageFormat = env.NewGlobalRef(&c.Object)
 		midImageFormatCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageFormat)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midImageFormatToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageFormat)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -6111,6 +6561,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midLightingColorFilterGetColorMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLightingColorFilter)), "getColorMultiply", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLightingColorFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLightingColorFilter)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6156,6 +6613,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBitmapRegionDecoderRecycle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapRegionDecoder)), "recycle", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBitmapRegionDecoderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapRegionDecoder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6427,6 +6891,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsColorSpaceAdaptation = env.NewGlobalRef(&c.Object)
 
+		midColorSpaceAdaptationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceAdaptation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midColorSpaceAdaptationValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceAdaptation)), "values", "()[Landroid/graphics/ColorSpace$Adaptation;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -6486,6 +6957,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midColorSpaceConnectorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceConnector)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/ColorSpace$Model")
@@ -6497,6 +6975,13 @@ func doInit(env *jni.Env) error {
 		clsColorSpaceModel = env.NewGlobalRef(&c.Object)
 
 		midColorSpaceModelGetComponentCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceModel)), "getComponentCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorSpaceModelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceModel)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6527,6 +7012,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsColorSpaceNamed = env.NewGlobalRef(&c.Object)
 
+		midColorSpaceNamedToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceNamed)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midColorSpaceNamedValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceNamed)), "values", "()[Landroid/graphics/ColorSpace$Named;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -6550,6 +7042,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsColorSpaceRenderIntent = env.NewGlobalRef(&c.Object)
+
+		midColorSpaceRenderIntentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceRenderIntent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midColorSpaceRenderIntentValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceRenderIntent)), "values", "()[Landroid/graphics/ColorSpace$RenderIntent;")
 		if err != nil {
@@ -6736,6 +7235,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midColorSpaceRgbToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorSpaceRgb)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Picture")
@@ -6786,6 +7292,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPictureRequiresHardwareAcceleration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPicture)), "requiresHardwareAcceleration", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPictureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPicture)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6960,6 +7473,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGainmapToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGainmap)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/RenderEffect")
@@ -6969,6 +7489,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsRenderEffect = env.NewGlobalRef(&c.Object)
+
+		midRenderEffectToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderEffect)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midRenderEffectCreateBitmapEffect1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderEffect)), "createBitmapEffect", "(Landroid/graphics/Bitmap;)Landroid/graphics/RenderEffect;")
 		if err != nil {
@@ -7065,6 +7592,13 @@ func doInit(env *jni.Env) error {
 		clsLinearGradient = env.NewGlobalRef(&c.Object)
 		midLinearGradientCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinearGradient)), "<init>", "(FFFFIILandroid/graphics/Shader$TileMode;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midLinearGradientToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinearGradient)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -7201,6 +7735,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOutlineToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutline)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/ComposePathEffect")
@@ -7212,6 +7753,13 @@ func doInit(env *jni.Env) error {
 		clsComposePathEffect = env.NewGlobalRef(&c.Object)
 		midComposePathEffectCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComposePathEffect)), "<init>", "(Landroid/graphics/PathEffect;Landroid/graphics/PathEffect;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midComposePathEffectToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComposePathEffect)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -7229,6 +7777,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSweepGradientToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSweepGradient)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/DashPathEffect")
@@ -7240,6 +7795,13 @@ func doInit(env *jni.Env) error {
 		clsDashPathEffect = env.NewGlobalRef(&c.Object)
 		midDashPathEffectCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDashPathEffect)), "<init>", "([FF)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDashPathEffectToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDashPathEffect)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -7257,6 +7819,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBlurMaskFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBlurMaskFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/BlurMaskFilter$Blur")
@@ -7266,6 +7835,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBlurMaskFilterBlur = env.NewGlobalRef(&c.Object)
+
+		midBlurMaskFilterBlurToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBlurMaskFilterBlur)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midBlurMaskFilterBlurValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBlurMaskFilterBlur)), "values", "()[Landroid/graphics/BlurMaskFilter$Blur;")
 		if err != nil {
@@ -7295,6 +7871,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPixelFormatToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPixelFormat)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midPixelFormatFormatHasAlpha, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPixelFormat)), "formatHasAlpha", "(I)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -7320,6 +7903,13 @@ func doInit(env *jni.Env) error {
 		clsBitmapFactory = env.NewGlobalRef(&c.Object)
 		midBitmapFactoryCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapFactory)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midBitmapFactoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapFactory)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -7417,6 +8007,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBitmapFactoryOptionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapFactoryOptions)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/PathDashPathEffect")
@@ -7431,6 +8028,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPathDashPathEffectToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathDashPathEffect)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/PathDashPathEffect$Style")
@@ -7440,6 +8044,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPathDashPathEffectStyle = env.NewGlobalRef(&c.Object)
+
+		midPathDashPathEffectStyleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathDashPathEffectStyle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midPathDashPathEffectStyleValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPathDashPathEffectStyle)), "values", "()[Landroid/graphics/PathDashPathEffect$Style;")
 		if err != nil {
@@ -7553,6 +8164,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNinePatchToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNinePatch)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midNinePatchIsNinePatchChunk, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNinePatch)), "isNinePatchChunk", "([B)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -7581,6 +8199,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRegionIteratorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRegionIterator)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/DiscretePathEffect")
@@ -7592,6 +8217,13 @@ func doInit(env *jni.Env) error {
 		clsDiscretePathEffect = env.NewGlobalRef(&c.Object)
 		midDiscretePathEffectCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDiscretePathEffect)), "<init>", "(FF)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDiscretePathEffectToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDiscretePathEffect)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -8085,6 +8717,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRenderNodeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderNode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/BitmapShader")
@@ -8134,6 +8773,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBitmapShaderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapShader)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Shader")
@@ -8162,6 +8808,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midShaderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShader)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Shader$TileMode")
@@ -8171,6 +8824,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsShaderTileMode = env.NewGlobalRef(&c.Object)
+
+		midShaderTileModeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShaderTileMode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midShaderTileModeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsShaderTileMode)), "values", "()[Landroid/graphics/Shader$TileMode;")
 		if err != nil {
@@ -8354,6 +9014,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBlendModeColorFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBlendModeColorFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Interpolator")
@@ -8431,6 +9098,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInterpolatorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInterpolator)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/Interpolator$Result")
@@ -8440,6 +9114,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsInterpolatorResult = env.NewGlobalRef(&c.Object)
+
+		midInterpolatorResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInterpolatorResult)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midInterpolatorResultValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsInterpolatorResult)), "values", "()[Landroid/graphics/Interpolator$Result;")
 		if err != nil {
@@ -8466,6 +9147,13 @@ func doInit(env *jni.Env) error {
 		clsComposeShader = env.NewGlobalRef(&c.Object)
 		midComposeShaderCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComposeShader)), "<init>", "(Landroid/graphics/Shader;Landroid/graphics/Shader;Landroid/graphics/BlendMode;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midComposeShaderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsComposeShader)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

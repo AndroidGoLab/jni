@@ -25,21 +25,29 @@ var (
 
 	clsContract            *jni.GlobalRef
 	midContractCtor        jni.MethodID
+	midContractToString    jni.MethodID
 	midContractIsProfileId jni.MethodID
 
-	clsContractAggregationExceptions *jni.GlobalRef
+	clsContractAggregationExceptions         *jni.GlobalRef
+	midContractAggregationExceptionsToString jni.MethodID
 
-	clsContractBaseSyncColumns *jni.GlobalRef
+	clsContractBaseSyncColumns         *jni.GlobalRef
+	midContractBaseSyncColumnsToString jni.MethodID
 
-	clsContractCommonDataKinds *jni.GlobalRef
+	clsContractCommonDataKinds         *jni.GlobalRef
+	midContractCommonDataKindsToString jni.MethodID
 
-	clsContractContactNameColumns *jni.GlobalRef
+	clsContractContactNameColumns         *jni.GlobalRef
+	midContractContactNameColumnsToString jni.MethodID
 
-	clsContractContactOptionsColumns *jni.GlobalRef
+	clsContractContactOptionsColumns         *jni.GlobalRef
+	midContractContactOptionsColumnsToString jni.MethodID
 
-	clsContractContactStatusColumns *jni.GlobalRef
+	clsContractContactStatusColumns         *jni.GlobalRef
+	midContractContactStatusColumnsToString jni.MethodID
 
 	clsContractContacts                               *jni.GlobalRef
+	midContractContactsToString                       jni.MethodID
 	midContractContactsGetLookupUri2                  jni.MethodID
 	midContractContactsGetLookupUri2_1                jni.MethodID
 	midContractContactsIsEnterpriseContactId          jni.MethodID
@@ -48,86 +56,117 @@ var (
 	midContractContactsOpenContactPhotoInputStream2   jni.MethodID
 	midContractContactsOpenContactPhotoInputStream3_1 jni.MethodID
 
-	clsContractContactsColumns *jni.GlobalRef
+	clsContractContactsColumns         *jni.GlobalRef
+	midContractContactsColumnsToString jni.MethodID
 
 	clsContractData                    *jni.GlobalRef
+	midContractDataToString            jni.MethodID
 	midContractDataGetContactLookupUri jni.MethodID
 
-	clsContractDataColumns *jni.GlobalRef
+	clsContractDataColumns         *jni.GlobalRef
+	midContractDataColumnsToString jni.MethodID
 
-	clsContractDataColumnsWithJoins *jni.GlobalRef
+	clsContractDataColumnsWithJoins         *jni.GlobalRef
+	midContractDataColumnsWithJoinsToString jni.MethodID
 
-	clsContractDataUsageFeedback *jni.GlobalRef
+	clsContractDataUsageFeedback         *jni.GlobalRef
+	midContractDataUsageFeedbackToString jni.MethodID
 
-	clsContractDataUsageStatColumns *jni.GlobalRef
+	clsContractDataUsageStatColumns         *jni.GlobalRef
+	midContractDataUsageStatColumnsToString jni.MethodID
 
-	clsContractDeletedContacts *jni.GlobalRef
+	clsContractDeletedContacts         *jni.GlobalRef
+	midContractDeletedContactsToString jni.MethodID
 
-	clsContractDeletedContactsColumns *jni.GlobalRef
+	clsContractDeletedContactsColumns         *jni.GlobalRef
+	midContractDeletedContactsColumnsToString jni.MethodID
 
 	clsContractDirectory                        *jni.GlobalRef
+	midContractDirectoryToString                jni.MethodID
 	midContractDirectoryIsEnterpriseDirectoryId jni.MethodID
 	midContractDirectoryIsRemoteDirectoryId     jni.MethodID
 	midContractDirectoryNotifyDirectoryChange   jni.MethodID
 
-	clsContractDisplayNameSources *jni.GlobalRef
+	clsContractDisplayNameSources         *jni.GlobalRef
+	midContractDisplayNameSourcesToString jni.MethodID
 
-	clsContractDisplayPhoto *jni.GlobalRef
+	clsContractDisplayPhoto         *jni.GlobalRef
+	midContractDisplayPhotoToString jni.MethodID
 
-	clsContractFullNameStyle *jni.GlobalRef
+	clsContractFullNameStyle         *jni.GlobalRef
+	midContractFullNameStyleToString jni.MethodID
 
 	clsContractGroups                  *jni.GlobalRef
+	midContractGroupsToString          jni.MethodID
 	midContractGroupsNewEntityIterator jni.MethodID
 
-	clsContractGroupsColumns *jni.GlobalRef
+	clsContractGroupsColumns         *jni.GlobalRef
+	midContractGroupsColumnsToString jni.MethodID
 
-	clsContractIntents *jni.GlobalRef
+	clsContractIntents         *jni.GlobalRef
+	midContractIntentsToString jni.MethodID
 
-	clsContractPhoneLookup *jni.GlobalRef
+	clsContractPhoneLookup         *jni.GlobalRef
+	midContractPhoneLookupToString jni.MethodID
 
-	clsContractPhoneLookupColumns *jni.GlobalRef
+	clsContractPhoneLookupColumns         *jni.GlobalRef
+	midContractPhoneLookupColumnsToString jni.MethodID
 
-	clsContractPhoneticNameStyle *jni.GlobalRef
+	clsContractPhoneticNameStyle         *jni.GlobalRef
+	midContractPhoneticNameStyleToString jni.MethodID
 
 	clsContractPinnedPositions         *jni.GlobalRef
+	midContractPinnedPositionsToString jni.MethodID
 	midContractPinnedPositionsPin      jni.MethodID
 	midContractPinnedPositionsUndemote jni.MethodID
 
-	clsContractPresence *jni.GlobalRef
+	clsContractPresence         *jni.GlobalRef
+	midContractPresenceToString jni.MethodID
 
-	clsContractPresenceColumns *jni.GlobalRef
+	clsContractPresenceColumns         *jni.GlobalRef
+	midContractPresenceColumnsToString jni.MethodID
 
-	clsContractProfile *jni.GlobalRef
+	clsContractProfile         *jni.GlobalRef
+	midContractProfileToString jni.MethodID
 
 	clsContractProfileSyncState                *jni.GlobalRef
+	midContractProfileSyncStateToString        jni.MethodID
 	midContractProfileSyncStateGet             jni.MethodID
 	midContractProfileSyncStateNewSetOperation jni.MethodID
 	midContractProfileSyncStateSet             jni.MethodID
 
-	clsContractProviderStatus *jni.GlobalRef
+	clsContractProviderStatus         *jni.GlobalRef
+	midContractProviderStatusToString jni.MethodID
 
 	clsContractQuickContact                    *jni.GlobalRef
+	midContractQuickContactToString            jni.MethodID
 	midContractQuickContactShowQuickContact5   jni.MethodID
 	midContractQuickContactShowQuickContact5_1 jni.MethodID
 	midContractQuickContactShowQuickContact5_2 jni.MethodID
 	midContractQuickContactShowQuickContact5_3 jni.MethodID
 
 	clsContractRawContacts                    *jni.GlobalRef
+	midContractRawContactsToString            jni.MethodID
 	midContractRawContactsGetContactLookupUri jni.MethodID
 	midContractRawContactsGetLocalAccountName jni.MethodID
 	midContractRawContactsGetLocalAccountType jni.MethodID
 	midContractRawContactsNewEntityIterator   jni.MethodID
 
-	clsContractRawContactsColumns *jni.GlobalRef
+	clsContractRawContactsColumns         *jni.GlobalRef
+	midContractRawContactsColumnsToString jni.MethodID
 
-	clsContractRawContactsEntity *jni.GlobalRef
+	clsContractRawContactsEntity         *jni.GlobalRef
+	midContractRawContactsEntityToString jni.MethodID
 
-	clsContractSearchSnippets *jni.GlobalRef
+	clsContractSearchSnippets         *jni.GlobalRef
+	midContractSearchSnippetsToString jni.MethodID
 
 	clsContractSettings                  *jni.GlobalRef
+	midContractSettingsToString          jni.MethodID
 	midContractSettingsGetDefaultAccount jni.MethodID
 
-	clsContractSettingsColumns *jni.GlobalRef
+	clsContractSettingsColumns         *jni.GlobalRef
+	midContractSettingsColumnsToString jni.MethodID
 
 	clsContractSimAccount                 *jni.GlobalRef
 	midContractSimAccountDescribeContents jni.MethodID
@@ -138,19 +177,25 @@ var (
 	midContractSimAccountGetSimSlotIndex  jni.MethodID
 	midContractSimAccountHashCode         jni.MethodID
 	midContractSimAccountWriteToParcel    jni.MethodID
+	midContractSimAccountToString         jni.MethodID
 
 	clsContractSimContacts               *jni.GlobalRef
+	midContractSimContactsToString       jni.MethodID
 	midContractSimContactsGetSimAccounts jni.MethodID
 
-	clsContractStatusColumns *jni.GlobalRef
+	clsContractStatusColumns         *jni.GlobalRef
+	midContractStatusColumnsToString jni.MethodID
 
 	clsContractStatusUpdates                          *jni.GlobalRef
+	midContractStatusUpdatesToString                  jni.MethodID
 	midContractStatusUpdatesGetPresenceIconResourceId jni.MethodID
 	midContractStatusUpdatesGetPresencePrecedence     jni.MethodID
 
-	clsContractSyncColumns *jni.GlobalRef
+	clsContractSyncColumns         *jni.GlobalRef
+	midContractSyncColumnsToString jni.MethodID
 
 	clsContractSyncState                *jni.GlobalRef
+	midContractSyncStateToString        jni.MethodID
 	midContractSyncStateGet             jni.MethodID
 	midContractSyncStateNewSetOperation jni.MethodID
 	midContractSyncStateSet             jni.MethodID
@@ -186,6 +231,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContractToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midContractIsProfileId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isProfileId", "(J)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -203,6 +255,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractAggregationExceptions = env.NewGlobalRef(&c.Object)
 
+		midContractAggregationExceptionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractAggregationExceptions)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$BaseSyncColumns")
@@ -212,6 +271,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractBaseSyncColumns = env.NewGlobalRef(&c.Object)
+
+		midContractBaseSyncColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractBaseSyncColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -223,6 +289,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractCommonDataKinds = env.NewGlobalRef(&c.Object)
 
+		midContractCommonDataKindsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractCommonDataKinds)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$ContactNameColumns")
@@ -232,6 +305,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractContactNameColumns = env.NewGlobalRef(&c.Object)
+
+		midContractContactNameColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractContactNameColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -243,6 +323,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractContactOptionsColumns = env.NewGlobalRef(&c.Object)
 
+		midContractContactOptionsColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractContactOptionsColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$ContactStatusColumns")
@@ -253,6 +340,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractContactStatusColumns = env.NewGlobalRef(&c.Object)
 
+		midContractContactStatusColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractContactStatusColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$Contacts")
@@ -262,6 +356,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractContacts = env.NewGlobalRef(&c.Object)
+
+		midContractContactsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractContactsGetLookupUri2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "getLookupUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
 		if err != nil {
@@ -322,6 +423,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractContactsColumns = env.NewGlobalRef(&c.Object)
 
+		midContractContactsColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractContactsColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$Data")
@@ -331,6 +439,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractData = env.NewGlobalRef(&c.Object)
+
+		midContractDataToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractData)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractDataGetContactLookupUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractData)), "getContactLookupUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
 		if err != nil {
@@ -349,6 +464,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractDataColumns = env.NewGlobalRef(&c.Object)
 
+		midContractDataColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDataColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$DataColumnsWithJoins")
@@ -358,6 +480,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractDataColumnsWithJoins = env.NewGlobalRef(&c.Object)
+
+		midContractDataColumnsWithJoinsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDataColumnsWithJoins)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -369,6 +498,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractDataUsageFeedback = env.NewGlobalRef(&c.Object)
 
+		midContractDataUsageFeedbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDataUsageFeedback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$DataUsageStatColumns")
@@ -378,6 +514,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractDataUsageStatColumns = env.NewGlobalRef(&c.Object)
+
+		midContractDataUsageStatColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDataUsageStatColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -389,6 +532,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractDeletedContacts = env.NewGlobalRef(&c.Object)
 
+		midContractDeletedContactsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDeletedContacts)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$DeletedContactsColumns")
@@ -399,6 +549,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractDeletedContactsColumns = env.NewGlobalRef(&c.Object)
 
+		midContractDeletedContactsColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDeletedContactsColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$Directory")
@@ -408,6 +565,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractDirectory = env.NewGlobalRef(&c.Object)
+
+		midContractDirectoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDirectory)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractDirectoryIsEnterpriseDirectoryId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractDirectory)), "isEnterpriseDirectoryId", "(J)Z")
 		if err != nil {
@@ -440,6 +604,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractDisplayNameSources = env.NewGlobalRef(&c.Object)
 
+		midContractDisplayNameSourcesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDisplayNameSources)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$DisplayPhoto")
@@ -449,6 +620,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractDisplayPhoto = env.NewGlobalRef(&c.Object)
+
+		midContractDisplayPhotoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDisplayPhoto)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -460,6 +638,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractFullNameStyle = env.NewGlobalRef(&c.Object)
 
+		midContractFullNameStyleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractFullNameStyle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$Groups")
@@ -469,6 +654,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractGroups = env.NewGlobalRef(&c.Object)
+
+		midContractGroupsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractGroups)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractGroupsNewEntityIterator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractGroups)), "newEntityIterator", "(Landroid/database/Cursor;)Landroid/content/EntityIterator;")
 		if err != nil {
@@ -487,6 +679,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractGroupsColumns = env.NewGlobalRef(&c.Object)
 
+		midContractGroupsColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractGroupsColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$Intents")
@@ -496,6 +695,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractIntents = env.NewGlobalRef(&c.Object)
+
+		midContractIntentsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractIntents)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -507,6 +713,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractPhoneLookup = env.NewGlobalRef(&c.Object)
 
+		midContractPhoneLookupToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPhoneLookup)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$PhoneLookupColumns")
@@ -516,6 +729,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractPhoneLookupColumns = env.NewGlobalRef(&c.Object)
+
+		midContractPhoneLookupColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPhoneLookupColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -527,6 +747,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractPhoneticNameStyle = env.NewGlobalRef(&c.Object)
 
+		midContractPhoneticNameStyleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPhoneticNameStyle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$PinnedPositions")
@@ -536,6 +763,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractPinnedPositions = env.NewGlobalRef(&c.Object)
+
+		midContractPinnedPositionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPinnedPositions)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractPinnedPositionsPin, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractPinnedPositions)), "pin", "(Landroid/content/ContentResolver;JI)V")
 		if err != nil {
@@ -561,6 +795,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractPresence = env.NewGlobalRef(&c.Object)
 
+		midContractPresenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPresence)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$PresenceColumns")
@@ -570,6 +811,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractPresenceColumns = env.NewGlobalRef(&c.Object)
+
+		midContractPresenceColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPresenceColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -581,6 +829,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractProfile = env.NewGlobalRef(&c.Object)
 
+		midContractProfileToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractProfile)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$ProfileSyncState")
@@ -590,6 +845,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractProfileSyncState = env.NewGlobalRef(&c.Object)
+
+		midContractProfileSyncStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractProfileSyncState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractProfileSyncStateGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractProfileSyncState)), "get", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;)[B")
 		if err != nil {
@@ -622,6 +884,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractProviderStatus = env.NewGlobalRef(&c.Object)
 
+		midContractProviderStatusToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractProviderStatus)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$QuickContact")
@@ -631,6 +900,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractQuickContact = env.NewGlobalRef(&c.Object)
+
+		midContractQuickContactToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractQuickContactShowQuickContact5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "showQuickContact", "(Landroid/content/Context;Landroid/graphics/Rect;Landroid/net/Uri;I[Ljava/lang/String;)V")
 		if err != nil {
@@ -670,6 +946,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractRawContacts = env.NewGlobalRef(&c.Object)
 
+		midContractRawContactsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midContractRawContactsGetContactLookupUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "getContactLookupUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -708,6 +991,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractRawContactsColumns = env.NewGlobalRef(&c.Object)
 
+		midContractRawContactsColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContactsColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$RawContactsEntity")
@@ -717,6 +1007,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractRawContactsEntity = env.NewGlobalRef(&c.Object)
+
+		midContractRawContactsEntityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContactsEntity)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -728,6 +1025,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractSearchSnippets = env.NewGlobalRef(&c.Object)
 
+		midContractSearchSnippetsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSearchSnippets)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$Settings")
@@ -737,6 +1041,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractSettings = env.NewGlobalRef(&c.Object)
+
+		midContractSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSettings)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractSettingsGetDefaultAccount, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSettings)), "getDefaultAccount", "(Landroid/content/ContentResolver;)Landroid/accounts/Account;")
 		if err != nil {
@@ -754,6 +1065,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractSettingsColumns = env.NewGlobalRef(&c.Object)
+
+		midContractSettingsColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSettingsColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -821,6 +1139,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContractSimAccountToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$SimContacts")
@@ -830,6 +1155,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractSimContacts = env.NewGlobalRef(&c.Object)
+
+		midContractSimContactsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimContacts)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractSimContactsGetSimAccounts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSimContacts)), "getSimAccounts", "(Landroid/content/ContentResolver;)Ljava/util/List;")
 		if err != nil {
@@ -848,6 +1180,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractStatusColumns = env.NewGlobalRef(&c.Object)
 
+		midContractStatusColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractStatusColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$StatusUpdates")
@@ -857,6 +1196,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractStatusUpdates = env.NewGlobalRef(&c.Object)
+
+		midContractStatusUpdatesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractStatusUpdates)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractStatusUpdatesGetPresenceIconResourceId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractStatusUpdates)), "getPresenceIconResourceId", "(I)I")
 		if err != nil {
@@ -882,6 +1228,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractSyncColumns = env.NewGlobalRef(&c.Object)
 
+		midContractSyncColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$SyncState")
@@ -891,6 +1244,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractSyncState = env.NewGlobalRef(&c.Object)
+
+		midContractSyncStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractSyncStateGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncState)), "get", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;)[B")
 		if err != nil {

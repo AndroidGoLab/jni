@@ -29,6 +29,7 @@ var (
 	midPrintedPdfDocumentGetPageHeight      jni.MethodID
 	midPrintedPdfDocumentGetPageWidth       jni.MethodID
 	midPrintedPdfDocumentStartPage          jni.MethodID
+	midPrintedPdfDocumentToString           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -83,6 +84,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPrintedPdfDocumentStartPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "startPage", "(I)Landroid/graphics/pdf/PdfDocument$Page;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrintedPdfDocumentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

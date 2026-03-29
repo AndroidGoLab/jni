@@ -37,6 +37,7 @@ var (
 	clsGnssNavigationMessageCallback                                *jni.GlobalRef
 	midGnssNavigationMessageCallbackOnGnssNavigationMessageReceived jni.MethodID
 	midGnssNavigationMessageCallbackOnStatusChanged                 jni.MethodID
+	midGnssNavigationMessageCallbackToString                        jni.MethodID
 
 	clsAddress                       *jni.GlobalRef
 	midAddressCtor                   jni.MethodID
@@ -86,6 +87,7 @@ var (
 
 	clsListener                  *jni.GlobalRef
 	midListenerOnLocationChanged jni.MethodID
+	midListenerToString          jni.MethodID
 
 	clsProvider                    *jni.GlobalRef
 	midProviderGetAccuracy         jni.MethodID
@@ -99,6 +101,7 @@ var (
 	midProviderSupportsAltitude    jni.MethodID
 	midProviderSupportsBearing     jni.MethodID
 	midProviderSupportsSpeed       jni.MethodID
+	midProviderToString            jni.MethodID
 
 	clsCriteria                      *jni.GlobalRef
 	midCriteriaCtor                  jni.MethodID
@@ -134,12 +137,15 @@ var (
 	midGeocoderGetFromLocationName3_1 jni.MethodID
 	midGeocoderGetFromLocationName6_2 jni.MethodID
 	midGeocoderGetFromLocationName7_3 jni.MethodID
+	midGeocoderToString               jni.MethodID
 	midGeocoderIsPresent              jni.MethodID
 
-	clsGeocoderGeocodeListener *jni.GlobalRef
+	clsGeocoderGeocodeListener         *jni.GlobalRef
+	midGeocoderGeocodeListenerToString jni.MethodID
 
 	clsOnNmeaMessageListener              *jni.GlobalRef
 	midOnNmeaMessageListenerOnNmeaMessage jni.MethodID
+	midOnNmeaMessageListenerToString      jni.MethodID
 
 	clsGnssMeasurementRequest                  *jni.GlobalRef
 	midGnssMeasurementRequestDescribeContents  jni.MethodID
@@ -154,6 +160,7 @@ var (
 	midGnssMeasurementRequestBuilderBuild             jni.MethodID
 	midGnssMeasurementRequestBuilderSetFullTracking   jni.MethodID
 	midGnssMeasurementRequestBuilderSetIntervalMillis jni.MethodID
+	midGnssMeasurementRequestBuilderToString          jni.MethodID
 
 	clsManager                                         *jni.GlobalRef
 	midManagerAddGpsStatusListener                     jni.MethodID
@@ -219,6 +226,7 @@ var (
 	midManagerUnregisterGnssMeasurementsCallback       jni.MethodID
 	midManagerUnregisterGnssNavigationMessageCallback  jni.MethodID
 	midManagerUnregisterGnssStatusCallback             jni.MethodID
+	midManagerToString                                 jni.MethodID
 
 	clsGpsSatellite             *jni.GlobalRef
 	midGpsSatelliteGetAzimuth   jni.MethodID
@@ -228,6 +236,7 @@ var (
 	midGpsSatelliteHasAlmanac   jni.MethodID
 	midGpsSatelliteHasEphemeris jni.MethodID
 	midGpsSatelliteUsedInFix    jni.MethodID
+	midGpsSatelliteToString     jni.MethodID
 
 	clsLocation                                      *jni.GlobalRef
 	midLocationCtor                                  jni.MethodID
@@ -319,22 +328,27 @@ var (
 	midGnssMeasurementsEventBuilderClearIsFullTracking jni.MethodID
 	midGnssMeasurementsEventBuilderSetClock            jni.MethodID
 	midGnssMeasurementsEventBuilderSetIsFullTracking   jni.MethodID
+	midGnssMeasurementsEventBuilderToString            jni.MethodID
 
 	clsGnssMeasurementsEventCallback                           *jni.GlobalRef
 	midGnssMeasurementsEventCallbackOnGnssMeasurementsReceived jni.MethodID
 	midGnssMeasurementsEventCallbackOnStatusChanged            jni.MethodID
+	midGnssMeasurementsEventCallbackToString                   jni.MethodID
 
 	clsGpsStatus                  *jni.GlobalRef
 	midGpsStatusGetMaxSatellites  jni.MethodID
 	midGpsStatusGetSatellites     jni.MethodID
 	midGpsStatusGetTimeToFirstFix jni.MethodID
+	midGpsStatusToString          jni.MethodID
 	midGpsStatusCreate            jni.MethodID
 
 	clsGpsStatusListener                   *jni.GlobalRef
 	midGpsStatusListenerOnGpsStatusChanged jni.MethodID
+	midGpsStatusListenerToString           jni.MethodID
 
 	clsGpsStatusNmeaListener               *jni.GlobalRef
 	midGpsStatusNmeaListenerOnNmeaReceived jni.MethodID
+	midGpsStatusNmeaListenerToString       jni.MethodID
 
 	clsGnssAutomaticGainControl                      *jni.GlobalRef
 	midGnssAutomaticGainControlDescribeContents      jni.MethodID
@@ -351,6 +365,7 @@ var (
 	midGnssAutomaticGainControlBuilderSetCarrierFrequencyHz jni.MethodID
 	midGnssAutomaticGainControlBuilderSetConstellationType  jni.MethodID
 	midGnssAutomaticGainControlBuilderSetLevelDb            jni.MethodID
+	midGnssAutomaticGainControlBuilderToString              jni.MethodID
 
 	clsGnssClock                                     *jni.GlobalRef
 	midGnssClockDescribeContents                     jni.MethodID
@@ -400,8 +415,10 @@ var (
 	midGnssAntennaInfoBuilderSetPhaseCenterOffset               jni.MethodID
 	midGnssAntennaInfoBuilderSetPhaseCenterVariationCorrections jni.MethodID
 	midGnssAntennaInfoBuilderSetSignalGainCorrections           jni.MethodID
+	midGnssAntennaInfoBuilderToString                           jni.MethodID
 
-	clsGnssAntennaInfoListener *jni.GlobalRef
+	clsGnssAntennaInfoListener         *jni.GlobalRef
+	midGnssAntennaInfoListenerToString jni.MethodID
 
 	clsGnssAntennaInfoPhaseCenterOffset                        *jni.GlobalRef
 	midGnssAntennaInfoPhaseCenterOffsetDescribeContents        jni.MethodID
@@ -445,22 +462,26 @@ var (
 	midGnssStatusHashCode              jni.MethodID
 	midGnssStatusUsedInFix             jni.MethodID
 	midGnssStatusWriteToParcel         jni.MethodID
+	midGnssStatusToString              jni.MethodID
 
 	clsGnssStatusBuilder                *jni.GlobalRef
 	midGnssStatusBuilderAddSatellite    jni.MethodID
 	midGnssStatusBuilderBuild           jni.MethodID
 	midGnssStatusBuilderClearSatellites jni.MethodID
+	midGnssStatusBuilderToString        jni.MethodID
 
 	clsGnssStatusCallback                         *jni.GlobalRef
 	midGnssStatusCallbackOnFirstFix               jni.MethodID
 	midGnssStatusCallbackOnSatelliteStatusChanged jni.MethodID
 	midGnssStatusCallbackOnStarted                jni.MethodID
 	midGnssStatusCallbackOnStopped                jni.MethodID
+	midGnssStatusCallbackToString                 jni.MethodID
 
 	clsSettingInjectorService                *jni.GlobalRef
 	midSettingInjectorServiceOnBind          jni.MethodID
 	midSettingInjectorServiceOnStart         jni.MethodID
 	midSettingInjectorServiceOnStartCommand  jni.MethodID
+	midSettingInjectorServiceToString        jni.MethodID
 	midSettingInjectorServiceRefreshSettings jni.MethodID
 
 	clsGnssMeasurement                                             *jni.GlobalRef
@@ -577,6 +598,7 @@ var (
 	midGnssCapabilitiesBuilderSetHasSatellitePvt                           jni.MethodID
 	midGnssCapabilitiesBuilderSetHasScheduling                             jni.MethodID
 	midGnssCapabilitiesBuilderSetHasSingleShotFix                          jni.MethodID
+	midGnssCapabilitiesBuilderToString                                     jni.MethodID
 
 	clsRequest                           *jni.GlobalRef
 	midRequestDescribeContents           jni.MethodID
@@ -602,6 +624,7 @@ var (
 	midRequestBuilderSetMinUpdateDistanceMeters   jni.MethodID
 	midRequestBuilderSetMinUpdateIntervalMillis   jni.MethodID
 	midRequestBuilderSetQuality                   jni.MethodID
+	midRequestBuilderToString                     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -711,6 +734,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGnssNavigationMessageCallbackOnStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssNavigationMessageCallback)), "onStatusChanged", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGnssNavigationMessageCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssNavigationMessageCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1049,6 +1079,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/LocationProvider")
@@ -1130,6 +1167,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midProviderSupportsSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProvider)), "supportsSpeed", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midProviderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProvider)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1367,6 +1411,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGeocoderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeocoder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midGeocoderIsPresent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGeocoder)), "isPresent", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1384,6 +1435,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsGeocoderGeocodeListener = env.NewGlobalRef(&c.Object)
 
+		midGeocoderGeocodeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeocoderGeocodeListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/OnNmeaMessageListener")
@@ -1395,6 +1453,13 @@ func doInit(env *jni.Env) error {
 		clsOnNmeaMessageListener = env.NewGlobalRef(&c.Object)
 
 		midOnNmeaMessageListenerOnNmeaMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnNmeaMessageListener)), "onNmeaMessage", "(Ljava/lang/String;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOnNmeaMessageListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnNmeaMessageListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1485,6 +1550,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGnssMeasurementRequestBuilderSetIntervalMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssMeasurementRequestBuilder)), "setIntervalMillis", "(I)Landroid/location/GnssMeasurementRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGnssMeasurementRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssMeasurementRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1942,6 +2014,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/GpsSatellite")
@@ -1995,6 +2074,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGpsSatelliteUsedInFix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGpsSatellite)), "usedInFix", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGpsSatelliteToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGpsSatellite)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2623,6 +2709,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGnssMeasurementsEventBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssMeasurementsEventBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/GnssMeasurementsEvent$Callback")
@@ -2641,6 +2734,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGnssMeasurementsEventCallbackOnStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssMeasurementsEventCallback)), "onStatusChanged", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGnssMeasurementsEventCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssMeasurementsEventCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2678,6 +2778,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGpsStatusToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGpsStatus)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midGpsStatusCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGpsStatus)), "create", "(Landroid/location/GnssStatus;I)Landroid/location/GpsStatus;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2702,6 +2809,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGpsStatusListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGpsStatusListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/GpsStatus$NmeaListener")
@@ -2713,6 +2827,13 @@ func doInit(env *jni.Env) error {
 		clsGpsStatusNmeaListener = env.NewGlobalRef(&c.Object)
 
 		midGpsStatusNmeaListenerOnNmeaReceived, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGpsStatusNmeaListener)), "onNmeaReceived", "(JLjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGpsStatusNmeaListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGpsStatusNmeaListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2817,6 +2938,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGnssAutomaticGainControlBuilderSetLevelDb, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssAutomaticGainControlBuilder)), "setLevelDb", "(D)Landroid/location/GnssAutomaticGainControl$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGnssAutomaticGainControlBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssAutomaticGainControlBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3154,6 +3282,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGnssAntennaInfoBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssAntennaInfoBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/GnssAntennaInfo$Listener")
@@ -3163,6 +3298,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGnssAntennaInfoListener = env.NewGlobalRef(&c.Object)
+
+		midGnssAntennaInfoListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssAntennaInfoListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -3453,6 +3595,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGnssStatusToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatus)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/GnssStatus$Builder")
@@ -3478,6 +3627,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGnssStatusBuilderClearSatellites, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatusBuilder)), "clearSatellites", "()Landroid/location/GnssStatus$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGnssStatusBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatusBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3522,6 +3678,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGnssStatusCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssStatusCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/SettingInjectorService")
@@ -3547,6 +3710,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSettingInjectorServiceOnStartCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSettingInjectorService)), "onStartCommand", "(Landroid/content/Intent;II)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSettingInjectorServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSettingInjectorService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4349,6 +4519,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGnssCapabilitiesBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGnssCapabilitiesBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/LocationRequest")
@@ -4510,6 +4687,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRequestBuilderSetQuality, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestBuilder)), "setQuality", "(I)Landroid/location/LocationRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

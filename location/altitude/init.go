@@ -27,6 +27,7 @@ var (
 	midConverterCtor                        jni.MethodID
 	midConverterAddMslAltitudeToLocation    jni.MethodID
 	midConverterTryAddMslAltitudeToLocation jni.MethodID
+	midConverterToString                    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -67,6 +68,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConverterTryAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "tryAddMslAltitudeToLocation", "(Landroid/location/Location;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConverterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

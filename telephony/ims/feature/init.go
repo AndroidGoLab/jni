@@ -23,7 +23,8 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsMmTelFeature *jni.GlobalRef
+	clsMmTelFeature         *jni.GlobalRef
+	midMmTelFeatureToString jni.MethodID
 
 	clsMmTelFeatureMmTelCapabilities          *jni.GlobalRef
 	midMmTelFeatureMmTelCapabilitiesEquals    jni.MethodID
@@ -57,6 +58,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMmTelFeature = env.NewGlobalRef(&c.Object)
+
+		midMmTelFeatureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMmTelFeature)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

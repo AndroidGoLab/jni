@@ -23,8 +23,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsException     *jni.GlobalRef
-	midExceptionCtor jni.MethodID
+	clsException         *jni.GlobalRef
+	midExceptionCtor     jni.MethodID
+	midExceptionToString jni.MethodID
 
 	clsProfile                    *jni.GlobalRef
 	midProfileDescribeContents    jni.MethodID
@@ -42,6 +43,7 @@ var (
 	midProfileGetUserName         jni.MethodID
 	midProfileSetCallingUid       jni.MethodID
 	midProfileWriteToParcel       jni.MethodID
+	midProfileToString            jni.MethodID
 
 	clsProfileBuilder                    *jni.GlobalRef
 	midProfileBuilderBuild               jni.MethodID
@@ -54,11 +56,13 @@ var (
 	midProfileBuilderSetProfileName      jni.MethodID
 	midProfileBuilderSetProtocol         jni.MethodID
 	midProfileBuilderSetSendKeepAlive    jni.MethodID
+	midProfileBuilderToString            jni.MethodID
 
 	clsRegistrationListener                     *jni.GlobalRef
 	midRegistrationListenerOnRegistering        jni.MethodID
 	midRegistrationListenerOnRegistrationDone   jni.MethodID
 	midRegistrationListenerOnRegistrationFailed jni.MethodID
+	midRegistrationListenerToString             jni.MethodID
 
 	clsAudioCall                *jni.GlobalRef
 	midAudioCallCtor            jni.MethodID
@@ -82,6 +86,7 @@ var (
 	midAudioCallSetSpeakerMode  jni.MethodID
 	midAudioCallStartAudio      jni.MethodID
 	midAudioCallToggleMute      jni.MethodID
+	midAudioCallToString        jni.MethodID
 
 	clsAudioCallListener                  *jni.GlobalRef
 	midAudioCallListenerOnCallBusy        jni.MethodID
@@ -94,6 +99,7 @@ var (
 	midAudioCallListenerOnReadyToCall     jni.MethodID
 	midAudioCallListenerOnRinging         jni.MethodID
 	midAudioCallListenerOnRingingBack     jni.MethodID
+	midAudioCallListenerToString          jni.MethodID
 
 	clsSession                *jni.GlobalRef
 	midSessionAnswerCall      jni.MethodID
@@ -109,6 +115,7 @@ var (
 	midSessionRegister        jni.MethodID
 	midSessionSetListener     jni.MethodID
 	midSessionUnregister      jni.MethodID
+	midSessionToString        jni.MethodID
 
 	clsSessionListener                      *jni.GlobalRef
 	midSessionListenerOnCallBusy            jni.MethodID
@@ -123,6 +130,7 @@ var (
 	midSessionListenerOnRegistrationTimeout jni.MethodID
 	midSessionListenerOnRinging             jni.MethodID
 	midSessionListenerOnRingingBack         jni.MethodID
+	midSessionListenerToString              jni.MethodID
 
 	clsSessionState         *jni.GlobalRef
 	midSessionStateToString jni.MethodID
@@ -144,6 +152,7 @@ var (
 	midManagerSetRegistrationListener    jni.MethodID
 	midManagerTakeAudioCall              jni.MethodID
 	midManagerUnregister                 jni.MethodID
+	midManagerToString                   jni.MethodID
 	midManagerGetCallId                  jni.MethodID
 	midManagerGetOfferSessionDescription jni.MethodID
 	midManagerIsApiSupported             jni.MethodID
@@ -180,6 +189,13 @@ func doInit(env *jni.Env) error {
 		clsException = env.NewGlobalRef(&c.Object)
 		midExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsException)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -298,6 +314,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midProfileToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProfile)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/sip/SipProfile$Builder")
@@ -378,6 +401,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midProfileBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProfileBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/sip/SipRegistrationListener")
@@ -403,6 +433,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRegistrationListenerOnRegistrationFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRegistrationListener)), "onRegistrationFailed", "(Ljava/lang/String;ILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRegistrationListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRegistrationListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -563,6 +600,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAudioCallToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioCall)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/sip/SipAudioCall$Listener")
@@ -637,6 +681,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAudioCallListenerOnRingingBack, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioCallListener)), "onRingingBack", "(Landroid/net/sip/SipAudioCall;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioCallListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioCallListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -744,6 +795,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/sip/SipSession$Listener")
@@ -832,6 +890,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionListenerOnRingingBack, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionListener)), "onRingingBack", "(Landroid/net/sip/SipSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -967,6 +1032,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerUnregister, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregister", "(Landroid/net/sip/SipProfile;Landroid/net/sip/SipRegistrationListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

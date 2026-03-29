@@ -179,3 +179,30 @@ func (m *DeviceManager) UnregisterVirtualDeviceListener(arg0 *jni.Object) error 
 	})
 	return callErr
 }
+
+// ToString calls android.companion.virtual.VirtualDeviceManager.toString.
+func (m *DeviceManager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeviceManagerToString == nil {
+			callErr = fmt.Errorf("android.companion.virtual.VirtualDeviceManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeviceManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

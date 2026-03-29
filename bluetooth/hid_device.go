@@ -323,3 +323,30 @@ func (m *HidDevice) UnregisterApp() (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.bluetooth.BluetoothHidDevice.toString.
+func (m *HidDevice) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midHidDeviceToString == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothHidDevice.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midHidDeviceToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

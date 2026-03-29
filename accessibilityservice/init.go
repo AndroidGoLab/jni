@@ -55,10 +55,12 @@ var (
 	midAccessibilityButtonControllerIsAccessibilityButtonAvailable        jni.MethodID
 	midAccessibilityButtonControllerRegisterAccessibilityButtonCallback   jni.MethodID
 	midAccessibilityButtonControllerUnregisterAccessibilityButtonCallback jni.MethodID
+	midAccessibilityButtonControllerToString                              jni.MethodID
 
 	clsAccessibilityButtonControllerAccessibilityButtonCallback                      *jni.GlobalRef
 	midAccessibilityButtonControllerAccessibilityButtonCallbackOnAvailabilityChanged jni.MethodID
 	midAccessibilityButtonControllerAccessibilityButtonCallbackOnClicked             jni.MethodID
+	midAccessibilityButtonControllerAccessibilityButtonCallbackToString              jni.MethodID
 
 	clsInputMethod                          *jni.GlobalRef
 	midInputMethodCtor                      jni.MethodID
@@ -68,6 +70,7 @@ var (
 	midInputMethodOnFinishInput             jni.MethodID
 	midInputMethodOnStartInput              jni.MethodID
 	midInputMethodOnUpdateSelection         jni.MethodID
+	midInputMethodToString                  jni.MethodID
 
 	clsInputMethodAccessibilityInputConnection                         *jni.GlobalRef
 	midInputMethodAccessibilityInputConnectionClearMetaKeyStates       jni.MethodID
@@ -79,6 +82,7 @@ var (
 	midInputMethodAccessibilityInputConnectionPerformEditorAction      jni.MethodID
 	midInputMethodAccessibilityInputConnectionSendKeyEvent             jni.MethodID
 	midInputMethodAccessibilityInputConnectionSetSelection             jni.MethodID
+	midInputMethodAccessibilityInputConnectionToString                 jni.MethodID
 
 	clsAccessibilityService                                     *jni.GlobalRef
 	midAccessibilityServiceAttachAccessibilityOverlayToDisplay  jni.MethodID
@@ -123,10 +127,12 @@ var (
 	midAccessibilityServiceSetTouchExplorationPassthroughRegion jni.MethodID
 	midAccessibilityServiceTakeScreenshot                       jni.MethodID
 	midAccessibilityServiceTakeScreenshotOfWindow               jni.MethodID
+	midAccessibilityServiceToString                             jni.MethodID
 
 	clsAccessibilityServiceGestureResultCallback            *jni.GlobalRef
 	midAccessibilityServiceGestureResultCallbackOnCancelled jni.MethodID
 	midAccessibilityServiceGestureResultCallbackOnCompleted jni.MethodID
+	midAccessibilityServiceGestureResultCallbackToString    jni.MethodID
 
 	clsAccessibilityServiceMagnificationController                              *jni.GlobalRef
 	midAccessibilityServiceMagnificationControllerAddListener                   jni.MethodID
@@ -142,11 +148,13 @@ var (
 	midAccessibilityServiceMagnificationControllerSetCenter                     jni.MethodID
 	midAccessibilityServiceMagnificationControllerSetMagnificationConfig        jni.MethodID
 	midAccessibilityServiceMagnificationControllerSetScale                      jni.MethodID
+	midAccessibilityServiceMagnificationControllerToString                      jni.MethodID
 
 	clsAccessibilityServiceScreenshotResult                  *jni.GlobalRef
 	midAccessibilityServiceScreenshotResultGetColorSpace     jni.MethodID
 	midAccessibilityServiceScreenshotResultGetHardwareBuffer jni.MethodID
 	midAccessibilityServiceScreenshotResultGetTimestamp      jni.MethodID
+	midAccessibilityServiceScreenshotResultToString          jni.MethodID
 
 	clsAccessibilityServiceSoftKeyboardController                                *jni.GlobalRef
 	midAccessibilityServiceSoftKeyboardControllerAddOnShowModeChangedListener    jni.MethodID
@@ -155,18 +163,22 @@ var (
 	midAccessibilityServiceSoftKeyboardControllerSetInputMethodEnabled           jni.MethodID
 	midAccessibilityServiceSoftKeyboardControllerSetShowMode                     jni.MethodID
 	midAccessibilityServiceSoftKeyboardControllerSwitchToInputMethod             jni.MethodID
+	midAccessibilityServiceSoftKeyboardControllerToString                        jni.MethodID
 
 	clsAccessibilityServiceTakeScreenshotCallback          *jni.GlobalRef
 	midAccessibilityServiceTakeScreenshotCallbackOnFailure jni.MethodID
 	midAccessibilityServiceTakeScreenshotCallbackOnSuccess jni.MethodID
+	midAccessibilityServiceTakeScreenshotCallbackToString  jni.MethodID
 
 	clsFingerprintGestureController                                     *jni.GlobalRef
 	midFingerprintGestureControllerIsGestureDetectionAvailable          jni.MethodID
 	midFingerprintGestureControllerUnregisterFingerprintGestureCallback jni.MethodID
+	midFingerprintGestureControllerToString                             jni.MethodID
 
 	clsFingerprintGestureControllerFingerprintGestureCallback                                      *jni.GlobalRef
 	midFingerprintGestureControllerFingerprintGestureCallbackOnGestureDetected                     jni.MethodID
 	midFingerprintGestureControllerFingerprintGestureCallbackOnGestureDetectionAvailabilityChanged jni.MethodID
+	midFingerprintGestureControllerFingerprintGestureCallbackToString                              jni.MethodID
 
 	clsMagnificationConfig                 *jni.GlobalRef
 	midMagnificationConfigDescribeContents jni.MethodID
@@ -185,11 +197,13 @@ var (
 	midMagnificationConfigBuilderSetCenterY   jni.MethodID
 	midMagnificationConfigBuilderSetMode      jni.MethodID
 	midMagnificationConfigBuilderSetScale     jni.MethodID
+	midMagnificationConfigBuilderToString     jni.MethodID
 
 	clsGestureDescription                      *jni.GlobalRef
 	midGestureDescriptionGetDisplayId          jni.MethodID
 	midGestureDescriptionGetStroke             jni.MethodID
 	midGestureDescriptionGetStrokeCount        jni.MethodID
+	midGestureDescriptionToString              jni.MethodID
 	midGestureDescriptionGetMaxGestureDuration jni.MethodID
 	midGestureDescriptionGetMaxStrokeCount     jni.MethodID
 
@@ -197,6 +211,7 @@ var (
 	midGestureDescriptionBuilderAddStroke    jni.MethodID
 	midGestureDescriptionBuilderBuild        jni.MethodID
 	midGestureDescriptionBuilderSetDisplayId jni.MethodID
+	midGestureDescriptionBuilderToString     jni.MethodID
 
 	clsGestureDescriptionStrokeDescription               *jni.GlobalRef
 	midGestureDescriptionStrokeDescriptionContinueStroke jni.MethodID
@@ -204,6 +219,7 @@ var (
 	midGestureDescriptionStrokeDescriptionGetPath        jni.MethodID
 	midGestureDescriptionStrokeDescriptionGetStartTime   jni.MethodID
 	midGestureDescriptionStrokeDescriptionWillContinue   jni.MethodID
+	midGestureDescriptionStrokeDescriptionToString       jni.MethodID
 
 	clsAccessibilityGestureEvent                  *jni.GlobalRef
 	midAccessibilityGestureEventCtor              jni.MethodID
@@ -223,12 +239,14 @@ var (
 	midBrailleDisplayControllerDisconnect  jni.MethodID
 	midBrailleDisplayControllerIsConnected jni.MethodID
 	midBrailleDisplayControllerWrite       jni.MethodID
+	midBrailleDisplayControllerToString    jni.MethodID
 
 	clsBrailleDisplayControllerBrailleDisplayCallback                   *jni.GlobalRef
 	midBrailleDisplayControllerBrailleDisplayCallbackOnConnected        jni.MethodID
 	midBrailleDisplayControllerBrailleDisplayCallbackOnConnectionFailed jni.MethodID
 	midBrailleDisplayControllerBrailleDisplayCallbackOnDisconnected     jni.MethodID
 	midBrailleDisplayControllerBrailleDisplayCallbackOnInput            jni.MethodID
+	midBrailleDisplayControllerBrailleDisplayCallbackToString           jni.MethodID
 
 	clsTouchInteractionController                             *jni.GlobalRef
 	midTouchInteractionControllerGetDisplayId                 jni.MethodID
@@ -242,11 +260,13 @@ var (
 	midTouchInteractionControllerRequestTouchExploration      jni.MethodID
 	midTouchInteractionControllerUnregisterAllCallbacks       jni.MethodID
 	midTouchInteractionControllerUnregisterCallback           jni.MethodID
+	midTouchInteractionControllerToString                     jni.MethodID
 	midTouchInteractionControllerStateToString                jni.MethodID
 
 	clsTouchInteractionControllerCallback               *jni.GlobalRef
 	midTouchInteractionControllerCallbackOnMotionEvent  jni.MethodID
 	midTouchInteractionControllerCallbackOnStateChanged jni.MethodID
+	midTouchInteractionControllerCallbackToString       jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -485,6 +505,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAccessibilityButtonControllerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityButtonController)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accessibilityservice/AccessibilityButtonController$AccessibilityButtonCallback")
@@ -503,6 +530,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAccessibilityButtonControllerAccessibilityButtonCallbackOnClicked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityButtonControllerAccessibilityButtonCallback)), "onClicked", "(Landroid/accessibilityservice/AccessibilityButtonController;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAccessibilityButtonControllerAccessibilityButtonCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityButtonControllerAccessibilityButtonCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -559,6 +593,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInputMethodOnUpdateSelection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "onUpdateSelection", "(IIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInputMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethod)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -632,6 +673,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInputMethodAccessibilityInputConnectionSetSelection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodAccessibilityInputConnection)), "setSelection", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInputMethodAccessibilityInputConnectionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodAccessibilityInputConnection)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -942,6 +990,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAccessibilityServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accessibilityservice/AccessibilityService$GestureResultCallback")
@@ -960,6 +1015,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAccessibilityServiceGestureResultCallbackOnCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceGestureResultCallback)), "onCompleted", "(Landroid/accessibilityservice/GestureDescription;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAccessibilityServiceGestureResultCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceGestureResultCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1067,6 +1129,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAccessibilityServiceMagnificationControllerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceMagnificationController)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accessibilityservice/AccessibilityService$ScreenshotResult")
@@ -1092,6 +1161,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAccessibilityServiceScreenshotResultGetTimestamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceScreenshotResult)), "getTimestamp", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAccessibilityServiceScreenshotResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceScreenshotResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1150,6 +1226,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAccessibilityServiceSoftKeyboardControllerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceSoftKeyboardController)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accessibilityservice/AccessibilityService$TakeScreenshotCallback")
@@ -1168,6 +1251,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAccessibilityServiceTakeScreenshotCallbackOnSuccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceTakeScreenshotCallback)), "onSuccess", "(Landroid/accessibilityservice/AccessibilityService$ScreenshotResult;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAccessibilityServiceTakeScreenshotCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceTakeScreenshotCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1198,6 +1288,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFingerprintGestureControllerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFingerprintGestureController)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accessibilityservice/FingerprintGestureController$FingerprintGestureCallback")
@@ -1216,6 +1313,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFingerprintGestureControllerFingerprintGestureCallbackOnGestureDetectionAvailabilityChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFingerprintGestureControllerFingerprintGestureCallback)), "onGestureDetectionAvailabilityChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFingerprintGestureControllerFingerprintGestureCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFingerprintGestureControllerFingerprintGestureCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1340,6 +1444,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMagnificationConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMagnificationConfigBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accessibilityservice/GestureDescription")
@@ -1365,6 +1476,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGestureDescriptionGetStrokeCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGestureDescription)), "getStrokeCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGestureDescriptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGestureDescription)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1416,6 +1534,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGestureDescriptionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGestureDescriptionBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accessibilityservice/GestureDescription$StrokeDescription")
@@ -1455,6 +1580,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGestureDescriptionStrokeDescriptionWillContinue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGestureDescriptionStrokeDescription)), "willContinue", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGestureDescriptionStrokeDescriptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGestureDescriptionStrokeDescription)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1583,6 +1715,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBrailleDisplayControllerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrailleDisplayController)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accessibilityservice/BrailleDisplayController$BrailleDisplayCallback")
@@ -1615,6 +1754,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBrailleDisplayControllerBrailleDisplayCallbackOnInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrailleDisplayControllerBrailleDisplayCallback)), "onInput", "([B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBrailleDisplayControllerBrailleDisplayCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrailleDisplayControllerBrailleDisplayCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1708,6 +1854,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTouchInteractionControllerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTouchInteractionController)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midTouchInteractionControllerStateToString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouchInteractionController)), "stateToString", "(I)Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1733,6 +1886,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTouchInteractionControllerCallbackOnStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTouchInteractionControllerCallback)), "onStateChanged", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTouchInteractionControllerCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTouchInteractionControllerCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

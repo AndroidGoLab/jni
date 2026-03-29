@@ -153,3 +153,30 @@ func (m *SignedContextualAdsBuilder) SetSignature(arg0 *jni.Object) (*jni.Object
 	})
 	return result, callErr
 }
+
+// ToString calls android.adservices.adselection.SignedContextualAds$Builder.toString.
+func (m *SignedContextualAdsBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSignedContextualAdsBuilderToString == nil {
+			callErr = fmt.Errorf("android.adservices.adselection.SignedContextualAds$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSignedContextualAdsBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

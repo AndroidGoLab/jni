@@ -44,3 +44,30 @@ func NewAuthenticatorException(vm *jni.VM) (*AuthenticatorException, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.accounts.AuthenticatorException.toString.
+func (m *AuthenticatorException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAuthenticatorExceptionToString == nil {
+			callErr = fmt.Errorf("android.accounts.AuthenticatorException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAuthenticatorExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

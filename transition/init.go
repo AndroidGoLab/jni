@@ -32,13 +32,16 @@ var (
 	midArcMotionSetMaximumAngle           jni.MethodID
 	midArcMotionSetMinimumHorizontalAngle jni.MethodID
 	midArcMotionSetMinimumVerticalAngle   jni.MethodID
+	midArcMotionToString                  jni.MethodID
 
-	clsAutoTransition     *jni.GlobalRef
-	midAutoTransitionCtor jni.MethodID
+	clsAutoTransition         *jni.GlobalRef
+	midAutoTransitionCtor     jni.MethodID
+	midAutoTransitionToString jni.MethodID
 
 	clsInflater                         *jni.GlobalRef
 	midInflaterInflateTransition        jni.MethodID
 	midInflaterInflateTransitionManager jni.MethodID
+	midInflaterToString                 jni.MethodID
 	midInflaterFrom                     jni.MethodID
 
 	clsValues         *jni.GlobalRef
@@ -51,17 +54,20 @@ var (
 	midPropagationCaptureValues            jni.MethodID
 	midPropagationGetPropagationProperties jni.MethodID
 	midPropagationGetStartDelay            jni.MethodID
+	midPropagationToString                 jni.MethodID
 
 	clsCircularPropagation                    *jni.GlobalRef
 	midCircularPropagationCtor                jni.MethodID
 	midCircularPropagationGetStartDelay       jni.MethodID
 	midCircularPropagationSetPropagationSpeed jni.MethodID
+	midCircularPropagationToString            jni.MethodID
 
 	clsSidePropagation                    *jni.GlobalRef
 	midSidePropagationCtor                jni.MethodID
 	midSidePropagationGetStartDelay       jni.MethodID
 	midSidePropagationSetPropagationSpeed jni.MethodID
 	midSidePropagationSetSide             jni.MethodID
+	midSidePropagationToString            jni.MethodID
 
 	clsTransition                        *jni.GlobalRef
 	midTransitionAddListener             jni.MethodID
@@ -113,6 +119,7 @@ var (
 
 	clsEpicenterCallback               *jni.GlobalRef
 	midEpicenterCallbackOnGetEpicenter jni.MethodID
+	midEpicenterCallbackToString       jni.MethodID
 
 	clsTransitionListener                   *jni.GlobalRef
 	midTransitionListenerOnTransitionCancel jni.MethodID
@@ -120,12 +127,14 @@ var (
 	midTransitionListenerOnTransitionPause  jni.MethodID
 	midTransitionListenerOnTransitionResume jni.MethodID
 	midTransitionListenerOnTransitionStart  jni.MethodID
+	midTransitionListenerToString           jni.MethodID
 
 	clsManager                          *jni.GlobalRef
 	midManagerCtor                      jni.MethodID
 	midManagerSetTransition3            jni.MethodID
 	midManagerSetTransition2_1          jni.MethodID
 	midManagerTransitionTo              jni.MethodID
+	midManagerToString                  jni.MethodID
 	midManagerBeginDelayedTransition1   jni.MethodID
 	midManagerBeginDelayedTransition2_1 jni.MethodID
 	midManagerEndTransitions            jni.MethodID
@@ -145,6 +154,7 @@ var (
 	midVisibilityOnDisappear5            jni.MethodID
 	midVisibilityOnDisappear4_1          jni.MethodID
 	midVisibilitySetMode                 jni.MethodID
+	midVisibilityToString                jni.MethodID
 
 	clsScene                  *jni.GlobalRef
 	midSceneCtor              jni.MethodID
@@ -153,6 +163,7 @@ var (
 	midSceneGetSceneRoot      jni.MethodID
 	midSceneSetEnterAction    jni.MethodID
 	midSceneSetExitAction     jni.MethodID
+	midSceneToString          jni.MethodID
 	midSceneGetCurrentScene   jni.MethodID
 	midSceneGetSceneForLayout jni.MethodID
 
@@ -166,6 +177,7 @@ var (
 	midChangeTransformGetTransitionProperties jni.MethodID
 	midChangeTransformSetReparent             jni.MethodID
 	midChangeTransformSetReparentWithOverlay  jni.MethodID
+	midChangeTransformToString                jni.MethodID
 
 	clsChangeScroll                        *jni.GlobalRef
 	midChangeScrollCtor                    jni.MethodID
@@ -173,6 +185,7 @@ var (
 	midChangeScrollCaptureStartValues      jni.MethodID
 	midChangeScrollCreateAnimator          jni.MethodID
 	midChangeScrollGetTransitionProperties jni.MethodID
+	midChangeScrollToString                jni.MethodID
 
 	clsChangeBounds                        *jni.GlobalRef
 	midChangeBoundsCtor                    jni.MethodID
@@ -183,12 +196,14 @@ var (
 	midChangeBoundsGetTransitionProperties jni.MethodID
 	midChangeBoundsSetReparent             jni.MethodID
 	midChangeBoundsSetResizeClip           jni.MethodID
+	midChangeBoundsToString                jni.MethodID
 
 	clsFade                   *jni.GlobalRef
 	midFadeCtor               jni.MethodID
 	midFadeCaptureStartValues jni.MethodID
 	midFadeOnAppear           jni.MethodID
 	midFadeOnDisappear        jni.MethodID
+	midFadeToString           jni.MethodID
 
 	clsListenerAdapter                   *jni.GlobalRef
 	midListenerAdapterOnTransitionCancel jni.MethodID
@@ -196,9 +211,11 @@ var (
 	midListenerAdapterOnTransitionPause  jni.MethodID
 	midListenerAdapterOnTransitionResume jni.MethodID
 	midListenerAdapterOnTransitionStart  jni.MethodID
+	midListenerAdapterToString           jni.MethodID
 
-	clsPathMotion        *jni.GlobalRef
-	midPathMotionGetPath jni.MethodID
+	clsPathMotion         *jni.GlobalRef
+	midPathMotionGetPath  jni.MethodID
+	midPathMotionToString jni.MethodID
 
 	clsVisibilityPropagation                         *jni.GlobalRef
 	midVisibilityPropagationCaptureValues            jni.MethodID
@@ -206,6 +223,7 @@ var (
 	midVisibilityPropagationGetViewVisibility        jni.MethodID
 	midVisibilityPropagationGetViewX                 jni.MethodID
 	midVisibilityPropagationGetViewY                 jni.MethodID
+	midVisibilityPropagationToString                 jni.MethodID
 
 	clsChangeImageTransform                        *jni.GlobalRef
 	midChangeImageTransformCtor                    jni.MethodID
@@ -213,12 +231,14 @@ var (
 	midChangeImageTransformCaptureStartValues      jni.MethodID
 	midChangeImageTransformCreateAnimator          jni.MethodID
 	midChangeImageTransformGetTransitionProperties jni.MethodID
+	midChangeImageTransformToString                jni.MethodID
 
 	clsPatternPathMotion               *jni.GlobalRef
 	midPatternPathMotionCtor           jni.MethodID
 	midPatternPathMotionGetPath        jni.MethodID
 	midPatternPathMotionGetPatternPath jni.MethodID
 	midPatternPathMotionSetPatternPath jni.MethodID
+	midPatternPathMotionToString       jni.MethodID
 
 	clsChangeClipBounds                        *jni.GlobalRef
 	midChangeClipBoundsCtor                    jni.MethodID
@@ -226,6 +246,7 @@ var (
 	midChangeClipBoundsCaptureStartValues      jni.MethodID
 	midChangeClipBoundsCreateAnimator          jni.MethodID
 	midChangeClipBoundsGetTransitionProperties jni.MethodID
+	midChangeClipBoundsToString                jni.MethodID
 
 	clsSet                     *jni.GlobalRef
 	midSetCtor                 jni.MethodID
@@ -273,6 +294,7 @@ var (
 	midSetAddTarget1_7         jni.MethodID
 	midSetAddListener1_1       jni.MethodID
 	midSetClone0_2             jni.MethodID
+	midSetToString             jni.MethodID
 
 	clsSlide                   *jni.GlobalRef
 	midSlideCtor               jni.MethodID
@@ -282,6 +304,7 @@ var (
 	midSlideOnAppear           jni.MethodID
 	midSlideOnDisappear        jni.MethodID
 	midSlideSetSlideEdge       jni.MethodID
+	midSlideToString           jni.MethodID
 
 	clsExplode                   *jni.GlobalRef
 	midExplodeCtor               jni.MethodID
@@ -289,6 +312,7 @@ var (
 	midExplodeCaptureStartValues jni.MethodID
 	midExplodeOnAppear           jni.MethodID
 	midExplodeOnDisappear        jni.MethodID
+	midExplodeToString           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -370,6 +394,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midArcMotionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcMotion)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/AutoTransition")
@@ -381,6 +412,13 @@ func doInit(env *jni.Env) error {
 		clsAutoTransition = env.NewGlobalRef(&c.Object)
 		midAutoTransitionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAutoTransition)), "<init>", "(Landroid/content/Context;Landroid/util/AttributeSet;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midAutoTransitionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAutoTransition)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -402,6 +440,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInflaterInflateTransitionManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInflater)), "inflateTransitionManager", "(ILandroid/view/ViewGroup;)Landroid/transition/TransitionManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInflaterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInflater)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -481,6 +526,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPropagationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropagation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/CircularPropagation")
@@ -503,6 +555,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCircularPropagationSetPropagationSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCircularPropagation)), "setPropagationSpeed", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCircularPropagationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCircularPropagation)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -538,6 +597,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSidePropagationSetSide, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSidePropagation)), "setSide", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSidePropagationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSidePropagation)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -893,6 +959,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEpicenterCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEpicenterCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/Transition$TransitionListener")
@@ -938,6 +1011,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTransitionListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/TransitionManager")
@@ -967,6 +1047,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerTransitionTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "transitionTo", "(Landroid/transition/Scene;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1102,6 +1189,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midVisibilityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisibility)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/Scene")
@@ -1145,6 +1239,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSceneSetExitAction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScene)), "setExitAction", "(Ljava/lang/Runnable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSceneToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScene)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1235,6 +1336,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midChangeTransformToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeTransform)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/ChangeScroll")
@@ -1271,6 +1379,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midChangeScrollGetTransitionProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeScroll)), "getTransitionProperties", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChangeScrollToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeScroll)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1340,6 +1455,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midChangeBoundsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeBounds)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/Fade")
@@ -1369,6 +1491,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFadeOnDisappear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFade)), "onDisappear", "(Landroid/view/ViewGroup;Landroid/view/View;Landroid/transition/TransitionValues;Landroid/transition/TransitionValues;)Landroid/animation/Animator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFadeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFade)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1420,6 +1549,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midListenerAdapterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerAdapter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/PathMotion")
@@ -1431,6 +1567,13 @@ func doInit(env *jni.Env) error {
 		clsPathMotion = env.NewGlobalRef(&c.Object)
 
 		midPathMotionGetPath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathMotion)), "getPath", "(FFFF)Landroid/graphics/Path;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPathMotionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathMotion)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1482,6 +1625,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midVisibilityPropagationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisibilityPropagation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/ChangeImageTransform")
@@ -1524,6 +1674,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midChangeImageTransformToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeImageTransform)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/PatternPathMotion")
@@ -1553,6 +1710,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPatternPathMotionSetPatternPath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPatternPathMotion)), "setPatternPath", "(Landroid/graphics/Path;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPatternPathMotionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPatternPathMotion)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1595,6 +1759,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midChangeClipBoundsGetTransitionProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeClipBounds)), "getTransitionProperties", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChangeClipBoundsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeClipBounds)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1923,6 +2094,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSetToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSet)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/Slide")
@@ -1979,6 +2157,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSlideToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSlide)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/transition/Explode")
@@ -2015,6 +2200,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExplodeOnDisappear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExplode)), "onDisappear", "(Landroid/view/ViewGroup;Landroid/view/View;Landroid/transition/TransitionValues;Landroid/transition/TransitionValues;)Landroid/animation/Animator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExplodeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExplode)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

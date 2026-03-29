@@ -194,3 +194,30 @@ func (m *BrailleDisplayController) Write(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.accessibilityservice.BrailleDisplayController.toString.
+func (m *BrailleDisplayController) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBrailleDisplayControllerToString == nil {
+			callErr = fmt.Errorf("android.accessibilityservice.BrailleDisplayController.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBrailleDisplayControllerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

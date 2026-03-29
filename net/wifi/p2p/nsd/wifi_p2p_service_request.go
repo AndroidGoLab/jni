@@ -179,6 +179,33 @@ func (m *WifiP2pServiceRequest) WriteToParcel(arg0 *jni.Object, arg1 int32) erro
 	return callErr
 }
 
+// ToString calls android.net.wifi.p2p.nsd.WifiP2pServiceRequest.toString.
+func (m *WifiP2pServiceRequest) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWifiP2pServiceRequestToString == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.nsd.WifiP2pServiceRequest.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWifiP2pServiceRequestToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // NewInstance1 calls android.net.wifi.p2p.nsd.WifiP2pServiceRequest.newInstance.
 func (m *WifiP2pServiceRequest) NewInstance1(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object

@@ -223,3 +223,30 @@ func (m *MagnificationConfigBuilder) SetScale(arg0 float32) (*jni.Object, error)
 	})
 	return result, callErr
 }
+
+// ToString calls android.accessibilityservice.MagnificationConfig$Builder.toString.
+func (m *MagnificationConfigBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMagnificationConfigBuilderToString == nil {
+			callErr = fmt.Errorf("android.accessibilityservice.MagnificationConfig$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMagnificationConfigBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

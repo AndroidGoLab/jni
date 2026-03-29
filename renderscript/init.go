@@ -23,18 +23,21 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsFloat4     *jni.GlobalRef
-	midFloat4Ctor jni.MethodID
+	clsFloat4         *jni.GlobalRef
+	midFloat4Ctor     jni.MethodID
+	midFloat4ToString jni.MethodID
 
 	clsScriptIntrinsic3DLUT            *jni.GlobalRef
 	midScriptIntrinsic3DLUTForEach2    jni.MethodID
 	midScriptIntrinsic3DLUTForEach3_1  jni.MethodID
 	midScriptIntrinsic3DLUTGetKernelID jni.MethodID
 	midScriptIntrinsic3DLUTSetLUT      jni.MethodID
+	midScriptIntrinsic3DLUTToString    jni.MethodID
 	midScriptIntrinsic3DLUTCreate      jni.MethodID
 
-	clsByte3     *jni.GlobalRef
-	midByte3Ctor jni.MethodID
+	clsByte3         *jni.GlobalRef
+	midByte3Ctor     jni.MethodID
+	midByte3ToString jni.MethodID
 
 	clsAllocationAdapter            *jni.GlobalRef
 	midAllocationAdapterSetFace     jni.MethodID
@@ -42,15 +45,18 @@ var (
 	midAllocationAdapterSetX        jni.MethodID
 	midAllocationAdapterSetY        jni.MethodID
 	midAllocationAdapterSetZ        jni.MethodID
+	midAllocationAdapterToString    jni.MethodID
 	midAllocationAdapterCreate1D    jni.MethodID
 	midAllocationAdapterCreate2D    jni.MethodID
 	midAllocationAdapterCreateTyped jni.MethodID
 
-	clsDouble3     *jni.GlobalRef
-	midDouble3Ctor jni.MethodID
+	clsDouble3         *jni.GlobalRef
+	midDouble3Ctor     jni.MethodID
+	midDouble3ToString jni.MethodID
 
-	clsShort2     *jni.GlobalRef
-	midShort2Ctor jni.MethodID
+	clsShort2         *jni.GlobalRef
+	midShort2Ctor     jni.MethodID
+	midShort2ToString jni.MethodID
 
 	clsScriptIntrinsicConvolve5x5                 *jni.GlobalRef
 	midScriptIntrinsicConvolve5x5ForEach1         jni.MethodID
@@ -59,6 +65,7 @@ var (
 	midScriptIntrinsicConvolve5x5GetKernelID      jni.MethodID
 	midScriptIntrinsicConvolve5x5SetCoefficients  jni.MethodID
 	midScriptIntrinsicConvolve5x5SetInput         jni.MethodID
+	midScriptIntrinsicConvolve5x5ToString         jni.MethodID
 	midScriptIntrinsicConvolve5x5Create           jni.MethodID
 
 	clsScriptIntrinsicColorMatrix                  *jni.GlobalRef
@@ -72,6 +79,7 @@ var (
 	midScriptIntrinsicColorMatrixSetGreyscale      jni.MethodID
 	midScriptIntrinsicColorMatrixSetRGBtoYUV       jni.MethodID
 	midScriptIntrinsicColorMatrixSetYUVtoRGB       jni.MethodID
+	midScriptIntrinsicColorMatrixToString          jni.MethodID
 	midScriptIntrinsicColorMatrixCreate1           jni.MethodID
 	midScriptIntrinsicColorMatrixCreate2_1         jni.MethodID
 
@@ -81,6 +89,7 @@ var (
 	midSamplerGetMinification                   jni.MethodID
 	midSamplerGetWrapS                          jni.MethodID
 	midSamplerGetWrapT                          jni.MethodID
+	midSamplerToString                          jni.MethodID
 	midSamplerCLAMP_LINEAR                      jni.MethodID
 	midSamplerCLAMP_LINEAR_MIP_LINEAR           jni.MethodID
 	midSamplerCLAMP_NEAREST                     jni.MethodID
@@ -98,10 +107,12 @@ var (
 	midSamplerBuilderSetMinification  jni.MethodID
 	midSamplerBuilderSetWrapS         jni.MethodID
 	midSamplerBuilderSetWrapT         jni.MethodID
+	midSamplerBuilderToString         jni.MethodID
 
-	clsSamplerValue        *jni.GlobalRef
-	midSamplerValueValues  jni.MethodID
-	midSamplerValueValueOf jni.MethodID
+	clsSamplerValue         *jni.GlobalRef
+	midSamplerValueToString jni.MethodID
+	midSamplerValueValues   jni.MethodID
+	midSamplerValueValueOf  jni.MethodID
 
 	clsScriptIntrinsicHistogram                     *jni.GlobalRef
 	midScriptIntrinsicHistogramForEach1             jni.MethodID
@@ -112,6 +123,7 @@ var (
 	midScriptIntrinsicHistogramGetKernelID_Separate jni.MethodID
 	midScriptIntrinsicHistogramSetDotCoefficients   jni.MethodID
 	midScriptIntrinsicHistogramSetOutput            jni.MethodID
+	midScriptIntrinsicHistogramToString             jni.MethodID
 	midScriptIntrinsicHistogramCreate               jni.MethodID
 
 	clsMatrix3f              *jni.GlobalRef
@@ -134,18 +146,23 @@ var (
 	midMatrix3fSet           jni.MethodID
 	midMatrix3fTranslate     jni.MethodID
 	midMatrix3fTranspose     jni.MethodID
+	midMatrix3fToString      jni.MethodID
 
-	clsFloat3     *jni.GlobalRef
-	midFloat3Ctor jni.MethodID
+	clsFloat3         *jni.GlobalRef
+	midFloat3Ctor     jni.MethodID
+	midFloat3ToString jni.MethodID
 
-	clsShort4     *jni.GlobalRef
-	midShort4Ctor jni.MethodID
+	clsShort4         *jni.GlobalRef
+	midShort4Ctor     jni.MethodID
+	midShort4ToString jni.MethodID
 
-	clsByte4     *jni.GlobalRef
-	midByte4Ctor jni.MethodID
+	clsByte4         *jni.GlobalRef
+	midByte4Ctor     jni.MethodID
+	midByte4ToString jni.MethodID
 
-	clsRSIllegalArgumentException     *jni.GlobalRef
-	midRSIllegalArgumentExceptionCtor jni.MethodID
+	clsRSIllegalArgumentException         *jni.GlobalRef
+	midRSIllegalArgumentExceptionCtor     jni.MethodID
+	midRSIllegalArgumentExceptionToString jni.MethodID
 
 	clsScriptIntrinsicResize                    *jni.GlobalRef
 	midScriptIntrinsicResizeForEach_bicubic1    jni.MethodID
@@ -153,10 +170,12 @@ var (
 	midScriptIntrinsicResizeGetFieldID_Input    jni.MethodID
 	midScriptIntrinsicResizeGetKernelID_bicubic jni.MethodID
 	midScriptIntrinsicResizeSetInput            jni.MethodID
+	midScriptIntrinsicResizeToString            jni.MethodID
 	midScriptIntrinsicResizeCreate              jni.MethodID
 
-	clsLong3     *jni.GlobalRef
-	midLong3Ctor jni.MethodID
+	clsLong3         *jni.GlobalRef
+	midLong3Ctor     jni.MethodID
+	midLong3ToString jni.MethodID
 
 	clsType           *jni.GlobalRef
 	midTypeGetCount   jni.MethodID
@@ -167,6 +186,7 @@ var (
 	midTypeGetZ       jni.MethodID
 	midTypeHasFaces   jni.MethodID
 	midTypeHasMipmaps jni.MethodID
+	midTypeToString   jni.MethodID
 	midTypeCreateX    jni.MethodID
 	midTypeCreateXY   jni.MethodID
 	midTypeCreateXYZ  jni.MethodID
@@ -179,10 +199,12 @@ var (
 	midTypeBuilderSetY         jni.MethodID
 	midTypeBuilderSetYuvFormat jni.MethodID
 	midTypeBuilderSetZ         jni.MethodID
+	midTypeBuilderToString     jni.MethodID
 
-	clsTypeCubemapFace        *jni.GlobalRef
-	midTypeCubemapFaceValues  jni.MethodID
-	midTypeCubemapFaceValueOf jni.MethodID
+	clsTypeCubemapFace         *jni.GlobalRef
+	midTypeCubemapFaceToString jni.MethodID
+	midTypeCubemapFaceValues   jni.MethodID
+	midTypeCubemapFaceValueOf  jni.MethodID
 
 	clsBaseObj         *jni.GlobalRef
 	midBaseObjDestroy  jni.MethodID
@@ -190,6 +212,7 @@ var (
 	midBaseObjGetName  jni.MethodID
 	midBaseObjHashCode jni.MethodID
 	midBaseObjSetName  jni.MethodID
+	midBaseObjToString jni.MethodID
 
 	clsMatrix4f                         *jni.GlobalRef
 	midMatrix4fCtor                     jni.MethodID
@@ -214,6 +237,7 @@ var (
 	midMatrix4fSet                      jni.MethodID
 	midMatrix4fTranslate                jni.MethodID
 	midMatrix4fTranspose                jni.MethodID
+	midMatrix4fToString                 jni.MethodID
 
 	clsAllocation                              *jni.GlobalRef
 	midAllocationCopy1DRangeFrom4              jni.MethodID
@@ -290,6 +314,7 @@ var (
 	midAllocationSetOnBufferAvailableListener  jni.MethodID
 	midAllocationSetSurface                    jni.MethodID
 	midAllocationSyncAll                       jni.MethodID
+	midAllocationToString                      jni.MethodID
 	midAllocationCreateAllocations             jni.MethodID
 	midAllocationCreateCubemapFromBitmap2      jni.MethodID
 	midAllocationCreateCubemapFromBitmap4_1    jni.MethodID
@@ -306,27 +331,34 @@ var (
 	midAllocationCreateTyped4_1                jni.MethodID
 	midAllocationCreateTyped3_2                jni.MethodID
 
-	clsAllocationMipmapControl        *jni.GlobalRef
-	midAllocationMipmapControlValues  jni.MethodID
-	midAllocationMipmapControlValueOf jni.MethodID
+	clsAllocationMipmapControl         *jni.GlobalRef
+	midAllocationMipmapControlToString jni.MethodID
+	midAllocationMipmapControlValues   jni.MethodID
+	midAllocationMipmapControlValueOf  jni.MethodID
 
 	clsAllocationOnBufferAvailableListener                  *jni.GlobalRef
 	midAllocationOnBufferAvailableListenerOnBufferAvailable jni.MethodID
+	midAllocationOnBufferAvailableListenerToString          jni.MethodID
 
-	clsInt3     *jni.GlobalRef
-	midInt3Ctor jni.MethodID
+	clsInt3         *jni.GlobalRef
+	midInt3Ctor     jni.MethodID
+	midInt3ToString jni.MethodID
 
-	clsDouble2     *jni.GlobalRef
-	midDouble2Ctor jni.MethodID
+	clsDouble2         *jni.GlobalRef
+	midDouble2Ctor     jni.MethodID
+	midDouble2ToString jni.MethodID
 
-	clsLong4     *jni.GlobalRef
-	midLong4Ctor jni.MethodID
+	clsLong4         *jni.GlobalRef
+	midLong4Ctor     jni.MethodID
+	midLong4ToString jni.MethodID
 
-	clsInt4     *jni.GlobalRef
-	midInt4Ctor jni.MethodID
+	clsInt4         *jni.GlobalRef
+	midInt4Ctor     jni.MethodID
+	midInt4ToString jni.MethodID
 
-	clsShort3     *jni.GlobalRef
-	midShort3Ctor jni.MethodID
+	clsShort3         *jni.GlobalRef
+	midShort3Ctor     jni.MethodID
+	midShort3ToString jni.MethodID
 
 	clsScriptIntrinsicConvolve3x3                 *jni.GlobalRef
 	midScriptIntrinsicConvolve3x3ForEach1         jni.MethodID
@@ -335,6 +367,7 @@ var (
 	midScriptIntrinsicConvolve3x3GetKernelID      jni.MethodID
 	midScriptIntrinsicConvolve3x3SetCoefficients  jni.MethodID
 	midScriptIntrinsicConvolve3x3SetInput         jni.MethodID
+	midScriptIntrinsicConvolve3x3ToString         jni.MethodID
 	midScriptIntrinsicConvolve3x3Create           jni.MethodID
 
 	clsFieldPacker             *jni.GlobalRef
@@ -418,12 +451,15 @@ var (
 	midFieldPackerSubShort3    jni.MethodID
 	midFieldPackerSubShort4    jni.MethodID
 	midFieldPackerSubalign     jni.MethodID
+	midFieldPackerToString     jni.MethodID
 
-	clsByte2     *jni.GlobalRef
-	midByte2Ctor jni.MethodID
+	clsByte2         *jni.GlobalRef
+	midByte2Ctor     jni.MethodID
+	midByte2ToString jni.MethodID
 
-	clsRSRuntimeException     *jni.GlobalRef
-	midRSRuntimeExceptionCtor jni.MethodID
+	clsRSRuntimeException         *jni.GlobalRef
+	midRSRuntimeExceptionCtor     jni.MethodID
+	midRSRuntimeExceptionToString jni.MethodID
 
 	clsRenderScript                      *jni.GlobalRef
 	midRenderScriptContextDump           jni.MethodID
@@ -434,6 +470,7 @@ var (
 	midRenderScriptGetMessageHandler     jni.MethodID
 	midRenderScriptSendMessage           jni.MethodID
 	midRenderScriptSetPriority           jni.MethodID
+	midRenderScriptToString              jni.MethodID
 	midRenderScriptCreate1               jni.MethodID
 	midRenderScriptCreate2_1             jni.MethodID
 	midRenderScriptCreate3_2             jni.MethodID
@@ -441,30 +478,38 @@ var (
 	midRenderScriptGetMinorVersion       jni.MethodID
 	midRenderScriptReleaseAllContexts    jni.MethodID
 
-	clsRenderScriptContextType        *jni.GlobalRef
-	midRenderScriptContextTypeValues  jni.MethodID
-	midRenderScriptContextTypeValueOf jni.MethodID
+	clsRenderScriptContextType         *jni.GlobalRef
+	midRenderScriptContextTypeToString jni.MethodID
+	midRenderScriptContextTypeValues   jni.MethodID
+	midRenderScriptContextTypeValueOf  jni.MethodID
 
-	clsRenderScriptPriority        *jni.GlobalRef
-	midRenderScriptPriorityValues  jni.MethodID
-	midRenderScriptPriorityValueOf jni.MethodID
+	clsRenderScriptPriority         *jni.GlobalRef
+	midRenderScriptPriorityToString jni.MethodID
+	midRenderScriptPriorityValues   jni.MethodID
+	midRenderScriptPriorityValueOf  jni.MethodID
 
-	clsRenderScriptRSErrorHandler    *jni.GlobalRef
-	midRenderScriptRSErrorHandlerRun jni.MethodID
+	clsRenderScriptRSErrorHandler         *jni.GlobalRef
+	midRenderScriptRSErrorHandlerRun      jni.MethodID
+	midRenderScriptRSErrorHandlerToString jni.MethodID
 
-	clsRenderScriptRSMessageHandler    *jni.GlobalRef
-	midRenderScriptRSMessageHandlerRun jni.MethodID
+	clsRenderScriptRSMessageHandler         *jni.GlobalRef
+	midRenderScriptRSMessageHandlerRun      jni.MethodID
+	midRenderScriptRSMessageHandlerToString jni.MethodID
 
-	clsRSDriverException     *jni.GlobalRef
-	midRSDriverExceptionCtor jni.MethodID
+	clsRSDriverException         *jni.GlobalRef
+	midRSDriverExceptionCtor     jni.MethodID
+	midRSDriverExceptionToString jni.MethodID
 
-	clsRSInvalidStateException     *jni.GlobalRef
-	midRSInvalidStateExceptionCtor jni.MethodID
+	clsRSInvalidStateException         *jni.GlobalRef
+	midRSInvalidStateExceptionCtor     jni.MethodID
+	midRSInvalidStateExceptionToString jni.MethodID
 
-	clsDouble4     *jni.GlobalRef
-	midDouble4Ctor jni.MethodID
+	clsDouble4         *jni.GlobalRef
+	midDouble4Ctor     jni.MethodID
+	midDouble4ToString jni.MethodID
 
-	clsScriptC *jni.GlobalRef
+	clsScriptC         *jni.GlobalRef
+	midScriptCToString jni.MethodID
 
 	clsScriptIntrinsicBlur                 *jni.GlobalRef
 	midScriptIntrinsicBlurForEach1         jni.MethodID
@@ -473,6 +518,7 @@ var (
 	midScriptIntrinsicBlurGetKernelID      jni.MethodID
 	midScriptIntrinsicBlurSetInput         jni.MethodID
 	midScriptIntrinsicBlurSetRadius        jni.MethodID
+	midScriptIntrinsicBlurToString         jni.MethodID
 	midScriptIntrinsicBlurCreate           jni.MethodID
 
 	clsScriptIntrinsicLUT            *jni.GlobalRef
@@ -484,6 +530,7 @@ var (
 	midScriptIntrinsicLUTSetBlue     jni.MethodID
 	midScriptIntrinsicLUTSetGreen    jni.MethodID
 	midScriptIntrinsicLUTSetRed      jni.MethodID
+	midScriptIntrinsicLUTToString    jni.MethodID
 	midScriptIntrinsicLUTCreate      jni.MethodID
 
 	clsMatrix2f             *jni.GlobalRef
@@ -500,12 +547,14 @@ var (
 	midMatrix2fScale        jni.MethodID
 	midMatrix2fSet          jni.MethodID
 	midMatrix2fTranspose    jni.MethodID
+	midMatrix2fToString     jni.MethodID
 
 	clsScriptIntrinsicYuvToRGB                 *jni.GlobalRef
 	midScriptIntrinsicYuvToRGBForEach          jni.MethodID
 	midScriptIntrinsicYuvToRGBGetFieldID_Input jni.MethodID
 	midScriptIntrinsicYuvToRGBGetKernelID      jni.MethodID
 	midScriptIntrinsicYuvToRGBSetInput         jni.MethodID
+	midScriptIntrinsicYuvToRGBToString         jni.MethodID
 	midScriptIntrinsicYuvToRGBCreate           jni.MethodID
 
 	clsElement                         *jni.GlobalRef
@@ -520,6 +569,7 @@ var (
 	midElementGetVectorSize            jni.MethodID
 	midElementIsCompatible             jni.MethodID
 	midElementIsComplex                jni.MethodID
+	midElementToString                 jni.MethodID
 	midElementALLOCATION               jni.MethodID
 	midElementA_8                      jni.MethodID
 	midElementBOOLEAN                  jni.MethodID
@@ -590,121 +640,126 @@ var (
 	midElementCreatePixel              jni.MethodID
 	midElementCreateVector             jni.MethodID
 
-	clsElementBuilder       *jni.GlobalRef
-	midElementBuilderAdd2   jni.MethodID
-	midElementBuilderAdd3_1 jni.MethodID
-	midElementBuilderCreate jni.MethodID
+	clsElementBuilder         *jni.GlobalRef
+	midElementBuilderAdd2     jni.MethodID
+	midElementBuilderAdd3_1   jni.MethodID
+	midElementBuilderCreate   jni.MethodID
+	midElementBuilderToString jni.MethodID
 
-	clsElementDataKind        *jni.GlobalRef
-	midElementDataKindValues  jni.MethodID
-	midElementDataKindValueOf jni.MethodID
+	clsElementDataKind         *jni.GlobalRef
+	midElementDataKindToString jni.MethodID
+	midElementDataKindValues   jni.MethodID
+	midElementDataKindValueOf  jni.MethodID
 
-	clsElementDataType        *jni.GlobalRef
-	midElementDataTypeValues  jni.MethodID
-	midElementDataTypeValueOf jni.MethodID
+	clsElementDataType         *jni.GlobalRef
+	midElementDataTypeToString jni.MethodID
+	midElementDataTypeValues   jni.MethodID
+	midElementDataTypeValueOf  jni.MethodID
 
-	clsLong2     *jni.GlobalRef
-	midLong2Ctor jni.MethodID
+	clsLong2         *jni.GlobalRef
+	midLong2Ctor     jni.MethodID
+	midLong2ToString jni.MethodID
 
-	clsScriptIntrinsicBLAS       *jni.GlobalRef
-	midScriptIntrinsicBLASBNNM   jni.MethodID
-	midScriptIntrinsicBLASCGBMV  jni.MethodID
-	midScriptIntrinsicBLASCGEMM  jni.MethodID
-	midScriptIntrinsicBLASCGEMV  jni.MethodID
-	midScriptIntrinsicBLASCGERC  jni.MethodID
-	midScriptIntrinsicBLASCGERU  jni.MethodID
-	midScriptIntrinsicBLASCHBMV  jni.MethodID
-	midScriptIntrinsicBLASCHEMM  jni.MethodID
-	midScriptIntrinsicBLASCHEMV  jni.MethodID
-	midScriptIntrinsicBLASCHER   jni.MethodID
-	midScriptIntrinsicBLASCHER2  jni.MethodID
-	midScriptIntrinsicBLASCHER2K jni.MethodID
-	midScriptIntrinsicBLASCHERK  jni.MethodID
-	midScriptIntrinsicBLASCHPMV  jni.MethodID
-	midScriptIntrinsicBLASCHPR   jni.MethodID
-	midScriptIntrinsicBLASCHPR2  jni.MethodID
-	midScriptIntrinsicBLASCSYMM  jni.MethodID
-	midScriptIntrinsicBLASCSYR2K jni.MethodID
-	midScriptIntrinsicBLASCSYRK  jni.MethodID
-	midScriptIntrinsicBLASCTBMV  jni.MethodID
-	midScriptIntrinsicBLASCTBSV  jni.MethodID
-	midScriptIntrinsicBLASCTPMV  jni.MethodID
-	midScriptIntrinsicBLASCTPSV  jni.MethodID
-	midScriptIntrinsicBLASCTRMM  jni.MethodID
-	midScriptIntrinsicBLASCTRMV  jni.MethodID
-	midScriptIntrinsicBLASCTRSM  jni.MethodID
-	midScriptIntrinsicBLASCTRSV  jni.MethodID
-	midScriptIntrinsicBLASDGBMV  jni.MethodID
-	midScriptIntrinsicBLASDGEMM  jni.MethodID
-	midScriptIntrinsicBLASDGEMV  jni.MethodID
-	midScriptIntrinsicBLASDGER   jni.MethodID
-	midScriptIntrinsicBLASDSBMV  jni.MethodID
-	midScriptIntrinsicBLASDSPMV  jni.MethodID
-	midScriptIntrinsicBLASDSPR   jni.MethodID
-	midScriptIntrinsicBLASDSPR2  jni.MethodID
-	midScriptIntrinsicBLASDSYMM  jni.MethodID
-	midScriptIntrinsicBLASDSYMV  jni.MethodID
-	midScriptIntrinsicBLASDSYR   jni.MethodID
-	midScriptIntrinsicBLASDSYR2  jni.MethodID
-	midScriptIntrinsicBLASDSYR2K jni.MethodID
-	midScriptIntrinsicBLASDSYRK  jni.MethodID
-	midScriptIntrinsicBLASDTBMV  jni.MethodID
-	midScriptIntrinsicBLASDTBSV  jni.MethodID
-	midScriptIntrinsicBLASDTPMV  jni.MethodID
-	midScriptIntrinsicBLASDTPSV  jni.MethodID
-	midScriptIntrinsicBLASDTRMM  jni.MethodID
-	midScriptIntrinsicBLASDTRMV  jni.MethodID
-	midScriptIntrinsicBLASDTRSM  jni.MethodID
-	midScriptIntrinsicBLASDTRSV  jni.MethodID
-	midScriptIntrinsicBLASSGBMV  jni.MethodID
-	midScriptIntrinsicBLASSGEMM  jni.MethodID
-	midScriptIntrinsicBLASSGEMV  jni.MethodID
-	midScriptIntrinsicBLASSGER   jni.MethodID
-	midScriptIntrinsicBLASSSBMV  jni.MethodID
-	midScriptIntrinsicBLASSSPMV  jni.MethodID
-	midScriptIntrinsicBLASSSPR   jni.MethodID
-	midScriptIntrinsicBLASSSPR2  jni.MethodID
-	midScriptIntrinsicBLASSSYMM  jni.MethodID
-	midScriptIntrinsicBLASSSYMV  jni.MethodID
-	midScriptIntrinsicBLASSSYR   jni.MethodID
-	midScriptIntrinsicBLASSSYR2  jni.MethodID
-	midScriptIntrinsicBLASSSYR2K jni.MethodID
-	midScriptIntrinsicBLASSSYRK  jni.MethodID
-	midScriptIntrinsicBLASSTBMV  jni.MethodID
-	midScriptIntrinsicBLASSTBSV  jni.MethodID
-	midScriptIntrinsicBLASSTPMV  jni.MethodID
-	midScriptIntrinsicBLASSTPSV  jni.MethodID
-	midScriptIntrinsicBLASSTRMM  jni.MethodID
-	midScriptIntrinsicBLASSTRMV  jni.MethodID
-	midScriptIntrinsicBLASSTRSM  jni.MethodID
-	midScriptIntrinsicBLASSTRSV  jni.MethodID
-	midScriptIntrinsicBLASZGBMV  jni.MethodID
-	midScriptIntrinsicBLASZGEMM  jni.MethodID
-	midScriptIntrinsicBLASZGEMV  jni.MethodID
-	midScriptIntrinsicBLASZGERC  jni.MethodID
-	midScriptIntrinsicBLASZGERU  jni.MethodID
-	midScriptIntrinsicBLASZHBMV  jni.MethodID
-	midScriptIntrinsicBLASZHEMM  jni.MethodID
-	midScriptIntrinsicBLASZHEMV  jni.MethodID
-	midScriptIntrinsicBLASZHER   jni.MethodID
-	midScriptIntrinsicBLASZHER2  jni.MethodID
-	midScriptIntrinsicBLASZHER2K jni.MethodID
-	midScriptIntrinsicBLASZHERK  jni.MethodID
-	midScriptIntrinsicBLASZHPMV  jni.MethodID
-	midScriptIntrinsicBLASZHPR   jni.MethodID
-	midScriptIntrinsicBLASZHPR2  jni.MethodID
-	midScriptIntrinsicBLASZSYMM  jni.MethodID
-	midScriptIntrinsicBLASZSYR2K jni.MethodID
-	midScriptIntrinsicBLASZSYRK  jni.MethodID
-	midScriptIntrinsicBLASZTBMV  jni.MethodID
-	midScriptIntrinsicBLASZTBSV  jni.MethodID
-	midScriptIntrinsicBLASZTPMV  jni.MethodID
-	midScriptIntrinsicBLASZTPSV  jni.MethodID
-	midScriptIntrinsicBLASZTRMM  jni.MethodID
-	midScriptIntrinsicBLASZTRMV  jni.MethodID
-	midScriptIntrinsicBLASZTRSM  jni.MethodID
-	midScriptIntrinsicBLASZTRSV  jni.MethodID
-	midScriptIntrinsicBLASCreate jni.MethodID
+	clsScriptIntrinsicBLAS         *jni.GlobalRef
+	midScriptIntrinsicBLASBNNM     jni.MethodID
+	midScriptIntrinsicBLASCGBMV    jni.MethodID
+	midScriptIntrinsicBLASCGEMM    jni.MethodID
+	midScriptIntrinsicBLASCGEMV    jni.MethodID
+	midScriptIntrinsicBLASCGERC    jni.MethodID
+	midScriptIntrinsicBLASCGERU    jni.MethodID
+	midScriptIntrinsicBLASCHBMV    jni.MethodID
+	midScriptIntrinsicBLASCHEMM    jni.MethodID
+	midScriptIntrinsicBLASCHEMV    jni.MethodID
+	midScriptIntrinsicBLASCHER     jni.MethodID
+	midScriptIntrinsicBLASCHER2    jni.MethodID
+	midScriptIntrinsicBLASCHER2K   jni.MethodID
+	midScriptIntrinsicBLASCHERK    jni.MethodID
+	midScriptIntrinsicBLASCHPMV    jni.MethodID
+	midScriptIntrinsicBLASCHPR     jni.MethodID
+	midScriptIntrinsicBLASCHPR2    jni.MethodID
+	midScriptIntrinsicBLASCSYMM    jni.MethodID
+	midScriptIntrinsicBLASCSYR2K   jni.MethodID
+	midScriptIntrinsicBLASCSYRK    jni.MethodID
+	midScriptIntrinsicBLASCTBMV    jni.MethodID
+	midScriptIntrinsicBLASCTBSV    jni.MethodID
+	midScriptIntrinsicBLASCTPMV    jni.MethodID
+	midScriptIntrinsicBLASCTPSV    jni.MethodID
+	midScriptIntrinsicBLASCTRMM    jni.MethodID
+	midScriptIntrinsicBLASCTRMV    jni.MethodID
+	midScriptIntrinsicBLASCTRSM    jni.MethodID
+	midScriptIntrinsicBLASCTRSV    jni.MethodID
+	midScriptIntrinsicBLASDGBMV    jni.MethodID
+	midScriptIntrinsicBLASDGEMM    jni.MethodID
+	midScriptIntrinsicBLASDGEMV    jni.MethodID
+	midScriptIntrinsicBLASDGER     jni.MethodID
+	midScriptIntrinsicBLASDSBMV    jni.MethodID
+	midScriptIntrinsicBLASDSPMV    jni.MethodID
+	midScriptIntrinsicBLASDSPR     jni.MethodID
+	midScriptIntrinsicBLASDSPR2    jni.MethodID
+	midScriptIntrinsicBLASDSYMM    jni.MethodID
+	midScriptIntrinsicBLASDSYMV    jni.MethodID
+	midScriptIntrinsicBLASDSYR     jni.MethodID
+	midScriptIntrinsicBLASDSYR2    jni.MethodID
+	midScriptIntrinsicBLASDSYR2K   jni.MethodID
+	midScriptIntrinsicBLASDSYRK    jni.MethodID
+	midScriptIntrinsicBLASDTBMV    jni.MethodID
+	midScriptIntrinsicBLASDTBSV    jni.MethodID
+	midScriptIntrinsicBLASDTPMV    jni.MethodID
+	midScriptIntrinsicBLASDTPSV    jni.MethodID
+	midScriptIntrinsicBLASDTRMM    jni.MethodID
+	midScriptIntrinsicBLASDTRMV    jni.MethodID
+	midScriptIntrinsicBLASDTRSM    jni.MethodID
+	midScriptIntrinsicBLASDTRSV    jni.MethodID
+	midScriptIntrinsicBLASSGBMV    jni.MethodID
+	midScriptIntrinsicBLASSGEMM    jni.MethodID
+	midScriptIntrinsicBLASSGEMV    jni.MethodID
+	midScriptIntrinsicBLASSGER     jni.MethodID
+	midScriptIntrinsicBLASSSBMV    jni.MethodID
+	midScriptIntrinsicBLASSSPMV    jni.MethodID
+	midScriptIntrinsicBLASSSPR     jni.MethodID
+	midScriptIntrinsicBLASSSPR2    jni.MethodID
+	midScriptIntrinsicBLASSSYMM    jni.MethodID
+	midScriptIntrinsicBLASSSYMV    jni.MethodID
+	midScriptIntrinsicBLASSSYR     jni.MethodID
+	midScriptIntrinsicBLASSSYR2    jni.MethodID
+	midScriptIntrinsicBLASSSYR2K   jni.MethodID
+	midScriptIntrinsicBLASSSYRK    jni.MethodID
+	midScriptIntrinsicBLASSTBMV    jni.MethodID
+	midScriptIntrinsicBLASSTBSV    jni.MethodID
+	midScriptIntrinsicBLASSTPMV    jni.MethodID
+	midScriptIntrinsicBLASSTPSV    jni.MethodID
+	midScriptIntrinsicBLASSTRMM    jni.MethodID
+	midScriptIntrinsicBLASSTRMV    jni.MethodID
+	midScriptIntrinsicBLASSTRSM    jni.MethodID
+	midScriptIntrinsicBLASSTRSV    jni.MethodID
+	midScriptIntrinsicBLASZGBMV    jni.MethodID
+	midScriptIntrinsicBLASZGEMM    jni.MethodID
+	midScriptIntrinsicBLASZGEMV    jni.MethodID
+	midScriptIntrinsicBLASZGERC    jni.MethodID
+	midScriptIntrinsicBLASZGERU    jni.MethodID
+	midScriptIntrinsicBLASZHBMV    jni.MethodID
+	midScriptIntrinsicBLASZHEMM    jni.MethodID
+	midScriptIntrinsicBLASZHEMV    jni.MethodID
+	midScriptIntrinsicBLASZHER     jni.MethodID
+	midScriptIntrinsicBLASZHER2    jni.MethodID
+	midScriptIntrinsicBLASZHER2K   jni.MethodID
+	midScriptIntrinsicBLASZHERK    jni.MethodID
+	midScriptIntrinsicBLASZHPMV    jni.MethodID
+	midScriptIntrinsicBLASZHPR     jni.MethodID
+	midScriptIntrinsicBLASZHPR2    jni.MethodID
+	midScriptIntrinsicBLASZSYMM    jni.MethodID
+	midScriptIntrinsicBLASZSYR2K   jni.MethodID
+	midScriptIntrinsicBLASZSYRK    jni.MethodID
+	midScriptIntrinsicBLASZTBMV    jni.MethodID
+	midScriptIntrinsicBLASZTBSV    jni.MethodID
+	midScriptIntrinsicBLASZTPMV    jni.MethodID
+	midScriptIntrinsicBLASZTPSV    jni.MethodID
+	midScriptIntrinsicBLASZTRMM    jni.MethodID
+	midScriptIntrinsicBLASZTRMV    jni.MethodID
+	midScriptIntrinsicBLASZTRSM    jni.MethodID
+	midScriptIntrinsicBLASZTRSV    jni.MethodID
+	midScriptIntrinsicBLASToString jni.MethodID
+	midScriptIntrinsicBLASCreate   jni.MethodID
 
 	clsScript               *jni.GlobalRef
 	midScriptBindAllocation jni.MethodID
@@ -723,20 +778,26 @@ var (
 	midScriptSetVar2_5      jni.MethodID
 	midScriptSetVar2_6      jni.MethodID
 	midScriptSetVar2_7      jni.MethodID
+	midScriptToString       jni.MethodID
 
-	clsScriptBuilder *jni.GlobalRef
+	clsScriptBuilder         *jni.GlobalRef
+	midScriptBuilderToString jni.MethodID
 
 	clsScriptFieldBase                 *jni.GlobalRef
 	midScriptFieldBaseGetAllocation    jni.MethodID
 	midScriptFieldBaseGetElement       jni.MethodID
 	midScriptFieldBaseGetType          jni.MethodID
 	midScriptFieldBaseUpdateAllocation jni.MethodID
+	midScriptFieldBaseToString         jni.MethodID
 
-	clsScriptFieldID *jni.GlobalRef
+	clsScriptFieldID         *jni.GlobalRef
+	midScriptFieldIDToString jni.MethodID
 
-	clsScriptInvokeID *jni.GlobalRef
+	clsScriptInvokeID         *jni.GlobalRef
+	midScriptInvokeIDToString jni.MethodID
 
-	clsScriptKernelID *jni.GlobalRef
+	clsScriptKernelID         *jni.GlobalRef
+	midScriptKernelIDToString jni.MethodID
 
 	clsScriptLaunchOptions          *jni.GlobalRef
 	midScriptLaunchOptionsGetXEnd   jni.MethodID
@@ -748,6 +809,7 @@ var (
 	midScriptLaunchOptionsSetX      jni.MethodID
 	midScriptLaunchOptionsSetY      jni.MethodID
 	midScriptLaunchOptionsSetZ      jni.MethodID
+	midScriptLaunchOptionsToString  jni.MethodID
 
 	clsScriptGroup           *jni.GlobalRef
 	midScriptGroupDestroy    jni.MethodID
@@ -755,32 +817,40 @@ var (
 	midScriptGroupExecute1_1 jni.MethodID
 	midScriptGroupSetInput   jni.MethodID
 	midScriptGroupSetOutput  jni.MethodID
+	midScriptGroupToString   jni.MethodID
 
-	clsScriptGroupBinding *jni.GlobalRef
+	clsScriptGroupBinding         *jni.GlobalRef
+	midScriptGroupBindingToString jni.MethodID
 
 	clsScriptGroupBuilder                 *jni.GlobalRef
 	midScriptGroupBuilderAddConnection3   jni.MethodID
 	midScriptGroupBuilderAddConnection3_1 jni.MethodID
 	midScriptGroupBuilderAddKernel        jni.MethodID
 	midScriptGroupBuilderCreate           jni.MethodID
+	midScriptGroupBuilderToString         jni.MethodID
 
 	clsScriptGroupBuilder2          *jni.GlobalRef
 	midScriptGroupBuilder2AddInput  jni.MethodID
 	midScriptGroupBuilder2AddInvoke jni.MethodID
 	midScriptGroupBuilder2AddKernel jni.MethodID
 	midScriptGroupBuilder2Create    jni.MethodID
+	midScriptGroupBuilder2ToString  jni.MethodID
 
 	clsScriptGroupClosure          *jni.GlobalRef
 	midScriptGroupClosureDestroy   jni.MethodID
 	midScriptGroupClosureGetGlobal jni.MethodID
 	midScriptGroupClosureGetReturn jni.MethodID
+	midScriptGroupClosureToString  jni.MethodID
 
-	clsScriptGroupFuture *jni.GlobalRef
+	clsScriptGroupFuture         *jni.GlobalRef
+	midScriptGroupFutureToString jni.MethodID
 
-	clsScriptGroupInput *jni.GlobalRef
+	clsScriptGroupInput         *jni.GlobalRef
+	midScriptGroupInputToString jni.MethodID
 
-	clsFloat2     *jni.GlobalRef
-	midFloat2Ctor jni.MethodID
+	clsFloat2         *jni.GlobalRef
+	midFloat2Ctor     jni.MethodID
+	midFloat2ToString jni.MethodID
 
 	clsScriptIntrinsicBlend                    *jni.GlobalRef
 	midScriptIntrinsicBlendForEachAdd2         jni.MethodID
@@ -828,12 +898,15 @@ var (
 	midScriptIntrinsicBlendGetKernelIDSrcOver  jni.MethodID
 	midScriptIntrinsicBlendGetKernelIDSubtract jni.MethodID
 	midScriptIntrinsicBlendGetKernelIDXor      jni.MethodID
+	midScriptIntrinsicBlendToString            jni.MethodID
 	midScriptIntrinsicBlendCreate              jni.MethodID
 
-	clsScriptIntrinsic *jni.GlobalRef
+	clsScriptIntrinsic         *jni.GlobalRef
+	midScriptIntrinsicToString jni.MethodID
 
-	clsInt2     *jni.GlobalRef
-	midInt2Ctor jni.MethodID
+	clsInt2         *jni.GlobalRef
+	midInt2Ctor     jni.MethodID
+	midInt2ToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -863,6 +936,13 @@ func doInit(env *jni.Env) error {
 		clsFloat4 = env.NewGlobalRef(&c.Object)
 		midFloat4Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloat4)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midFloat4ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloat4)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -904,6 +984,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptIntrinsic3DLUTToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midScriptIntrinsic3DLUTCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsic3DLUT;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -922,6 +1009,13 @@ func doInit(env *jni.Env) error {
 		clsByte3 = env.NewGlobalRef(&c.Object)
 		midByte3Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsByte3)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midByte3ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsByte3)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -970,6 +1064,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAllocationAdapterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midAllocationAdapterCreate1D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "create1D", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Allocation;)Landroid/renderscript/AllocationAdapter;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1005,6 +1106,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDouble3ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDouble3)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Short2")
@@ -1016,6 +1124,13 @@ func doInit(env *jni.Env) error {
 		clsShort2 = env.NewGlobalRef(&c.Object)
 		midShort2Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShort2)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midShort2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShort2)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1065,6 +1180,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScriptIntrinsicConvolve5x5SetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "setInput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicConvolve5x5ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1158,6 +1280,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptIntrinsicColorMatrixToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midScriptIntrinsicColorMatrixCreate1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "create", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/ScriptIntrinsicColorMatrix;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1211,6 +1340,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSamplerGetWrapT, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getWrapT", "()Landroid/renderscript/Sampler$Value;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSamplerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1332,6 +1468,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSamplerBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Sampler$Value")
@@ -1341,6 +1484,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSamplerValue = env.NewGlobalRef(&c.Object)
+
+		midSamplerValueToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerValue)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midSamplerValueValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSamplerValue)), "values", "()[Landroid/renderscript/Sampler$Value;")
 		if err != nil {
@@ -1416,6 +1566,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScriptIntrinsicHistogramSetOutput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "setOutput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicHistogramToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1569,6 +1726,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMatrix3fToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Float3")
@@ -1580,6 +1744,13 @@ func doInit(env *jni.Env) error {
 		clsFloat3 = env.NewGlobalRef(&c.Object)
 		midFloat3Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloat3)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midFloat3ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloat3)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1597,6 +1768,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midShort4ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShort4)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Byte4")
@@ -1611,6 +1789,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midByte4ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsByte4)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RSIllegalArgumentException")
@@ -1622,6 +1807,13 @@ func doInit(env *jni.Env) error {
 		clsRSIllegalArgumentException = env.NewGlobalRef(&c.Object)
 		midRSIllegalArgumentExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRSIllegalArgumentException)), "<init>", "(Ljava/lang/String;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midRSIllegalArgumentExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRSIllegalArgumentException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1670,6 +1862,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptIntrinsicResizeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midScriptIntrinsicResizeCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "create", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/ScriptIntrinsicResize;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1688,6 +1887,13 @@ func doInit(env *jni.Env) error {
 		clsLong3 = env.NewGlobalRef(&c.Object)
 		midLong3Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLong3)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midLong3ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLong3)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1751,6 +1957,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTypeHasMipmaps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "hasMipmaps", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1837,6 +2050,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTypeBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Type$CubemapFace")
@@ -1846,6 +2066,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTypeCubemapFace = env.NewGlobalRef(&c.Object)
+
+		midTypeCubemapFaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeCubemapFace)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midTypeCubemapFaceValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeCubemapFace)), "values", "()[Landroid/renderscript/Type$CubemapFace;")
 		if err != nil {
@@ -1900,6 +2127,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBaseObjSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "setName", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBaseObjToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2061,6 +2295,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMatrix4fTranspose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "transpose", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrix4fToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2595,6 +2836,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAllocationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midAllocationCreateAllocations, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createAllocations", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Type;II)[Landroid/renderscript/Allocation;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2710,6 +2958,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsAllocationMipmapControl = env.NewGlobalRef(&c.Object)
 
+		midAllocationMipmapControlToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationMipmapControl)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midAllocationMipmapControlValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationMipmapControl)), "values", "()[Landroid/renderscript/Allocation$MipmapControl;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2741,6 +2996,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAllocationOnBufferAvailableListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationOnBufferAvailableListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Int3")
@@ -2752,6 +3014,13 @@ func doInit(env *jni.Env) error {
 		clsInt3 = env.NewGlobalRef(&c.Object)
 		midInt3Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInt3)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midInt3ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInt3)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -2769,6 +3038,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDouble2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDouble2)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Long4")
@@ -2780,6 +3056,13 @@ func doInit(env *jni.Env) error {
 		clsLong4 = env.NewGlobalRef(&c.Object)
 		midLong4Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLong4)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midLong4ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLong4)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -2797,6 +3080,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInt4ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInt4)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Short3")
@@ -2808,6 +3098,13 @@ func doInit(env *jni.Env) error {
 		clsShort3 = env.NewGlobalRef(&c.Object)
 		midShort3Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShort3)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midShort3ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShort3)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -2857,6 +3154,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScriptIntrinsicConvolve3x3SetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "setInput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicConvolve3x3ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3437,6 +3741,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFieldPackerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Byte2")
@@ -3451,6 +3762,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midByte2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsByte2)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RSRuntimeException")
@@ -3462,6 +3780,13 @@ func doInit(env *jni.Env) error {
 		clsRSRuntimeException = env.NewGlobalRef(&c.Object)
 		midRSRuntimeExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRSRuntimeException)), "<init>", "(Ljava/lang/String;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midRSRuntimeExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRSRuntimeException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3531,6 +3856,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRenderScriptToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midRenderScriptCreate1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "create", "(Landroid/content/Context;)Landroid/renderscript/RenderScript;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3583,6 +3915,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsRenderScriptContextType = env.NewGlobalRef(&c.Object)
 
+		midRenderScriptContextTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptContextType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midRenderScriptContextTypeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptContextType)), "values", "()[Landroid/renderscript/RenderScript$ContextType;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3606,6 +3945,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsRenderScriptPriority = env.NewGlobalRef(&c.Object)
+
+		midRenderScriptPriorityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptPriority)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midRenderScriptPriorityValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptPriority)), "values", "()[Landroid/renderscript/RenderScript$Priority;")
 		if err != nil {
@@ -3638,6 +3984,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRenderScriptRSErrorHandlerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptRSErrorHandler)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RenderScript$RSMessageHandler")
@@ -3649,6 +4002,13 @@ func doInit(env *jni.Env) error {
 		clsRenderScriptRSMessageHandler = env.NewGlobalRef(&c.Object)
 
 		midRenderScriptRSMessageHandlerRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptRSMessageHandler)), "run", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderScriptRSMessageHandlerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptRSMessageHandler)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3669,6 +4029,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRSDriverExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRSDriverException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RSInvalidStateException")
@@ -3680,6 +4047,13 @@ func doInit(env *jni.Env) error {
 		clsRSInvalidStateException = env.NewGlobalRef(&c.Object)
 		midRSInvalidStateExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRSInvalidStateException)), "<init>", "(Ljava/lang/String;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midRSInvalidStateExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRSInvalidStateException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3697,6 +4071,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDouble4ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDouble4)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptC")
@@ -3706,6 +4087,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsScriptC = env.NewGlobalRef(&c.Object)
+
+		midScriptCToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptC)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -3753,6 +4141,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScriptIntrinsicBlurSetRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "setRadius", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBlurToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3826,6 +4221,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScriptIntrinsicLUTSetRed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "setRed", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicLUTToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3937,6 +4339,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMatrix2fToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicYuvToRGB")
@@ -3969,6 +4378,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScriptIntrinsicYuvToRGBSetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "setInput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicYuvToRGBToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4063,6 +4479,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midElementIsComplex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "isComplex", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4583,6 +5006,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midElementBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Element$DataKind")
@@ -4592,6 +5022,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsElementDataKind = env.NewGlobalRef(&c.Object)
+
+		midElementDataKindToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementDataKind)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midElementDataKindValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataKind)), "values", "()[Landroid/renderscript/Element$DataKind;")
 		if err != nil {
@@ -4616,6 +5053,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsElementDataType = env.NewGlobalRef(&c.Object)
+
+		midElementDataTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementDataType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midElementDataTypeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataType)), "values", "()[Landroid/renderscript/Element$DataType;")
 		if err != nil {
@@ -4642,6 +5086,13 @@ func doInit(env *jni.Env) error {
 		clsLong2 = env.NewGlobalRef(&c.Object)
 		midLong2Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLong2)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midLong2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLong2)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -5334,6 +5785,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptIntrinsicBLASToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midScriptIntrinsicBLASCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "create", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/ScriptIntrinsicBLAS;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -5463,6 +5921,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Script$Builder")
@@ -5472,6 +5937,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsScriptBuilder = env.NewGlobalRef(&c.Object)
+
+		midScriptBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5511,6 +5983,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptFieldBaseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldBase)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Script$FieldID")
@@ -5520,6 +5999,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsScriptFieldID = env.NewGlobalRef(&c.Object)
+
+		midScriptFieldIDToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldID)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5531,6 +6017,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsScriptInvokeID = env.NewGlobalRef(&c.Object)
 
+		midScriptInvokeIDToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptInvokeID)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Script$KernelID")
@@ -5540,6 +6033,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsScriptKernelID = env.NewGlobalRef(&c.Object)
+
+		midScriptKernelIDToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptKernelID)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5614,6 +6114,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptLaunchOptionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup")
@@ -5659,6 +6166,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptGroupToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Binding")
@@ -5668,6 +6182,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsScriptGroupBinding = env.NewGlobalRef(&c.Object)
+
+		midScriptGroupBindingToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBinding)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5701,6 +6222,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScriptGroupBuilderCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "create", "()Landroid/renderscript/ScriptGroup;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptGroupBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5745,6 +6273,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptGroupBuilder2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder2)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Closure")
@@ -5776,6 +6311,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptGroupClosureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupClosure)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Future")
@@ -5786,6 +6328,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsScriptGroupFuture = env.NewGlobalRef(&c.Object)
 
+		midScriptGroupFutureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupFuture)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Input")
@@ -5795,6 +6344,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsScriptGroupInput = env.NewGlobalRef(&c.Object)
+
+		midScriptGroupInputToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupInput)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5807,6 +6363,13 @@ func doInit(env *jni.Env) error {
 		clsFloat2 = env.NewGlobalRef(&c.Object)
 		midFloat2Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloat2)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midFloat2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloat2)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -6135,6 +6698,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScriptIntrinsicBlendToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midScriptIntrinsicBlendCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicBlend;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -6152,6 +6722,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsScriptIntrinsic = env.NewGlobalRef(&c.Object)
 
+		midScriptIntrinsicToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Int2")
@@ -6163,6 +6740,13 @@ func doInit(env *jni.Env) error {
 		clsInt2 = env.NewGlobalRef(&c.Object)
 		midInt2Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInt2)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midInt2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInt2)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

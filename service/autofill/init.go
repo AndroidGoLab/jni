@@ -23,7 +23,8 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsSanitizer *jni.GlobalRef
+	clsSanitizer         *jni.GlobalRef
+	midSanitizerToString jni.MethodID
 
 	clsLuhnChecksumValidator                 *jni.GlobalRef
 	midLuhnChecksumValidatorCtor             jni.MethodID
@@ -40,9 +41,11 @@ var (
 	midBatchUpdatesBuilderBuild          jni.MethodID
 	midBatchUpdatesBuilderTransformChild jni.MethodID
 	midBatchUpdatesBuilderUpdateTemplate jni.MethodID
+	midBatchUpdatesBuilderToString       jni.MethodID
 
-	clsSavedDatasetsInfoCallback        *jni.GlobalRef
-	midSavedDatasetsInfoCallbackOnError jni.MethodID
+	clsSavedDatasetsInfoCallback         *jni.GlobalRef
+	midSavedDatasetsInfoCallbackOnError  jni.MethodID
+	midSavedDatasetsInfoCallbackToString jni.MethodID
 
 	clsSaveInfo                 *jni.GlobalRef
 	midSaveInfoDescribeContents jni.MethodID
@@ -60,6 +63,7 @@ var (
 	midSaveInfoBuilderSetPositiveAction    jni.MethodID
 	midSaveInfoBuilderSetTriggerId         jni.MethodID
 	midSaveInfoBuilderSetValidator         jni.MethodID
+	midSaveInfoBuilderToString             jni.MethodID
 
 	clsSaveRequest                 *jni.GlobalRef
 	midSaveRequestDescribeContents jni.MethodID
@@ -67,10 +71,12 @@ var (
 	midSaveRequestGetDatasetIds    jni.MethodID
 	midSaveRequestGetFillContexts  jni.MethodID
 	midSaveRequestWriteToParcel    jni.MethodID
+	midSaveRequestToString         jni.MethodID
 
 	clsFillCallback          *jni.GlobalRef
 	midFillCallbackOnFailure jni.MethodID
 	midFillCallbackOnSuccess jni.MethodID
+	midFillCallbackToString  jni.MethodID
 
 	clsDateTransformation                 *jni.GlobalRef
 	midDateTransformationCtor             jni.MethodID
@@ -87,8 +93,10 @@ var (
 	midImageTransformationBuilderAddOption2   jni.MethodID
 	midImageTransformationBuilderAddOption3_1 jni.MethodID
 	midImageTransformationBuilderBuild        jni.MethodID
+	midImageTransformationBuilderToString     jni.MethodID
 
-	clsTransformation *jni.GlobalRef
+	clsTransformation         *jni.GlobalRef
+	midTransformationToString jni.MethodID
 
 	clsService                           *jni.GlobalRef
 	midServiceGetFillEventHistory        jni.MethodID
@@ -100,6 +108,7 @@ var (
 	midServiceOnSaveRequest              jni.MethodID
 	midServiceOnSavedDatasetsInfoRequest jni.MethodID
 	midServiceOnSessionDestroyed         jni.MethodID
+	midServiceToString                   jni.MethodID
 
 	clsCharSequenceTransformation                 *jni.GlobalRef
 	midCharSequenceTransformationDescribeContents jni.MethodID
@@ -109,6 +118,7 @@ var (
 	clsCharSequenceTransformationBuilder         *jni.GlobalRef
 	midCharSequenceTransformationBuilderAddField jni.MethodID
 	midCharSequenceTransformationBuilderBuild    jni.MethodID
+	midCharSequenceTransformationBuilderToString jni.MethodID
 
 	clsSavedDatasetsInfo         *jni.GlobalRef
 	midSavedDatasetsInfoCtor     jni.MethodID
@@ -146,6 +156,7 @@ var (
 	midFillResponseBuilderSetShowFillDialogIcon           jni.MethodID
 	midFillResponseBuilderSetShowSaveDialogIcon           jni.MethodID
 	midFillResponseBuilderSetUserData                     jni.MethodID
+	midFillResponseBuilderToString                        jni.MethodID
 
 	clsFillContext                 *jni.GlobalRef
 	midFillContextDescribeContents jni.MethodID
@@ -159,6 +170,7 @@ var (
 	midSaveCallbackOnFailure    jni.MethodID
 	midSaveCallbackOnSuccess0   jni.MethodID
 	midSaveCallbackOnSuccess1_1 jni.MethodID
+	midSaveCallbackToString     jni.MethodID
 
 	clsInlinePresentation                          *jni.GlobalRef
 	midInlinePresentationCtor                      jni.MethodID
@@ -212,6 +224,7 @@ var (
 	midDatasetBuilderSetValue4_5              jni.MethodID
 	midDatasetBuilderSetValue5_6              jni.MethodID
 	midDatasetBuilderSetValue6_7              jni.MethodID
+	midDatasetBuilderToString                 jni.MethodID
 
 	clsFillEventHistory                 *jni.GlobalRef
 	midFillEventHistoryDescribeContents jni.MethodID
@@ -241,17 +254,20 @@ var (
 	clsVisibilitySetterActionBuilder              *jni.GlobalRef
 	midVisibilitySetterActionBuilderBuild         jni.MethodID
 	midVisibilitySetterActionBuilderSetVisibility jni.MethodID
+	midVisibilitySetterActionBuilderToString      jni.MethodID
 
-	clsValidators    *jni.GlobalRef
-	midValidatorsAnd jni.MethodID
-	midValidatorsNot jni.MethodID
-	midValidatorsOr  jni.MethodID
+	clsValidators         *jni.GlobalRef
+	midValidatorsToString jni.MethodID
+	midValidatorsAnd      jni.MethodID
+	midValidatorsNot      jni.MethodID
+	midValidatorsOr       jni.MethodID
 
 	clsPresentations                             *jni.GlobalRef
 	midPresentationsGetDialogPresentation        jni.MethodID
 	midPresentationsGetInlinePresentation        jni.MethodID
 	midPresentationsGetInlineTooltipPresentation jni.MethodID
 	midPresentationsGetMenuPresentation          jni.MethodID
+	midPresentationsToString                     jni.MethodID
 
 	clsPresentationsBuilder                             *jni.GlobalRef
 	midPresentationsBuilderBuild                        jni.MethodID
@@ -259,17 +275,20 @@ var (
 	midPresentationsBuilderSetInlinePresentation        jni.MethodID
 	midPresentationsBuilderSetInlineTooltipPresentation jni.MethodID
 	midPresentationsBuilderSetMenuPresentation          jni.MethodID
+	midPresentationsBuilderToString                     jni.MethodID
 
 	clsField                 *jni.GlobalRef
 	midFieldGetFilter        jni.MethodID
 	midFieldGetPresentations jni.MethodID
 	midFieldGetValue         jni.MethodID
+	midFieldToString         jni.MethodID
 
 	clsFieldBuilder                 *jni.GlobalRef
 	midFieldBuilderBuild            jni.MethodID
 	midFieldBuilderSetFilter        jni.MethodID
 	midFieldBuilderSetPresentations jni.MethodID
 	midFieldBuilderSetValue         jni.MethodID
+	midFieldBuilderToString         jni.MethodID
 
 	clsTextValueSanitizer                 *jni.GlobalRef
 	midTextValueSanitizerCtor             jni.MethodID
@@ -287,8 +306,10 @@ var (
 	midCustomDescriptionBuilderAddOnClickAction jni.MethodID
 	midCustomDescriptionBuilderBatchUpdate      jni.MethodID
 	midCustomDescriptionBuilderBuild            jni.MethodID
+	midCustomDescriptionBuilderToString         jni.MethodID
 
-	clsOnClickAction *jni.GlobalRef
+	clsOnClickAction         *jni.GlobalRef
+	midOnClickActionToString jni.MethodID
 
 	clsFieldClassification           *jni.GlobalRef
 	midFieldClassificationGetMatches jni.MethodID
@@ -323,8 +344,10 @@ var (
 	midUserDataBuilderBuild                                      jni.MethodID
 	midUserDataBuilderSetFieldClassificationAlgorithm            jni.MethodID
 	midUserDataBuilderSetFieldClassificationAlgorithmForCategory jni.MethodID
+	midUserDataBuilderToString                                   jni.MethodID
 
-	clsValidator *jni.GlobalRef
+	clsValidator         *jni.GlobalRef
+	midValidatorToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -352,6 +375,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSanitizer = env.NewGlobalRef(&c.Object)
+
+		midSanitizerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSanitizer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -450,6 +480,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBatchUpdatesBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBatchUpdatesBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/SavedDatasetsInfoCallback")
@@ -461,6 +498,13 @@ func doInit(env *jni.Env) error {
 		clsSavedDatasetsInfoCallback = env.NewGlobalRef(&c.Object)
 
 		midSavedDatasetsInfoCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSavedDatasetsInfoCallback)), "onError", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSavedDatasetsInfoCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSavedDatasetsInfoCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -578,6 +622,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSaveInfoBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSaveInfoBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/SaveRequest")
@@ -623,6 +674,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSaveRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSaveRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/FillCallback")
@@ -641,6 +699,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFillCallbackOnSuccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFillCallback)), "onSuccess", "(Landroid/service/autofill/FillResponse;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFillCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFillCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -744,6 +809,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midImageTransformationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageTransformationBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/Transformation")
@@ -753,6 +825,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTransformation = env.NewGlobalRef(&c.Object)
+
+		midTransformationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransformation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -827,6 +906,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/CharSequenceTransformation")
@@ -876,6 +962,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCharSequenceTransformationBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharSequenceTransformationBuilder)), "build", "()Landroid/service/autofill/CharSequenceTransformation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCharSequenceTransformationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharSequenceTransformationBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1126,6 +1219,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFillResponseBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFillResponseBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/FillContext")
@@ -1203,6 +1303,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSaveCallbackOnSuccess1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSaveCallback)), "onSuccess", "(Landroid/content/IntentSender;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSaveCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSaveCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1554,6 +1661,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDatasetBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDatasetBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/FillEventHistory")
@@ -1741,6 +1855,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midVisibilitySetterActionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisibilitySetterActionBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/Validators")
@@ -1750,6 +1871,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsValidators = env.NewGlobalRef(&c.Object)
+
+		midValidatorsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsValidators)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midValidatorsAnd, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsValidators)), "and", "([Landroid/service/autofill/Validator;)Landroid/service/autofill/Validator;")
 		if err != nil {
@@ -1810,6 +1938,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPresentationsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentations)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/Presentations$Builder")
@@ -1855,6 +1990,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPresentationsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationsBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/Field")
@@ -1880,6 +2022,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFieldGetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsField)), "getValue", "()Landroid/view/autofill/AutofillValue;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsField)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1918,6 +2067,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFieldBuilderSetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldBuilder)), "setValue", "(Landroid/view/autofill/AutofillValue;)Landroid/service/autofill/Field$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2028,6 +2184,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCustomDescriptionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCustomDescriptionBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/OnClickAction")
@@ -2037,6 +2200,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsOnClickAction = env.NewGlobalRef(&c.Object)
+
+		midOnClickActionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnClickAction)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -2253,6 +2423,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUserDataBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUserDataBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/autofill/Validator")
@@ -2262,6 +2439,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsValidator = env.NewGlobalRef(&c.Object)
+
+		midValidatorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsValidator)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

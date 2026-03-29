@@ -25,9 +25,11 @@ var (
 
 	clsSettings                *jni.GlobalRef
 	midSettingsCtor            jni.MethodID
+	midSettingsToString        jni.MethodID
 	midSettingsCanDrawOverlays jni.MethodID
 
 	clsGlobal            *jni.GlobalRef
+	midGlobalToString    jni.MethodID
 	midGlobalGetFloat2   jni.MethodID
 	midGlobalGetFloat3_1 jni.MethodID
 	midGlobalGetInt2     jni.MethodID
@@ -42,11 +44,14 @@ var (
 	midGlobalPutString   jni.MethodID
 
 	clsNameValueTable          *jni.GlobalRef
+	midNameValueTableToString  jni.MethodID
 	midNameValueTableGetUriFor jni.MethodID
 
-	clsPanel *jni.GlobalRef
+	clsPanel         *jni.GlobalRef
+	midPanelToString jni.MethodID
 
 	clsSecure                           *jni.GlobalRef
+	midSecureToString                   jni.MethodID
 	midSecureGetFloat2                  jni.MethodID
 	midSecureGetFloat3_1                jni.MethodID
 	midSecureGetInt2                    jni.MethodID
@@ -62,9 +67,11 @@ var (
 	midSecurePutString                  jni.MethodID
 	midSecureSetLocationProviderEnabled jni.MethodID
 
-	clsSettingNotFoundException *jni.GlobalRef
+	clsSettingNotFoundException         *jni.GlobalRef
+	midSettingNotFoundExceptionToString jni.MethodID
 
 	clsSystem                          *jni.GlobalRef
+	midSystemToString                  jni.MethodID
 	midSystemCanWrite                  jni.MethodID
 	midSystemGetConfiguration          jni.MethodID
 	midSystemGetFloat2                 jni.MethodID
@@ -114,6 +121,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSettings)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midSettingsCanDrawOverlays, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSettings)), "canDrawOverlays", "(Landroid/content/Context;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -130,6 +144,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGlobal = env.NewGlobalRef(&c.Object)
+
+		midGlobalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGlobal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midGlobalGetFloat2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGlobal)), "getFloat", "(Landroid/content/ContentResolver;Ljava/lang/String;)F")
 		if err != nil {
@@ -225,6 +246,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsNameValueTable = env.NewGlobalRef(&c.Object)
 
+		midNameValueTableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNameValueTable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midNameValueTableGetUriFor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNameValueTable)), "getUriFor", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/net/Uri;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -242,6 +270,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsPanel = env.NewGlobalRef(&c.Object)
 
+		midPanelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPanel)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/Settings$Secure")
@@ -251,6 +286,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSecure = env.NewGlobalRef(&c.Object)
+
+		midSecureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSecure)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midSecureGetFloat2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSecure)), "getFloat", "(Landroid/content/ContentResolver;Ljava/lang/String;)F")
 		if err != nil {
@@ -360,6 +402,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsSettingNotFoundException = env.NewGlobalRef(&c.Object)
 
+		midSettingNotFoundExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSettingNotFoundException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/Settings$System")
@@ -369,6 +418,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSystem = env.NewGlobalRef(&c.Object)
+
+		midSystemToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSystem)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midSystemCanWrite, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSystem)), "canWrite", "(Landroid/content/Context;)Z")
 		if err != nil {

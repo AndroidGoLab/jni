@@ -31,6 +31,7 @@ var (
 	midChannelIsOpen            jni.MethodID
 	midChannelSelectNext        jni.MethodID
 	midChannelTransmit          jni.MethodID
+	midChannelToString          jni.MethodID
 
 	clsSession                      *jni.GlobalRef
 	midSessionClose                 jni.MethodID
@@ -42,6 +43,7 @@ var (
 	midSessionOpenBasicChannel2_1   jni.MethodID
 	midSessionOpenLogicalChannel1   jni.MethodID
 	midSessionOpenLogicalChannel2_1 jni.MethodID
+	midSessionToString              jni.MethodID
 
 	clsSEService              *jni.GlobalRef
 	midSEServiceCtor          jni.MethodID
@@ -50,9 +52,11 @@ var (
 	midSEServiceGetVersion    jni.MethodID
 	midSEServiceIsConnected   jni.MethodID
 	midSEServiceShutdown      jni.MethodID
+	midSEServiceToString      jni.MethodID
 
 	clsSEServiceOnConnectedListener            *jni.GlobalRef
 	midSEServiceOnConnectedListenerOnConnected jni.MethodID
+	midSEServiceOnConnectedListenerToString    jni.MethodID
 
 	clsReader                       *jni.GlobalRef
 	midReaderCloseSessions          jni.MethodID
@@ -60,6 +64,7 @@ var (
 	midReaderGetSEService           jni.MethodID
 	midReaderIsSecureElementPresent jni.MethodID
 	midReaderOpenSession            jni.MethodID
+	midReaderToString               jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -131,6 +136,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midChannelTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "transmit", "([B)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChannelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -210,6 +222,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/se/omapi/SEService")
@@ -259,6 +278,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSEServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSEService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/se/omapi/SEService$OnConnectedListener")
@@ -270,6 +296,13 @@ func doInit(env *jni.Env) error {
 		clsSEServiceOnConnectedListener = env.NewGlobalRef(&c.Object)
 
 		midSEServiceOnConnectedListenerOnConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSEServiceOnConnectedListener)), "onConnected", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSEServiceOnConnectedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSEServiceOnConnectedListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -315,6 +348,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midReaderOpenSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReader)), "openSession", "()Landroid/se/omapi/Session;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReaderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReader)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

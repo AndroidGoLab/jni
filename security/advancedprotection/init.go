@@ -27,9 +27,11 @@ var (
 	midAdvancedProtectionManagerIsAdvancedProtectionEnabled          jni.MethodID
 	midAdvancedProtectionManagerRegisterAdvancedProtectionCallback   jni.MethodID
 	midAdvancedProtectionManagerUnregisterAdvancedProtectionCallback jni.MethodID
+	midAdvancedProtectionManagerToString                             jni.MethodID
 
 	clsAdvancedProtectionManagerCallback                            *jni.GlobalRef
 	midAdvancedProtectionManagerCallbackOnAdvancedProtectionChanged jni.MethodID
+	midAdvancedProtectionManagerCallbackToString                    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -79,6 +81,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdvancedProtectionManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/security/advancedprotection/AdvancedProtectionManager$Callback")
@@ -90,6 +99,13 @@ func doInit(env *jni.Env) error {
 		clsAdvancedProtectionManagerCallback = env.NewGlobalRef(&c.Object)
 
 		midAdvancedProtectionManagerCallbackOnAdvancedProtectionChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManagerCallback)), "onAdvancedProtectionChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdvancedProtectionManagerCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManagerCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

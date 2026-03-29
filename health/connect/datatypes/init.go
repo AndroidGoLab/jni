@@ -27,6 +27,7 @@ var (
 	midPowerRecordEquals     jni.MethodID
 	midPowerRecordGetSamples jni.MethodID
 	midPowerRecordHashCode   jni.MethodID
+	midPowerRecordToString   jni.MethodID
 
 	clsPowerRecordBuilder                     *jni.GlobalRef
 	midPowerRecordBuilderBuild                jni.MethodID
@@ -34,12 +35,14 @@ var (
 	midPowerRecordBuilderClearStartZoneOffset jni.MethodID
 	midPowerRecordBuilderSetEndZoneOffset     jni.MethodID
 	midPowerRecordBuilderSetStartZoneOffset   jni.MethodID
+	midPowerRecordBuilderToString             jni.MethodID
 
 	clsPowerRecordPowerRecordSample         *jni.GlobalRef
 	midPowerRecordPowerRecordSampleEquals   jni.MethodID
 	midPowerRecordPowerRecordSampleGetPower jni.MethodID
 	midPowerRecordPowerRecordSampleGetTime  jni.MethodID
 	midPowerRecordPowerRecordSampleHashCode jni.MethodID
+	midPowerRecordPowerRecordSampleToString jni.MethodID
 
 	clsFhirResource                 *jni.GlobalRef
 	midFhirResourceDescribeContents jni.MethodID
@@ -51,11 +54,12 @@ var (
 	midFhirResourceToString         jni.MethodID
 	midFhirResourceWriteToParcel    jni.MethodID
 
-	clsFhirResourceBuilder        *jni.GlobalRef
-	midFhirResourceBuilderBuild   jni.MethodID
-	midFhirResourceBuilderSetData jni.MethodID
-	midFhirResourceBuilderSetId   jni.MethodID
-	midFhirResourceBuilderSetType jni.MethodID
+	clsFhirResourceBuilder         *jni.GlobalRef
+	midFhirResourceBuilderBuild    jni.MethodID
+	midFhirResourceBuilderSetData  jni.MethodID
+	midFhirResourceBuilderSetId    jni.MethodID
+	midFhirResourceBuilderSetType  jni.MethodID
+	midFhirResourceBuilderToString jni.MethodID
 
 	clsIntervalRecord                   *jni.GlobalRef
 	midIntervalRecordEquals             jni.MethodID
@@ -64,6 +68,7 @@ var (
 	midIntervalRecordGetStartTime       jni.MethodID
 	midIntervalRecordGetStartZoneOffset jni.MethodID
 	midIntervalRecordHashCode           jni.MethodID
+	midIntervalRecordToString           jni.MethodID
 
 	clsBloodGlucoseRecord                  *jni.GlobalRef
 	midBloodGlucoseRecordEquals            jni.MethodID
@@ -72,15 +77,19 @@ var (
 	midBloodGlucoseRecordGetRelationToMeal jni.MethodID
 	midBloodGlucoseRecordGetSpecimenSource jni.MethodID
 	midBloodGlucoseRecordHashCode          jni.MethodID
+	midBloodGlucoseRecordToString          jni.MethodID
 
 	clsBloodGlucoseRecordBuilder                *jni.GlobalRef
 	midBloodGlucoseRecordBuilderBuild           jni.MethodID
 	midBloodGlucoseRecordBuilderClearZoneOffset jni.MethodID
 	midBloodGlucoseRecordBuilderSetZoneOffset   jni.MethodID
+	midBloodGlucoseRecordBuilderToString        jni.MethodID
 
-	clsBloodGlucoseRecordRelationToMealType *jni.GlobalRef
+	clsBloodGlucoseRecordRelationToMealType         *jni.GlobalRef
+	midBloodGlucoseRecordRelationToMealTypeToString jni.MethodID
 
-	clsBloodGlucoseRecordSpecimenSource *jni.GlobalRef
+	clsBloodGlucoseRecordSpecimenSource         *jni.GlobalRef
+	midBloodGlucoseRecordSpecimenSourceToString jni.MethodID
 
 	clsMedicalResource                 *jni.GlobalRef
 	midMedicalResourceDescribeContents jni.MethodID
@@ -100,11 +109,13 @@ var (
 	midMedicalResourceBuilderSetFhirResource jni.MethodID
 	midMedicalResourceBuilderSetFhirVersion  jni.MethodID
 	midMedicalResourceBuilderSetType         jni.MethodID
+	midMedicalResourceBuilderToString        jni.MethodID
 
 	clsWheelchairPushesRecord         *jni.GlobalRef
 	midWheelchairPushesRecordEquals   jni.MethodID
 	midWheelchairPushesRecordGetCount jni.MethodID
 	midWheelchairPushesRecordHashCode jni.MethodID
+	midWheelchairPushesRecordToString jni.MethodID
 
 	clsWheelchairPushesRecordBuilder                     *jni.GlobalRef
 	midWheelchairPushesRecordBuilderBuild                jni.MethodID
@@ -112,6 +123,7 @@ var (
 	midWheelchairPushesRecordBuilderClearStartZoneOffset jni.MethodID
 	midWheelchairPushesRecordBuilderSetEndZoneOffset     jni.MethodID
 	midWheelchairPushesRecordBuilderSetStartZoneOffset   jni.MethodID
+	midWheelchairPushesRecordBuilderToString             jni.MethodID
 
 	clsExerciseRoute                  *jni.GlobalRef
 	midExerciseRouteCtor              jni.MethodID
@@ -120,6 +132,7 @@ var (
 	midExerciseRouteGetRouteLocations jni.MethodID
 	midExerciseRouteHashCode          jni.MethodID
 	midExerciseRouteWriteToParcel     jni.MethodID
+	midExerciseRouteToString          jni.MethodID
 
 	clsExerciseRouteLocation                      *jni.GlobalRef
 	midExerciseRouteLocationDescribeContents      jni.MethodID
@@ -132,25 +145,31 @@ var (
 	midExerciseRouteLocationGetVerticalAccuracy   jni.MethodID
 	midExerciseRouteLocationHashCode              jni.MethodID
 	midExerciseRouteLocationWriteToParcel         jni.MethodID
+	midExerciseRouteLocationToString              jni.MethodID
 
 	clsMenstruationFlowRecord         *jni.GlobalRef
 	midMenstruationFlowRecordEquals   jni.MethodID
 	midMenstruationFlowRecordGetFlow  jni.MethodID
 	midMenstruationFlowRecordHashCode jni.MethodID
+	midMenstruationFlowRecordToString jni.MethodID
 
 	clsMenstruationFlowRecordBuilder                *jni.GlobalRef
 	midMenstruationFlowRecordBuilderBuild           jni.MethodID
 	midMenstruationFlowRecordBuilderClearZoneOffset jni.MethodID
 	midMenstruationFlowRecordBuilderSetZoneOffset   jni.MethodID
+	midMenstruationFlowRecordBuilderToString        jni.MethodID
 
-	clsMenstruationFlowRecordMenstruationFlowType *jni.GlobalRef
+	clsMenstruationFlowRecordMenstruationFlowType         *jni.GlobalRef
+	midMenstruationFlowRecordMenstruationFlowTypeToString jni.MethodID
 
-	clsAggregationType *jni.GlobalRef
+	clsAggregationType         *jni.GlobalRef
+	midAggregationTypeToString jni.MethodID
 
 	clsDistanceRecord            *jni.GlobalRef
 	midDistanceRecordEquals      jni.MethodID
 	midDistanceRecordGetDistance jni.MethodID
 	midDistanceRecordHashCode    jni.MethodID
+	midDistanceRecordToString    jni.MethodID
 
 	clsDistanceRecordBuilder                     *jni.GlobalRef
 	midDistanceRecordBuilderBuild                jni.MethodID
@@ -158,26 +177,31 @@ var (
 	midDistanceRecordBuilderClearStartZoneOffset jni.MethodID
 	midDistanceRecordBuilderSetEndZoneOffset     jni.MethodID
 	midDistanceRecordBuilderSetStartZoneOffset   jni.MethodID
+	midDistanceRecordBuilderToString             jni.MethodID
 
 	clsAppInfo               *jni.GlobalRef
 	midAppInfoGetIcon        jni.MethodID
 	midAppInfoGetName        jni.MethodID
 	midAppInfoGetPackageName jni.MethodID
+	midAppInfoToString       jni.MethodID
 
 	clsRespiratoryRateRecord         *jni.GlobalRef
 	midRespiratoryRateRecordEquals   jni.MethodID
 	midRespiratoryRateRecordGetRate  jni.MethodID
 	midRespiratoryRateRecordHashCode jni.MethodID
+	midRespiratoryRateRecordToString jni.MethodID
 
 	clsRespiratoryRateRecordBuilder                *jni.GlobalRef
 	midRespiratoryRateRecordBuilderBuild           jni.MethodID
 	midRespiratoryRateRecordBuilderClearZoneOffset jni.MethodID
 	midRespiratoryRateRecordBuilderSetZoneOffset   jni.MethodID
+	midRespiratoryRateRecordBuilderToString        jni.MethodID
 
 	clsCyclingPedalingCadenceRecord           *jni.GlobalRef
 	midCyclingPedalingCadenceRecordEquals     jni.MethodID
 	midCyclingPedalingCadenceRecordGetSamples jni.MethodID
 	midCyclingPedalingCadenceRecordHashCode   jni.MethodID
+	midCyclingPedalingCadenceRecordToString   jni.MethodID
 
 	clsCyclingPedalingCadenceRecordBuilder                     *jni.GlobalRef
 	midCyclingPedalingCadenceRecordBuilderBuild                jni.MethodID
@@ -185,33 +209,39 @@ var (
 	midCyclingPedalingCadenceRecordBuilderClearStartZoneOffset jni.MethodID
 	midCyclingPedalingCadenceRecordBuilderSetEndZoneOffset     jni.MethodID
 	midCyclingPedalingCadenceRecordBuilderSetStartZoneOffset   jni.MethodID
+	midCyclingPedalingCadenceRecordBuilderToString             jni.MethodID
 
 	clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample                        *jni.GlobalRef
 	midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleEquals                  jni.MethodID
 	midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleGetRevolutionsPerMinute jni.MethodID
 	midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleGetTime                 jni.MethodID
 	midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleHashCode                jni.MethodID
+	midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleToString                jni.MethodID
 
 	clsInstantRecord              *jni.GlobalRef
 	midInstantRecordEquals        jni.MethodID
 	midInstantRecordGetTime       jni.MethodID
 	midInstantRecordGetZoneOffset jni.MethodID
 	midInstantRecordHashCode      jni.MethodID
+	midInstantRecordToString      jni.MethodID
 
 	clsBoneMassRecord         *jni.GlobalRef
 	midBoneMassRecordEquals   jni.MethodID
 	midBoneMassRecordGetMass  jni.MethodID
 	midBoneMassRecordHashCode jni.MethodID
+	midBoneMassRecordToString jni.MethodID
 
 	clsBoneMassRecordBuilder                *jni.GlobalRef
 	midBoneMassRecordBuilderBuild           jni.MethodID
 	midBoneMassRecordBuilderClearZoneOffset jni.MethodID
 	midBoneMassRecordBuilderSetZoneOffset   jni.MethodID
+	midBoneMassRecordBuilderToString        jni.MethodID
 
 	clsHydrationRecord          *jni.GlobalRef
 	midHydrationRecordEquals    jni.MethodID
 	midHydrationRecordGetVolume jni.MethodID
 	midHydrationRecordHashCode  jni.MethodID
+	midHydrationRecordToString  jni.MethodID
 
 	clsHydrationRecordBuilder                     *jni.GlobalRef
 	midHydrationRecordBuilderBuild                jni.MethodID
@@ -219,6 +249,7 @@ var (
 	midHydrationRecordBuilderClearStartZoneOffset jni.MethodID
 	midHydrationRecordBuilderSetEndZoneOffset     jni.MethodID
 	midHydrationRecordBuilderSetStartZoneOffset   jni.MethodID
+	midHydrationRecordBuilderToString             jni.MethodID
 
 	clsMetadata                       *jni.GlobalRef
 	midMetadataEquals                 jni.MethodID
@@ -230,6 +261,7 @@ var (
 	midMetadataGetLastModifiedTime    jni.MethodID
 	midMetadataGetRecordingMethod     jni.MethodID
 	midMetadataHashCode               jni.MethodID
+	midMetadataToString               jni.MethodID
 
 	clsMetadataBuilder                       *jni.GlobalRef
 	midMetadataBuilderBuild                  jni.MethodID
@@ -240,63 +272,77 @@ var (
 	midMetadataBuilderSetId                  jni.MethodID
 	midMetadataBuilderSetLastModifiedTime    jni.MethodID
 	midMetadataBuilderSetRecordingMethod     jni.MethodID
+	midMetadataBuilderToString               jni.MethodID
 
-	clsExerciseCompletionGoal *jni.GlobalRef
+	clsExerciseCompletionGoal         *jni.GlobalRef
+	midExerciseCompletionGoalToString jni.MethodID
 
 	clsExerciseCompletionGoalActiveCaloriesBurnedGoal                  *jni.GlobalRef
 	midExerciseCompletionGoalActiveCaloriesBurnedGoalEquals            jni.MethodID
 	midExerciseCompletionGoalActiveCaloriesBurnedGoalGetActiveCalories jni.MethodID
 	midExerciseCompletionGoalActiveCaloriesBurnedGoalHashCode          jni.MethodID
+	midExerciseCompletionGoalActiveCaloriesBurnedGoalToString          jni.MethodID
 
 	clsExerciseCompletionGoalDistanceGoal            *jni.GlobalRef
 	midExerciseCompletionGoalDistanceGoalEquals      jni.MethodID
 	midExerciseCompletionGoalDistanceGoalGetDistance jni.MethodID
 	midExerciseCompletionGoalDistanceGoalHashCode    jni.MethodID
+	midExerciseCompletionGoalDistanceGoalToString    jni.MethodID
 
 	clsExerciseCompletionGoalDistanceWithVariableRestGoal            *jni.GlobalRef
 	midExerciseCompletionGoalDistanceWithVariableRestGoalEquals      jni.MethodID
 	midExerciseCompletionGoalDistanceWithVariableRestGoalGetDistance jni.MethodID
 	midExerciseCompletionGoalDistanceWithVariableRestGoalGetDuration jni.MethodID
 	midExerciseCompletionGoalDistanceWithVariableRestGoalHashCode    jni.MethodID
+	midExerciseCompletionGoalDistanceWithVariableRestGoalToString    jni.MethodID
 
 	clsExerciseCompletionGoalDurationGoal            *jni.GlobalRef
 	midExerciseCompletionGoalDurationGoalEquals      jni.MethodID
 	midExerciseCompletionGoalDurationGoalGetDuration jni.MethodID
 	midExerciseCompletionGoalDurationGoalHashCode    jni.MethodID
+	midExerciseCompletionGoalDurationGoalToString    jni.MethodID
 
 	clsExerciseCompletionGoalRepetitionsGoal               *jni.GlobalRef
 	midExerciseCompletionGoalRepetitionsGoalEquals         jni.MethodID
 	midExerciseCompletionGoalRepetitionsGoalGetRepetitions jni.MethodID
 	midExerciseCompletionGoalRepetitionsGoalHashCode       jni.MethodID
+	midExerciseCompletionGoalRepetitionsGoalToString       jni.MethodID
 
 	clsExerciseCompletionGoalStepsGoal         *jni.GlobalRef
 	midExerciseCompletionGoalStepsGoalEquals   jni.MethodID
 	midExerciseCompletionGoalStepsGoalGetSteps jni.MethodID
 	midExerciseCompletionGoalStepsGoalHashCode jni.MethodID
+	midExerciseCompletionGoalStepsGoalToString jni.MethodID
 
 	clsExerciseCompletionGoalTotalCaloriesBurnedGoal                 *jni.GlobalRef
 	midExerciseCompletionGoalTotalCaloriesBurnedGoalEquals           jni.MethodID
 	midExerciseCompletionGoalTotalCaloriesBurnedGoalGetTotalCalories jni.MethodID
 	midExerciseCompletionGoalTotalCaloriesBurnedGoalHashCode         jni.MethodID
+	midExerciseCompletionGoalTotalCaloriesBurnedGoalToString         jni.MethodID
 
-	clsExerciseCompletionGoalUnknownGoal *jni.GlobalRef
+	clsExerciseCompletionGoalUnknownGoal         *jni.GlobalRef
+	midExerciseCompletionGoalUnknownGoalToString jni.MethodID
 
-	clsExerciseCompletionGoalUnspecifiedGoal *jni.GlobalRef
+	clsExerciseCompletionGoalUnspecifiedGoal         *jni.GlobalRef
+	midExerciseCompletionGoalUnspecifiedGoalToString jni.MethodID
 
 	clsActivityIntensityRecord                         *jni.GlobalRef
 	midActivityIntensityRecordEquals                   jni.MethodID
 	midActivityIntensityRecordGetActivityIntensityType jni.MethodID
 	midActivityIntensityRecordHashCode                 jni.MethodID
+	midActivityIntensityRecordToString                 jni.MethodID
 
 	clsActivityIntensityRecordBuilder                   *jni.GlobalRef
 	midActivityIntensityRecordBuilderBuild              jni.MethodID
 	midActivityIntensityRecordBuilderSetEndZoneOffset   jni.MethodID
 	midActivityIntensityRecordBuilderSetStartZoneOffset jni.MethodID
+	midActivityIntensityRecordBuilderToString           jni.MethodID
 
 	clsStepsRecord         *jni.GlobalRef
 	midStepsRecordEquals   jni.MethodID
 	midStepsRecordGetCount jni.MethodID
 	midStepsRecordHashCode jni.MethodID
+	midStepsRecordToString jni.MethodID
 
 	clsStepsRecordBuilder                     *jni.GlobalRef
 	midStepsRecordBuilderBuild                jni.MethodID
@@ -304,11 +350,13 @@ var (
 	midStepsRecordBuilderClearStartZoneOffset jni.MethodID
 	midStepsRecordBuilderSetEndZoneOffset     jni.MethodID
 	midStepsRecordBuilderSetStartZoneOffset   jni.MethodID
+	midStepsRecordBuilderToString             jni.MethodID
 
 	clsHeartRateRecord           *jni.GlobalRef
 	midHeartRateRecordEquals     jni.MethodID
 	midHeartRateRecordGetSamples jni.MethodID
 	midHeartRateRecordHashCode   jni.MethodID
+	midHeartRateRecordToString   jni.MethodID
 
 	clsHeartRateRecordBuilder                     *jni.GlobalRef
 	midHeartRateRecordBuilderBuild                jni.MethodID
@@ -316,22 +364,26 @@ var (
 	midHeartRateRecordBuilderClearStartZoneOffset jni.MethodID
 	midHeartRateRecordBuilderSetEndZoneOffset     jni.MethodID
 	midHeartRateRecordBuilderSetStartZoneOffset   jni.MethodID
+	midHeartRateRecordBuilderToString             jni.MethodID
 
 	clsHeartRateRecordHeartRateSample                  *jni.GlobalRef
 	midHeartRateRecordHeartRateSampleEquals            jni.MethodID
 	midHeartRateRecordHeartRateSampleGetBeatsPerMinute jni.MethodID
 	midHeartRateRecordHeartRateSampleGetTime           jni.MethodID
 	midHeartRateRecordHeartRateSampleHashCode          jni.MethodID
+	midHeartRateRecordHeartRateSampleToString          jni.MethodID
 
 	clsBodyFatRecord              *jni.GlobalRef
 	midBodyFatRecordEquals        jni.MethodID
 	midBodyFatRecordGetPercentage jni.MethodID
 	midBodyFatRecordHashCode      jni.MethodID
+	midBodyFatRecordToString      jni.MethodID
 
 	clsBodyFatRecordBuilder                *jni.GlobalRef
 	midBodyFatRecordBuilderBuild           jni.MethodID
 	midBodyFatRecordBuilderClearZoneOffset jni.MethodID
 	midBodyFatRecordBuilderSetZoneOffset   jni.MethodID
+	midBodyFatRecordBuilderToString        jni.MethodID
 
 	clsPlannedExerciseStep                    *jni.GlobalRef
 	midPlannedExerciseStepEquals              jni.MethodID
@@ -341,6 +393,7 @@ var (
 	midPlannedExerciseStepGetExerciseType     jni.MethodID
 	midPlannedExerciseStepGetPerformanceGoals jni.MethodID
 	midPlannedExerciseStepHashCode            jni.MethodID
+	midPlannedExerciseStepToString            jni.MethodID
 
 	clsPlannedExerciseStepBuilder                      *jni.GlobalRef
 	midPlannedExerciseStepBuilderAddPerformanceGoal    jni.MethodID
@@ -350,31 +403,37 @@ var (
 	midPlannedExerciseStepBuilderSetDescription        jni.MethodID
 	midPlannedExerciseStepBuilderSetExerciseCategory   jni.MethodID
 	midPlannedExerciseStepBuilderSetExerciseType       jni.MethodID
+	midPlannedExerciseStepBuilderToString              jni.MethodID
 
 	clsBasalMetabolicRateRecord                      *jni.GlobalRef
 	midBasalMetabolicRateRecordEquals                jni.MethodID
 	midBasalMetabolicRateRecordGetBasalMetabolicRate jni.MethodID
 	midBasalMetabolicRateRecordHashCode              jni.MethodID
+	midBasalMetabolicRateRecordToString              jni.MethodID
 
 	clsBasalMetabolicRateRecordBuilder                *jni.GlobalRef
 	midBasalMetabolicRateRecordBuilderBuild           jni.MethodID
 	midBasalMetabolicRateRecordBuilderClearZoneOffset jni.MethodID
 	midBasalMetabolicRateRecordBuilderSetZoneOffset   jni.MethodID
+	midBasalMetabolicRateRecordBuilderToString        jni.MethodID
 
 	clsHeightRecord          *jni.GlobalRef
 	midHeightRecordEquals    jni.MethodID
 	midHeightRecordGetHeight jni.MethodID
 	midHeightRecordHashCode  jni.MethodID
+	midHeightRecordToString  jni.MethodID
 
 	clsHeightRecordBuilder                *jni.GlobalRef
 	midHeightRecordBuilderBuild           jni.MethodID
 	midHeightRecordBuilderClearZoneOffset jni.MethodID
 	midHeightRecordBuilderSetZoneOffset   jni.MethodID
+	midHeightRecordBuilderToString        jni.MethodID
 
 	clsElevationGainedRecord             *jni.GlobalRef
 	midElevationGainedRecordEquals       jni.MethodID
 	midElevationGainedRecordGetElevation jni.MethodID
 	midElevationGainedRecordHashCode     jni.MethodID
+	midElevationGainedRecordToString     jni.MethodID
 
 	clsElevationGainedRecordBuilder                     *jni.GlobalRef
 	midElevationGainedRecordBuilderBuild                jni.MethodID
@@ -382,15 +441,19 @@ var (
 	midElevationGainedRecordBuilderClearStartZoneOffset jni.MethodID
 	midElevationGainedRecordBuilderSetEndZoneOffset     jni.MethodID
 	midElevationGainedRecordBuilderSetStartZoneOffset   jni.MethodID
+	midElevationGainedRecordBuilderToString             jni.MethodID
 
-	clsBodyTemperatureMeasurementLocation *jni.GlobalRef
+	clsBodyTemperatureMeasurementLocation         *jni.GlobalRef
+	midBodyTemperatureMeasurementLocationToString jni.MethodID
 
-	clsExerciseSessionType *jni.GlobalRef
+	clsExerciseSessionType         *jni.GlobalRef
+	midExerciseSessionTypeToString jni.MethodID
 
 	clsSpeedRecord           *jni.GlobalRef
 	midSpeedRecordEquals     jni.MethodID
 	midSpeedRecordGetSamples jni.MethodID
 	midSpeedRecordHashCode   jni.MethodID
+	midSpeedRecordToString   jni.MethodID
 
 	clsSpeedRecordBuilder                     *jni.GlobalRef
 	midSpeedRecordBuilderBuild                jni.MethodID
@@ -398,25 +461,30 @@ var (
 	midSpeedRecordBuilderClearStartZoneOffset jni.MethodID
 	midSpeedRecordBuilderSetEndZoneOffset     jni.MethodID
 	midSpeedRecordBuilderSetStartZoneOffset   jni.MethodID
+	midSpeedRecordBuilderToString             jni.MethodID
 
 	clsSpeedRecordSpeedRecordSample         *jni.GlobalRef
 	midSpeedRecordSpeedRecordSampleEquals   jni.MethodID
 	midSpeedRecordSpeedRecordSampleGetSpeed jni.MethodID
 	midSpeedRecordSpeedRecordSampleGetTime  jni.MethodID
 	midSpeedRecordSpeedRecordSampleHashCode jni.MethodID
+	midSpeedRecordSpeedRecordSampleToString jni.MethodID
 
-	clsExerciseSegmentType *jni.GlobalRef
+	clsExerciseSegmentType         *jni.GlobalRef
+	midExerciseSegmentTypeToString jni.MethodID
 
 	clsBasalBodyTemperatureRecord                       *jni.GlobalRef
 	midBasalBodyTemperatureRecordEquals                 jni.MethodID
 	midBasalBodyTemperatureRecordGetMeasurementLocation jni.MethodID
 	midBasalBodyTemperatureRecordGetTemperature         jni.MethodID
 	midBasalBodyTemperatureRecordHashCode               jni.MethodID
+	midBasalBodyTemperatureRecordToString               jni.MethodID
 
 	clsBasalBodyTemperatureRecordBuilder                *jni.GlobalRef
 	midBasalBodyTemperatureRecordBuilderBuild           jni.MethodID
 	midBasalBodyTemperatureRecordBuilderClearZoneOffset jni.MethodID
 	midBasalBodyTemperatureRecordBuilderSetZoneOffset   jni.MethodID
+	midBasalBodyTemperatureRecordBuilderToString        jni.MethodID
 
 	clsExerciseSegment                    *jni.GlobalRef
 	midExerciseSegmentEquals              jni.MethodID
@@ -425,10 +493,12 @@ var (
 	midExerciseSegmentGetSegmentType      jni.MethodID
 	midExerciseSegmentGetStartTime        jni.MethodID
 	midExerciseSegmentHashCode            jni.MethodID
+	midExerciseSegmentToString            jni.MethodID
 
 	clsExerciseSegmentBuilder                    *jni.GlobalRef
 	midExerciseSegmentBuilderBuild               jni.MethodID
 	midExerciseSegmentBuilderSetRepetitionsCount jni.MethodID
+	midExerciseSegmentBuilderToString            jni.MethodID
 
 	clsMedicalDataSource                      *jni.GlobalRef
 	midMedicalDataSourceDescribeContents      jni.MethodID
@@ -451,10 +521,12 @@ var (
 	midMedicalDataSourceBuilderSetId                 jni.MethodID
 	midMedicalDataSourceBuilderSetLastDataUpdateTime jni.MethodID
 	midMedicalDataSourceBuilderSetPackageName        jni.MethodID
+	midMedicalDataSourceBuilderToString              jni.MethodID
 
 	clsMenstruationPeriodRecord         *jni.GlobalRef
 	midMenstruationPeriodRecordEquals   jni.MethodID
 	midMenstruationPeriodRecordHashCode jni.MethodID
+	midMenstruationPeriodRecordToString jni.MethodID
 
 	clsMenstruationPeriodRecordBuilder                     *jni.GlobalRef
 	midMenstruationPeriodRecordBuilderBuild                jni.MethodID
@@ -462,6 +534,7 @@ var (
 	midMenstruationPeriodRecordBuilderClearStartZoneOffset jni.MethodID
 	midMenstruationPeriodRecordBuilderSetEndZoneOffset     jni.MethodID
 	midMenstruationPeriodRecordBuilderSetStartZoneOffset   jni.MethodID
+	midMenstruationPeriodRecordBuilderToString             jni.MethodID
 
 	clsPlannedExerciseSessionRecord                              *jni.GlobalRef
 	midPlannedExerciseSessionRecordEquals                        jni.MethodID
@@ -474,6 +547,7 @@ var (
 	midPlannedExerciseSessionRecordGetTitle                      jni.MethodID
 	midPlannedExerciseSessionRecordHasExplicitTime               jni.MethodID
 	midPlannedExerciseSessionRecordHashCode                      jni.MethodID
+	midPlannedExerciseSessionRecordToString                      jni.MethodID
 
 	clsPlannedExerciseSessionRecordBuilder                     *jni.GlobalRef
 	midPlannedExerciseSessionRecordBuilderAddBlock             jni.MethodID
@@ -489,16 +563,19 @@ var (
 	midPlannedExerciseSessionRecordBuilderSetStartTime         jni.MethodID
 	midPlannedExerciseSessionRecordBuilderSetStartZoneOffset   jni.MethodID
 	midPlannedExerciseSessionRecordBuilderSetTitle             jni.MethodID
+	midPlannedExerciseSessionRecordBuilderToString             jni.MethodID
 
 	clsHeartRateVariabilityRmssdRecord                              *jni.GlobalRef
 	midHeartRateVariabilityRmssdRecordEquals                        jni.MethodID
 	midHeartRateVariabilityRmssdRecordGetHeartRateVariabilityMillis jni.MethodID
 	midHeartRateVariabilityRmssdRecordHashCode                      jni.MethodID
+	midHeartRateVariabilityRmssdRecordToString                      jni.MethodID
 
 	clsHeartRateVariabilityRmssdRecordBuilder                *jni.GlobalRef
 	midHeartRateVariabilityRmssdRecordBuilderBuild           jni.MethodID
 	midHeartRateVariabilityRmssdRecordBuilderClearZoneOffset jni.MethodID
 	midHeartRateVariabilityRmssdRecordBuilderSetZoneOffset   jni.MethodID
+	midHeartRateVariabilityRmssdRecordBuilderToString        jni.MethodID
 
 	clsExerciseLap             *jni.GlobalRef
 	midExerciseLapEquals       jni.MethodID
@@ -506,45 +583,55 @@ var (
 	midExerciseLapGetLength    jni.MethodID
 	midExerciseLapGetStartTime jni.MethodID
 	midExerciseLapHashCode     jni.MethodID
+	midExerciseLapToString     jni.MethodID
 
 	clsExerciseLapBuilder          *jni.GlobalRef
 	midExerciseLapBuilderBuild     jni.MethodID
 	midExerciseLapBuilderSetLength jni.MethodID
+	midExerciseLapBuilderToString  jni.MethodID
 
 	clsDataOrigin               *jni.GlobalRef
 	midDataOriginEquals         jni.MethodID
 	midDataOriginGetPackageName jni.MethodID
 	midDataOriginHashCode       jni.MethodID
+	midDataOriginToString       jni.MethodID
 
 	clsDataOriginBuilder               *jni.GlobalRef
 	midDataOriginBuilderBuild          jni.MethodID
 	midDataOriginBuilderSetPackageName jni.MethodID
+	midDataOriginBuilderToString       jni.MethodID
 
 	clsBodyTemperatureRecord                       *jni.GlobalRef
 	midBodyTemperatureRecordEquals                 jni.MethodID
 	midBodyTemperatureRecordGetMeasurementLocation jni.MethodID
 	midBodyTemperatureRecordGetTemperature         jni.MethodID
 	midBodyTemperatureRecordHashCode               jni.MethodID
+	midBodyTemperatureRecordToString               jni.MethodID
 
 	clsBodyTemperatureRecordBuilder                *jni.GlobalRef
 	midBodyTemperatureRecordBuilderBuild           jni.MethodID
 	midBodyTemperatureRecordBuilderClearZoneOffset jni.MethodID
 	midBodyTemperatureRecordBuilderSetZoneOffset   jni.MethodID
+	midBodyTemperatureRecordBuilderToString        jni.MethodID
 
 	clsCervicalMucusRecord              *jni.GlobalRef
 	midCervicalMucusRecordEquals        jni.MethodID
 	midCervicalMucusRecordGetAppearance jni.MethodID
 	midCervicalMucusRecordGetSensation  jni.MethodID
 	midCervicalMucusRecordHashCode      jni.MethodID
+	midCervicalMucusRecordToString      jni.MethodID
 
 	clsCervicalMucusRecordBuilder                *jni.GlobalRef
 	midCervicalMucusRecordBuilderBuild           jni.MethodID
 	midCervicalMucusRecordBuilderClearZoneOffset jni.MethodID
 	midCervicalMucusRecordBuilderSetZoneOffset   jni.MethodID
+	midCervicalMucusRecordBuilderToString        jni.MethodID
 
-	clsCervicalMucusRecordCervicalMucusAppearance *jni.GlobalRef
+	clsCervicalMucusRecordCervicalMucusAppearance         *jni.GlobalRef
+	midCervicalMucusRecordCervicalMucusAppearanceToString jni.MethodID
 
-	clsCervicalMucusRecordCervicalMucusSensation *jni.GlobalRef
+	clsCervicalMucusRecordCervicalMucusSensation         *jni.GlobalRef
+	midCervicalMucusRecordCervicalMucusSensationToString jni.MethodID
 
 	clsNutritionRecord                      *jni.GlobalRef
 	midNutritionRecordEquals                jni.MethodID
@@ -593,6 +680,7 @@ var (
 	midNutritionRecordGetVitaminK           jni.MethodID
 	midNutritionRecordGetZinc               jni.MethodID
 	midNutritionRecordHashCode              jni.MethodID
+	midNutritionRecordToString              jni.MethodID
 
 	clsNutritionRecordBuilder                      *jni.GlobalRef
 	midNutritionRecordBuilderBuild                 jni.MethodID
@@ -644,6 +732,7 @@ var (
 	midNutritionRecordBuilderSetVitaminE           jni.MethodID
 	midNutritionRecordBuilderSetVitaminK           jni.MethodID
 	midNutritionRecordBuilderSetZinc               jni.MethodID
+	midNutritionRecordBuilderToString              jni.MethodID
 
 	clsDevice                *jni.GlobalRef
 	midDeviceEquals          jni.MethodID
@@ -651,12 +740,14 @@ var (
 	midDeviceGetModel        jni.MethodID
 	midDeviceGetType         jni.MethodID
 	midDeviceHashCode        jni.MethodID
+	midDeviceToString        jni.MethodID
 
 	clsDeviceBuilder                *jni.GlobalRef
 	midDeviceBuilderBuild           jni.MethodID
 	midDeviceBuilderSetManufacturer jni.MethodID
 	midDeviceBuilderSetModel        jni.MethodID
 	midDeviceBuilderSetType         jni.MethodID
+	midDeviceBuilderToString        jni.MethodID
 
 	clsExerciseSessionRecord                            *jni.GlobalRef
 	midExerciseSessionRecordEquals                      jni.MethodID
@@ -669,6 +760,7 @@ var (
 	midExerciseSessionRecordGetTitle                    jni.MethodID
 	midExerciseSessionRecordHasRoute                    jni.MethodID
 	midExerciseSessionRecordHashCode                    jni.MethodID
+	midExerciseSessionRecordToString                    jni.MethodID
 
 	clsExerciseSessionRecordBuilder                            *jni.GlobalRef
 	midExerciseSessionRecordBuilderBuild                       jni.MethodID
@@ -680,51 +772,62 @@ var (
 	midExerciseSessionRecordBuilderSetRoute                    jni.MethodID
 	midExerciseSessionRecordBuilderSetStartZoneOffset          jni.MethodID
 	midExerciseSessionRecordBuilderSetTitle                    jni.MethodID
+	midExerciseSessionRecordBuilderToString                    jni.MethodID
 
-	clsExercisePerformanceGoal *jni.GlobalRef
+	clsExercisePerformanceGoal         *jni.GlobalRef
+	midExercisePerformanceGoalToString jni.MethodID
 
-	clsExercisePerformanceGoalAmrapGoal *jni.GlobalRef
+	clsExercisePerformanceGoalAmrapGoal         *jni.GlobalRef
+	midExercisePerformanceGoalAmrapGoalToString jni.MethodID
 
 	clsExercisePerformanceGoalCadenceGoal          *jni.GlobalRef
 	midExercisePerformanceGoalCadenceGoalEquals    jni.MethodID
 	midExercisePerformanceGoalCadenceGoalGetMaxRpm jni.MethodID
 	midExercisePerformanceGoalCadenceGoalGetMinRpm jni.MethodID
 	midExercisePerformanceGoalCadenceGoalHashCode  jni.MethodID
+	midExercisePerformanceGoalCadenceGoalToString  jni.MethodID
 
 	clsExercisePerformanceGoalHeartRateGoal          *jni.GlobalRef
 	midExercisePerformanceGoalHeartRateGoalEquals    jni.MethodID
 	midExercisePerformanceGoalHeartRateGoalGetMaxBpm jni.MethodID
 	midExercisePerformanceGoalHeartRateGoalGetMinBpm jni.MethodID
 	midExercisePerformanceGoalHeartRateGoalHashCode  jni.MethodID
+	midExercisePerformanceGoalHeartRateGoalToString  jni.MethodID
 
 	clsExercisePerformanceGoalPowerGoal            *jni.GlobalRef
 	midExercisePerformanceGoalPowerGoalEquals      jni.MethodID
 	midExercisePerformanceGoalPowerGoalGetMaxPower jni.MethodID
 	midExercisePerformanceGoalPowerGoalGetMinPower jni.MethodID
 	midExercisePerformanceGoalPowerGoalHashCode    jni.MethodID
+	midExercisePerformanceGoalPowerGoalToString    jni.MethodID
 
 	clsExercisePerformanceGoalRateOfPerceivedExertionGoal         *jni.GlobalRef
 	midExercisePerformanceGoalRateOfPerceivedExertionGoalEquals   jni.MethodID
 	midExercisePerformanceGoalRateOfPerceivedExertionGoalGetRpe   jni.MethodID
 	midExercisePerformanceGoalRateOfPerceivedExertionGoalHashCode jni.MethodID
+	midExercisePerformanceGoalRateOfPerceivedExertionGoalToString jni.MethodID
 
 	clsExercisePerformanceGoalSpeedGoal            *jni.GlobalRef
 	midExercisePerformanceGoalSpeedGoalEquals      jni.MethodID
 	midExercisePerformanceGoalSpeedGoalGetMaxSpeed jni.MethodID
 	midExercisePerformanceGoalSpeedGoalGetMinSpeed jni.MethodID
 	midExercisePerformanceGoalSpeedGoalHashCode    jni.MethodID
+	midExercisePerformanceGoalSpeedGoalToString    jni.MethodID
 
-	clsExercisePerformanceGoalUnknownGoal *jni.GlobalRef
+	clsExercisePerformanceGoalUnknownGoal         *jni.GlobalRef
+	midExercisePerformanceGoalUnknownGoalToString jni.MethodID
 
 	clsExercisePerformanceGoalWeightGoal         *jni.GlobalRef
 	midExercisePerformanceGoalWeightGoalEquals   jni.MethodID
 	midExercisePerformanceGoalWeightGoalGetMass  jni.MethodID
 	midExercisePerformanceGoalWeightGoalHashCode jni.MethodID
+	midExercisePerformanceGoalWeightGoalToString jni.MethodID
 
 	clsFloorsClimbedRecord          *jni.GlobalRef
 	midFloorsClimbedRecordEquals    jni.MethodID
 	midFloorsClimbedRecordGetFloors jni.MethodID
 	midFloorsClimbedRecordHashCode  jni.MethodID
+	midFloorsClimbedRecordToString  jni.MethodID
 
 	clsFloorsClimbedRecordBuilder                     *jni.GlobalRef
 	midFloorsClimbedRecordBuilderBuild                jni.MethodID
@@ -732,40 +835,48 @@ var (
 	midFloorsClimbedRecordBuilderClearStartZoneOffset jni.MethodID
 	midFloorsClimbedRecordBuilderSetEndZoneOffset     jni.MethodID
 	midFloorsClimbedRecordBuilderSetStartZoneOffset   jni.MethodID
+	midFloorsClimbedRecordBuilderToString             jni.MethodID
 
 	clsOxygenSaturationRecord              *jni.GlobalRef
 	midOxygenSaturationRecordEquals        jni.MethodID
 	midOxygenSaturationRecordGetPercentage jni.MethodID
 	midOxygenSaturationRecordHashCode      jni.MethodID
+	midOxygenSaturationRecordToString      jni.MethodID
 
 	clsOxygenSaturationRecordBuilder                *jni.GlobalRef
 	midOxygenSaturationRecordBuilderBuild           jni.MethodID
 	midOxygenSaturationRecordBuilderClearZoneOffset jni.MethodID
 	midOxygenSaturationRecordBuilderSetZoneOffset   jni.MethodID
+	midOxygenSaturationRecordBuilderToString        jni.MethodID
 
 	clsIntermenstrualBleedingRecord         *jni.GlobalRef
 	midIntermenstrualBleedingRecordEquals   jni.MethodID
 	midIntermenstrualBleedingRecordHashCode jni.MethodID
+	midIntermenstrualBleedingRecordToString jni.MethodID
 
 	clsIntermenstrualBleedingRecordBuilder                *jni.GlobalRef
 	midIntermenstrualBleedingRecordBuilderBuild           jni.MethodID
 	midIntermenstrualBleedingRecordBuilderClearZoneOffset jni.MethodID
 	midIntermenstrualBleedingRecordBuilderSetZoneOffset   jni.MethodID
+	midIntermenstrualBleedingRecordBuilderToString        jni.MethodID
 
 	clsRecord            *jni.GlobalRef
 	midRecordEquals      jni.MethodID
 	midRecordGetMetadata jni.MethodID
 	midRecordHashCode    jni.MethodID
+	midRecordToString    jni.MethodID
 
 	clsLeanBodyMassRecord         *jni.GlobalRef
 	midLeanBodyMassRecordEquals   jni.MethodID
 	midLeanBodyMassRecordGetMass  jni.MethodID
 	midLeanBodyMassRecordHashCode jni.MethodID
+	midLeanBodyMassRecordToString jni.MethodID
 
 	clsLeanBodyMassRecordBuilder                *jni.GlobalRef
 	midLeanBodyMassRecordBuilderBuild           jni.MethodID
 	midLeanBodyMassRecordBuilderClearZoneOffset jni.MethodID
 	midLeanBodyMassRecordBuilderSetZoneOffset   jni.MethodID
+	midLeanBodyMassRecordBuilderToString        jni.MethodID
 
 	clsSleepSessionRecord          *jni.GlobalRef
 	midSleepSessionRecordEquals    jni.MethodID
@@ -773,6 +884,7 @@ var (
 	midSleepSessionRecordGetStages jni.MethodID
 	midSleepSessionRecordGetTitle  jni.MethodID
 	midSleepSessionRecordHashCode  jni.MethodID
+	midSleepSessionRecordToString  jni.MethodID
 
 	clsSleepSessionRecordBuilder                     *jni.GlobalRef
 	midSleepSessionRecordBuilderBuild                jni.MethodID
@@ -782,6 +894,7 @@ var (
 	midSleepSessionRecordBuilderSetNotes             jni.MethodID
 	midSleepSessionRecordBuilderSetStartZoneOffset   jni.MethodID
 	midSleepSessionRecordBuilderSetTitle             jni.MethodID
+	midSleepSessionRecordBuilderToString             jni.MethodID
 
 	clsSleepSessionRecordStage             *jni.GlobalRef
 	midSleepSessionRecordStageEquals       jni.MethodID
@@ -789,8 +902,10 @@ var (
 	midSleepSessionRecordStageGetStartTime jni.MethodID
 	midSleepSessionRecordStageGetType      jni.MethodID
 	midSleepSessionRecordStageHashCode     jni.MethodID
+	midSleepSessionRecordStageToString     jni.MethodID
 
-	clsSleepSessionRecordStageType *jni.GlobalRef
+	clsSleepSessionRecordStageType         *jni.GlobalRef
+	midSleepSessionRecordStageTypeToString jni.MethodID
 
 	clsSkinTemperatureRecord                       *jni.GlobalRef
 	midSkinTemperatureRecordEquals                 jni.MethodID
@@ -798,6 +913,7 @@ var (
 	midSkinTemperatureRecordGetDeltas              jni.MethodID
 	midSkinTemperatureRecordGetMeasurementLocation jni.MethodID
 	midSkinTemperatureRecordHashCode               jni.MethodID
+	midSkinTemperatureRecordToString               jni.MethodID
 
 	clsSkinTemperatureRecordBuilder                       *jni.GlobalRef
 	midSkinTemperatureRecordBuilderBuild                  jni.MethodID
@@ -807,22 +923,26 @@ var (
 	midSkinTemperatureRecordBuilderSetEndZoneOffset       jni.MethodID
 	midSkinTemperatureRecordBuilderSetMeasurementLocation jni.MethodID
 	midSkinTemperatureRecordBuilderSetStartZoneOffset     jni.MethodID
+	midSkinTemperatureRecordBuilderToString               jni.MethodID
 
 	clsSkinTemperatureRecordDelta         *jni.GlobalRef
 	midSkinTemperatureRecordDeltaEquals   jni.MethodID
 	midSkinTemperatureRecordDeltaGetDelta jni.MethodID
 	midSkinTemperatureRecordDeltaGetTime  jni.MethodID
 	midSkinTemperatureRecordDeltaHashCode jni.MethodID
+	midSkinTemperatureRecordDeltaToString jni.MethodID
 
 	clsBodyWaterMassRecord                 *jni.GlobalRef
 	midBodyWaterMassRecordEquals           jni.MethodID
 	midBodyWaterMassRecordGetBodyWaterMass jni.MethodID
 	midBodyWaterMassRecordHashCode         jni.MethodID
+	midBodyWaterMassRecordToString         jni.MethodID
 
 	clsBodyWaterMassRecordBuilder                *jni.GlobalRef
 	midBodyWaterMassRecordBuilderBuild           jni.MethodID
 	midBodyWaterMassRecordBuilderClearZoneOffset jni.MethodID
 	midBodyWaterMassRecordBuilderSetZoneOffset   jni.MethodID
+	midBodyWaterMassRecordBuilderToString        jni.MethodID
 
 	clsPlannedExerciseBlock               *jni.GlobalRef
 	midPlannedExerciseBlockEquals         jni.MethodID
@@ -830,6 +950,7 @@ var (
 	midPlannedExerciseBlockGetRepetitions jni.MethodID
 	midPlannedExerciseBlockGetSteps       jni.MethodID
 	midPlannedExerciseBlockHashCode       jni.MethodID
+	midPlannedExerciseBlockToString       jni.MethodID
 
 	clsPlannedExerciseBlockBuilder               *jni.GlobalRef
 	midPlannedExerciseBlockBuilderAddStep        jni.MethodID
@@ -837,11 +958,13 @@ var (
 	midPlannedExerciseBlockBuilderClearSteps     jni.MethodID
 	midPlannedExerciseBlockBuilderSetDescription jni.MethodID
 	midPlannedExerciseBlockBuilderSetRepetitions jni.MethodID
+	midPlannedExerciseBlockBuilderToString       jni.MethodID
 
 	clsTotalCaloriesBurnedRecord          *jni.GlobalRef
 	midTotalCaloriesBurnedRecordEquals    jni.MethodID
 	midTotalCaloriesBurnedRecordGetEnergy jni.MethodID
 	midTotalCaloriesBurnedRecordHashCode  jni.MethodID
+	midTotalCaloriesBurnedRecordToString  jni.MethodID
 
 	clsTotalCaloriesBurnedRecordBuilder                     *jni.GlobalRef
 	midTotalCaloriesBurnedRecordBuilderBuild                jni.MethodID
@@ -849,6 +972,7 @@ var (
 	midTotalCaloriesBurnedRecordBuilderClearStartZoneOffset jni.MethodID
 	midTotalCaloriesBurnedRecordBuilderSetEndZoneOffset     jni.MethodID
 	midTotalCaloriesBurnedRecordBuilderSetStartZoneOffset   jni.MethodID
+	midTotalCaloriesBurnedRecordBuilderToString             jni.MethodID
 
 	clsFhirVersion                       *jni.GlobalRef
 	midFhirVersionDescribeContents       jni.MethodID
@@ -862,12 +986,14 @@ var (
 	midFhirVersionWriteToParcel          jni.MethodID
 	midFhirVersionParseFhirVersion       jni.MethodID
 
-	clsMealType *jni.GlobalRef
+	clsMealType         *jni.GlobalRef
+	midMealTypeToString jni.MethodID
 
 	clsStepsCadenceRecord           *jni.GlobalRef
 	midStepsCadenceRecordEquals     jni.MethodID
 	midStepsCadenceRecordGetSamples jni.MethodID
 	midStepsCadenceRecordHashCode   jni.MethodID
+	midStepsCadenceRecordToString   jni.MethodID
 
 	clsStepsCadenceRecordBuilder                     *jni.GlobalRef
 	midStepsCadenceRecordBuilderBuild                jni.MethodID
@@ -875,50 +1001,60 @@ var (
 	midStepsCadenceRecordBuilderClearStartZoneOffset jni.MethodID
 	midStepsCadenceRecordBuilderSetEndZoneOffset     jni.MethodID
 	midStepsCadenceRecordBuilderSetStartZoneOffset   jni.MethodID
+	midStepsCadenceRecordBuilderToString             jni.MethodID
 
 	clsStepsCadenceRecordStepsCadenceRecordSample         *jni.GlobalRef
 	midStepsCadenceRecordStepsCadenceRecordSampleEquals   jni.MethodID
 	midStepsCadenceRecordStepsCadenceRecordSampleGetRate  jni.MethodID
 	midStepsCadenceRecordStepsCadenceRecordSampleGetTime  jni.MethodID
 	midStepsCadenceRecordStepsCadenceRecordSampleHashCode jni.MethodID
+	midStepsCadenceRecordStepsCadenceRecordSampleToString jni.MethodID
 
 	clsVo2MaxRecord                                   *jni.GlobalRef
 	midVo2MaxRecordEquals                             jni.MethodID
 	midVo2MaxRecordGetMeasurementMethod               jni.MethodID
 	midVo2MaxRecordGetVo2MillilitersPerMinuteKilogram jni.MethodID
 	midVo2MaxRecordHashCode                           jni.MethodID
+	midVo2MaxRecordToString                           jni.MethodID
 
 	clsVo2MaxRecordBuilder                *jni.GlobalRef
 	midVo2MaxRecordBuilderBuild           jni.MethodID
 	midVo2MaxRecordBuilderClearZoneOffset jni.MethodID
 	midVo2MaxRecordBuilderSetZoneOffset   jni.MethodID
+	midVo2MaxRecordBuilderToString        jni.MethodID
 
-	clsVo2MaxRecordVo2MaxMeasurementMethod *jni.GlobalRef
+	clsVo2MaxRecordVo2MaxMeasurementMethod         *jni.GlobalRef
+	midVo2MaxRecordVo2MaxMeasurementMethodToString jni.MethodID
 
 	clsWeightRecord          *jni.GlobalRef
 	midWeightRecordEquals    jni.MethodID
 	midWeightRecordGetWeight jni.MethodID
 	midWeightRecordHashCode  jni.MethodID
+	midWeightRecordToString  jni.MethodID
 
 	clsWeightRecordBuilder                *jni.GlobalRef
 	midWeightRecordBuilderBuild           jni.MethodID
 	midWeightRecordBuilderClearZoneOffset jni.MethodID
 	midWeightRecordBuilderSetZoneOffset   jni.MethodID
+	midWeightRecordBuilderToString        jni.MethodID
 
 	clsRestingHeartRateRecord                  *jni.GlobalRef
 	midRestingHeartRateRecordEquals            jni.MethodID
 	midRestingHeartRateRecordGetBeatsPerMinute jni.MethodID
 	midRestingHeartRateRecordHashCode          jni.MethodID
+	midRestingHeartRateRecordToString          jni.MethodID
 
 	clsRestingHeartRateRecordBuilder                *jni.GlobalRef
 	midRestingHeartRateRecordBuilderBuild           jni.MethodID
 	midRestingHeartRateRecordBuilderClearZoneOffset jni.MethodID
 	midRestingHeartRateRecordBuilderSetZoneOffset   jni.MethodID
+	midRestingHeartRateRecordBuilderToString        jni.MethodID
 
 	clsActiveCaloriesBurnedRecord          *jni.GlobalRef
 	midActiveCaloriesBurnedRecordEquals    jni.MethodID
 	midActiveCaloriesBurnedRecordGetEnergy jni.MethodID
 	midActiveCaloriesBurnedRecordHashCode  jni.MethodID
+	midActiveCaloriesBurnedRecordToString  jni.MethodID
 
 	clsActiveCaloriesBurnedRecordBuilder                     *jni.GlobalRef
 	midActiveCaloriesBurnedRecordBuilderBuild                jni.MethodID
@@ -926,6 +1062,7 @@ var (
 	midActiveCaloriesBurnedRecordBuilderClearStartZoneOffset jni.MethodID
 	midActiveCaloriesBurnedRecordBuilderSetEndZoneOffset     jni.MethodID
 	midActiveCaloriesBurnedRecordBuilderSetStartZoneOffset   jni.MethodID
+	midActiveCaloriesBurnedRecordBuilderToString             jni.MethodID
 
 	clsMindfulnessSessionRecord                          *jni.GlobalRef
 	midMindfulnessSessionRecordEquals                    jni.MethodID
@@ -933,6 +1070,7 @@ var (
 	midMindfulnessSessionRecordGetNotes                  jni.MethodID
 	midMindfulnessSessionRecordGetTitle                  jni.MethodID
 	midMindfulnessSessionRecordHashCode                  jni.MethodID
+	midMindfulnessSessionRecordToString                  jni.MethodID
 
 	clsMindfulnessSessionRecordBuilder                   *jni.GlobalRef
 	midMindfulnessSessionRecordBuilderBuild              jni.MethodID
@@ -940,6 +1078,7 @@ var (
 	midMindfulnessSessionRecordBuilderSetNotes           jni.MethodID
 	midMindfulnessSessionRecordBuilderSetStartZoneOffset jni.MethodID
 	midMindfulnessSessionRecordBuilderSetTitle           jni.MethodID
+	midMindfulnessSessionRecordBuilderToString           jni.MethodID
 
 	clsBloodPressureRecord                       *jni.GlobalRef
 	midBloodPressureRecordEquals                 jni.MethodID
@@ -948,39 +1087,49 @@ var (
 	midBloodPressureRecordGetMeasurementLocation jni.MethodID
 	midBloodPressureRecordGetSystolic            jni.MethodID
 	midBloodPressureRecordHashCode               jni.MethodID
+	midBloodPressureRecordToString               jni.MethodID
 
-	clsBloodPressureRecordBloodPressureMeasurementLocation *jni.GlobalRef
+	clsBloodPressureRecordBloodPressureMeasurementLocation         *jni.GlobalRef
+	midBloodPressureRecordBloodPressureMeasurementLocationToString jni.MethodID
 
-	clsBloodPressureRecordBodyPosition *jni.GlobalRef
+	clsBloodPressureRecordBodyPosition         *jni.GlobalRef
+	midBloodPressureRecordBodyPositionToString jni.MethodID
 
 	clsBloodPressureRecordBuilder                *jni.GlobalRef
 	midBloodPressureRecordBuilderBuild           jni.MethodID
 	midBloodPressureRecordBuilderClearZoneOffset jni.MethodID
 	midBloodPressureRecordBuilderSetZoneOffset   jni.MethodID
+	midBloodPressureRecordBuilderToString        jni.MethodID
 
 	clsSexualActivityRecord                  *jni.GlobalRef
 	midSexualActivityRecordEquals            jni.MethodID
 	midSexualActivityRecordGetProtectionUsed jni.MethodID
 	midSexualActivityRecordHashCode          jni.MethodID
+	midSexualActivityRecordToString          jni.MethodID
 
 	clsSexualActivityRecordBuilder                *jni.GlobalRef
 	midSexualActivityRecordBuilderBuild           jni.MethodID
 	midSexualActivityRecordBuilderClearZoneOffset jni.MethodID
 	midSexualActivityRecordBuilderSetZoneOffset   jni.MethodID
+	midSexualActivityRecordBuilderToString        jni.MethodID
 
-	clsSexualActivityRecordSexualActivityProtectionUsed *jni.GlobalRef
+	clsSexualActivityRecordSexualActivityProtectionUsed         *jni.GlobalRef
+	midSexualActivityRecordSexualActivityProtectionUsedToString jni.MethodID
 
 	clsOvulationTestRecord          *jni.GlobalRef
 	midOvulationTestRecordEquals    jni.MethodID
 	midOvulationTestRecordGetResult jni.MethodID
 	midOvulationTestRecordHashCode  jni.MethodID
+	midOvulationTestRecordToString  jni.MethodID
 
 	clsOvulationTestRecordBuilder                *jni.GlobalRef
 	midOvulationTestRecordBuilderBuild           jni.MethodID
 	midOvulationTestRecordBuilderClearZoneOffset jni.MethodID
 	midOvulationTestRecordBuilderSetZoneOffset   jni.MethodID
+	midOvulationTestRecordBuilderToString        jni.MethodID
 
-	clsOvulationTestRecordOvulationTestResult *jni.GlobalRef
+	clsOvulationTestRecordOvulationTestResult         *jni.GlobalRef
+	midOvulationTestRecordOvulationTestResultToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -1024,6 +1173,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPowerRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPowerRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1075,6 +1231,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPowerRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PowerRecord$PowerRecordSample")
@@ -1107,6 +1270,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPowerRecordPowerRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPowerRecordPowerRecordSampleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1217,6 +1387,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFhirResourceBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResourceBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/IntervalRecord")
@@ -1263,6 +1440,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midIntervalRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIntervalRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1321,6 +1505,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBloodGlucoseRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodGlucoseRecord$Builder")
@@ -1352,6 +1543,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBloodGlucoseRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodGlucoseRecord$RelationToMealType")
@@ -1362,6 +1560,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsBloodGlucoseRecordRelationToMealType = env.NewGlobalRef(&c.Object)
 
+		midBloodGlucoseRecordRelationToMealTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecordRelationToMealType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodGlucoseRecord$SpecimenSource")
@@ -1371,6 +1576,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBloodGlucoseRecordSpecimenSource = env.NewGlobalRef(&c.Object)
+
+		midBloodGlucoseRecordSpecimenSourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecordSpecimenSource)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1497,6 +1709,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMedicalResourceBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/WheelchairPushesRecord")
@@ -1522,6 +1741,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWheelchairPushesRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWheelchairPushesRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1573,6 +1799,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWheelchairPushesRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseRoute")
@@ -1616,6 +1849,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExerciseRouteWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseRouteToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1702,6 +1942,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExerciseRouteLocationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MenstruationFlowRecord")
@@ -1727,6 +1974,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMenstruationFlowRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMenstruationFlowRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1764,6 +2018,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMenstruationFlowRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MenstruationFlowRecord$MenstruationFlowType")
@@ -1774,6 +2035,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsMenstruationFlowRecordMenstruationFlowType = env.NewGlobalRef(&c.Object)
 
+		midMenstruationFlowRecordMenstruationFlowTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecordMenstruationFlowType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/AggregationType")
@@ -1783,6 +2051,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAggregationType = env.NewGlobalRef(&c.Object)
+
+		midAggregationTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAggregationType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1809,6 +2084,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDistanceRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDistanceRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1860,6 +2142,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDistanceRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/AppInfo")
@@ -1885,6 +2174,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAppInfoGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "getPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1922,6 +2218,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRespiratoryRateRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/RespiratoryRateRecord$Builder")
@@ -1953,6 +2256,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRespiratoryRateRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CyclingPedalingCadenceRecord")
@@ -1978,6 +2288,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCyclingPedalingCadenceRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCyclingPedalingCadenceRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2029,6 +2346,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCyclingPedalingCadenceRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CyclingPedalingCadenceRecord$CyclingPedalingCadenceRecordSample")
@@ -2061,6 +2385,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2105,6 +2436,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInstantRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstantRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BoneMassRecord")
@@ -2130,6 +2468,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBoneMassRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBoneMassRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2167,6 +2512,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBoneMassRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HydrationRecord")
@@ -2192,6 +2544,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midHydrationRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHydrationRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2237,6 +2596,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midHydrationRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HydrationRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHydrationRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2316,6 +2682,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMetadataToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Metadata$Builder")
@@ -2382,6 +2755,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMetadataBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal")
@@ -2391,6 +2771,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsExerciseCompletionGoal = env.NewGlobalRef(&c.Object)
+
+		midExerciseCompletionGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -2423,6 +2810,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExerciseCompletionGoalActiveCaloriesBurnedGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalActiveCaloriesBurnedGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$DistanceGoal")
@@ -2448,6 +2842,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExerciseCompletionGoalDistanceGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalDistanceGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceGoal)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2492,6 +2893,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExerciseCompletionGoalDistanceWithVariableRestGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceWithVariableRestGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$DurationGoal")
@@ -2517,6 +2925,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExerciseCompletionGoalDurationGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDurationGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalDurationGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDurationGoal)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2554,6 +2969,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExerciseCompletionGoalRepetitionsGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalRepetitionsGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$StepsGoal")
@@ -2579,6 +3001,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExerciseCompletionGoalStepsGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalStepsGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalStepsGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalStepsGoal)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2616,6 +3045,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExerciseCompletionGoalTotalCaloriesBurnedGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalTotalCaloriesBurnedGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$UnknownGoal")
@@ -2626,6 +3062,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsExerciseCompletionGoalUnknownGoal = env.NewGlobalRef(&c.Object)
 
+		midExerciseCompletionGoalUnknownGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalUnknownGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$UnspecifiedGoal")
@@ -2635,6 +3078,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsExerciseCompletionGoalUnspecifiedGoal = env.NewGlobalRef(&c.Object)
+
+		midExerciseCompletionGoalUnspecifiedGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalUnspecifiedGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -2661,6 +3111,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midActivityIntensityRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityIntensityRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2698,6 +3155,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midActivityIntensityRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/StepsRecord")
@@ -2723,6 +3187,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStepsRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStepsRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2774,6 +3245,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStepsRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeartRateRecord")
@@ -2799,6 +3277,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midHeartRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeartRateRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2850,6 +3335,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midHeartRateRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeartRateRecord$HeartRateSample")
@@ -2888,6 +3380,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midHeartRateRecordHeartRateSampleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordHeartRateSample)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyFatRecord")
@@ -2919,6 +3418,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBodyFatRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyFatRecord$Builder")
@@ -2944,6 +3450,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBodyFatRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BodyFatRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBodyFatRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3009,6 +3522,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlannedExerciseStepToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PlannedExerciseStep$Builder")
@@ -3068,6 +3588,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlannedExerciseStepBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BasalMetabolicRateRecord")
@@ -3093,6 +3620,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBasalMetabolicRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBasalMetabolicRateRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3130,6 +3664,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBasalMetabolicRateRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeightRecord")
@@ -3155,6 +3696,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midHeightRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeightRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3192,6 +3740,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midHeightRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ElevationGainedRecord")
@@ -3217,6 +3772,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midElevationGainedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElevationGainedRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3268,6 +3830,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midElevationGainedRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyTemperatureMeasurementLocation")
@@ -3278,6 +3847,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsBodyTemperatureMeasurementLocation = env.NewGlobalRef(&c.Object)
 
+		midBodyTemperatureMeasurementLocationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureMeasurementLocation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSessionType")
@@ -3287,6 +3863,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsExerciseSessionType = env.NewGlobalRef(&c.Object)
+
+		midExerciseSessionTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -3313,6 +3896,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSpeedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpeedRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3364,6 +3954,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSpeedRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SpeedRecord$SpeedRecordSample")
@@ -3402,6 +3999,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSpeedRecordSpeedRecordSampleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordSpeedRecordSample)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSegmentType")
@@ -3411,6 +4015,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsExerciseSegmentType = env.NewGlobalRef(&c.Object)
+
+		midExerciseSegmentTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegmentType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -3450,6 +4061,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBasalBodyTemperatureRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BasalBodyTemperatureRecord$Builder")
@@ -3475,6 +4093,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBasalBodyTemperatureRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BasalBodyTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBasalBodyTemperatureRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3533,6 +4158,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExerciseSegmentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSegment$Builder")
@@ -3551,6 +4183,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExerciseSegmentBuilderSetRepetitionsCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegmentBuilder)), "setRepetitionsCount", "(I)Landroid/health/connect/datatypes/ExerciseSegment$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseSegmentBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegmentBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3703,6 +4342,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMedicalDataSourceBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MenstruationPeriodRecord")
@@ -3721,6 +4367,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMenstruationPeriodRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMenstruationPeriodRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3766,6 +4419,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMenstruationPeriodRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MenstruationPeriodRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMenstruationPeriodRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3846,6 +4506,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPlannedExerciseSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPlannedExerciseSessionRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3953,6 +4620,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlannedExerciseSessionRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeartRateVariabilityRmssdRecord")
@@ -3984,6 +4658,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midHeartRateVariabilityRmssdRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeartRateVariabilityRmssdRecord$Builder")
@@ -4009,6 +4690,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midHeartRateVariabilityRmssdRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HeartRateVariabilityRmssdRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeartRateVariabilityRmssdRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4060,6 +4748,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExerciseLapToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseLap$Builder")
@@ -4078,6 +4773,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExerciseLapBuilderSetLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLapBuilder)), "setLength", "(Landroid/health/connect/datatypes/units/Length;)Landroid/health/connect/datatypes/ExerciseLap$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseLapBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLapBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4115,6 +4817,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDataOriginToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOrigin)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/DataOrigin$Builder")
@@ -4133,6 +4842,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDataOriginBuilderSetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOriginBuilder)), "setPackageName", "(Ljava/lang/String;)Landroid/health/connect/datatypes/DataOrigin$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataOriginBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOriginBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4177,6 +4893,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBodyTemperatureRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyTemperatureRecord$Builder")
@@ -4202,6 +4925,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBodyTemperatureRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BodyTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBodyTemperatureRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4246,6 +4976,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCervicalMucusRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CervicalMucusRecord$Builder")
@@ -4277,6 +5014,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCervicalMucusRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CervicalMucusRecord$CervicalMucusAppearance")
@@ -4287,6 +5031,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsCervicalMucusRecordCervicalMucusAppearance = env.NewGlobalRef(&c.Object)
 
+		midCervicalMucusRecordCervicalMucusAppearanceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecordCervicalMucusAppearance)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CervicalMucusRecord$CervicalMucusSensation")
@@ -4296,6 +5047,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCervicalMucusRecordCervicalMucusSensation = env.NewGlobalRef(&c.Object)
+
+		midCervicalMucusRecordCervicalMucusSensationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecordCervicalMucusSensation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -4623,6 +5381,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNutritionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNutritionRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4982,6 +5747,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNutritionRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Device")
@@ -5027,6 +5799,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Device$Builder")
@@ -5059,6 +5838,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDeviceBuilderSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setType", "(I)Landroid/health/connect/datatypes/Device$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5145,6 +5931,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExerciseSessionRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSessionRecord$Builder")
@@ -5218,6 +6011,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExerciseSessionRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal")
@@ -5228,6 +6028,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsExercisePerformanceGoal = env.NewGlobalRef(&c.Object)
 
+		midExercisePerformanceGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$AmrapGoal")
@@ -5237,6 +6044,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsExercisePerformanceGoalAmrapGoal = env.NewGlobalRef(&c.Object)
+
+		midExercisePerformanceGoalAmrapGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalAmrapGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5270,6 +6084,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExercisePerformanceGoalCadenceGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExercisePerformanceGoalCadenceGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5314,6 +6135,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExercisePerformanceGoalHeartRateGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalHeartRateGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$PowerGoal")
@@ -5352,6 +6180,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExercisePerformanceGoalPowerGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalPowerGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$RateOfPerceivedExertionGoal")
@@ -5377,6 +6212,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExercisePerformanceGoalRateOfPerceivedExertionGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalRateOfPerceivedExertionGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExercisePerformanceGoalRateOfPerceivedExertionGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalRateOfPerceivedExertionGoal)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5421,6 +6263,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExercisePerformanceGoalSpeedGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalSpeedGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$UnknownGoal")
@@ -5430,6 +6279,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsExercisePerformanceGoalUnknownGoal = env.NewGlobalRef(&c.Object)
+
+		midExercisePerformanceGoalUnknownGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalUnknownGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5462,6 +6318,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExercisePerformanceGoalWeightGoalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalWeightGoal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/FloorsClimbedRecord")
@@ -5487,6 +6350,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFloorsClimbedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFloorsClimbedRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5538,6 +6408,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFloorsClimbedRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/OxygenSaturationRecord")
@@ -5563,6 +6440,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midOxygenSaturationRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOxygenSaturationRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5600,6 +6484,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOxygenSaturationRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/IntermenstrualBleedingRecord")
@@ -5618,6 +6509,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midIntermenstrualBleedingRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIntermenstrualBleedingRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5655,6 +6553,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIntermenstrualBleedingRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Record")
@@ -5680,6 +6585,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5717,6 +6629,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLeanBodyMassRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/LeanBodyMassRecord$Builder")
@@ -5742,6 +6661,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midLeanBodyMassRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/LeanBodyMassRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeanBodyMassRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5787,6 +6713,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSleepSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSleepSessionRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5852,6 +6785,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSleepSessionRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SleepSessionRecord$Stage")
@@ -5897,6 +6837,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSleepSessionRecordStageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SleepSessionRecord$StageType")
@@ -5906,6 +6853,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSleepSessionRecordStageType = env.NewGlobalRef(&c.Object)
+
+		midSleepSessionRecordStageTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStageType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5946,6 +6900,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSkinTemperatureRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSkinTemperatureRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6011,6 +6972,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSkinTemperatureRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SkinTemperatureRecord$Delta")
@@ -6049,6 +7017,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSkinTemperatureRecordDeltaToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordDelta)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyWaterMassRecord")
@@ -6080,6 +7055,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBodyWaterMassRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyWaterMassRecord$Builder")
@@ -6105,6 +7087,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBodyWaterMassRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BodyWaterMassRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBodyWaterMassRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6156,6 +7145,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlannedExerciseBlockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlock)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PlannedExerciseBlock$Builder")
@@ -6201,6 +7197,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlannedExerciseBlockBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/TotalCaloriesBurnedRecord")
@@ -6226,6 +7229,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTotalCaloriesBurnedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTotalCaloriesBurnedRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6271,6 +7281,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTotalCaloriesBurnedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTotalCaloriesBurnedRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6367,6 +7384,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsMealType = env.NewGlobalRef(&c.Object)
 
+		midMealTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMealType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/StepsCadenceRecord")
@@ -6392,6 +7416,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStepsCadenceRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStepsCadenceRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6443,6 +7474,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStepsCadenceRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/StepsCadenceRecord$StepsCadenceRecordSample")
@@ -6475,6 +7513,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStepsCadenceRecordStepsCadenceRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStepsCadenceRecordStepsCadenceRecordSampleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6519,6 +7564,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midVo2MaxRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Vo2MaxRecord$Builder")
@@ -6550,6 +7602,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midVo2MaxRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Vo2MaxRecord$Vo2MaxMeasurementMethod")
@@ -6559,6 +7618,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsVo2MaxRecordVo2MaxMeasurementMethod = env.NewGlobalRef(&c.Object)
+
+		midVo2MaxRecordVo2MaxMeasurementMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecordVo2MaxMeasurementMethod)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -6585,6 +7651,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWeightRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWeightRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6622,6 +7695,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWeightRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/RestingHeartRateRecord")
@@ -6647,6 +7727,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRestingHeartRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRestingHeartRateRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6684,6 +7771,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRestingHeartRateRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ActiveCaloriesBurnedRecord")
@@ -6709,6 +7803,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midActiveCaloriesBurnedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActiveCaloriesBurnedRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6760,6 +7861,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midActiveCaloriesBurnedRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MindfulnessSessionRecord")
@@ -6805,6 +7913,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMindfulnessSessionRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MindfulnessSessionRecord$Builder")
@@ -6844,6 +7959,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMindfulnessSessionRecordBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/MindfulnessSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMindfulnessSessionRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6902,6 +8024,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBloodPressureRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodPressureRecord$BloodPressureMeasurementLocation")
@@ -6912,6 +8041,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsBloodPressureRecordBloodPressureMeasurementLocation = env.NewGlobalRef(&c.Object)
 
+		midBloodPressureRecordBloodPressureMeasurementLocationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBloodPressureMeasurementLocation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodPressureRecord$BodyPosition")
@@ -6921,6 +8057,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBloodPressureRecordBodyPosition = env.NewGlobalRef(&c.Object)
+
+		midBloodPressureRecordBodyPositionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBodyPosition)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -6947,6 +8090,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBloodPressureRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BloodPressureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBloodPressureRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6984,6 +8134,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSexualActivityRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecord)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SexualActivityRecord$Builder")
@@ -7015,6 +8172,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSexualActivityRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SexualActivityRecord$SexualActivityProtectionUsed")
@@ -7024,6 +8188,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSexualActivityRecordSexualActivityProtectionUsed = env.NewGlobalRef(&c.Object)
+
+		midSexualActivityRecordSexualActivityProtectionUsedToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecordSexualActivityProtectionUsed)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -7050,6 +8221,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midOvulationTestRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOvulationTestRecordToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecord)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -7087,6 +8265,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOvulationTestRecordBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecordBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/OvulationTestRecord$OvulationTestResult")
@@ -7096,6 +8281,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsOvulationTestRecordOvulationTestResult = env.NewGlobalRef(&c.Object)
+
+		midOvulationTestRecordOvulationTestResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecordOvulationTestResult)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

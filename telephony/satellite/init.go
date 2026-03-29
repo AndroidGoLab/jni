@@ -25,10 +25,12 @@ var (
 
 	clsStateChangeListener                      *jni.GlobalRef
 	midStateChangeListenerOnEnabledStateChanged jni.MethodID
+	midStateChangeListenerToString              jni.MethodID
 
 	clsManager                              *jni.GlobalRef
 	midManagerRegisterStateChangeListener   jni.MethodID
 	midManagerUnregisterStateChangeListener jni.MethodID
+	midManagerToString                      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -64,6 +66,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStateChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateChangeListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/telephony/satellite/SatelliteManager")
@@ -82,6 +91,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerUnregisterStateChangeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterStateChangeListener", "(Landroid/telephony/satellite/SatelliteStateChangeListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

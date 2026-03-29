@@ -45,3 +45,30 @@ func (m *DialogInterfaceOnCancelListener) OnCancel(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.content.DialogInterface$OnCancelListener.toString.
+func (m *DialogInterfaceOnCancelListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDialogInterfaceOnCancelListenerToString == nil {
+			callErr = fmt.Errorf("android.content.DialogInterface$OnCancelListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDialogInterfaceOnCancelListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

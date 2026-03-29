@@ -23,11 +23,13 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsDeviceLockManager *jni.GlobalRef
+	clsDeviceLockManager         *jni.GlobalRef
+	midDeviceLockManagerToString jni.MethodID
 
-	clsDeviceId        *jni.GlobalRef
-	midDeviceIdGetId   jni.MethodID
-	midDeviceIdGetType jni.MethodID
+	clsDeviceId         *jni.GlobalRef
+	midDeviceIdGetId    jni.MethodID
+	midDeviceIdGetType  jni.MethodID
+	midDeviceIdToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -56,6 +58,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsDeviceLockManager = env.NewGlobalRef(&c.Object)
 
+		midDeviceLockManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceLockManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/devicelock/DeviceId")
@@ -74,6 +83,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDeviceIdGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceId)), "getType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceIdToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceId)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

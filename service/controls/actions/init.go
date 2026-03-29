@@ -27,11 +27,13 @@ var (
 	midBooleanActionCtor          jni.MethodID
 	midBooleanActionGetActionType jni.MethodID
 	midBooleanActionGetNewState   jni.MethodID
+	midBooleanActionToString      jni.MethodID
 
 	clsControlAction                  *jni.GlobalRef
 	midControlActionGetActionType     jni.MethodID
 	midControlActionGetChallengeValue jni.MethodID
 	midControlActionGetTemplateId     jni.MethodID
+	midControlActionToString          jni.MethodID
 	midControlActionGetErrorAction    jni.MethodID
 	midControlActionIsValidResponse   jni.MethodID
 
@@ -39,15 +41,18 @@ var (
 	midFloatActionCtor          jni.MethodID
 	midFloatActionGetActionType jni.MethodID
 	midFloatActionGetNewValue   jni.MethodID
+	midFloatActionToString      jni.MethodID
 
 	clsCommandAction              *jni.GlobalRef
 	midCommandActionCtor          jni.MethodID
 	midCommandActionGetActionType jni.MethodID
+	midCommandActionToString      jni.MethodID
 
 	clsModeAction              *jni.GlobalRef
 	midModeActionCtor          jni.MethodID
 	midModeActionGetActionType jni.MethodID
 	midModeActionGetNewMode    jni.MethodID
+	midModeActionToString      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -94,6 +99,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBooleanActionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBooleanAction)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/actions/ControlAction")
@@ -119,6 +131,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midControlActionGetTemplateId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlAction)), "getTemplateId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midControlActionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlAction)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -167,6 +186,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFloatActionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatAction)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/actions/CommandAction")
@@ -182,6 +208,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCommandActionGetActionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCommandAction)), "getActionType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCommandActionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCommandAction)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -210,6 +243,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midModeActionGetNewMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsModeAction)), "getNewMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midModeActionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsModeAction)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

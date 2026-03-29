@@ -29,23 +29,29 @@ var (
 	midServiceOnBind                        jni.MethodID
 	midServiceOnLoadConfig1                 jni.MethodID
 	midServiceOnLoadConfig2_1               jni.MethodID
+	midServiceToString                      jni.MethodID
 
-	clsMessagingService       *jni.GlobalRef
-	midMessagingServiceOnBind jni.MethodID
+	clsMessagingService         *jni.GlobalRef
+	midMessagingServiceOnBind   jni.MethodID
+	midMessagingServiceToString jni.MethodID
 
-	clsMessagingServiceResultCallback *jni.GlobalRef
+	clsMessagingServiceResultCallback         *jni.GlobalRef
+	midMessagingServiceResultCallbackToString jni.MethodID
 
 	clsMessagingServiceSendMmsResult               *jni.GlobalRef
 	midMessagingServiceSendMmsResultGetSendConfPdu jni.MethodID
 	midMessagingServiceSendMmsResultGetSendStatus  jni.MethodID
+	midMessagingServiceSendMmsResultToString       jni.MethodID
 
 	clsMessagingServiceSendMultipartSmsResult               *jni.GlobalRef
 	midMessagingServiceSendMultipartSmsResultGetMessageRefs jni.MethodID
 	midMessagingServiceSendMultipartSmsResultGetSendStatus  jni.MethodID
+	midMessagingServiceSendMultipartSmsResultToString       jni.MethodID
 
 	clsMessagingServiceSendSmsResult              *jni.GlobalRef
 	midMessagingServiceSendSmsResultGetMessageRef jni.MethodID
 	midMessagingServiceSendSmsResultGetSendStatus jni.MethodID
+	midMessagingServiceSendSmsResultToString      jni.MethodID
 
 	clsIdentifier                     *jni.GlobalRef
 	midIdentifierCtor                 jni.MethodID
@@ -63,15 +69,17 @@ var (
 	midIdentifierToString             jni.MethodID
 	midIdentifierWriteToParcel        jni.MethodID
 
-	clsMessagingClientService       *jni.GlobalRef
-	midMessagingClientServiceCtor   jni.MethodID
-	midMessagingClientServiceOnBind jni.MethodID
+	clsMessagingClientService         *jni.GlobalRef
+	midMessagingClientServiceCtor     jni.MethodID
+	midMessagingClientServiceOnBind   jni.MethodID
+	midMessagingClientServiceToString jni.MethodID
 
 	clsMessagePdu                 *jni.GlobalRef
 	midMessagePduCtor             jni.MethodID
 	midMessagePduDescribeContents jni.MethodID
 	midMessagePduGetPdus          jni.MethodID
 	midMessagePduWriteToParcel    jni.MethodID
+	midMessagePduToString         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -135,6 +143,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/carrier/CarrierMessagingService")
@@ -152,6 +167,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMessagingServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagingService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/carrier/CarrierMessagingService$ResultCallback")
@@ -161,6 +183,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMessagingServiceResultCallback = env.NewGlobalRef(&c.Object)
+
+		midMessagingServiceResultCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagingServiceResultCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -180,6 +209,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMessagingServiceSendMmsResultGetSendStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagingServiceSendMmsResult)), "getSendStatus", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMessagingServiceSendMmsResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagingServiceSendMmsResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -210,6 +246,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMessagingServiceSendMultipartSmsResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagingServiceSendMultipartSmsResult)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/carrier/CarrierMessagingService$SendSmsResult")
@@ -228,6 +271,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMessagingServiceSendSmsResultGetSendStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagingServiceSendSmsResult)), "getSendStatus", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMessagingServiceSendSmsResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagingServiceSendSmsResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -360,6 +410,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMessagingClientServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagingClientService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/carrier/MessagePdu")
@@ -389,6 +446,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMessagePduWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagePdu)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMessagePduToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMessagePdu)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

@@ -25,6 +25,7 @@ var (
 
 	clsEnvironment                                  *jni.GlobalRef
 	midEnvironmentCtor                              jni.MethodID
+	midEnvironmentToString                          jni.MethodID
 	midEnvironmentGetDataDirectory                  jni.MethodID
 	midEnvironmentGetDownloadCacheDirectory         jni.MethodID
 	midEnvironmentGetExternalStorageDirectory       jni.MethodID
@@ -71,6 +72,13 @@ func doInit(env *jni.Env) error {
 		clsEnvironment = env.NewGlobalRef(&c.Object)
 		midEnvironmentCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midEnvironmentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

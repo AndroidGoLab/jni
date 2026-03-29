@@ -23,14 +23,16 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsFontFamily        *jni.GlobalRef
-	midFontFamilyGetFont jni.MethodID
-	midFontFamilyGetSize jni.MethodID
+	clsFontFamily         *jni.GlobalRef
+	midFontFamilyGetFont  jni.MethodID
+	midFontFamilyGetSize  jni.MethodID
+	midFontFamilyToString jni.MethodID
 
 	clsFontFamilyBuilder                    *jni.GlobalRef
 	midFontFamilyBuilderAddFont             jni.MethodID
 	midFontFamilyBuilderBuild               jni.MethodID
 	midFontFamilyBuilderBuildVariableFamily jni.MethodID
+	midFontFamilyBuilderToString            jni.MethodID
 
 	clsFontStyle          *jni.GlobalRef
 	midFontStyleCtor      jni.MethodID
@@ -71,8 +73,10 @@ var (
 	midFontBuilderSetSlant                    jni.MethodID
 	midFontBuilderSetTtcIndex                 jni.MethodID
 	midFontBuilderSetWeight                   jni.MethodID
+	midFontBuilderToString                    jni.MethodID
 
 	clsSystemFonts                  *jni.GlobalRef
+	midSystemFontsToString          jni.MethodID
 	midSystemFontsGetAvailableFonts jni.MethodID
 )
 
@@ -116,6 +120,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFontFamilyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFontFamily)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/fonts/FontFamily$Builder")
@@ -141,6 +152,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFontFamilyBuilderBuildVariableFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFontFamilyBuilder)), "buildVariableFamily", "()Landroid/graphics/fonts/FontFamily;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFontFamilyBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFontFamilyBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -405,6 +423,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFontBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFontBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/fonts/SystemFonts")
@@ -414,6 +439,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSystemFonts = env.NewGlobalRef(&c.Object)
+
+		midSystemFontsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSystemFonts)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midSystemFontsGetAvailableFonts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSystemFonts)), "getAvailableFonts", "()Ljava/util/Set;")
 		if err != nil {

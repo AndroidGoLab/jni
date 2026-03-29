@@ -37,10 +37,12 @@ var (
 	midGetCredentialRequestBuilderBuild                          jni.MethodID
 	midGetCredentialRequestBuilderSetAlwaysSendAppInfoToProvider jni.MethodID
 	midGetCredentialRequestBuilderSetOrigin                      jni.MethodID
+	midGetCredentialRequestBuilderToString                       jni.MethodID
 
-	clsClearCredentialStateException        *jni.GlobalRef
-	midClearCredentialStateExceptionCtor    jni.MethodID
-	midClearCredentialStateExceptionGetType jni.MethodID
+	clsClearCredentialStateException         *jni.GlobalRef
+	midClearCredentialStateExceptionCtor     jni.MethodID
+	midClearCredentialStateExceptionGetType  jni.MethodID
+	midClearCredentialStateExceptionToString jni.MethodID
 
 	clsGetCredentialResponse                 *jni.GlobalRef
 	midGetCredentialResponseCtor             jni.MethodID
@@ -54,6 +56,7 @@ var (
 	midUnregisterCredentialDescriptionRequestDescribeContents          jni.MethodID
 	midUnregisterCredentialDescriptionRequestGetCredentialDescriptions jni.MethodID
 	midUnregisterCredentialDescriptionRequestWriteToParcel             jni.MethodID
+	midUnregisterCredentialDescriptionRequestToString                  jni.MethodID
 
 	clsClearCredentialStateRequest                 *jni.GlobalRef
 	midClearCredentialStateRequestCtor             jni.MethodID
@@ -74,12 +77,14 @@ var (
 	midCredentialManagerIsEnabledCredentialProviderService jni.MethodID
 	midCredentialManagerRegisterCredentialDescription      jni.MethodID
 	midCredentialManagerUnregisterCredentialDescription    jni.MethodID
+	midCredentialManagerToString                           jni.MethodID
 
 	clsRegisterCredentialDescriptionRequest                          *jni.GlobalRef
 	midRegisterCredentialDescriptionRequestCtor                      jni.MethodID
 	midRegisterCredentialDescriptionRequestDescribeContents          jni.MethodID
 	midRegisterCredentialDescriptionRequestGetCredentialDescriptions jni.MethodID
 	midRegisterCredentialDescriptionRequestWriteToParcel             jni.MethodID
+	midRegisterCredentialDescriptionRequestToString                  jni.MethodID
 
 	clsCreateCredentialRequest                            *jni.GlobalRef
 	midCreateCredentialRequestAlwaysSendAppInfoToProvider jni.MethodID
@@ -97,10 +102,12 @@ var (
 	midCreateCredentialRequestBuilderSetAlwaysSendAppInfoToProvider jni.MethodID
 	midCreateCredentialRequestBuilderSetIsSystemProviderRequired    jni.MethodID
 	midCreateCredentialRequestBuilderSetOrigin                      jni.MethodID
+	midCreateCredentialRequestBuilderToString                       jni.MethodID
 
-	clsCreateCredentialException        *jni.GlobalRef
-	midCreateCredentialExceptionCtor    jni.MethodID
-	midCreateCredentialExceptionGetType jni.MethodID
+	clsCreateCredentialException         *jni.GlobalRef
+	midCreateCredentialExceptionCtor     jni.MethodID
+	midCreateCredentialExceptionGetType  jni.MethodID
+	midCreateCredentialExceptionToString jni.MethodID
 
 	clsCredentialDescription                        *jni.GlobalRef
 	midCredentialDescriptionCtor                    jni.MethodID
@@ -111,6 +118,7 @@ var (
 	midCredentialDescriptionGetType                 jni.MethodID
 	midCredentialDescriptionHashCode                jni.MethodID
 	midCredentialDescriptionWriteToParcel           jni.MethodID
+	midCredentialDescriptionToString                jni.MethodID
 
 	clsCreateCredentialResponse                 *jni.GlobalRef
 	midCreateCredentialResponseCtor             jni.MethodID
@@ -119,17 +127,20 @@ var (
 	midCreateCredentialResponseToString         jni.MethodID
 	midCreateCredentialResponseWriteToParcel    jni.MethodID
 
-	clsGetCredentialException        *jni.GlobalRef
-	midGetCredentialExceptionCtor    jni.MethodID
-	midGetCredentialExceptionGetType jni.MethodID
+	clsGetCredentialException         *jni.GlobalRef
+	midGetCredentialExceptionCtor     jni.MethodID
+	midGetCredentialExceptionGetType  jni.MethodID
+	midGetCredentialExceptionToString jni.MethodID
 
 	clsPrepareGetCredentialResponse                              *jni.GlobalRef
 	midPrepareGetCredentialResponseGetPendingGetCredentialHandle jni.MethodID
 	midPrepareGetCredentialResponseHasAuthenticationResults      jni.MethodID
 	midPrepareGetCredentialResponseHasCredentialResults          jni.MethodID
 	midPrepareGetCredentialResponseHasRemoteResults              jni.MethodID
+	midPrepareGetCredentialResponseToString                      jni.MethodID
 
-	clsPrepareGetCredentialResponsePendingGetCredentialHandle *jni.GlobalRef
+	clsPrepareGetCredentialResponsePendingGetCredentialHandle         *jni.GlobalRef
+	midPrepareGetCredentialResponsePendingGetCredentialHandleToString jni.MethodID
 
 	clsCredentialOption                           *jni.GlobalRef
 	midCredentialOptionDescribeContents           jni.MethodID
@@ -145,6 +156,7 @@ var (
 	midCredentialOptionBuilderAddAllowedProvider          jni.MethodID
 	midCredentialOptionBuilderBuild                       jni.MethodID
 	midCredentialOptionBuilderSetIsSystemProviderRequired jni.MethodID
+	midCredentialOptionBuilderToString                    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -260,6 +272,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGetCredentialRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequestBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/credentials/ClearCredentialStateException")
@@ -275,6 +294,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midClearCredentialStateExceptionGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateException)), "getType", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClearCredentialStateExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateException)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -352,6 +378,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midUnregisterCredentialDescriptionRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnregisterCredentialDescriptionRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUnregisterCredentialDescriptionRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnregisterCredentialDescriptionRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -480,6 +513,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCredentialManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/credentials/RegisterCredentialDescriptionRequest")
@@ -509,6 +549,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRegisterCredentialDescriptionRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRegisterCredentialDescriptionRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRegisterCredentialDescriptionRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRegisterCredentialDescriptionRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -626,6 +673,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCreateCredentialRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequestBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/credentials/CreateCredentialException")
@@ -641,6 +695,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCreateCredentialExceptionGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialException)), "getType", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCreateCredentialExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialException)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -710,6 +771,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCredentialDescriptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialDescription)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/credentials/CreateCredentialResponse")
@@ -773,6 +841,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGetCredentialExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/credentials/PrepareGetCredentialResponse")
@@ -811,6 +886,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPrepareGetCredentialResponseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrepareGetCredentialResponse)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/credentials/PrepareGetCredentialResponse$PendingGetCredentialHandle")
@@ -820,6 +902,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPrepareGetCredentialResponsePendingGetCredentialHandle = env.NewGlobalRef(&c.Object)
+
+		midPrepareGetCredentialResponsePendingGetCredentialHandleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrepareGetCredentialResponsePendingGetCredentialHandle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -912,6 +1001,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCredentialOptionBuilderSetIsSystemProviderRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialOptionBuilder)), "setIsSystemProviderRequired", "(Z)Landroid/credentials/CredentialOption$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCredentialOptionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialOptionBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

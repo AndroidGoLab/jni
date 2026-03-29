@@ -31,13 +31,15 @@ var (
 	midTextClassificationSessionIdToString         jni.MethodID
 	midTextClassificationSessionIdWriteToParcel    jni.MethodID
 
-	clsTextClassifier *jni.GlobalRef
+	clsTextClassifier         *jni.GlobalRef
+	midTextClassifierToString jni.MethodID
 
 	clsTextClassifierEntityConfig                                     *jni.GlobalRef
 	midTextClassifierEntityConfigDescribeContents                     jni.MethodID
 	midTextClassifierEntityConfigGetHints                             jni.MethodID
 	midTextClassifierEntityConfigShouldIncludeTypesFromTextClassifier jni.MethodID
 	midTextClassifierEntityConfigWriteToParcel                        jni.MethodID
+	midTextClassifierEntityConfigToString                             jni.MethodID
 
 	clsConversationAction                   *jni.GlobalRef
 	midConversationActionDescribeContents   jni.MethodID
@@ -47,6 +49,7 @@ var (
 	midConversationActionGetTextReply       jni.MethodID
 	midConversationActionGetType            jni.MethodID
 	midConversationActionWriteToParcel      jni.MethodID
+	midConversationActionToString           jni.MethodID
 
 	clsConversationActionBuilder                   *jni.GlobalRef
 	midConversationActionBuilderBuild              jni.MethodID
@@ -54,9 +57,11 @@ var (
 	midConversationActionBuilderSetConfidenceScore jni.MethodID
 	midConversationActionBuilderSetExtras          jni.MethodID
 	midConversationActionBuilderSetTextReply       jni.MethodID
+	midConversationActionBuilderToString           jni.MethodID
 
 	clsTextClassificationSessionFactory                                *jni.GlobalRef
 	midTextClassificationSessionFactoryCreateTextClassificationSession jni.MethodID
+	midTextClassificationSessionFactoryToString                        jni.MethodID
 
 	clsTextClassificationContext                 *jni.GlobalRef
 	midTextClassificationContextDescribeContents jni.MethodID
@@ -69,6 +74,7 @@ var (
 	clsTextClassificationContextBuilder                 *jni.GlobalRef
 	midTextClassificationContextBuilderBuild            jni.MethodID
 	midTextClassificationContextBuilderSetWidgetVersion jni.MethodID
+	midTextClassificationContextBuilderToString         jni.MethodID
 
 	clsTextLinks                 *jni.GlobalRef
 	midTextLinksDescribeContents jni.MethodID
@@ -82,6 +88,7 @@ var (
 	midTextLinksBuilderBuild          jni.MethodID
 	midTextLinksBuilderClearTextLinks jni.MethodID
 	midTextLinksBuilderSetExtras      jni.MethodID
+	midTextLinksBuilderToString       jni.MethodID
 
 	clsTextLinksRequest                      *jni.GlobalRef
 	midTextLinksRequestDescribeContents      jni.MethodID
@@ -92,6 +99,7 @@ var (
 	midTextLinksRequestGetReferenceTime      jni.MethodID
 	midTextLinksRequestGetText               jni.MethodID
 	midTextLinksRequestWriteToParcel         jni.MethodID
+	midTextLinksRequestToString              jni.MethodID
 
 	clsTextLinksTextLink                   *jni.GlobalRef
 	midTextLinksTextLinkDescribeContents   jni.MethodID
@@ -107,6 +115,7 @@ var (
 	clsTextLinksTextLinkSpan            *jni.GlobalRef
 	midTextLinksTextLinkSpanGetTextLink jni.MethodID
 	midTextLinksTextLinkSpanOnClick     jni.MethodID
+	midTextLinksTextLinkSpanToString    jni.MethodID
 
 	clsTextClassifierEvent                 *jni.GlobalRef
 	midTextClassifierEventDescribeContents jni.MethodID
@@ -124,13 +133,17 @@ var (
 	midTextClassifierEventToString         jni.MethodID
 	midTextClassifierEventWriteToParcel    jni.MethodID
 
-	clsTextClassifierEventBuilder *jni.GlobalRef
+	clsTextClassifierEventBuilder         *jni.GlobalRef
+	midTextClassifierEventBuilderToString jni.MethodID
 
-	clsTextClassifierEventConversationActionsEvent *jni.GlobalRef
+	clsTextClassifierEventConversationActionsEvent         *jni.GlobalRef
+	midTextClassifierEventConversationActionsEventToString jni.MethodID
 
-	clsTextClassifierEventLanguageDetectionEvent *jni.GlobalRef
+	clsTextClassifierEventLanguageDetectionEvent         *jni.GlobalRef
+	midTextClassifierEventLanguageDetectionEventToString jni.MethodID
 
-	clsTextClassifierEventTextLinkifyEvent *jni.GlobalRef
+	clsTextClassifierEventTextLinkifyEvent         *jni.GlobalRef
+	midTextClassifierEventTextLinkifyEventToString jni.MethodID
 
 	clsTextClassifierEventTextSelectionEvent                                   *jni.GlobalRef
 	midTextClassifierEventTextSelectionEventGetRelativeSuggestedWordEndIndex   jni.MethodID
@@ -138,6 +151,7 @@ var (
 	midTextClassifierEventTextSelectionEventGetRelativeWordEndIndex            jni.MethodID
 	midTextClassifierEventTextSelectionEventGetRelativeWordStartIndex          jni.MethodID
 	midTextClassifierEventTextSelectionEventWriteToParcel                      jni.MethodID
+	midTextClassifierEventTextSelectionEventToString                           jni.MethodID
 
 	clsTextLanguage                         *jni.GlobalRef
 	midTextLanguageDescribeContents         jni.MethodID
@@ -154,6 +168,7 @@ var (
 	midTextLanguageBuilderPutLocale jni.MethodID
 	midTextLanguageBuilderSetExtras jni.MethodID
 	midTextLanguageBuilderSetId     jni.MethodID
+	midTextLanguageBuilderToString  jni.MethodID
 
 	clsTextLanguageRequest                      *jni.GlobalRef
 	midTextLanguageRequestDescribeContents      jni.MethodID
@@ -161,6 +176,7 @@ var (
 	midTextLanguageRequestGetExtras             jni.MethodID
 	midTextLanguageRequestGetText               jni.MethodID
 	midTextLanguageRequestWriteToParcel         jni.MethodID
+	midTextLanguageRequestToString              jni.MethodID
 
 	clsTextClassification                   *jni.GlobalRef
 	midTextClassificationDescribeContents   jni.MethodID
@@ -189,6 +205,7 @@ var (
 	midTextClassificationBuilderSetLabel           jni.MethodID
 	midTextClassificationBuilderSetOnClickListener jni.MethodID
 	midTextClassificationBuilderSetText            jni.MethodID
+	midTextClassificationBuilderToString           jni.MethodID
 
 	clsTextClassificationRequest                      *jni.GlobalRef
 	midTextClassificationRequestDescribeContents      jni.MethodID
@@ -200,12 +217,14 @@ var (
 	midTextClassificationRequestGetStartIndex         jni.MethodID
 	midTextClassificationRequestGetText               jni.MethodID
 	midTextClassificationRequestWriteToParcel         jni.MethodID
+	midTextClassificationRequestToString              jni.MethodID
 
 	clsTextClassificationManager                                    *jni.GlobalRef
 	midTextClassificationManagerCreateTextClassificationSession     jni.MethodID
 	midTextClassificationManagerGetTextClassifier                   jni.MethodID
 	midTextClassificationManagerSetTextClassificationSessionFactory jni.MethodID
 	midTextClassificationManagerSetTextClassifier                   jni.MethodID
+	midTextClassificationManagerToString                            jni.MethodID
 
 	clsConversationActions                       *jni.GlobalRef
 	midConversationActionsCtor                   jni.MethodID
@@ -213,6 +232,7 @@ var (
 	midConversationActionsGetConversationActions jni.MethodID
 	midConversationActionsGetId                  jni.MethodID
 	midConversationActionsWriteToParcel          jni.MethodID
+	midConversationActionsToString               jni.MethodID
 
 	clsConversationActionsMessage                 *jni.GlobalRef
 	midConversationActionsMessageDescribeContents jni.MethodID
@@ -221,6 +241,7 @@ var (
 	midConversationActionsMessageGetReferenceTime jni.MethodID
 	midConversationActionsMessageGetText          jni.MethodID
 	midConversationActionsMessageWriteToParcel    jni.MethodID
+	midConversationActionsMessageToString         jni.MethodID
 
 	clsConversationActionsRequest                      *jni.GlobalRef
 	midConversationActionsRequestDescribeContents      jni.MethodID
@@ -231,6 +252,7 @@ var (
 	midConversationActionsRequestGetMaxSuggestions     jni.MethodID
 	midConversationActionsRequestGetTypeConfig         jni.MethodID
 	midConversationActionsRequestWriteToParcel         jni.MethodID
+	midConversationActionsRequestToString              jni.MethodID
 
 	clsTextSelection                       *jni.GlobalRef
 	midTextSelectionDescribeContents       jni.MethodID
@@ -251,6 +273,7 @@ var (
 	midTextSelectionBuilderSetExtras             jni.MethodID
 	midTextSelectionBuilderSetId                 jni.MethodID
 	midTextSelectionBuilderSetTextClassification jni.MethodID
+	midTextSelectionBuilderToString              jni.MethodID
 
 	clsTextSelectionRequest                                *jni.GlobalRef
 	midTextSelectionRequestDescribeContents                jni.MethodID
@@ -262,6 +285,7 @@ var (
 	midTextSelectionRequestGetText                         jni.MethodID
 	midTextSelectionRequestShouldIncludeTextClassification jni.MethodID
 	midTextSelectionRequestWriteToParcel                   jni.MethodID
+	midTextSelectionRequestToString                        jni.MethodID
 
 	clsSelectionEvent                                *jni.GlobalRef
 	midSelectionEventDescribeContents                jni.MethodID
@@ -372,6 +396,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsTextClassifier = env.NewGlobalRef(&c.Object)
 
+		midTextClassifierToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassifier)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/TextClassifier$EntityConfig")
@@ -404,6 +435,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextClassifierEntityConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassifierEntityConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextClassifierEntityConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassifierEntityConfig)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -469,6 +507,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midConversationActionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationAction)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/ConversationAction$Builder")
@@ -514,6 +559,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midConversationActionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationActionBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/TextClassificationSessionFactory")
@@ -525,6 +577,13 @@ func doInit(env *jni.Env) error {
 		clsTextClassificationSessionFactory = env.NewGlobalRef(&c.Object)
 
 		midTextClassificationSessionFactoryCreateTextClassificationSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassificationSessionFactory)), "createTextClassificationSession", "(Landroid/view/textclassifier/TextClassificationContext;)Landroid/view/textclassifier/TextClassifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextClassificationSessionFactoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassificationSessionFactory)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -601,6 +660,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextClassificationContextBuilderSetWidgetVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassificationContextBuilder)), "setWidgetVersion", "(Ljava/lang/String;)Landroid/view/textclassifier/TextClassificationContext$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextClassificationContextBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassificationContextBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -690,6 +756,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTextLinksBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextLinksBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/TextLinks$Request")
@@ -750,6 +823,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextLinksRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextLinksRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextLinksRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextLinksRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -847,6 +927,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextLinksTextLinkSpanOnClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextLinksTextLinkSpan)), "onClick", "(Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextLinksTextLinkSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextLinksTextLinkSpan)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -971,6 +1058,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsTextClassifierEventBuilder = env.NewGlobalRef(&c.Object)
 
+		midTextClassifierEventBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassifierEventBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/TextClassifierEvent$ConversationActionsEvent")
@@ -980,6 +1074,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTextClassifierEventConversationActionsEvent = env.NewGlobalRef(&c.Object)
+
+		midTextClassifierEventConversationActionsEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassifierEventConversationActionsEvent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -991,6 +1092,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsTextClassifierEventLanguageDetectionEvent = env.NewGlobalRef(&c.Object)
 
+		midTextClassifierEventLanguageDetectionEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassifierEventLanguageDetectionEvent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/TextClassifierEvent$TextLinkifyEvent")
@@ -1000,6 +1108,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTextClassifierEventTextLinkifyEvent = env.NewGlobalRef(&c.Object)
+
+		midTextClassifierEventTextLinkifyEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassifierEventTextLinkifyEvent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1040,6 +1155,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextClassifierEventTextSelectionEventWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassifierEventTextSelectionEvent)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextClassifierEventTextSelectionEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassifierEventTextSelectionEvent)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1150,6 +1272,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTextLanguageBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextLanguageBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/TextLanguage$Request")
@@ -1189,6 +1318,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextLanguageRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextLanguageRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextLanguageRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextLanguageRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1383,6 +1519,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTextClassificationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassificationBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/TextClassification$Request")
@@ -1456,6 +1599,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTextClassificationRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassificationRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/TextClassificationManager")
@@ -1488,6 +1638,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextClassificationManagerSetTextClassifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassificationManager)), "setTextClassifier", "(Landroid/view/textclassifier/TextClassifier;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextClassificationManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextClassificationManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1530,6 +1687,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConversationActionsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationActions)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConversationActionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationActions)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1582,6 +1746,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConversationActionsMessageWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationActionsMessage)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConversationActionsMessageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationActionsMessage)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1648,6 +1819,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConversationActionsRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationActionsRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConversationActionsRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationActionsRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1786,6 +1964,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTextSelectionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextSelectionBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textclassifier/TextSelection$Request")
@@ -1853,6 +2038,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextSelectionRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextSelectionRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextSelectionRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextSelectionRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

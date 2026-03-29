@@ -130,3 +130,30 @@ func (m *DownloadCompletedInput) HashCode() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.adservices.ondevicepersonalization.DownloadCompletedInput.toString.
+func (m *DownloadCompletedInput) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDownloadCompletedInputToString == nil {
+			callErr = fmt.Errorf("android.adservices.ondevicepersonalization.DownloadCompletedInput.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDownloadCompletedInputToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

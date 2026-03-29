@@ -103,6 +103,7 @@ var (
 	midMediaPlayerSetWakeMode                           jni.MethodID
 	midMediaPlayerStart                                 jni.MethodID
 	midMediaPlayerStop                                  jni.MethodID
+	midMediaPlayerToString                              jni.MethodID
 	midMediaPlayerCreate2                               jni.MethodID
 	midMediaPlayerCreate3_1                             jni.MethodID
 	midMediaPlayerCreate5_2                             jni.MethodID
@@ -111,56 +112,75 @@ var (
 
 	clsMediaPlayerDrmInfo                    *jni.GlobalRef
 	midMediaPlayerDrmInfoGetSupportedSchemes jni.MethodID
+	midMediaPlayerDrmInfoToString            jni.MethodID
 
-	clsMediaPlayerMetricsConstants *jni.GlobalRef
+	clsMediaPlayerMetricsConstants         *jni.GlobalRef
+	midMediaPlayerMetricsConstantsToString jni.MethodID
 
-	clsMediaPlayerNoDrmSchemeException *jni.GlobalRef
+	clsMediaPlayerNoDrmSchemeException         *jni.GlobalRef
+	midMediaPlayerNoDrmSchemeExceptionToString jni.MethodID
 
 	clsMediaPlayerOnBufferingUpdateListener                  *jni.GlobalRef
 	midMediaPlayerOnBufferingUpdateListenerOnBufferingUpdate jni.MethodID
+	midMediaPlayerOnBufferingUpdateListenerToString          jni.MethodID
 
 	clsMediaPlayerOnCompletionListener             *jni.GlobalRef
 	midMediaPlayerOnCompletionListenerOnCompletion jni.MethodID
+	midMediaPlayerOnCompletionListenerToString     jni.MethodID
 
 	clsMediaPlayerOnDrmConfigHelper            *jni.GlobalRef
 	midMediaPlayerOnDrmConfigHelperOnDrmConfig jni.MethodID
+	midMediaPlayerOnDrmConfigHelperToString    jni.MethodID
 
 	clsMediaPlayerOnDrmInfoListener          *jni.GlobalRef
 	midMediaPlayerOnDrmInfoListenerOnDrmInfo jni.MethodID
+	midMediaPlayerOnDrmInfoListenerToString  jni.MethodID
 
 	clsMediaPlayerOnDrmPreparedListener              *jni.GlobalRef
 	midMediaPlayerOnDrmPreparedListenerOnDrmPrepared jni.MethodID
+	midMediaPlayerOnDrmPreparedListenerToString      jni.MethodID
 
-	clsMediaPlayerOnErrorListener        *jni.GlobalRef
-	midMediaPlayerOnErrorListenerOnError jni.MethodID
+	clsMediaPlayerOnErrorListener         *jni.GlobalRef
+	midMediaPlayerOnErrorListenerOnError  jni.MethodID
+	midMediaPlayerOnErrorListenerToString jni.MethodID
 
-	clsMediaPlayerOnInfoListener       *jni.GlobalRef
-	midMediaPlayerOnInfoListenerOnInfo jni.MethodID
+	clsMediaPlayerOnInfoListener         *jni.GlobalRef
+	midMediaPlayerOnInfoListenerOnInfo   jni.MethodID
+	midMediaPlayerOnInfoListenerToString jni.MethodID
 
 	clsMediaPlayerOnMediaTimeDiscontinuityListener                         *jni.GlobalRef
 	midMediaPlayerOnMediaTimeDiscontinuityListenerOnMediaTimeDiscontinuity jni.MethodID
+	midMediaPlayerOnMediaTimeDiscontinuityListenerToString                 jni.MethodID
 
 	clsMediaPlayerOnPreparedListener           *jni.GlobalRef
 	midMediaPlayerOnPreparedListenerOnPrepared jni.MethodID
+	midMediaPlayerOnPreparedListenerToString   jni.MethodID
 
 	clsMediaPlayerOnSeekCompleteListener               *jni.GlobalRef
 	midMediaPlayerOnSeekCompleteListenerOnSeekComplete jni.MethodID
+	midMediaPlayerOnSeekCompleteListenerToString       jni.MethodID
 
 	clsMediaPlayerOnSubtitleDataListener               *jni.GlobalRef
 	midMediaPlayerOnSubtitleDataListenerOnSubtitleData jni.MethodID
+	midMediaPlayerOnSubtitleDataListenerToString       jni.MethodID
 
 	clsMediaPlayerOnTimedMetaDataAvailableListener                         *jni.GlobalRef
 	midMediaPlayerOnTimedMetaDataAvailableListenerOnTimedMetaDataAvailable jni.MethodID
+	midMediaPlayerOnTimedMetaDataAvailableListenerToString                 jni.MethodID
 
 	clsMediaPlayerOnTimedTextListener            *jni.GlobalRef
 	midMediaPlayerOnTimedTextListenerOnTimedText jni.MethodID
+	midMediaPlayerOnTimedTextListenerToString    jni.MethodID
 
 	clsMediaPlayerOnVideoSizeChangedListener                   *jni.GlobalRef
 	midMediaPlayerOnVideoSizeChangedListenerOnVideoSizeChanged jni.MethodID
+	midMediaPlayerOnVideoSizeChangedListenerToString           jni.MethodID
 
-	clsMediaPlayerProvisioningNetworkErrorException *jni.GlobalRef
+	clsMediaPlayerProvisioningNetworkErrorException         *jni.GlobalRef
+	midMediaPlayerProvisioningNetworkErrorExceptionToString jni.MethodID
 
-	clsMediaPlayerProvisioningServerErrorException *jni.GlobalRef
+	clsMediaPlayerProvisioningServerErrorException         *jni.GlobalRef
+	midMediaPlayerProvisioningServerErrorExceptionToString jni.MethodID
 
 	clsMediaPlayerTrackInfo                 *jni.GlobalRef
 	midMediaPlayerTrackInfoDescribeContents jni.MethodID
@@ -747,6 +767,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaPlayerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midMediaPlayerCreate2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "create", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/MediaPlayer;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -799,6 +826,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaPlayerDrmInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerDrmInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$MetricsConstants")
@@ -809,6 +843,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsMediaPlayerMetricsConstants = env.NewGlobalRef(&c.Object)
 
+		midMediaPlayerMetricsConstantsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerMetricsConstants)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$NoDrmSchemeException")
@@ -818,6 +859,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaPlayerNoDrmSchemeException = env.NewGlobalRef(&c.Object)
+
+		midMediaPlayerNoDrmSchemeExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerNoDrmSchemeException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -830,6 +878,13 @@ func doInit(env *jni.Env) error {
 		clsMediaPlayerOnBufferingUpdateListener = env.NewGlobalRef(&c.Object)
 
 		midMediaPlayerOnBufferingUpdateListenerOnBufferingUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnBufferingUpdateListener)), "onBufferingUpdate", "(Landroid/media/MediaPlayer;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaPlayerOnBufferingUpdateListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnBufferingUpdateListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -853,6 +908,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaPlayerOnCompletionListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnCompletionListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$OnDrmConfigHelper")
@@ -864,6 +926,13 @@ func doInit(env *jni.Env) error {
 		clsMediaPlayerOnDrmConfigHelper = env.NewGlobalRef(&c.Object)
 
 		midMediaPlayerOnDrmConfigHelperOnDrmConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnDrmConfigHelper)), "onDrmConfig", "(Landroid/media/MediaPlayer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaPlayerOnDrmConfigHelperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnDrmConfigHelper)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -887,6 +956,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaPlayerOnDrmInfoListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnDrmInfoListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$OnDrmPreparedListener")
@@ -898,6 +974,13 @@ func doInit(env *jni.Env) error {
 		clsMediaPlayerOnDrmPreparedListener = env.NewGlobalRef(&c.Object)
 
 		midMediaPlayerOnDrmPreparedListenerOnDrmPrepared, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnDrmPreparedListener)), "onDrmPrepared", "(Landroid/media/MediaPlayer;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaPlayerOnDrmPreparedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnDrmPreparedListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -921,6 +1004,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaPlayerOnErrorListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnErrorListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$OnInfoListener")
@@ -932,6 +1022,13 @@ func doInit(env *jni.Env) error {
 		clsMediaPlayerOnInfoListener = env.NewGlobalRef(&c.Object)
 
 		midMediaPlayerOnInfoListenerOnInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnInfoListener)), "onInfo", "(Landroid/media/MediaPlayer;II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaPlayerOnInfoListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnInfoListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -955,6 +1052,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaPlayerOnMediaTimeDiscontinuityListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnMediaTimeDiscontinuityListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$OnPreparedListener")
@@ -966,6 +1070,13 @@ func doInit(env *jni.Env) error {
 		clsMediaPlayerOnPreparedListener = env.NewGlobalRef(&c.Object)
 
 		midMediaPlayerOnPreparedListenerOnPrepared, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnPreparedListener)), "onPrepared", "(Landroid/media/MediaPlayer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaPlayerOnPreparedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnPreparedListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -989,6 +1100,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaPlayerOnSeekCompleteListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnSeekCompleteListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$OnSubtitleDataListener")
@@ -1000,6 +1118,13 @@ func doInit(env *jni.Env) error {
 		clsMediaPlayerOnSubtitleDataListener = env.NewGlobalRef(&c.Object)
 
 		midMediaPlayerOnSubtitleDataListenerOnSubtitleData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnSubtitleDataListener)), "onSubtitleData", "(Landroid/media/MediaPlayer;Landroid/media/SubtitleData;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaPlayerOnSubtitleDataListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnSubtitleDataListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1023,6 +1148,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaPlayerOnTimedMetaDataAvailableListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnTimedMetaDataAvailableListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$OnTimedTextListener")
@@ -1034,6 +1166,13 @@ func doInit(env *jni.Env) error {
 		clsMediaPlayerOnTimedTextListener = env.NewGlobalRef(&c.Object)
 
 		midMediaPlayerOnTimedTextListenerOnTimedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnTimedTextListener)), "onTimedText", "(Landroid/media/MediaPlayer;Landroid/media/TimedText;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaPlayerOnTimedTextListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnTimedTextListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1057,6 +1196,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaPlayerOnVideoSizeChangedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerOnVideoSizeChangedListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$ProvisioningNetworkErrorException")
@@ -1067,6 +1213,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsMediaPlayerProvisioningNetworkErrorException = env.NewGlobalRef(&c.Object)
 
+		midMediaPlayerProvisioningNetworkErrorExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerProvisioningNetworkErrorException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaPlayer$ProvisioningServerErrorException")
@@ -1076,6 +1229,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaPlayerProvisioningServerErrorException = env.NewGlobalRef(&c.Object)
+
+		midMediaPlayerProvisioningServerErrorExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayerProvisioningServerErrorException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

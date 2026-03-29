@@ -40,15 +40,18 @@ var (
 	midManagerSetTimeZone               jni.MethodID
 	midManagerSetWindow4                jni.MethodID
 	midManagerSetWindow6_1              jni.MethodID
+	midManagerToString                  jni.MethodID
 
 	clsManagerAlarmClockInfo                 *jni.GlobalRef
 	midManagerAlarmClockInfoDescribeContents jni.MethodID
 	midManagerAlarmClockInfoGetShowIntent    jni.MethodID
 	midManagerAlarmClockInfoGetTriggerTime   jni.MethodID
 	midManagerAlarmClockInfoWriteToParcel    jni.MethodID
+	midManagerAlarmClockInfoToString         jni.MethodID
 
-	clsManagerOnAlarmListener        *jni.GlobalRef
-	midManagerOnAlarmListenerOnAlarm jni.MethodID
+	clsManagerOnAlarmListener         *jni.GlobalRef
+	midManagerOnAlarmListenerOnAlarm  jni.MethodID
+	midManagerOnAlarmListenerToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -189,6 +192,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/AlarmManager$AlarmClockInfo")
@@ -227,6 +237,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerAlarmClockInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAlarmClockInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/AlarmManager$OnAlarmListener")
@@ -238,6 +255,13 @@ func doInit(env *jni.Env) error {
 		clsManagerOnAlarmListener = env.NewGlobalRef(&c.Object)
 
 		midManagerOnAlarmListenerOnAlarm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnAlarmListener)), "onAlarm", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerOnAlarmListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnAlarmListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

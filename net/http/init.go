@@ -27,12 +27,14 @@ var (
 	midConnectionMigrationOptionsGetAllowNonDefaultNetworkUsage jni.MethodID
 	midConnectionMigrationOptionsGetDefaultNetworkMigration     jni.MethodID
 	midConnectionMigrationOptionsGetPathDegradationMigration    jni.MethodID
+	midConnectionMigrationOptionsToString                       jni.MethodID
 
 	clsConnectionMigrationOptionsBuilder                               *jni.GlobalRef
 	midConnectionMigrationOptionsBuilderBuild                          jni.MethodID
 	midConnectionMigrationOptionsBuilderSetAllowNonDefaultNetworkUsage jni.MethodID
 	midConnectionMigrationOptionsBuilderSetDefaultNetworkMigration     jni.MethodID
 	midConnectionMigrationOptionsBuilderSetPathDegradationMigration    jni.MethodID
+	midConnectionMigrationOptionsBuilderToString                       jni.MethodID
 
 	clsUrlRequest                        *jni.GlobalRef
 	midUrlRequestCancel                  jni.MethodID
@@ -49,6 +51,7 @@ var (
 	midUrlRequestIsDirectExecutorAllowed jni.MethodID
 	midUrlRequestIsDone                  jni.MethodID
 	midUrlRequestStart                   jni.MethodID
+	midUrlRequestToString                jni.MethodID
 
 	clsUrlRequestBuilder                         *jni.GlobalRef
 	midUrlRequestBuilderAddHeader                jni.MethodID
@@ -61,6 +64,7 @@ var (
 	midUrlRequestBuilderSetTrafficStatsTag       jni.MethodID
 	midUrlRequestBuilderSetTrafficStatsUid       jni.MethodID
 	midUrlRequestBuilderSetUploadDataProvider    jni.MethodID
+	midUrlRequestBuilderToString                 jni.MethodID
 
 	clsUrlRequestCallback                   *jni.GlobalRef
 	midUrlRequestCallbackOnCanceled         jni.MethodID
@@ -68,11 +72,14 @@ var (
 	midUrlRequestCallbackOnRedirectReceived jni.MethodID
 	midUrlRequestCallbackOnResponseStarted  jni.MethodID
 	midUrlRequestCallbackOnSucceeded        jni.MethodID
+	midUrlRequestCallbackToString           jni.MethodID
 
-	clsUrlRequestStatus *jni.GlobalRef
+	clsUrlRequestStatus         *jni.GlobalRef
+	midUrlRequestStatusToString jni.MethodID
 
 	clsUrlRequestStatusListener         *jni.GlobalRef
 	midUrlRequestStatusListenerOnStatus jni.MethodID
+	midUrlRequestStatusListenerToString jni.MethodID
 
 	clsX509TrustManagerExtensions                         *jni.GlobalRef
 	midX509TrustManagerExtensionsCtor                     jni.MethodID
@@ -80,20 +87,24 @@ var (
 	midX509TrustManagerExtensionsCheckServerTrusted3_1    jni.MethodID
 	midX509TrustManagerExtensionsIsSameTrustConfiguration jni.MethodID
 	midX509TrustManagerExtensionsIsUserAddedCertificate   jni.MethodID
+	midX509TrustManagerExtensionsToString                 jni.MethodID
 
 	clsUploadDataSink                  *jni.GlobalRef
 	midUploadDataSinkOnReadError       jni.MethodID
 	midUploadDataSinkOnReadSucceeded   jni.MethodID
 	midUploadDataSinkOnRewindError     jni.MethodID
 	midUploadDataSinkOnRewindSucceeded jni.MethodID
+	midUploadDataSinkToString          jni.MethodID
 
-	clsException     *jni.GlobalRef
-	midExceptionCtor jni.MethodID
+	clsException         *jni.GlobalRef
+	midExceptionCtor     jni.MethodID
+	midExceptionToString jni.MethodID
 
 	clsUploadDataProvider          *jni.GlobalRef
 	midUploadDataProviderClose     jni.MethodID
 	midUploadDataProviderGetLength jni.MethodID
 	midUploadDataProviderRewind    jni.MethodID
+	midUploadDataProviderToString  jni.MethodID
 
 	clsBidirectionalStream                                            *jni.GlobalRef
 	midBidirectionalStreamCancel                                      jni.MethodID
@@ -108,6 +119,7 @@ var (
 	midBidirectionalStreamIsDelayRequestHeadersUntilFirstFlushEnabled jni.MethodID
 	midBidirectionalStreamIsDone                                      jni.MethodID
 	midBidirectionalStreamStart                                       jni.MethodID
+	midBidirectionalStreamToString                                    jni.MethodID
 
 	clsBidirectionalStreamBuilder                                             *jni.GlobalRef
 	midBidirectionalStreamBuilderAddHeader                                    jni.MethodID
@@ -117,6 +129,7 @@ var (
 	midBidirectionalStreamBuilderSetPriority                                  jni.MethodID
 	midBidirectionalStreamBuilderSetTrafficStatsTag                           jni.MethodID
 	midBidirectionalStreamBuilderSetTrafficStatsUid                           jni.MethodID
+	midBidirectionalStreamBuilderToString                                     jni.MethodID
 
 	clsBidirectionalStreamCallback                           *jni.GlobalRef
 	midBidirectionalStreamCallbackOnCanceled                 jni.MethodID
@@ -125,8 +138,10 @@ var (
 	midBidirectionalStreamCallbackOnResponseTrailersReceived jni.MethodID
 	midBidirectionalStreamCallbackOnStreamReady              jni.MethodID
 	midBidirectionalStreamCallbackOnSucceeded                jni.MethodID
+	midBidirectionalStreamCallbackToString                   jni.MethodID
 
-	clsQuicException *jni.GlobalRef
+	clsQuicException         *jni.GlobalRef
+	midQuicExceptionToString jni.MethodID
 
 	clsEngine                              *jni.GlobalRef
 	midEngineBindToNetwork                 jni.MethodID
@@ -135,6 +150,7 @@ var (
 	midEngineNewUrlRequestBuilder          jni.MethodID
 	midEngineOpenConnection                jni.MethodID
 	midEngineShutdown                      jni.MethodID
+	midEngineToString                      jni.MethodID
 	midEngineGetVersionString              jni.MethodID
 
 	clsEngineBuilder                                                    *jni.GlobalRef
@@ -151,10 +167,12 @@ var (
 	midEngineBuilderSetQuicOptions                                      jni.MethodID
 	midEngineBuilderSetStoragePath                                      jni.MethodID
 	midEngineBuilderSetUserAgent                                        jni.MethodID
+	midEngineBuilderToString                                            jni.MethodID
 
 	clsNetworkException                       *jni.GlobalRef
 	midNetworkExceptionGetErrorCode           jni.MethodID
 	midNetworkExceptionIsImmediatelyRetryable jni.MethodID
+	midNetworkExceptionToString               jni.MethodID
 
 	clsSslError                *jni.GlobalRef
 	midSslErrorCtor            jni.MethodID
@@ -165,8 +183,9 @@ var (
 	midSslErrorHasError        jni.MethodID
 	midSslErrorToString        jni.MethodID
 
-	clsInlineExecutionProhibitedException     *jni.GlobalRef
-	midInlineExecutionProhibitedExceptionCtor jni.MethodID
+	clsInlineExecutionProhibitedException         *jni.GlobalRef
+	midInlineExecutionProhibitedExceptionCtor     jni.MethodID
+	midInlineExecutionProhibitedExceptionToString jni.MethodID
 
 	clsQuicOptions                                  *jni.GlobalRef
 	midQuicOptionsGetAllowedQuicHosts               jni.MethodID
@@ -174,6 +193,7 @@ var (
 	midQuicOptionsGetIdleConnectionTimeout          jni.MethodID
 	midQuicOptionsGetInMemoryServerConfigsCacheSize jni.MethodID
 	midQuicOptionsHasInMemoryServerConfigsCacheSize jni.MethodID
+	midQuicOptionsToString                          jni.MethodID
 
 	clsQuicOptionsBuilder                                  *jni.GlobalRef
 	midQuicOptionsBuilderAddAllowedQuicHost                jni.MethodID
@@ -181,8 +201,10 @@ var (
 	midQuicOptionsBuilderSetHandshakeUserAgent             jni.MethodID
 	midQuicOptionsBuilderSetIdleConnectionTimeout          jni.MethodID
 	midQuicOptionsBuilderSetInMemoryServerConfigsCacheSize jni.MethodID
+	midQuicOptionsBuilderToString                          jni.MethodID
 
-	clsCallbackException *jni.GlobalRef
+	clsCallbackException         *jni.GlobalRef
+	midCallbackExceptionToString jni.MethodID
 
 	clsDnsOptions                                            *jni.GlobalRef
 	midDnsOptionsGetPersistHostCache                         jni.MethodID
@@ -191,6 +213,7 @@ var (
 	midDnsOptionsGetStaleDns                                 jni.MethodID
 	midDnsOptionsGetStaleDnsOptions                          jni.MethodID
 	midDnsOptionsGetUseHttpStackDnsResolver                  jni.MethodID
+	midDnsOptionsToString                                    jni.MethodID
 
 	clsDnsOptionsBuilder                                            *jni.GlobalRef
 	midDnsOptionsBuilderBuild                                       jni.MethodID
@@ -200,14 +223,17 @@ var (
 	midDnsOptionsBuilderSetStaleDns                                 jni.MethodID
 	midDnsOptionsBuilderSetStaleDnsOptions                          jni.MethodID
 	midDnsOptionsBuilderSetUseHttpStackDnsResolver                  jni.MethodID
+	midDnsOptionsBuilderToString                                    jni.MethodID
 
 	clsDnsOptionsStaleDnsOptions                             *jni.GlobalRef
 	midDnsOptionsStaleDnsOptionsGetAllowCrossNetworkUsage    jni.MethodID
 	midDnsOptionsStaleDnsOptionsGetFreshLookupTimeout        jni.MethodID
 	midDnsOptionsStaleDnsOptionsGetMaxExpiredDelay           jni.MethodID
 	midDnsOptionsStaleDnsOptionsGetUseStaleOnNameNotResolved jni.MethodID
+	midDnsOptionsStaleDnsOptionsToString                     jni.MethodID
 
-	clsHeaderBlock *jni.GlobalRef
+	clsHeaderBlock         *jni.GlobalRef
+	midHeaderBlockToString jni.MethodID
 
 	clsResponseCache                *jni.GlobalRef
 	midResponseCacheClose           jni.MethodID
@@ -219,6 +245,7 @@ var (
 	midResponseCacheMaxSize         jni.MethodID
 	midResponseCachePut             jni.MethodID
 	midResponseCacheSize            jni.MethodID
+	midResponseCacheToString        jni.MethodID
 	midResponseCacheGetInstalled    jni.MethodID
 
 	clsSslCertificate                      *jni.GlobalRef
@@ -239,6 +266,7 @@ var (
 	midSslCertificateDNameGetDName jni.MethodID
 	midSslCertificateDNameGetOName jni.MethodID
 	midSslCertificateDNameGetUName jni.MethodID
+	midSslCertificateDNameToString jni.MethodID
 
 	clsUrlResponseInfo                      *jni.GlobalRef
 	midUrlResponseInfoGetHeaders            jni.MethodID
@@ -249,6 +277,7 @@ var (
 	midUrlResponseInfoGetUrl                jni.MethodID
 	midUrlResponseInfoGetUrlChain           jni.MethodID
 	midUrlResponseInfoWasCached             jni.MethodID
+	midUrlResponseInfoToString              jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -298,6 +327,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midConnectionMigrationOptionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionMigrationOptions)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/ConnectionMigrationOptions$Builder")
@@ -330,6 +366,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConnectionMigrationOptionsBuilderSetPathDegradationMigration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionMigrationOptionsBuilder)), "setPathDegradationMigration", "(I)Landroid/net/http/ConnectionMigrationOptions$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionMigrationOptionsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionMigrationOptionsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -444,6 +487,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUrlRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/UrlRequest$Builder")
@@ -524,6 +574,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUrlRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlRequestBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/UrlRequest$Callback")
@@ -569,6 +626,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUrlRequestCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlRequestCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/UrlRequest$Status")
@@ -578,6 +642,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUrlRequestStatus = env.NewGlobalRef(&c.Object)
+
+		midUrlRequestStatusToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlRequestStatus)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -590,6 +661,13 @@ func doInit(env *jni.Env) error {
 		clsUrlRequestStatusListener = env.NewGlobalRef(&c.Object)
 
 		midUrlRequestStatusListenerOnStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlRequestStatusListener)), "onStatus", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUrlRequestStatusListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlRequestStatusListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -638,6 +716,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midX509TrustManagerExtensionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsX509TrustManagerExtensions)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/UploadDataSink")
@@ -676,6 +761,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUploadDataSinkToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUploadDataSink)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/HttpException")
@@ -687,6 +779,13 @@ func doInit(env *jni.Env) error {
 		clsException = env.NewGlobalRef(&c.Object)
 		midExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsException)), "<init>", "(Ljava/lang/String;Ljava/lang/Throwable;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -715,6 +814,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midUploadDataProviderRewind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUploadDataProvider)), "rewind", "(Landroid/net/http/UploadDataSink;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUploadDataProviderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUploadDataProvider)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -815,6 +921,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBidirectionalStreamToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBidirectionalStream)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/BidirectionalStream$Builder")
@@ -874,6 +987,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBidirectionalStreamBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBidirectionalStreamBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/BidirectionalStream$Callback")
@@ -926,6 +1046,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBidirectionalStreamCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBidirectionalStreamCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/QuicException")
@@ -935,6 +1062,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsQuicException = env.NewGlobalRef(&c.Object)
+
+		midQuicExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuicException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -982,6 +1116,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midEngineShutdown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEngine)), "shutdown", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEngineToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEngine)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1096,6 +1237,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEngineBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEngineBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/NetworkException")
@@ -1114,6 +1262,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNetworkExceptionIsImmediatelyRetryable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkException)), "isImmediatelyRetryable", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNetworkExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkException)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1190,6 +1345,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInlineExecutionProhibitedExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInlineExecutionProhibitedException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/QuicOptions")
@@ -1229,6 +1391,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midQuicOptionsHasInMemoryServerConfigsCacheSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuicOptions)), "hasInMemoryServerConfigsCacheSize", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midQuicOptionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuicOptions)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1280,6 +1449,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midQuicOptionsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuicOptionsBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/CallbackException")
@@ -1289,6 +1465,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCallbackException = env.NewGlobalRef(&c.Object)
+
+		midCallbackExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallbackException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1336,6 +1519,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDnsOptionsGetUseHttpStackDnsResolver, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDnsOptions)), "getUseHttpStackDnsResolver", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDnsOptionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDnsOptions)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1401,6 +1591,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDnsOptionsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDnsOptionsBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/DnsOptions$StaleDnsOptions")
@@ -1439,6 +1636,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDnsOptionsStaleDnsOptionsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDnsOptionsStaleDnsOptions)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/HeaderBlock")
@@ -1448,6 +1652,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsHeaderBlock = env.NewGlobalRef(&c.Object)
+
+		midHeaderBlockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeaderBlock)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1516,6 +1727,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midResponseCacheSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseCache)), "size", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponseCacheToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseCache)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1651,6 +1869,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSslCertificateDNameToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSslCertificateDName)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/http/UrlResponseInfo")
@@ -1711,6 +1936,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midUrlResponseInfoWasCached, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlResponseInfo)), "wasCached", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUrlResponseInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlResponseInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

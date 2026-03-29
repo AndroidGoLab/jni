@@ -26,6 +26,7 @@ var (
 	clsReceiver                    *jni.GlobalRef
 	midReceiverOnReceive           jni.MethodID
 	midReceiverOnRequestPermission jni.MethodID
+	midReceiverToString            jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -62,6 +63,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midReceiverOnRequestPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "onRequestPermission", "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/os/PersistableBundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReceiverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

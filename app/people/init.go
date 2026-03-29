@@ -28,6 +28,7 @@ var (
 	midManagerClearStatus       jni.MethodID
 	midManagerClearStatuses     jni.MethodID
 	midManagerGetStatuses       jni.MethodID
+	midManagerToString          jni.MethodID
 
 	clsConversationStatus                   *jni.GlobalRef
 	midConversationStatusDescribeContents   jni.MethodID
@@ -50,6 +51,7 @@ var (
 	midConversationStatusBuilderSetEndTimeMillis   jni.MethodID
 	midConversationStatusBuilderSetIcon            jni.MethodID
 	midConversationStatusBuilderSetStartTimeMillis jni.MethodID
+	midConversationStatusBuilderToString           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -100,6 +102,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerGetStatuses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStatuses", "(Ljava/lang/String;)Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -246,6 +255,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConversationStatusBuilderSetStartTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationStatusBuilder)), "setStartTimeMillis", "(J)Landroid/app/people/ConversationStatus$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConversationStatusBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConversationStatusBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

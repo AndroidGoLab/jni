@@ -41,9 +41,11 @@ var (
 	midFragmentOnStop                     jni.MethodID
 	midFragmentOnViewCreated              jni.MethodID
 	midFragmentSetPreferenceScreen        jni.MethodID
+	midFragmentToString                   jni.MethodID
 
 	clsFragmentOnPreferenceStartFragmentCallback                          *jni.GlobalRef
 	midFragmentOnPreferenceStartFragmentCallbackOnPreferenceStartFragment jni.MethodID
+	midFragmentOnPreferenceStartFragmentCallbackToString                  jni.MethodID
 
 	clsSwitchPreference                    *jni.GlobalRef
 	midSwitchPreferenceCtor                jni.MethodID
@@ -53,9 +55,11 @@ var (
 	midSwitchPreferenceSetSwitchTextOff1_1 jni.MethodID
 	midSwitchPreferenceSetSwitchTextOn1    jni.MethodID
 	midSwitchPreferenceSetSwitchTextOn1_1  jni.MethodID
+	midSwitchPreferenceToString            jni.MethodID
 
-	clsCheckBoxPreference     *jni.GlobalRef
-	midCheckBoxPreferenceCtor jni.MethodID
+	clsCheckBoxPreference         *jni.GlobalRef
+	midCheckBoxPreferenceCtor     jni.MethodID
+	midCheckBoxPreferenceToString jni.MethodID
 
 	clsPreference                              *jni.GlobalRef
 	midPreferenceCtor                          jni.MethodID
@@ -124,13 +128,16 @@ var (
 	midPreferenceToString                      jni.MethodID
 	midPreferenceCompareTo1_1                  jni.MethodID
 
-	clsBaseSavedState *jni.GlobalRef
+	clsBaseSavedState         *jni.GlobalRef
+	midBaseSavedStateToString jni.MethodID
 
 	clsOnPreferenceChangeListener                   *jni.GlobalRef
 	midOnPreferenceChangeListenerOnPreferenceChange jni.MethodID
+	midOnPreferenceChangeListenerToString           jni.MethodID
 
 	clsOnPreferenceClickListener                  *jni.GlobalRef
 	midOnPreferenceClickListenerOnPreferenceClick jni.MethodID
+	midOnPreferenceClickListenerToString          jni.MethodID
 
 	clsRingtonePreference                 *jni.GlobalRef
 	midRingtonePreferenceCtor             jni.MethodID
@@ -141,6 +148,7 @@ var (
 	midRingtonePreferenceSetRingtoneType  jni.MethodID
 	midRingtonePreferenceSetShowDefault   jni.MethodID
 	midRingtonePreferenceSetShowSilent    jni.MethodID
+	midRingtonePreferenceToString         jni.MethodID
 
 	clsActivity                           *jni.GlobalRef
 	midActivityAddPreferencesFromIntent   jni.MethodID
@@ -173,6 +181,7 @@ var (
 	midActivityStartWithFragment6_1       jni.MethodID
 	midActivitySwitchToHeader1            jni.MethodID
 	midActivitySwitchToHeader2_1          jni.MethodID
+	midActivityToString                   jni.MethodID
 
 	clsActivityHeader                        *jni.GlobalRef
 	midActivityHeaderDescribeContents        jni.MethodID
@@ -182,6 +191,7 @@ var (
 	midActivityHeaderGetTitle                jni.MethodID
 	midActivityHeaderReadFromParcel          jni.MethodID
 	midActivityHeaderWriteToParcel           jni.MethodID
+	midActivityHeaderToString                jni.MethodID
 
 	clsTwoStatePreference                          *jni.GlobalRef
 	midTwoStatePreferenceGetDisableDependentsState jni.MethodID
@@ -195,8 +205,10 @@ var (
 	midTwoStatePreferenceSetSummaryOn1             jni.MethodID
 	midTwoStatePreferenceSetSummaryOn1_1           jni.MethodID
 	midTwoStatePreferenceShouldDisableDependents   jni.MethodID
+	midTwoStatePreferenceToString                  jni.MethodID
 
-	clsDataStore *jni.GlobalRef
+	clsDataStore         *jni.GlobalRef
+	midDataStoreToString jni.MethodID
 
 	clsMultiSelectListPreference                  *jni.GlobalRef
 	midMultiSelectListPreferenceCtor              jni.MethodID
@@ -208,6 +220,7 @@ var (
 	midMultiSelectListPreferenceSetEntries1_1     jni.MethodID
 	midMultiSelectListPreferenceSetEntryValues1   jni.MethodID
 	midMultiSelectListPreferenceSetEntryValues1_1 jni.MethodID
+	midMultiSelectListPreferenceToString          jni.MethodID
 
 	clsEditTextPreference                        *jni.GlobalRef
 	midEditTextPreferenceCtor                    jni.MethodID
@@ -215,6 +228,7 @@ var (
 	midEditTextPreferenceGetText                 jni.MethodID
 	midEditTextPreferenceSetText                 jni.MethodID
 	midEditTextPreferenceShouldDisableDependents jni.MethodID
+	midEditTextPreferenceToString                jni.MethodID
 
 	clsManager                                *jni.GlobalRef
 	midManagerCreatePreferenceScreen          jni.MethodID
@@ -230,6 +244,7 @@ var (
 	midManagerSetSharedPreferencesName        jni.MethodID
 	midManagerSetStorageDefault               jni.MethodID
 	midManagerSetStorageDeviceProtected       jni.MethodID
+	midManagerToString                        jni.MethodID
 	midManagerGetDefaultSharedPreferences     jni.MethodID
 	midManagerGetDefaultSharedPreferencesName jni.MethodID
 	midManagerSetDefaultValues3               jni.MethodID
@@ -237,12 +252,15 @@ var (
 
 	clsManagerOnActivityDestroyListener                  *jni.GlobalRef
 	midManagerOnActivityDestroyListenerOnActivityDestroy jni.MethodID
+	midManagerOnActivityDestroyListenerToString          jni.MethodID
 
 	clsManagerOnActivityResultListener                 *jni.GlobalRef
 	midManagerOnActivityResultListenerOnActivityResult jni.MethodID
+	midManagerOnActivityResultListenerToString         jni.MethodID
 
 	clsManagerOnActivityStopListener               *jni.GlobalRef
 	midManagerOnActivityStopListenerOnActivityStop jni.MethodID
+	midManagerOnActivityStopListenerToString       jni.MethodID
 
 	clsListPreference                  *jni.GlobalRef
 	midListPreferenceCtor              jni.MethodID
@@ -259,6 +277,7 @@ var (
 	midListPreferenceSetSummary        jni.MethodID
 	midListPreferenceSetValue          jni.MethodID
 	midListPreferenceSetValueIndex     jni.MethodID
+	midListPreferenceToString          jni.MethodID
 
 	clsGroup                       *jni.GlobalRef
 	midGroupAddItemFromInflater    jni.MethodID
@@ -271,11 +290,13 @@ var (
 	midGroupRemoveAll              jni.MethodID
 	midGroupRemovePreference       jni.MethodID
 	midGroupSetOrderingAsAdded     jni.MethodID
+	midGroupToString               jni.MethodID
 
 	clsCategory                        *jni.GlobalRef
 	midCategoryCtor                    jni.MethodID
 	midCategoryIsEnabled               jni.MethodID
 	midCategoryShouldDisableDependents jni.MethodID
+	midCategoryToString                jni.MethodID
 
 	clsScreen               *jni.GlobalRef
 	midScreenBind           jni.MethodID
@@ -283,6 +304,7 @@ var (
 	midScreenGetRootAdapter jni.MethodID
 	midScreenOnDismiss      jni.MethodID
 	midScreenOnItemClick    jni.MethodID
+	midScreenToString       jni.MethodID
 
 	clsDialogPreference                         *jni.GlobalRef
 	midDialogPreferenceGetDialog                jni.MethodID
@@ -306,6 +328,7 @@ var (
 	midDialogPreferenceSetNegativeButtonText1_1 jni.MethodID
 	midDialogPreferenceSetPositiveButtonText1   jni.MethodID
 	midDialogPreferenceSetPositiveButtonText1_1 jni.MethodID
+	midDialogPreferenceToString                 jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -453,6 +476,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFragmentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/PreferenceFragment$OnPreferenceStartFragmentCallback")
@@ -464,6 +494,13 @@ func doInit(env *jni.Env) error {
 		clsFragmentOnPreferenceStartFragmentCallback = env.NewGlobalRef(&c.Object)
 
 		midFragmentOnPreferenceStartFragmentCallbackOnPreferenceStartFragment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragmentOnPreferenceStartFragmentCallback)), "onPreferenceStartFragment", "(Landroid/preference/PreferenceFragment;Landroid/preference/Preference;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFragmentOnPreferenceStartFragmentCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragmentOnPreferenceStartFragmentCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -526,6 +563,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSwitchPreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/CheckBoxPreference")
@@ -537,6 +581,13 @@ func doInit(env *jni.Env) error {
 		clsCheckBoxPreference = env.NewGlobalRef(&c.Object)
 		midCheckBoxPreferenceCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCheckBoxPreference)), "<init>", "(Landroid/content/Context;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCheckBoxPreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCheckBoxPreference)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1012,6 +1063,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsBaseSavedState = env.NewGlobalRef(&c.Object)
 
+		midBaseSavedStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseSavedState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/Preference$OnPreferenceChangeListener")
@@ -1029,6 +1087,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOnPreferenceChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnPreferenceChangeListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/Preference$OnPreferenceClickListener")
@@ -1040,6 +1105,13 @@ func doInit(env *jni.Env) error {
 		clsOnPreferenceClickListener = env.NewGlobalRef(&c.Object)
 
 		midOnPreferenceClickListenerOnPreferenceClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnPreferenceClickListener)), "onPreferenceClick", "(Landroid/preference/Preference;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOnPreferenceClickListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnPreferenceClickListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1103,6 +1175,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRingtonePreferenceSetShowSilent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "setShowSilent", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRingtonePreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1329,6 +1408,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midActivityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/PreferenceActivity$Header")
@@ -1382,6 +1468,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midActivityHeaderWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityHeaderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1475,6 +1568,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTwoStatePreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/PreferenceDataStore")
@@ -1484,6 +1584,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDataStore = env.NewGlobalRef(&c.Object)
+
+		midDataStoreToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataStore)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1555,6 +1662,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMultiSelectListPreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/EditTextPreference")
@@ -1591,6 +1705,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midEditTextPreferenceShouldDisableDependents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "shouldDisableDependents", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEditTextPreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1698,6 +1819,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midManagerGetDefaultSharedPreferences, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultSharedPreferences", "(Landroid/content/Context;)Landroid/content/SharedPreferences;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1743,6 +1871,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerOnActivityDestroyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnActivityDestroyListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/PreferenceManager$OnActivityResultListener")
@@ -1760,6 +1895,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerOnActivityResultListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnActivityResultListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/PreferenceManager$OnActivityStopListener")
@@ -1771,6 +1913,13 @@ func doInit(env *jni.Env) error {
 		clsManagerOnActivityStopListener = env.NewGlobalRef(&c.Object)
 
 		midManagerOnActivityStopListenerOnActivityStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnActivityStopListener)), "onActivityStop", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerOnActivityStopListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnActivityStopListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1882,6 +2031,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midListPreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListPreference)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/PreferenceGroup")
@@ -1962,6 +2118,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGroupToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/preference/PreferenceCategory")
@@ -1984,6 +2147,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCategoryShouldDisableDependents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCategory)), "shouldDisableDependents", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCategoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCategory)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2029,6 +2199,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScreenOnItemClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "onItemClick", "(Landroid/widget/AdapterView;Landroid/view/View;IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScreenToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2186,6 +2363,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDialogPreferenceSetPositiveButtonText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setPositiveButtonText", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

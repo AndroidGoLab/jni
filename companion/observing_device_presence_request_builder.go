@@ -120,3 +120,30 @@ func (m *ObservingDevicePresenceRequestBuilder) SetUuid(arg0 *jni.Object) (*jni.
 	})
 	return result, callErr
 }
+
+// ToString calls android.companion.ObservingDevicePresenceRequest$Builder.toString.
+func (m *ObservingDevicePresenceRequestBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midObservingDevicePresenceRequestBuilderToString == nil {
+			callErr = fmt.Errorf("android.companion.ObservingDevicePresenceRequest$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midObservingDevicePresenceRequestBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

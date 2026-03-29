@@ -45,6 +45,33 @@ func NewTrafficStats(vm *jni.VM) (*TrafficStats, error) {
 	return &t, nil
 }
 
+// ToString calls android.net.TrafficStats.toString.
+func (m *TrafficStats) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTrafficStatsToString == nil {
+			callErr = fmt.Errorf("android.net.TrafficStats.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTrafficStatsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // ClearThreadStatsTag calls android.net.TrafficStats.clearThreadStatsTag.
 func (m *TrafficStats) ClearThreadStatsTag() error {
 

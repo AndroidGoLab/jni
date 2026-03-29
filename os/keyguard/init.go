@@ -35,21 +35,26 @@ var (
 	midManagerNewKeyguardLock                     jni.MethodID
 	midManagerRemoveKeyguardLockedStateListener   jni.MethodID
 	midManagerRequestDismissKeyguard              jni.MethodID
+	midManagerToString                            jni.MethodID
 
 	clsManagerKeyguardDismissCallback                   *jni.GlobalRef
 	midManagerKeyguardDismissCallbackOnDismissCancelled jni.MethodID
 	midManagerKeyguardDismissCallbackOnDismissError     jni.MethodID
 	midManagerKeyguardDismissCallbackOnDismissSucceeded jni.MethodID
+	midManagerKeyguardDismissCallbackToString           jni.MethodID
 
 	clsManagerKeyguardLock                 *jni.GlobalRef
 	midManagerKeyguardLockDisableKeyguard  jni.MethodID
 	midManagerKeyguardLockReenableKeyguard jni.MethodID
+	midManagerKeyguardLockToString         jni.MethodID
 
 	clsManagerKeyguardLockedStateListener                             *jni.GlobalRef
 	midManagerKeyguardLockedStateListenerOnKeyguardLockedStateChanged jni.MethodID
+	midManagerKeyguardLockedStateListenerToString                     jni.MethodID
 
 	clsManagerOnKeyguardExitResult                     *jni.GlobalRef
 	midManagerOnKeyguardExitResultOnKeyguardExitResult jni.MethodID
+	midManagerOnKeyguardExitResultToString             jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -155,6 +160,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/KeyguardManager$KeyguardDismissCallback")
@@ -186,6 +198,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerKeyguardDismissCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerKeyguardDismissCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/KeyguardManager$KeyguardLock")
@@ -210,6 +229,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerKeyguardLockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerKeyguardLock)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/KeyguardManager$KeyguardLockedStateListener")
@@ -227,6 +253,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerKeyguardLockedStateListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerKeyguardLockedStateListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/KeyguardManager$OnKeyguardExitResult")
@@ -238,6 +271,13 @@ func doInit(env *jni.Env) error {
 		clsManagerOnKeyguardExitResult = env.NewGlobalRef(&c.Object)
 
 		midManagerOnKeyguardExitResultOnKeyguardExitResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnKeyguardExitResult)), "onKeyguardExitResult", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerOnKeyguardExitResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnKeyguardExitResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

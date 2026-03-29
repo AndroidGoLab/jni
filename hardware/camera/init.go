@@ -38,6 +38,7 @@ var (
 	midManagerTurnOnTorchWithStrengthLevel      jni.MethodID
 	midManagerUnregisterAvailabilityCallback    jni.MethodID
 	midManagerUnregisterTorchCallback           jni.MethodID
+	midManagerToString                          jni.MethodID
 
 	clsManagerAvailabilityCallback                                *jni.GlobalRef
 	midManagerAvailabilityCallbackOnCameraAccessPrioritiesChanged jni.MethodID
@@ -45,11 +46,13 @@ var (
 	midManagerAvailabilityCallbackOnCameraUnavailable             jni.MethodID
 	midManagerAvailabilityCallbackOnPhysicalCameraAvailable       jni.MethodID
 	midManagerAvailabilityCallbackOnPhysicalCameraUnavailable     jni.MethodID
+	midManagerAvailabilityCallbackToString                        jni.MethodID
 
 	clsManagerTorchCallback                            *jni.GlobalRef
 	midManagerTorchCallbackOnTorchModeChanged          jni.MethodID
 	midManagerTorchCallbackOnTorchModeUnavailable      jni.MethodID
 	midManagerTorchCallbackOnTorchStrengthLevelChanged jni.MethodID
+	midManagerTorchCallbackToString                    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -176,6 +179,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraManager$AvailabilityCallback")
@@ -221,6 +231,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerAvailabilityCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAvailabilityCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraManager$TorchCallback")
@@ -246,6 +263,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerTorchCallbackOnTorchStrengthLevelChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerTorchCallback)), "onTorchStrengthLevelChanged", "(Ljava/lang/String;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerTorchCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerTorchCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

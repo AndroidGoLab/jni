@@ -26,10 +26,12 @@ var (
 	clsFontScaleConverter                             *jni.GlobalRef
 	midFontScaleConverterConvertDpToSp                jni.MethodID
 	midFontScaleConverterConvertSpToDp                jni.MethodID
+	midFontScaleConverterToString                     jni.MethodID
 	midFontScaleConverterForScale                     jni.MethodID
 	midFontScaleConverterIsNonLinearFontScalingActive jni.MethodID
 
 	clsObbScanner           *jni.GlobalRef
+	midObbScannerToString   jni.MethodID
 	midObbScannerGetObbInfo jni.MethodID
 
 	clsObbInfo                 *jni.GlobalRef
@@ -48,6 +50,7 @@ var (
 	midAssetManagerOpenNonAssetFd1_1        jni.MethodID
 	midAssetManagerOpenXmlResourceParser2   jni.MethodID
 	midAssetManagerOpenXmlResourceParser1_1 jni.MethodID
+	midAssetManagerToString                 jni.MethodID
 
 	clsAssetManagerAssetInputStream              *jni.GlobalRef
 	midAssetManagerAssetInputStreamAvailable     jni.MethodID
@@ -59,6 +62,7 @@ var (
 	midAssetManagerAssetInputStreamRead3_2       jni.MethodID
 	midAssetManagerAssetInputStreamReset         jni.MethodID
 	midAssetManagerAssetInputStreamSkip          jni.MethodID
+	midAssetManagerAssetInputStreamToString      jni.MethodID
 
 	clsConfiguration                       *jni.GlobalRef
 	midConfigurationCtor                   jni.MethodID
@@ -92,6 +96,7 @@ var (
 	clsXmlResourceParser                      *jni.GlobalRef
 	midXmlResourceParserClose                 jni.MethodID
 	midXmlResourceParserGetAttributeNamespace jni.MethodID
+	midXmlResourceParserToString              jni.MethodID
 
 	clsTypedArray                          *jni.GlobalRef
 	midTypedArrayClose                     jni.MethodID
@@ -170,11 +175,13 @@ var (
 	midAssetFileDescriptorAutoCloseInputStreamRead1_1       jni.MethodID
 	midAssetFileDescriptorAutoCloseInputStreamRead3_2       jni.MethodID
 	midAssetFileDescriptorAutoCloseInputStreamSkip          jni.MethodID
+	midAssetFileDescriptorAutoCloseInputStreamToString      jni.MethodID
 
 	clsAssetFileDescriptorAutoCloseOutputStream         *jni.GlobalRef
 	midAssetFileDescriptorAutoCloseOutputStreamWrite1   jni.MethodID
 	midAssetFileDescriptorAutoCloseOutputStreamWrite3_1 jni.MethodID
 	midAssetFileDescriptorAutoCloseOutputStreamWrite1_2 jni.MethodID
+	midAssetFileDescriptorAutoCloseOutputStreamToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -217,6 +224,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midFontScaleConverterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFontScaleConverter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midFontScaleConverterForScale, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsFontScaleConverter)), "forScale", "(F)Landroid/content/res/FontScaleConverter;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -240,6 +254,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsObbScanner = env.NewGlobalRef(&c.Object)
+
+		midObbScannerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObbScanner)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midObbScannerGetObbInfo, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsObbScanner)), "getObbInfo", "(Ljava/lang/String;)Landroid/content/res/ObbInfo;")
 		if err != nil {
@@ -359,6 +380,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAssetManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAssetManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/res/AssetManager$AssetInputStream")
@@ -426,6 +454,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAssetManagerAssetInputStreamSkip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAssetManagerAssetInputStream)), "skip", "(J)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAssetManagerAssetInputStreamToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAssetManagerAssetInputStream)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -646,6 +681,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midXmlResourceParserGetAttributeNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsXmlResourceParser)), "getAttributeNamespace", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midXmlResourceParserToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsXmlResourceParser)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1176,6 +1218,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAssetFileDescriptorAutoCloseInputStreamToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAssetFileDescriptorAutoCloseInputStream)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/res/AssetFileDescriptor$AutoCloseOutputStream")
@@ -1201,6 +1250,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAssetFileDescriptorAutoCloseOutputStreamWrite1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAssetFileDescriptorAutoCloseOutputStream)), "write", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAssetFileDescriptorAutoCloseOutputStreamToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAssetFileDescriptorAutoCloseOutputStream)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

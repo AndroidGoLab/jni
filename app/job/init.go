@@ -41,6 +41,7 @@ var (
 	midWorkItemBuilderSetExtras                   jni.MethodID
 	midWorkItemBuilderSetIntent                   jni.MethodID
 	midWorkItemBuilderSetMinimumNetworkChunkBytes jni.MethodID
+	midWorkItemBuilderToString                    jni.MethodID
 
 	clsPendingJobReasonsInfo                     *jni.GlobalRef
 	midPendingJobReasonsInfoCtor                 jni.MethodID
@@ -48,6 +49,7 @@ var (
 	midPendingJobReasonsInfoGetPendingJobReasons jni.MethodID
 	midPendingJobReasonsInfoGetTimestampMillis   jni.MethodID
 	midPendingJobReasonsInfoWriteToParcel        jni.MethodID
+	midPendingJobReasonsInfoToString             jni.MethodID
 
 	clsInfo                                 *jni.GlobalRef
 	midInfoDescribeContents                 jni.MethodID
@@ -121,6 +123,7 @@ var (
 	midInfoBuilderSetTriggerContentMaxDelay    jni.MethodID
 	midInfoBuilderSetTriggerContentUpdateDelay jni.MethodID
 	midInfoBuilderSetUserInitiated             jni.MethodID
+	midInfoBuilderToString                     jni.MethodID
 
 	clsInfoTriggerContentUri                 *jni.GlobalRef
 	midInfoTriggerContentUriDescribeContents jni.MethodID
@@ -129,6 +132,7 @@ var (
 	midInfoTriggerContentUriGetUri           jni.MethodID
 	midInfoTriggerContentUriHashCode         jni.MethodID
 	midInfoTriggerContentUriWriteToParcel    jni.MethodID
+	midInfoTriggerContentUriToString         jni.MethodID
 
 	clsService                                 *jni.GlobalRef
 	midServiceJobFinished                      jni.MethodID
@@ -141,6 +145,7 @@ var (
 	midServiceUpdateEstimatedNetworkBytes3_1   jni.MethodID
 	midServiceUpdateTransferredNetworkBytes4   jni.MethodID
 	midServiceUpdateTransferredNetworkBytes3_1 jni.MethodID
+	midServiceToString                         jni.MethodID
 
 	clsScheduler                            *jni.GlobalRef
 	midSchedulerCanRunUserInitiatedJobs     jni.MethodID
@@ -156,6 +161,7 @@ var (
 	midSchedulerGetPendingJobReasons        jni.MethodID
 	midSchedulerGetPendingJobReasonsHistory jni.MethodID
 	midSchedulerSchedule                    jni.MethodID
+	midSchedulerToString                    jni.MethodID
 
 	clsParameters                               *jni.GlobalRef
 	midParametersCompleteWork                   jni.MethodID
@@ -175,6 +181,7 @@ var (
 	midParametersIsOverrideDeadlineExpired      jni.MethodID
 	midParametersIsUserInitiatedJob             jni.MethodID
 	midParametersWriteToParcel                  jni.MethodID
+	midParametersToString                       jni.MethodID
 
 	clsServiceEngine                              *jni.GlobalRef
 	midServiceEngineGetBinder                     jni.MethodID
@@ -185,6 +192,7 @@ var (
 	midServiceEngineSetNotification               jni.MethodID
 	midServiceEngineUpdateEstimatedNetworkBytes   jni.MethodID
 	midServiceEngineUpdateTransferredNetworkBytes jni.MethodID
+	midServiceEngineToString                      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -325,6 +333,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWorkItemBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWorkItemBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/job/PendingJobReasonsInfo")
@@ -361,6 +376,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPendingJobReasonsInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPendingJobReasonsInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPendingJobReasonsInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPendingJobReasonsInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -870,6 +892,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInfoBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfoBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/job/JobInfo$TriggerContentUri")
@@ -916,6 +945,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInfoTriggerContentUriWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfoTriggerContentUri)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInfoTriggerContentUriToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfoTriggerContentUri)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -996,6 +1032,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midServiceUpdateTransferredNetworkBytes3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "updateTransferredNetworkBytes", "(Landroid/app/job/JobParameters;JJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1097,6 +1140,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSchedulerSchedule, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "schedule", "(Landroid/app/job/JobInfo;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSchedulerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduler)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1232,6 +1282,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midParametersToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameters)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/job/JobServiceEngine")
@@ -1292,6 +1349,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midServiceEngineUpdateTransferredNetworkBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "updateTransferredNetworkBytes", "(Landroid/app/job/JobParameters;Landroid/app/job/JobWorkItem;JJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceEngineToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

@@ -52,6 +52,7 @@ var (
 	midScanResultInformationElementGetIdExt         jni.MethodID
 	midScanResultInformationElementHashCode         jni.MethodID
 	midScanResultInformationElementWriteToParcel    jni.MethodID
+	midScanResultInformationElementToString         jni.MethodID
 
 	clsNetworkSuggestion                           *jni.GlobalRef
 	midNetworkSuggestionDescribeContents           jni.MethodID
@@ -113,6 +114,7 @@ var (
 	midNetworkSuggestionBuilderSetWpa3EnterpriseConfig             jni.MethodID
 	midNetworkSuggestionBuilderSetWpa3EnterpriseStandardModeConfig jni.MethodID
 	midNetworkSuggestionBuilderSetWpa3Passphrase                   jni.MethodID
+	midNetworkSuggestionBuilderToString                            jni.MethodID
 
 	clsEnterpriseConfig                                      *jni.GlobalRef
 	midEnterpriseConfigCtor                                  jni.MethodID
@@ -161,9 +163,11 @@ var (
 	midEnterpriseConfigToString                              jni.MethodID
 	midEnterpriseConfigWriteToParcel                         jni.MethodID
 
-	clsEnterpriseConfigEap *jni.GlobalRef
+	clsEnterpriseConfigEap         *jni.GlobalRef
+	midEnterpriseConfigEapToString jni.MethodID
 
-	clsEnterpriseConfigPhase2 *jni.GlobalRef
+	clsEnterpriseConfigPhase2         *jni.GlobalRef
+	midEnterpriseConfigPhase2ToString jni.MethodID
 
 	clsMloLink                   *jni.GlobalRef
 	midMloLinkCtor               jni.MethodID
@@ -218,6 +222,7 @@ var (
 	midNetworkSpecifierBuilderSetWpa3EnterpriseConfig             jni.MethodID
 	midNetworkSpecifierBuilderSetWpa3EnterpriseStandardModeConfig jni.MethodID
 	midNetworkSpecifierBuilderSetWpa3Passphrase                   jni.MethodID
+	midNetworkSpecifierBuilderToString                            jni.MethodID
 
 	clsAvailableChannel                    *jni.GlobalRef
 	midAvailableChannelCtor                jni.MethodID
@@ -247,6 +252,7 @@ var (
 	clsSoftApConfigurationBuilder            *jni.GlobalRef
 	midSoftApConfigurationBuilderBuild       jni.MethodID
 	midSoftApConfigurationBuilderSetChannels jni.MethodID
+	midSoftApConfigurationBuilderToString    jni.MethodID
 
 	clsConfiguration                           *jni.GlobalRef
 	midConfigurationCtor                       jni.MethodID
@@ -264,23 +270,31 @@ var (
 	midConfigurationToString                   jni.MethodID
 	midConfigurationWriteToParcel              jni.MethodID
 
-	clsConfigurationAuthAlgorithm *jni.GlobalRef
+	clsConfigurationAuthAlgorithm         *jni.GlobalRef
+	midConfigurationAuthAlgorithmToString jni.MethodID
 
-	clsConfigurationGroupCipher *jni.GlobalRef
+	clsConfigurationGroupCipher         *jni.GlobalRef
+	midConfigurationGroupCipherToString jni.MethodID
 
-	clsConfigurationGroupMgmtCipher *jni.GlobalRef
+	clsConfigurationGroupMgmtCipher         *jni.GlobalRef
+	midConfigurationGroupMgmtCipherToString jni.MethodID
 
-	clsConfigurationKeyMgmt *jni.GlobalRef
+	clsConfigurationKeyMgmt         *jni.GlobalRef
+	midConfigurationKeyMgmtToString jni.MethodID
 
-	clsConfigurationPairwiseCipher *jni.GlobalRef
+	clsConfigurationPairwiseCipher         *jni.GlobalRef
+	midConfigurationPairwiseCipherToString jni.MethodID
 
-	clsConfigurationProtocol *jni.GlobalRef
+	clsConfigurationProtocol         *jni.GlobalRef
+	midConfigurationProtocolToString jni.MethodID
 
-	clsConfigurationStatus *jni.GlobalRef
+	clsConfigurationStatus         *jni.GlobalRef
+	midConfigurationStatusToString jni.MethodID
 
 	clsSupplicantState                 *jni.GlobalRef
 	midSupplicantStateDescribeContents jni.MethodID
 	midSupplicantStateWriteToParcel    jni.MethodID
+	midSupplicantStateToString         jni.MethodID
 	midSupplicantStateValues           jni.MethodID
 	midSupplicantStateValueOf          jni.MethodID
 	midSupplicantStateIsValidState     jni.MethodID
@@ -329,6 +343,7 @@ var (
 	midInfoBuilderSetRssi                jni.MethodID
 	midInfoBuilderSetSsid                jni.MethodID
 	midInfoBuilderSetSubscriptionId      jni.MethodID
+	midInfoBuilderToString               jni.MethodID
 
 	clsManager                                                 *jni.GlobalRef
 	midManagerAddLocalOnlyConnectionFailureListener            jni.MethodID
@@ -433,31 +448,37 @@ var (
 	midManagerUnregisterSubsystemRestartTrackingCallback       jni.MethodID
 	midManagerUpdateNetwork                                    jni.MethodID
 	midManagerValidateSoftApConfiguration                      jni.MethodID
+	midManagerToString                                         jni.MethodID
 	midManagerCalculateSignalLevel2_1                          jni.MethodID
 	midManagerCompareSignalLevel                               jni.MethodID
 
 	clsManagerAddNetworkResult                 *jni.GlobalRef
 	midManagerAddNetworkResultDescribeContents jni.MethodID
 	midManagerAddNetworkResultWriteToParcel    jni.MethodID
+	midManagerAddNetworkResultToString         jni.MethodID
 
 	clsManagerInterfaceCreationImpact                 *jni.GlobalRef
 	midManagerInterfaceCreationImpactEquals           jni.MethodID
 	midManagerInterfaceCreationImpactGetInterfaceType jni.MethodID
 	midManagerInterfaceCreationImpactGetPackages      jni.MethodID
 	midManagerInterfaceCreationImpactHashCode         jni.MethodID
+	midManagerInterfaceCreationImpactToString         jni.MethodID
 
 	clsManagerLocalOnlyConnectionFailureListener                   *jni.GlobalRef
 	midManagerLocalOnlyConnectionFailureListenerOnConnectionFailed jni.MethodID
+	midManagerLocalOnlyConnectionFailureListenerToString           jni.MethodID
 
 	clsManagerLocalOnlyHotspotCallback          *jni.GlobalRef
 	midManagerLocalOnlyHotspotCallbackOnFailed  jni.MethodID
 	midManagerLocalOnlyHotspotCallbackOnStarted jni.MethodID
 	midManagerLocalOnlyHotspotCallbackOnStopped jni.MethodID
+	midManagerLocalOnlyHotspotCallbackToString  jni.MethodID
 
 	clsManagerLocalOnlyHotspotReservation                       *jni.GlobalRef
 	midManagerLocalOnlyHotspotReservationClose                  jni.MethodID
 	midManagerLocalOnlyHotspotReservationGetSoftApConfiguration jni.MethodID
 	midManagerLocalOnlyHotspotReservationGetWifiConfiguration   jni.MethodID
+	midManagerLocalOnlyHotspotReservationToString               jni.MethodID
 
 	clsManagerMulticastLock                    *jni.GlobalRef
 	midManagerMulticastLockAcquire             jni.MethodID
@@ -468,16 +489,20 @@ var (
 
 	clsManagerScanResultsCallback                       *jni.GlobalRef
 	midManagerScanResultsCallbackOnScanResultsAvailable jni.MethodID
+	midManagerScanResultsCallbackToString               jni.MethodID
 
 	clsManagerSubsystemRestartTrackingCallback                      *jni.GlobalRef
 	midManagerSubsystemRestartTrackingCallbackOnSubsystemRestarted  jni.MethodID
 	midManagerSubsystemRestartTrackingCallbackOnSubsystemRestarting jni.MethodID
+	midManagerSubsystemRestartTrackingCallbackToString              jni.MethodID
 
 	clsManagerSuggestionConnectionStatusListener                   *jni.GlobalRef
 	midManagerSuggestionConnectionStatusListenerOnConnectionStatus jni.MethodID
+	midManagerSuggestionConnectionStatusListenerToString           jni.MethodID
 
 	clsManagerSuggestionUserApprovalStatusListener                           *jni.GlobalRef
 	midManagerSuggestionUserApprovalStatusListenerOnUserApprovalStatusChange jni.MethodID
+	midManagerSuggestionUserApprovalStatusListenerToString                   jni.MethodID
 
 	clsManagerWifiLock                    *jni.GlobalRef
 	midManagerWifiLockAcquire             jni.MethodID
@@ -489,11 +514,13 @@ var (
 
 	clsManagerWifiStateChangedListener                   *jni.GlobalRef
 	midManagerWifiStateChangedListenerOnWifiStateChanged jni.MethodID
+	midManagerWifiStateChangedListenerToString           jni.MethodID
 
 	clsManagerWpsCallback            *jni.GlobalRef
 	midManagerWpsCallbackOnFailed    jni.MethodID
 	midManagerWpsCallbackOnStarted   jni.MethodID
 	midManagerWpsCallbackOnSucceeded jni.MethodID
+	midManagerWpsCallbackToString    jni.MethodID
 
 	clsBlockingOption                       *jni.GlobalRef
 	midBlockingOptionDescribeContents       jni.MethodID
@@ -507,8 +534,10 @@ var (
 	clsBlockingOptionBuilder                     *jni.GlobalRef
 	midBlockingOptionBuilderBuild                jni.MethodID
 	midBlockingOptionBuilderSetBlockingBssidOnly jni.MethodID
+	midBlockingOptionBuilderToString             jni.MethodID
 
-	clsEasyConnectStatusCallback *jni.GlobalRef
+	clsEasyConnectStatusCallback         *jni.GlobalRef
+	midEasyConnectStatusCallbackToString jni.MethodID
 
 	clsWpsInfo                 *jni.GlobalRef
 	midWpsInfoCtor             jni.MethodID
@@ -726,6 +755,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScanResultInformationElementWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanResultInformationElement)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScanResultInformationElementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScanResultInformationElement)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1151,6 +1187,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNetworkSuggestionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkSuggestionBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiEnterpriseConfig")
@@ -1483,6 +1526,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsEnterpriseConfigEap = env.NewGlobalRef(&c.Object)
 
+		midEnterpriseConfigEapToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnterpriseConfigEap)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiEnterpriseConfig$Phase2")
@@ -1492,6 +1542,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsEnterpriseConfigPhase2 = env.NewGlobalRef(&c.Object)
+
+		midEnterpriseConfigPhase2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnterpriseConfigPhase2)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1852,6 +1909,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNetworkSpecifierBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkSpecifierBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiAvailableChannel")
@@ -2040,6 +2104,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSoftApConfigurationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSoftApConfigurationBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiConfiguration")
@@ -2155,6 +2226,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsConfigurationAuthAlgorithm = env.NewGlobalRef(&c.Object)
 
+		midConfigurationAuthAlgorithmToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfigurationAuthAlgorithm)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiConfiguration$GroupCipher")
@@ -2164,6 +2242,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsConfigurationGroupCipher = env.NewGlobalRef(&c.Object)
+
+		midConfigurationGroupCipherToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfigurationGroupCipher)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -2175,6 +2260,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsConfigurationGroupMgmtCipher = env.NewGlobalRef(&c.Object)
 
+		midConfigurationGroupMgmtCipherToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfigurationGroupMgmtCipher)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiConfiguration$KeyMgmt")
@@ -2184,6 +2276,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsConfigurationKeyMgmt = env.NewGlobalRef(&c.Object)
+
+		midConfigurationKeyMgmtToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfigurationKeyMgmt)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -2195,6 +2294,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsConfigurationPairwiseCipher = env.NewGlobalRef(&c.Object)
 
+		midConfigurationPairwiseCipherToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfigurationPairwiseCipher)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiConfiguration$Protocol")
@@ -2205,6 +2311,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsConfigurationProtocol = env.NewGlobalRef(&c.Object)
 
+		midConfigurationProtocolToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfigurationProtocol)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiConfiguration$Status")
@@ -2214,6 +2327,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsConfigurationStatus = env.NewGlobalRef(&c.Object)
+
+		midConfigurationStatusToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfigurationStatus)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -2233,6 +2353,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSupplicantStateWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSupplicantState)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSupplicantStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSupplicantState)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2561,6 +2688,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInfoBuilderSetSubscriptionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfoBuilder)), "setSubscriptionId", "(I)Landroid/net/wifi/WifiInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInfoBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfoBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3291,6 +3425,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midManagerCalculateSignalLevel2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "calculateSignalLevel", "(II)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3323,6 +3464,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerAddNetworkResultWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAddNetworkResult)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerAddNetworkResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAddNetworkResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3367,6 +3515,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerInterfaceCreationImpactToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerInterfaceCreationImpact)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiManager$LocalOnlyConnectionFailureListener")
@@ -3378,6 +3533,13 @@ func doInit(env *jni.Env) error {
 		clsManagerLocalOnlyConnectionFailureListener = env.NewGlobalRef(&c.Object)
 
 		midManagerLocalOnlyConnectionFailureListenerOnConnectionFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerLocalOnlyConnectionFailureListener)), "onConnectionFailed", "(Landroid/net/wifi/WifiNetworkSpecifier;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerLocalOnlyConnectionFailureListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerLocalOnlyConnectionFailureListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3415,6 +3577,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerLocalOnlyHotspotCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerLocalOnlyHotspotCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiManager$LocalOnlyHotspotReservation")
@@ -3440,6 +3609,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerLocalOnlyHotspotReservationGetWifiConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerLocalOnlyHotspotReservation)), "getWifiConfiguration", "()Landroid/net/wifi/WifiConfiguration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerLocalOnlyHotspotReservationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerLocalOnlyHotspotReservation)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3508,6 +3684,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerScanResultsCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerScanResultsCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiManager$SubsystemRestartTrackingCallback")
@@ -3532,6 +3715,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerSubsystemRestartTrackingCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerSubsystemRestartTrackingCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiManager$SuggestionConnectionStatusListener")
@@ -3549,6 +3739,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerSuggestionConnectionStatusListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerSuggestionConnectionStatusListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiManager$SuggestionUserApprovalStatusListener")
@@ -3560,6 +3757,13 @@ func doInit(env *jni.Env) error {
 		clsManagerSuggestionUserApprovalStatusListener = env.NewGlobalRef(&c.Object)
 
 		midManagerSuggestionUserApprovalStatusListenerOnUserApprovalStatusChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerSuggestionUserApprovalStatusListener)), "onUserApprovalStatusChange", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerSuggestionUserApprovalStatusListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerSuggestionUserApprovalStatusListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3635,6 +3839,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerWifiStateChangedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWifiStateChangedListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/WifiManager$WpsCallback")
@@ -3660,6 +3871,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerWpsCallbackOnSucceeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWpsCallback)), "onSucceeded", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerWpsCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWpsCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3749,6 +3967,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBlockingOptionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBlockingOptionBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/EasyConnectStatusCallback")
@@ -3758,6 +3983,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsEasyConnectStatusCallback = env.NewGlobalRef(&c.Object)
+
+		midEasyConnectStatusCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEasyConnectStatusCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

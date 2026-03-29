@@ -195,3 +195,30 @@ func (m *A2dp) IsA2dpPlaying(arg0 *jni.Object) (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.bluetooth.BluetoothA2dp.toString.
+func (m *A2dp) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midA2dpToString == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothA2dp.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midA2dpToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

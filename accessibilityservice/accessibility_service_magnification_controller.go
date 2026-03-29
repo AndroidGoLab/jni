@@ -411,3 +411,30 @@ func (m *AccessibilityServiceMagnificationController) SetScale(arg0 float32, arg
 	})
 	return result, callErr
 }
+
+// ToString calls android.accessibilityservice.AccessibilityService$MagnificationController.toString.
+func (m *AccessibilityServiceMagnificationController) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAccessibilityServiceMagnificationControllerToString == nil {
+			callErr = fmt.Errorf("android.accessibilityservice.AccessibilityService$MagnificationController.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAccessibilityServiceMagnificationControllerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

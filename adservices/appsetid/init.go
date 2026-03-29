@@ -23,8 +23,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAppSetIdManager    *jni.GlobalRef
-	midAppSetIdManagerGet jni.MethodID
+	clsAppSetIdManager         *jni.GlobalRef
+	midAppSetIdManagerToString jni.MethodID
+	midAppSetIdManagerGet      jni.MethodID
 
 	clsAppSetId         *jni.GlobalRef
 	midAppSetIdCtor     jni.MethodID
@@ -32,6 +33,7 @@ var (
 	midAppSetIdGetId    jni.MethodID
 	midAppSetIdGetScope jni.MethodID
 	midAppSetIdHashCode jni.MethodID
+	midAppSetIdToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -59,6 +61,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAppSetIdManager = env.NewGlobalRef(&c.Object)
+
+		midAppSetIdManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetIdManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midAppSetIdManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAppSetIdManager)), "get", "(Landroid/content/Context;)Landroid/adservices/appsetid/AppSetIdManager;")
 		if err != nil {
@@ -103,6 +112,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAppSetIdHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppSetIdToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

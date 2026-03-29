@@ -351,3 +351,30 @@ func (m *FragmentHostCallback) OnUseFragmentManagerInflaterFactory() (bool, erro
 	})
 	return result, callErr
 }
+
+// ToString calls android.app.FragmentHostCallback.toString.
+func (m *FragmentHostCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFragmentHostCallbackToString == nil {
+			callErr = fmt.Errorf("android.app.FragmentHostCallback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFragmentHostCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

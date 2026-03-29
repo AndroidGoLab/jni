@@ -23,6 +23,33 @@ type WifiP2pDnsSdServiceRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceRequest.toString.
+func (m *WifiP2pDnsSdServiceRequest) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWifiP2pDnsSdServiceRequestToString == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceRequest.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWifiP2pDnsSdServiceRequestToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // NewInstance0 calls android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceRequest.newInstance.
 func (m *WifiP2pDnsSdServiceRequest) NewInstance0() (*jni.Object, error) {
 	var result *jni.Object

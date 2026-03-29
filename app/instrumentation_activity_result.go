@@ -77,3 +77,30 @@ func (m *InstrumentationActivityResult) GetResultData() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.app.Instrumentation$ActivityResult.toString.
+func (m *InstrumentationActivityResult) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInstrumentationActivityResultToString == nil {
+			callErr = fmt.Errorf("android.app.Instrumentation$ActivityResult.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInstrumentationActivityResultToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

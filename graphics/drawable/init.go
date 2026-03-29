@@ -28,6 +28,7 @@ var (
 	midLevelListDrawableAddLevel jni.MethodID
 	midLevelListDrawableInflate  jni.MethodID
 	midLevelListDrawableMutate   jni.MethodID
+	midLevelListDrawableToString jni.MethodID
 
 	clsLayerDrawable                          *jni.GlobalRef
 	midLayerDrawableCtor                      jni.MethodID
@@ -104,6 +105,7 @@ var (
 	midLayerDrawableSetTintList               jni.MethodID
 	midLayerDrawableSetVisible                jni.MethodID
 	midLayerDrawableUnscheduleDrawable        jni.MethodID
+	midLayerDrawableToString                  jni.MethodID
 
 	clsVectorDrawable                          *jni.GlobalRef
 	midVectorDrawableCtor                      jni.MethodID
@@ -128,6 +130,7 @@ var (
 	midVectorDrawableSetColorFilter            jni.MethodID
 	midVectorDrawableSetTintBlendMode          jni.MethodID
 	midVectorDrawableSetTintList               jni.MethodID
+	midVectorDrawableToString                  jni.MethodID
 
 	clsContainer                          *jni.GlobalRef
 	midContainerCtor                      jni.MethodID
@@ -168,6 +171,7 @@ var (
 	midContainerSetTintList               jni.MethodID
 	midContainerSetVisible                jni.MethodID
 	midContainerUnscheduleDrawable        jni.MethodID
+	midContainerToString                  jni.MethodID
 
 	clsContainerDrawableContainerState                          *jni.GlobalRef
 	midContainerDrawableContainerStateAddChild                  jni.MethodID
@@ -191,6 +195,7 @@ var (
 	midContainerDrawableContainerStateSetEnterFadeDuration      jni.MethodID
 	midContainerDrawableContainerStateSetExitFadeDuration       jni.MethodID
 	midContainerDrawableContainerStateSetVariablePadding        jni.MethodID
+	midContainerDrawableContainerStateToString                  jni.MethodID
 
 	clsStateListDrawable                       *jni.GlobalRef
 	midStateListDrawableCtor                   jni.MethodID
@@ -204,6 +209,7 @@ var (
 	midStateListDrawableInflate                jni.MethodID
 	midStateListDrawableIsStateful             jni.MethodID
 	midStateListDrawableMutate                 jni.MethodID
+	midStateListDrawableToString               jni.MethodID
 
 	clsIcon                                      *jni.GlobalRef
 	midIconDescribeContents                      jni.MethodID
@@ -232,6 +238,7 @@ var (
 
 	clsIconOnDrawableLoadedListener                 *jni.GlobalRef
 	midIconOnDrawableLoadedListenerOnDrawableLoaded jni.MethodID
+	midIconOnDrawableLoadedListenerToString         jni.MethodID
 
 	clsShapeDrawable                          *jni.GlobalRef
 	midShapeDrawableCtor                      jni.MethodID
@@ -263,9 +270,11 @@ var (
 	midShapeDrawableSetShape                  jni.MethodID
 	midShapeDrawableSetTintBlendMode          jni.MethodID
 	midShapeDrawableSetTintList               jni.MethodID
+	midShapeDrawableToString                  jni.MethodID
 
-	clsShapeDrawableShaderFactory       *jni.GlobalRef
-	midShapeDrawableShaderFactoryResize jni.MethodID
+	clsShapeDrawableShaderFactory         *jni.GlobalRef
+	midShapeDrawableShaderFactoryResize   jni.MethodID
+	midShapeDrawableShaderFactoryToString jni.MethodID
 
 	clsColorStateListDrawable                          *jni.GlobalRef
 	midColorStateListDrawableCtor                      jni.MethodID
@@ -291,6 +300,7 @@ var (
 	midColorStateListDrawableSetTintBlendMode          jni.MethodID
 	midColorStateListDrawableSetTintList               jni.MethodID
 	midColorStateListDrawableUnscheduleDrawable        jni.MethodID
+	midColorStateListDrawableToString                  jni.MethodID
 
 	clsPictureDrawable                   *jni.GlobalRef
 	midPictureDrawableCtor               jni.MethodID
@@ -302,6 +312,7 @@ var (
 	midPictureDrawableSetAlpha           jni.MethodID
 	midPictureDrawableSetColorFilter     jni.MethodID
 	midPictureDrawableSetPicture         jni.MethodID
+	midPictureDrawableToString           jni.MethodID
 
 	clsDrawable                            *jni.GlobalRef
 	midDrawableApplyTheme                  jni.MethodID
@@ -365,6 +376,7 @@ var (
 	midDrawableSetTintMode                 jni.MethodID
 	midDrawableSetVisible                  jni.MethodID
 	midDrawableUnscheduleSelf              jni.MethodID
+	midDrawableToString                    jni.MethodID
 	midDrawableCreateFromPath              jni.MethodID
 	midDrawableCreateFromResourceStream4   jni.MethodID
 	midDrawableCreateFromResourceStream5_1 jni.MethodID
@@ -379,6 +391,7 @@ var (
 	midCallbackInvalidateDrawable jni.MethodID
 	midCallbackScheduleDrawable   jni.MethodID
 	midCallbackUnscheduleDrawable jni.MethodID
+	midCallbackToString           jni.MethodID
 
 	clsConstantState                          *jni.GlobalRef
 	midConstantStateCanApplyTheme             jni.MethodID
@@ -386,6 +399,7 @@ var (
 	midConstantStateNewDrawable0              jni.MethodID
 	midConstantStateNewDrawable1_1            jni.MethodID
 	midConstantStateNewDrawable2_2            jni.MethodID
+	midConstantStateToString                  jni.MethodID
 
 	clsAdaptiveIconDrawable                          *jni.GlobalRef
 	midAdaptiveIconDrawableCtor                      jni.MethodID
@@ -426,6 +440,7 @@ var (
 	midAdaptiveIconDrawableSetTintList               jni.MethodID
 	midAdaptiveIconDrawableSetVisible                jni.MethodID
 	midAdaptiveIconDrawableUnscheduleDrawable        jni.MethodID
+	midAdaptiveIconDrawableToString                  jni.MethodID
 	midAdaptiveIconDrawableGetExtraInsetFraction     jni.MethodID
 
 	clsColorDrawable                          *jni.GlobalRef
@@ -449,6 +464,7 @@ var (
 	midColorDrawableSetColorFilter            jni.MethodID
 	midColorDrawableSetTintBlendMode          jni.MethodID
 	midColorDrawableSetTintList               jni.MethodID
+	midColorDrawableToString                  jni.MethodID
 
 	clsAnimatedVectorDrawable                            *jni.GlobalRef
 	midAnimatedVectorDrawableCtor                        jni.MethodID
@@ -482,6 +498,7 @@ var (
 	midAnimatedVectorDrawableStart                       jni.MethodID
 	midAnimatedVectorDrawableStop                        jni.MethodID
 	midAnimatedVectorDrawableUnregisterAnimationCallback jni.MethodID
+	midAnimatedVectorDrawableToString                    jni.MethodID
 
 	clsClipDrawable           *jni.GlobalRef
 	midClipDrawableCtor       jni.MethodID
@@ -489,11 +506,13 @@ var (
 	midClipDrawableDraw       jni.MethodID
 	midClipDrawableGetOpacity jni.MethodID
 	midClipDrawableInflate    jni.MethodID
+	midClipDrawableToString   jni.MethodID
 
 	clsPaintDrawable                *jni.GlobalRef
 	midPaintDrawableCtor            jni.MethodID
 	midPaintDrawableSetCornerRadii  jni.MethodID
 	midPaintDrawableSetCornerRadius jni.MethodID
+	midPaintDrawableToString        jni.MethodID
 
 	clsGradientDrawable                          *jni.GlobalRef
 	midGradientDrawableCtor                      jni.MethodID
@@ -556,19 +575,23 @@ var (
 	midGradientDrawableSetTintBlendMode          jni.MethodID
 	midGradientDrawableSetTintList               jni.MethodID
 	midGradientDrawableSetUseLevel               jni.MethodID
+	midGradientDrawableToString                  jni.MethodID
 
-	clsGradientDrawableOrientation        *jni.GlobalRef
-	midGradientDrawableOrientationValues  jni.MethodID
-	midGradientDrawableOrientationValueOf jni.MethodID
+	clsGradientDrawableOrientation         *jni.GlobalRef
+	midGradientDrawableOrientationToString jni.MethodID
+	midGradientDrawableOrientationValues   jni.MethodID
+	midGradientDrawableOrientationValueOf  jni.MethodID
 
 	clsAnimatable2                            *jni.GlobalRef
 	midAnimatable2ClearAnimationCallbacks     jni.MethodID
 	midAnimatable2RegisterAnimationCallback   jni.MethodID
 	midAnimatable2UnregisterAnimationCallback jni.MethodID
+	midAnimatable2ToString                    jni.MethodID
 
 	clsAnimatable2AnimationCallback                 *jni.GlobalRef
 	midAnimatable2AnimationCallbackOnAnimationEnd   jni.MethodID
 	midAnimatable2AnimationCallbackOnAnimationStart jni.MethodID
+	midAnimatable2AnimationCallbackToString         jni.MethodID
 
 	clsBitmapDrawable                          *jni.GlobalRef
 	midBitmapDrawableCtor                      jni.MethodID
@@ -614,6 +637,7 @@ var (
 	midBitmapDrawableSetTileModeY              jni.MethodID
 	midBitmapDrawableSetTintBlendMode          jni.MethodID
 	midBitmapDrawableSetTintList               jni.MethodID
+	midBitmapDrawableToString                  jni.MethodID
 
 	clsTransitionDrawable                    *jni.GlobalRef
 	midTransitionDrawableCtor                jni.MethodID
@@ -623,6 +647,7 @@ var (
 	midTransitionDrawableReverseTransition   jni.MethodID
 	midTransitionDrawableSetCrossFadeEnabled jni.MethodID
 	midTransitionDrawableStartTransition     jni.MethodID
+	midTransitionDrawableToString            jni.MethodID
 
 	clsWrapper                          *jni.GlobalRef
 	midWrapperApplyTheme                jni.MethodID
@@ -657,6 +682,7 @@ var (
 	midWrapperSetTintList               jni.MethodID
 	midWrapperSetVisible                jni.MethodID
 	midWrapperUnscheduleDrawable        jni.MethodID
+	midWrapperToString                  jni.MethodID
 
 	clsRippleDrawable                       *jni.GlobalRef
 	midRippleDrawableCtor                   jni.MethodID
@@ -685,6 +711,7 @@ var (
 	midRippleDrawableSetPaddingMode         jni.MethodID
 	midRippleDrawableSetRadius              jni.MethodID
 	midRippleDrawableSetVisible             jni.MethodID
+	midRippleDrawableToString               jni.MethodID
 
 	clsScaleDrawable           *jni.GlobalRef
 	midScaleDrawableCtor       jni.MethodID
@@ -692,6 +719,7 @@ var (
 	midScaleDrawableDraw       jni.MethodID
 	midScaleDrawableGetOpacity jni.MethodID
 	midScaleDrawableInflate    jni.MethodID
+	midScaleDrawableToString   jni.MethodID
 
 	clsRotateDrawable                  *jni.GlobalRef
 	midRotateDrawableCtor              jni.MethodID
@@ -710,6 +738,7 @@ var (
 	midRotateDrawableSetPivotY         jni.MethodID
 	midRotateDrawableSetPivotYRelative jni.MethodID
 	midRotateDrawableSetToDegrees      jni.MethodID
+	midRotateDrawableToString          jni.MethodID
 
 	clsInsetDrawable                   *jni.GlobalRef
 	midInsetDrawableCtor               jni.MethodID
@@ -721,6 +750,7 @@ var (
 	midInsetDrawableGetOutline         jni.MethodID
 	midInsetDrawableGetPadding         jni.MethodID
 	midInsetDrawableInflate            jni.MethodID
+	midInsetDrawableToString           jni.MethodID
 
 	clsNinePatchDrawable                          *jni.GlobalRef
 	midNinePatchDrawableCtor                      jni.MethodID
@@ -754,6 +784,7 @@ var (
 	midNinePatchDrawableSetTargetDensity1_2       jni.MethodID
 	midNinePatchDrawableSetTintBlendMode          jni.MethodID
 	midNinePatchDrawableSetTintList               jni.MethodID
+	midNinePatchDrawableToString                  jni.MethodID
 
 	clsAnimationDrawable                  *jni.GlobalRef
 	midAnimationDrawableCtor              jni.MethodID
@@ -771,6 +802,7 @@ var (
 	midAnimationDrawableStart             jni.MethodID
 	midAnimationDrawableStop              jni.MethodID
 	midAnimationDrawableUnscheduleSelf    jni.MethodID
+	midAnimationDrawableToString          jni.MethodID
 
 	clsAnimatedStateListDrawable                   *jni.GlobalRef
 	midAnimatedStateListDrawableCtor               jni.MethodID
@@ -781,6 +813,7 @@ var (
 	midAnimatedStateListDrawableJumpToCurrentState jni.MethodID
 	midAnimatedStateListDrawableMutate             jni.MethodID
 	midAnimatedStateListDrawableSetVisible         jni.MethodID
+	midAnimatedStateListDrawableToString           jni.MethodID
 
 	clsAnimatedImageDrawable                            *jni.GlobalRef
 	midAnimatedImageDrawableCtor                        jni.MethodID
@@ -806,11 +839,13 @@ var (
 	midAnimatedImageDrawableStart                       jni.MethodID
 	midAnimatedImageDrawableStop                        jni.MethodID
 	midAnimatedImageDrawableUnregisterAnimationCallback jni.MethodID
+	midAnimatedImageDrawableToString                    jni.MethodID
 
 	clsAnimatable          *jni.GlobalRef
 	midAnimatableIsRunning jni.MethodID
 	midAnimatableStart     jni.MethodID
 	midAnimatableStop      jni.MethodID
+	midAnimatableToString  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -858,6 +893,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midLevelListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLevelListDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1389,6 +1431,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLayerDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayerDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/VectorDrawable")
@@ -1544,6 +1593,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midVectorDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1823,6 +1879,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContainerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/DrawableContainer$DrawableContainerState")
@@ -1980,6 +2043,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContainerDrawableContainerStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/StateListDrawable")
@@ -2058,6 +2128,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStateListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2246,6 +2323,13 @@ func doInit(env *jni.Env) error {
 		clsIconOnDrawableLoadedListener = env.NewGlobalRef(&c.Object)
 
 		midIconOnDrawableLoadedListenerOnDrawableLoaded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconOnDrawableLoadedListener)), "onDrawableLoaded", "(Landroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIconOnDrawableLoadedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconOnDrawableLoadedListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2462,6 +2546,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midShapeDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/ShapeDrawable$ShaderFactory")
@@ -2473,6 +2564,13 @@ func doInit(env *jni.Env) error {
 		clsShapeDrawableShaderFactory = env.NewGlobalRef(&c.Object)
 
 		midShapeDrawableShaderFactoryResize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawableShaderFactory)), "resize", "(II)Landroid/graphics/Shader;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midShapeDrawableShaderFactoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawableShaderFactory)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2647,6 +2745,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midColorStateListDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/PictureDrawable")
@@ -2711,6 +2816,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPictureDrawableSetPicture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureDrawable)), "setPicture", "(Landroid/graphics/Picture;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPictureDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3154,6 +3266,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midDrawableCreateFromPath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDrawable)), "createFromPath", "(Ljava/lang/String;)Landroid/graphics/drawable/Drawable;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3248,6 +3367,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/Drawable$ConstantState")
@@ -3287,6 +3413,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConstantStateNewDrawable2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConstantState)), "newDrawable", "(Landroid/content/res/Resources;Landroid/content/res/Resources$Theme;)Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConstantStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConstantState)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3566,6 +3699,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdaptiveIconDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midAdaptiveIconDrawableGetExtraInsetFraction, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getExtraInsetFraction", "()F")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3714,6 +3854,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midColorDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3944,6 +4091,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAnimatedVectorDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/ClipDrawable")
@@ -3986,6 +4140,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midClipDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/PaintDrawable")
@@ -4008,6 +4169,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPaintDrawableSetCornerRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintDrawable)), "setCornerRadius", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPaintDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4441,6 +4609,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGradientDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGradientDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/GradientDrawable$Orientation")
@@ -4450,6 +4625,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGradientDrawableOrientation = env.NewGlobalRef(&c.Object)
+
+		midGradientDrawableOrientationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGradientDrawableOrientation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midGradientDrawableOrientationValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGradientDrawableOrientation)), "values", "()[Landroid/graphics/drawable/GradientDrawable$Orientation;")
 		if err != nil {
@@ -4496,6 +4678,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAnimatable2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/Animatable2$AnimationCallback")
@@ -4514,6 +4703,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAnimatable2AnimationCallbackOnAnimationStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2AnimationCallback)), "onAnimationStart", "(Landroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatable2AnimationCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2AnimationCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4828,6 +5024,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBitmapDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/TransitionDrawable")
@@ -4878,6 +5081,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTransitionDrawableStartTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "startTransition", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransitionDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5118,6 +5328,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWrapperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrapper)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/RippleDrawable")
@@ -5307,6 +5524,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRippleDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/ScaleDrawable")
@@ -5343,6 +5567,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midScaleDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScaleDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5468,6 +5699,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRotateDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/InsetDrawable")
@@ -5532,6 +5770,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInsetDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsetDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInsetDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsetDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5762,6 +6007,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNinePatchDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNinePatchDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/AnimationDrawable")
@@ -5874,6 +6126,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAnimationDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/AnimatedStateListDrawable")
@@ -5931,6 +6190,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAnimatedStateListDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "setVisible", "(ZZ)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedStateListDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6105,6 +6371,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAnimatedImageDrawableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/Animatable")
@@ -6130,6 +6403,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAnimatableStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable)), "stop", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

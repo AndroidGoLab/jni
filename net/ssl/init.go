@@ -24,11 +24,13 @@ var (
 	initErr  error
 
 	clsSSLEngines                     *jni.GlobalRef
+	midSSLEnginesToString             jni.MethodID
 	midSSLEnginesExportKeyingMaterial jni.MethodID
 	midSSLEnginesIsSupportedEngine    jni.MethodID
 	midSSLEnginesSetUseSessionTickets jni.MethodID
 
 	clsSSLSockets                     *jni.GlobalRef
+	midSSLSocketsToString             jni.MethodID
 	midSSLSocketsExportKeyingMaterial jni.MethodID
 	midSSLSocketsIsSupportedSocket    jni.MethodID
 	midSSLSocketsSetUseSessionTickets jni.MethodID
@@ -60,6 +62,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsSSLEngines = env.NewGlobalRef(&c.Object)
 
+		midSSLEnginesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSSLEngines)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midSSLEnginesExportKeyingMaterial, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLEngines)), "exportKeyingMaterial", "(Ljavax/net/ssl/SSLEngine;Ljava/lang/String;[BI)[B")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -90,6 +99,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSSLSockets = env.NewGlobalRef(&c.Object)
+
+		midSSLSocketsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSSLSockets)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midSSLSocketsExportKeyingMaterial, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLSockets)), "exportKeyingMaterial", "(Ljavax/net/ssl/SSLSocket;Ljava/lang/String;[BI)[B")
 		if err != nil {

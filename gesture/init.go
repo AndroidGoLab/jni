@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsUtils                           *jni.GlobalRef
+	midUtilsToString                   jni.MethodID
 	midUtilsComputeOrientedBoundingBox jni.MethodID
 	midUtilsSpatialSampling2           jni.MethodID
 	midUtilsSpatialSampling3_1         jni.MethodID
@@ -43,13 +44,15 @@ var (
 	midLibrarySave                jni.MethodID
 	midLibrarySetOrientationStyle jni.MethodID
 	midLibrarySetSequenceType     jni.MethodID
+	midLibraryToString            jni.MethodID
 
 	clsPrediction         *jni.GlobalRef
 	midPredictionToString jni.MethodID
 
-	clsPoint      *jni.GlobalRef
-	midPointCtor  jni.MethodID
-	midPointClone jni.MethodID
+	clsPoint         *jni.GlobalRef
+	midPointCtor     jni.MethodID
+	midPointClone    jni.MethodID
+	midPointToString jni.MethodID
 
 	clsStroke                           *jni.GlobalRef
 	midStrokeCtor                       jni.MethodID
@@ -58,8 +61,10 @@ var (
 	midStrokeComputeOrientedBoundingBox jni.MethodID
 	midStrokeGetPath                    jni.MethodID
 	midStrokeToPath                     jni.MethodID
+	midStrokeToString                   jni.MethodID
 
 	clsLibraries                   *jni.GlobalRef
+	midLibrariesToString           jni.MethodID
 	midLibrariesFromFile1          jni.MethodID
 	midLibrariesFromFile1_1        jni.MethodID
 	midLibrariesFromFileDescriptor jni.MethodID
@@ -112,19 +117,23 @@ var (
 	midOverlayViewSetGestureVisible                    jni.MethodID
 	midOverlayViewSetOrientation                       jni.MethodID
 	midOverlayViewSetUncertainGestureColor             jni.MethodID
+	midOverlayViewToString                             jni.MethodID
 
 	clsOverlayViewOnGestureListener                   *jni.GlobalRef
 	midOverlayViewOnGestureListenerOnGesture          jni.MethodID
 	midOverlayViewOnGestureListenerOnGestureCancelled jni.MethodID
 	midOverlayViewOnGestureListenerOnGestureEnded     jni.MethodID
 	midOverlayViewOnGestureListenerOnGestureStarted   jni.MethodID
+	midOverlayViewOnGestureListenerToString           jni.MethodID
 
 	clsOverlayViewOnGesturePerformedListener                   *jni.GlobalRef
 	midOverlayViewOnGesturePerformedListenerOnGesturePerformed jni.MethodID
+	midOverlayViewOnGesturePerformedListenerToString           jni.MethodID
 
 	clsOverlayViewOnGesturingListener                   *jni.GlobalRef
 	midOverlayViewOnGesturingListenerOnGesturingEnded   jni.MethodID
 	midOverlayViewOnGesturingListenerOnGesturingStarted jni.MethodID
+	midOverlayViewOnGesturingListenerToString           jni.MethodID
 
 	clsStore                    *jni.GlobalRef
 	midStoreCtor                jni.MethodID
@@ -143,8 +152,10 @@ var (
 	midStoreSave2_1             jni.MethodID
 	midStoreSetOrientationStyle jni.MethodID
 	midStoreSetSequenceType     jni.MethodID
+	midStoreToString            jni.MethodID
 
-	clsOrientedBoundingBox *jni.GlobalRef
+	clsOrientedBoundingBox         *jni.GlobalRef
+	midOrientedBoundingBoxToString jni.MethodID
 
 	clsGesture                 *jni.GlobalRef
 	midGestureCtor             jni.MethodID
@@ -163,6 +174,7 @@ var (
 	midGestureToPath5_2        jni.MethodID
 	midGestureToPath4_3        jni.MethodID
 	midGestureWriteToParcel    jni.MethodID
+	midGestureToString         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -190,6 +202,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUtils = env.NewGlobalRef(&c.Object)
+
+		midUtilsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtils)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midUtilsComputeOrientedBoundingBox, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUtils)), "computeOrientedBoundingBox", "([F)Landroid/gesture/OrientedBoundingBox;")
 		if err != nil {
@@ -320,6 +339,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLibraryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLibrary)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/gesture/Prediction")
@@ -352,6 +378,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPointClone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPoint)), "clone", "()Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPointToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPoint)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -407,6 +440,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStrokeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStroke)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/gesture/GestureLibraries")
@@ -416,6 +456,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsLibraries = env.NewGlobalRef(&c.Object)
+
+		midLibrariesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLibraries)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midLibrariesFromFile1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLibraries)), "fromFile", "(Ljava/io/File;)Landroid/gesture/GestureLibrary;")
 		if err != nil {
@@ -774,6 +821,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOverlayViewToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOverlayView)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/gesture/GestureOverlayView$OnGestureListener")
@@ -812,6 +866,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOverlayViewOnGestureListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOverlayViewOnGestureListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/gesture/GestureOverlayView$OnGesturePerformedListener")
@@ -823,6 +884,13 @@ func doInit(env *jni.Env) error {
 		clsOverlayViewOnGesturePerformedListener = env.NewGlobalRef(&c.Object)
 
 		midOverlayViewOnGesturePerformedListenerOnGesturePerformed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOverlayViewOnGesturePerformedListener)), "onGesturePerformed", "(Landroid/gesture/GestureOverlayView;Landroid/gesture/Gesture;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOverlayViewOnGesturePerformedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOverlayViewOnGesturePerformedListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -847,6 +915,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midOverlayViewOnGesturingListenerOnGesturingStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOverlayViewOnGesturingListener)), "onGesturingStarted", "(Landroid/gesture/GestureOverlayView;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOverlayViewOnGesturingListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOverlayViewOnGesturingListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -972,6 +1047,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStoreToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStore)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/gesture/OrientedBoundingBox")
@@ -981,6 +1063,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsOrientedBoundingBox = env.NewGlobalRef(&c.Object)
+
+		midOrientedBoundingBoxToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOrientedBoundingBox)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1095,6 +1184,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGestureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGesture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGestureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGesture)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

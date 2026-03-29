@@ -26,6 +26,7 @@ var (
 	clsSpellCheckerService              *jni.GlobalRef
 	midSpellCheckerServiceCreateSession jni.MethodID
 	midSpellCheckerServiceOnBind        jni.MethodID
+	midSpellCheckerServiceToString      jni.MethodID
 
 	clsSpellCheckerServiceSession                                 *jni.GlobalRef
 	midSpellCheckerServiceSessionGetBundle                        jni.MethodID
@@ -37,6 +38,7 @@ var (
 	midSpellCheckerServiceSessionOnGetSentenceSuggestionsMultiple jni.MethodID
 	midSpellCheckerServiceSessionOnGetSuggestions                 jni.MethodID
 	midSpellCheckerServiceSessionOnGetSuggestionsMultiple         jni.MethodID
+	midSpellCheckerServiceSessionToString                         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -73,6 +75,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSpellCheckerServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpellCheckerServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -146,6 +155,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSpellCheckerServiceSessionOnGetSuggestionsMultiple, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerServiceSession)), "onGetSuggestionsMultiple", "([Landroid/view/textservice/TextInfo;IZ)[Landroid/view/textservice/SuggestionsInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpellCheckerServiceSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerServiceSession)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

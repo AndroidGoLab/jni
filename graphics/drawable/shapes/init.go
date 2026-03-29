@@ -34,6 +34,7 @@ var (
 	midShapeHashCode   jni.MethodID
 	midShapeResize     jni.MethodID
 	midShapeClone0_1   jni.MethodID
+	midShapeToString   jni.MethodID
 
 	clsRoundRectShape           *jni.GlobalRef
 	midRoundRectShapeCtor       jni.MethodID
@@ -45,6 +46,7 @@ var (
 	midRoundRectShapeClone0_1   jni.MethodID
 	midRoundRectShapeClone0_2   jni.MethodID
 	midRoundRectShapeClone0_3   jni.MethodID
+	midRoundRectShapeToString   jni.MethodID
 
 	clsRectShape           *jni.GlobalRef
 	midRectShapeCtor       jni.MethodID
@@ -55,6 +57,7 @@ var (
 	midRectShapeHashCode   jni.MethodID
 	midRectShapeClone0_1   jni.MethodID
 	midRectShapeClone0_2   jni.MethodID
+	midRectShapeToString   jni.MethodID
 
 	clsArcShape              *jni.GlobalRef
 	midArcShapeCtor          jni.MethodID
@@ -68,6 +71,7 @@ var (
 	midArcShapeClone0_1      jni.MethodID
 	midArcShapeClone0_2      jni.MethodID
 	midArcShapeClone0_3      jni.MethodID
+	midArcShapeToString      jni.MethodID
 
 	clsOvalShape           *jni.GlobalRef
 	midOvalShapeCtor       jni.MethodID
@@ -77,6 +81,7 @@ var (
 	midOvalShapeClone0_1   jni.MethodID
 	midOvalShapeClone0_2   jni.MethodID
 	midOvalShapeClone0_3   jni.MethodID
+	midOvalShapeToString   jni.MethodID
 
 	clsPathShape         *jni.GlobalRef
 	midPathShapeCtor     jni.MethodID
@@ -86,6 +91,7 @@ var (
 	midPathShapeHashCode jni.MethodID
 	midPathShapeClone0_1 jni.MethodID
 	midPathShapeClone0_2 jni.MethodID
+	midPathShapeToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -184,6 +190,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midShapeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShape)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/shapes/RoundRectShape")
@@ -254,6 +267,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRoundRectShapeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRoundRectShape)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/shapes/RectShape")
@@ -311,6 +331,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRectShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "clone", "()Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRectShapeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -401,6 +428,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midArcShapeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/shapes/OvalShape")
@@ -457,6 +491,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOvalShapeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/graphics/drawable/shapes/PathShape")
@@ -507,6 +548,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPathShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "clone", "()Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPathShapeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

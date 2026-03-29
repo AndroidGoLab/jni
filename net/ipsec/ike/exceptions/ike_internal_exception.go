@@ -50,3 +50,30 @@ func NewIkeInternalException(vm *jni.VM, arg0 string, arg1 *jni.Object) (*IkeInt
 	}
 	return &t, nil
 }
+
+// ToString calls android.net.ipsec.ike.exceptions.IkeInternalException.toString.
+func (m *IkeInternalException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIkeInternalExceptionToString == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.exceptions.IkeInternalException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIkeInternalExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

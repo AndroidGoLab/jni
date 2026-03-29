@@ -49,3 +49,30 @@ func (m *AppSearchSchemaDoublePropertyConfig) IsScoringEnabled() (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.app.appsearch.AppSearchSchema$DoublePropertyConfig.toString.
+func (m *AppSearchSchemaDoublePropertyConfig) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAppSearchSchemaDoublePropertyConfigToString == nil {
+			callErr = fmt.Errorf("android.app.appsearch.AppSearchSchema$DoublePropertyConfig.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAppSearchSchemaDoublePropertyConfigToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -42,6 +42,7 @@ var (
 	midPasspointConfigurationWriteToParcel                         jni.MethodID
 
 	clsConfigParser                     *jni.GlobalRef
+	midConfigParserToString             jni.MethodID
 	midConfigParserParsePasspointConfig jni.MethodID
 )
 
@@ -189,6 +190,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsConfigParser = env.NewGlobalRef(&c.Object)
+
+		midConfigParserToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfigParser)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midConfigParserParsePasspointConfig, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConfigParser)), "parsePasspointConfig", "(Ljava/lang/String;[B)Landroid/net/wifi/hotspot2/PasspointConfiguration;")
 		if err != nil {

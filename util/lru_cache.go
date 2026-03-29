@@ -113,3 +113,30 @@ func (m *LruCache) TrimToSize(arg0 int32) error {
 	})
 	return callErr
 }
+
+// ToString calls android.util.LruCache.toString.
+func (m *LruCache) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLruCacheToString == nil {
+			callErr = fmt.Errorf("android.util.LruCache.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLruCacheToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

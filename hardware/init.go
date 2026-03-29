@@ -25,6 +25,7 @@ var (
 
 	clsSensorEventListener2                 *jni.GlobalRef
 	midSensorEventListener2OnFlushCompleted jni.MethodID
+	midSensorEventListener2ToString         jni.MethodID
 
 	clsDisplayLuts         *jni.GlobalRef
 	midDisplayLutsCtor     jni.MethodID
@@ -43,8 +44,10 @@ var (
 	midSensorEventCallbackOnFlushCompleted       jni.MethodID
 	midSensorEventCallbackOnSensorAdditionalInfo jni.MethodID
 	midSensorEventCallbackOnSensorChanged        jni.MethodID
+	midSensorEventCallbackToString               jni.MethodID
 
 	clsDataSpace            *jni.GlobalRef
+	midDataSpaceToString    jni.MethodID
 	midDataSpaceGetRange    jni.MethodID
 	midDataSpaceGetStandard jni.MethodID
 	midDataSpaceGetTransfer jni.MethodID
@@ -53,18 +56,23 @@ var (
 	clsSensorEventListener                  *jni.GlobalRef
 	midSensorEventListenerOnAccuracyChanged jni.MethodID
 	midSensorEventListenerOnSensorChanged   jni.MethodID
+	midSensorEventListenerToString          jni.MethodID
 
 	clsSensorPrivacyManager                        *jni.GlobalRef
 	midSensorPrivacyManagerSupportsSensorToggle1   jni.MethodID
 	midSensorPrivacyManagerSupportsSensorToggle2_1 jni.MethodID
+	midSensorPrivacyManagerToString                jni.MethodID
 
-	clsSensorPrivacyManagerSensors *jni.GlobalRef
+	clsSensorPrivacyManagerSensors         *jni.GlobalRef
+	midSensorPrivacyManagerSensorsToString jni.MethodID
 
-	clsTriggerEvent *jni.GlobalRef
+	clsTriggerEvent         *jni.GlobalRef
+	midTriggerEventToString jni.MethodID
 
 	clsSensorListener                  *jni.GlobalRef
 	midSensorListenerOnAccuracyChanged jni.MethodID
 	midSensorListenerOnSensorChanged   jni.MethodID
+	midSensorListenerToString          jni.MethodID
 
 	clsSyncFence                 *jni.GlobalRef
 	midSyncFenceCtor             jni.MethodID
@@ -75,6 +83,7 @@ var (
 	midSyncFenceGetSignalTime    jni.MethodID
 	midSyncFenceIsValid          jni.MethodID
 	midSyncFenceWriteToParcel    jni.MethodID
+	midSyncFenceToString         jni.MethodID
 
 	clsGeomagneticField                      *jni.GlobalRef
 	midGeomagneticFieldCtor                  jni.MethodID
@@ -85,6 +94,7 @@ var (
 	midGeomagneticFieldGetX                  jni.MethodID
 	midGeomagneticFieldGetY                  jni.MethodID
 	midGeomagneticFieldGetZ                  jni.MethodID
+	midGeomagneticFieldToString              jni.MethodID
 
 	clsSensorManager                                  *jni.GlobalRef
 	midSensorManagerCancelTriggerSensor               jni.MethodID
@@ -108,6 +118,7 @@ var (
 	midSensorManagerUnregisterListener2_1             jni.MethodID
 	midSensorManagerUnregisterListener1_2             jni.MethodID
 	midSensorManagerUnregisterListener2_3             jni.MethodID
+	midSensorManagerToString                          jni.MethodID
 	midSensorManagerGetAltitude                       jni.MethodID
 	midSensorManagerGetAngleChange                    jni.MethodID
 	midSensorManagerGetInclination                    jni.MethodID
@@ -120,16 +131,20 @@ var (
 	clsSensorManagerDynamicSensorCallback                            *jni.GlobalRef
 	midSensorManagerDynamicSensorCallbackOnDynamicSensorConnected    jni.MethodID
 	midSensorManagerDynamicSensorCallbackOnDynamicSensorDisconnected jni.MethodID
+	midSensorManagerDynamicSensorCallbackToString                    jni.MethodID
 
-	clsSensorEvent *jni.GlobalRef
+	clsSensorEvent         *jni.GlobalRef
+	midSensorEventToString jni.MethodID
 
 	clsBatteryState            *jni.GlobalRef
 	midBatteryStateGetCapacity jni.MethodID
 	midBatteryStateGetStatus   jni.MethodID
 	midBatteryStateIsPresent   jni.MethodID
+	midBatteryStateToString    jni.MethodID
 
 	clsTriggerEventListener          *jni.GlobalRef
 	midTriggerEventListenerOnTrigger jni.MethodID
+	midTriggerEventListenerToString  jni.MethodID
 
 	clsSensor                                *jni.GlobalRef
 	midSensorGetFifoMaxEventCount            jni.MethodID
@@ -153,7 +168,8 @@ var (
 	midSensorIsWakeUpSensor                  jni.MethodID
 	midSensorToString                        jni.MethodID
 
-	clsSensorAdditionalInfo *jni.GlobalRef
+	clsSensorAdditionalInfo         *jni.GlobalRef
+	midSensorAdditionalInfoToString jni.MethodID
 
 	clsOverlayProperties                            *jni.GlobalRef
 	midOverlayPropertiesDescribeContents            jni.MethodID
@@ -161,11 +177,13 @@ var (
 	midOverlayPropertiesIsCombinationSupported      jni.MethodID
 	midOverlayPropertiesIsMixedColorSpacesSupported jni.MethodID
 	midOverlayPropertiesWriteToParcel               jni.MethodID
+	midOverlayPropertiesToString                    jni.MethodID
 
 	clsSensorDirectChannel          *jni.GlobalRef
 	midSensorDirectChannelClose     jni.MethodID
 	midSensorDirectChannelConfigure jni.MethodID
 	midSensorDirectChannelIsOpen    jni.MethodID
+	midSensorDirectChannelToString  jni.MethodID
 
 	clsBuffer                 *jni.GlobalRef
 	midBufferClose            jni.MethodID
@@ -178,6 +196,7 @@ var (
 	midBufferGetWidth         jni.MethodID
 	midBufferIsClosed         jni.MethodID
 	midBufferWriteToParcel    jni.MethodID
+	midBufferToString         jni.MethodID
 	midBufferCreate           jni.MethodID
 	midBufferIsSupported      jni.MethodID
 
@@ -210,32 +229,41 @@ var (
 	midCameraTakePicture3                 jni.MethodID
 	midCameraTakePicture4_1               jni.MethodID
 	midCameraUnlock                       jni.MethodID
+	midCameraToString                     jni.MethodID
 	midCameraGetCameraInfo                jni.MethodID
 	midCameraGetNumberOfCameras           jni.MethodID
 	midCameraOpen0                        jni.MethodID
 	midCameraOpen1_1                      jni.MethodID
 
-	clsCameraArea       *jni.GlobalRef
-	midCameraAreaEquals jni.MethodID
+	clsCameraArea         *jni.GlobalRef
+	midCameraAreaEquals   jni.MethodID
+	midCameraAreaToString jni.MethodID
 
 	clsCameraAutoFocusCallback            *jni.GlobalRef
 	midCameraAutoFocusCallbackOnAutoFocus jni.MethodID
+	midCameraAutoFocusCallbackToString    jni.MethodID
 
 	clsCameraAutoFocusMoveCallback                  *jni.GlobalRef
 	midCameraAutoFocusMoveCallbackOnAutoFocusMoving jni.MethodID
+	midCameraAutoFocusMoveCallbackToString          jni.MethodID
 
-	clsCameraCameraInfo *jni.GlobalRef
+	clsCameraCameraInfo         *jni.GlobalRef
+	midCameraCameraInfoToString jni.MethodID
 
-	clsCameraErrorCallback        *jni.GlobalRef
-	midCameraErrorCallbackOnError jni.MethodID
+	clsCameraErrorCallback         *jni.GlobalRef
+	midCameraErrorCallbackOnError  jni.MethodID
+	midCameraErrorCallbackToString jni.MethodID
 
-	clsCameraFace *jni.GlobalRef
+	clsCameraFace         *jni.GlobalRef
+	midCameraFaceToString jni.MethodID
 
 	clsCameraFaceDetectionListener                *jni.GlobalRef
 	midCameraFaceDetectionListenerOnFaceDetection jni.MethodID
+	midCameraFaceDetectionListenerToString        jni.MethodID
 
 	clsCameraOnZoomChangeListener             *jni.GlobalRef
 	midCameraOnZoomChangeListenerOnZoomChange jni.MethodID
+	midCameraOnZoomChangeListenerToString     jni.MethodID
 
 	clsCameraParameters                                *jni.GlobalRef
 	midCameraParametersFlatten                         jni.MethodID
@@ -328,24 +356,30 @@ var (
 	midCameraParametersSetWhiteBalance                 jni.MethodID
 	midCameraParametersSetZoom                         jni.MethodID
 	midCameraParametersUnflatten                       jni.MethodID
+	midCameraParametersToString                        jni.MethodID
 
 	clsCameraPictureCallback               *jni.GlobalRef
 	midCameraPictureCallbackOnPictureTaken jni.MethodID
+	midCameraPictureCallbackToString       jni.MethodID
 
 	clsCameraPreviewCallback               *jni.GlobalRef
 	midCameraPreviewCallbackOnPreviewFrame jni.MethodID
+	midCameraPreviewCallbackToString       jni.MethodID
 
 	clsCameraShutterCallback          *jni.GlobalRef
 	midCameraShutterCallbackOnShutter jni.MethodID
+	midCameraShutterCallbackToString  jni.MethodID
 
 	clsCameraSize         *jni.GlobalRef
 	midCameraSizeEquals   jni.MethodID
 	midCameraSizeHashCode jni.MethodID
+	midCameraSizeToString jni.MethodID
 
 	clsLutProperties                *jni.GlobalRef
 	midLutPropertiesGetDimension    jni.MethodID
 	midLutPropertiesGetSamplingKeys jni.MethodID
 	midLutPropertiesGetSize         jni.MethodID
+	midLutPropertiesToString        jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -375,6 +409,13 @@ func doInit(env *jni.Env) error {
 		clsSensorEventListener2 = env.NewGlobalRef(&c.Object)
 
 		midSensorEventListener2OnFlushCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorEventListener2)), "onFlushCompleted", "(Landroid/hardware/Sensor;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorEventListener2ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorEventListener2)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -492,6 +533,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSensorEventCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorEventCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/DataSpace")
@@ -501,6 +549,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDataSpace = env.NewGlobalRef(&c.Object)
+
+		midDataSpaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataSpace)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midDataSpaceGetRange, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDataSpace)), "getRange", "(I)I")
 		if err != nil {
@@ -554,6 +609,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSensorEventListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorEventListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/SensorPrivacyManager")
@@ -578,6 +640,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSensorPrivacyManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorPrivacyManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/SensorPrivacyManager$Sensors")
@@ -588,6 +657,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsSensorPrivacyManagerSensors = env.NewGlobalRef(&c.Object)
 
+		midSensorPrivacyManagerSensorsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorPrivacyManagerSensors)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/TriggerEvent")
@@ -597,6 +673,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTriggerEvent = env.NewGlobalRef(&c.Object)
+
+		midTriggerEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTriggerEvent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -616,6 +699,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSensorListenerOnSensorChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorListener)), "onSensorChanged", "(I[F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -685,6 +775,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSyncFenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSyncFence)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/GeomagneticField")
@@ -742,6 +839,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGeomagneticFieldGetZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeomagneticField)), "getZ", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGeomagneticFieldToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeomagneticField)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -905,6 +1009,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSensorManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midSensorManagerGetAltitude, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSensorManager)), "getAltitude", "(FF)F")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -985,6 +1096,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSensorManagerDynamicSensorCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorManagerDynamicSensorCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/SensorEvent")
@@ -994,6 +1112,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSensorEvent = env.NewGlobalRef(&c.Object)
+
+		midSensorEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorEvent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1026,6 +1151,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBatteryStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBatteryState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/TriggerEventListener")
@@ -1037,6 +1169,13 @@ func doInit(env *jni.Env) error {
 		clsTriggerEventListener = env.NewGlobalRef(&c.Object)
 
 		midTriggerEventListenerOnTrigger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTriggerEventListener)), "onTrigger", "(Landroid/hardware/TriggerEvent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTriggerEventListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTriggerEventListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1203,6 +1342,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsSensorAdditionalInfo = env.NewGlobalRef(&c.Object)
 
+		midSensorAdditionalInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorAdditionalInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/OverlayProperties")
@@ -1248,6 +1394,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midOverlayPropertiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOverlayProperties)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/SensorDirectChannel")
@@ -1273,6 +1426,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSensorDirectChannelIsOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorDirectChannel)), "isOpen", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorDirectChannelToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorDirectChannel)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1353,6 +1513,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBufferWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuffer)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBufferToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuffer)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1579,6 +1746,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCameraToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCamera)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midCameraGetCameraInfo, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCamera)), "getCameraInfo", "(ILandroid/hardware/Camera$CameraInfo;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1624,6 +1798,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCameraAreaToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraArea)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/Camera$AutoFocusCallback")
@@ -1635,6 +1816,13 @@ func doInit(env *jni.Env) error {
 		clsCameraAutoFocusCallback = env.NewGlobalRef(&c.Object)
 
 		midCameraAutoFocusCallbackOnAutoFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraAutoFocusCallback)), "onAutoFocus", "(ZLandroid/hardware/Camera;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraAutoFocusCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraAutoFocusCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1658,6 +1846,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCameraAutoFocusMoveCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraAutoFocusMoveCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/Camera$CameraInfo")
@@ -1667,6 +1862,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCameraCameraInfo = env.NewGlobalRef(&c.Object)
+
+		midCameraCameraInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCameraInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1685,6 +1887,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCameraErrorCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraErrorCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/Camera$Face")
@@ -1694,6 +1903,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCameraFace = env.NewGlobalRef(&c.Object)
+
+		midCameraFaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraFace)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1712,6 +1928,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCameraFaceDetectionListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraFaceDetectionListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/Camera$OnZoomChangeListener")
@@ -1723,6 +1946,13 @@ func doInit(env *jni.Env) error {
 		clsCameraOnZoomChangeListener = env.NewGlobalRef(&c.Object)
 
 		midCameraOnZoomChangeListenerOnZoomChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOnZoomChangeListener)), "onZoomChange", "(IZLandroid/hardware/Camera;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraOnZoomChangeListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOnZoomChangeListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2369,6 +2599,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCameraParametersToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraParameters)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/Camera$PictureCallback")
@@ -2380,6 +2617,13 @@ func doInit(env *jni.Env) error {
 		clsCameraPictureCallback = env.NewGlobalRef(&c.Object)
 
 		midCameraPictureCallbackOnPictureTaken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPictureCallback)), "onPictureTaken", "([BLandroid/hardware/Camera;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraPictureCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPictureCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2403,6 +2647,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCameraPreviewCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPreviewCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/Camera$ShutterCallback")
@@ -2414,6 +2665,13 @@ func doInit(env *jni.Env) error {
 		clsCameraShutterCallback = env.NewGlobalRef(&c.Object)
 
 		midCameraShutterCallbackOnShutter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraShutterCallback)), "onShutter", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraShutterCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraShutterCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2438,6 +2696,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCameraSizeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraSize)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraSizeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraSize)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2469,6 +2734,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midLutPropertiesGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLutProperties)), "getSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLutPropertiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLutProperties)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

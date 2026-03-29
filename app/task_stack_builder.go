@@ -358,6 +358,33 @@ func (m *TaskStackBuilder) StartActivities1_1(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.app.TaskStackBuilder.toString.
+func (m *TaskStackBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTaskStackBuilderToString == nil {
+			callErr = fmt.Errorf("android.app.TaskStackBuilder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTaskStackBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Create calls android.app.TaskStackBuilder.create.
 func (m *TaskStackBuilder) Create(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

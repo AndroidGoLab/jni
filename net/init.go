@@ -29,11 +29,12 @@ var (
 	midDhcpInfoToString         jni.MethodID
 	midDhcpInfoWriteToParcel    jni.MethodID
 
-	clsCredentials       *jni.GlobalRef
-	midCredentialsCtor   jni.MethodID
-	midCredentialsGetGid jni.MethodID
-	midCredentialsGetPid jni.MethodID
-	midCredentialsGetUid jni.MethodID
+	clsCredentials         *jni.GlobalRef
+	midCredentialsCtor     jni.MethodID
+	midCredentialsGetGid   jni.MethodID
+	midCredentialsGetPid   jni.MethodID
+	midCredentialsGetUid   jni.MethodID
+	midCredentialsToString jni.MethodID
 
 	clsworkRequest                    *jni.GlobalRef
 	midworkRequestCanBeSatisfiedBy    jni.MethodID
@@ -59,8 +60,10 @@ var (
 	midworkRequestBuilderSetIncludeOtherUidNetworks jni.MethodID
 	midworkRequestBuilderSetNetworkSpecifier1       jni.MethodID
 	midworkRequestBuilderSetNetworkSpecifier1_1     jni.MethodID
+	midworkRequestBuilderToString                   jni.MethodID
 
-	clsworkSpecifier *jni.GlobalRef
+	clsworkSpecifier         *jni.GlobalRef
+	midworkSpecifierToString jni.MethodID
 
 	clsIpSecTransformState                           *jni.GlobalRef
 	midIpSecTransformStateDescribeContents           jni.MethodID
@@ -71,6 +74,7 @@ var (
 	midIpSecTransformStateGetTimestampMillis         jni.MethodID
 	midIpSecTransformStateGetTxHighestSequenceNumber jni.MethodID
 	midIpSecTransformStateWriteToParcel              jni.MethodID
+	midIpSecTransformStateToString                   jni.MethodID
 
 	clsIpSecTransformStateBuilder                           *jni.GlobalRef
 	midIpSecTransformStateBuilderBuild                      jni.MethodID
@@ -80,6 +84,7 @@ var (
 	midIpSecTransformStateBuilderSetRxHighestSequenceNumber jni.MethodID
 	midIpSecTransformStateBuilderSetTimestampMillis         jni.MethodID
 	midIpSecTransformStateBuilderSetTxHighestSequenceNumber jni.MethodID
+	midIpSecTransformStateBuilderToString                   jni.MethodID
 
 	clsMailTo           *jni.GlobalRef
 	midMailToGetBody    jni.MethodID
@@ -101,6 +106,7 @@ var (
 	midIpSecTransformBuilderSetAuthentication           jni.MethodID
 	midIpSecTransformBuilderSetEncryption               jni.MethodID
 	midIpSecTransformBuilderSetIpv4Encapsulation        jni.MethodID
+	midIpSecTransformBuilderToString                    jni.MethodID
 
 	clsTelephonyNetworkSpecifier                  *jni.GlobalRef
 	midTelephonyNetworkSpecifierDescribeContents  jni.MethodID
@@ -113,12 +119,14 @@ var (
 	clsTelephonyNetworkSpecifierBuilder                  *jni.GlobalRef
 	midTelephonyNetworkSpecifierBuilderBuild             jni.MethodID
 	midTelephonyNetworkSpecifierBuilderSetSubscriptionId jni.MethodID
+	midTelephonyNetworkSpecifierBuilderToString          jni.MethodID
 
 	clsCaptivePortal                             *jni.GlobalRef
 	midCaptivePortalDescribeContents             jni.MethodID
 	midCaptivePortalIgnoreNetwork                jni.MethodID
 	midCaptivePortalReportCaptivePortalDismissed jni.MethodID
 	midCaptivePortalWriteToParcel                jni.MethodID
+	midCaptivePortalToString                     jni.MethodID
 
 	clsLinkProperties                        *jni.GlobalRef
 	midLinkPropertiesCtor                    jni.MethodID
@@ -179,6 +187,7 @@ var (
 	midUrlQuerySanitizerSetPreferFirstRepeatedParameter        jni.MethodID
 	midUrlQuerySanitizerSetUnregisteredParameterValueSanitizer jni.MethodID
 	midUrlQuerySanitizerUnescape                               jni.MethodID
+	midUrlQuerySanitizerToString                               jni.MethodID
 	midUrlQuerySanitizerGetAllButNulAndAngleBracketsLegal      jni.MethodID
 	midUrlQuerySanitizerGetAllButNulLegal                      jni.MethodID
 	midUrlQuerySanitizerGetAllButWhitespaceLegal               jni.MethodID
@@ -191,20 +200,25 @@ var (
 
 	clsUrlQuerySanitizerIllegalCharacterValueSanitizer         *jni.GlobalRef
 	midUrlQuerySanitizerIllegalCharacterValueSanitizerSanitize jni.MethodID
+	midUrlQuerySanitizerIllegalCharacterValueSanitizerToString jni.MethodID
 
-	clsUrlQuerySanitizerParameterValuePair *jni.GlobalRef
+	clsUrlQuerySanitizerParameterValuePair         *jni.GlobalRef
+	midUrlQuerySanitizerParameterValuePairToString jni.MethodID
 
 	clsUrlQuerySanitizerValueSanitizer         *jni.GlobalRef
 	midUrlQuerySanitizerValueSanitizerSanitize jni.MethodID
+	midUrlQuerySanitizerValueSanitizerToString jni.MethodID
 
 	clsLocalSocketAddress             *jni.GlobalRef
 	midLocalSocketAddressCtor         jni.MethodID
 	midLocalSocketAddressGetName      jni.MethodID
 	midLocalSocketAddressGetNamespace jni.MethodID
+	midLocalSocketAddressToString     jni.MethodID
 
-	clsLocalSocketAddressNamespace        *jni.GlobalRef
-	midLocalSocketAddressNamespaceValues  jni.MethodID
-	midLocalSocketAddressNamespaceValueOf jni.MethodID
+	clsLocalSocketAddressNamespace         *jni.GlobalRef
+	midLocalSocketAddressNamespaceToString jni.MethodID
+	midLocalSocketAddressNamespaceValues   jni.MethodID
+	midLocalSocketAddressNamespaceValueOf  jni.MethodID
 
 	clsLocalSocket                            *jni.GlobalRef
 	midLocalSocketCtor                        jni.MethodID
@@ -240,14 +254,17 @@ var (
 	midVpnManagerStartProvisionedVpnProfile        jni.MethodID
 	midVpnManagerStartProvisionedVpnProfileSession jni.MethodID
 	midVpnManagerStopProvisionedVpnProfile         jni.MethodID
+	midVpnManagerToString                          jni.MethodID
 
 	clsPlatformVpnProfile                             *jni.GlobalRef
 	midPlatformVpnProfileAreLocalRoutesExcluded       jni.MethodID
 	midPlatformVpnProfileGetType                      jni.MethodID
 	midPlatformVpnProfileGetTypeString                jni.MethodID
 	midPlatformVpnProfileIsInternetValidationRequired jni.MethodID
+	midPlatformVpnProfileToString                     jni.MethodID
 
 	clsInetAddresses                    *jni.GlobalRef
+	midInetAddressesToString            jni.MethodID
 	midInetAddressesIsNumericAddress    jni.MethodID
 	midInetAddressesParseNumericAddress jni.MethodID
 
@@ -286,6 +303,7 @@ var (
 
 	clsTrafficStats                           *jni.GlobalRef
 	midTrafficStatsCtor                       jni.MethodID
+	midTrafficStatsToString                   jni.MethodID
 	midTrafficStatsClearThreadStatsTag        jni.MethodID
 	midTrafficStatsClearThreadStatsUid        jni.MethodID
 	midTrafficStatsGetAndSetThreadStatsTag    jni.MethodID
@@ -346,22 +364,26 @@ var (
 	midworkInfoToString                jni.MethodID
 	midworkInfoWriteToParcel           jni.MethodID
 
-	clsworkInfoDetailedState        *jni.GlobalRef
-	midworkInfoDetailedStateValues  jni.MethodID
-	midworkInfoDetailedStateValueOf jni.MethodID
+	clsworkInfoDetailedState         *jni.GlobalRef
+	midworkInfoDetailedStateToString jni.MethodID
+	midworkInfoDetailedStateValues   jni.MethodID
+	midworkInfoDetailedStateValueOf  jni.MethodID
 
-	clsworkInfoState        *jni.GlobalRef
-	midworkInfoStateValues  jni.MethodID
-	midworkInfoStateValueOf jni.MethodID
+	clsworkInfoState         *jni.GlobalRef
+	midworkInfoStateToString jni.MethodID
+	midworkInfoStateValues   jni.MethodID
+	midworkInfoStateValueOf  jni.MethodID
 
 	clsConnectivityDiagnosticsManager                                          *jni.GlobalRef
 	midConnectivityDiagnosticsManagerRegisterConnectivityDiagnosticsCallback   jni.MethodID
 	midConnectivityDiagnosticsManagerUnregisterConnectivityDiagnosticsCallback jni.MethodID
+	midConnectivityDiagnosticsManagerToString                                  jni.MethodID
 
 	clsConnectivityDiagnosticsManagerConnectivityDiagnosticsCallback                              *jni.GlobalRef
 	midConnectivityDiagnosticsManagerConnectivityDiagnosticsCallbackOnConnectivityReportAvailable jni.MethodID
 	midConnectivityDiagnosticsManagerConnectivityDiagnosticsCallbackOnDataStallSuspected          jni.MethodID
 	midConnectivityDiagnosticsManagerConnectivityDiagnosticsCallbackOnNetworkConnectivityReported jni.MethodID
+	midConnectivityDiagnosticsManagerConnectivityDiagnosticsCallbackToString                      jni.MethodID
 
 	clsConnectivityDiagnosticsManagerConnectivityReport                       *jni.GlobalRef
 	midConnectivityDiagnosticsManagerConnectivityReportDescribeContents       jni.MethodID
@@ -373,6 +395,7 @@ var (
 	midConnectivityDiagnosticsManagerConnectivityReportGetReportTimestamp     jni.MethodID
 	midConnectivityDiagnosticsManagerConnectivityReportHashCode               jni.MethodID
 	midConnectivityDiagnosticsManagerConnectivityReportWriteToParcel          jni.MethodID
+	midConnectivityDiagnosticsManagerConnectivityReportToString               jni.MethodID
 
 	clsConnectivityDiagnosticsManagerDataStallReport                       *jni.GlobalRef
 	midConnectivityDiagnosticsManagerDataStallReportDescribeContents       jni.MethodID
@@ -385,6 +408,7 @@ var (
 	midConnectivityDiagnosticsManagerDataStallReportGetStallDetails        jni.MethodID
 	midConnectivityDiagnosticsManagerDataStallReportHashCode               jni.MethodID
 	midConnectivityDiagnosticsManagerDataStallReportWriteToParcel          jni.MethodID
+	midConnectivityDiagnosticsManagerDataStallReportToString               jni.MethodID
 
 	clsLinkAddress                 *jni.GlobalRef
 	midLinkAddressDescribeContents jni.MethodID
@@ -398,15 +422,19 @@ var (
 	midLinkAddressWriteToParcel    jni.MethodID
 
 	clsDnsResolver            *jni.GlobalRef
+	midDnsResolverToString    jni.MethodID
 	midDnsResolverGetInstance jni.MethodID
 
-	clsDnsResolverCallback        *jni.GlobalRef
-	midDnsResolverCallbackOnError jni.MethodID
+	clsDnsResolverCallback         *jni.GlobalRef
+	midDnsResolverCallbackOnError  jni.MethodID
+	midDnsResolverCallbackToString jni.MethodID
 
-	clsDnsResolverDnsException *jni.GlobalRef
+	clsDnsResolverDnsException         *jni.GlobalRef
+	midDnsResolverDnsExceptionToString jni.MethodID
 
 	clsProxy               *jni.GlobalRef
 	midProxyCtor           jni.MethodID
+	midProxyToString       jni.MethodID
 	midProxyGetDefaultHost jni.MethodID
 	midProxyGetDefaultPort jni.MethodID
 	midProxyGetHost        jni.MethodID
@@ -462,6 +490,7 @@ var (
 	midConnectivityManagerSetNetworkPreference               jni.MethodID
 	midConnectivityManagerUnregisterNetworkCallback1         jni.MethodID
 	midConnectivityManagerUnregisterNetworkCallback1_1       jni.MethodID
+	midConnectivityManagerToString                           jni.MethodID
 	midConnectivityManagerGetProcessDefaultNetwork           jni.MethodID
 	midConnectivityManagerIsNetworkTypeValid                 jni.MethodID
 	midConnectivityManagerSetProcessDefaultNetwork           jni.MethodID
@@ -475,9 +504,11 @@ var (
 	midConnectivityManagerNetworkCallbackOnLost                  jni.MethodID
 	midConnectivityManagerNetworkCallbackOnReserved              jni.MethodID
 	midConnectivityManagerNetworkCallbackOnUnavailable           jni.MethodID
+	midConnectivityManagerNetworkCallbackToString                jni.MethodID
 
 	clsConnectivityManagerOnNetworkActiveListener                *jni.GlobalRef
 	midConnectivityManagerOnNetworkActiveListenerOnNetworkActive jni.MethodID
+	midConnectivityManagerOnNetworkActiveListenerToString        jni.MethodID
 
 	clsIpSecAlgorithm                        *jni.GlobalRef
 	midIpSecAlgorithmCtor                    jni.MethodID
@@ -489,8 +520,9 @@ var (
 	midIpSecAlgorithmWriteToParcel           jni.MethodID
 	midIpSecAlgorithmGetSupportedAlgorithms  jni.MethodID
 
-	clsSSLSessionCache     *jni.GlobalRef
-	midSSLSessionCacheCtor jni.MethodID
+	clsSSLSessionCache         *jni.GlobalRef
+	midSSLSessionCacheCtor     jni.MethodID
+	midSSLSessionCacheToString jni.MethodID
 
 	clsIpConfiguration                         *jni.GlobalRef
 	midIpConfigurationDescribeContents         jni.MethodID
@@ -505,6 +537,7 @@ var (
 	midIpConfigurationBuilderBuild                    jni.MethodID
 	midIpConfigurationBuilderSetHttpProxy             jni.MethodID
 	midIpConfigurationBuilderSetStaticIpConfiguration jni.MethodID
+	midIpConfigurationBuilderToString                 jni.MethodID
 
 	clsL2capNetworkSpecifier                     *jni.GlobalRef
 	midL2capNetworkSpecifierCanBeSatisfiedBy     jni.MethodID
@@ -525,6 +558,7 @@ var (
 	midL2capNetworkSpecifierBuilderSetPsm               jni.MethodID
 	midL2capNetworkSpecifierBuilderSetRemoteAddress     jni.MethodID
 	midL2capNetworkSpecifierBuilderSetRole              jni.MethodID
+	midL2capNetworkSpecifierBuilderToString             jni.MethodID
 
 	clsworkCapabilities                               *jni.GlobalRef
 	midworkCapabilitiesCtor                           jni.MethodID
@@ -562,6 +596,7 @@ var (
 	midSSLCertificateSocketFactorySetNpnProtocols          jni.MethodID
 	midSSLCertificateSocketFactorySetTrustManagers         jni.MethodID
 	midSSLCertificateSocketFactorySetUseSessionTickets     jni.MethodID
+	midSSLCertificateSocketFactoryToString                 jni.MethodID
 	midSSLCertificateSocketFactoryGetDefault1              jni.MethodID
 	midSSLCertificateSocketFactoryGetDefault2_1            jni.MethodID
 	midSSLCertificateSocketFactoryGetInsecure              jni.MethodID
@@ -577,8 +612,9 @@ var (
 	midTetheringInterfaceToString               jni.MethodID
 	midTetheringInterfaceWriteToParcel          jni.MethodID
 
-	clsParseException     *jni.GlobalRef
-	midParseExceptionCtor jni.MethodID
+	clsParseException         *jni.GlobalRef
+	midParseExceptionCtor     jni.MethodID
+	midParseExceptionToString jni.MethodID
 
 	clsVpnProfileState                  *jni.GlobalRef
 	midVpnProfileStateCtor              jni.MethodID
@@ -592,16 +628,18 @@ var (
 	midVpnProfileStateToString          jni.MethodID
 	midVpnProfileStateWriteToParcel     jni.MethodID
 
-	clsSocketKeepalive      *jni.GlobalRef
-	midSocketKeepaliveClose jni.MethodID
-	midSocketKeepaliveStart jni.MethodID
-	midSocketKeepaliveStop  jni.MethodID
+	clsSocketKeepalive         *jni.GlobalRef
+	midSocketKeepaliveClose    jni.MethodID
+	midSocketKeepaliveStart    jni.MethodID
+	midSocketKeepaliveStop     jni.MethodID
+	midSocketKeepaliveToString jni.MethodID
 
 	clsSocketKeepaliveCallback               *jni.GlobalRef
 	midSocketKeepaliveCallbackOnDataReceived jni.MethodID
 	midSocketKeepaliveCallbackOnError        jni.MethodID
 	midSocketKeepaliveCallbackOnStarted      jni.MethodID
 	midSocketKeepaliveCallbackOnStopped      jni.MethodID
+	midSocketKeepaliveCallbackToString       jni.MethodID
 
 	clsIkev2VpnProfile                                     *jni.GlobalRef
 	midIkev2VpnProfileEquals                               jni.MethodID
@@ -637,8 +675,10 @@ var (
 	midIkev2VpnProfileBuilderSetMetered                            jni.MethodID
 	midIkev2VpnProfileBuilderSetProxy                              jni.MethodID
 	midIkev2VpnProfileBuilderSetRequiresInternetValidation         jni.MethodID
+	midIkev2VpnProfileBuilderToString                              jni.MethodID
 
-	clsTransportInfo *jni.GlobalRef
+	clsTransportInfo         *jni.GlobalRef
+	midTransportInfoToString jni.MethodID
 
 	clsStaticIpConfiguration                 *jni.GlobalRef
 	midStaticIpConfigurationDescribeContents jni.MethodID
@@ -656,18 +696,23 @@ var (
 	midStaticIpConfigurationBuilderSetDomains   jni.MethodID
 	midStaticIpConfigurationBuilderSetGateway   jni.MethodID
 	midStaticIpConfigurationBuilderSetIpAddress jni.MethodID
+	midStaticIpConfigurationBuilderToString     jni.MethodID
 
 	clsTetheringManager                                 *jni.GlobalRef
 	midTetheringManagerRegisterTetheringEventCallback   jni.MethodID
 	midTetheringManagerStartTethering                   jni.MethodID
 	midTetheringManagerStopTethering                    jni.MethodID
 	midTetheringManagerUnregisterTetheringEventCallback jni.MethodID
+	midTetheringManagerToString                         jni.MethodID
 
-	clsTetheringManagerStartTetheringCallback *jni.GlobalRef
+	clsTetheringManagerStartTetheringCallback         *jni.GlobalRef
+	midTetheringManagerStartTetheringCallbackToString jni.MethodID
 
-	clsTetheringManagerStopTetheringCallback *jni.GlobalRef
+	clsTetheringManagerStopTetheringCallback         *jni.GlobalRef
+	midTetheringManagerStopTetheringCallbackToString jni.MethodID
 
-	clsTetheringManagerTetheringEventCallback *jni.GlobalRef
+	clsTetheringManagerTetheringEventCallback         *jni.GlobalRef
+	midTetheringManagerTetheringEventCallbackToString jni.MethodID
 
 	clsTetheringManagerTetheringRequest                       *jni.GlobalRef
 	midTetheringManagerTetheringRequestDescribeContents       jni.MethodID
@@ -708,6 +753,7 @@ var (
 	midLocalServerSocketClose                 jni.MethodID
 	midLocalServerSocketGetFileDescriptor     jni.MethodID
 	midLocalServerSocketGetLocalSocketAddress jni.MethodID
+	midLocalServerSocketToString              jni.MethodID
 
 	clsIpSecManager                                  *jni.GlobalRef
 	midIpSecManagerAllocateSecurityParameterIndex1   jni.MethodID
@@ -720,16 +766,19 @@ var (
 	midIpSecManagerRemoveTransportModeTransforms1    jni.MethodID
 	midIpSecManagerRemoveTransportModeTransforms1_1  jni.MethodID
 	midIpSecManagerRemoveTransportModeTransforms1_2  jni.MethodID
+	midIpSecManagerToString                          jni.MethodID
 
-	clsIpSecManagerResourceUnavailableException *jni.GlobalRef
+	clsIpSecManagerResourceUnavailableException         *jni.GlobalRef
+	midIpSecManagerResourceUnavailableExceptionToString jni.MethodID
 
 	clsIpSecManagerSecurityParameterIndex         *jni.GlobalRef
 	midIpSecManagerSecurityParameterIndexClose    jni.MethodID
 	midIpSecManagerSecurityParameterIndexGetSpi   jni.MethodID
 	midIpSecManagerSecurityParameterIndexToString jni.MethodID
 
-	clsIpSecManagerSpiUnavailableException       *jni.GlobalRef
-	midIpSecManagerSpiUnavailableExceptionGetSpi jni.MethodID
+	clsIpSecManagerSpiUnavailableException         *jni.GlobalRef
+	midIpSecManagerSpiUnavailableExceptionGetSpi   jni.MethodID
+	midIpSecManagerSpiUnavailableExceptionToString jni.MethodID
 
 	clsIpSecManagerUdpEncapsulationSocket                  *jni.GlobalRef
 	midIpSecManagerUdpEncapsulationSocketClose             jni.MethodID
@@ -818,6 +867,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCredentialsGetUid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentials)), "getUid", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCredentialsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentials)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -991,6 +1047,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midworkRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsworkRequestBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/NetworkSpecifier")
@@ -1000,6 +1063,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsworkSpecifier = env.NewGlobalRef(&c.Object)
+
+		midworkSpecifierToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsworkSpecifier)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1067,6 +1137,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIpSecTransformStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpSecTransformState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/IpSecTransformState$Builder")
@@ -1120,6 +1197,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midIpSecTransformStateBuilderSetTxHighestSequenceNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpSecTransformStateBuilder)), "setTxHighestSequenceNumber", "(J)Landroid/net/IpSecTransformState$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIpSecTransformStateBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpSecTransformStateBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1261,6 +1345,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIpSecTransformBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpSecTransformBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/TelephonyNetworkSpecifier")
@@ -1337,6 +1428,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTelephonyNetworkSpecifierBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTelephonyNetworkSpecifierBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/CaptivePortal")
@@ -1369,6 +1467,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCaptivePortalWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptivePortal)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCaptivePortalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptivePortal)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1774,6 +1879,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUrlQuerySanitizerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlQuerySanitizer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midUrlQuerySanitizerGetAllButNulAndAngleBracketsLegal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUrlQuerySanitizer)), "getAllButNulAndAngleBracketsLegal", "()Landroid/net/UrlQuerySanitizer$ValueSanitizer;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1854,6 +1966,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUrlQuerySanitizerIllegalCharacterValueSanitizerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlQuerySanitizerIllegalCharacterValueSanitizer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/UrlQuerySanitizer$ParameterValuePair")
@@ -1863,6 +1982,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUrlQuerySanitizerParameterValuePair = env.NewGlobalRef(&c.Object)
+
+		midUrlQuerySanitizerParameterValuePairToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlQuerySanitizerParameterValuePair)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1875,6 +2001,13 @@ func doInit(env *jni.Env) error {
 		clsUrlQuerySanitizerValueSanitizer = env.NewGlobalRef(&c.Object)
 
 		midUrlQuerySanitizerValueSanitizerSanitize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlQuerySanitizerValueSanitizer)), "sanitize", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUrlQuerySanitizerValueSanitizerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUrlQuerySanitizerValueSanitizer)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1909,6 +2042,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLocalSocketAddressToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocalSocketAddress)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/LocalSocketAddress$Namespace")
@@ -1918,6 +2058,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsLocalSocketAddressNamespace = env.NewGlobalRef(&c.Object)
+
+		midLocalSocketAddressNamespaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocalSocketAddressNamespace)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midLocalSocketAddressNamespaceValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLocalSocketAddressNamespace)), "values", "()[Landroid/net/LocalSocketAddress$Namespace;")
 		if err != nil {
@@ -2167,6 +2314,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midVpnManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVpnManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/PlatformVpnProfile")
@@ -2205,6 +2359,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlatformVpnProfileToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlatformVpnProfile)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/InetAddresses")
@@ -2214,6 +2375,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsInetAddresses = env.NewGlobalRef(&c.Object)
+
+		midInetAddressesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInetAddresses)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midInetAddressesIsNumericAddress, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsInetAddresses)), "isNumericAddress", "(Ljava/lang/String;)Z")
 		if err != nil {
@@ -2460,6 +2628,13 @@ func doInit(env *jni.Env) error {
 		clsTrafficStats = env.NewGlobalRef(&c.Object)
 		midTrafficStatsCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrafficStats)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midTrafficStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrafficStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -2879,6 +3054,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsworkInfoDetailedState = env.NewGlobalRef(&c.Object)
 
+		midworkInfoDetailedStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsworkInfoDetailedState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midworkInfoDetailedStateValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsworkInfoDetailedState)), "values", "()[Landroid/net/NetworkInfo$DetailedState;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2902,6 +3084,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsworkInfoState = env.NewGlobalRef(&c.Object)
+
+		midworkInfoStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsworkInfoState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midworkInfoStateValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsworkInfoState)), "values", "()[Landroid/net/NetworkInfo$State;")
 		if err != nil {
@@ -2941,6 +3130,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midConnectivityDiagnosticsManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityDiagnosticsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ConnectivityDiagnosticsManager$ConnectivityDiagnosticsCallback")
@@ -2966,6 +3162,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConnectivityDiagnosticsManagerConnectivityDiagnosticsCallbackOnNetworkConnectivityReported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityDiagnosticsManagerConnectivityDiagnosticsCallback)), "onNetworkConnectivityReported", "(Landroid/net/Network;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectivityDiagnosticsManagerConnectivityDiagnosticsCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityDiagnosticsManagerConnectivityDiagnosticsCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3039,6 +3242,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConnectivityDiagnosticsManagerConnectivityReportWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityDiagnosticsManagerConnectivityReport)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectivityDiagnosticsManagerConnectivityReportToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityDiagnosticsManagerConnectivityReport)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3119,6 +3329,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConnectivityDiagnosticsManagerDataStallReportWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityDiagnosticsManagerDataStallReport)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectivityDiagnosticsManagerDataStallReportToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityDiagnosticsManagerDataStallReport)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3208,6 +3425,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsDnsResolver = env.NewGlobalRef(&c.Object)
 
+		midDnsResolverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDnsResolver)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midDnsResolverGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDnsResolver)), "getInstance", "()Landroid/net/DnsResolver;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3232,6 +3456,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDnsResolverCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDnsResolverCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/DnsResolver$DnsException")
@@ -3241,6 +3472,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDnsResolverDnsException = env.NewGlobalRef(&c.Object)
+
+		midDnsResolverDnsExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDnsResolverDnsException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -3253,6 +3491,13 @@ func doInit(env *jni.Env) error {
 		clsProxy = env.NewGlobalRef(&c.Object)
 		midProxyCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProxy)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midProxyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProxy)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3633,6 +3878,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midConnectivityManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midConnectivityManagerGetProcessDefaultNetwork, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityManager)), "getProcessDefaultNetwork", "()Landroid/net/Network;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3720,6 +3972,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midConnectivityManagerNetworkCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityManagerNetworkCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/ConnectivityManager$OnNetworkActiveListener")
@@ -3731,6 +3990,13 @@ func doInit(env *jni.Env) error {
 		clsConnectivityManagerOnNetworkActiveListener = env.NewGlobalRef(&c.Object)
 
 		midConnectivityManagerOnNetworkActiveListenerOnNetworkActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityManagerOnNetworkActiveListener)), "onNetworkActive", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectivityManagerOnNetworkActiveListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectivityManagerOnNetworkActiveListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3811,6 +4077,13 @@ func doInit(env *jni.Env) error {
 		clsSSLSessionCache = env.NewGlobalRef(&c.Object)
 		midSSLSessionCacheCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSSLSessionCache)), "<init>", "(Landroid/content/Context;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midSSLSessionCacheToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSSLSessionCache)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3898,6 +4171,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midIpConfigurationBuilderSetStaticIpConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpConfigurationBuilder)), "setStaticIpConfiguration", "(Landroid/net/StaticIpConfiguration;)Landroid/net/IpConfiguration$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIpConfigurationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpConfigurationBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4030,6 +4310,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midL2capNetworkSpecifierBuilderSetRole, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsL2capNetworkSpecifierBuilder)), "setRole", "(I)Landroid/net/L2capNetworkSpecifier$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midL2capNetworkSpecifierBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsL2capNetworkSpecifierBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4281,6 +4568,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSSLCertificateSocketFactoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSSLCertificateSocketFactory)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midSSLCertificateSocketFactoryGetDefault1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLCertificateSocketFactory)), "getDefault", "(I)Ljavax/net/SocketFactory;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -4383,6 +4677,13 @@ func doInit(env *jni.Env) error {
 		clsParseException = env.NewGlobalRef(&c.Object)
 		midParseExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParseException)), "<init>", "(Ljava/lang/String;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midParseExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParseException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -4494,6 +4795,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSocketKeepaliveToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocketKeepalive)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/SocketKeepalive$Callback")
@@ -4526,6 +4834,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSocketKeepaliveCallbackOnStopped, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocketKeepaliveCallback)), "onStopped", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSocketKeepaliveCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSocketKeepaliveCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4769,6 +5084,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIkev2VpnProfileBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkev2VpnProfileBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/TransportInfo")
@@ -4778,6 +5100,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTransportInfo = env.NewGlobalRef(&c.Object)
+
+		midTransportInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -4890,6 +5219,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStaticIpConfigurationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStaticIpConfigurationBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/TetheringManager")
@@ -4928,6 +5264,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTetheringManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTetheringManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/TetheringManager$StartTetheringCallback")
@@ -4937,6 +5280,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTetheringManagerStartTetheringCallback = env.NewGlobalRef(&c.Object)
+
+		midTetheringManagerStartTetheringCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTetheringManagerStartTetheringCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -4948,6 +5298,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsTetheringManagerStopTetheringCallback = env.NewGlobalRef(&c.Object)
 
+		midTetheringManagerStopTetheringCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTetheringManagerStopTetheringCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/TetheringManager$TetheringEventCallback")
@@ -4957,6 +5314,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTetheringManagerTetheringEventCallback = env.NewGlobalRef(&c.Object)
+
+		midTetheringManagerTetheringEventCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTetheringManagerTetheringEventCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5216,6 +5580,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLocalServerSocketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocalServerSocket)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/IpSecManager")
@@ -5296,6 +5667,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIpSecManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpSecManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/IpSecManager$ResourceUnavailableException")
@@ -5305,6 +5683,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsIpSecManagerResourceUnavailableException = env.NewGlobalRef(&c.Object)
+
+		midIpSecManagerResourceUnavailableExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpSecManagerResourceUnavailableException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -5348,6 +5733,13 @@ func doInit(env *jni.Env) error {
 		clsIpSecManagerSpiUnavailableException = env.NewGlobalRef(&c.Object)
 
 		midIpSecManagerSpiUnavailableExceptionGetSpi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpSecManagerSpiUnavailableException)), "getSpi", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIpSecManagerSpiUnavailableExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIpSecManagerSpiUnavailableException)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

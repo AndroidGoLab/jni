@@ -49,6 +49,7 @@ var (
 	midSmsMessageIsReplace                    jni.MethodID
 	midSmsMessageIsReplyPathPresent           jni.MethodID
 	midSmsMessageIsStatusReportMessage        jni.MethodID
+	midSmsMessageToString                     jni.MethodID
 	midSmsMessageCalculateLength2             jni.MethodID
 	midSmsMessageCalculateLength2_1           jni.MethodID
 	midSmsMessageCreateFromPdu                jni.MethodID
@@ -56,9 +57,10 @@ var (
 	midSmsMessageGetSubmitPdu5_1              jni.MethodID
 	midSmsMessageGetTPLayerLengthForPDU       jni.MethodID
 
-	clsSmsMessageMessageClass        *jni.GlobalRef
-	midSmsMessageMessageClassValues  jni.MethodID
-	midSmsMessageMessageClassValueOf jni.MethodID
+	clsSmsMessageMessageClass         *jni.GlobalRef
+	midSmsMessageMessageClassToString jni.MethodID
+	midSmsMessageMessageClassValues   jni.MethodID
+	midSmsMessageMessageClassValueOf  jni.MethodID
 
 	clsSmsMessageSubmitPdu         *jni.GlobalRef
 	midSmsMessageSubmitPduToString jni.MethodID
@@ -67,6 +69,7 @@ var (
 	midSmsManagerDivideMessage   jni.MethodID
 	midSmsManagerSendDataMessage jni.MethodID
 	midSmsManagerSendTextMessage jni.MethodID
+	midSmsManagerToString        jni.MethodID
 	midSmsManagerGetDefault      jni.MethodID
 
 	clsCellLocation                     *jni.GlobalRef
@@ -280,6 +283,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSmsMessageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSmsMessage)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midSmsMessageCalculateLength2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSmsMessage)), "calculateLength", "(Ljava/lang/CharSequence;Z)[I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -331,6 +341,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSmsMessageMessageClass = env.NewGlobalRef(&c.Object)
+
+		midSmsMessageMessageClassToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSmsMessageMessageClass)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midSmsMessageMessageClassValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSmsMessageMessageClass)), "values", "()[Landroid/telephony/gsm/SmsMessage$MessageClass;")
 		if err != nil {
@@ -388,6 +405,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSmsManagerSendTextMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSmsManager)), "sendTextMessage", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/app/PendingIntent;Landroid/app/PendingIntent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSmsManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSmsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

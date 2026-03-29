@@ -23,7 +23,8 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsUidHealthStats *jni.GlobalRef
+	clsUidHealthStats         *jni.GlobalRef
+	midUidHealthStatsToString jni.MethodID
 
 	clsTimerStat                 *jni.GlobalRef
 	midTimerStatCtor             jni.MethodID
@@ -33,12 +34,16 @@ var (
 	midTimerStatSetCount         jni.MethodID
 	midTimerStatSetTime          jni.MethodID
 	midTimerStatWriteToParcel    jni.MethodID
+	midTimerStatToString         jni.MethodID
 
-	clsPackageHealthStats *jni.GlobalRef
+	clsPackageHealthStats         *jni.GlobalRef
+	midPackageHealthStatsToString jni.MethodID
 
-	clsPidHealthStats *jni.GlobalRef
+	clsPidHealthStats         *jni.GlobalRef
+	midPidHealthStatsToString jni.MethodID
 
-	clsServiceHealthStats *jni.GlobalRef
+	clsServiceHealthStats         *jni.GlobalRef
+	midServiceHealthStatsToString jni.MethodID
 
 	clsStats                        *jni.GlobalRef
 	midStatsGetDataType             jni.MethodID
@@ -61,6 +66,7 @@ var (
 	midStatsHasStats                jni.MethodID
 	midStatsHasTimer                jni.MethodID
 	midStatsHasTimers               jni.MethodID
+	midStatsToString                jni.MethodID
 
 	clsSystemHealthManager                                *jni.GlobalRef
 	midSystemHealthManagerGetCpuHeadroom                  jni.MethodID
@@ -71,8 +77,10 @@ var (
 	midSystemHealthManagerTakeMyUidSnapshot               jni.MethodID
 	midSystemHealthManagerTakeUidSnapshot                 jni.MethodID
 	midSystemHealthManagerTakeUidSnapshots                jni.MethodID
+	midSystemHealthManagerToString                        jni.MethodID
 
-	clsProcessHealthStats *jni.GlobalRef
+	clsProcessHealthStats         *jni.GlobalRef
+	midProcessHealthStatsToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -100,6 +108,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUidHealthStats = env.NewGlobalRef(&c.Object)
+
+		midUidHealthStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUidHealthStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -157,6 +172,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTimerStatToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/health/PackageHealthStats")
@@ -166,6 +188,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPackageHealthStats = env.NewGlobalRef(&c.Object)
+
+		midPackageHealthStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPackageHealthStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -177,6 +206,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsPidHealthStats = env.NewGlobalRef(&c.Object)
 
+		midPidHealthStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPidHealthStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/health/ServiceHealthStats")
@@ -186,6 +222,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsServiceHealthStats = env.NewGlobalRef(&c.Object)
+
+		midServiceHealthStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceHealthStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -337,6 +380,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/health/SystemHealthManager")
@@ -403,6 +453,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSystemHealthManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSystemHealthManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/health/ProcessHealthStats")
@@ -412,6 +469,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsProcessHealthStats = env.NewGlobalRef(&c.Object)
+
+		midProcessHealthStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProcessHealthStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

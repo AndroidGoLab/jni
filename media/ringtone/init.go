@@ -37,6 +37,7 @@ var (
 	midManagerSetStopPreviousRingtone     jni.MethodID
 	midManagerSetType                     jni.MethodID
 	midManagerStopPreviousRingtone        jni.MethodID
+	midManagerToString                    jni.MethodID
 	midManagerGetActualDefaultRingtoneUri jni.MethodID
 	midManagerGetDefaultType              jni.MethodID
 	midManagerGetDefaultUri               jni.MethodID
@@ -63,6 +64,7 @@ var (
 	midRingtoneSetStreamType             jni.MethodID
 	midRingtoneSetVolume                 jni.MethodID
 	midRingtoneStop                      jni.MethodID
+	midRingtoneToString                  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -173,6 +175,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "stopPreviousRingtone", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -351,6 +360,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRingtoneStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "stop", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRingtoneToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

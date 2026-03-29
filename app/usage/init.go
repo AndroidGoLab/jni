@@ -31,6 +31,7 @@ var (
 	midStorageStatsGetDataBytes          jni.MethodID
 	midStorageStatsGetExternalCacheBytes jni.MethodID
 	midStorageStatsWriteToParcel         jni.MethodID
+	midStorageStatsToString              jni.MethodID
 
 	clsStats                                  *jni.GlobalRef
 	midStatsCtor                              jni.MethodID
@@ -46,6 +47,7 @@ var (
 	midStatsGetTotalTimeInForeground          jni.MethodID
 	midStatsGetTotalTimeVisible               jni.MethodID
 	midStatsWriteToParcel                     jni.MethodID
+	midStatsToString                          jni.MethodID
 
 	clsNetworkStatsManager                           *jni.GlobalRef
 	midNetworkStatsManagerQueryDetails               jni.MethodID
@@ -57,14 +59,17 @@ var (
 	midNetworkStatsManagerQuerySummaryForUser        jni.MethodID
 	midNetworkStatsManagerRegisterUsageCallback      jni.MethodID
 	midNetworkStatsManagerUnregisterUsageCallback    jni.MethodID
+	midNetworkStatsManagerToString                   jni.MethodID
 
 	clsNetworkStatsManagerUsageCallback                   *jni.GlobalRef
 	midNetworkStatsManagerUsageCallbackOnThresholdReached jni.MethodID
+	midNetworkStatsManagerUsageCallbackToString           jni.MethodID
 
 	clsNetworkStats              *jni.GlobalRef
 	midNetworkStatsClose         jni.MethodID
 	midNetworkStatsGetNextBucket jni.MethodID
 	midNetworkStatsHasNextBucket jni.MethodID
+	midNetworkStatsToString      jni.MethodID
 
 	clsNetworkStatsBucket                        *jni.GlobalRef
 	midNetworkStatsBucketGetDefaultNetworkStatus jni.MethodID
@@ -79,6 +84,7 @@ var (
 	midNetworkStatsBucketGetTxBytes              jni.MethodID
 	midNetworkStatsBucketGetTxPackets            jni.MethodID
 	midNetworkStatsBucketGetUid                  jni.MethodID
+	midNetworkStatsBucketToString                jni.MethodID
 
 	clsEventStats                  *jni.GlobalRef
 	midEventStatsCtor              jni.MethodID
@@ -91,6 +97,7 @@ var (
 	midEventStatsGetLastTimeStamp  jni.MethodID
 	midEventStatsGetTotalTime      jni.MethodID
 	midEventStatsWriteToParcel     jni.MethodID
+	midEventStatsToString          jni.MethodID
 
 	clsStorageStatsManager                          *jni.GlobalRef
 	midStorageStatsManagerGetFreeBytes              jni.MethodID
@@ -99,12 +106,14 @@ var (
 	midStorageStatsManagerQueryStatsForPackage      jni.MethodID
 	midStorageStatsManagerQueryStatsForUid          jni.MethodID
 	midStorageStatsManagerQueryStatsForUser         jni.MethodID
+	midStorageStatsManagerToString                  jni.MethodID
 
 	clsEvents                 *jni.GlobalRef
 	midEventsDescribeContents jni.MethodID
 	midEventsGetNextEvent     jni.MethodID
 	midEventsHasNextEvent     jni.MethodID
 	midEventsWriteToParcel    jni.MethodID
+	midEventsToString         jni.MethodID
 
 	clsEventsEvent                    *jni.GlobalRef
 	midEventsEventGetAppStandbyBucket jni.MethodID
@@ -115,6 +124,7 @@ var (
 	midEventsEventGetPackageName      jni.MethodID
 	midEventsEventGetShortcutId       jni.MethodID
 	midEventsEventGetTimeStamp        jni.MethodID
+	midEventsEventToString            jni.MethodID
 
 	clsConfigurationStats                   *jni.GlobalRef
 	midConfigurationStatsCtor               jni.MethodID
@@ -126,6 +136,7 @@ var (
 	midConfigurationStatsGetLastTimeStamp   jni.MethodID
 	midConfigurationStatsGetTotalTimeActive jni.MethodID
 	midConfigurationStatsWriteToParcel      jni.MethodID
+	midConfigurationStatsToString           jni.MethodID
 
 	clsStatsManager                    *jni.GlobalRef
 	midStatsManagerGetAppStandbyBucket jni.MethodID
@@ -136,6 +147,7 @@ var (
 	midStatsManagerQueryEvents2_1      jni.MethodID
 	midStatsManagerQueryEventsForSelf  jni.MethodID
 	midStatsManagerQueryUsageStats     jni.MethodID
+	midStatsManagerToString            jni.MethodID
 
 	clsExternalStorageStats                 *jni.GlobalRef
 	midExternalStorageStatsDescribeContents jni.MethodID
@@ -145,6 +157,7 @@ var (
 	midExternalStorageStatsGetTotalBytes    jni.MethodID
 	midExternalStorageStatsGetVideoBytes    jni.MethodID
 	midExternalStorageStatsWriteToParcel    jni.MethodID
+	midExternalStorageStatsToString         jni.MethodID
 
 	clsEventsQuery                   *jni.GlobalRef
 	midEventsQueryDescribeContents   jni.MethodID
@@ -153,11 +166,13 @@ var (
 	midEventsQueryGetEventTypes      jni.MethodID
 	midEventsQueryGetPackageNames    jni.MethodID
 	midEventsQueryWriteToParcel      jni.MethodID
+	midEventsQueryToString           jni.MethodID
 
 	clsEventsQueryBuilder                *jni.GlobalRef
 	midEventsQueryBuilderBuild           jni.MethodID
 	midEventsQueryBuilderSetEventTypes   jni.MethodID
 	midEventsQueryBuilderSetPackageNames jni.MethodID
+	midEventsQueryBuilderToString        jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -229,6 +244,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStorageStatsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageStats)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStorageStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageStats)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -333,6 +355,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/usage/NetworkStatsManager")
@@ -406,6 +435,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNetworkStatsManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkStatsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/usage/NetworkStatsManager$UsageCallback")
@@ -417,6 +453,13 @@ func doInit(env *jni.Env) error {
 		clsNetworkStatsManagerUsageCallback = env.NewGlobalRef(&c.Object)
 
 		midNetworkStatsManagerUsageCallbackOnThresholdReached, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkStatsManagerUsageCallback)), "onThresholdReached", "(ILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNetworkStatsManagerUsageCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkStatsManagerUsageCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -448,6 +491,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNetworkStatsHasNextBucket, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkStats)), "hasNextBucket", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNetworkStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkStats)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -548,6 +598,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNetworkStatsBucketToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkStatsBucket)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/usage/EventStats")
@@ -625,6 +682,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEventStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/usage/StorageStatsManager")
@@ -677,6 +741,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStorageStatsManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageStatsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/usage/UsageEvents")
@@ -709,6 +780,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midEventsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvents)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvents)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -775,6 +853,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midEventsEventGetTimeStamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventsEvent)), "getTimeStamp", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventsEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventsEvent)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -851,6 +936,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midConfigurationStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfigurationStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/usage/UsageStatsManager")
@@ -917,6 +1009,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStatsManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/usage/ExternalStorageStats")
@@ -976,6 +1075,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midExternalStorageStatsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExternalStorageStats)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/usage/UsageEventsQuery")
@@ -1028,6 +1134,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEventsQueryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventsQuery)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/usage/UsageEventsQuery$Builder")
@@ -1053,6 +1166,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midEventsQueryBuilderSetPackageNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventsQueryBuilder)), "setPackageNames", "([Ljava/lang/String;)Landroid/app/usage/UsageEventsQuery$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventsQueryBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventsQueryBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

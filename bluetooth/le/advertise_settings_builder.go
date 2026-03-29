@@ -227,3 +227,30 @@ func (m *AdvertiseSettingsBuilder) SetTxPowerLevel(arg0 int32) (*jni.Object, err
 	})
 	return result, callErr
 }
+
+// ToString calls android.bluetooth.le.AdvertiseSettings$Builder.toString.
+func (m *AdvertiseSettingsBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAdvertiseSettingsBuilderToString == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.AdvertiseSettings$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAdvertiseSettingsBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

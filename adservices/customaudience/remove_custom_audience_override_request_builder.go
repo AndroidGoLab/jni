@@ -125,3 +125,30 @@ func (m *RemoveCustomAudienceOverrideRequestBuilder) SetName(arg0 string) (*jni.
 	})
 	return result, callErr
 }
+
+// ToString calls android.adservices.customaudience.RemoveCustomAudienceOverrideRequest$Builder.toString.
+func (m *RemoveCustomAudienceOverrideRequestBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRemoveCustomAudienceOverrideRequestBuilderToString == nil {
+			callErr = fmt.Errorf("android.adservices.customaudience.RemoveCustomAudienceOverrideRequest$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRemoveCustomAudienceOverrideRequestBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

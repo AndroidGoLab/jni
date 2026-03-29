@@ -389,6 +389,33 @@ func (m *AppWidgetHostView) GenerateLayoutParams1_1(arg0 *jni.Object) (*jni.Obje
 	return result, callErr
 }
 
+// ToString calls android.appwidget.AppWidgetHostView.toString.
+func (m *AppWidgetHostView) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAppWidgetHostViewToString == nil {
+			callErr = fmt.Errorf("android.appwidget.AppWidgetHostView.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAppWidgetHostViewToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDefaultPaddingForWidget calls android.appwidget.AppWidgetHostView.getDefaultPaddingForWidget.
 func (m *AppWidgetHostView) GetDefaultPaddingForWidget(
 	arg0 *jni.Object,

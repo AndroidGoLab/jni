@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsPpsMoParser            *jni.GlobalRef
+	midPpsMoParserToString    jni.MethodID
 	midPpsMoParserParseMoText jni.MethodID
 )
 
@@ -52,6 +53,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPpsMoParser = env.NewGlobalRef(&c.Object)
+
+		midPpsMoParserToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPpsMoParser)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midPpsMoParserParseMoText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPpsMoParser)), "parseMoText", "(Ljava/lang/String;)Landroid/net/wifi/hotspot2/PasspointConfiguration;")
 		if err != nil {

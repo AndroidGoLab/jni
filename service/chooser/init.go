@@ -23,13 +23,17 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAdditionalContentContract *jni.GlobalRef
+	clsAdditionalContentContract         *jni.GlobalRef
+	midAdditionalContentContractToString jni.MethodID
 
-	clsAdditionalContentContractColumns *jni.GlobalRef
+	clsAdditionalContentContractColumns         *jni.GlobalRef
+	midAdditionalContentContractColumnsToString jni.MethodID
 
-	clsAdditionalContentContractCursorExtraKeys *jni.GlobalRef
+	clsAdditionalContentContractCursorExtraKeys         *jni.GlobalRef
+	midAdditionalContentContractCursorExtraKeysToString jni.MethodID
 
-	clsAdditionalContentContractMethodNames *jni.GlobalRef
+	clsAdditionalContentContractMethodNames         *jni.GlobalRef
+	midAdditionalContentContractMethodNamesToString jni.MethodID
 
 	clsTarget                 *jni.GlobalRef
 	midTargetCtor             jni.MethodID
@@ -50,12 +54,14 @@ var (
 	midActionToString         jni.MethodID
 	midActionWriteToParcel    jni.MethodID
 
-	clsActionBuilder      *jni.GlobalRef
-	midActionBuilderBuild jni.MethodID
+	clsActionBuilder         *jni.GlobalRef
+	midActionBuilderBuild    jni.MethodID
+	midActionBuilderToString jni.MethodID
 
 	clsTargetService                    *jni.GlobalRef
 	midTargetServiceOnBind              jni.MethodID
 	midTargetServiceOnGetChooserTargets jni.MethodID
+	midTargetServiceToString            jni.MethodID
 
 	clsResult                     *jni.GlobalRef
 	midResultDescribeContents     jni.MethodID
@@ -65,6 +71,7 @@ var (
 	midResultHashCode             jni.MethodID
 	midResultIsShortcut           jni.MethodID
 	midResultWriteToParcel        jni.MethodID
+	midResultToString             jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -93,6 +100,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsAdditionalContentContract = env.NewGlobalRef(&c.Object)
 
+		midAdditionalContentContractToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdditionalContentContract)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/chooser/AdditionalContentContract$Columns")
@@ -102,6 +116,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAdditionalContentContractColumns = env.NewGlobalRef(&c.Object)
+
+		midAdditionalContentContractColumnsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdditionalContentContractColumns)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -113,6 +134,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsAdditionalContentContractCursorExtraKeys = env.NewGlobalRef(&c.Object)
 
+		midAdditionalContentContractCursorExtraKeysToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdditionalContentContractCursorExtraKeys)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/chooser/AdditionalContentContract$MethodNames")
@@ -122,6 +150,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAdditionalContentContractMethodNames = env.NewGlobalRef(&c.Object)
+
+		midAdditionalContentContractMethodNamesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdditionalContentContractMethodNames)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -262,6 +297,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midActionBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActionBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/chooser/ChooserTargetService")
@@ -280,6 +322,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTargetServiceOnGetChooserTargets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTargetService)), "onGetChooserTargets", "(Landroid/content/ComponentName;Landroid/content/IntentFilter;)Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTargetServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTargetService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -339,6 +388,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midResultWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResult)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

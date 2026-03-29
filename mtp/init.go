@@ -32,6 +32,7 @@ var (
 	midDeviceInfoGetVersion             jni.MethodID
 	midDeviceInfoIsEventSupported       jni.MethodID
 	midDeviceInfoIsOperationSupported   jni.MethodID
+	midDeviceInfoToString               jni.MethodID
 
 	clsEvent                    *jni.GlobalRef
 	midEventGetDevicePropCode   jni.MethodID
@@ -44,6 +45,7 @@ var (
 	midEventGetParameter3       jni.MethodID
 	midEventGetStorageId        jni.MethodID
 	midEventGetTransactionId    jni.MethodID
+	midEventToString            jni.MethodID
 
 	clsObjectInfo                           *jni.GlobalRef
 	midObjectInfoGetAssociationDesc         jni.MethodID
@@ -74,6 +76,7 @@ var (
 	midObjectInfoGetThumbPixHeightLong      jni.MethodID
 	midObjectInfoGetThumbPixWidth           jni.MethodID
 	midObjectInfoGetThumbPixWidthLong       jni.MethodID
+	midObjectInfoToString                   jni.MethodID
 
 	clsObjectInfoBuilder                       *jni.GlobalRef
 	midObjectInfoBuilderBuild                  jni.MethodID
@@ -97,6 +100,7 @@ var (
 	midObjectInfoBuilderSetThumbFormat         jni.MethodID
 	midObjectInfoBuilderSetThumbPixHeight      jni.MethodID
 	midObjectInfoBuilderSetThumbPixWidth       jni.MethodID
+	midObjectInfoBuilderToString               jni.MethodID
 
 	clsStorageInfo                    *jni.GlobalRef
 	midStorageInfoGetDescription      jni.MethodID
@@ -104,6 +108,7 @@ var (
 	midStorageInfoGetMaxCapacity      jni.MethodID
 	midStorageInfoGetStorageId        jni.MethodID
 	midStorageInfoGetVolumeIdentifier jni.MethodID
+	midStorageInfoToString            jni.MethodID
 
 	clsDevice                   *jni.GlobalRef
 	midDeviceCtor               jni.MethodID
@@ -132,6 +137,7 @@ var (
 
 	clsConstants                 *jni.GlobalRef
 	midConstantsCtor             jni.MethodID
+	midConstantsToString         jni.MethodID
 	midConstantsIsAbstractObject jni.MethodID
 )
 
@@ -217,6 +223,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDeviceInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/mtp/MtpEvent")
@@ -291,6 +304,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midEventGetTransactionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getTransactionId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -503,6 +523,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midObjectInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/mtp/MtpObjectInfo$Builder")
@@ -660,6 +687,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midObjectInfoBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/mtp/MtpStorageInfo")
@@ -699,6 +733,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStorageInfoGetVolumeIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getVolumeIdentifier", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStorageInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -884,6 +925,13 @@ func doInit(env *jni.Env) error {
 		clsConstants = env.NewGlobalRef(&c.Object)
 		midConstantsCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConstants)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midConstantsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConstants)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

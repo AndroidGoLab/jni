@@ -37,6 +37,7 @@ var (
 	midManagerStopServiceResolution         jni.MethodID
 	midManagerUnregisterService             jni.MethodID
 	midManagerUnregisterServiceInfoCallback jni.MethodID
+	midManagerToString                      jni.MethodID
 
 	clsServiceInfo                 *jni.GlobalRef
 	midServiceInfoDescribeContents jni.MethodID
@@ -172,6 +173,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerUnregisterServiceInfoCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterServiceInfoCallback", "(Landroid/net/nsd/NsdManager$ServiceInfoCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

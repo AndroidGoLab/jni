@@ -26,20 +26,24 @@ var (
 	clsManager                        *jni.GlobalRef
 	midManagerHasEnrolledFingerprints jni.MethodID
 	midManagerIsHardwareDetected      jni.MethodID
+	midManagerToString                jni.MethodID
 
 	clsManagerAuthenticationCallback                          *jni.GlobalRef
 	midManagerAuthenticationCallbackOnAuthenticationError     jni.MethodID
 	midManagerAuthenticationCallbackOnAuthenticationFailed    jni.MethodID
 	midManagerAuthenticationCallbackOnAuthenticationHelp      jni.MethodID
 	midManagerAuthenticationCallbackOnAuthenticationSucceeded jni.MethodID
+	midManagerAuthenticationCallbackToString                  jni.MethodID
 
 	clsManagerAuthenticationResult                *jni.GlobalRef
 	midManagerAuthenticationResultGetCryptoObject jni.MethodID
+	midManagerAuthenticationResultToString        jni.MethodID
 
 	clsManagerCryptoObject             *jni.GlobalRef
 	midManagerCryptoObjectGetCipher    jni.MethodID
 	midManagerCryptoObjectGetMac       jni.MethodID
 	midManagerCryptoObjectGetSignature jni.MethodID
+	midManagerCryptoObjectToString     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -76,6 +80,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerIsHardwareDetected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isHardwareDetected", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -120,6 +131,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerAuthenticationCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAuthenticationCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/fingerprint/FingerprintManager$AuthenticationResult")
@@ -131,6 +149,13 @@ func doInit(env *jni.Env) error {
 		clsManagerAuthenticationResult = env.NewGlobalRef(&c.Object)
 
 		midManagerAuthenticationResultGetCryptoObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAuthenticationResult)), "getCryptoObject", "()Landroid/hardware/fingerprint/FingerprintManager$CryptoObject;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerAuthenticationResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerAuthenticationResult)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -162,6 +187,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerCryptoObjectGetSignature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerCryptoObject)), "getSignature", "()Ljava/security/Signature;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerCryptoObjectToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerCryptoObject)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

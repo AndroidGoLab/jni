@@ -25,13 +25,16 @@ var (
 
 	clsInfo                 *jni.GlobalRef
 	midInfoGetEapMethodType jni.MethodID
+	midInfoToString         jni.MethodID
 
 	clsAkaInfo            *jni.GlobalRef
 	midAkaInfoGetReauthId jni.MethodID
+	midAkaInfoToString    jni.MethodID
 
 	clsAkaInfoBuilder            *jni.GlobalRef
 	midAkaInfoBuilderBuild       jni.MethodID
 	midAkaInfoBuilderSetReauthId jni.MethodID
+	midAkaInfoBuilderToString    jni.MethodID
 
 	clsSessionConfig                     *jni.GlobalRef
 	midSessionConfigEquals               jni.MethodID
@@ -42,6 +45,7 @@ var (
 	midSessionConfigGetEapSimConfig      jni.MethodID
 	midSessionConfigGetEapTtlsConfig     jni.MethodID
 	midSessionConfigHashCode             jni.MethodID
+	midSessionConfigToString             jni.MethodID
 
 	clsSessionConfigBuilder                     *jni.GlobalRef
 	midSessionConfigBuilderBuild                jni.MethodID
@@ -52,6 +56,7 @@ var (
 	midSessionConfigBuilderSetEapMsChapV2Config jni.MethodID
 	midSessionConfigBuilderSetEapSimConfig      jni.MethodID
 	midSessionConfigBuilderSetEapTtlsConfig     jni.MethodID
+	midSessionConfigBuilderToString             jni.MethodID
 
 	clsSessionConfigEapAkaConfig                *jni.GlobalRef
 	midSessionConfigEapAkaConfigEquals          jni.MethodID
@@ -59,40 +64,47 @@ var (
 	midSessionConfigEapAkaConfigGetEapAkaOption jni.MethodID
 	midSessionConfigEapAkaConfigGetSubId        jni.MethodID
 	midSessionConfigEapAkaConfigHashCode        jni.MethodID
+	midSessionConfigEapAkaConfigToString        jni.MethodID
 
 	clsSessionConfigEapAkaOption            *jni.GlobalRef
 	midSessionConfigEapAkaOptionEquals      jni.MethodID
 	midSessionConfigEapAkaOptionGetReauthId jni.MethodID
 	midSessionConfigEapAkaOptionHashCode    jni.MethodID
+	midSessionConfigEapAkaOptionToString    jni.MethodID
 
 	clsSessionConfigEapAkaPrimeConfig                             *jni.GlobalRef
 	midSessionConfigEapAkaPrimeConfigAllowsMismatchedNetworkNames jni.MethodID
 	midSessionConfigEapAkaPrimeConfigEquals                       jni.MethodID
 	midSessionConfigEapAkaPrimeConfigGetNetworkName               jni.MethodID
 	midSessionConfigEapAkaPrimeConfigHashCode                     jni.MethodID
+	midSessionConfigEapAkaPrimeConfigToString                     jni.MethodID
 
 	clsSessionConfigEapMethodConfig              *jni.GlobalRef
 	midSessionConfigEapMethodConfigEquals        jni.MethodID
 	midSessionConfigEapMethodConfigGetMethodType jni.MethodID
 	midSessionConfigEapMethodConfigHashCode      jni.MethodID
+	midSessionConfigEapMethodConfigToString      jni.MethodID
 
 	clsSessionConfigEapMsChapV2Config            *jni.GlobalRef
 	midSessionConfigEapMsChapV2ConfigEquals      jni.MethodID
 	midSessionConfigEapMsChapV2ConfigGetPassword jni.MethodID
 	midSessionConfigEapMsChapV2ConfigGetUsername jni.MethodID
 	midSessionConfigEapMsChapV2ConfigHashCode    jni.MethodID
+	midSessionConfigEapMsChapV2ConfigToString    jni.MethodID
 
 	clsSessionConfigEapSimConfig           *jni.GlobalRef
 	midSessionConfigEapSimConfigEquals     jni.MethodID
 	midSessionConfigEapSimConfigGetAppType jni.MethodID
 	midSessionConfigEapSimConfigGetSubId   jni.MethodID
 	midSessionConfigEapSimConfigHashCode   jni.MethodID
+	midSessionConfigEapSimConfigToString   jni.MethodID
 
 	clsSessionConfigEapTtlsConfig                         *jni.GlobalRef
 	midSessionConfigEapTtlsConfigEquals                   jni.MethodID
 	midSessionConfigEapTtlsConfigGetInnerEapSessionConfig jni.MethodID
 	midSessionConfigEapTtlsConfigGetServerCaCert          jni.MethodID
 	midSessionConfigEapTtlsConfigHashCode                 jni.MethodID
+	midSessionConfigEapTtlsConfigToString                 jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -128,6 +140,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/eap/EapAkaInfo")
@@ -139,6 +158,13 @@ func doInit(env *jni.Env) error {
 		clsAkaInfo = env.NewGlobalRef(&c.Object)
 
 		midAkaInfoGetReauthId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAkaInfo)), "getReauthId", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAkaInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAkaInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -163,6 +189,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAkaInfoBuilderSetReauthId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAkaInfoBuilder)), "setReauthId", "([B)Landroid/net/eap/EapAkaInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAkaInfoBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAkaInfoBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -235,6 +268,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/eap/EapSessionConfig$Builder")
@@ -301,6 +341,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/eap/EapSessionConfig$EapAkaConfig")
@@ -346,6 +393,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionConfigEapAkaConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapAkaConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/eap/EapSessionConfig$EapAkaOption")
@@ -371,6 +425,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionConfigEapAkaOptionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapAkaOption)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigEapAkaOptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapAkaOption)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -415,6 +476,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionConfigEapAkaPrimeConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapAkaPrimeConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/eap/EapSessionConfig$EapMethodConfig")
@@ -440,6 +508,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionConfigEapMethodConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapMethodConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigEapMethodConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapMethodConfig)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -484,6 +559,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionConfigEapMsChapV2ConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapMsChapV2Config)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/eap/EapSessionConfig$EapSimConfig")
@@ -522,6 +604,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionConfigEapSimConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapSimConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/eap/EapSessionConfig$EapTtlsConfig")
@@ -554,6 +643,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionConfigEapTtlsConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapTtlsConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigEapTtlsConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapTtlsConfig)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

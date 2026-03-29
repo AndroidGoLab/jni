@@ -55,6 +55,33 @@ func (m *CustomAudienceManager) GetTestCustomAudienceManager() (*jni.Object, err
 	return result, callErr
 }
 
+// ToString calls android.adservices.customaudience.CustomAudienceManager.toString.
+func (m *CustomAudienceManager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCustomAudienceManagerToString == nil {
+			callErr = fmt.Errorf("android.adservices.customaudience.CustomAudienceManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCustomAudienceManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Get calls android.adservices.customaudience.CustomAudienceManager.get.
 func (m *CustomAudienceManager) Get(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

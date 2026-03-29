@@ -34,9 +34,11 @@ var (
 	midManagerRemovePrimaryClipChangedListener jni.MethodID
 	midManagerSetPrimaryClip                   jni.MethodID
 	midManagerSetText                          jni.MethodID
+	midManagerToString                         jni.MethodID
 
 	clsManagerOnPrimaryClipChangedListener                     *jni.GlobalRef
 	midManagerOnPrimaryClipChangedListenerOnPrimaryClipChanged jni.MethodID
+	midManagerOnPrimaryClipChangedListenerToString             jni.MethodID
 
 	clsClipData                 *jni.GlobalRef
 	midClipDataCtor             jni.MethodID
@@ -163,6 +165,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/ClipboardManager$OnPrimaryClipChangedListener")
@@ -174,6 +183,13 @@ func doInit(env *jni.Env) error {
 		clsManagerOnPrimaryClipChangedListener = env.NewGlobalRef(&c.Object)
 
 		midManagerOnPrimaryClipChangedListenerOnPrimaryClipChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnPrimaryClipChangedListener)), "onPrimaryClipChanged", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerOnPrimaryClipChangedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnPrimaryClipChangedListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

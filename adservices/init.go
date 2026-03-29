@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsAdServicesState                         *jni.GlobalRef
+	midAdServicesStateToString                 jni.MethodID
 	midAdServicesStateIsAdServicesStateEnabled jni.MethodID
 )
 
@@ -52,6 +53,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAdServicesState = env.NewGlobalRef(&c.Object)
+
+		midAdServicesStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdServicesState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midAdServicesStateIsAdServicesStateEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdServicesState)), "isAdServicesStateEnabled", "()Z")
 		if err != nil {

@@ -97,3 +97,30 @@ func (m *RestoreObserver) RestoreStarting(arg0 int32) error {
 	})
 	return callErr
 }
+
+// ToString calls android.app.backup.RestoreObserver.toString.
+func (m *RestoreObserver) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRestoreObserverToString == nil {
+			callErr = fmt.Errorf("android.app.backup.RestoreObserver.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRestoreObserverToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

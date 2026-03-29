@@ -34,6 +34,7 @@ var (
 	midSharedPreferencesGetStringSet                               jni.MethodID
 	midSharedPreferencesRegisterOnSharedPreferenceChangeListener   jni.MethodID
 	midSharedPreferencesUnregisterOnSharedPreferenceChangeListener jni.MethodID
+	midSharedPreferencesToString                                   jni.MethodID
 
 	clsSharedPreferencesEditor             *jni.GlobalRef
 	midSharedPreferencesEditorApply        jni.MethodID
@@ -46,6 +47,7 @@ var (
 	midSharedPreferencesEditorPutString    jni.MethodID
 	midSharedPreferencesEditorPutStringSet jni.MethodID
 	midSharedPreferencesEditorRemove       jni.MethodID
+	midSharedPreferencesEditorToString     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -144,6 +146,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSharedPreferencesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferences)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/SharedPreferences$Editor")
@@ -218,6 +227,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSharedPreferencesEditorRemove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "remove", "(Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSharedPreferencesEditorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesEditor)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

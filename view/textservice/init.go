@@ -31,6 +31,7 @@ var (
 	midTextInfoGetSequence      jni.MethodID
 	midTextInfoGetText          jni.MethodID
 	midTextInfoWriteToParcel    jni.MethodID
+	midTextInfoToString         jni.MethodID
 
 	clsSpellCheckerSubtype                      *jni.GlobalRef
 	midSpellCheckerSubtypeCtor                  jni.MethodID
@@ -45,6 +46,7 @@ var (
 	midSpellCheckerSubtypeGetNameResId          jni.MethodID
 	midSpellCheckerSubtypeHashCode              jni.MethodID
 	midSpellCheckerSubtypeWriteToParcel         jni.MethodID
+	midSpellCheckerSubtypeToString              jni.MethodID
 
 	clsSentenceSuggestionsInfo                     *jni.GlobalRef
 	midSentenceSuggestionsInfoCtor                 jni.MethodID
@@ -54,6 +56,7 @@ var (
 	midSentenceSuggestionsInfoGetSuggestionsCount  jni.MethodID
 	midSentenceSuggestionsInfoGetSuggestionsInfoAt jni.MethodID
 	midSentenceSuggestionsInfoWriteToParcel        jni.MethodID
+	midSentenceSuggestionsInfoToString             jni.MethodID
 
 	clsSpellCheckerSession                       *jni.GlobalRef
 	midSpellCheckerSessionCancel                 jni.MethodID
@@ -63,16 +66,19 @@ var (
 	midSpellCheckerSessionGetSuggestions2        jni.MethodID
 	midSpellCheckerSessionGetSuggestions3_1      jni.MethodID
 	midSpellCheckerSessionIsSessionDisconnected  jni.MethodID
+	midSpellCheckerSessionToString               jni.MethodID
 
 	clsSpellCheckerSessionSpellCheckerSessionListener                         *jni.GlobalRef
 	midSpellCheckerSessionSpellCheckerSessionListenerOnGetSentenceSuggestions jni.MethodID
 	midSpellCheckerSessionSpellCheckerSessionListenerOnGetSuggestions         jni.MethodID
+	midSpellCheckerSessionSpellCheckerSessionListenerToString                 jni.MethodID
 
 	clsSpellCheckerSessionSpellCheckerSessionParams                                          *jni.GlobalRef
 	midSpellCheckerSessionSpellCheckerSessionParamsGetExtras                                 jni.MethodID
 	midSpellCheckerSessionSpellCheckerSessionParamsGetLocale                                 jni.MethodID
 	midSpellCheckerSessionSpellCheckerSessionParamsGetSupportedAttributes                    jni.MethodID
 	midSpellCheckerSessionSpellCheckerSessionParamsShouldReferToSpellCheckerLanguageSettings jni.MethodID
+	midSpellCheckerSessionSpellCheckerSessionParamsToString                                  jni.MethodID
 
 	clsTextServicesManager                            *jni.GlobalRef
 	midTextServicesManagerGetCurrentSpellCheckerInfo  jni.MethodID
@@ -80,6 +86,7 @@ var (
 	midTextServicesManagerIsSpellCheckerEnabled       jni.MethodID
 	midTextServicesManagerNewSpellCheckerSession4     jni.MethodID
 	midTextServicesManagerNewSpellCheckerSession3_1   jni.MethodID
+	midTextServicesManagerToString                    jni.MethodID
 
 	clsSuggestionsInfo                         *jni.GlobalRef
 	midSuggestionsInfoCtor                     jni.MethodID
@@ -91,6 +98,7 @@ var (
 	midSuggestionsInfoGetSuggestionsCount      jni.MethodID
 	midSuggestionsInfoSetCookieAndSequence     jni.MethodID
 	midSuggestionsInfoWriteToParcel            jni.MethodID
+	midSuggestionsInfoToString                 jni.MethodID
 
 	clsSpellCheckerInfo                    *jni.GlobalRef
 	midSpellCheckerInfoDescribeContents    jni.MethodID
@@ -104,6 +112,7 @@ var (
 	midSpellCheckerInfoLoadIcon            jni.MethodID
 	midSpellCheckerInfoLoadLabel           jni.MethodID
 	midSpellCheckerInfoWriteToParcel       jni.MethodID
+	midSpellCheckerInfoToString            jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -172,6 +181,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -269,6 +285,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSpellCheckerSubtypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerSubtype)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textservice/SentenceSuggestionsInfo")
@@ -319,6 +342,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSentenceSuggestionsInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSentenceSuggestionsInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSentenceSuggestionsInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSentenceSuggestionsInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -384,6 +414,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSpellCheckerSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerSession)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/view/textservice/SpellCheckerSession$SpellCheckerSessionListener")
@@ -402,6 +439,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSpellCheckerSessionSpellCheckerSessionListenerOnGetSuggestions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerSessionSpellCheckerSessionListener)), "onGetSuggestions", "([Landroid/view/textservice/SuggestionsInfo;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpellCheckerSessionSpellCheckerSessionListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerSessionSpellCheckerSessionListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -440,6 +484,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSpellCheckerSessionSpellCheckerSessionParamsShouldReferToSpellCheckerLanguageSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerSessionSpellCheckerSessionParams)), "shouldReferToSpellCheckerLanguageSettings", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpellCheckerSessionSpellCheckerSessionParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerSessionSpellCheckerSessionParams)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -485,6 +536,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextServicesManagerNewSpellCheckerSession3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextServicesManager)), "newSpellCheckerSession", "(Landroid/view/textservice/SpellCheckerSession$SpellCheckerSessionParams;Ljava/util/concurrent/Executor;Landroid/view/textservice/SpellCheckerSession$SpellCheckerSessionListener;)Landroid/view/textservice/SpellCheckerSession;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextServicesManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextServicesManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -555,6 +613,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSuggestionsInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionsInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSuggestionsInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionsInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -642,6 +707,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSpellCheckerInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpellCheckerInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpellCheckerInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

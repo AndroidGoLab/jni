@@ -45,6 +45,33 @@ func NewProxy(vm *jni.VM) (*Proxy, error) {
 	return &t, nil
 }
 
+// ToString calls android.net.Proxy.toString.
+func (m *Proxy) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midProxyToString == nil {
+			callErr = fmt.Errorf("android.net.Proxy.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midProxyToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDefaultHost calls android.net.Proxy.getDefaultHost.
 func (m *Proxy) GetDefaultHost() (string, error) {
 	var result string

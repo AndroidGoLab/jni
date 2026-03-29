@@ -25,6 +25,7 @@ var (
 
 	clsLinkify            *jni.GlobalRef
 	midLinkifyCtor        jni.MethodID
+	midLinkifyToString    jni.MethodID
 	midLinkifyAddLinks2   jni.MethodID
 	midLinkifyAddLinks3_1 jni.MethodID
 	midLinkifyAddLinks5_2 jni.MethodID
@@ -36,9 +37,11 @@ var (
 
 	clsLinkifyMatchFilter            *jni.GlobalRef
 	midLinkifyMatchFilterAcceptMatch jni.MethodID
+	midLinkifyMatchFilterToString    jni.MethodID
 
 	clsLinkifyTransformFilter             *jni.GlobalRef
 	midLinkifyTransformFilterTransformUrl jni.MethodID
+	midLinkifyTransformFilterToString     jni.MethodID
 
 	clsRfc822Token                     *jni.GlobalRef
 	midRfc822TokenCtor                 jni.MethodID
@@ -60,6 +63,7 @@ var (
 	midRfc822TokenizerFindTokenEnd   jni.MethodID
 	midRfc822TokenizerFindTokenStart jni.MethodID
 	midRfc822TokenizerTerminateToken jni.MethodID
+	midRfc822TokenizerToString       jni.MethodID
 	midRfc822TokenizerTokenize       jni.MethodID
 )
 
@@ -90,6 +94,13 @@ func doInit(env *jni.Env) error {
 		clsLinkify = env.NewGlobalRef(&c.Object)
 		midLinkifyCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midLinkifyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -166,6 +177,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLinkifyMatchFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkifyMatchFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/util/Linkify$TransformFilter")
@@ -177,6 +195,13 @@ func doInit(env *jni.Env) error {
 		clsLinkifyTransformFilter = env.NewGlobalRef(&c.Object)
 
 		midLinkifyTransformFilterTransformUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkifyTransformFilter)), "transformUrl", "(Ljava/util/regex/Matcher;Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLinkifyTransformFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkifyTransformFilter)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -310,6 +335,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRfc822TokenizerTerminateToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "terminateToken", "(Ljava/lang/CharSequence;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRfc822TokenizerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

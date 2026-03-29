@@ -26,6 +26,7 @@ var (
 	clsCallback                  *jni.GlobalRef
 	midCallbackOnDocumentChanged jni.MethodID
 	midCallbackOnSchemaChanged   jni.MethodID
+	midCallbackToString          jni.MethodID
 
 	clsDocumentChangeInfo                      *jni.GlobalRef
 	midDocumentChangeInfoCtor                  jni.MethodID
@@ -51,10 +52,12 @@ var (
 	midSpecDescribeContents jni.MethodID
 	midSpecGetFilterSchemas jni.MethodID
 	midSpecWriteToParcel    jni.MethodID
+	midSpecToString         jni.MethodID
 
 	clsSpecBuilder                 *jni.GlobalRef
 	midSpecBuilderAddFilterSchemas jni.MethodID
 	midSpecBuilderBuild            jni.MethodID
+	midSpecBuilderToString         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -91,6 +94,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCallbackOnSchemaChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallback)), "onSchemaChanged", "(Landroid/app/appsearch/observer/SchemaChangeInfo;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -254,6 +264,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSpecToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpec)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/appsearch/observer/ObserverSpec$Builder")
@@ -272,6 +289,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSpecBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpecBuilder)), "build", "()Landroid/app/appsearch/observer/ObserverSpec;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpecBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpecBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

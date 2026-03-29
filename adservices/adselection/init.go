@@ -34,6 +34,7 @@ var (
 	midAdSelectionConfigGetTrustedScoringSignalsUri jni.MethodID
 	midAdSelectionConfigHashCode                    jni.MethodID
 	midAdSelectionConfigWriteToParcel               jni.MethodID
+	midAdSelectionConfigToString                    jni.MethodID
 
 	clsAdSelectionConfigBuilder                            *jni.GlobalRef
 	midAdSelectionConfigBuilderBuild                       jni.MethodID
@@ -42,6 +43,7 @@ var (
 	midAdSelectionConfigBuilderSetSeller                   jni.MethodID
 	midAdSelectionConfigBuilderSetSellerSignals            jni.MethodID
 	midAdSelectionConfigBuilderSetTrustedScoringSignalsUri jni.MethodID
+	midAdSelectionConfigBuilderToString                    jni.MethodID
 
 	clsReportEventRequest                         *jni.GlobalRef
 	midReportEventRequestGetAdSelectionId         jni.MethodID
@@ -49,6 +51,7 @@ var (
 	midReportEventRequestGetInputEvent            jni.MethodID
 	midReportEventRequestGetKey                   jni.MethodID
 	midReportEventRequestGetReportingDestinations jni.MethodID
+	midReportEventRequestToString                 jni.MethodID
 
 	clsReportEventRequestBuilder                         *jni.GlobalRef
 	midReportEventRequestBuilderBuild                    jni.MethodID
@@ -57,6 +60,7 @@ var (
 	midReportEventRequestBuilderSetInputEvent            jni.MethodID
 	midReportEventRequestBuilderSetKey                   jni.MethodID
 	midReportEventRequestBuilderSetReportingDestinations jni.MethodID
+	midReportEventRequestBuilderToString                 jni.MethodID
 
 	clsAddAdSelectionOverrideRequest                         *jni.GlobalRef
 	midAddAdSelectionOverrideRequestCtor                     jni.MethodID
@@ -64,9 +68,11 @@ var (
 	midAddAdSelectionOverrideRequestGetDecisionLogicJs       jni.MethodID
 	midAddAdSelectionOverrideRequestGetPerBuyerDecisionLogic jni.MethodID
 	midAddAdSelectionOverrideRequestGetTrustedScoringSignals jni.MethodID
+	midAddAdSelectionOverrideRequestToString                 jni.MethodID
 
 	clsAdSelectionManager                          *jni.GlobalRef
 	midAdSelectionManagerGetTestAdSelectionManager jni.MethodID
+	midAdSelectionManagerToString                  jni.MethodID
 	midAdSelectionManagerGet                       jni.MethodID
 
 	clsDecisionLogic                 *jni.GlobalRef
@@ -80,9 +86,11 @@ var (
 
 	clsSetAppInstallAdvertisersRequest               *jni.GlobalRef
 	midSetAppInstallAdvertisersRequestGetAdvertisers jni.MethodID
+	midSetAppInstallAdvertisersRequestToString       jni.MethodID
 
-	clsSetAppInstallAdvertisersRequestBuilder      *jni.GlobalRef
-	midSetAppInstallAdvertisersRequestBuilderBuild jni.MethodID
+	clsSetAppInstallAdvertisersRequestBuilder         *jni.GlobalRef
+	midSetAppInstallAdvertisersRequestBuilderBuild    jni.MethodID
+	midSetAppInstallAdvertisersRequestBuilderToString jni.MethodID
 
 	clsSignedContextualAds                    *jni.GlobalRef
 	midSignedContextualAdsDescribeContents    jni.MethodID
@@ -100,6 +108,7 @@ var (
 	midSignedContextualAdsBuilderSetBuyer            jni.MethodID
 	midSignedContextualAdsBuilderSetDecisionLogicUri jni.MethodID
 	midSignedContextualAdsBuilderSetSignature        jni.MethodID
+	midSignedContextualAdsBuilderToString            jni.MethodID
 
 	clsSellerConfiguration                           *jni.GlobalRef
 	midSellerConfigurationDescribeContents           jni.MethodID
@@ -108,10 +117,12 @@ var (
 	midSellerConfigurationGetPerBuyerConfigurations  jni.MethodID
 	midSellerConfigurationHashCode                   jni.MethodID
 	midSellerConfigurationWriteToParcel              jni.MethodID
+	midSellerConfigurationToString                   jni.MethodID
 
 	clsSellerConfigurationBuilder                           *jni.GlobalRef
 	midSellerConfigurationBuilderBuild                      jni.MethodID
 	midSellerConfigurationBuilderSetMaximumPayloadSizeBytes jni.MethodID
+	midSellerConfigurationBuilderToString                   jni.MethodID
 
 	clsAdSelectionOutcome                   *jni.GlobalRef
 	midAdSelectionOutcomeEquals             jni.MethodID
@@ -121,11 +132,13 @@ var (
 	midAdSelectionOutcomeGetWinningSeller   jni.MethodID
 	midAdSelectionOutcomeHasOutcome         jni.MethodID
 	midAdSelectionOutcomeHashCode           jni.MethodID
+	midAdSelectionOutcomeToString           jni.MethodID
 
 	clsAdSelectionOutcomeBuilder                 *jni.GlobalRef
 	midAdSelectionOutcomeBuilderBuild            jni.MethodID
 	midAdSelectionOutcomeBuilderSetAdSelectionId jni.MethodID
 	midAdSelectionOutcomeBuilderSetRenderUri     jni.MethodID
+	midAdSelectionOutcomeBuilderToString         jni.MethodID
 
 	clsPerBuyerConfiguration                        *jni.GlobalRef
 	midPerBuyerConfigurationDescribeContents        jni.MethodID
@@ -134,11 +147,13 @@ var (
 	midPerBuyerConfigurationGetTargetInputSizeBytes jni.MethodID
 	midPerBuyerConfigurationHashCode                jni.MethodID
 	midPerBuyerConfigurationWriteToParcel           jni.MethodID
+	midPerBuyerConfigurationToString                jni.MethodID
 
 	clsPerBuyerConfigurationBuilder                        *jni.GlobalRef
 	midPerBuyerConfigurationBuilderBuild                   jni.MethodID
 	midPerBuyerConfigurationBuilderSetBuyer                jni.MethodID
 	midPerBuyerConfigurationBuilderSetTargetInputSizeBytes jni.MethodID
+	midPerBuyerConfigurationBuilderToString                jni.MethodID
 
 	clsPerBuyerDecisionLogic                 *jni.GlobalRef
 	midPerBuyerDecisionLogicCtor             jni.MethodID
@@ -146,38 +161,46 @@ var (
 	midPerBuyerDecisionLogicEquals           jni.MethodID
 	midPerBuyerDecisionLogicHashCode         jni.MethodID
 	midPerBuyerDecisionLogicWriteToParcel    jni.MethodID
+	midPerBuyerDecisionLogicToString         jni.MethodID
 
 	clsRemoveAdSelectionOverrideRequest                     *jni.GlobalRef
 	midRemoveAdSelectionOverrideRequestCtor                 jni.MethodID
 	midRemoveAdSelectionOverrideRequestGetAdSelectionConfig jni.MethodID
+	midRemoveAdSelectionOverrideRequestToString             jni.MethodID
 
 	clsReportImpressionRequest                     *jni.GlobalRef
 	midReportImpressionRequestCtor                 jni.MethodID
 	midReportImpressionRequestGetAdSelectionConfig jni.MethodID
 	midReportImpressionRequestGetAdSelectionId     jni.MethodID
+	midReportImpressionRequestToString             jni.MethodID
 
 	clsAddAdSelectionFromOutcomesOverrideRequest                                  *jni.GlobalRef
 	midAddAdSelectionFromOutcomesOverrideRequestCtor                              jni.MethodID
 	midAddAdSelectionFromOutcomesOverrideRequestGetAdSelectionFromOutcomesConfig  jni.MethodID
 	midAddAdSelectionFromOutcomesOverrideRequestGetOutcomeSelectionLogicJs        jni.MethodID
 	midAddAdSelectionFromOutcomesOverrideRequestGetOutcomeSelectionTrustedSignals jni.MethodID
+	midAddAdSelectionFromOutcomesOverrideRequestToString                          jni.MethodID
 
 	clsGetAdSelectionDataOutcome                     *jni.GlobalRef
 	midGetAdSelectionDataOutcomeGetAdSelectionData   jni.MethodID
 	midGetAdSelectionDataOutcomeGetAdSelectionDataId jni.MethodID
 	midGetAdSelectionDataOutcomeGetAdSelectionId     jni.MethodID
+	midGetAdSelectionDataOutcomeToString             jni.MethodID
 
 	clsRemoveAdSelectionFromOutcomesOverrideRequest                                 *jni.GlobalRef
 	midRemoveAdSelectionFromOutcomesOverrideRequestCtor                             jni.MethodID
 	midRemoveAdSelectionFromOutcomesOverrideRequestGetAdSelectionFromOutcomesConfig jni.MethodID
+	midRemoveAdSelectionFromOutcomesOverrideRequestToString                         jni.MethodID
 
-	clsTestAdSelectionManager *jni.GlobalRef
+	clsTestAdSelectionManager         *jni.GlobalRef
+	midTestAdSelectionManagerToString jni.MethodID
 
 	clsPersistAdSelectionResultRequest                     *jni.GlobalRef
 	midPersistAdSelectionResultRequestGetAdSelectionDataId jni.MethodID
 	midPersistAdSelectionResultRequestGetAdSelectionId     jni.MethodID
 	midPersistAdSelectionResultRequestGetAdSelectionResult jni.MethodID
 	midPersistAdSelectionResultRequestGetSeller            jni.MethodID
+	midPersistAdSelectionResultRequestToString             jni.MethodID
 
 	clsPersistAdSelectionResultRequestBuilder                     *jni.GlobalRef
 	midPersistAdSelectionResultRequestBuilderBuild                jni.MethodID
@@ -185,6 +208,7 @@ var (
 	midPersistAdSelectionResultRequestBuilderSetAdSelectionId     jni.MethodID
 	midPersistAdSelectionResultRequestBuilderSetAdSelectionResult jni.MethodID
 	midPersistAdSelectionResultRequestBuilderSetSeller            jni.MethodID
+	midPersistAdSelectionResultRequestBuilderToString             jni.MethodID
 
 	clsAdSelectionFromOutcomesConfig                     *jni.GlobalRef
 	midAdSelectionFromOutcomesConfigDescribeContents     jni.MethodID
@@ -195,23 +219,27 @@ var (
 	midAdSelectionFromOutcomesConfigGetSeller            jni.MethodID
 	midAdSelectionFromOutcomesConfigHashCode             jni.MethodID
 	midAdSelectionFromOutcomesConfigWriteToParcel        jni.MethodID
+	midAdSelectionFromOutcomesConfigToString             jni.MethodID
 
 	clsAdSelectionFromOutcomesConfigBuilder                     *jni.GlobalRef
 	midAdSelectionFromOutcomesConfigBuilderBuild                jni.MethodID
 	midAdSelectionFromOutcomesConfigBuilderSetSelectionLogicUri jni.MethodID
 	midAdSelectionFromOutcomesConfigBuilderSetSelectionSignals  jni.MethodID
 	midAdSelectionFromOutcomesConfigBuilderSetSeller            jni.MethodID
+	midAdSelectionFromOutcomesConfigBuilderToString             jni.MethodID
 
 	clsGetAdSelectionDataRequest                        *jni.GlobalRef
 	midGetAdSelectionDataRequestGetCoordinatorOriginUri jni.MethodID
 	midGetAdSelectionDataRequestGetSeller               jni.MethodID
 	midGetAdSelectionDataRequestGetSellerConfiguration  jni.MethodID
+	midGetAdSelectionDataRequestToString                jni.MethodID
 
 	clsGetAdSelectionDataRequestBuilder                        *jni.GlobalRef
 	midGetAdSelectionDataRequestBuilderBuild                   jni.MethodID
 	midGetAdSelectionDataRequestBuilderSetCoordinatorOriginUri jni.MethodID
 	midGetAdSelectionDataRequestBuilderSetSeller               jni.MethodID
 	midGetAdSelectionDataRequestBuilderSetSellerConfiguration  jni.MethodID
+	midGetAdSelectionDataRequestBuilderToString                jni.MethodID
 
 	clsAdWithBid                 *jni.GlobalRef
 	midAdWithBidCtor             jni.MethodID
@@ -221,6 +249,7 @@ var (
 	midAdWithBidGetBid           jni.MethodID
 	midAdWithBidHashCode         jni.MethodID
 	midAdWithBidWriteToParcel    jni.MethodID
+	midAdWithBidToString         jni.MethodID
 
 	clsUpdateAdCounterHistogramRequest                 *jni.GlobalRef
 	midUpdateAdCounterHistogramRequestEquals           jni.MethodID
@@ -235,6 +264,7 @@ var (
 	midUpdateAdCounterHistogramRequestBuilderSetAdEventType   jni.MethodID
 	midUpdateAdCounterHistogramRequestBuilderSetAdSelectionId jni.MethodID
 	midUpdateAdCounterHistogramRequestBuilderSetCallerAdTech  jni.MethodID
+	midUpdateAdCounterHistogramRequestBuilderToString         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -333,6 +363,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdSelectionConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionConfig$Builder")
@@ -385,6 +422,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdSelectionConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/ReportEventRequest")
@@ -424,6 +468,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midReportEventRequestGetReportingDestinations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getReportingDestinations", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReportEventRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -482,6 +533,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midReportEventRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AddAdSelectionOverrideRequest")
@@ -524,6 +582,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAddAdSelectionOverrideRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionOverrideRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionManager")
@@ -535,6 +600,13 @@ func doInit(env *jni.Env) error {
 		clsAdSelectionManager = env.NewGlobalRef(&c.Object)
 
 		midAdSelectionManagerGetTestAdSelectionManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionManager)), "getTestAdSelectionManager", "()Landroid/adservices/adselection/TestAdSelectionManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdSelectionManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -621,6 +693,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSetAppInstallAdvertisersRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSetAppInstallAdvertisersRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/SetAppInstallAdvertisersRequest$Builder")
@@ -632,6 +711,13 @@ func doInit(env *jni.Env) error {
 		clsSetAppInstallAdvertisersRequestBuilder = env.NewGlobalRef(&c.Object)
 
 		midSetAppInstallAdvertisersRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSetAppInstallAdvertisersRequestBuilder)), "build", "()Landroid/adservices/adselection/SetAppInstallAdvertisersRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSetAppInstallAdvertisersRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSetAppInstallAdvertisersRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -749,6 +835,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSignedContextualAdsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAdsBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/SellerConfiguration")
@@ -801,6 +894,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSellerConfigurationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/SellerConfiguration$Builder")
@@ -819,6 +919,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSellerConfigurationBuilderSetMaximumPayloadSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfigurationBuilder)), "setMaximumPayloadSizeBytes", "(I)Landroid/adservices/adselection/SellerConfiguration$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSellerConfigurationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfigurationBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -884,6 +991,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdSelectionOutcomeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionOutcome$Builder")
@@ -909,6 +1023,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAdSelectionOutcomeBuilderSetRenderUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcomeBuilder)), "setRenderUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/AdSelectionOutcome$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdSelectionOutcomeBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcomeBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -967,6 +1088,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPerBuyerConfigurationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/PerBuyerConfiguration$Builder")
@@ -992,6 +1120,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPerBuyerConfigurationBuilderSetTargetInputSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfigurationBuilder)), "setTargetInputSizeBytes", "(I)Landroid/adservices/adselection/PerBuyerConfiguration$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPerBuyerConfigurationBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfigurationBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1040,6 +1175,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPerBuyerDecisionLogicToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/RemoveAdSelectionOverrideRequest")
@@ -1055,6 +1197,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRemoveAdSelectionOverrideRequestGetAdSelectionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionOverrideRequest)), "getAdSelectionConfig", "()Landroid/adservices/adselection/AdSelectionConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoveAdSelectionOverrideRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionOverrideRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1083,6 +1232,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midReportImpressionRequestGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportImpressionRequest)), "getAdSelectionId", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReportImpressionRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportImpressionRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1124,6 +1280,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAddAdSelectionFromOutcomesOverrideRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionFromOutcomesOverrideRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/GetAdSelectionDataOutcome")
@@ -1155,6 +1318,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGetAdSelectionDataOutcomeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataOutcome)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/RemoveAdSelectionFromOutcomesOverrideRequest")
@@ -1176,6 +1346,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midRemoveAdSelectionFromOutcomesOverrideRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionFromOutcomesOverrideRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/TestAdSelectionManager")
@@ -1185,6 +1362,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTestAdSelectionManager = env.NewGlobalRef(&c.Object)
+
+		midTestAdSelectionManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTestAdSelectionManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1218,6 +1402,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPersistAdSelectionResultRequestGetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "getSeller", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPersistAdSelectionResultRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1263,6 +1454,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPersistAdSelectionResultRequestBuilderSetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "setSeller", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/PersistAdSelectionResultRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPersistAdSelectionResultRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1335,6 +1533,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdSelectionFromOutcomesConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionFromOutcomesConfig$Builder")
@@ -1373,6 +1578,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdSelectionFromOutcomesConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfigBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/GetAdSelectionDataRequest")
@@ -1398,6 +1610,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGetAdSelectionDataRequestGetSellerConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequest)), "getSellerConfiguration", "()Landroid/adservices/adselection/SellerConfiguration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetAdSelectionDataRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1436,6 +1655,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGetAdSelectionDataRequestBuilderSetSellerConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "setSellerConfiguration", "(Landroid/adservices/adselection/SellerConfiguration;)Landroid/adservices/adselection/GetAdSelectionDataRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetAdSelectionDataRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1492,6 +1718,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAdWithBidWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdWithBidToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1582,6 +1815,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midUpdateAdCounterHistogramRequestBuilderSetCallerAdTech, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "setCallerAdTech", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/UpdateAdCounterHistogramRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUpdateAdCounterHistogramRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

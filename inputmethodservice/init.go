@@ -48,6 +48,7 @@ var (
 	midKeyboardViewSetProximityCorrectionEnabled jni.MethodID
 	midKeyboardViewSetShifted                    jni.MethodID
 	midKeyboardViewSetVerticalCorrection         jni.MethodID
+	midKeyboardViewToString                      jni.MethodID
 
 	clsKeyboardViewOnKeyboardActionListener           *jni.GlobalRef
 	midKeyboardViewOnKeyboardActionListenerOnKey      jni.MethodID
@@ -58,6 +59,7 @@ var (
 	midKeyboardViewOnKeyboardActionListenerSwipeLeft  jni.MethodID
 	midKeyboardViewOnKeyboardActionListenerSwipeRight jni.MethodID
 	midKeyboardViewOnKeyboardActionListenerSwipeUp    jni.MethodID
+	midKeyboardViewOnKeyboardActionListenerToString   jni.MethodID
 
 	clsKeyboard                 *jni.GlobalRef
 	midKeyboardCtor             jni.MethodID
@@ -69,6 +71,7 @@ var (
 	midKeyboardGetShiftKeyIndex jni.MethodID
 	midKeyboardIsShifted        jni.MethodID
 	midKeyboardSetShifted       jni.MethodID
+	midKeyboardToString         jni.MethodID
 
 	clsKeyboardKey                        *jni.GlobalRef
 	midKeyboardKeyGetCurrentDrawableState jni.MethodID
@@ -76,8 +79,10 @@ var (
 	midKeyboardKeyOnPressed               jni.MethodID
 	midKeyboardKeyOnReleased              jni.MethodID
 	midKeyboardKeySquaredDistanceFrom     jni.MethodID
+	midKeyboardKeyToString                jni.MethodID
 
-	clsKeyboardRow *jni.GlobalRef
+	clsKeyboardRow         *jni.GlobalRef
+	midKeyboardRowToString jni.MethodID
 
 	clsExtractEditText                      *jni.GlobalRef
 	midExtractEditTextCtor                  jni.MethodID
@@ -91,6 +96,7 @@ var (
 	midExtractEditTextPerformClick          jni.MethodID
 	midExtractEditTextSetExtractedText      jni.MethodID
 	midExtractEditTextStartInternalChanges  jni.MethodID
+	midExtractEditTextToString              jni.MethodID
 
 	clsAbstractInputMethodService                                    *jni.GlobalRef
 	midAbstractInputMethodServiceGetKeyDispatcherState               jni.MethodID
@@ -107,11 +113,13 @@ var (
 	midAbstractInputMethodServiceOnTrimMemory                        jni.MethodID
 	midAbstractInputMethodServiceRegisterComponentCallbacks          jni.MethodID
 	midAbstractInputMethodServiceUnregisterComponentCallbacks        jni.MethodID
+	midAbstractInputMethodServiceToString                            jni.MethodID
 
 	clsAbstractInputMethodServiceAbstractInputMethodImpl                  *jni.GlobalRef
 	midAbstractInputMethodServiceAbstractInputMethodImplCreateSession     jni.MethodID
 	midAbstractInputMethodServiceAbstractInputMethodImplRevokeSession     jni.MethodID
 	midAbstractInputMethodServiceAbstractInputMethodImplSetSessionEnabled jni.MethodID
+	midAbstractInputMethodServiceAbstractInputMethodImplToString          jni.MethodID
 
 	clsAbstractInputMethodServiceAbstractInputMethodSessionImpl                           *jni.GlobalRef
 	midAbstractInputMethodServiceAbstractInputMethodSessionImplDispatchGenericMotionEvent jni.MethodID
@@ -122,6 +130,7 @@ var (
 	midAbstractInputMethodServiceAbstractInputMethodSessionImplOnShouldVerifyKeyEvent     jni.MethodID
 	midAbstractInputMethodServiceAbstractInputMethodSessionImplRevokeSelf                 jni.MethodID
 	midAbstractInputMethodServiceAbstractInputMethodSessionImplSetEnabled                 jni.MethodID
+	midAbstractInputMethodServiceAbstractInputMethodSessionImplToString                   jni.MethodID
 
 	clsInputMethodService                                          *jni.GlobalRef
 	midInputMethodServiceCtor                                      jni.MethodID
@@ -225,6 +234,7 @@ var (
 	midInputMethodServiceSwitchToPreviousInputMethod               jni.MethodID
 	midInputMethodServiceUpdateFullscreenMode                      jni.MethodID
 	midInputMethodServiceUpdateInputViewShown                      jni.MethodID
+	midInputMethodServiceToString                                  jni.MethodID
 	midInputMethodServiceGetStylusHandwritingIdleTimeoutMax        jni.MethodID
 
 	clsInputMethodServiceInputMethodImpl                         *jni.GlobalRef
@@ -236,6 +246,7 @@ var (
 	midInputMethodServiceInputMethodImplShowSoftInput            jni.MethodID
 	midInputMethodServiceInputMethodImplStartInput               jni.MethodID
 	midInputMethodServiceInputMethodImplUnbindInput              jni.MethodID
+	midInputMethodServiceInputMethodImplToString                 jni.MethodID
 
 	clsInputMethodServiceInputMethodSessionImpl                       *jni.GlobalRef
 	midInputMethodServiceInputMethodSessionImplAppPrivateCommand      jni.MethodID
@@ -247,8 +258,10 @@ var (
 	midInputMethodServiceInputMethodSessionImplUpdateExtractedText    jni.MethodID
 	midInputMethodServiceInputMethodSessionImplUpdateSelection        jni.MethodID
 	midInputMethodServiceInputMethodSessionImplViewClicked            jni.MethodID
+	midInputMethodServiceInputMethodSessionImplToString               jni.MethodID
 
-	clsInputMethodServiceInsets *jni.GlobalRef
+	clsInputMethodServiceInsets         *jni.GlobalRef
+	midInputMethodServiceInsetsToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -442,6 +455,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midKeyboardViewToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardView)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/inputmethodservice/KeyboardView$OnKeyboardActionListener")
@@ -502,6 +522,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midKeyboardViewOnKeyboardActionListenerSwipeUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardViewOnKeyboardActionListener)), "swipeUp", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardViewOnKeyboardActionListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardViewOnKeyboardActionListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -578,6 +605,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midKeyboardToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/inputmethodservice/Keyboard$Key")
@@ -623,6 +657,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midKeyboardKeyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/inputmethodservice/Keyboard$Row")
@@ -632,6 +673,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsKeyboardRow = env.NewGlobalRef(&c.Object)
+
+		midKeyboardRowToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardRow)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -711,6 +759,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midExtractEditTextStartInternalChanges, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "startInternalChanges", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -825,6 +880,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAbstractInputMethodServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractInputMethodService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/inputmethodservice/AbstractInputMethodService$AbstractInputMethodImpl")
@@ -850,6 +912,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAbstractInputMethodServiceAbstractInputMethodImplSetSessionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractInputMethodServiceAbstractInputMethodImpl)), "setSessionEnabled", "(Landroid/view/inputmethod/InputMethodSession;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAbstractInputMethodServiceAbstractInputMethodImplToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractInputMethodServiceAbstractInputMethodImpl)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -916,6 +985,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAbstractInputMethodServiceAbstractInputMethodSessionImplSetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractInputMethodServiceAbstractInputMethodSessionImpl)), "setEnabled", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAbstractInputMethodServiceAbstractInputMethodSessionImplToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractInputMethodServiceAbstractInputMethodSessionImpl)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1636,6 +1712,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInputMethodServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midInputMethodServiceGetStylusHandwritingIdleTimeoutMax, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodService)), "getStylusHandwritingIdleTimeoutMax", "()Ljava/time/Duration;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1703,6 +1786,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInputMethodServiceInputMethodImplUnbindInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodServiceInputMethodImpl)), "unbindInput", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInputMethodServiceInputMethodImplToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodServiceInputMethodImpl)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1782,6 +1872,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInputMethodServiceInputMethodSessionImplToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodServiceInputMethodSessionImpl)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/inputmethodservice/InputMethodService$Insets")
@@ -1791,6 +1888,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsInputMethodServiceInsets = env.NewGlobalRef(&c.Object)
+
+		midInputMethodServiceInsetsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputMethodServiceInsets)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

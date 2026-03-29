@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsGLUtils                  *jni.GlobalRef
+	midGLUtilsToString          jni.MethodID
 	midGLUtilsGetEGLErrorString jni.MethodID
 	midGLUtilsGetInternalFormat jni.MethodID
 	midGLUtilsGetType           jni.MethodID
@@ -33,14 +34,17 @@ var (
 	midGLUtilsTexSubImage2D5    jni.MethodID
 	midGLUtilsTexSubImage2D7_1  jni.MethodID
 
-	clsEGLImage       *jni.GlobalRef
-	midEGLImageEquals jni.MethodID
+	clsEGLImage         *jni.GlobalRef
+	midEGLImageEquals   jni.MethodID
+	midEGLImageToString jni.MethodID
 
-	clsEGLSync       *jni.GlobalRef
-	midEGLSyncEquals jni.MethodID
+	clsEGLSync         *jni.GlobalRef
+	midEGLSyncEquals   jni.MethodID
+	midEGLSyncToString jni.MethodID
 
 	clsETC1                   *jni.GlobalRef
 	midETC1Ctor               jni.MethodID
+	midETC1ToString           jni.MethodID
 	midETC1DecodeBlock        jni.MethodID
 	midETC1DecodeImage        jni.MethodID
 	midETC1EncodeBlock        jni.MethodID
@@ -53,18 +57,22 @@ var (
 
 	clsVisibility                      *jni.GlobalRef
 	midVisibilityCtor                  jni.MethodID
+	midVisibilityToString              jni.MethodID
 	midVisibilityComputeBoundingSphere jni.MethodID
 	midVisibilityFrustumCullSpheres    jni.MethodID
 	midVisibilityVisibilityTest        jni.MethodID
 
-	clsEGLConfig       *jni.GlobalRef
-	midEGLConfigEquals jni.MethodID
+	clsEGLConfig         *jni.GlobalRef
+	midEGLConfigEquals   jni.MethodID
+	midEGLConfigToString jni.MethodID
 
-	clsGLException     *jni.GlobalRef
-	midGLExceptionCtor jni.MethodID
+	clsGLException         *jni.GlobalRef
+	midGLExceptionCtor     jni.MethodID
+	midGLExceptionToString jni.MethodID
 
 	clsGLES11                          *jni.GlobalRef
 	midGLES11Ctor                      jni.MethodID
+	midGLES11ToString                  jni.MethodID
 	midGLES11GlBindBuffer              jni.MethodID
 	midGLES11GlBufferData              jni.MethodID
 	midGLES11GlBufferSubData           jni.MethodID
@@ -136,6 +144,7 @@ var (
 	midGLES11GlVertexPointer           jni.MethodID
 
 	clsGLES32                                     *jni.GlobalRef
+	midGLES32ToString                             jni.MethodID
 	midGLES32GlBlendBarrier                       jni.MethodID
 	midGLES32GlBlendEquationSeparatei             jni.MethodID
 	midGLES32GlBlendEquationi                     jni.MethodID
@@ -198,9 +207,11 @@ var (
 
 	clsGLES32DebugProc          *jni.GlobalRef
 	midGLES32DebugProcOnMessage jni.MethodID
+	midGLES32DebugProcToString  jni.MethodID
 
 	clsEGL14                                 *jni.GlobalRef
 	midEGL14Ctor                             jni.MethodID
+	midEGL14ToString                         jni.MethodID
 	midEGL14EglBindAPI                       jni.MethodID
 	midEGL14EglBindTexImage                  jni.MethodID
 	midEGL14EglChooseConfig                  jni.MethodID
@@ -237,6 +248,7 @@ var (
 
 	clsGLES10                          *jni.GlobalRef
 	midGLES10Ctor                      jni.MethodID
+	midGLES10ToString                  jni.MethodID
 	midGLES10GlActiveTexture           jni.MethodID
 	midGLES10GlAlphaFunc               jni.MethodID
 	midGLES10GlAlphaFuncx              jni.MethodID
@@ -361,12 +373,14 @@ var (
 	midGLES10GlVertexPointer           jni.MethodID
 	midGLES10GlViewport                jni.MethodID
 
-	clsGLDebugHelper        *jni.GlobalRef
-	midGLDebugHelperCtor    jni.MethodID
-	midGLDebugHelperWrap3   jni.MethodID
-	midGLDebugHelperWrap3_1 jni.MethodID
+	clsGLDebugHelper         *jni.GlobalRef
+	midGLDebugHelperCtor     jni.MethodID
+	midGLDebugHelperToString jni.MethodID
+	midGLDebugHelperWrap3    jni.MethodID
+	midGLDebugHelperWrap3_1  jni.MethodID
 
 	clsGLES31                               *jni.GlobalRef
+	midGLES31ToString                       jni.MethodID
 	midGLES31GlActiveShaderProgram          jni.MethodID
 	midGLES31GlBindImageTexture             jni.MethodID
 	midGLES31GlBindProgramPipeline          jni.MethodID
@@ -469,14 +483,17 @@ var (
 
 	clsEGLExt                           *jni.GlobalRef
 	midEGLExtCtor                       jni.MethodID
+	midEGLExtToString                   jni.MethodID
 	midEGLExtEglDupNativeFenceFDANDROID jni.MethodID
 	midEGLExtEglPresentationTimeANDROID jni.MethodID
 
-	clsEGLSurface       *jni.GlobalRef
-	midEGLSurfaceEquals jni.MethodID
+	clsEGLSurface         *jni.GlobalRef
+	midEGLSurfaceEquals   jni.MethodID
+	midEGLSurfaceToString jni.MethodID
 
 	clsETC1Util                *jni.GlobalRef
 	midETC1UtilCtor            jni.MethodID
+	midETC1UtilToString        jni.MethodID
 	midETC1UtilCompressTexture jni.MethodID
 	midETC1UtilCreateTexture   jni.MethodID
 	midETC1UtilIsETC1Supported jni.MethodID
@@ -488,9 +505,11 @@ var (
 	midETC1UtilETC1TextureGetData   jni.MethodID
 	midETC1UtilETC1TextureGetHeight jni.MethodID
 	midETC1UtilETC1TextureGetWidth  jni.MethodID
+	midETC1UtilETC1TextureToString  jni.MethodID
 
 	clsMatrix                 *jni.GlobalRef
 	midMatrixCtor             jni.MethodID
+	midMatrixToString         jni.MethodID
 	midMatrixFrustumM         jni.MethodID
 	midMatrixInvertM          jni.MethodID
 	midMatrixLength           jni.MethodID
@@ -511,11 +530,13 @@ var (
 	midMatrixTranslateM7_1    jni.MethodID
 	midMatrixTransposeM       jni.MethodID
 
-	clsEGLDisplay       *jni.GlobalRef
-	midEGLDisplayEquals jni.MethodID
+	clsEGLDisplay         *jni.GlobalRef
+	midEGLDisplayEquals   jni.MethodID
+	midEGLDisplayToString jni.MethodID
 
 	clsGLES20                                         *jni.GlobalRef
 	midGLES20Ctor                                     jni.MethodID
+	midGLES20ToString                                 jni.MethodID
 	midGLES20GlActiveTexture                          jni.MethodID
 	midGLES20GlAttachShader                           jni.MethodID
 	midGLES20GlBindAttribLocation                     jni.MethodID
@@ -709,6 +730,7 @@ var (
 
 	clsGLES10Ext                     *jni.GlobalRef
 	midGLES10ExtCtor                 jni.MethodID
+	midGLES10ExtToString             jni.MethodID
 	midGLES10ExtGlQueryMatrixxOES4   jni.MethodID
 	midGLES10ExtGlQueryMatrixxOES2_1 jni.MethodID
 
@@ -737,28 +759,35 @@ var (
 	midGLSurfaceViewSurfaceDestroyed             jni.MethodID
 	midGLSurfaceViewSurfaceRedrawNeeded          jni.MethodID
 	midGLSurfaceViewSurfaceRedrawNeededAsync     jni.MethodID
+	midGLSurfaceViewToString                     jni.MethodID
 
 	clsGLSurfaceViewEGLConfigChooser             *jni.GlobalRef
 	midGLSurfaceViewEGLConfigChooserChooseConfig jni.MethodID
+	midGLSurfaceViewEGLConfigChooserToString     jni.MethodID
 
 	clsGLSurfaceViewEGLContextFactory               *jni.GlobalRef
 	midGLSurfaceViewEGLContextFactoryCreateContext  jni.MethodID
 	midGLSurfaceViewEGLContextFactoryDestroyContext jni.MethodID
+	midGLSurfaceViewEGLContextFactoryToString       jni.MethodID
 
 	clsGLSurfaceViewEGLWindowSurfaceFactory                    *jni.GlobalRef
 	midGLSurfaceViewEGLWindowSurfaceFactoryCreateWindowSurface jni.MethodID
 	midGLSurfaceViewEGLWindowSurfaceFactoryDestroySurface      jni.MethodID
+	midGLSurfaceViewEGLWindowSurfaceFactoryToString            jni.MethodID
 
-	clsGLSurfaceViewGLWrapper     *jni.GlobalRef
-	midGLSurfaceViewGLWrapperWrap jni.MethodID
+	clsGLSurfaceViewGLWrapper         *jni.GlobalRef
+	midGLSurfaceViewGLWrapperWrap     jni.MethodID
+	midGLSurfaceViewGLWrapperToString jni.MethodID
 
 	clsGLSurfaceViewRenderer                 *jni.GlobalRef
 	midGLSurfaceViewRendererOnDrawFrame      jni.MethodID
 	midGLSurfaceViewRendererOnSurfaceChanged jni.MethodID
 	midGLSurfaceViewRendererOnSurfaceCreated jni.MethodID
+	midGLSurfaceViewRendererToString         jni.MethodID
 
 	clsGLU               *jni.GlobalRef
 	midGLUCtor           jni.MethodID
+	midGLUToString       jni.MethodID
 	midGLUGluErrorString jni.MethodID
 	midGLUGluLookAt      jni.MethodID
 	midGLUGluOrtho2D     jni.MethodID
@@ -768,6 +797,7 @@ var (
 
 	clsGLES11Ext                                            *jni.GlobalRef
 	midGLES11ExtCtor                                        jni.MethodID
+	midGLES11ExtToString                                    jni.MethodID
 	midGLES11ExtGlAlphaFuncxOES                             jni.MethodID
 	midGLES11ExtGlBindFramebufferOES                        jni.MethodID
 	midGLES11ExtGlBindRenderbufferOES                       jni.MethodID
@@ -893,9 +923,11 @@ var (
 	midEGLObjectHandleGetHandle       jni.MethodID
 	midEGLObjectHandleGetNativeHandle jni.MethodID
 	midEGLObjectHandleHashCode        jni.MethodID
+	midEGLObjectHandleToString        jni.MethodID
 
 	clsGLES30                                 *jni.GlobalRef
 	midGLES30Ctor                             jni.MethodID
+	midGLES30ToString                         jni.MethodID
 	midGLES30GlBeginQuery                     jni.MethodID
 	midGLES30GlBeginTransformFeedback         jni.MethodID
 	midGLES30GlBindBufferBase                 jni.MethodID
@@ -1060,6 +1092,7 @@ var (
 	midGLES30GlWaitSync                       jni.MethodID
 
 	clsGLES31Ext                                *jni.GlobalRef
+	midGLES31ExtToString                        jni.MethodID
 	midGLES31ExtGlBlendBarrierKHR               jni.MethodID
 	midGLES31ExtGlBlendEquationSeparateiEXT     jni.MethodID
 	midGLES31ExtGlBlendEquationiEXT             jni.MethodID
@@ -1110,11 +1143,14 @@ var (
 
 	clsGLES31ExtDebugProcKHR          *jni.GlobalRef
 	midGLES31ExtDebugProcKHROnMessage jni.MethodID
+	midGLES31ExtDebugProcKHRToString  jni.MethodID
 
-	clsEGLContext       *jni.GlobalRef
-	midEGLContextEquals jni.MethodID
+	clsEGLContext         *jni.GlobalRef
+	midEGLContextEquals   jni.MethodID
+	midEGLContextToString jni.MethodID
 
 	clsEGL15                               *jni.GlobalRef
+	midEGL15ToString                       jni.MethodID
 	midEGL15EglClientWaitSync              jni.MethodID
 	midEGL15EglCreateImage                 jni.MethodID
 	midEGL15EglCreatePlatformPixmapSurface jni.MethodID
@@ -1152,6 +1188,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGLUtils = env.NewGlobalRef(&c.Object)
+
+		midGLUtilsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midGLUtilsGetEGLErrorString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "getEGLErrorString", "(I)Ljava/lang/String;")
 		if err != nil {
@@ -1226,6 +1269,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEGLImageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLImage)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/EGLSync")
@@ -1243,6 +1293,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEGLSyncToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLSync)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/ETC1")
@@ -1254,6 +1311,13 @@ func doInit(env *jni.Env) error {
 		clsETC1 = env.NewGlobalRef(&c.Object)
 		midETC1Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midETC1ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1334,6 +1398,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midVisibilityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisibility)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midVisibilityComputeBoundingSphere, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVisibility)), "computeBoundingSphere", "([FII[FI)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1372,6 +1443,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEGLConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/GLException")
@@ -1386,6 +1464,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGLExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/GLES11")
@@ -1397,6 +1482,13 @@ func doInit(env *jni.Env) error {
 		clsGLES11 = env.NewGlobalRef(&c.Object)
 		midGLES11Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGLES11ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1893,6 +1985,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsGLES32 = env.NewGlobalRef(&c.Object)
 
+		midGLES32ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midGLES32GlBlendBarrier, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendBarrier", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -2323,6 +2422,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGLES32DebugProcToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES32DebugProc)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/EGL14")
@@ -2334,6 +2440,13 @@ func doInit(env *jni.Env) error {
 		clsEGL14 = env.NewGlobalRef(&c.Object)
 		midEGL14Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midEGL14ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -2579,6 +2692,13 @@ func doInit(env *jni.Env) error {
 		clsGLES10 = env.NewGlobalRef(&c.Object)
 		midGLES10Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGLES10ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -3457,6 +3577,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGLDebugHelperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midGLDebugHelperWrap3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), "wrap", "(Ljavax/microedition/khronos/egl/EGL;ILjava/io/Writer;)Ljavax/microedition/khronos/egl/EGL;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -3480,6 +3607,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGLES31 = env.NewGlobalRef(&c.Object)
+
+		midGLES31ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midGLES31GlActiveShaderProgram, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glActiveShaderProgram", "(II)V")
 		if err != nil {
@@ -4188,6 +4322,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEGLExtToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLExt)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midEGLExtEglDupNativeFenceFDANDROID, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGLExt)), "eglDupNativeFenceFDANDROID", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;)Landroid/hardware/SyncFence;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -4219,6 +4360,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEGLSurfaceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLSurface)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/ETC1Util")
@@ -4230,6 +4378,13 @@ func doInit(env *jni.Env) error {
 		clsETC1Util = env.NewGlobalRef(&c.Object)
 		midETC1UtilCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midETC1UtilToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -4306,6 +4461,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midETC1UtilETC1TextureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1UtilETC1Texture)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/Matrix")
@@ -4317,6 +4479,13 @@ func doInit(env *jni.Env) error {
 		clsMatrix = env.NewGlobalRef(&c.Object)
 		midMatrixCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midMatrixToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -4470,6 +4639,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEGLDisplayToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLDisplay)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/GLES20")
@@ -4481,6 +4657,13 @@ func doInit(env *jni.Env) error {
 		clsGLES20 = env.NewGlobalRef(&c.Object)
 		midGLES20Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES20)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGLES20ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES20)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -5828,6 +6011,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGLES10ExtToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES10Ext)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midGLES10ExtGlQueryMatrixxOES4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10Ext)), "glQueryMatrixxOES", "([II[II)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -6017,6 +6207,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGLSurfaceViewToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceView)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/GLSurfaceView$EGLConfigChooser")
@@ -6028,6 +6225,13 @@ func doInit(env *jni.Env) error {
 		clsGLSurfaceViewEGLConfigChooser = env.NewGlobalRef(&c.Object)
 
 		midGLSurfaceViewEGLConfigChooserChooseConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceViewEGLConfigChooser)), "chooseConfig", "(Ljavax/microedition/khronos/egl/EGL10;Ljavax/microedition/khronos/egl/EGLDisplay;)Ljavax/microedition/khronos/egl/EGLConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLSurfaceViewEGLConfigChooserToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceViewEGLConfigChooser)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6058,6 +6262,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGLSurfaceViewEGLContextFactoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceViewEGLContextFactory)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/GLSurfaceView$EGLWindowSurfaceFactory")
@@ -6082,6 +6293,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGLSurfaceViewEGLWindowSurfaceFactoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceViewEGLWindowSurfaceFactory)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/GLSurfaceView$GLWrapper")
@@ -6093,6 +6311,13 @@ func doInit(env *jni.Env) error {
 		clsGLSurfaceViewGLWrapper = env.NewGlobalRef(&c.Object)
 
 		midGLSurfaceViewGLWrapperWrap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceViewGLWrapper)), "wrap", "(Ljavax/microedition/khronos/opengles/GL;)Ljavax/microedition/khronos/opengles/GL;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLSurfaceViewGLWrapperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceViewGLWrapper)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -6130,6 +6355,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGLSurfaceViewRendererToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceViewRenderer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/GLU")
@@ -6141,6 +6373,13 @@ func doInit(env *jni.Env) error {
 		clsGLU = env.NewGlobalRef(&c.Object)
 		midGLUCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLU)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGLUToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLU)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -6197,6 +6436,13 @@ func doInit(env *jni.Env) error {
 		clsGLES11Ext = env.NewGlobalRef(&c.Object)
 		midGLES11ExtCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES11Ext)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGLES11ExtToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES11Ext)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -7071,6 +7317,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEGLObjectHandleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLObjectHandle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/GLES30")
@@ -7082,6 +7335,13 @@ func doInit(env *jni.Env) error {
 		clsGLES30 = env.NewGlobalRef(&c.Object)
 		midGLES30Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES30)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGLES30ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES30)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -8229,6 +8489,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsGLES31Ext = env.NewGlobalRef(&c.Object)
 
+		midGLES31ExtToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midGLES31ExtGlBlendBarrierKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendBarrierKHR", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -8575,6 +8842,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGLES31ExtDebugProcKHRToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES31ExtDebugProcKHR)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/EGLContext")
@@ -8592,6 +8866,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEGLContextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLContext)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/opengl/EGL15")
@@ -8601,6 +8882,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsEGL15 = env.NewGlobalRef(&c.Object)
+
+		midEGL15ToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midEGL15EglClientWaitSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglClientWaitSync", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;IJ)I")
 		if err != nil {

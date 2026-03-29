@@ -25,6 +25,7 @@ var (
 
 	clsBuild                           *jni.GlobalRef
 	midBuildCtor                       jni.MethodID
+	midBuildToString                   jni.MethodID
 	midBuildGetFingerprintedPartitions jni.MethodID
 	midBuildGetMajorSdkVersion         jni.MethodID
 	midBuildGetMinorSdkVersion         jni.MethodID
@@ -37,12 +38,16 @@ var (
 	midPartitionGetFingerprint     jni.MethodID
 	midPartitionGetName            jni.MethodID
 	midPartitionHashCode           jni.MethodID
+	midPartitionToString           jni.MethodID
 
-	clsVERSION *jni.GlobalRef
+	clsVERSION         *jni.GlobalRef
+	midVERSIONToString jni.MethodID
 
-	clsVERSION_CODES *jni.GlobalRef
+	clsVERSION_CODES         *jni.GlobalRef
+	midVERSION_CODESToString jni.MethodID
 
-	clsVERSION_CODES_FULL *jni.GlobalRef
+	clsVERSION_CODES_FULL         *jni.GlobalRef
+	midVERSION_CODES_FULLToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -72,6 +77,13 @@ func doInit(env *jni.Env) error {
 		clsBuild = env.NewGlobalRef(&c.Object)
 		midBuildCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midBuildToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -155,6 +167,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPartitionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPartition)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/Build$VERSION")
@@ -164,6 +183,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsVERSION = env.NewGlobalRef(&c.Object)
+
+		midVERSIONToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVERSION)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -175,6 +201,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsVERSION_CODES = env.NewGlobalRef(&c.Object)
 
+		midVERSION_CODESToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVERSION_CODES)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/Build$VERSION_CODES_FULL")
@@ -184,6 +217,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsVERSION_CODES_FULL = env.NewGlobalRef(&c.Object)
+
+		midVERSION_CODES_FULLToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVERSION_CODES_FULL)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

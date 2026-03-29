@@ -107,3 +107,30 @@ func (m *JoinCustomAudienceRequest) HashCode() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.adservices.customaudience.JoinCustomAudienceRequest.toString.
+func (m *JoinCustomAudienceRequest) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midJoinCustomAudienceRequestToString == nil {
+			callErr = fmt.Errorf("android.adservices.customaudience.JoinCustomAudienceRequest.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midJoinCustomAudienceRequestToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

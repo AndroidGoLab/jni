@@ -45,6 +45,7 @@ var (
 	midRangingParamsBuilderSetMatchFilter                     jni.MethodID
 	midRangingParamsBuilderSetPeriodicRangingHwFeatureEnabled jni.MethodID
 	midRangingParamsBuilderSetRangingUpdateRate               jni.MethodID
+	midRangingParamsBuilderToString                           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -206,6 +207,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRangingParamsBuilderSetRangingUpdateRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingParamsBuilder)), "setRangingUpdateRate", "(I)Landroid/ranging/wifi/rtt/RttRangingParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRangingParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

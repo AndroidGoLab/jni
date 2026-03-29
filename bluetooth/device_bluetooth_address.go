@@ -122,3 +122,30 @@ func (m *DeviceBluetoothAddress) WriteToParcel(arg0 *jni.Object, arg1 int32) err
 	})
 	return callErr
 }
+
+// ToString calls android.bluetooth.BluetoothDevice$BluetoothAddress.toString.
+func (m *DeviceBluetoothAddress) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeviceBluetoothAddressToString == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothDevice$BluetoothAddress.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeviceBluetoothAddressToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

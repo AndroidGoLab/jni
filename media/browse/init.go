@@ -37,15 +37,18 @@ var (
 	midMediaBrowserSubscribe3_1        jni.MethodID
 	midMediaBrowserUnsubscribe1        jni.MethodID
 	midMediaBrowserUnsubscribe2_1      jni.MethodID
+	midMediaBrowserToString            jni.MethodID
 
 	clsMediaBrowserConnectionCallback                      *jni.GlobalRef
 	midMediaBrowserConnectionCallbackOnConnected           jni.MethodID
 	midMediaBrowserConnectionCallbackOnConnectionFailed    jni.MethodID
 	midMediaBrowserConnectionCallbackOnConnectionSuspended jni.MethodID
+	midMediaBrowserConnectionCallbackToString              jni.MethodID
 
 	clsMediaBrowserItemCallback             *jni.GlobalRef
 	midMediaBrowserItemCallbackOnError      jni.MethodID
 	midMediaBrowserItemCallbackOnItemLoaded jni.MethodID
+	midMediaBrowserItemCallbackToString     jni.MethodID
 
 	clsMediaBrowserMediaItem                 *jni.GlobalRef
 	midMediaBrowserMediaItemDescribeContents jni.MethodID
@@ -60,6 +63,7 @@ var (
 	clsMediaBrowserSubscriptionCallback           *jni.GlobalRef
 	midMediaBrowserSubscriptionCallbackOnError1   jni.MethodID
 	midMediaBrowserSubscriptionCallbackOnError2_1 jni.MethodID
+	midMediaBrowserSubscriptionCallbackToString   jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -176,6 +180,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaBrowserToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaBrowser)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/browse/MediaBrowser$ConnectionCallback")
@@ -207,6 +218,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaBrowserConnectionCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaBrowserConnectionCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/browse/MediaBrowser$ItemCallback")
@@ -225,6 +243,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMediaBrowserItemCallbackOnItemLoaded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaBrowserItemCallback)), "onItemLoaded", "(Landroid/media/browse/MediaBrowser$MediaItem;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaBrowserItemCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaBrowserItemCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -315,6 +340,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMediaBrowserSubscriptionCallbackOnError2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaBrowserSubscriptionCallback)), "onError", "(Ljava/lang/String;Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaBrowserSubscriptionCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaBrowserSubscriptionCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

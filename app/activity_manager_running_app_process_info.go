@@ -91,3 +91,30 @@ func (m *ActivityManagerRunningAppProcessInfo) WriteToParcel(arg0 *jni.Object, a
 	})
 	return callErr
 }
+
+// ToString calls android.app.ActivityManager$RunningAppProcessInfo.toString.
+func (m *ActivityManagerRunningAppProcessInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActivityManagerRunningAppProcessInfoToString == nil {
+			callErr = fmt.Errorf("android.app.ActivityManager$RunningAppProcessInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActivityManagerRunningAppProcessInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

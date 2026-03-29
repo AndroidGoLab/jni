@@ -35,6 +35,7 @@ var (
 	midStoreManagerOpenBlob                    jni.MethodID
 	midStoreManagerOpenSession                 jni.MethodID
 	midStoreManagerReleaseLease                jni.MethodID
+	midStoreManagerToString                    jni.MethodID
 
 	clsStoreManagerSession                             *jni.GlobalRef
 	midStoreManagerSessionAbandon                      jni.MethodID
@@ -48,6 +49,7 @@ var (
 	midStoreManagerSessionIsSameSignatureAccessAllowed jni.MethodID
 	midStoreManagerSessionOpenRead                     jni.MethodID
 	midStoreManagerSessionOpenWrite                    jni.MethodID
+	midStoreManagerSessionToString                     jni.MethodID
 
 	clsHandle                    *jni.GlobalRef
 	midHandleDescribeContents    jni.MethodID
@@ -165,6 +167,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStoreManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStoreManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/blob/BlobStoreManager$Session")
@@ -246,6 +255,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStoreManagerSessionOpenWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStoreManagerSession)), "openWrite", "(JJ)Landroid/os/ParcelFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStoreManagerSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStoreManagerSession)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

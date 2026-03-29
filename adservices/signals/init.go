@@ -32,9 +32,11 @@ var (
 	clsUpdateSignalsRequestBuilder             *jni.GlobalRef
 	midUpdateSignalsRequestBuilderBuild        jni.MethodID
 	midUpdateSignalsRequestBuilderSetUpdateUri jni.MethodID
+	midUpdateSignalsRequestBuilderToString     jni.MethodID
 
-	clsProtectedSignalsManager    *jni.GlobalRef
-	midProtectedSignalsManagerGet jni.MethodID
+	clsProtectedSignalsManager         *jni.GlobalRef
+	midProtectedSignalsManagerToString jni.MethodID
+	midProtectedSignalsManagerGet      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -115,6 +117,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUpdateSignalsRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequestBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/signals/ProtectedSignalsManager")
@@ -124,6 +133,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsProtectedSignalsManager = env.NewGlobalRef(&c.Object)
+
+		midProtectedSignalsManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProtectedSignalsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midProtectedSignalsManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsProtectedSignalsManager)), "get", "(Landroid/content/Context;)Landroid/adservices/signals/ProtectedSignalsManager;")
 		if err != nil {

@@ -66,3 +66,30 @@ func (m *DialogInterface) Dismiss() error {
 	})
 	return callErr
 }
+
+// ToString calls android.content.DialogInterface.toString.
+func (m *DialogInterface) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDialogInterfaceToString == nil {
+			callErr = fmt.Errorf("android.content.DialogInterface.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDialogInterfaceToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

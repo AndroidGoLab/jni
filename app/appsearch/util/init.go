@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsDocumentIdUtil                     *jni.GlobalRef
+	midDocumentIdUtilToString             jni.MethodID
 	midDocumentIdUtilCreateQualifiedId3   jni.MethodID
 	midDocumentIdUtilCreateQualifiedId4_1 jni.MethodID
 )
@@ -53,6 +54,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDocumentIdUtil = env.NewGlobalRef(&c.Object)
+
+		midDocumentIdUtilToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentIdUtil)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midDocumentIdUtilCreateQualifiedId3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentIdUtil)), "createQualifiedId", "(Ljava/lang/String;Ljava/lang/String;Landroid/app/appsearch/GenericDocument;)Ljava/lang/String;")
 		if err != nil {

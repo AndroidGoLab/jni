@@ -23,57 +23,80 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsSqliteObjectLeakedViolation *jni.GlobalRef
+	clsSqliteObjectLeakedViolation         *jni.GlobalRef
+	midSqliteObjectLeakedViolationToString jni.MethodID
 
-	clsDiskWriteViolation *jni.GlobalRef
+	clsDiskWriteViolation         *jni.GlobalRef
+	midDiskWriteViolationToString jni.MethodID
 
-	clsNonSdkApiUsedViolation *jni.GlobalRef
+	clsNonSdkApiUsedViolation         *jni.GlobalRef
+	midNonSdkApiUsedViolationToString jni.MethodID
 
-	clsLeakedClosableViolation *jni.GlobalRef
+	clsLeakedClosableViolation         *jni.GlobalRef
+	midLeakedClosableViolationToString jni.MethodID
 
-	clsNetworkViolation *jni.GlobalRef
+	clsNetworkViolation         *jni.GlobalRef
+	midNetworkViolationToString jni.MethodID
 
-	clsExplicitGcViolation *jni.GlobalRef
+	clsExplicitGcViolation         *jni.GlobalRef
+	midExplicitGcViolationToString jni.MethodID
 
-	clsServiceConnectionLeakedViolation *jni.GlobalRef
+	clsServiceConnectionLeakedViolation         *jni.GlobalRef
+	midServiceConnectionLeakedViolationToString jni.MethodID
 
 	clsInstanceCountViolation                     *jni.GlobalRef
 	midInstanceCountViolationGetNumberOfInstances jni.MethodID
+	midInstanceCountViolationToString             jni.MethodID
 
-	clsIncorrectContextUseViolation     *jni.GlobalRef
-	midIncorrectContextUseViolationCtor jni.MethodID
+	clsIncorrectContextUseViolation         *jni.GlobalRef
+	midIncorrectContextUseViolationCtor     jni.MethodID
+	midIncorrectContextUseViolationToString jni.MethodID
 
-	clsWebViewMethodCalledOnWrongThreadViolation *jni.GlobalRef
+	clsWebViewMethodCalledOnWrongThreadViolation         *jni.GlobalRef
+	midWebViewMethodCalledOnWrongThreadViolationToString jni.MethodID
 
 	clsViolation              *jni.GlobalRef
 	midViolationHashCode      jni.MethodID
 	midViolationSetStackTrace jni.MethodID
+	midViolationToString      jni.MethodID
 
 	clsUnsafeIntentLaunchViolation          *jni.GlobalRef
 	midUnsafeIntentLaunchViolationCtor      jni.MethodID
 	midUnsafeIntentLaunchViolationGetIntent jni.MethodID
+	midUnsafeIntentLaunchViolationToString  jni.MethodID
 
-	clsContentUriWithoutPermissionViolation *jni.GlobalRef
+	clsContentUriWithoutPermissionViolation         *jni.GlobalRef
+	midContentUriWithoutPermissionViolationToString jni.MethodID
 
-	clsUnbufferedIoViolation *jni.GlobalRef
+	clsUnbufferedIoViolation         *jni.GlobalRef
+	midUnbufferedIoViolationToString jni.MethodID
 
-	clsCleartextNetworkViolation *jni.GlobalRef
+	clsCleartextNetworkViolation         *jni.GlobalRef
+	midCleartextNetworkViolationToString jni.MethodID
 
-	clsImplicitDirectBootViolation *jni.GlobalRef
+	clsImplicitDirectBootViolation         *jni.GlobalRef
+	midImplicitDirectBootViolationToString jni.MethodID
 
-	clsUntaggedSocketViolation *jni.GlobalRef
+	clsUntaggedSocketViolation         *jni.GlobalRef
+	midUntaggedSocketViolationToString jni.MethodID
 
-	clsResourceMismatchViolation *jni.GlobalRef
+	clsResourceMismatchViolation         *jni.GlobalRef
+	midResourceMismatchViolationToString jni.MethodID
 
-	clsFileUriExposedViolation *jni.GlobalRef
+	clsFileUriExposedViolation         *jni.GlobalRef
+	midFileUriExposedViolationToString jni.MethodID
 
-	clsCredentialProtectedWhileLockedViolation *jni.GlobalRef
+	clsCredentialProtectedWhileLockedViolation         *jni.GlobalRef
+	midCredentialProtectedWhileLockedViolationToString jni.MethodID
 
-	clsIntentReceiverLeakedViolation *jni.GlobalRef
+	clsIntentReceiverLeakedViolation         *jni.GlobalRef
+	midIntentReceiverLeakedViolationToString jni.MethodID
 
-	clsCustomViolation *jni.GlobalRef
+	clsCustomViolation         *jni.GlobalRef
+	midCustomViolationToString jni.MethodID
 
-	clsDiskReadViolation *jni.GlobalRef
+	clsDiskReadViolation         *jni.GlobalRef
+	midDiskReadViolationToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -102,6 +125,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsSqliteObjectLeakedViolation = env.NewGlobalRef(&c.Object)
 
+		midSqliteObjectLeakedViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSqliteObjectLeakedViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/DiskWriteViolation")
@@ -111,6 +141,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDiskWriteViolation = env.NewGlobalRef(&c.Object)
+
+		midDiskWriteViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDiskWriteViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -122,6 +159,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsNonSdkApiUsedViolation = env.NewGlobalRef(&c.Object)
 
+		midNonSdkApiUsedViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNonSdkApiUsedViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/LeakedClosableViolation")
@@ -131,6 +175,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsLeakedClosableViolation = env.NewGlobalRef(&c.Object)
+
+		midLeakedClosableViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeakedClosableViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -142,6 +193,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsNetworkViolation = env.NewGlobalRef(&c.Object)
 
+		midNetworkViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/ExplicitGcViolation")
@@ -152,6 +210,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsExplicitGcViolation = env.NewGlobalRef(&c.Object)
 
+		midExplicitGcViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExplicitGcViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/ServiceConnectionLeakedViolation")
@@ -161,6 +226,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsServiceConnectionLeakedViolation = env.NewGlobalRef(&c.Object)
+
+		midServiceConnectionLeakedViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceConnectionLeakedViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -173,6 +245,13 @@ func doInit(env *jni.Env) error {
 		clsInstanceCountViolation = env.NewGlobalRef(&c.Object)
 
 		midInstanceCountViolationGetNumberOfInstances, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstanceCountViolation)), "getNumberOfInstances", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInstanceCountViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstanceCountViolation)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -193,6 +272,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midIncorrectContextUseViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIncorrectContextUseViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/WebViewMethodCalledOnWrongThreadViolation")
@@ -202,6 +288,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsWebViewMethodCalledOnWrongThreadViolation = env.NewGlobalRef(&c.Object)
+
+		midWebViewMethodCalledOnWrongThreadViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewMethodCalledOnWrongThreadViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -221,6 +314,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midViolationSetStackTrace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViolation)), "setStackTrace", "([Ljava/lang/StackTraceElement;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViolation)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -248,6 +348,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUnsafeIntentLaunchViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnsafeIntentLaunchViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/ContentUriWithoutPermissionViolation")
@@ -257,6 +364,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContentUriWithoutPermissionViolation = env.NewGlobalRef(&c.Object)
+
+		midContentUriWithoutPermissionViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentUriWithoutPermissionViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -268,6 +382,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUnbufferedIoViolation = env.NewGlobalRef(&c.Object)
 
+		midUnbufferedIoViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnbufferedIoViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/CleartextNetworkViolation")
@@ -277,6 +398,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCleartextNetworkViolation = env.NewGlobalRef(&c.Object)
+
+		midCleartextNetworkViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCleartextNetworkViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -288,6 +416,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsImplicitDirectBootViolation = env.NewGlobalRef(&c.Object)
 
+		midImplicitDirectBootViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImplicitDirectBootViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/UntaggedSocketViolation")
@@ -297,6 +432,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUntaggedSocketViolation = env.NewGlobalRef(&c.Object)
+
+		midUntaggedSocketViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUntaggedSocketViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -308,6 +450,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsResourceMismatchViolation = env.NewGlobalRef(&c.Object)
 
+		midResourceMismatchViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResourceMismatchViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/FileUriExposedViolation")
@@ -317,6 +466,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsFileUriExposedViolation = env.NewGlobalRef(&c.Object)
+
+		midFileUriExposedViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileUriExposedViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -328,6 +484,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsCredentialProtectedWhileLockedViolation = env.NewGlobalRef(&c.Object)
 
+		midCredentialProtectedWhileLockedViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialProtectedWhileLockedViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/IntentReceiverLeakedViolation")
@@ -337,6 +500,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsIntentReceiverLeakedViolation = env.NewGlobalRef(&c.Object)
+
+		midIntentReceiverLeakedViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntentReceiverLeakedViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -348,6 +518,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsCustomViolation = env.NewGlobalRef(&c.Object)
 
+		midCustomViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCustomViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/DiskReadViolation")
@@ -357,6 +534,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDiskReadViolation = env.NewGlobalRef(&c.Object)
+
+		midDiskReadViolationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDiskReadViolation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

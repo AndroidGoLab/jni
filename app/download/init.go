@@ -32,12 +32,14 @@ var (
 	midManagerOpenDownloadedFile               jni.MethodID
 	midManagerQuery                            jni.MethodID
 	midManagerRemove                           jni.MethodID
+	midManagerToString                         jni.MethodID
 	midManagerGetMaxBytesOverMobile            jni.MethodID
 	midManagerGetRecommendedMaxBytesOverMobile jni.MethodID
 
 	clsManagerQuery                  *jni.GlobalRef
 	midManagerQuerySetFilterById     jni.MethodID
 	midManagerQuerySetFilterByStatus jni.MethodID
+	midManagerQueryToString          jni.MethodID
 
 	clsManagerRequest                                  *jni.GlobalRef
 	midManagerRequestAddRequestHeader                  jni.MethodID
@@ -56,6 +58,7 @@ var (
 	midManagerRequestSetShowRunningNotification        jni.MethodID
 	midManagerRequestSetTitle                          jni.MethodID
 	midManagerRequestSetVisibleInDownloadsUi           jni.MethodID
+	midManagerRequestToString                          jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -140,6 +143,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midManagerGetMaxBytesOverMobile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMaxBytesOverMobile", "(Landroid/content/Context;)Ljava/lang/Long;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -172,6 +182,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerQuerySetFilterByStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerQuery)), "setFilterByStatus", "(I)Landroid/app/DownloadManager$Query;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerQueryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerQuery)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -294,6 +311,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerRequestSetVisibleInDownloadsUi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setVisibleInDownloadsUi", "(Z)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

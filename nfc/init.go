@@ -23,8 +23,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsTagLostException     *jni.GlobalRef
-	midTagLostExceptionCtor jni.MethodID
+	clsTagLostException         *jni.GlobalRef
+	midTagLostExceptionCtor     jni.MethodID
+	midTagLostExceptionToString jni.MethodID
 
 	clsNdefRecord                        *jni.GlobalRef
 	midNdefRecordCtor                    jni.MethodID
@@ -75,10 +76,12 @@ var (
 	midNdefMessageToString           jni.MethodID
 	midNdefMessageWriteToParcel      jni.MethodID
 
-	clsEvent *jni.GlobalRef
+	clsEvent         *jni.GlobalRef
+	midEventToString jni.MethodID
 
 	clsManager                  *jni.GlobalRef
 	midManagerGetDefaultAdapter jni.MethodID
+	midManagerToString          jni.MethodID
 
 	clsNdef                     *jni.GlobalRef
 	midNdefCanMakeReadOnly      jni.MethodID
@@ -93,6 +96,7 @@ var (
 	midNdefIsWritable           jni.MethodID
 	midNdefMakeReadOnly         jni.MethodID
 	midNdefWriteNdefMessage     jni.MethodID
+	midNdefToString             jni.MethodID
 	midNdefGet                  jni.MethodID
 
 	clsAntennaInfo                        *jni.GlobalRef
@@ -103,6 +107,7 @@ var (
 	midAntennaInfoGetDeviceWidth          jni.MethodID
 	midAntennaInfoIsDeviceFoldable        jni.MethodID
 	midAntennaInfoWriteToParcel           jni.MethodID
+	midAntennaInfoToString                jni.MethodID
 
 	clsIsoDep                              *jni.GlobalRef
 	midIsoDepClose                         jni.MethodID
@@ -116,6 +121,7 @@ var (
 	midIsoDepIsExtendedLengthApduSupported jni.MethodID
 	midIsoDepSetTimeout                    jni.MethodID
 	midIsoDepTransceive                    jni.MethodID
+	midIsoDepToString                      jni.MethodID
 	midIsoDepGet                           jni.MethodID
 
 	clsAdapter                                  *jni.GlobalRef
@@ -138,25 +144,32 @@ var (
 	midAdapterResetDiscoveryTechnology          jni.MethodID
 	midAdapterSetDiscoveryTechnology            jni.MethodID
 	midAdapterSetObserveModeEnabled             jni.MethodID
+	midAdapterToString                          jni.MethodID
 	midAdapterGetDefaultAdapter                 jni.MethodID
 
 	clsAdapterCreateBeamUrisCallback               *jni.GlobalRef
 	midAdapterCreateBeamUrisCallbackCreateBeamUris jni.MethodID
+	midAdapterCreateBeamUrisCallbackToString       jni.MethodID
 
 	clsAdapterCreateNdefMessageCallback                  *jni.GlobalRef
 	midAdapterCreateNdefMessageCallbackCreateNdefMessage jni.MethodID
+	midAdapterCreateNdefMessageCallbackToString          jni.MethodID
 
 	clsAdapterOnNdefPushCompleteCallback                   *jni.GlobalRef
 	midAdapterOnNdefPushCompleteCallbackOnNdefPushComplete jni.MethodID
+	midAdapterOnNdefPushCompleteCallbackToString           jni.MethodID
 
 	clsAdapterOnTagRemovedListener             *jni.GlobalRef
 	midAdapterOnTagRemovedListenerOnTagRemoved jni.MethodID
+	midAdapterOnTagRemovedListenerToString     jni.MethodID
 
 	clsAdapterReaderCallback                *jni.GlobalRef
 	midAdapterReaderCallbackOnTagDiscovered jni.MethodID
+	midAdapterReaderCallbackToString        jni.MethodID
 
-	clsFormatException     *jni.GlobalRef
-	midFormatExceptionCtor jni.MethodID
+	clsFormatException         *jni.GlobalRef
+	midFormatExceptionCtor     jni.MethodID
+	midFormatExceptionToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -186,6 +199,13 @@ func doInit(env *jni.Env) error {
 		clsTagLostException = env.NewGlobalRef(&c.Object)
 		midTagLostExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTagLostException)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midTagLostExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTagLostException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -517,6 +537,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsEvent = env.NewGlobalRef(&c.Object)
 
+		midEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/nfc/NfcManager")
@@ -528,6 +555,13 @@ func doInit(env *jni.Env) error {
 		clsManager = env.NewGlobalRef(&c.Object)
 
 		midManagerGetDefaultAdapter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultAdapter", "()Landroid/nfc/NfcAdapter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -628,6 +662,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNdefToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNdef)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midNdefGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNdef)), "get", "(Landroid/nfc/Tag;)Landroid/nfc/tech/Ndef;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -685,6 +726,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAntennaInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAntennaInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAntennaInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAntennaInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -772,6 +820,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midIsoDepTransceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsoDep)), "transceive", "([B)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsoDepToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsoDep)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -928,6 +983,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdapterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midAdapterGetDefaultAdapter, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdapter)), "getDefaultAdapter", "(Landroid/content/Context;)Landroid/nfc/NfcAdapter;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -952,6 +1014,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdapterCreateBeamUrisCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapterCreateBeamUrisCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/nfc/NfcAdapter$CreateNdefMessageCallback")
@@ -963,6 +1032,13 @@ func doInit(env *jni.Env) error {
 		clsAdapterCreateNdefMessageCallback = env.NewGlobalRef(&c.Object)
 
 		midAdapterCreateNdefMessageCallbackCreateNdefMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapterCreateNdefMessageCallback)), "createNdefMessage", "(Landroid/nfc/NfcEvent;)Landroid/nfc/NdefMessage;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdapterCreateNdefMessageCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapterCreateNdefMessageCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -986,6 +1062,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdapterOnNdefPushCompleteCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapterOnNdefPushCompleteCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/nfc/NfcAdapter$OnTagRemovedListener")
@@ -997,6 +1080,13 @@ func doInit(env *jni.Env) error {
 		clsAdapterOnTagRemovedListener = env.NewGlobalRef(&c.Object)
 
 		midAdapterOnTagRemovedListenerOnTagRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapterOnTagRemovedListener)), "onTagRemoved", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdapterOnTagRemovedListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapterOnTagRemovedListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1020,6 +1110,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAdapterReaderCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdapterReaderCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/nfc/FormatException")
@@ -1031,6 +1128,13 @@ func doInit(env *jni.Env) error {
 		clsFormatException = env.NewGlobalRef(&c.Object)
 		midFormatExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFormatException)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midFormatExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFormatException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

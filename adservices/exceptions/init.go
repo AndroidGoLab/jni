@@ -23,8 +23,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAdServicesException     *jni.GlobalRef
-	midAdServicesExceptionCtor jni.MethodID
+	clsAdServicesException         *jni.GlobalRef
+	midAdServicesExceptionCtor     jni.MethodID
+	midAdServicesExceptionToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -54,6 +55,13 @@ func doInit(env *jni.Env) error {
 		clsAdServicesException = env.NewGlobalRef(&c.Object)
 		midAdServicesExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdServicesException)), "<init>", "(Ljava/lang/String;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midAdServicesExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdServicesException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

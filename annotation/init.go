@@ -23,11 +23,13 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsTargetApi      *jni.GlobalRef
-	midTargetApiValue jni.MethodID
+	clsTargetApi         *jni.GlobalRef
+	midTargetApiValue    jni.MethodID
+	midTargetApiToString jni.MethodID
 
-	clsSuppressLint      *jni.GlobalRef
-	midSuppressLintValue jni.MethodID
+	clsSuppressLint         *jni.GlobalRef
+	midSuppressLintValue    jni.MethodID
+	midSuppressLintToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -63,6 +65,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTargetApiToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTargetApi)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/annotation/SuppressLint")
@@ -74,6 +83,13 @@ func doInit(env *jni.Env) error {
 		clsSuppressLint = env.NewGlobalRef(&c.Object)
 
 		midSuppressLintValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuppressLint)), "value", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSuppressLintToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuppressLint)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

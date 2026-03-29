@@ -28,6 +28,7 @@ var (
 	midRecordingSessionEquals       jni.MethodID
 	midRecordingSessionGetSessionId jni.MethodID
 	midRecordingSessionHashCode     jni.MethodID
+	midRecordingSessionToString     jni.MethodID
 
 	clsEditingEndedEvent                          *jni.GlobalRef
 	midEditingEndedEventDescribeContents          jni.MethodID
@@ -57,6 +58,7 @@ var (
 	midEditingEndedEventBuilderSetMuxerName              jni.MethodID
 	midEditingEndedEventBuilderSetOutputMediaItemInfo    jni.MethodID
 	midEditingEndedEventBuilderSetTimeSinceCreatedMillis jni.MethodID
+	midEditingEndedEventBuilderToString                  jni.MethodID
 
 	clsPlaybackStateEvent                          *jni.GlobalRef
 	midPlaybackStateEventDescribeContents          jni.MethodID
@@ -66,12 +68,14 @@ var (
 	midPlaybackStateEventGetTimeSinceCreatedMillis jni.MethodID
 	midPlaybackStateEventHashCode                  jni.MethodID
 	midPlaybackStateEventWriteToParcel             jni.MethodID
+	midPlaybackStateEventToString                  jni.MethodID
 
 	clsPlaybackStateEventBuilder                          *jni.GlobalRef
 	midPlaybackStateEventBuilderBuild                     jni.MethodID
 	midPlaybackStateEventBuilderSetMetricsBundle          jni.MethodID
 	midPlaybackStateEventBuilderSetState                  jni.MethodID
 	midPlaybackStateEventBuilderSetTimeSinceCreatedMillis jni.MethodID
+	midPlaybackStateEventBuilderToString                  jni.MethodID
 
 	clsMediaMetricsManager                         *jni.GlobalRef
 	midMediaMetricsManagerCreateBundleSession      jni.MethodID
@@ -80,6 +84,7 @@ var (
 	midMediaMetricsManagerCreateRecordingSession   jni.MethodID
 	midMediaMetricsManagerCreateTranscodingSession jni.MethodID
 	midMediaMetricsManagerReleaseSessionId         jni.MethodID
+	midMediaMetricsManagerToString                 jni.MethodID
 
 	clsTrackChangeEvent                          *jni.GlobalRef
 	midTrackChangeEventDescribeContents          jni.MethodID
@@ -121,6 +126,7 @@ var (
 	midTrackChangeEventBuilderSetTrackState             jni.MethodID
 	midTrackChangeEventBuilderSetVideoFrameRate         jni.MethodID
 	midTrackChangeEventBuilderSetWidth                  jni.MethodID
+	midTrackChangeEventBuilderToString                  jni.MethodID
 
 	clsPlaybackMetrics                                 *jni.GlobalRef
 	midPlaybackMetricsDescribeContents                 jni.MethodID
@@ -165,6 +171,7 @@ var (
 	midPlaybackMetricsBuilderSetStreamType                    jni.MethodID
 	midPlaybackMetricsBuilderSetVideoFramesDropped            jni.MethodID
 	midPlaybackMetricsBuilderSetVideoFramesPlayed             jni.MethodID
+	midPlaybackMetricsBuilderToString                         jni.MethodID
 
 	clsPlaybackErrorEvent                          *jni.GlobalRef
 	midPlaybackErrorEventDescribeContents          jni.MethodID
@@ -184,6 +191,7 @@ var (
 	midPlaybackErrorEventBuilderSetMetricsBundle          jni.MethodID
 	midPlaybackErrorEventBuilderSetSubErrorCode           jni.MethodID
 	midPlaybackErrorEventBuilderSetTimeSinceCreatedMillis jni.MethodID
+	midPlaybackErrorEventBuilderToString                  jni.MethodID
 
 	clsNetworkEvent                          *jni.GlobalRef
 	midNetworkEventDescribeContents          jni.MethodID
@@ -200,12 +208,14 @@ var (
 	midNetworkEventBuilderSetMetricsBundle          jni.MethodID
 	midNetworkEventBuilderSetNetworkType            jni.MethodID
 	midNetworkEventBuilderSetTimeSinceCreatedMillis jni.MethodID
+	midNetworkEventBuilderToString                  jni.MethodID
 
 	clsTranscodingSession             *jni.GlobalRef
 	midTranscodingSessionClose        jni.MethodID
 	midTranscodingSessionEquals       jni.MethodID
 	midTranscodingSessionGetSessionId jni.MethodID
 	midTranscodingSessionHashCode     jni.MethodID
+	midTranscodingSessionToString     jni.MethodID
 
 	clsLogSessionId            *jni.GlobalRef
 	midLogSessionIdEquals      jni.MethodID
@@ -250,6 +260,7 @@ var (
 	midMediaItemInfoBuilderSetVideoFrameRate     jni.MethodID
 	midMediaItemInfoBuilderSetVideoSampleCount   jni.MethodID
 	midMediaItemInfoBuilderSetVideoSize          jni.MethodID
+	midMediaItemInfoBuilderToString              jni.MethodID
 
 	clsBundleSession                    *jni.GlobalRef
 	midBundleSessionClose               jni.MethodID
@@ -257,6 +268,7 @@ var (
 	midBundleSessionGetSessionId        jni.MethodID
 	midBundleSessionHashCode            jni.MethodID
 	midBundleSessionReportBundleMetrics jni.MethodID
+	midBundleSessionToString            jni.MethodID
 
 	clsPlaybackSession                         *jni.GlobalRef
 	midPlaybackSessionClose                    jni.MethodID
@@ -268,6 +280,7 @@ var (
 	midPlaybackSessionReportPlaybackMetrics    jni.MethodID
 	midPlaybackSessionReportPlaybackStateEvent jni.MethodID
 	midPlaybackSessionReportTrackChangeEvent   jni.MethodID
+	midPlaybackSessionToString                 jni.MethodID
 
 	clsEditingSession                        *jni.GlobalRef
 	midEditingSessionClose                   jni.MethodID
@@ -275,10 +288,12 @@ var (
 	midEditingSessionGetSessionId            jni.MethodID
 	midEditingSessionHashCode                jni.MethodID
 	midEditingSessionReportEditingEndedEvent jni.MethodID
+	midEditingSessionToString                jni.MethodID
 
 	clsEvent                          *jni.GlobalRef
 	midEventGetMetricsBundle          jni.MethodID
 	midEventGetTimeSinceCreatedMillis jni.MethodID
+	midEventToString                  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -329,6 +344,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRecordingSessionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecordingSession)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRecordingSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecordingSession)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -530,6 +552,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEditingEndedEventBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditingEndedEventBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/metrics/PlaybackStateEvent")
@@ -589,6 +618,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlaybackStateEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlaybackStateEvent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/metrics/PlaybackStateEvent$Builder")
@@ -621,6 +657,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPlaybackStateEventBuilderSetTimeSinceCreatedMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlaybackStateEventBuilder)), "setTimeSinceCreatedMillis", "(J)Landroid/media/metrics/PlaybackStateEvent$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPlaybackStateEventBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlaybackStateEventBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -673,6 +716,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMediaMetricsManagerReleaseSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaMetricsManager)), "releaseSessionId", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaMetricsManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaMetricsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -952,6 +1002,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTrackChangeEventBuilderSetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrackChangeEventBuilder)), "setWidth", "(I)Landroid/media/metrics/TrackChangeEvent$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrackChangeEventBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrackChangeEventBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1258,6 +1315,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlaybackMetricsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlaybackMetricsBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/metrics/PlaybackErrorEvent")
@@ -1383,6 +1447,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlaybackErrorEventBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlaybackErrorEventBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/metrics/NetworkEvent")
@@ -1487,6 +1558,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midNetworkEventBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkEventBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/metrics/TranscodingSession")
@@ -1519,6 +1597,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTranscodingSessionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTranscodingSession)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTranscodingSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTranscodingSession)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1821,6 +1906,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaItemInfoBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaItemInfoBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/metrics/BundleSession")
@@ -1860,6 +1952,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBundleSessionReportBundleMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundleSession)), "reportBundleMetrics", "(Landroid/os/PersistableBundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBundleSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBundleSession)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1939,6 +2038,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPlaybackSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlaybackSession)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/metrics/EditingSession")
@@ -1984,6 +2090,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEditingSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditingSession)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/metrics/Event")
@@ -2002,6 +2115,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midEventGetTimeSinceCreatedMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getTimeSinceCreatedMillis", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

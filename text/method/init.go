@@ -27,6 +27,7 @@ var (
 	midQwertyKeyListenerCtor                       jni.MethodID
 	midQwertyKeyListenerGetInputType               jni.MethodID
 	midQwertyKeyListenerOnKeyDown                  jni.MethodID
+	midQwertyKeyListenerToString                   jni.MethodID
 	midQwertyKeyListenerGetInstance                jni.MethodID
 	midQwertyKeyListenerGetInstanceForFullKeyboard jni.MethodID
 	midQwertyKeyListenerMarkAsReplaced             jni.MethodID
@@ -44,30 +45,36 @@ var (
 	midBaseMovementMethodOnTouchEvent         jni.MethodID
 	midBaseMovementMethodOnTrackballEvent     jni.MethodID
 	midBaseMovementMethodPreviousParagraph    jni.MethodID
+	midBaseMovementMethodToString             jni.MethodID
 
 	clsSingleLineTransformationMethod            *jni.GlobalRef
 	midSingleLineTransformationMethodCtor        jni.MethodID
+	midSingleLineTransformationMethodToString    jni.MethodID
 	midSingleLineTransformationMethodGetInstance jni.MethodID
 
 	clsReplacementTransformationMethod                  *jni.GlobalRef
 	midReplacementTransformationMethodGetTransformation jni.MethodID
 	midReplacementTransformationMethodOnFocusChanged    jni.MethodID
+	midReplacementTransformationMethodToString          jni.MethodID
 
 	clsBaseKeyListener              *jni.GlobalRef
 	midBaseKeyListenerBackspace     jni.MethodID
 	midBaseKeyListenerForwardDelete jni.MethodID
 	midBaseKeyListenerOnKeyDown     jni.MethodID
 	midBaseKeyListenerOnKeyOther    jni.MethodID
+	midBaseKeyListenerToString      jni.MethodID
 
 	clsTransformationMethod                  *jni.GlobalRef
 	midTransformationMethodGetTransformation jni.MethodID
 	midTransformationMethodOnFocusChanged    jni.MethodID
+	midTransformationMethodToString          jni.MethodID
 
 	clsMetaKeyKeyListener                           *jni.GlobalRef
 	midMetaKeyKeyListenerClearMetaKeyState3_1       jni.MethodID
 	midMetaKeyKeyListenerClearMetaKeyState2_2       jni.MethodID
 	midMetaKeyKeyListenerOnKeyDown                  jni.MethodID
 	midMetaKeyKeyListenerOnKeyUp                    jni.MethodID
+	midMetaKeyKeyListenerToString                   jni.MethodID
 	midMetaKeyKeyListenerAdjustMetaAfterKeypress1   jni.MethodID
 	midMetaKeyKeyListenerAdjustMetaAfterKeypress1_1 jni.MethodID
 	midMetaKeyKeyListenerClearMetaKeyState2         jni.MethodID
@@ -91,6 +98,7 @@ var (
 	midPasswordTransformationMethodGetTransformation jni.MethodID
 	midPasswordTransformationMethodOnFocusChanged    jni.MethodID
 	midPasswordTransformationMethodOnTextChanged     jni.MethodID
+	midPasswordTransformationMethodToString          jni.MethodID
 	midPasswordTransformationMethodGetInstance       jni.MethodID
 
 	clsArrowKeyMovementMethod                     *jni.GlobalRef
@@ -101,11 +109,13 @@ var (
 	midArrowKeyMovementMethodOnTakeFocus          jni.MethodID
 	midArrowKeyMovementMethodOnTouchEvent         jni.MethodID
 	midArrowKeyMovementMethodPreviousParagraph    jni.MethodID
+	midArrowKeyMovementMethodToString             jni.MethodID
 	midArrowKeyMovementMethodGetInstance          jni.MethodID
 
 	clsDateTimeKeyListener               *jni.GlobalRef
 	midDateTimeKeyListenerCtor           jni.MethodID
 	midDateTimeKeyListenerGetInputType   jni.MethodID
+	midDateTimeKeyListenerToString       jni.MethodID
 	midDateTimeKeyListenerGetInstance0   jni.MethodID
 	midDateTimeKeyListenerGetInstance1_1 jni.MethodID
 
@@ -113,17 +123,20 @@ var (
 	midScrollingMovementMethodCtor         jni.MethodID
 	midScrollingMovementMethodOnTakeFocus  jni.MethodID
 	midScrollingMovementMethodOnTouchEvent jni.MethodID
+	midScrollingMovementMethodToString     jni.MethodID
 	midScrollingMovementMethodGetInstance  jni.MethodID
 
 	clsTimeKeyListener               *jni.GlobalRef
 	midTimeKeyListenerCtor           jni.MethodID
 	midTimeKeyListenerGetInputType   jni.MethodID
+	midTimeKeyListenerToString       jni.MethodID
 	midTimeKeyListenerGetInstance0   jni.MethodID
 	midTimeKeyListenerGetInstance1_1 jni.MethodID
 
 	clsNumberKeyListener          *jni.GlobalRef
 	midNumberKeyListenerFilter    jni.MethodID
 	midNumberKeyListenerOnKeyDown jni.MethodID
+	midNumberKeyListenerToString  jni.MethodID
 
 	clsMovementMethod                     *jni.GlobalRef
 	midMovementMethodCanSelectArbitrarily jni.MethodID
@@ -135,6 +148,7 @@ var (
 	midMovementMethodOnTakeFocus          jni.MethodID
 	midMovementMethodOnTouchEvent         jni.MethodID
 	midMovementMethodOnTrackballEvent     jni.MethodID
+	midMovementMethodToString             jni.MethodID
 
 	clsKeyListener                  *jni.GlobalRef
 	midKeyListenerClearMetaKeyState jni.MethodID
@@ -142,11 +156,13 @@ var (
 	midKeyListenerOnKeyDown         jni.MethodID
 	midKeyListenerOnKeyOther        jni.MethodID
 	midKeyListenerOnKeyUp           jni.MethodID
+	midKeyListenerToString          jni.MethodID
 
 	clsCharacterPickerDialog            *jni.GlobalRef
 	midCharacterPickerDialogCtor        jni.MethodID
 	midCharacterPickerDialogOnClick     jni.MethodID
 	midCharacterPickerDialogOnItemClick jni.MethodID
+	midCharacterPickerDialogToString    jni.MethodID
 
 	clsTextKeyListener               *jni.GlobalRef
 	midTextKeyListenerCtor           jni.MethodID
@@ -158,24 +174,28 @@ var (
 	midTextKeyListenerOnSpanChanged  jni.MethodID
 	midTextKeyListenerOnSpanRemoved  jni.MethodID
 	midTextKeyListenerRelease        jni.MethodID
+	midTextKeyListenerToString       jni.MethodID
 	midTextKeyListenerClear          jni.MethodID
 	midTextKeyListenerGetInstance0   jni.MethodID
 	midTextKeyListenerGetInstance2_1 jni.MethodID
 	midTextKeyListenerShouldCap      jni.MethodID
 
-	clsTextKeyListenerCapitalize        *jni.GlobalRef
-	midTextKeyListenerCapitalizeValues  jni.MethodID
-	midTextKeyListenerCapitalizeValueOf jni.MethodID
+	clsTextKeyListenerCapitalize         *jni.GlobalRef
+	midTextKeyListenerCapitalizeToString jni.MethodID
+	midTextKeyListenerCapitalizeValues   jni.MethodID
+	midTextKeyListenerCapitalizeValueOf  jni.MethodID
 
 	clsDateKeyListener               *jni.GlobalRef
 	midDateKeyListenerCtor           jni.MethodID
 	midDateKeyListenerGetInputType   jni.MethodID
+	midDateKeyListenerToString       jni.MethodID
 	midDateKeyListenerGetInstance0   jni.MethodID
 	midDateKeyListenerGetInstance1_1 jni.MethodID
 
 	clsDialerKeyListener             *jni.GlobalRef
 	midDialerKeyListenerCtor         jni.MethodID
 	midDialerKeyListenerGetInputType jni.MethodID
+	midDialerKeyListenerToString     jni.MethodID
 	midDialerKeyListenerGetInstance  jni.MethodID
 
 	clsMultiTapKeyListener              *jni.GlobalRef
@@ -185,9 +205,11 @@ var (
 	midMultiTapKeyListenerOnSpanAdded   jni.MethodID
 	midMultiTapKeyListenerOnSpanChanged jni.MethodID
 	midMultiTapKeyListenerOnSpanRemoved jni.MethodID
+	midMultiTapKeyListenerToString      jni.MethodID
 	midMultiTapKeyListenerGetInstance   jni.MethodID
 
 	clsTouch                  *jni.GlobalRef
+	midTouchToString          jni.MethodID
 	midTouchGetInitialScrollX jni.MethodID
 	midTouchGetInitialScrollY jni.MethodID
 	midTouchOnTouchEvent      jni.MethodID
@@ -197,6 +219,7 @@ var (
 	midDigitsKeyListenerCtor           jni.MethodID
 	midDigitsKeyListenerFilter         jni.MethodID
 	midDigitsKeyListenerGetInputType   jni.MethodID
+	midDigitsKeyListenerToString       jni.MethodID
 	midDigitsKeyListenerGetInstance0   jni.MethodID
 	midDigitsKeyListenerGetInstance2_1 jni.MethodID
 	midDigitsKeyListenerGetInstance1_2 jni.MethodID
@@ -209,10 +232,12 @@ var (
 	midLinkMovementMethodInitialize           jni.MethodID
 	midLinkMovementMethodOnTakeFocus          jni.MethodID
 	midLinkMovementMethodOnTouchEvent         jni.MethodID
+	midLinkMovementMethodToString             jni.MethodID
 	midLinkMovementMethodGetInstance          jni.MethodID
 
 	clsHideReturnsTransformationMethod            *jni.GlobalRef
 	midHideReturnsTransformationMethodCtor        jni.MethodID
+	midHideReturnsTransformationMethodToString    jni.MethodID
 	midHideReturnsTransformationMethodGetInstance jni.MethodID
 )
 
@@ -254,6 +279,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midQwertyKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midQwertyKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -372,6 +404,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBaseMovementMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/SingleLineTransformationMethod")
@@ -383,6 +422,13 @@ func doInit(env *jni.Env) error {
 		clsSingleLineTransformationMethod = env.NewGlobalRef(&c.Object)
 		midSingleLineTransformationMethodCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSingleLineTransformationMethod)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midSingleLineTransformationMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSingleLineTransformationMethod)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -411,6 +457,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midReplacementTransformationMethodOnFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementTransformationMethod)), "onFocusChanged", "(Landroid/view/View;Ljava/lang/CharSequence;ZILandroid/graphics/Rect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReplacementTransformationMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementTransformationMethod)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -455,6 +508,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBaseKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseKeyListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/TransformationMethod")
@@ -473,6 +533,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTransformationMethodOnFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransformationMethod)), "onFocusChanged", "(Landroid/view/View;Ljava/lang/CharSequence;ZILandroid/graphics/Rect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransformationMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransformationMethod)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -511,6 +578,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMetaKeyKeyListenerOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "onKeyUp", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMetaKeyKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -671,6 +745,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPasswordTransformationMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midPasswordTransformationMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "getInstance", "()Landroid/text/method/PasswordTransformationMethod;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -734,6 +815,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midArrowKeyMovementMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midArrowKeyMovementMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "getInstance", "()Landroid/text/method/MovementMethod;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -756,6 +844,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDateTimeKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateTimeKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateTimeKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateTimeKeyListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -804,6 +899,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midScrollingMovementMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midScrollingMovementMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), "getInstance", "()Landroid/text/method/MovementMethod;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -826,6 +928,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTimeKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTimeKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeKeyListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -864,6 +973,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNumberKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumberKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNumberKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumberKeyListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -943,6 +1059,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMovementMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/KeyListener")
@@ -988,6 +1111,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/CharacterPickerDialog")
@@ -1010,6 +1140,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCharacterPickerDialogOnItemClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterPickerDialog)), "onItemClick", "(Landroid/widget/AdapterView;Landroid/view/View;IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCharacterPickerDialogToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterPickerDialog)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1086,6 +1223,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTextKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midTextKeyListenerClear, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "clear", "(Landroid/text/Editable;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1124,6 +1268,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsTextKeyListenerCapitalize = env.NewGlobalRef(&c.Object)
 
+		midTextKeyListenerCapitalizeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListenerCapitalize)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midTextKeyListenerCapitalizeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListenerCapitalize)), "values", "()[Landroid/text/method/TextKeyListener$Capitalize;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1159,6 +1310,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDateKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midDateKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), "getInstance", "()Landroid/text/method/DateKeyListener;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1188,6 +1346,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDialerKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialerKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialerKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialerKeyListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1250,6 +1415,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMultiTapKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midMultiTapKeyListenerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "getInstance", "(ZLandroid/text/method/TextKeyListener$Capitalize;)Landroid/text/method/MultiTapKeyListener;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1266,6 +1438,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTouch = env.NewGlobalRef(&c.Object)
+
+		midTouchToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midTouchGetInitialScrollX, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "getInitialScrollX", "(Landroid/widget/TextView;Landroid/text/Spannable;)I")
 		if err != nil {
@@ -1317,6 +1496,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDigitsKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDigitsKeyListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1400,6 +1586,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midLinkMovementMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midLinkMovementMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "getInstance", "()Landroid/text/method/MovementMethod;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1418,6 +1611,13 @@ func doInit(env *jni.Env) error {
 		clsHideReturnsTransformationMethod = env.NewGlobalRef(&c.Object)
 		midHideReturnsTransformationMethodCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHideReturnsTransformationMethod)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midHideReturnsTransformationMethodToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHideReturnsTransformationMethod)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

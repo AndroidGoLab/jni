@@ -125,3 +125,30 @@ func (m *SessionConfigEapSimConfig) HashCode() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.net.eap.EapSessionConfig$EapSimConfig.toString.
+func (m *SessionConfigEapSimConfig) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSessionConfigEapSimConfigToString == nil {
+			callErr = fmt.Errorf("android.net.eap.EapSessionConfig$EapSimConfig.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSessionConfigEapSimConfigToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

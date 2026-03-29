@@ -25,6 +25,7 @@ var (
 
 	clsResourcesProvider                  *jni.GlobalRef
 	midResourcesProviderClose             jni.MethodID
+	midResourcesProviderToString          jni.MethodID
 	midResourcesProviderEmpty             jni.MethodID
 	midResourcesProviderLoadFromApk1      jni.MethodID
 	midResourcesProviderLoadFromApk2_1    jni.MethodID
@@ -39,8 +40,10 @@ var (
 	midResourcesLoaderClearProviders jni.MethodID
 	midResourcesLoaderGetProviders   jni.MethodID
 	midResourcesLoaderRemoveProvider jni.MethodID
+	midResourcesLoaderToString       jni.MethodID
 
-	clsAssetsProvider *jni.GlobalRef
+	clsAssetsProvider         *jni.GlobalRef
+	midAssetsProviderToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -70,6 +73,13 @@ func doInit(env *jni.Env) error {
 		clsResourcesProvider = env.NewGlobalRef(&c.Object)
 
 		midResourcesProviderClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResourcesProvider)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResourcesProviderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResourcesProvider)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -167,6 +177,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midResourcesLoaderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResourcesLoader)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/res/loader/AssetsProvider")
@@ -176,6 +193,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAssetsProvider = env.NewGlobalRef(&c.Object)
+
+		midAssetsProviderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAssetsProvider)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

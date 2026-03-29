@@ -23,16 +23,20 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsUCharacterEnums *jni.GlobalRef
+	clsUCharacterEnums         *jni.GlobalRef
+	midUCharacterEnumsToString jni.MethodID
 
-	clsUCharacterEnumsECharacterCategory *jni.GlobalRef
+	clsUCharacterEnumsECharacterCategory         *jni.GlobalRef
+	midUCharacterEnumsECharacterCategoryToString jni.MethodID
 
-	clsUCharacterEnumsECharacterDirection *jni.GlobalRef
+	clsUCharacterEnumsECharacterDirection         *jni.GlobalRef
+	midUCharacterEnumsECharacterDirectionToString jni.MethodID
 
 	clsUCharacterCategory         *jni.GlobalRef
 	midUCharacterCategoryToString jni.MethodID
 
 	clsUScript                     *jni.GlobalRef
+	midUScriptToString             jni.MethodID
 	midUScriptBreaksBetweenLetters jni.MethodID
 	midUScriptGetCode1             jni.MethodID
 	midUScriptGetCode1_1           jni.MethodID
@@ -48,13 +52,16 @@ var (
 	midUScriptIsCased              jni.MethodID
 	midUScriptIsRightToLeft        jni.MethodID
 
-	clsUScriptScriptUsage        *jni.GlobalRef
-	midUScriptScriptUsageValues  jni.MethodID
-	midUScriptScriptUsageValueOf jni.MethodID
+	clsUScriptScriptUsage         *jni.GlobalRef
+	midUScriptScriptUsageToString jni.MethodID
+	midUScriptScriptUsageValues   jni.MethodID
+	midUScriptScriptUsageValueOf  jni.MethodID
 
-	clsUProperty *jni.GlobalRef
+	clsUProperty         *jni.GlobalRef
+	midUPropertyToString jni.MethodID
 
-	clsUPropertyNameChoice *jni.GlobalRef
+	clsUPropertyNameChoice         *jni.GlobalRef
+	midUPropertyNameChoiceToString jni.MethodID
 
 	clsUCharacterDirection         *jni.GlobalRef
 	midUCharacterDirectionToString jni.MethodID
@@ -165,39 +172,54 @@ var (
 	midUCharacterToUpperCase1_2           jni.MethodID
 	midUCharacterToUpperCase2_3           jni.MethodID
 
-	clsUCharacterBidiPairedBracketType *jni.GlobalRef
+	clsUCharacterBidiPairedBracketType         *jni.GlobalRef
+	midUCharacterBidiPairedBracketTypeToString jni.MethodID
 
-	clsUCharacterDecompositionType *jni.GlobalRef
+	clsUCharacterDecompositionType         *jni.GlobalRef
+	midUCharacterDecompositionTypeToString jni.MethodID
 
-	clsUCharacterEastAsianWidth *jni.GlobalRef
+	clsUCharacterEastAsianWidth         *jni.GlobalRef
+	midUCharacterEastAsianWidthToString jni.MethodID
 
-	clsUCharacterGraphemeClusterBreak *jni.GlobalRef
+	clsUCharacterGraphemeClusterBreak         *jni.GlobalRef
+	midUCharacterGraphemeClusterBreakToString jni.MethodID
 
-	clsUCharacterHangulSyllableType *jni.GlobalRef
+	clsUCharacterHangulSyllableType         *jni.GlobalRef
+	midUCharacterHangulSyllableTypeToString jni.MethodID
 
-	clsUCharacterIndicPositionalCategory *jni.GlobalRef
+	clsUCharacterIndicPositionalCategory         *jni.GlobalRef
+	midUCharacterIndicPositionalCategoryToString jni.MethodID
 
-	clsUCharacterIndicSyllabicCategory *jni.GlobalRef
+	clsUCharacterIndicSyllabicCategory         *jni.GlobalRef
+	midUCharacterIndicSyllabicCategoryToString jni.MethodID
 
-	clsUCharacterJoiningGroup *jni.GlobalRef
+	clsUCharacterJoiningGroup         *jni.GlobalRef
+	midUCharacterJoiningGroupToString jni.MethodID
 
-	clsUCharacterJoiningType *jni.GlobalRef
+	clsUCharacterJoiningType         *jni.GlobalRef
+	midUCharacterJoiningTypeToString jni.MethodID
 
-	clsUCharacterLineBreak *jni.GlobalRef
+	clsUCharacterLineBreak         *jni.GlobalRef
+	midUCharacterLineBreakToString jni.MethodID
 
-	clsUCharacterNumericType *jni.GlobalRef
+	clsUCharacterNumericType         *jni.GlobalRef
+	midUCharacterNumericTypeToString jni.MethodID
 
-	clsUCharacterSentenceBreak *jni.GlobalRef
+	clsUCharacterSentenceBreak         *jni.GlobalRef
+	midUCharacterSentenceBreakToString jni.MethodID
 
 	clsUCharacterUnicodeBlock            *jni.GlobalRef
 	midUCharacterUnicodeBlockGetID       jni.MethodID
+	midUCharacterUnicodeBlockToString    jni.MethodID
 	midUCharacterUnicodeBlockForName     jni.MethodID
 	midUCharacterUnicodeBlockGetInstance jni.MethodID
 	midUCharacterUnicodeBlockOf          jni.MethodID
 
-	clsUCharacterVerticalOrientation *jni.GlobalRef
+	clsUCharacterVerticalOrientation         *jni.GlobalRef
+	midUCharacterVerticalOrientationToString jni.MethodID
 
-	clsUCharacterWordBreak *jni.GlobalRef
+	clsUCharacterWordBreak         *jni.GlobalRef
+	midUCharacterWordBreakToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -226,6 +248,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUCharacterEnums = env.NewGlobalRef(&c.Object)
 
+		midUCharacterEnumsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterEnums)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UCharacterEnums$ECharacterCategory")
@@ -236,6 +265,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUCharacterEnumsECharacterCategory = env.NewGlobalRef(&c.Object)
 
+		midUCharacterEnumsECharacterCategoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterEnumsECharacterCategory)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UCharacterEnums$ECharacterDirection")
@@ -245,6 +281,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUCharacterEnumsECharacterDirection = env.NewGlobalRef(&c.Object)
+
+		midUCharacterEnumsECharacterDirectionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterEnumsECharacterDirection)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -272,6 +315,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUScript = env.NewGlobalRef(&c.Object)
+
+		midUScriptToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUScript)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midUScriptBreaksBetweenLetters, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUScript)), "breaksBetweenLetters", "(I)Z")
 		if err != nil {
@@ -381,6 +431,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUScriptScriptUsage = env.NewGlobalRef(&c.Object)
 
+		midUScriptScriptUsageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUScriptScriptUsage)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midUScriptScriptUsageValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUScriptScriptUsage)), "values", "()[Landroid/icu/lang/UScript$ScriptUsage;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -405,6 +462,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUProperty = env.NewGlobalRef(&c.Object)
 
+		midUPropertyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUProperty)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UProperty$NameChoice")
@@ -414,6 +478,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUPropertyNameChoice = env.NewGlobalRef(&c.Object)
+
+		midUPropertyNameChoiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUPropertyNameChoice)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1180,6 +1251,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUCharacterBidiPairedBracketType = env.NewGlobalRef(&c.Object)
 
+		midUCharacterBidiPairedBracketTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterBidiPairedBracketType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UCharacter$DecompositionType")
@@ -1189,6 +1267,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUCharacterDecompositionType = env.NewGlobalRef(&c.Object)
+
+		midUCharacterDecompositionTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterDecompositionType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1200,6 +1285,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUCharacterEastAsianWidth = env.NewGlobalRef(&c.Object)
 
+		midUCharacterEastAsianWidthToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterEastAsianWidth)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UCharacter$GraphemeClusterBreak")
@@ -1209,6 +1301,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUCharacterGraphemeClusterBreak = env.NewGlobalRef(&c.Object)
+
+		midUCharacterGraphemeClusterBreakToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterGraphemeClusterBreak)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1220,6 +1319,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUCharacterHangulSyllableType = env.NewGlobalRef(&c.Object)
 
+		midUCharacterHangulSyllableTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterHangulSyllableType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UCharacter$IndicPositionalCategory")
@@ -1229,6 +1335,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUCharacterIndicPositionalCategory = env.NewGlobalRef(&c.Object)
+
+		midUCharacterIndicPositionalCategoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterIndicPositionalCategory)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1240,6 +1353,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUCharacterIndicSyllabicCategory = env.NewGlobalRef(&c.Object)
 
+		midUCharacterIndicSyllabicCategoryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterIndicSyllabicCategory)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UCharacter$JoiningGroup")
@@ -1249,6 +1369,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUCharacterJoiningGroup = env.NewGlobalRef(&c.Object)
+
+		midUCharacterJoiningGroupToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterJoiningGroup)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1260,6 +1387,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUCharacterJoiningType = env.NewGlobalRef(&c.Object)
 
+		midUCharacterJoiningTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterJoiningType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UCharacter$LineBreak")
@@ -1269,6 +1403,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUCharacterLineBreak = env.NewGlobalRef(&c.Object)
+
+		midUCharacterLineBreakToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterLineBreak)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1280,6 +1421,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUCharacterNumericType = env.NewGlobalRef(&c.Object)
 
+		midUCharacterNumericTypeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterNumericType)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UCharacter$SentenceBreak")
@@ -1289,6 +1437,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUCharacterSentenceBreak = env.NewGlobalRef(&c.Object)
+
+		midUCharacterSentenceBreakToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterSentenceBreak)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1301,6 +1456,13 @@ func doInit(env *jni.Env) error {
 		clsUCharacterUnicodeBlock = env.NewGlobalRef(&c.Object)
 
 		midUCharacterUnicodeBlockGetID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterUnicodeBlock)), "getID", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUCharacterUnicodeBlockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterUnicodeBlock)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1338,6 +1500,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsUCharacterVerticalOrientation = env.NewGlobalRef(&c.Object)
 
+		midUCharacterVerticalOrientationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterVerticalOrientation)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/lang/UCharacter$WordBreak")
@@ -1347,6 +1516,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUCharacterWordBreak = env.NewGlobalRef(&c.Object)
+
+		midUCharacterWordBreakToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterWordBreak)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

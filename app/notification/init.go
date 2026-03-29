@@ -70,6 +70,7 @@ var (
 	midManagerSetNotificationPolicy               jni.MethodID
 	midManagerShouldHideSilentStatusBarIcons      jni.MethodID
 	midManagerUpdateAutomaticZenRule              jni.MethodID
+	midManagerToString                            jni.MethodID
 
 	clsStatusBarNotification                    *jni.GlobalRef
 	midStatusBarNotificationClone0              jni.MethodID
@@ -170,6 +171,7 @@ var (
 	midBigTextStyleBigText            jni.MethodID
 	midBigTextStyleSetBigContentTitle jni.MethodID
 	midBigTextStyleSetSummaryText     jni.MethodID
+	midBigTextStyleToString           jni.MethodID
 
 	clsBuilder                                         *jni.GlobalRef
 	midBuilderAddAction1                               jni.MethodID
@@ -244,6 +246,7 @@ var (
 	midBuilderSetVibrate                               jni.MethodID
 	midBuilderSetVisibility                            jni.MethodID
 	midBuilderSetWhen                                  jni.MethodID
+	midBuilderToString                                 jni.MethodID
 	midBuilderRecoverBuilder                           jni.MethodID
 )
 
@@ -589,6 +592,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerUpdateAutomaticZenRule, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "updateAutomaticZenRule", "(Ljava/lang/String;Landroid/app/AutomaticZenRule;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1279,6 +1289,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBigTextStyleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigTextStyle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/Notification$Builder")
@@ -1787,6 +1804,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBuilderSetWhen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "setWhen", "(J)Landroid/app/Notification$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

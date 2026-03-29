@@ -40,6 +40,7 @@ var (
 	midContentSetStructuredData     jni.MethodID
 	midContentSetWebUri             jni.MethodID
 	midContentWriteToParcel         jni.MethodID
+	midContentToString              jni.MethodID
 
 	clsStructure                        *jni.GlobalRef
 	midStructureCtor                    jni.MethodID
@@ -51,6 +52,7 @@ var (
 	midStructureGetWindowNodeCount      jni.MethodID
 	midStructureIsHomeActivity          jni.MethodID
 	midStructureWriteToParcel           jni.MethodID
+	midStructureToString                jni.MethodID
 
 	clsStructureViewNode                           *jni.GlobalRef
 	midStructureViewNodeGetAlpha                   jni.MethodID
@@ -112,6 +114,7 @@ var (
 	midStructureViewNodeIsLongClickable            jni.MethodID
 	midStructureViewNodeIsOpaque                   jni.MethodID
 	midStructureViewNodeIsSelected                 jni.MethodID
+	midStructureViewNodeToString                   jni.MethodID
 
 	clsStructureWindowNode                *jni.GlobalRef
 	midStructureWindowNodeGetDisplayId    jni.MethodID
@@ -121,6 +124,7 @@ var (
 	midStructureWindowNodeGetTitle        jni.MethodID
 	midStructureWindowNodeGetTop          jni.MethodID
 	midStructureWindowNodeGetWidth        jni.MethodID
+	midStructureWindowNodeToString        jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -258,6 +262,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/assist/AssistStructure")
@@ -322,6 +333,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStructureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStructureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -751,6 +769,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStructureViewNodeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/assist/AssistStructure$WindowNode")
@@ -804,6 +829,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStructureWindowNodeGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStructureWindowNodeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

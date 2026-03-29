@@ -23,8 +23,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsCharArrayBuffer     *jni.GlobalRef
-	midCharArrayBufferCtor jni.MethodID
+	clsCharArrayBuffer         *jni.GlobalRef
+	midCharArrayBufferCtor     jni.MethodID
+	midCharArrayBufferToString jni.MethodID
 
 	clsMatrixCursor               *jni.GlobalRef
 	midMatrixCursorCtor           jni.MethodID
@@ -41,13 +42,16 @@ var (
 	midMatrixCursorGetType        jni.MethodID
 	midMatrixCursorIsNull         jni.MethodID
 	midMatrixCursorNewRow         jni.MethodID
+	midMatrixCursorToString       jni.MethodID
 
-	clsMatrixCursorRowBuilder       *jni.GlobalRef
-	midMatrixCursorRowBuilderAdd1   jni.MethodID
-	midMatrixCursorRowBuilderAdd2_1 jni.MethodID
+	clsMatrixCursorRowBuilder         *jni.GlobalRef
+	midMatrixCursorRowBuilderAdd1     jni.MethodID
+	midMatrixCursorRowBuilderAdd2_1   jni.MethodID
+	midMatrixCursorRowBuilderToString jni.MethodID
 
-	clsSQLException     *jni.GlobalRef
-	midSQLExceptionCtor jni.MethodID
+	clsSQLException         *jni.GlobalRef
+	midSQLExceptionCtor     jni.MethodID
+	midSQLExceptionToString jni.MethodID
 
 	clsAbstractWindowedCursor                   *jni.GlobalRef
 	midAbstractWindowedCursorCopyStringToBuffer jni.MethodID
@@ -67,21 +71,26 @@ var (
 	midAbstractWindowedCursorIsNull             jni.MethodID
 	midAbstractWindowedCursorIsString           jni.MethodID
 	midAbstractWindowedCursorSetWindow          jni.MethodID
+	midAbstractWindowedCursorToString           jni.MethodID
 
 	clsCrossProcessCursor           *jni.GlobalRef
 	midCrossProcessCursorFillWindow jni.MethodID
 	midCrossProcessCursorGetWindow  jni.MethodID
 	midCrossProcessCursorOnMove     jni.MethodID
+	midCrossProcessCursorToString   jni.MethodID
 
 	clsDataSetObserver              *jni.GlobalRef
 	midDataSetObserverOnChanged     jni.MethodID
 	midDataSetObserverOnInvalidated jni.MethodID
+	midDataSetObserverToString      jni.MethodID
 
-	clsStaleDataException     *jni.GlobalRef
-	midStaleDataExceptionCtor jni.MethodID
+	clsStaleDataException         *jni.GlobalRef
+	midStaleDataExceptionCtor     jni.MethodID
+	midStaleDataExceptionToString jni.MethodID
 
 	clsUtils                                                         *jni.GlobalRef
 	midUtilsCtor                                                     jni.MethodID
+	midUtilsToString                                                 jni.MethodID
 	midUtilsAppendEscapedSQLString                                   jni.MethodID
 	midUtilsAppendSelectionArgs                                      jni.MethodID
 	midUtilsAppendValueToSql                                         jni.MethodID
@@ -146,12 +155,14 @@ var (
 	midUtilsInsertHelperPrepareForInsert  jni.MethodID
 	midUtilsInsertHelperPrepareForReplace jni.MethodID
 	midUtilsInsertHelperReplace           jni.MethodID
+	midUtilsInsertHelperToString          jni.MethodID
 
 	clsCrossProcessCursorWrapper           *jni.GlobalRef
 	midCrossProcessCursorWrapperCtor       jni.MethodID
 	midCrossProcessCursorWrapperFillWindow jni.MethodID
 	midCrossProcessCursorWrapperGetWindow  jni.MethodID
 	midCrossProcessCursorWrapperOnMove     jni.MethodID
+	midCrossProcessCursorWrapperToString   jni.MethodID
 
 	clsContentObserver                         *jni.GlobalRef
 	midContentObserverDeliverSelfNotifications jni.MethodID
@@ -161,10 +172,12 @@ var (
 	midContentObserverOnChange1                jni.MethodID
 	midContentObserverOnChange2_1              jni.MethodID
 	midContentObserverOnChange3_2              jni.MethodID
+	midContentObserverToString                 jni.MethodID
 
 	clsDefaultDatabaseErrorHandler             *jni.GlobalRef
 	midDefaultDatabaseErrorHandlerCtor         jni.MethodID
 	midDefaultDatabaseErrorHandlerOnCorruption jni.MethodID
+	midDefaultDatabaseErrorHandlerToString     jni.MethodID
 
 	clsContentObservable                    *jni.GlobalRef
 	midContentObservableCtor                jni.MethodID
@@ -173,6 +186,7 @@ var (
 	midContentObservableNotifyChange        jni.MethodID
 	midContentObservableRegisterObserver1   jni.MethodID
 	midContentObservableRegisterObserver1_1 jni.MethodID
+	midContentObservableToString            jni.MethodID
 
 	clsCursorWindow                   *jni.GlobalRef
 	midCursorWindowCtor               jni.MethodID
@@ -209,9 +223,11 @@ var (
 
 	clsErrorHandler             *jni.GlobalRef
 	midErrorHandlerOnCorruption jni.MethodID
+	midErrorHandlerToString     jni.MethodID
 
 	clsObservable              *jni.GlobalRef
 	midObservableUnregisterAll jni.MethodID
+	midObservableToString      jni.MethodID
 
 	clsMergeCursor                          *jni.GlobalRef
 	midMergeCursorCtor                      jni.MethodID
@@ -234,6 +250,7 @@ var (
 	midMergeCursorRequery                   jni.MethodID
 	midMergeCursorUnregisterContentObserver jni.MethodID
 	midMergeCursorUnregisterDataSetObserver jni.MethodID
+	midMergeCursorToString                  jni.MethodID
 
 	clsAbstractCursor                          *jni.GlobalRef
 	midAbstractCursorClose                     jni.MethodID
@@ -281,10 +298,12 @@ var (
 	midAbstractCursorSetNotificationUri        jni.MethodID
 	midAbstractCursorUnregisterContentObserver jni.MethodID
 	midAbstractCursorUnregisterDataSetObserver jni.MethodID
+	midAbstractCursorToString                  jni.MethodID
 
 	clsAbstractCursorSelfContentObserver                         *jni.GlobalRef
 	midAbstractCursorSelfContentObserverDeliverSelfNotifications jni.MethodID
 	midAbstractCursorSelfContentObserverOnChange                 jni.MethodID
+	midAbstractCursorSelfContentObserverToString                 jni.MethodID
 
 	clsCursorJoiner         *jni.GlobalRef
 	midCursorJoinerCtor     jni.MethodID
@@ -293,13 +312,16 @@ var (
 	midCursorJoinerNext0    jni.MethodID
 	midCursorJoinerRemove   jni.MethodID
 	midCursorJoinerNext0_1  jni.MethodID
+	midCursorJoinerToString jni.MethodID
 
-	clsCursorJoinerResult        *jni.GlobalRef
-	midCursorJoinerResultValues  jni.MethodID
-	midCursorJoinerResultValueOf jni.MethodID
+	clsCursorJoinerResult         *jni.GlobalRef
+	midCursorJoinerResultToString jni.MethodID
+	midCursorJoinerResultValues   jni.MethodID
+	midCursorJoinerResultValueOf  jni.MethodID
 
-	clsCursorWindowAllocationException     *jni.GlobalRef
-	midCursorWindowAllocationExceptionCtor jni.MethodID
+	clsCursorWindowAllocationException         *jni.GlobalRef
+	midCursorWindowAllocationExceptionCtor     jni.MethodID
+	midCursorWindowAllocationExceptionToString jni.MethodID
 
 	clsCursorWrapper                          *jni.GlobalRef
 	midCursorWrapperCtor                      jni.MethodID
@@ -346,14 +368,17 @@ var (
 	midCursorWrapperSetNotificationUri        jni.MethodID
 	midCursorWrapperUnregisterContentObserver jni.MethodID
 	midCursorWrapperUnregisterDataSetObserver jni.MethodID
+	midCursorWrapperToString                  jni.MethodID
 
 	clsDataSetObservable                  *jni.GlobalRef
 	midDataSetObservableCtor              jni.MethodID
 	midDataSetObservableNotifyChanged     jni.MethodID
 	midDataSetObservableNotifyInvalidated jni.MethodID
+	midDataSetObservableToString          jni.MethodID
 
-	clsCursorIndexOutOfBoundsException     *jni.GlobalRef
-	midCursorIndexOutOfBoundsExceptionCtor jni.MethodID
+	clsCursorIndexOutOfBoundsException         *jni.GlobalRef
+	midCursorIndexOutOfBoundsExceptionCtor     jni.MethodID
+	midCursorIndexOutOfBoundsExceptionToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -383,6 +408,13 @@ func doInit(env *jni.Env) error {
 		clsCharArrayBuffer = env.NewGlobalRef(&c.Object)
 		midCharArrayBufferCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharArrayBuffer)), "<init>", "([C)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCharArrayBufferToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharArrayBuffer)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -491,6 +523,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMatrixCursorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrixCursor)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/MatrixCursor$RowBuilder")
@@ -515,6 +554,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMatrixCursorRowBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrixCursorRowBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/SQLException")
@@ -526,6 +572,13 @@ func doInit(env *jni.Env) error {
 		clsSQLException = env.NewGlobalRef(&c.Object)
 		midSQLExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLException)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midSQLExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -658,6 +711,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAbstractWindowedCursorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractWindowedCursor)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/CrossProcessCursor")
@@ -689,6 +749,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCrossProcessCursorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCrossProcessCursor)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/DataSetObserver")
@@ -713,6 +780,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDataSetObserverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataSetObserver)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/StaleDataException")
@@ -727,6 +801,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midStaleDataExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStaleDataException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/DatabaseUtils")
@@ -738,6 +819,13 @@ func doInit(env *jni.Env) error {
 		clsUtils = env.NewGlobalRef(&c.Object)
 		midUtilsCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtils)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midUtilsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtils)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -1185,6 +1273,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUtilsInsertHelperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtilsInsertHelper)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/CrossProcessCursorWrapper")
@@ -1214,6 +1309,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCrossProcessCursorWrapperOnMove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCrossProcessCursorWrapper)), "onMove", "(II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCrossProcessCursorWrapperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCrossProcessCursorWrapper)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1279,6 +1381,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContentObserverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentObserver)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/DefaultDatabaseErrorHandler")
@@ -1294,6 +1403,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDefaultDatabaseErrorHandlerOnCorruption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDefaultDatabaseErrorHandler)), "onCorruption", "(Landroid/database/sqlite/SQLiteDatabase;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDefaultDatabaseErrorHandlerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDefaultDatabaseErrorHandler)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1343,6 +1459,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midContentObservableRegisterObserver1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentObservable)), "registerObserver", "(Ljava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentObservableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentObservable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1590,6 +1713,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midErrorHandlerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsErrorHandler)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/Observable")
@@ -1601,6 +1731,13 @@ func doInit(env *jni.Env) error {
 		clsObservable = env.NewGlobalRef(&c.Object)
 
 		midObservableUnregisterAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObservable)), "unregisterAll", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midObservableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObservable)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1748,6 +1885,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMergeCursorUnregisterDataSetObserver, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMergeCursor)), "unregisterDataSetObserver", "(Landroid/database/DataSetObserver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMergeCursorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMergeCursor)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2079,6 +2223,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAbstractCursorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractCursor)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/AbstractCursor$SelfContentObserver")
@@ -2097,6 +2248,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAbstractCursorSelfContentObserverOnChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractCursorSelfContentObserver)), "onChange", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAbstractCursorSelfContentObserverToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractCursorSelfContentObserver)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2152,6 +2310,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCursorJoinerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorJoiner)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/CursorJoiner$Result")
@@ -2161,6 +2326,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCursorJoinerResult = env.NewGlobalRef(&c.Object)
+
+		midCursorJoinerResultToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorJoinerResult)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midCursorJoinerResultValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCursorJoinerResult)), "values", "()[Landroid/database/CursorJoiner$Result;")
 		if err != nil {
@@ -2187,6 +2359,13 @@ func doInit(env *jni.Env) error {
 		clsCursorWindowAllocationException = env.NewGlobalRef(&c.Object)
 		midCursorWindowAllocationExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorWindowAllocationException)), "<init>", "(Ljava/lang/String;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCursorWindowAllocationExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorWindowAllocationException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -2505,6 +2684,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midCursorWrapperToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorWrapper)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/DataSetObservable")
@@ -2533,6 +2719,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDataSetObservableToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataSetObservable)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/database/CursorIndexOutOfBoundsException")
@@ -2544,6 +2737,13 @@ func doInit(env *jni.Env) error {
 		clsCursorIndexOutOfBoundsException = env.NewGlobalRef(&c.Object)
 		midCursorIndexOutOfBoundsExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorIndexOutOfBoundsException)), "<init>", "(II)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCursorIndexOutOfBoundsExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCursorIndexOutOfBoundsException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

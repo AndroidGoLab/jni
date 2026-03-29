@@ -1243,6 +1243,33 @@ func (m *WifiP2pManager) UnregisterWifiP2pListener(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.net.wifi.p2p.WifiP2pManager.toString.
+func (m *WifiP2pManager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWifiP2pManagerToString == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWifiP2pManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetP2pMaxAllowedVendorElementsLengthBytes calls android.net.wifi.p2p.WifiP2pManager.getP2pMaxAllowedVendorElementsLengthBytes.
 func (m *WifiP2pManager) GetP2pMaxAllowedVendorElementsLengthBytes() (int32, error) {
 	var result int32

@@ -80,25 +80,34 @@ var (
 	midMediaRecorderStart                                jni.MethodID
 	midMediaRecorderStop                                 jni.MethodID
 	midMediaRecorderUnregisterAudioRecordingCallback     jni.MethodID
+	midMediaRecorderToString                             jni.MethodID
 	midMediaRecorderGetAudioSourceMax                    jni.MethodID
 
-	clsMediaRecorderAudioEncoder *jni.GlobalRef
+	clsMediaRecorderAudioEncoder         *jni.GlobalRef
+	midMediaRecorderAudioEncoderToString jni.MethodID
 
-	clsMediaRecorderAudioSource *jni.GlobalRef
+	clsMediaRecorderAudioSource         *jni.GlobalRef
+	midMediaRecorderAudioSourceToString jni.MethodID
 
-	clsMediaRecorderMetricsConstants *jni.GlobalRef
+	clsMediaRecorderMetricsConstants         *jni.GlobalRef
+	midMediaRecorderMetricsConstantsToString jni.MethodID
 
-	clsMediaRecorderOnErrorListener        *jni.GlobalRef
-	midMediaRecorderOnErrorListenerOnError jni.MethodID
+	clsMediaRecorderOnErrorListener         *jni.GlobalRef
+	midMediaRecorderOnErrorListenerOnError  jni.MethodID
+	midMediaRecorderOnErrorListenerToString jni.MethodID
 
-	clsMediaRecorderOnInfoListener       *jni.GlobalRef
-	midMediaRecorderOnInfoListenerOnInfo jni.MethodID
+	clsMediaRecorderOnInfoListener         *jni.GlobalRef
+	midMediaRecorderOnInfoListenerOnInfo   jni.MethodID
+	midMediaRecorderOnInfoListenerToString jni.MethodID
 
-	clsMediaRecorderOutputFormat *jni.GlobalRef
+	clsMediaRecorderOutputFormat         *jni.GlobalRef
+	midMediaRecorderOutputFormatToString jni.MethodID
 
-	clsMediaRecorderVideoEncoder *jni.GlobalRef
+	clsMediaRecorderVideoEncoder         *jni.GlobalRef
+	midMediaRecorderVideoEncoderToString jni.MethodID
 
-	clsMediaRecorderVideoSource *jni.GlobalRef
+	clsMediaRecorderVideoSource         *jni.GlobalRef
+	midMediaRecorderVideoSourceToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -516,6 +525,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaRecorderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midMediaRecorderGetAudioSourceMax, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "getAudioSourceMax", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -533,6 +549,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsMediaRecorderAudioEncoder = env.NewGlobalRef(&c.Object)
 
+		midMediaRecorderAudioEncoderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderAudioEncoder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaRecorder$AudioSource")
@@ -543,6 +566,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsMediaRecorderAudioSource = env.NewGlobalRef(&c.Object)
 
+		midMediaRecorderAudioSourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderAudioSource)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaRecorder$MetricsConstants")
@@ -552,6 +582,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaRecorderMetricsConstants = env.NewGlobalRef(&c.Object)
+
+		midMediaRecorderMetricsConstantsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderMetricsConstants)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -564,6 +601,13 @@ func doInit(env *jni.Env) error {
 		clsMediaRecorderOnErrorListener = env.NewGlobalRef(&c.Object)
 
 		midMediaRecorderOnErrorListenerOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderOnErrorListener)), "onError", "(Landroid/media/MediaRecorder;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaRecorderOnErrorListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderOnErrorListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -587,6 +631,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midMediaRecorderOnInfoListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderOnInfoListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaRecorder$OutputFormat")
@@ -596,6 +647,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaRecorderOutputFormat = env.NewGlobalRef(&c.Object)
+
+		midMediaRecorderOutputFormatToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderOutputFormat)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -607,6 +665,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsMediaRecorderVideoEncoder = env.NewGlobalRef(&c.Object)
 
+		midMediaRecorderVideoEncoderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderVideoEncoder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/MediaRecorder$VideoSource")
@@ -616,6 +681,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaRecorderVideoSource = env.NewGlobalRef(&c.Object)
+
+		midMediaRecorderVideoSourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorderVideoSource)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

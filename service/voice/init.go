@@ -38,6 +38,7 @@ var (
 	midInteractionSessionServiceOnLowMemory            jni.MethodID
 	midInteractionSessionServiceOnNewSession           jni.MethodID
 	midInteractionSessionServiceOnTrimMemory           jni.MethodID
+	midInteractionSessionServiceToString               jni.MethodID
 
 	clsInteractionService                                *jni.GlobalRef
 	midInteractionServiceCtor                            jni.MethodID
@@ -51,6 +52,7 @@ var (
 	midInteractionServiceSetDisabledShowContext          jni.MethodID
 	midInteractionServiceSetUiHints                      jni.MethodID
 	midInteractionServiceShowSession                     jni.MethodID
+	midInteractionServiceToString                        jni.MethodID
 	midInteractionServiceIsActiveService                 jni.MethodID
 
 	clsInteractionSession                                  *jni.GlobalRef
@@ -107,15 +109,18 @@ var (
 	midInteractionSessionStartAssistantActivity2_1         jni.MethodID
 	midInteractionSessionStartVoiceActivity                jni.MethodID
 	midInteractionSessionUnregisterVisibleActivityCallback jni.MethodID
+	midInteractionSessionToString                          jni.MethodID
 
 	clsInteractionSessionAbortVoiceRequest                *jni.GlobalRef
 	midInteractionSessionAbortVoiceRequestGetMessage      jni.MethodID
 	midInteractionSessionAbortVoiceRequestGetVoicePrompt  jni.MethodID
 	midInteractionSessionAbortVoiceRequestSendAbortResult jni.MethodID
+	midInteractionSessionAbortVoiceRequestToString        jni.MethodID
 
 	clsInteractionSessionActivityId         *jni.GlobalRef
 	midInteractionSessionActivityIdEquals   jni.MethodID
 	midInteractionSessionActivityIdHashCode jni.MethodID
+	midInteractionSessionActivityIdToString jni.MethodID
 
 	clsInteractionSessionAssistState                   *jni.GlobalRef
 	midInteractionSessionAssistStateGetActivityId      jni.MethodID
@@ -125,23 +130,28 @@ var (
 	midInteractionSessionAssistStateGetCount           jni.MethodID
 	midInteractionSessionAssistStateGetIndex           jni.MethodID
 	midInteractionSessionAssistStateIsFocused          jni.MethodID
+	midInteractionSessionAssistStateToString           jni.MethodID
 
 	clsInteractionSessionCommandRequest                       *jni.GlobalRef
 	midInteractionSessionCommandRequestGetCommand             jni.MethodID
 	midInteractionSessionCommandRequestSendIntermediateResult jni.MethodID
 	midInteractionSessionCommandRequestSendResult             jni.MethodID
+	midInteractionSessionCommandRequestToString               jni.MethodID
 
 	clsInteractionSessionCompleteVoiceRequest                   *jni.GlobalRef
 	midInteractionSessionCompleteVoiceRequestGetMessage         jni.MethodID
 	midInteractionSessionCompleteVoiceRequestGetVoicePrompt     jni.MethodID
 	midInteractionSessionCompleteVoiceRequestSendCompleteResult jni.MethodID
+	midInteractionSessionCompleteVoiceRequestToString           jni.MethodID
 
 	clsInteractionSessionConfirmationRequest                       *jni.GlobalRef
 	midInteractionSessionConfirmationRequestGetPrompt              jni.MethodID
 	midInteractionSessionConfirmationRequestGetVoicePrompt         jni.MethodID
 	midInteractionSessionConfirmationRequestSendConfirmationResult jni.MethodID
+	midInteractionSessionConfirmationRequestToString               jni.MethodID
 
-	clsInteractionSessionInsets *jni.GlobalRef
+	clsInteractionSessionInsets         *jni.GlobalRef
+	midInteractionSessionInsetsToString jni.MethodID
 
 	clsInteractionSessionPickOptionRequest                                 *jni.GlobalRef
 	midInteractionSessionPickOptionRequestGetOptions                       jni.MethodID
@@ -149,6 +159,7 @@ var (
 	midInteractionSessionPickOptionRequestGetVoicePrompt                   jni.MethodID
 	midInteractionSessionPickOptionRequestSendIntermediatePickOptionResult jni.MethodID
 	midInteractionSessionPickOptionRequestSendPickOptionResult             jni.MethodID
+	midInteractionSessionPickOptionRequestToString                         jni.MethodID
 
 	clsInteractionSessionRequest                  *jni.GlobalRef
 	midInteractionSessionRequestCancel            jni.MethodID
@@ -158,7 +169,8 @@ var (
 	midInteractionSessionRequestIsActive          jni.MethodID
 	midInteractionSessionRequestToString          jni.MethodID
 
-	clsInteractionSessionVisibleActivityCallback *jni.GlobalRef
+	clsInteractionSessionVisibleActivityCallback         *jni.GlobalRef
+	midInteractionSessionVisibleActivityCallbackToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -281,6 +293,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInteractionSessionServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/voice/VoiceInteractionService")
@@ -359,6 +378,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInteractionServiceShowSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionService)), "showSession", "(Landroid/os/Bundle;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInteractionServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -750,6 +776,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInteractionSessionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSession)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/voice/VoiceInteractionSession$AbortVoiceRequest")
@@ -781,6 +814,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInteractionSessionAbortVoiceRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionAbortVoiceRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/voice/VoiceInteractionSession$ActivityId")
@@ -799,6 +839,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInteractionSessionActivityIdHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionActivityId)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInteractionSessionActivityIdToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionActivityId)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -864,6 +911,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInteractionSessionAssistStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionAssistState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/voice/VoiceInteractionSession$CommandRequest")
@@ -889,6 +943,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInteractionSessionCommandRequestSendResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionCommandRequest)), "sendResult", "(Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInteractionSessionCommandRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionCommandRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -926,6 +987,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInteractionSessionCompleteVoiceRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionCompleteVoiceRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/voice/VoiceInteractionSession$ConfirmationRequest")
@@ -957,6 +1025,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midInteractionSessionConfirmationRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionConfirmationRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/voice/VoiceInteractionSession$Insets")
@@ -966,6 +1041,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsInteractionSessionInsets = env.NewGlobalRef(&c.Object)
+
+		midInteractionSessionInsetsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionInsets)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1006,6 +1088,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInteractionSessionPickOptionRequestSendPickOptionResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionPickOptionRequest)), "sendPickOptionResult", "([Landroid/app/VoiceInteractor$PickOptionRequest$Option;Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInteractionSessionPickOptionRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionPickOptionRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1073,6 +1162,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsInteractionSessionVisibleActivityCallback = env.NewGlobalRef(&c.Object)
+
+		midInteractionSessionVisibleActivityCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInteractionSessionVisibleActivityCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

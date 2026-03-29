@@ -39,6 +39,7 @@ var (
 	midTileServiceStartActivityAndCollapse1   jni.MethodID
 	midTileServiceStartActivityAndCollapse1_1 jni.MethodID
 	midTileServiceUnlockAndRun                jni.MethodID
+	midTileServiceToString                    jni.MethodID
 	midTileServiceRequestListeningState       jni.MethodID
 
 	clsTile                          *jni.GlobalRef
@@ -59,6 +60,7 @@ var (
 	midTileSetSubtitle               jni.MethodID
 	midTileUpdateTile                jni.MethodID
 	midTileWriteToParcel             jni.MethodID
+	midTileToString                  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -183,6 +185,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTileServiceUnlockAndRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTileService)), "unlockAndRun", "(Ljava/lang/Runnable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTileServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTileService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -319,6 +328,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTileWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTile)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTileToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTile)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

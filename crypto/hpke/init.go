@@ -29,6 +29,7 @@ var (
 	midXdhKeySpecGetFormat jni.MethodID
 	midXdhKeySpecGetKey    jni.MethodID
 	midXdhKeySpecHashCode  jni.MethodID
+	midXdhKeySpecToString  jni.MethodID
 
 	clsSpi                         *jni.GlobalRef
 	midSpiEngineExport             jni.MethodID
@@ -38,6 +39,7 @@ var (
 	midSpiEngineOpen               jni.MethodID
 	midSpiEngineSeal               jni.MethodID
 	midSpiGetEncapsulated          jni.MethodID
+	midSpiToString                 jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -98,6 +100,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midXdhKeySpecToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsXdhKeySpec)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/crypto/hpke/HpkeSpi")
@@ -151,6 +160,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSpiGetEncapsulated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpi)), "getEncapsulated", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpiToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpi)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

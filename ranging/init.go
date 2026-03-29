@@ -31,9 +31,10 @@ var (
 	midDeviceToString         jni.MethodID
 	midDeviceWriteToParcel    jni.MethodID
 
-	clsDeviceBuilder        *jni.GlobalRef
-	midDeviceBuilderBuild   jni.MethodID
-	midDeviceBuilderSetUuid jni.MethodID
+	clsDeviceBuilder         *jni.GlobalRef
+	midDeviceBuilderBuild    jni.MethodID
+	midDeviceBuilderSetUuid  jni.MethodID
+	midDeviceBuilderToString jni.MethodID
 
 	clsSessionConfig                            *jni.GlobalRef
 	midSessionConfigDescribeContents            jni.MethodID
@@ -52,6 +53,7 @@ var (
 	midSessionConfigBuilderSetDataNotificationConfig   jni.MethodID
 	midSessionConfigBuilderSetRangingMeasurementsLimit jni.MethodID
 	midSessionConfigBuilderSetSensorFusionParams       jni.MethodID
+	midSessionConfigBuilderToString                    jni.MethodID
 
 	clsPreference                 *jni.GlobalRef
 	midPreferenceDescribeContents jni.MethodID
@@ -64,6 +66,7 @@ var (
 	clsPreferenceBuilder                 *jni.GlobalRef
 	midPreferenceBuilderBuild            jni.MethodID
 	midPreferenceBuilderSetSessionConfig jni.MethodID
+	midPreferenceBuilderToString         jni.MethodID
 
 	clsSensorFusionParams                      *jni.GlobalRef
 	midSensorFusionParamsDescribeContents      jni.MethodID
@@ -76,6 +79,7 @@ var (
 	clsSensorFusionParamsBuilder                       *jni.GlobalRef
 	midSensorFusionParamsBuilderBuild                  jni.MethodID
 	midSensorFusionParamsBuilderSetSensorFusionEnabled jni.MethodID
+	midSensorFusionParamsBuilderToString               jni.MethodID
 
 	clsSession                               *jni.GlobalRef
 	midSessionAddDeviceToRangingSession      jni.MethodID
@@ -93,6 +97,7 @@ var (
 	midSessionCallbackOnResults    jni.MethodID
 	midSessionCallbackOnStarted    jni.MethodID
 	midSessionCallbackOnStopped    jni.MethodID
+	midSessionCallbackToString     jni.MethodID
 
 	clsCapabilities                          *jni.GlobalRef
 	midCapabilitiesDescribeContents          jni.MethodID
@@ -123,14 +128,17 @@ var (
 	midDataGetTimestampMillis   jni.MethodID
 	midDataHasRssi              jni.MethodID
 	midDataWriteToParcel        jni.MethodID
+	midDataToString             jni.MethodID
 
 	clsManager                               *jni.GlobalRef
 	midManagerCreateRangingSession           jni.MethodID
 	midManagerRegisterCapabilitiesCallback   jni.MethodID
 	midManagerUnregisterCapabilitiesCallback jni.MethodID
+	midManagerToString                       jni.MethodID
 
 	clsManagerRangingCapabilitiesCallback                      *jni.GlobalRef
 	midManagerRangingCapabilitiesCallbackOnRangingCapabilities jni.MethodID
+	midManagerRangingCapabilitiesCallbackToString              jni.MethodID
 
 	clsDataNotificationConfig                          *jni.GlobalRef
 	midDataNotificationConfigDescribeContents          jni.MethodID
@@ -147,6 +155,7 @@ var (
 	midDataNotificationConfigBuilderSetNotificationConfigType jni.MethodID
 	midDataNotificationConfigBuilderSetProximityFarCm         jni.MethodID
 	midDataNotificationConfigBuilderSetProximityNearCm        jni.MethodID
+	midDataNotificationConfigBuilderToString                  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -235,6 +244,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDeviceBuilderSetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setUuid", "(Ljava/util/UUID;)Landroid/ranging/RangingDevice$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -359,6 +375,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midSessionConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/ranging/RangingPreference")
@@ -435,6 +458,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPreferenceBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferenceBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/ranging/SensorFusionParams")
@@ -505,6 +535,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSensorFusionParamsBuilderSetSensorFusionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParamsBuilder)), "setSensorFusionEnabled", "(Z)Landroid/ranging/SensorFusionParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorFusionParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -616,6 +653,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionCallbackOnStopped, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionCallback)), "onStopped", "(Landroid/ranging/RangingDevice;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -816,6 +860,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDataToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsData)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/ranging/RangingManager")
@@ -847,6 +898,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/ranging/RangingManager$RangingCapabilitiesCallback")
@@ -858,6 +916,13 @@ func doInit(env *jni.Env) error {
 		clsManagerRangingCapabilitiesCallback = env.NewGlobalRef(&c.Object)
 
 		midManagerRangingCapabilitiesCallbackOnRangingCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRangingCapabilitiesCallback)), "onRangingCapabilities", "(Landroid/ranging/RangingCapabilities;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerRangingCapabilitiesCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRangingCapabilitiesCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -962,6 +1027,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDataNotificationConfigBuilderSetProximityNearCm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataNotificationConfigBuilder)), "setProximityNearCm", "(I)Landroid/ranging/DataNotificationConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataNotificationConfigBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataNotificationConfigBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

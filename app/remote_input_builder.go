@@ -301,3 +301,30 @@ func (m *RemoteInputBuilder) SetLabel(arg0 string) (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.app.RemoteInput$Builder.toString.
+func (m *RemoteInputBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRemoteInputBuilderToString == nil {
+			callErr = fmt.Errorf("android.app.RemoteInput$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRemoteInputBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

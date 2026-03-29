@@ -33,6 +33,7 @@ var (
 	midBleCsRangingParamsGetSightType            jni.MethodID
 	midBleCsRangingParamsHashCode                jni.MethodID
 	midBleCsRangingParamsWriteToParcel           jni.MethodID
+	midBleCsRangingParamsToString                jni.MethodID
 
 	clsBleCsRangingParamsBuilder                     *jni.GlobalRef
 	midBleCsRangingParamsBuilderBuild                jni.MethodID
@@ -40,6 +41,7 @@ var (
 	midBleCsRangingParamsBuilderSetRangingUpdateRate jni.MethodID
 	midBleCsRangingParamsBuilderSetSecurityLevel     jni.MethodID
 	midBleCsRangingParamsBuilderSetSightType         jni.MethodID
+	midBleCsRangingParamsBuilderToString             jni.MethodID
 
 	clsBleCsRangingCapabilities                           *jni.GlobalRef
 	midBleCsRangingCapabilitiesDescribeContents           jni.MethodID
@@ -137,6 +139,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBleCsRangingParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/ranging/ble/cs/BleCsRangingParams$Builder")
@@ -176,6 +185,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBleCsRangingParamsBuilderSetSightType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingParamsBuilder)), "setSightType", "(I)Landroid/ranging/ble/cs/BleCsRangingParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBleCsRangingParamsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingParamsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

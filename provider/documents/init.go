@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsContract                                *jni.GlobalRef
+	midContractToString                        jni.MethodID
 	midContractBuildChildDocumentsUri          jni.MethodID
 	midContractBuildChildDocumentsUriUsingTree jni.MethodID
 	midContractBuildDocumentUri                jni.MethodID
@@ -54,7 +55,8 @@ var (
 	midContractRemoveDocument                  jni.MethodID
 	midContractRenameDocument                  jni.MethodID
 
-	clsContractDocument *jni.GlobalRef
+	clsContractDocument         *jni.GlobalRef
+	midContractDocumentToString jni.MethodID
 
 	clsContractPath                 *jni.GlobalRef
 	midContractPathDescribeContents jni.MethodID
@@ -65,7 +67,8 @@ var (
 	midContractPathToString         jni.MethodID
 	midContractPathWriteToParcel    jni.MethodID
 
-	clsContractRoot *jni.GlobalRef
+	clsContractRoot         *jni.GlobalRef
+	midContractRootToString jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -93,6 +96,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContract = env.NewGlobalRef(&c.Object)
+
+		midContractToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midContractBuildChildDocumentsUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "buildChildDocumentsUri", "(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;")
 		if err != nil {
@@ -307,6 +317,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsContractDocument = env.NewGlobalRef(&c.Object)
 
+		midContractDocumentToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractDocument)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/DocumentsContract$Path")
@@ -375,6 +392,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractRoot = env.NewGlobalRef(&c.Object)
+
+		midContractRootToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractRoot)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

@@ -1329,3 +1329,30 @@ func (m *SearchSpecBuilder) SetVerbatimSearchEnabled(arg0 bool) (*jni.Object, er
 	})
 	return result, callErr
 }
+
+// ToString calls android.app.appsearch.SearchSpec$Builder.toString.
+func (m *SearchSpecBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchSpecBuilderToString == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SearchSpec$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchSpecBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -32,8 +32,9 @@ var (
 	midEncryptedTopicHashCode           jni.MethodID
 	midEncryptedTopicToString           jni.MethodID
 
-	clsManager    *jni.GlobalRef
-	midManagerGet jni.MethodID
+	clsManager         *jni.GlobalRef
+	midManagerToString jni.MethodID
+	midManagerGet      jni.MethodID
 
 	clsTopic                   *jni.GlobalRef
 	midTopicCtor               jni.MethodID
@@ -49,18 +50,22 @@ var (
 	midGetTopicsResponseGetEncryptedTopics jni.MethodID
 	midGetTopicsResponseGetTopics          jni.MethodID
 	midGetTopicsResponseHashCode           jni.MethodID
+	midGetTopicsResponseToString           jni.MethodID
 
-	clsGetTopicsResponseBuilder      *jni.GlobalRef
-	midGetTopicsResponseBuilderBuild jni.MethodID
+	clsGetTopicsResponseBuilder         *jni.GlobalRef
+	midGetTopicsResponseBuilderBuild    jni.MethodID
+	midGetTopicsResponseBuilderToString jni.MethodID
 
 	clsGetTopicsRequest                        *jni.GlobalRef
 	midGetTopicsRequestGetAdsSdkName           jni.MethodID
 	midGetTopicsRequestShouldRecordObservation jni.MethodID
+	midGetTopicsRequestToString                jni.MethodID
 
 	clsGetTopicsRequestBuilder                           *jni.GlobalRef
 	midGetTopicsRequestBuilderBuild                      jni.MethodID
 	midGetTopicsRequestBuilderSetAdsSdkName              jni.MethodID
 	midGetTopicsRequestBuilderSetShouldRecordObservation jni.MethodID
+	midGetTopicsRequestBuilderToString                   jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -144,6 +149,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsManager = env.NewGlobalRef(&c.Object)
+
+		midManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "get", "(Landroid/content/Context;)Landroid/adservices/topics/TopicsManager;")
 		if err != nil {
@@ -246,6 +258,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midGetTopicsResponseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetTopicsResponse)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/topics/GetTopicsResponse$Builder")
@@ -257,6 +276,13 @@ func doInit(env *jni.Env) error {
 		clsGetTopicsResponseBuilder = env.NewGlobalRef(&c.Object)
 
 		midGetTopicsResponseBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetTopicsResponseBuilder)), "build", "()Landroid/adservices/topics/GetTopicsResponse;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetTopicsResponseBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetTopicsResponseBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -281,6 +307,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGetTopicsRequestShouldRecordObservation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetTopicsRequest)), "shouldRecordObservation", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetTopicsRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetTopicsRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -312,6 +345,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGetTopicsRequestBuilderSetShouldRecordObservation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetTopicsRequestBuilder)), "setShouldRecordObservation", "(Z)Landroid/adservices/topics/GetTopicsRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetTopicsRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetTopicsRequestBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

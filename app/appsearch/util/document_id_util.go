@@ -23,6 +23,33 @@ type DocumentIdUtil struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.app.appsearch.util.DocumentIdUtil.toString.
+func (m *DocumentIdUtil) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDocumentIdUtilToString == nil {
+			callErr = fmt.Errorf("android.app.appsearch.util.DocumentIdUtil.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDocumentIdUtilToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CreateQualifiedId3 calls android.app.appsearch.util.DocumentIdUtil.createQualifiedId.
 func (m *DocumentIdUtil) CreateQualifiedId3(
 	arg0 string,

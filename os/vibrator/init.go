@@ -41,6 +41,7 @@ var (
 	midFrequencyProfileGetMaxOutputAccelerationGs       jni.MethodID
 	midFrequencyProfileGetMinFrequencyHz                jni.MethodID
 	midFrequencyProfileGetOutputAccelerationGs          jni.MethodID
+	midFrequencyProfileToString                         jni.MethodID
 
 	clsVibrator                            *jni.GlobalRef
 	midVibratorAreAllEffectsSupported      jni.MethodID
@@ -64,6 +65,7 @@ var (
 	midVibratorVibrate2_4                  jni.MethodID
 	midVibratorVibrate2_5                  jni.MethodID
 	midVibratorVibrate3_6                  jni.MethodID
+	midVibratorToString                    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -201,6 +203,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFrequencyProfileGetOutputAccelerationGs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "getOutputAccelerationGs", "(F)F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFrequencyProfileToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -358,6 +367,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midVibratorVibrate3_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "([JILandroid/media/AudioAttributes;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVibratorToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

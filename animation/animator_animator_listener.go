@@ -114,3 +114,30 @@ func (m *AnimatorAnimatorListener) OnAnimationStart(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.animation.Animator$AnimatorListener.toString.
+func (m *AnimatorAnimatorListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAnimatorAnimatorListenerToString == nil {
+			callErr = fmt.Errorf("android.animation.Animator$AnimatorListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAnimatorAnimatorListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

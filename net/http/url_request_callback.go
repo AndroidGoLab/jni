@@ -151,3 +151,30 @@ func (m *UrlRequestCallback) OnSucceeded(arg0 *jni.Object, arg1 *jni.Object) err
 	})
 	return callErr
 }
+
+// ToString calls android.net.http.UrlRequest$Callback.toString.
+func (m *UrlRequestCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUrlRequestCallbackToString == nil {
+			callErr = fmt.Errorf("android.net.http.UrlRequest$Callback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUrlRequestCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

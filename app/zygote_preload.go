@@ -43,3 +43,30 @@ func (m *ZygotePreload) DoPreload(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.app.ZygotePreload.toString.
+func (m *ZygotePreload) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midZygotePreloadToString == nil {
+			callErr = fmt.Errorf("android.app.ZygotePreload.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midZygotePreloadToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -57,6 +57,7 @@ var (
 	midAssociationRequestBuilderSetForceConfirmation jni.MethodID
 	midAssociationRequestBuilderSetSelfManaged       jni.MethodID
 	midAssociationRequestBuilderSetSingleDevice      jni.MethodID
+	midAssociationRequestBuilderToString             jni.MethodID
 
 	clsBluetoothDeviceFilter                 *jni.GlobalRef
 	midBluetoothDeviceFilterDescribeContents jni.MethodID
@@ -70,8 +71,10 @@ var (
 	midBluetoothDeviceFilterBuilderBuild          jni.MethodID
 	midBluetoothDeviceFilterBuilderSetAddress     jni.MethodID
 	midBluetoothDeviceFilterBuilderSetNamePattern jni.MethodID
+	midBluetoothDeviceFilterBuilderToString       jni.MethodID
 
-	clsDeviceNotAssociatedException *jni.GlobalRef
+	clsDeviceNotAssociatedException         *jni.GlobalRef
+	midDeviceNotAssociatedExceptionToString jni.MethodID
 
 	clsDevicePresenceEvent                 *jni.GlobalRef
 	midDevicePresenceEventCtor             jni.MethodID
@@ -97,6 +100,7 @@ var (
 	midObservingDevicePresenceRequestBuilderBuild            jni.MethodID
 	midObservingDevicePresenceRequestBuilderSetAssociationId jni.MethodID
 	midObservingDevicePresenceRequestBuilderSetUuid          jni.MethodID
+	midObservingDevicePresenceRequestBuilderToString         jni.MethodID
 
 	clsDeviceManager                                         *jni.GlobalRef
 	midDeviceManagerAssociate                                jni.MethodID
@@ -119,6 +123,7 @@ var (
 	midDeviceManagerStartObservingDevicePresence1_1          jni.MethodID
 	midDeviceManagerStopObservingDevicePresence1             jni.MethodID
 	midDeviceManagerStopObservingDevicePresence1_1           jni.MethodID
+	midDeviceManagerToString                                 jni.MethodID
 
 	clsDeviceManagerCallback                     *jni.GlobalRef
 	midDeviceManagerCallbackOnAssociationCreated jni.MethodID
@@ -126,10 +131,13 @@ var (
 	midDeviceManagerCallbackOnDeviceFound        jni.MethodID
 	midDeviceManagerCallbackOnFailure2           jni.MethodID
 	midDeviceManagerCallbackOnFailure1_1         jni.MethodID
+	midDeviceManagerCallbackToString             jni.MethodID
 
-	clsException *jni.GlobalRef
+	clsException         *jni.GlobalRef
+	midExceptionToString jni.MethodID
 
-	clsDeviceFilter *jni.GlobalRef
+	clsDeviceFilter         *jni.GlobalRef
+	midDeviceFilterToString jni.MethodID
 
 	clsDeviceId                 *jni.GlobalRef
 	midDeviceIdDescribeContents jni.MethodID
@@ -144,6 +152,7 @@ var (
 	midDeviceIdBuilderBuild         jni.MethodID
 	midDeviceIdBuilderSetCustomId   jni.MethodID
 	midDeviceIdBuilderSetMacAddress jni.MethodID
+	midDeviceIdBuilderToString      jni.MethodID
 
 	clsDeviceService                          *jni.GlobalRef
 	midDeviceServiceAttachSystemDataTransport jni.MethodID
@@ -154,18 +163,21 @@ var (
 	midDeviceServiceOnDeviceDisappeared1      jni.MethodID
 	midDeviceServiceOnDeviceDisappeared1_1    jni.MethodID
 	midDeviceServiceOnDevicePresenceEvent     jni.MethodID
+	midDeviceServiceToString                  jni.MethodID
 
 	clsWifiDeviceFilter                 *jni.GlobalRef
 	midWifiDeviceFilterDescribeContents jni.MethodID
 	midWifiDeviceFilterEquals           jni.MethodID
 	midWifiDeviceFilterHashCode         jni.MethodID
 	midWifiDeviceFilterWriteToParcel    jni.MethodID
+	midWifiDeviceFilterToString         jni.MethodID
 
 	clsWifiDeviceFilterBuilder               *jni.GlobalRef
 	midWifiDeviceFilterBuilderBuild          jni.MethodID
 	midWifiDeviceFilterBuilderSetBssid       jni.MethodID
 	midWifiDeviceFilterBuilderSetBssidMask   jni.MethodID
 	midWifiDeviceFilterBuilderSetNamePattern jni.MethodID
+	midWifiDeviceFilterBuilderToString       jni.MethodID
 
 	clsAssociatedDevice                   *jni.GlobalRef
 	midAssociatedDeviceDescribeContents   jni.MethodID
@@ -192,6 +204,7 @@ var (
 	midBluetoothLeDeviceFilterBuilderSetRenameFromBytes jni.MethodID
 	midBluetoothLeDeviceFilterBuilderSetRenameFromName  jni.MethodID
 	midBluetoothLeDeviceFilterBuilderSetScanFilter      jni.MethodID
+	midBluetoothLeDeviceFilterBuilderToString           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -443,6 +456,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midAssociationRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAssociationRequestBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/BluetoothDeviceFilter")
@@ -526,6 +546,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midBluetoothDeviceFilterBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBluetoothDeviceFilterBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/DeviceNotAssociatedException")
@@ -535,6 +562,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDeviceNotAssociatedException = env.NewGlobalRef(&c.Object)
+
+		midDeviceNotAssociatedExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceNotAssociatedException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -696,6 +730,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midObservingDevicePresenceRequestBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObservingDevicePresenceRequestBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/CompanionDeviceManager")
@@ -846,6 +887,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDeviceManagerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceManager)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/CompanionDeviceManager$Callback")
@@ -891,6 +939,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDeviceManagerCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceManagerCallback)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/CompanionException")
@@ -901,6 +956,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsException = env.NewGlobalRef(&c.Object)
 
+		midExceptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsException)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/DeviceFilter")
@@ -910,6 +972,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDeviceFilter = env.NewGlobalRef(&c.Object)
+
+		midDeviceFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1001,6 +1070,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDeviceIdBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceIdBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/CompanionDeviceService")
@@ -1067,6 +1143,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midDeviceServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/WifiDeviceFilter")
@@ -1105,6 +1188,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midWifiDeviceFilterToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiDeviceFilter)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/companion/WifiDeviceFilter$Builder")
@@ -1137,6 +1227,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWifiDeviceFilterBuilderSetNamePattern, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiDeviceFilterBuilder)), "setNamePattern", "(Ljava/util/regex/Pattern;)Landroid/companion/WifiDeviceFilter$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiDeviceFilterBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiDeviceFilterBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1307,6 +1404,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBluetoothLeDeviceFilterBuilderSetScanFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBluetoothLeDeviceFilterBuilder)), "setScanFilter", "(Landroid/bluetooth/le/ScanFilter;)Landroid/companion/BluetoothLeDeviceFilter$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBluetoothLeDeviceFilterBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBluetoothLeDeviceFilterBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

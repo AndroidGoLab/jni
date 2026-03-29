@@ -93,6 +93,7 @@ var (
 	midApnSettingBuilderSetProxyPort          jni.MethodID
 	midApnSettingBuilderSetRoamingProtocol    jni.MethodID
 	midApnSettingBuilderSetUser               jni.MethodID
+	midApnSettingBuilderToString              jni.MethodID
 
 	clsRouteSelectionDescriptor                   *jni.GlobalRef
 	midRouteSelectionDescriptorDescribeContents   jni.MethodID
@@ -119,6 +120,7 @@ var (
 	midTrafficDescriptorBuilderBuild              jni.MethodID
 	midTrafficDescriptorBuilderSetDataNetworkName jni.MethodID
 	midTrafficDescriptorBuilderSetOsAppId         jni.MethodID
+	midTrafficDescriptorBuilderToString           jni.MethodID
 
 	clsNetworkSliceInfo                                  *jni.GlobalRef
 	midNetworkSliceInfoDescribeContents                  jni.MethodID
@@ -139,6 +141,7 @@ var (
 	midNetworkSliceInfoBuilderSetSliceDifferentiator            jni.MethodID
 	midNetworkSliceInfoBuilderSetSliceServiceType               jni.MethodID
 	midNetworkSliceInfoBuilderSetStatus                         jni.MethodID
+	midNetworkSliceInfoBuilderToString                          jni.MethodID
 
 	clsNetworkSlicingConfig                 *jni.GlobalRef
 	midNetworkSlicingConfigCtor             jni.MethodID
@@ -652,6 +655,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midApnSettingBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsApnSettingBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/telephony/data/RouteSelectionDescriptor")
@@ -822,6 +832,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midTrafficDescriptorBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrafficDescriptorBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/telephony/data/NetworkSliceInfo")
@@ -948,6 +965,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNetworkSliceInfoBuilderSetStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkSliceInfoBuilder)), "setStatus", "(I)Landroid/telephony/data/NetworkSliceInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNetworkSliceInfoBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNetworkSliceInfoBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

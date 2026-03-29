@@ -23,10 +23,12 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsElementListener *jni.GlobalRef
+	clsElementListener         *jni.GlobalRef
+	midElementListenerToString jni.MethodID
 
-	clsEndElementListener    *jni.GlobalRef
-	midEndElementListenerEnd jni.MethodID
+	clsEndElementListener         *jni.GlobalRef
+	midEndElementListenerEnd      jni.MethodID
+	midEndElementListenerToString jni.MethodID
 
 	clsElement                          *jni.GlobalRef
 	midElementGetChild1                 jni.MethodID
@@ -40,17 +42,21 @@ var (
 	midElementSetTextElementListener    jni.MethodID
 	midElementToString                  jni.MethodID
 
-	clsTextElementListener *jni.GlobalRef
+	clsTextElementListener         *jni.GlobalRef
+	midTextElementListenerToString jni.MethodID
 
-	clsStartElementListener      *jni.GlobalRef
-	midStartElementListenerStart jni.MethodID
+	clsStartElementListener         *jni.GlobalRef
+	midStartElementListenerStart    jni.MethodID
+	midStartElementListenerToString jni.MethodID
 
-	clsEndTextElementListener    *jni.GlobalRef
-	midEndTextElementListenerEnd jni.MethodID
+	clsEndTextElementListener         *jni.GlobalRef
+	midEndTextElementListenerEnd      jni.MethodID
+	midEndTextElementListenerToString jni.MethodID
 
 	clsRootElement                  *jni.GlobalRef
 	midRootElementCtor              jni.MethodID
 	midRootElementGetContentHandler jni.MethodID
+	midRootElementToString          jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -79,6 +85,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsElementListener = env.NewGlobalRef(&c.Object)
 
+		midElementListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/sax/EndElementListener")
@@ -90,6 +103,13 @@ func doInit(env *jni.Env) error {
 		clsEndElementListener = env.NewGlobalRef(&c.Object)
 
 		midEndElementListenerEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEndElementListener)), "end", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEndElementListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEndElementListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -186,6 +206,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsTextElementListener = env.NewGlobalRef(&c.Object)
 
+		midTextElementListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextElementListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/sax/StartElementListener")
@@ -197,6 +224,13 @@ func doInit(env *jni.Env) error {
 		clsStartElementListener = env.NewGlobalRef(&c.Object)
 
 		midStartElementListenerStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStartElementListener)), "start", "(Lorg/xml/sax/Attributes;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStartElementListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStartElementListener)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -220,6 +254,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midEndTextElementListenerToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEndTextElementListener)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/sax/RootElement")
@@ -235,6 +276,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRootElementGetContentHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRootElement)), "getContentHandler", "()Lorg/xml/sax/ContentHandler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRootElementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRootElement)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

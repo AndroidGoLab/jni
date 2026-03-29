@@ -36,6 +36,7 @@ var (
 	clsPresentationSpecBuilder         *jni.GlobalRef
 	midPresentationSpecBuilderBuild    jni.MethodID
 	midPresentationSpecBuilderSetStyle jni.MethodID
+	midPresentationSpecBuilderToString jni.MethodID
 
 	clsContentView                          *jni.GlobalRef
 	midContentViewGetSurfaceControl         jni.MethodID
@@ -44,10 +45,12 @@ var (
 	midContentViewSetClipBounds             jni.MethodID
 	midContentViewSetSurfaceControlCallback jni.MethodID
 	midContentViewSetZOrderedOnTop          jni.MethodID
+	midContentViewToString                  jni.MethodID
 
 	clsContentViewSurfaceControlCallback            *jni.GlobalRef
 	midContentViewSurfaceControlCallbackOnCreated   jni.MethodID
 	midContentViewSurfaceControlCallbackOnDestroyed jni.MethodID
+	midContentViewSurfaceControlCallbackToString    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -156,6 +159,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midPresentationSpecBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpecBuilder)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/widget/inline/InlineContentView")
@@ -208,6 +218,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContentViewToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/widget/inline/InlineContentView$SurfaceControlCallback")
@@ -226,6 +243,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midContentViewSurfaceControlCallbackOnDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentViewSurfaceControlCallback)), "onDestroyed", "(Landroid/view/SurfaceControl;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentViewSurfaceControlCallbackToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentViewSurfaceControlCallback)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

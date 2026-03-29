@@ -40,6 +40,7 @@ var (
 	midZenDeviceEffectsBuilderSetShouldDisplayGrayscale       jni.MethodID
 	midZenDeviceEffectsBuilderSetShouldSuppressAmbientDisplay jni.MethodID
 	midZenDeviceEffectsBuilderSetShouldUseNightMode           jni.MethodID
+	midZenDeviceEffectsBuilderToString                        jni.MethodID
 
 	clsListenerService                                                *jni.GlobalRef
 	midListenerServiceCancelAllNotifications                          jni.MethodID
@@ -77,6 +78,7 @@ var (
 	midListenerServiceSetNotificationsShown                           jni.MethodID
 	midListenerServiceSnoozeNotification                              jni.MethodID
 	midListenerServiceUpdateNotificationChannel                       jni.MethodID
+	midListenerServiceToString                                        jni.MethodID
 	midListenerServiceRequestRebind                                   jni.MethodID
 	midListenerServiceRequestUnbind1_1                                jni.MethodID
 
@@ -101,6 +103,7 @@ var (
 	midListenerServiceRankingIsConversation                  jni.MethodID
 	midListenerServiceRankingIsSuspended                     jni.MethodID
 	midListenerServiceRankingMatchesInterruptionFilter       jni.MethodID
+	midListenerServiceRankingToString                        jni.MethodID
 
 	clsListenerServiceRankingMap                 *jni.GlobalRef
 	midListenerServiceRankingMapDescribeContents jni.MethodID
@@ -108,6 +111,7 @@ var (
 	midListenerServiceRankingMapGetOrderedKeys   jni.MethodID
 	midListenerServiceRankingMapGetRanking       jni.MethodID
 	midListenerServiceRankingMapWriteToParcel    jni.MethodID
+	midListenerServiceRankingMapToString         jni.MethodID
 
 	clsConditionProviderService                    *jni.GlobalRef
 	midConditionProviderServiceNotifyCondition     jni.MethodID
@@ -118,6 +122,7 @@ var (
 	midConditionProviderServiceOnSubscribe         jni.MethodID
 	midConditionProviderServiceOnUnsubscribe       jni.MethodID
 	midConditionProviderServiceRequestUnbind       jni.MethodID
+	midConditionProviderServiceToString            jni.MethodID
 	midConditionProviderServiceRequestRebind       jni.MethodID
 
 	clsCondition                  *jni.GlobalRef
@@ -183,6 +188,7 @@ var (
 	midZenPolicyBuilderShowLights             jni.MethodID
 	midZenPolicyBuilderShowPeeking            jni.MethodID
 	midZenPolicyBuilderShowStatusBarIcons     jni.MethodID
+	midZenPolicyBuilderToString               jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -313,6 +319,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midZenDeviceEffectsBuilderSetShouldUseNightMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "setShouldUseNightMode", "(Z)Landroid/service/notification/ZenDeviceEffects$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -574,6 +587,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midListenerServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midListenerServiceRequestRebind, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestRebind", "(Landroid/content/ComponentName;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -738,6 +758,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midListenerServiceRankingToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/notification/NotificationListenerService$RankingMap")
@@ -777,6 +804,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midListenerServiceRankingMapWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingMapToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -843,6 +877,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConditionProviderServiceRequestUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "requestUnbind", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConditionProviderServiceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1283,6 +1324,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midZenPolicyBuilderShowStatusBarIcons, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenPolicyBuilder)), "showStatusBarIcons", "(Z)Landroid/service/notification/ZenPolicy$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenPolicyBuilderToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenPolicyBuilder)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
