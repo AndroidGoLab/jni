@@ -146,25 +146,23 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "")
 	fmt.Fprintln(output, "--- Pattern 3: Three quick pulses ---")
 	pattern := []int64{0, 100, 100, 100, 100, 100} // ms: delay, on, off, on, off, on
-	var patternObj *jni.Object
+	// Create long array and call Vibrate inside the same vm.Do scope
+	// to avoid invalid local reference after scope exit.
 	vm.Do(func(env *jni.Env) error {
 		longArr := env.NewLongArray(int32(len(pattern)))
 		if longArr == nil {
 			return fmt.Errorf("NewLongArray returned nil")
 		}
 		env.SetLongArrayRegion(longArr, 0, int32(len(pattern)), unsafe.Pointer(&pattern[0]))
-		patternObj = (*jni.Object)(unsafe.Pointer(longArr))
-		return nil
-	})
-
-	if patternObj != nil {
+		patternObj := (*jni.Object)(unsafe.Pointer(longArr))
 		if err := vib.Vibrate2_5(patternObj, -1); err != nil {
 			fmt.Fprintf(output, "Error: %v\n", err)
 		} else {
 			fmt.Fprintln(output, "Vibrating pattern: [0, 100, 100, 100, 100, 100] ms")
 			fmt.Fprintln(output, "  (delay=0, on=100, off=100, on=100, off=100, on=100)")
 		}
-	}
+		return nil
+	})
 	time.Sleep(600 * time.Millisecond)
 
 	// Pattern 4: SOS pattern (... --- ...)
@@ -180,24 +178,20 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		300,                      // letter gap
 		100, 100, 100, 100, 100,  // S: dot dot dot
 	}
-	var sosObj *jni.Object
 	vm.Do(func(env *jni.Env) error {
 		longArr := env.NewLongArray(int32(len(sosPattern)))
 		if longArr == nil {
 			return fmt.Errorf("NewLongArray returned nil")
 		}
 		env.SetLongArrayRegion(longArr, 0, int32(len(sosPattern)), unsafe.Pointer(&sosPattern[0]))
-		sosObj = (*jni.Object)(unsafe.Pointer(longArr))
-		return nil
-	})
-
-	if sosObj != nil {
+		sosObj := (*jni.Object)(unsafe.Pointer(longArr))
 		if err := vib.Vibrate2_5(sosObj, -1); err != nil {
 			fmt.Fprintf(output, "Error: %v\n", err)
 		} else {
 			fmt.Fprintln(output, "Vibrating SOS: ... --- ...")
 		}
-	}
+		return nil
+	})
 	time.Sleep(3 * time.Second)
 
 	// Cancel any ongoing vibration

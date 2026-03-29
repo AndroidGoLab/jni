@@ -82,9 +82,16 @@ for i in "${!EXAMPLES[@]}"; do
     # Uninstall old version (ignore errors)
     "$ADB" uninstall "$pkg" > /dev/null 2>&1 || true
 
-    # Install
+    # Install via push + pm install (more reliable than streaming install)
     echo "  Installing..."
-    if ! "$ADB" install -r "$dir/build/$name.apk" >> "$result_file" 2>&1; then
+    "$ADB" wait-for-device
+    if ! "$ADB" push "$dir/build/$name.apk" /data/local/tmp/ >> "$result_file" 2>&1; then
+        echo "  PUSH FAILED"
+        FAIL=$((FAIL + 1))
+        ERRORS="$ERRORS\n  INSTALL_FAIL: $name"
+        continue
+    fi
+    if ! "$ADB" shell pm install -r "/data/local/tmp/$name.apk" >> "$result_file" 2>&1; then
         echo "  INSTALL FAILED"
         FAIL=$((FAIL + 1))
         ERRORS="$ERRORS\n  INSTALL_FAIL: $name"
@@ -97,25 +104,33 @@ for i in "${!EXAMPLES[@]}"; do
         "$ADB" shell pm grant "$pkg" "$perm" 2>/dev/null || true
     done
 
-    # Clear logcat and wait for any stale crash dumps to flush
+    # Clear logcat
     "$ADB" logcat -c 2>/dev/null || true
-    sleep 2
+    sleep 1
     "$ADB" logcat -c 2>/dev/null || true
 
     # Launch
     echo "  Running..."
     "$ADB" shell am start -n "$pkg/android.app.NativeActivity" >> "$result_file" 2>&1
 
-    # Get the PID of the launched app for filtering
+    # Get the PID of the launched app for filtering (take first PID if multiple)
     sleep 1
-    app_pid=$("$ADB" shell pidof "$pkg" 2>/dev/null || true)
+    app_pid=$("$ADB" shell pidof "$pkg" 2>/dev/null | awk '{print $1}' || true)
 
     # Wait for output (the app writes to logcat with tag GoJNI)
-    # Poll for up to 30 seconds
+    # Poll for up to 30 seconds, filtering by PID to avoid stale messages
     got_output=false
     for attempt in $(seq 1 30); do
         sleep 1
-        output=$("$ADB" logcat -d -s GoJNI 2>/dev/null | grep -v "^-" || true)
+        if [ -n "$app_pid" ]; then
+            output=$("$ADB" logcat -d -s GoJNI --pid="$app_pid" 2>/dev/null | grep -v "^-" || true)
+            # Fallback: some adb versions don't support --pid; use grep
+            if [ -z "$output" ]; then
+                output=$("$ADB" logcat -d -s GoJNI 2>/dev/null | grep -v "^-" | grep " $app_pid " || true)
+            fi
+        else
+            output=$("$ADB" logcat -d -s GoJNI 2>/dev/null | grep -v "^-" || true)
+        fi
         if [ -n "$output" ]; then
             got_output=true
             break
@@ -123,8 +138,11 @@ for i in "${!EXAMPLES[@]}"; do
         # Check if app is still alive
         if [ -n "$app_pid" ]; then
             if ! "$ADB" shell kill -0 "$app_pid" 2>/dev/null; then
-                # App exited, check for crash
-                break
+                # App exited; re-read PID in case it restarted, then check for crash
+                app_pid=$("$ADB" shell pidof "$pkg" 2>/dev/null || true)
+                if [ -z "$app_pid" ]; then
+                    break
+                fi
             fi
         fi
     done
@@ -163,11 +181,9 @@ for i in "${!EXAMPLES[@]}"; do
 
     # Force stop the app
     "$ADB" shell am force-stop "$pkg" 2>/dev/null || true
-    sleep 1
 
     # Uninstall to keep device clean
     "$ADB" uninstall "$pkg" > /dev/null 2>&1 || true
-    sleep 1
 done
 
 echo ""
