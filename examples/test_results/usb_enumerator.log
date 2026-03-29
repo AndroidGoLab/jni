@@ -30,38 +30,3 @@ cd build && zip -r base.apk lib/
 Built: build/usb_enumerator.apk
 Serving...
 All files should be loaded. Notifying the device.
-Performing Incremental Install
-Success
-Install command complete in 875 ms
-Starting: Intent { cmp=center.dx.jni.examples.usb_enumerator/android.app.NativeActivity }
-03-29 15:14:53.142 13361 13386 I GoJNI   : === USB Device Enumerator ===
-03-29 15:14:53.142 13361 13386 I GoJNI   : UsbManager: obtained
-03-29 15:14:53.142 13361 13386 I GoJNI   : USB device class constants:
-03-29 15:14:53.142 13361 13386 I GoJNI   :   PER_INTERFACE     = 0
-03-29 15:14:53.142 13361 13386 I GoJNI   :   AUDIO             = 1
-03-29 15:14:53.142 13361 13386 I GoJNI   :   COMM              = 2
-03-29 15:14:53.142 13361 13386 I GoJNI   :   HID               = 3
-03-29 15:14:53.142 13361 13386 I GoJNI   :   PHYSICAL          = 5
-03-29 15:14:53.142 13361 13386 I GoJNI   :   STILL_IMAGE       = 6
-03-29 15:14:53.142 13361 13386 I GoJNI   :   PRINTER           = 7
-03-29 15:14:53.142 13361 13386 I GoJNI   :   MASS_STORAGE      = 8
-03-29 15:14:53.142 13361 13386 I GoJNI   :   HUB               = 9
-03-29 15:14:53.142 13361 13386 I GoJNI   :   CDC_DATA          = 10
-03-29 15:14:53.142 13361 13386 I GoJNI   :   CSCID             = 11
-03-29 15:14:53.142 13361 13386 I GoJNI   :   CONTENT_SEC       = 13
-03-29 15:14:53.142 13361 13386 I GoJNI   :   VIDEO             = 14
-03-29 15:14:53.142 13361 13386 I GoJNI   :   WIRELESS_CTRL     = 224
-03-29 15:14:53.142 13361 13386 I GoJNI   :   MISC              = 239
-03-29 15:14:53.142 13361 13386 I GoJNI   :   APP_SPEC          = 254
-03-29 15:14:53.142 13361 13386 I GoJNI   :   VENDOR_SPEC       = 255
-03-29 15:14:53.142 13361 13386 I GoJNI   : Endpoint transfer types:
-03-29 15:14:53.142 13361 13386 I GoJNI   :   CONTROL     = 0
-03-29 15:14:53.142 13361 13386 I GoJNI   :   ISOCHRONOUS = 1
-03-29 15:14:53.142 13361 13386 I GoJNI   :   BULK        = 2
-03-29 15:14:53.142 13361 13386 I GoJNI   :   INTERRUPT   = 3
-03-29 15:14:53.142 13361 13386 I GoJNI   : Direction constants:
-03-29 15:14:53.142 13361 13386 I GoJNI   :   USB_DIR_IN  = 128
-03-29 15:14:53.142 13361 13386 I GoJNI   :   USB_DIR_OUT = 0
-03-29 15:14:53.142 13361 13386 I GoJNI   : === USB Accessories ===
-03-29 15:14:53.142 13361 13386 I GoJNI   : No USB accessories connected
-03-29 15:14:53.142 13361 13386 I GoJNI   : USB device enumeration complete.
