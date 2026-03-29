@@ -32,27 +32,27 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 20454 ms
+Install command complete in 746 ms
 Starting: Intent { cmp=center.dx.jni.examples.bt_bond_manager/android.app.NativeActivity }
-03-29 14:45:45.118 21055 21085 I GoJNI   : === Bond state constants ===
-03-29 14:45:45.119 21055 21085 I GoJNI   :   BondNone    = 10
-03-29 14:45:45.119 21055 21085 I GoJNI   :   BondBonding = 11
-03-29 14:45:45.119 21055 21085 I GoJNI   :   BondBonded  = 12
-03-29 14:45:45.119 21055 21085 I GoJNI   : === Device type constants ===
-03-29 14:45:45.119 21055 21085 I GoJNI   :   DeviceTypeClassic = 1
-03-29 14:45:45.119 21055 21085 I GoJNI   :   DeviceTypeLe      = 2
-03-29 14:45:45.119 21055 21085 I GoJNI   :   DeviceTypeDual    = 3
-03-29 14:45:45.119 21055 21085 I GoJNI   : === Device typed wrapper API ===
-03-29 14:45:45.119 21055 21085 I GoJNI   :   Device methods: GetName, GetAddress, GetType, GetBondState,
-03-29 14:45:45.119 21055 21085 I GoJNI   :     GetAlias, SetAlias, GetBluetoothClass, GetUuids,
-03-29 14:45:45.119 21055 21085 I GoJNI   :     FetchUuidsWithSdp, CreateBond, SetPairingConfirmation,
-03-29 14:45:45.119 21055 21085 I GoJNI   :     ConnectGatt, CreateRfcommSocketToServiceRecord,
-03-29 14:45:45.119 21055 21085 I GoJNI   :     CreateInsecureRfcommSocketToServiceRecord
-03-29 14:45:45.119 21055 21085 I GoJNI   : Bluetooth enabled: true
-03-29 14:45:45.120 21055 21085 I GoJNI   : Adapter name: Pixel 8a
-03-29 14:45:45.120 21055 21085 I GoJNI   : Scan mode: Connectable (21)
-03-29 14:45:45.120 21055 21085 I GoJNI   : Bonded devices set retrieved: OK
-03-29 14:45:45.120 21055 21085 I GoJNI   :   (Set iteration requires collection helpers not yet in typed wrappers)
-03-29 14:45:45.120 21055 21085 I GoJNI   : Adapter address: 02:00:00:00:00:00
-03-29 14:45:45.120 21055 21085 I GoJNI   : Bond manager demo completed.
-03-29 14:45:45.120 21055 21085 I GoJNI   : No errors occurred during bond manager demo.
+03-29 15:46:03.985 25134 25155 I GoJNI   : === Bond state constants ===
+03-29 15:46:03.985 25134 25155 I GoJNI   :   BondNone    = 10
+03-29 15:46:03.985 25134 25155 I GoJNI   :   BondBonding = 11
+03-29 15:46:03.985 25134 25155 I GoJNI   :   BondBonded  = 12
+03-29 15:46:03.985 25134 25155 I GoJNI   : === Device type constants ===
+03-29 15:46:03.985 25134 25155 I GoJNI   :   DeviceTypeClassic = 1
+03-29 15:46:03.985 25134 25155 I GoJNI   :   DeviceTypeLe      = 2
+03-29 15:46:03.985 25134 25155 I GoJNI   :   DeviceTypeDual    = 3
+03-29 15:46:03.985 25134 25155 I GoJNI   : === Device typed wrapper API ===
+03-29 15:46:03.985 25134 25155 I GoJNI   :   Device methods: GetName, GetAddress, GetType, GetBondState,
+03-29 15:46:03.985 25134 25155 I GoJNI   :     GetAlias, SetAlias, GetBluetoothClass, GetUuids,
+03-29 15:46:03.985 25134 25155 I GoJNI   :     FetchUuidsWithSdp, CreateBond, SetPairingConfirmation,
+03-29 15:46:03.985 25134 25155 I GoJNI   :     ConnectGatt, CreateRfcommSocketToServiceRecord,
+03-29 15:46:03.985 25134 25155 I GoJNI   :     CreateInsecureRfcommSocketToServiceRecord
+03-29 15:46:03.985 25134 25155 I GoJNI   : Bluetooth enabled: true
+03-29 15:46:03.985 25134 25155 I GoJNI   : Adapter name: Pixel 8a
+03-29 15:46:03.985 25134 25155 I GoJNI   : Scan mode: Connectable (21)
+03-29 15:46:03.985 25134 25155 I GoJNI   : Bonded devices set retrieved: OK
+03-29 15:46:03.985 25134 25155 I GoJNI   :   (Set iteration requires collection helpers not yet in typed wrappers)
+03-29 15:46:03.985 25134 25155 I GoJNI   : Adapter address: 02:00:00:00:00:00
+03-29 15:46:03.985 25134 25155 I GoJNI   : Bond manager demo completed.
+03-29 15:46:03.985 25134 25155 I GoJNI   : No errors occurred during bond manager demo.

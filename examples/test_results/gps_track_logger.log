@@ -37,8 +37,8 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 817 ms
+Install command complete in 803 ms
 Starting: Intent { cmp=center.dx.jni.examples.gps_track_logger/android.app.NativeActivity }
-03-29 14:57:35.519  5405  5432 I GoJNI   : GPS provider enabled: false
-03-29 14:57:35.519  5405  5432 I GoJNI   : GPS provider is not enabled. Enable GPS and retry.
-03-29 14:57:35.519  5405  5432 I GoJNI   : GPS track logger example completed.
+03-29 15:50:32.926 26198 26220 I GoJNI   : GPS provider enabled: false
+03-29 15:50:32.926 26198 26220 I GoJNI   : GPS provider is not enabled. Enable GPS and retry.
+03-29 15:50:32.926 26198 26220 I GoJNI   : GPS track logger example completed.

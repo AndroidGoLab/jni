@@ -97,12 +97,18 @@ for i in "${!EXAMPLES[@]}"; do
         "$ADB" shell pm grant "$pkg" "$perm" 2>/dev/null || true
     done
 
-    # Clear logcat
+    # Clear logcat and wait for any stale crash dumps to flush
+    "$ADB" logcat -c 2>/dev/null || true
+    sleep 2
     "$ADB" logcat -c 2>/dev/null || true
 
     # Launch
     echo "  Running..."
     "$ADB" shell am start -n "$pkg/android.app.NativeActivity" >> "$result_file" 2>&1
+
+    # Get the PID of the launched app for filtering
+    sleep 1
+    app_pid=$("$ADB" shell pidof "$pkg" 2>/dev/null || true)
 
     # Wait for output (the app writes to logcat with tag GoJNI)
     # Poll for up to 30 seconds
@@ -114,14 +120,22 @@ for i in "${!EXAMPLES[@]}"; do
             got_output=true
             break
         fi
+        # Check if app is still alive
+        if [ -n "$app_pid" ]; then
+            if ! "$ADB" shell kill -0 "$app_pid" 2>/dev/null; then
+                # App exited, check for crash
+                break
+            fi
+        fi
     done
 
     # Capture screenshot
     "$ADB" exec-out screencap -p > "$SCREENSHOTS_DIR/$name.png" 2>/dev/null || true
 
     if ! $got_output; then
-        # Check for crashes
-        crash=$("$ADB" logcat -d | grep -iE "FATAL|AndroidRuntime|signal.*SIGSEGV|panic" | head -5 || true)
+        # Check for crashes - filter to current app's package name
+        short_pkg=$(echo "$pkg" | grep -oE '[^.]+$')
+        crash=$("$ADB" logcat -d | grep -iE "FATAL|signal.*(SIGSEGV|SIGABRT)|panic" | grep -iE "$short_pkg|$name" | head -5 || true)
         if [ -n "$crash" ]; then
             echo "  CRASHED"
             echo "$crash" >> "$result_file"
@@ -149,9 +163,11 @@ for i in "${!EXAMPLES[@]}"; do
 
     # Force stop the app
     "$ADB" shell am force-stop "$pkg" 2>/dev/null || true
+    sleep 1
 
     # Uninstall to keep device clean
     "$ADB" uninstall "$pkg" > /dev/null 2>&1 || true
+    sleep 1
 done
 
 echo ""

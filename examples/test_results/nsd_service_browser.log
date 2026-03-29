@@ -32,7 +32,35 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 792 ms
+Install command complete in 843 ms
 Starting: Intent { cmp=center.dx.jni.examples.nsd_service_browser/android.app.NativeActivity }
-03-29 14:56:40.904  5073  5099 I GoJNI   : === NSD Service Browser ===
-03-29 14:56:40.904  5073  5099 I GoJNI   : ERROR: nsd.NewManager: java java.lang.SecurityException: NsdService: Neither user 10197 nor current process has android.permission.INTERNET.
+03-29 15:49:16.782 25879 25904 I GoJNI   : === NSD Service Browser ===
+03-29 15:49:16.782 25879 25904 I GoJNI   : NsdManager: obtained OK
+03-29 15:49:16.782 25879 25904 I GoJNI   :   ToString: android.net.nsd.NsdManager@a8e1b9b
+03-29 15:49:16.782 25879 25904 I GoJNI   : NSD constants:
+03-29 15:49:16.783 25879 25904 I GoJNI   :   ProtocolDnsSd: 1
+03-29 15:49:16.783 25879 25904 I GoJNI   :   NsdStateEnabled: 2
+03-29 15:49:16.783 25879 25904 I GoJNI   :   NsdStateDisabled: 1
+03-29 15:49:16.783 25879 25904 I GoJNI   :   FailureAlreadyActive: 3
+03-29 15:49:16.783 25879 25904 I GoJNI   :   FailureBadParameters: 6
+03-29 15:49:16.783 25879 25904 I GoJNI   :   FailureInternalError: 0
+03-29 15:49:16.783 25879 25904 I GoJNI   :   FailureMaxLimit: 4
+03-29 15:49:16.783 25879 25904 I GoJNI   :   FailureOperationNotRunning: 5
+03-29 15:49:16.783 25879 25904 I GoJNI   : NsdServiceInfo round-trip test:
+03-29 15:49:16.783 25879 25904 I GoJNI   :   SetServiceName('GoTestService'): OK
+03-29 15:49:16.783 25879 25904 I GoJNI   :   SetServiceType('_http._tcp'): OK
+03-29 15:49:16.783 25879 25904 I GoJNI   :   SetPort(8080): OK
+03-29 15:49:16.783 25879 25904 I GoJNI   :   SetAttribute('path', '/api/v1'): OK
+03-29 15:49:16.783 25879 25904 I GoJNI   :   SetAttribute('version', '2.0'): OK
+03-29 15:49:16.783 25879 25904 I GoJNI   :   GetServiceName: GoTestService
+03-29 15:49:16.783 25879 25904 I GoJNI   :   GetServiceType: _http._tcp
+03-29 15:49:16.783 25879 25904 I GoJNI   :   GetPort: 8080
+03-29 15:49:16.783 25879 25904 I GoJNI   :   GetHost: (null) -- not set
+03-29 15:49:16.783 25879 25904 I GoJNI   :   GetHostname: ""
+03-29 15:49:16.783 25879 25904 I GoJNI   :   GetHostAddresses: list obtained
+03-29 15:49:16.783 25879 25904 I GoJNI   :   GetNetwork: (null) -- not set
+03-29 15:49:16.783 25879 25904 I GoJNI   :   GetSubtypes: set obtained
+03-29 15:49:16.783 25879 25904 I GoJNI   :   DescribeContents: 0
+03-29 15:49:16.783 25879 25904 I GoJNI   :   RemoveAttribute('version'): OK
+03-29 15:49:16.783 25879 25904 I GoJNI   :   ToString: name: GoTestService, type: _http._tcp, subtypes: , hostAddresses: , hostname: null, port: 8080, network: null, expirationTime: null, txtRecord: {path=/api/v1}
+03-29 15:49:16.783 25879 25904 I GoJNI   : NSD service browser example complete.

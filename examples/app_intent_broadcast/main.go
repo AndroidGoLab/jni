@@ -60,10 +60,29 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "=== Intent Broadcast ===")
 
-	// Create an Intent.
-	intent, err := app.NewIntent(vm, nil, nil)
+	// Create an Intent using the no-arg constructor via raw JNI.
+	// The generated NewIntent uses Intent(Context, Class) which requires both non-null.
+	// For broadcast intents we need the no-arg constructor.
+	var intent app.Intent
+	intent.VM = vm
+	err = vm.Do(func(env *jni.Env) error {
+		cls, err := env.FindClass("android/content/Intent")
+		if err != nil {
+			return fmt.Errorf("find Intent class: %w", err)
+		}
+		mid, err := env.GetMethodID(cls, "<init>", "()V")
+		if err != nil {
+			return fmt.Errorf("get Intent constructor: %w", err)
+		}
+		obj, err := env.NewObject(cls, mid)
+		if err != nil {
+			return fmt.Errorf("create Intent: %w", err)
+		}
+		intent.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
 	if err != nil {
-		return fmt.Errorf("app.NewIntent: %w", err)
+		return fmt.Errorf("create Intent: %w", err)
 	}
 
 	// Build a custom broadcast action.

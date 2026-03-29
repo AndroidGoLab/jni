@@ -28,7 +28,7 @@ cd build && zip -r base.apk lib/
   adding: lib/arm64-v8a/ (stored 0%)
   adding: lib/arm64-v8a/libexample.so (deflated 52%)
   adding: lib/x86_64/ (stored 0%)
-  adding: lib/x86_64/libexample.so (deflated 50%)
+  adding: lib/x86_64/libexample.so (deflated 51%)
 /home/streaming/Android/Sdk/build-tools/35.0.0/zipalign -f 4 build/base.apk build/aligned.apk
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/bt_mesh_relay.apk build/aligned.apk
@@ -37,40 +37,31 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 1104 ms
+Install command complete in 877 ms
 Starting: Intent { cmp=center.dx.jni.examples.bt_mesh_relay/android.app.NativeActivity }
-03-29 14:46:05.536 21575 21600 I GoJNI   : === Advertise mode constants ===
-03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseModeLowPower   = 0
-03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseModeBalanced   = 1
-03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseModeLowLatency = 2
-03-29 14:46:05.537 21575 21600 I GoJNI   : === Advertise TX power constants ===
-03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseTxPowerUltraLow = 0
-03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseTxPowerLow      = 1
-03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseTxPowerMedium   = 2
-03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseTxPowerHigh     = 3
-03-29 14:46:05.537 21575 21600 I GoJNI   : === Scan mode constants ===
-03-29 14:46:05.537 21575 21600 I GoJNI   :   ScanModeLowPower   = 0
-03-29 14:46:05.537 21575 21600 I GoJNI   :   ScanModeBalanced   = 1
-03-29 14:46:05.537 21575 21600 I GoJNI   :   ScanModeLowLatency = 2
-03-29 14:46:05.537 21575 21600 I GoJNI   : === BLE mesh data type constants ===
-03-29 14:46:05.537 21575 21600 I GoJNI   :   DataTypeMeshMessage = 42
-03-29 14:46:05.537 21575 21600 I GoJNI   :   DataTypeMeshBeacon  = 43
-03-29 14:46:05.537 21575 21600 I GoJNI   :   DataTypePbAdv       = 41
-03-29 14:46:05.537 21575 21600 I GoJNI   : Bluetooth enabled: true
-03-29 14:46:05.537 21575 21600 I GoJNI   : Multiple advertisement supported: true
-03-29 14:46:05.538 21575 21600 I GoJNI   : LE extended advertising supported: true
-03-29 14:46:05.538 21575 21600 I GoJNI   : Max advertising data length: 1650 bytes
-03-29 14:46:05.538 21575 21600 I GoJNI   : BLE scanner obtained: OK
-03-29 14:46:05.538 21575 21600 I GoJNI   : BLE advertiser obtained: OK
-03-29 14:46:05.538 21575 21600 I GoJNI   : === Mesh relay typed wrapper API ===
-03-29 14:46:05.538 21575 21600 I GoJNI   :   BluetoothLeScanner: StartScan, StopScan, FlushPendingScanResults
-03-29 14:46:05.538 21575 21600 I GoJNI   :   BluetoothLeAdvertiser: StartAdvertising, StopAdvertising,
-03-29 14:46:05.538 21575 21600 I GoJNI   :     StartAdvertisingSet, StopAdvertisingSet
-03-29 14:46:05.538 21575 21600 I GoJNI   :   ScanSettingsBuilder: SetScanMode, SetCallbackType, SetMatchMode,
-03-29 14:46:05.538 21575 21600 I GoJNI   :     SetNumOfMatches, SetReportDelay, SetPhy, SetLegacy, Build
-03-29 14:46:05.538 21575 21600 I GoJNI   :   AdvertiseSettingsBuilder: SetAdvertiseMode, SetTxPowerLevel,
-03-29 14:46:05.538 21575 21600 I GoJNI   :     SetConnectable, SetDiscoverable, SetTimeout, Build
-03-29 14:46:05.538 21575 21600 I GoJNI   :   AdvertiseDataBuilder: SetIncludeDeviceName, SetIncludeTxPowerLevel,
-03-29 14:46:05.538 21575 21600 I GoJNI   :     AddServiceUuid, AddServiceData, AddManufacturerData, Build
-03-29 14:46:05.538 21575 21600 I GoJNI   : Mesh relay capability check completed.
-03-29 14:46:05.538 21575 21600 I GoJNI   : No errors occurred during mesh relay demo.
+03-29 15:46:32.828 25245 25267 I GoJNI   : === Mesh Relay Demo ===
+03-29 15:46:32.828 25245 25267 I GoJNI   : BluetoothManager: obtained OK
+03-29 15:46:32.828 25245 25267 I GoJNI   : Adapter obtained via Manager: OK
+03-29 15:46:32.828 25245 25267 I GoJNI   : Bluetooth enabled: true
+03-29 15:46:32.828 25245 25267 I GoJNI   : Adapter name: Pixel 8a
+03-29 15:46:32.828 25245 25267 I GoJNI   : Adapter state: 12
+03-29 15:46:32.828 25245 25267 I GoJNI   : === Advertising capabilities ===
+03-29 15:46:32.828 25245 25267 I GoJNI   : Multiple advertisement supported: true
+03-29 15:46:32.828 25245 25267 I GoJNI   : LE extended advertising: true
+03-29 15:46:32.828 25245 25267 I GoJNI   : LE periodic advertising: true
+03-29 15:46:32.828 25245 25267 I GoJNI   : Max advertising data length: 1650 bytes
+03-29 15:46:32.828 25245 25267 I GoJNI   : === PHY capabilities ===
+03-29 15:46:32.828 25245 25267 I GoJNI   : LE 2M PHY supported: true
+03-29 15:46:32.828 25245 25267 I GoJNI   : LE Coded PHY supported: true
+03-29 15:46:32.828 25245 25267 I GoJNI   : LE audio supported: 10
+03-29 15:46:32.828 25245 25267 I GoJNI   : Offloaded filtering: true
+03-29 15:46:32.828 25245 25267 I GoJNI   : Offloaded scan batching: true
+03-29 15:46:32.828 25245 25267 I GoJNI   : === LE Scanner ===
+03-29 15:46:32.828 25245 25267 I GoJNI   : BLE scanner: android.bluetooth.le.BluetoothLeScanner@57dd268
+03-29 15:46:32.828 25245 25267 I GoJNI   : === LE Advertiser ===
+03-29 15:46:32.828 25245 25267 I GoJNI   : BLE advertiser: android.bluetooth.le.BluetoothLeAdvertiser@c464b67
+03-29 15:46:32.828 25245 25267 I GoJNI   : === Bonded devices ===
+03-29 15:46:32.828 25245 25267 I GoJNI   : Bonded devices set: obtained OK
+03-29 15:46:32.828 25245 25267 I GoJNI   : GATT connected devices: obtained OK
+03-29 15:46:32.828 25245 25267 I GoJNI   : Mesh relay capable: true
+03-29 15:46:32.828 25245 25267 I GoJNI   : Mesh relay demo completed successfully.

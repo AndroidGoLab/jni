@@ -32,18 +32,18 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 790 ms
+Install command complete in 795 ms
 Starting: Intent { cmp=center.dx.jni.examples.wifi_rtt_ranging/android.app.NativeActivity }
-03-29 14:56:25.566  4971  4997 I GoJNI   : === WiFi RTT Ranging ===
-03-29 14:56:25.567  4971  4997 I GoJNI   : WifiRttManager obtained
-03-29 14:56:25.567  4971  4997 I GoJNI   : RTT available: false
-03-29 14:56:25.567  4971  4997 I GoJNI   : RTT characteristics: obtained
-03-29 14:56:25.567  4971  4997 I GoJNI   : WiFi enabled: true
-03-29 14:56:25.567  4971  4997 I GoJNI   : Scanning for RTT-capable APs...
-03-29 14:56:25.567  4971  4997 I GoJNI   : Scan results obtained (List object)
-03-29 14:56:25.567  4971  4997 I GoJNI   : Note: Iterating Java List<ScanResult> requires raw JNI;
-03-29 14:56:25.567  4971  4997 I GoJNI   : use WifiManager.GetConnectionInfo() for current AP info.
-03-29 14:56:25.567  4971  4997 I GoJNI   : Current AP RSSI: -50 dBm
-03-29 14:56:25.567  4971  4997 I GoJNI   : Current AP frequency: 5180 MHz
-03-29 14:56:25.567  4971  4997 I GoJNI   : Link speed: 270 Mbps
-03-29 14:56:25.567  4971  4997 I GoJNI   : WiFi RTT ranging example complete.
+03-29 15:48:50.691 25774 25795 I GoJNI   : === WiFi RTT Ranging ===
+03-29 15:48:50.691 25774 25795 I GoJNI   : WifiRttManager obtained
+03-29 15:48:50.691 25774 25795 I GoJNI   : RTT available: false
+03-29 15:48:50.691 25774 25795 I GoJNI   : RTT characteristics: obtained
+03-29 15:48:50.691 25774 25795 I GoJNI   : WiFi enabled: true
+03-29 15:48:50.691 25774 25795 I GoJNI   : Scanning for RTT-capable APs...
+03-29 15:48:50.691 25774 25795 I GoJNI   : Scan results obtained (List object)
+03-29 15:48:50.691 25774 25795 I GoJNI   : Note: Iterating Java List<ScanResult> requires raw JNI;
+03-29 15:48:50.691 25774 25795 I GoJNI   : use WifiManager.GetConnectionInfo() for current AP info.
+03-29 15:48:50.691 25774 25795 I GoJNI   : Current AP RSSI: -49 dBm
+03-29 15:48:50.691 25774 25795 I GoJNI   : Current AP frequency: 5180 MHz
+03-29 15:48:50.691 25774 25795 I GoJNI   : Link speed: 300 Mbps
+03-29 15:48:50.691 25774 25795 I GoJNI   : WiFi RTT ranging example complete.

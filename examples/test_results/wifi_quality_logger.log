@@ -32,23 +32,23 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 783 ms
+Install command complete in 864 ms
 Starting: Intent { cmp=center.dx.jni.examples.wifi_quality_logger/android.app.NativeActivity }
-03-29 14:56:57.447  5178  5199 I GoJNI   : === WiFi Quality Logger ===
-03-29 14:56:57.447  5178  5199 I GoJNI   : WiFi enabled: true
-03-29 14:56:57.447  5178  5199 I GoJNI   : SSID: <unknown ssid>
-03-29 14:56:57.447  5178  5199 I GoJNI   : BSSID: 02:00:00:00:00:00
-03-29 14:56:57.447  5178  5199 I GoJNI   : RSSI: -51 dBm
-03-29 14:56:57.447  5178  5199 I GoJNI   : Link speed: 270 Mbps
-03-29 14:56:57.447  5178  5199 I GoJNI   : TX speed: 270 Mbps
-03-29 14:56:57.447  5178  5199 I GoJNI   : RX speed: 300 Mbps
-03-29 14:56:57.447  5178  5199 I GoJNI   : Frequency: 5180 MHz
-03-29 14:56:57.447  5178  5199 I GoJNI   : IP address: 192.168.0.159
-03-29 14:56:57.447  5178  5199 I GoJNI   : Network ID: -1
-03-29 14:56:57.447  5178  5199 I GoJNI   : WiFi standard: 802.11n (WiFi 4) (4)
-03-29 14:56:57.447  5178  5199 I GoJNI   : Max TX speed: 300 Mbps
-03-29 14:56:57.447  5178  5199 I GoJNI   : Max RX speed: 300 Mbps
-03-29 14:56:57.447  5178  5199 I GoJNI   : Hidden SSID: false
-03-29 14:56:57.447  5178  5199 I GoJNI   : Full WifiInfo:
-03-29 14:56:57.447  5178  5199 I GoJNI   :   SSID: <unknown ssid>, BSSID: 02:00:00:00:00:00, MAC: 02:00:00:00:00:00, IP: /192.168.0.159, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11n, RSSI: -51, Link speed: 270Mbps, Tx Link speed: 270Mbps, Max Supported Tx Link speed: 300Mbps, Rx Link speed: 300Mbps, Max Supported Rx Link speed: 300Mbps, Frequency: 5180MHz, Net ID: -1, Metered hint: false, score: 79, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: -1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none><none>MLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
-03-29 14:56:57.447  5178  5199 I GoJNI   : WiFi quality logger complete.
+03-29 15:49:41.019 25989 26011 I GoJNI   : === WiFi Quality Logger ===
+03-29 15:49:41.019 25989 26011 I GoJNI   : WiFi enabled: true
+03-29 15:49:41.019 25989 26011 I GoJNI   : SSID: <unknown ssid>
+03-29 15:49:41.019 25989 26011 I GoJNI   : BSSID: 02:00:00:00:00:00
+03-29 15:49:41.019 25989 26011 I GoJNI   : RSSI: -49 dBm
+03-29 15:49:41.019 25989 26011 I GoJNI   : Link speed: 300 Mbps
+03-29 15:49:41.019 25989 26011 I GoJNI   : TX speed: 300 Mbps
+03-29 15:49:41.019 25989 26011 I GoJNI   : RX speed: 300 Mbps
+03-29 15:49:41.019 25989 26011 I GoJNI   : Frequency: 5180 MHz
+03-29 15:49:41.019 25989 26011 I GoJNI   : IP address: 192.168.0.159
+03-29 15:49:41.019 25989 26011 I GoJNI   : Network ID: -1
+03-29 15:49:41.019 25989 26011 I GoJNI   : WiFi standard: 802.11n (WiFi 4) (4)
+03-29 15:49:41.020 25989 26011 I GoJNI   : Max TX speed: 300 Mbps
+03-29 15:49:41.020 25989 26011 I GoJNI   : Max RX speed: 300 Mbps
+03-29 15:49:41.020 25989 26011 I GoJNI   : Hidden SSID: false
+03-29 15:49:41.020 25989 26011 I GoJNI   : Full WifiInfo:
+03-29 15:49:41.020 25989 26011 I GoJNI   :   SSID: <unknown ssid>, BSSID: 02:00:00:00:00:00, MAC: 02:00:00:00:00:00, IP: /192.168.0.159, Security type: 2, Supplicant state: COMPLETED, Wi-Fi standard: 11n, RSSI: -49, Link speed: 300Mbps, Tx Link speed: 300Mbps, Max Supported Tx Link speed: 300Mbps, Rx Link speed: 300Mbps, Max Supported Rx Link speed: 300Mbps, Frequency: 5180MHz, Net ID: -1, Metered hint: false, score: 81, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: -1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none><none>MLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+03-29 15:49:41.020 25989 26011 I GoJNI   : WiFi quality logger complete.

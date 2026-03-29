@@ -32,12 +32,12 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 793 ms
+Install command complete in 875 ms
 Starting: Intent { cmp=center.dx.jni.examples.telephony_cell_tower/android.app.NativeActivity }
-03-29 15:03:16.075  7239  7264 I GoJNI   : === Cell Tower Info ===
-03-29 15:03:16.075  7239  7264 I GoJNI   : operator code: (empty)
-03-29 15:03:16.075  7239  7264 I GoJNI   : operator name: 
-03-29 15:03:16.075  7239  7264 I GoJNI   : country ISO: ie
-03-29 15:03:16.076  7239  7264 I GoJNI   : data network: UNKNOWN
-03-29 15:03:16.076  7239  7264 I GoJNI   : voice network: UNKNOWN
-03-29 15:03:16.076  7239  7264 I GoJNI   : ICC card: false
+03-29 15:56:50.469 27851 27872 I GoJNI   : === Cell Tower Info ===
+03-29 15:56:50.469 27851 27872 I GoJNI   : operator code: (empty)
+03-29 15:56:50.469 27851 27872 I GoJNI   : operator name: 
+03-29 15:56:50.469 27851 27872 I GoJNI   : country ISO: ie
+03-29 15:56:50.469 27851 27872 I GoJNI   : data network: UNKNOWN
+03-29 15:56:50.469 27851 27872 I GoJNI   : voice network: UNKNOWN
+03-29 15:56:50.469 27851 27872 I GoJNI   : ICC card: false

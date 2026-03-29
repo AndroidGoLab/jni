@@ -32,27 +32,27 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 815 ms
+Install command complete in 857 ms
 Starting: Intent { cmp=center.dx.jni.examples.bt_classic_discovery/android.app.NativeActivity }
-03-29 14:43:54.220 15160 15185 I GoJNI   : === Device type constants ===
-03-29 14:43:54.220 15160 15185 I GoJNI   :   DeviceTypeClassic = 1
-03-29 14:43:54.221 15160 15185 I GoJNI   :   DeviceTypeLe      = 2
-03-29 14:43:54.221 15160 15185 I GoJNI   :   DeviceTypeDual    = 3
-03-29 14:43:54.221 15160 15185 I GoJNI   : === Bond state constants ===
-03-29 14:43:54.221 15160 15185 I GoJNI   :   BondNone    = 10
-03-29 14:43:54.221 15160 15185 I GoJNI   :   BondBonding = 11
-03-29 14:43:54.221 15160 15185 I GoJNI   :   BondBonded  = 12
-03-29 14:43:54.221 15160 15185 I GoJNI   : === Adapter state constants ===
-03-29 14:43:54.221 15160 15185 I GoJNI   :   StateOff       = 10
-03-29 14:43:54.221 15160 15185 I GoJNI   :   StateTurningOn = 11
-03-29 14:43:54.221 15160 15185 I GoJNI   :   StateOn        = 12
-03-29 14:43:54.221 15160 15185 I GoJNI   :   StateTurningOff = 13
-03-29 14:43:54.221 15160 15185 I GoJNI   : Bluetooth enabled: true
-03-29 14:43:54.221 15160 15185 I GoJNI   : Adapter name: Pixel 8a
-03-29 14:43:54.221 15160 15185 I GoJNI   : Adapter state: On (12)
-03-29 14:43:54.221 15160 15185 I GoJNI   : Scan mode: Connectable (21)
-03-29 14:43:54.221 15160 15185 I GoJNI   : StartDiscovery result: false
-03-29 14:43:54.221 15160 15185 I GoJNI   : IsDiscovering: false
-03-29 14:43:54.221 15160 15185 I GoJNI   : IsDiscovering (after 3s): false
-03-29 14:43:54.221 15160 15185 I GoJNI   : CancelDiscovery result: true
-03-29 14:43:54.221 15160 15185 I GoJNI   : No errors occurred during classic Bluetooth discovery.
+03-29 15:44:11.470 24686 24709 I GoJNI   : === Device type constants ===
+03-29 15:44:11.470 24686 24709 I GoJNI   :   DeviceTypeClassic = 1
+03-29 15:44:11.470 24686 24709 I GoJNI   :   DeviceTypeLe      = 2
+03-29 15:44:11.470 24686 24709 I GoJNI   :   DeviceTypeDual    = 3
+03-29 15:44:11.470 24686 24709 I GoJNI   : === Bond state constants ===
+03-29 15:44:11.470 24686 24709 I GoJNI   :   BondNone    = 10
+03-29 15:44:11.471 24686 24709 I GoJNI   :   BondBonding = 11
+03-29 15:44:11.471 24686 24709 I GoJNI   :   BondBonded  = 12
+03-29 15:44:11.471 24686 24709 I GoJNI   : === Adapter state constants ===
+03-29 15:44:11.471 24686 24709 I GoJNI   :   StateOff       = 10
+03-29 15:44:11.471 24686 24709 I GoJNI   :   StateTurningOn = 11
+03-29 15:44:11.471 24686 24709 I GoJNI   :   StateOn        = 12
+03-29 15:44:11.471 24686 24709 I GoJNI   :   StateTurningOff = 13
+03-29 15:44:11.471 24686 24709 I GoJNI   : Bluetooth enabled: true
+03-29 15:44:11.471 24686 24709 I GoJNI   : Adapter name: Pixel 8a
+03-29 15:44:11.471 24686 24709 I GoJNI   : Adapter state: On (12)
+03-29 15:44:11.471 24686 24709 I GoJNI   : Scan mode: Connectable (21)
+03-29 15:44:11.471 24686 24709 I GoJNI   : StartDiscovery result: false
+03-29 15:44:11.471 24686 24709 I GoJNI   : IsDiscovering: false
+03-29 15:44:11.471 24686 24709 I GoJNI   : IsDiscovering (after 3s): false
+03-29 15:44:11.471 24686 24709 I GoJNI   : CancelDiscovery result: true
+03-29 15:44:11.471 24686 24709 I GoJNI   : No errors occurred during classic Bluetooth discovery.

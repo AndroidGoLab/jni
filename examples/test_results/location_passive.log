@@ -32,19 +32,19 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 833 ms
+Install command complete in 915 ms
 Starting: Intent { cmp=center.dx.jni.examples.location_passive/android.app.NativeActivity }
-03-29 14:59:14.982  5931  5957 I GoJNI   : === Passive Location Provider ===
-03-29 14:59:14.982  5931  5957 I GoJNI   : Provider constant: "passive"
-03-29 14:59:14.983  5931  5957 I GoJNI   : Passive provider enabled: false
-03-29 14:59:14.983  5931  5957 I GoJNI   : === All Provider Status ===
-03-29 14:59:14.983  5931  5957 I GoJNI   :   gps: enabled=false
-03-29 14:59:14.983  5931  5957 I GoJNI   :   network: enabled=false
-03-29 14:59:14.983  5931  5957 I GoJNI   :   passive: enabled=false
-03-29 14:59:14.983  5931  5957 I GoJNI   : === Passive Location ===
-03-29 14:59:14.983  5931  5957 I GoJNI   : No cached passive location available.
-03-29 14:59:14.983  5931  5957 I GoJNI   : (Passive provider reuses fixes from other apps.)
-03-29 14:59:14.983  5931  5957 I GoJNI   : Try running a maps app first, then retry.
-03-29 14:59:14.983  5931  5957 I GoJNI   : === GPS Last Known (for comparison) ===
-03-29 14:59:14.983  5931  5957 I GoJNI   : No cached GPS location.
-03-29 14:59:14.983  5931  5957 I GoJNI   : Passive location example completed.
+03-29 15:52:18.089 26596 26617 I GoJNI   : === Passive Location Provider ===
+03-29 15:52:18.089 26596 26617 I GoJNI   : Provider constant: "passive"
+03-29 15:52:18.089 26596 26617 I GoJNI   : Passive provider enabled: false
+03-29 15:52:18.089 26596 26617 I GoJNI   : === All Provider Status ===
+03-29 15:52:18.089 26596 26617 I GoJNI   :   gps: enabled=false
+03-29 15:52:18.089 26596 26617 I GoJNI   :   network: enabled=false
+03-29 15:52:18.089 26596 26617 I GoJNI   :   passive: enabled=false
+03-29 15:52:18.089 26596 26617 I GoJNI   : === Passive Location ===
+03-29 15:52:18.089 26596 26617 I GoJNI   : No cached passive location available.
+03-29 15:52:18.089 26596 26617 I GoJNI   : (Passive provider reuses fixes from other apps.)
+03-29 15:52:18.089 26596 26617 I GoJNI   : Try running a maps app first, then retry.
+03-29 15:52:18.089 26596 26617 I GoJNI   : === GPS Last Known (for comparison) ===
+03-29 15:52:18.089 26596 26617 I GoJNI   : No cached GPS location.
+03-29 15:52:18.089 26596 26617 I GoJNI   : Passive location example completed.

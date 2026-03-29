@@ -32,16 +32,16 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 710 ms
+Install command complete in 763 ms
 Starting: Intent { cmp=center.dx.jni.examples.wifi_direct_transfer/android.app.NativeActivity }
-03-29 14:46:47.618 22574 22606 I GoJNI   : === WiFi Direct (P2P) ===
-03-29 14:46:47.618 22574 22606 I GoJNI   : P2P supported: true
-03-29 14:46:47.618 22574 22606 I GoJNI   : WifiP2pManager obtained
-03-29 14:46:47.618 22574 22606 I GoJNI   : Channel-constrained discovery: true
-03-29 14:46:47.618 22574 22606 I GoJNI   : Group client removal: true
-03-29 14:46:47.618 22574 22606 I GoJNI   : GO IPv6 link-local: true
-03-29 14:46:47.618 22574 22606 I GoJNI   : Vendor elements: true
-03-29 14:46:47.618 22574 22606 I GoJNI   : WiFi Direct R2: false
-03-29 14:46:47.618 22574 22606 I GoJNI   : Max vendor elements length: 512 bytes
-03-29 14:46:47.618 22574 22606 I GoJNI   : Initialize error: java java.lang.NullPointerException: Attempt to read from field 'android.os.MessageQueue android.os.Looper.mQueue' on a null object reference in method 'void android.os.Handler.<init>(android.os.Looper, android.os.Handler$Callback, boolean, boolean)'
-03-29 14:46:47.618 22574 22606 I GoJNI   : WiFi Direct example complete.
+03-29 15:47:28.136 25465 25486 I GoJNI   : === WiFi Direct (P2P) ===
+03-29 15:47:28.136 25465 25486 I GoJNI   : P2P supported: true
+03-29 15:47:28.136 25465 25486 I GoJNI   : WifiP2pManager obtained
+03-29 15:47:28.136 25465 25486 I GoJNI   : Channel-constrained discovery: true
+03-29 15:47:28.136 25465 25486 I GoJNI   : Group client removal: true
+03-29 15:47:28.136 25465 25486 I GoJNI   : GO IPv6 link-local: true
+03-29 15:47:28.136 25465 25486 I GoJNI   : Vendor elements: true
+03-29 15:47:28.136 25465 25486 I GoJNI   : WiFi Direct R2: false
+03-29 15:47:28.136 25465 25486 I GoJNI   : Max vendor elements length: 512 bytes
+03-29 15:47:28.136 25465 25486 I GoJNI   : Initialize error: java java.lang.NullPointerException: Attempt to read from field 'android.os.MessageQueue android.os.Looper.mQueue' on a null object reference in method 'void android.os.Handler.<init>(android.os.Looper, android.os.Handler$Callback, boolean, boolean)'
+03-29 15:47:28.136 25465 25486 I GoJNI   : WiFi Direct example complete.

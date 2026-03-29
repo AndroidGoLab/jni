@@ -153,18 +153,34 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		}
 
 		// Build an NDEF message from the two records.
-		msg, err := nfc.NewNdefMessage(vm, uriRec.Obj, textRec.Obj)
-		if err != nil {
-			fmt.Fprintf(output, "  NewNdefMessage: %v\n", err)
-		} else {
+		// NdefMessage constructor expects (NdefRecord first, NdefRecord[] rest).
+		// Create a single-element NdefRecord array for the second argument.
+		var msgErr error
+		vm.Do(func(env *jni.Env) error {
+			recCls, err := env.FindClass("android/nfc/NdefRecord")
+			if err != nil {
+				msgErr = err
+				return nil
+			}
+			arr, err := env.NewObjectArray(1, recCls, textRec.Obj)
+			if err != nil {
+				msgErr = err
+				return nil
+			}
+			msg, err := nfc.NewNdefMessage(vm, uriRec.Obj, &arr.Object)
+			if err != nil {
+				msgErr = err
+				return nil
+			}
 			byteLen, err := msg.GetByteArrayLength()
 			if err == nil {
 				fmt.Fprintf(output, "  Message size: %d bytes\n", byteLen)
 			}
-			vm.Do(func(env *jni.Env) error {
-				env.DeleteGlobalRef(msg.Obj)
-				return nil
-			})
+			env.DeleteGlobalRef(msg.Obj)
+			return nil
+		})
+		if msgErr != nil {
+			fmt.Fprintf(output, "  NewNdefMessage: %v\n", msgErr)
 		}
 
 		// Clean up records.

@@ -32,17 +32,17 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 750 ms
+Install command complete in 877 ms
 Starting: Intent { cmp=center.dx.jni.examples.telephony_dual_sim/android.app.NativeActivity }
-03-29 15:02:29.868  6944  6970 I GoJNI   : === Dual SIM Info ===
-03-29 15:02:29.868  6944  6970 I GoJNI   : phone count: 2
-03-29 15:02:29.868  6944  6970 I GoJNI   : active modems: 2
-03-29 15:02:29.868  6944  6970 I GoJNI   : multi-SIM: ALLOWED
-03-29 15:02:29.868  6944  6970 I GoJNI   : --- slot 0 ---
-03-29 15:02:29.868  6944  6970 I GoJNI   :   state: ABSENT
-03-29 15:02:29.868  6944  6970 I GoJNI   :   operator: 
-03-29 15:02:29.868  6944  6970 I GoJNI   :   country: ie
-03-29 15:02:29.868  6944  6970 I GoJNI   : --- slot 1 ---
-03-29 15:02:29.868  6944  6970 I GoJNI   :   state: NOT_READY
-03-29 15:02:29.868  6944  6970 I GoJNI   :   operator: 
-03-29 15:02:29.868  6944  6970 I GoJNI   :   country: ie
+03-29 15:55:44.960 27488 27511 I GoJNI   : === Dual SIM Info ===
+03-29 15:55:44.960 27488 27511 I GoJNI   : phone count: 2
+03-29 15:55:44.960 27488 27511 I GoJNI   : active modems: 2
+03-29 15:55:44.960 27488 27511 I GoJNI   : multi-SIM: ALLOWED
+03-29 15:55:44.960 27488 27511 I GoJNI   : --- slot 0 ---
+03-29 15:55:44.960 27488 27511 I GoJNI   :   state: ABSENT
+03-29 15:55:44.960 27488 27511 I GoJNI   :   operator: 
+03-29 15:55:44.960 27488 27511 I GoJNI   :   country: ie
+03-29 15:55:44.960 27488 27511 I GoJNI   : --- slot 1 ---
+03-29 15:55:44.960 27488 27511 I GoJNI   :   state: NOT_READY
+03-29 15:55:44.960 27488 27511 I GoJNI   :   operator: 
+03-29 15:55:44.960 27488 27511 I GoJNI   :   country: ie

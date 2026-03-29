@@ -37,42 +37,35 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 961 ms
+Install command complete in 893 ms
 Starting: Intent { cmp=center.dx.jni.examples.bt_gatt_client/android.app.NativeActivity }
-03-29 14:44:11.689 15825 15858 I GoJNI   : === GATT status constants ===
-03-29 14:44:11.689 15825 15858 I GoJNI   :   GattSuccess = 0
-03-29 14:44:11.689 15825 15858 I GoJNI   :   GattFailure = 257
-03-29 14:44:11.689 15825 15858 I GoJNI   : === Connection state constants ===
-03-29 14:44:11.689 15825 15858 I GoJNI   :   StateDisconnected  = 0
-03-29 14:44:11.689 15825 15858 I GoJNI   :   StateConnecting    = 1
-03-29 14:44:11.689 15825 15858 I GoJNI   :   StateConnected     = 2
-03-29 14:44:11.689 15825 15858 I GoJNI   :   StateDisconnecting = 3
-03-29 14:44:11.689 15825 15858 I GoJNI   : === Characteristic property constants ===
-03-29 14:44:11.689 15825 15858 I GoJNI   :   PropertyRead          = 2
-03-29 14:44:11.689 15825 15858 I GoJNI   :   PropertyWrite         = 8
-03-29 14:44:11.689 15825 15858 I GoJNI   :   PropertyWriteNoResponse = 4
-03-29 14:44:11.689 15825 15858 I GoJNI   :   PropertyNotify        = 16
-03-29 14:44:11.690 15825 15858 I GoJNI   :   PropertyIndicate      = 32
-03-29 14:44:11.690 15825 15858 I GoJNI   : === Characteristic permission constants ===
-03-29 14:44:11.690 15825 15858 I GoJNI   :   PermissionRead  = 1
-03-29 14:44:11.690 15825 15858 I GoJNI   :   PermissionWrite = 16
-03-29 14:44:11.690 15825 15858 I GoJNI   : === Write type constants ===
-03-29 14:44:11.690 15825 15858 I GoJNI   :   WriteTypeDefault    = 2
-03-29 14:44:11.690 15825 15858 I GoJNI   :   WriteTypeNoResponse = 1
-03-29 14:44:11.690 15825 15858 I GoJNI   :   WriteTypeSigned     = 4
-03-29 14:44:11.690 15825 15858 I GoJNI   : Bluetooth enabled: true
-03-29 14:44:11.690 15825 15858 I GoJNI   : BLE supported: scanner available
-03-29 14:44:11.690 15825 15858 I GoJNI   : Multiple advertisement supported: true
-03-29 14:44:11.690 15825 15858 I GoJNI   : === GATT client typed wrapper API ===
-03-29 14:44:11.690 15825 15858 I GoJNI   :   Gatt methods: Close, Connect, Disconnect, DiscoverServices,
-03-29 14:44:11.690 15825 15858 I GoJNI   :     GetServices, GetService, ReadCharacteristic, WriteCharacteristic,
-03-29 14:44:11.690 15825 15858 I GoJNI   :     SetCharacteristicNotification, RequestMtu, ReadRemoteRssi,
-03-29 14:44:11.690 15825 15858 I GoJNI   :     ReadPhy, SetPreferredPhy, ReadDescriptor, WriteDescriptor,
-03-29 14:44:11.690 15825 15858 I GoJNI   :     BeginReliableWrite, ExecuteReliableWrite, AbortReliableWrite,
-03-29 14:44:11.690 15825 15858 I GoJNI   :     RequestConnectionPriority
-03-29 14:44:11.690 15825 15858 I GoJNI   :   GattCallback methods: OnConnectionStateChange, OnServicesDiscovered,
-03-29 14:44:11.690 15825 15858 I GoJNI   :     OnCharacteristicRead, OnCharacteristicWrite, OnCharacteristicChanged,
-03-29 14:44:11.690 15825 15858 I GoJNI   :     OnDescriptorRead, OnDescriptorWrite, OnMtuChanged, OnReadRemoteRssi,
-03-29 14:44:11.690 15825 15858 I GoJNI   :     OnPhyRead, OnPhyUpdate, OnReliableWriteCompleted, OnServiceChanged
-03-29 14:44:11.690 15825 15858 I GoJNI   : GATT client demo completed successfully.
-03-29 14:44:11.691 15825 15858 I GoJNI   : No errors occurred during GATT client lifecycle demo.
+03-29 15:44:34.059 24800 24822 I GoJNI   : === GATT Client Demo ===
+03-29 15:44:34.059 24800 24822 I GoJNI   : BluetoothManager: obtained OK
+03-29 15:44:34.059 24800 24822 I GoJNI   : Manager.ToString: android.bluetooth.BluetoothManager@efe2749
+03-29 15:44:34.059 24800 24822 I GoJNI   : Adapter obtained via Manager: OK
+03-29 15:44:34.060 24800 24822 I GoJNI   : Bluetooth enabled: true
+03-29 15:44:34.060 24800 24822 I GoJNI   : Adapter name: Pixel 8a
+03-29 15:44:34.060 24800 24822 I GoJNI   : Adapter address: 02:00:00:00:00:00
+03-29 15:44:34.060 24800 24822 I GoJNI   : Adapter state: 12
+03-29 15:44:34.060 24800 24822 I GoJNI   : Scan mode: 21
+03-29 15:44:34.060 24800 24822 I GoJNI   : === GATT connected devices (profile=7/GATT) ===
+03-29 15:44:34.060 24800 24822 I GoJNI   : Connected devices list: obtained OK
+03-29 15:44:34.060 24800 24822 I GoJNI   : === BLE capabilities ===
+03-29 15:44:34.060 24800 24822 I GoJNI   : BLE scanner: available
+03-29 15:44:34.060 24800 24822 I GoJNI   : Multiple advertisement supported: true
+03-29 15:44:34.060 24800 24822 I GoJNI   : LE 2M PHY supported: true
+03-29 15:44:34.060 24800 24822 I GoJNI   : LE Coded PHY supported: true
+03-29 15:44:34.060 24800 24822 I GoJNI   : LE extended advertising supported: true
+03-29 15:44:34.060 24800 24822 I GoJNI   : LE periodic advertising supported: true
+03-29 15:44:34.060 24800 24822 I GoJNI   : Offloaded filtering supported: true
+03-29 15:44:34.060 24800 24822 I GoJNI   : Offloaded scan batching supported: true
+03-29 15:44:34.060 24800 24822 I GoJNI   : Max advertising data length: 1650 bytes
+03-29 15:44:34.060 24800 24822 I GoJNI   : Max connected audio devices: 5
+03-29 15:44:34.060 24800 24822 I GoJNI   : LE audio supported: 10
+03-29 15:44:34.060 24800 24822 I GoJNI   : LE audio broadcast source supported: 10
+03-29 15:44:34.060 24800 24822 I GoJNI   : LE audio broadcast assistant supported: 10
+03-29 15:44:34.060 24800 24822 I GoJNI   : === Bonded devices ===
+03-29 15:44:34.060 24800 24822 I GoJNI   : Bonded devices set: obtained OK
+03-29 15:44:34.060 24800 24822 I GoJNI   : Is discovering: false
+03-29 15:44:34.060 24800 24822 I GoJNI   : GATT profile connection state: 0
+03-29 15:44:34.060 24800 24822 I GoJNI   : GATT client demo completed successfully.

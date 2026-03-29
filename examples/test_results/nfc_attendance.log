@@ -32,34 +32,34 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 787 ms
+Install command complete in 808 ms
 Starting: Intent { cmp=center.dx.jni.examples.nfc_attendance/android.app.NativeActivity }
-03-29 15:00:22.113  6339  6361 I GoJNI   : === NFC Attendance System ===
-03-29 15:00:22.113  6339  6361 I GoJNI   : NFC hardware: available
-03-29 15:00:22.114  6339  6361 I GoJNI   : NFC enabled: false
-03-29 15:00:22.114  6339  6361 I GoJNI   : === System Readiness ===
-03-29 15:00:22.114  6339  6361 I GoJNI   :   NFC Hardware:  OK
-03-29 15:00:22.114  6339  6361 I GoJNI   :   NFC Enabled:   NOT AVAILABLE
-03-29 15:00:22.114  6339  6361 I GoJNI   :   Status: Enable NFC in Settings
-03-29 15:00:22.114  6339  6361 I GoJNI   : === Tag Discovery Configuration ===
-03-29 15:00:22.114  6339  6361 I GoJNI   :   NDEF discovered: "android.nfc.action.NDEF_DISCOVERED"
-03-29 15:00:22.114  6339  6361 I GoJNI   :   Tech discovered: "android.nfc.action.TECH_DISCOVERED"
-03-29 15:00:22.114  6339  6361 I GoJNI   :   Tag discovered:  "android.nfc.action.TAG_DISCOVERED"
-03-29 15:00:22.114  6339  6361 I GoJNI   : === Reader Mode Config ===
-03-29 15:00:22.114  6339  6361 I GoJNI   :   FlagReaderNfcA: 0x1
-03-29 15:00:22.114  6339  6361 I GoJNI   :   FlagReaderNfcB: 0x2
-03-29 15:00:22.114  6339  6361 I GoJNI   :   Combined flags: 0x3
-03-29 15:00:22.114  6339  6361 I GoJNI   : === Simulated Attendance Log ===
-03-29 15:00:22.114  6339  6361 I GoJNI   :   [12:00:22] CHECK-IN Alice     tag=04:A2:B3:C4:D5:E6:F7
-03-29 15:00:22.114  6339  6361 I GoJNI   :   [12:30:22] CHECK-IN Bob       tag=04:11:22:33:44:55:66
-03-29 15:00:22.114  6339  6361 I GoJNI   :   [13:00:22] CHECK-IN Carol     tag=04:AA:BB:CC:DD:EE:FF
-03-29 15:00:22.114  6339  6361 I GoJNI   :   [13:30:22] CHECK-OUT Alice     tag=04:A2:B3:C4:D5:E6:F7
-03-29 15:00:22.114  6339  6361 I GoJNI   :   Total entries: 4
-03-29 15:00:22.115  6339  6361 I GoJNI   :   Unique tags:   3
-03-29 15:00:22.115  6339  6361 I GoJNI   : === Attendance Workflow ===
-03-29 15:00:22.115  6339  6361 I GoJNI   :   1. enableReaderMode(activity, callback, flags)
-03-29 15:00:22.115  6339  6361 I GoJNI   :   2. onTagDiscovered(tag) receives Tag object
-03-29 15:00:22.115  6339  6361 I GoJNI   :   3. Read tag ID via tag.getId()
-03-29 15:00:22.115  6339  6361 I GoJNI   :   4. Log timestamp + tag ID as attendance record
-03-29 15:00:22.115  6339  6361 I GoJNI   :   5. Optionally read NDEF for employee name
-03-29 15:00:22.115  6339  6361 I GoJNI   : NFC attendance example completed.
+03-29 15:53:48.482 26996 27018 I GoJNI   : === NFC Attendance System ===
+03-29 15:53:48.482 26996 27018 I GoJNI   : NFC hardware: available
+03-29 15:53:48.482 26996 27018 I GoJNI   : NFC enabled: false
+03-29 15:53:48.482 26996 27018 I GoJNI   : === System Readiness ===
+03-29 15:53:48.482 26996 27018 I GoJNI   :   NFC Hardware:  OK
+03-29 15:53:48.482 26996 27018 I GoJNI   :   NFC Enabled:   NOT AVAILABLE
+03-29 15:53:48.482 26996 27018 I GoJNI   :   Status: Enable NFC in Settings
+03-29 15:53:48.482 26996 27018 I GoJNI   : === Tag Discovery Configuration ===
+03-29 15:53:48.483 26996 27018 I GoJNI   :   NDEF discovered: "android.nfc.action.NDEF_DISCOVERED"
+03-29 15:53:48.483 26996 27018 I GoJNI   :   Tech discovered: "android.nfc.action.TECH_DISCOVERED"
+03-29 15:53:48.483 26996 27018 I GoJNI   :   Tag discovered:  "android.nfc.action.TAG_DISCOVERED"
+03-29 15:53:48.483 26996 27018 I GoJNI   : === Reader Mode Config ===
+03-29 15:53:48.483 26996 27018 I GoJNI   :   FlagReaderNfcA: 0x1
+03-29 15:53:48.483 26996 27018 I GoJNI   :   FlagReaderNfcB: 0x2
+03-29 15:53:48.483 26996 27018 I GoJNI   :   Combined flags: 0x3
+03-29 15:53:48.483 26996 27018 I GoJNI   : === Simulated Attendance Log ===
+03-29 15:53:48.483 26996 27018 I GoJNI   :   [12:53:48] CHECK-IN Alice     tag=04:A2:B3:C4:D5:E6:F7
+03-29 15:53:48.483 26996 27018 I GoJNI   :   [13:23:48] CHECK-IN Bob       tag=04:11:22:33:44:55:66
+03-29 15:53:48.483 26996 27018 I GoJNI   :   [13:53:48] CHECK-IN Carol     tag=04:AA:BB:CC:DD:EE:FF
+03-29 15:53:48.483 26996 27018 I GoJNI   :   [14:23:48] CHECK-OUT Alice     tag=04:A2:B3:C4:D5:E6:F7
+03-29 15:53:48.483 26996 27018 I GoJNI   :   Total entries: 4
+03-29 15:53:48.483 26996 27018 I GoJNI   :   Unique tags:   3
+03-29 15:53:48.483 26996 27018 I GoJNI   : === Attendance Workflow ===
+03-29 15:53:48.483 26996 27018 I GoJNI   :   1. enableReaderMode(activity, callback, flags)
+03-29 15:53:48.483 26996 27018 I GoJNI   :   2. onTagDiscovered(tag) receives Tag object
+03-29 15:53:48.483 26996 27018 I GoJNI   :   3. Read tag ID via tag.getId()
+03-29 15:53:48.483 26996 27018 I GoJNI   :   4. Log timestamp + tag ID as attendance record
+03-29 15:53:48.483 26996 27018 I GoJNI   :   5. Optionally read NDEF for employee name
+03-29 15:53:48.483 26996 27018 I GoJNI   : NFC attendance example completed.

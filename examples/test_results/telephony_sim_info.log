@@ -32,13 +32,13 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 837 ms
+Install command complete in 798 ms
 Starting: Intent { cmp=center.dx.jni.examples.telephony_sim_info/android.app.NativeActivity }
-03-29 15:01:56.576  6742  6767 I GoJNI   : === SIM Info ===
-03-29 15:01:56.576  6742  6767 I GoJNI   : SIM state: ABSENT
-03-29 15:01:56.576  6742  6767 I GoJNI   : phone type: GSM
-03-29 15:01:56.576  6742  6767 I GoJNI   : carrier: 
-03-29 15:01:56.576  6742  6767 I GoJNI   : operator: 
-03-29 15:01:56.576  6742  6767 I GoJNI   : MCC+MNC: 
-03-29 15:01:56.576  6742  6767 I GoJNI   : SIM country: 
-03-29 15:01:56.576  6742  6767 I GoJNI   : IMEI: (denied)
+03-29 15:54:57.576 27287 27310 I GoJNI   : === SIM Info ===
+03-29 15:54:57.576 27287 27310 I GoJNI   : SIM state: ABSENT
+03-29 15:54:57.576 27287 27310 I GoJNI   : phone type: GSM
+03-29 15:54:57.576 27287 27310 I GoJNI   : carrier: 
+03-29 15:54:57.576 27287 27310 I GoJNI   : operator: 
+03-29 15:54:57.576 27287 27310 I GoJNI   : MCC+MNC: 
+03-29 15:54:57.576 27287 27310 I GoJNI   : SIM country: 
+03-29 15:54:57.576 27287 27310 I GoJNI   : IMEI: (denied)

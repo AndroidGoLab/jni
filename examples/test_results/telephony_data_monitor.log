@@ -32,11 +32,11 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 817 ms
+Install command complete in 756 ms
 Starting: Intent { cmp=center.dx.jni.examples.telephony_data_monitor/android.app.NativeActivity }
-03-29 15:03:00.736  7137  7159 I GoJNI   : === Data Monitor ===
-03-29 15:03:00.736  7137  7159 I GoJNI   : data state: DISCONNECTED
-03-29 15:03:00.736  7137  7159 I GoJNI   : data activity: NONE
-03-29 15:03:00.736  7137  7159 I GoJNI   : data enabled: false
-03-29 15:03:00.736  7137  7159 I GoJNI   : data capable: true
-03-29 15:03:00.736  7137  7159 I GoJNI   : data conn allowed: false
+03-29 15:56:28.724 27747 27772 I GoJNI   : === Data Monitor ===
+03-29 15:56:28.725 27747 27772 I GoJNI   : data state: DISCONNECTED
+03-29 15:56:28.725 27747 27772 I GoJNI   : data activity: NONE
+03-29 15:56:28.725 27747 27772 I GoJNI   : data enabled: false
+03-29 15:56:28.725 27747 27772 I GoJNI   : data capable: true
+03-29 15:56:28.725 27747 27772 I GoJNI   : data conn allowed: false

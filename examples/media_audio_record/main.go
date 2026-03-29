@@ -72,7 +72,33 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	ui.RenderOutput()
 
 	// Output file path in app cache directory.
-	outPath := "/sdcard/jni_audio_test.3gp"
+	// Use app-private storage since /sdcard requires MANAGE_EXTERNAL_STORAGE on Android 11+.
+	var outPath string
+	vm.Do(func(env *jni.Env) error {
+		actCls := env.GetObjectClass(ctx.Obj)
+		mid, err := env.GetMethodID(actCls, "getCacheDir", "()Ljava/io/File;")
+		if err != nil {
+			return err
+		}
+		dirObj, err := env.CallObjectMethod(ctx.Obj, mid)
+		if err != nil || dirObj == nil {
+			return fmt.Errorf("getCacheDir: %w", err)
+		}
+		fileCls := env.GetObjectClass(dirObj)
+		pathMid, err := env.GetMethodID(fileCls, "getAbsolutePath", "()Ljava/lang/String;")
+		if err != nil {
+			return err
+		}
+		pathObj, err := env.CallObjectMethod(dirObj, pathMid)
+		if err != nil {
+			return err
+		}
+		outPath = env.GoString((*jni.String)(unsafe.Pointer(pathObj))) + "/jni_audio_test.3gp"
+		return nil
+	})
+	if outPath == "" {
+		outPath = "/data/local/tmp/jni_audio_test.3gp"
+	}
 
 	// Configure audio recording.
 	if err := rec.SetAudioSource(recorder.AudioSourceMIC); err != nil {

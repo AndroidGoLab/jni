@@ -32,7 +32,22 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 785 ms
+Install command complete in 796 ms
 Starting: Intent { cmp=center.dx.jni.examples.app_intent_broadcast/android.app.NativeActivity }
-03-29 15:26:02.273 20550 20576 I GoJNI   : === Intent Broadcast ===
-03-29 15:26:02.273 20550 20576 I GoJNI   : ERROR: app.NewIntent: java java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String android.content.Context.getPackageName()' on a null object reference
+03-29 15:42:52.669 24420 24445 I GoJNI   : === Intent Broadcast ===
+03-29 15:42:52.669 24420 24445 I GoJNI   : Action: center.dx.jni.examples.ACTION_TEST_BROADCAST
+03-29 15:42:52.669 24420 24445 I GoJNI   : Added string extra: message=Hello from Go!
+03-29 15:42:52.669 24420 24445 I GoJNI   : Added int extra: timestamp=1234567890
+03-29 15:42:52.669 24420 24445 I GoJNI   : Added bool extra: from_go=true
+03-29 15:42:52.669 24420 24445 I GoJNI   : Read back string: Hello from Go!
+03-29 15:42:52.669 24420 24445 I GoJNI   : Read back int: 1234567890
+03-29 15:42:52.669 24420 24445 I GoJNI   : Sending broadcast...
+03-29 15:42:52.669 24420 24445 I GoJNI   : Broadcast sent OK
+03-29 15:42:52.669 24420 24445 I GoJNI   : Intent Action Constants:
+03-29 15:42:52.669 24420 24445 I GoJNI   :   ACTION_VIEW: android.intent.action.VIEW
+03-29 15:42:52.669 24420 24445 I GoJNI   :   ACTION_SEND: android.intent.action.SEND
+03-29 15:42:52.669 24420 24445 I GoJNI   :   ACTION_MAIN: android.intent.action.MAIN
+03-29 15:42:52.669 24420 24445 I GoJNI   : Intent Flag Constants:
+03-29 15:42:52.669 24420 24445 I GoJNI   :   FLAG_ACTIVITY_NEW_TASK:   0x10000000
+03-29 15:42:52.669 24420 24445 I GoJNI   :   FLAG_ACTIVITY_CLEAR_TOP:  0x4000000
+03-29 15:42:52.669 24420 24445 I GoJNI   : Intent broadcast complete.

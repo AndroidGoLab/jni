@@ -32,12 +32,12 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 855 ms
+Install command complete in 793 ms
 Starting: Intent { cmp=center.dx.jni.examples.telephony_roaming/android.app.NativeActivity }
-03-29 15:02:13.101  6838  6861 I GoJNI   : === Roaming Status ===
-03-29 15:02:13.102  6838  6861 I GoJNI   : roaming: false
-03-29 15:02:13.102  6838  6861 I GoJNI   : network country: ie
-03-29 15:02:13.102  6838  6861 I GoJNI   : operator name: 
-03-29 15:02:13.102  6838  6861 I GoJNI   : operator code: 
-03-29 15:02:13.102  6838  6861 I GoJNI   : SIM country: 
-03-29 15:02:13.102  6838  6861 I GoJNI   : data roaming: false
+03-29 15:55:21.991 27387 27409 I GoJNI   : === Roaming Status ===
+03-29 15:55:21.991 27387 27409 I GoJNI   : roaming: false
+03-29 15:55:21.991 27387 27409 I GoJNI   : network country: ie
+03-29 15:55:21.991 27387 27409 I GoJNI   : operator name: 
+03-29 15:55:21.991 27387 27409 I GoJNI   : operator code: 
+03-29 15:55:21.991 27387 27409 I GoJNI   : SIM country: 
+03-29 15:55:21.991 27387 27409 I GoJNI   : data roaming: false

@@ -32,11 +32,11 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 788 ms
+Install command complete in 747 ms
 Starting: Intent { cmp=center.dx.jni.examples.telephony_call_state/android.app.NativeActivity }
-03-29 15:02:45.286  7043  7068 I GoJNI   : === Call State ===
-03-29 15:02:45.286  7043  7068 I GoJNI   : call state: IDLE
-03-29 15:02:45.286  7043  7068 I GoJNI   : sub call state: IDLE
-03-29 15:02:45.286  7043  7068 I GoJNI   : voice capable: true
-03-29 15:02:45.286  7043  7068 I GoJNI   : SMS capable: true
-03-29 15:02:45.286  7043  7068 I GoJNI   : voice+data: true
+03-29 15:56:06.802 27588 27614 I GoJNI   : === Call State ===
+03-29 15:56:06.802 27588 27614 I GoJNI   : call state: IDLE
+03-29 15:56:06.802 27588 27614 I GoJNI   : sub call state: IDLE
+03-29 15:56:06.802 27588 27614 I GoJNI   : voice capable: true
+03-29 15:56:06.802 27588 27614 I GoJNI   : SMS capable: true
+03-29 15:56:06.802 27588 27614 I GoJNI   : voice+data: true

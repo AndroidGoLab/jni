@@ -32,46 +32,46 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 828 ms
+Install command complete in 928 ms
 Starting: Intent { cmp=center.dx.jni.examples.nfc_payment/android.app.NativeActivity }
-03-29 15:00:46.283  6427  6453 I GoJNI   : === NFC Payment (HCE) ===
-03-29 15:00:46.283  6427  6453 I GoJNI   : NFC adapter: available
-03-29 15:00:46.283  6427  6453 I GoJNI   : NFC enabled: false
-03-29 15:00:46.283  6427  6453 I GoJNI   : Secure NFC supported: true
-03-29 15:00:46.283  6427  6453 I GoJNI   : Secure NFC enabled: false
-03-29 15:00:46.283  6427  6453 I GoJNI   : Observe mode supported: false
-03-29 15:00:46.283  6427  6453 I GoJNI   : === Card Emulation Categories ===
-03-29 15:00:46.283  6427  6453 I GoJNI   :   CATEGORY_PAYMENT: "payment"
-03-29 15:00:46.283  6427  6453 I GoJNI   :   CATEGORY_OTHER:   "other"
-03-29 15:00:46.283  6427  6453 I GoJNI   : === Selection Modes ===
-03-29 15:00:46.283  6427  6453 I GoJNI   :   PREFER_DEFAULT:  0
-03-29 15:00:46.283  6427  6453 I GoJNI   :   ALWAYS_ASK:      1
-03-29 15:00:46.283  6427  6453 I GoJNI   :   ASK_IF_CONFLICT: 2
-03-29 15:00:46.284  6427  6453 I GoJNI   : === Deactivation Reasons ===
-03-29 15:00:46.285  6427  6453 I GoJNI   :   LINK_LOSS:  0
-03-29 15:00:46.285  6427  6453 I GoJNI   :   DESELECTED: 1
-03-29 15:00:46.285  6427  6453 I GoJNI   : === Routing Constants ===
-03-29 15:00:46.285  6427  6453 I GoJNI   :   ROUTE_DEFAULT: 3
-03-29 15:00:46.285  6427  6453 I GoJNI   :   ROUTE_ESE:     1
-03-29 15:00:46.285  6427  6453 I GoJNI   :   ROUTE_UICC:    2
-03-29 15:00:46.285  6427  6453 I GoJNI   :   ROUTE_DH:      0
-03-29 15:00:46.285  6427  6453 I GoJNI   : === Polling Loop Types ===
-03-29 15:00:46.286  6427  6453 I GoJNI   :   TYPE_A:       65
-03-29 15:00:46.286  6427  6453 I GoJNI   :   TYPE_B:       66
-03-29 15:00:46.286  6427  6453 I GoJNI   :   TYPE_F:       70
-03-29 15:00:46.286  6427  6453 I GoJNI   : === Service Configuration ===
-03-29 15:00:46.286  6427  6453 I GoJNI   :   SERVICE_INTERFACE: "android.nfc.cardemulation.action.HOST_NFCF_SERVICE"
-03-29 15:00:46.286  6427  6453 I GoJNI   :   SERVICE_META_DATA: "android.nfc.cardemulation.host_nfcf_service"
-03-29 15:00:46.286  6427  6453 I GoJNI   :   ACTION_CHANGE_DEFAULT: "android.nfc.cardemulation.action.ACTION_CHANGE_DEFAULT"
-03-29 15:00:46.286  6427  6453 I GoJNI   : === NFC Adapter States ===
-03-29 15:00:46.286  6427  6453 I GoJNI   :   Off:        1
-03-29 15:00:46.286  6427  6453 I GoJNI   :   TurningOn:  2
-03-29 15:00:46.286  6427  6453 I GoJNI   :   On:         3
-03-29 15:00:46.287  6427  6453 I GoJNI   :   TurningOff: 4
-03-29 15:00:46.287  6427  6453 I GoJNI   : === HCE Payment Workflow ===
-03-29 15:00:46.287  6427  6453 I GoJNI   :   1. Register HostApduService in manifest
-03-29 15:00:46.287  6427  6453 I GoJNI   :   2. Define AID group for payment category
-03-29 15:00:46.287  6427  6453 I GoJNI   :   3. Process SELECT APDU in processCommandApdu
-03-29 15:00:46.287  6427  6453 I GoJNI   :   4. Exchange APDU commands with terminal
-03-29 15:00:46.287  6427  6453 I GoJNI   :   5. Handle deactivation in onDeactivated
-03-29 15:00:46.287  6427  6453 I GoJNI   : NFC payment example completed.
+03-29 15:54:10.922 27092 27115 I GoJNI   : === NFC Payment (HCE) ===
+03-29 15:54:10.922 27092 27115 I GoJNI   : NFC adapter: available
+03-29 15:54:10.922 27092 27115 I GoJNI   : NFC enabled: false
+03-29 15:54:10.922 27092 27115 I GoJNI   : Secure NFC supported: true
+03-29 15:54:10.922 27092 27115 I GoJNI   : Secure NFC enabled: false
+03-29 15:54:10.922 27092 27115 I GoJNI   : Observe mode supported: false
+03-29 15:54:10.922 27092 27115 I GoJNI   : === Card Emulation Categories ===
+03-29 15:54:10.922 27092 27115 I GoJNI   :   CATEGORY_PAYMENT: "payment"
+03-29 15:54:10.922 27092 27115 I GoJNI   :   CATEGORY_OTHER:   "other"
+03-29 15:54:10.922 27092 27115 I GoJNI   : === Selection Modes ===
+03-29 15:54:10.922 27092 27115 I GoJNI   :   PREFER_DEFAULT:  0
+03-29 15:54:10.922 27092 27115 I GoJNI   :   ALWAYS_ASK:      1
+03-29 15:54:10.922 27092 27115 I GoJNI   :   ASK_IF_CONFLICT: 2
+03-29 15:54:10.922 27092 27115 I GoJNI   : === Deactivation Reasons ===
+03-29 15:54:10.922 27092 27115 I GoJNI   :   LINK_LOSS:  0
+03-29 15:54:10.922 27092 27115 I GoJNI   :   DESELECTED: 1
+03-29 15:54:10.922 27092 27115 I GoJNI   : === Routing Constants ===
+03-29 15:54:10.922 27092 27115 I GoJNI   :   ROUTE_DEFAULT: 3
+03-29 15:54:10.922 27092 27115 I GoJNI   :   ROUTE_ESE:     1
+03-29 15:54:10.922 27092 27115 I GoJNI   :   ROUTE_UICC:    2
+03-29 15:54:10.922 27092 27115 I GoJNI   :   ROUTE_DH:      0
+03-29 15:54:10.922 27092 27115 I GoJNI   : === Polling Loop Types ===
+03-29 15:54:10.922 27092 27115 I GoJNI   :   TYPE_A:       65
+03-29 15:54:10.922 27092 27115 I GoJNI   :   TYPE_B:       66
+03-29 15:54:10.922 27092 27115 I GoJNI   :   TYPE_F:       70
+03-29 15:54:10.922 27092 27115 I GoJNI   : === Service Configuration ===
+03-29 15:54:10.922 27092 27115 I GoJNI   :   SERVICE_INTERFACE: "android.nfc.cardemulation.action.HOST_NFCF_SERVICE"
+03-29 15:54:10.922 27092 27115 I GoJNI   :   SERVICE_META_DATA: "android.nfc.cardemulation.host_nfcf_service"
+03-29 15:54:10.922 27092 27115 I GoJNI   :   ACTION_CHANGE_DEFAULT: "android.nfc.cardemulation.action.ACTION_CHANGE_DEFAULT"
+03-29 15:54:10.922 27092 27115 I GoJNI   : === NFC Adapter States ===
+03-29 15:54:10.922 27092 27115 I GoJNI   :   Off:        1
+03-29 15:54:10.922 27092 27115 I GoJNI   :   TurningOn:  2
+03-29 15:54:10.922 27092 27115 I GoJNI   :   On:         3
+03-29 15:54:10.922 27092 27115 I GoJNI   :   TurningOff: 4
+03-29 15:54:10.922 27092 27115 I GoJNI   : === HCE Payment Workflow ===
+03-29 15:54:10.922 27092 27115 I GoJNI   :   1. Register HostApduService in manifest
+03-29 15:54:10.922 27092 27115 I GoJNI   :   2. Define AID group for payment category
+03-29 15:54:10.922 27092 27115 I GoJNI   :   3. Process SELECT APDU in processCommandApdu
+03-29 15:54:10.922 27092 27115 I GoJNI   :   4. Exchange APDU commands with terminal
+03-29 15:54:10.922 27092 27115 I GoJNI   :   5. Handle deactivation in onDeactivated
+03-29 15:54:10.922 27092 27115 I GoJNI   : NFC payment example completed.

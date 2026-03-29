@@ -32,21 +32,21 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 800 ms
+Install command complete in 763 ms
 Starting: Intent { cmp=center.dx.jni.examples.location_fusion/android.app.NativeActivity }
-03-29 14:59:33.230  6057  6080 I GoJNI   : === Provider Constants ===
-03-29 14:59:33.230  6057  6080 I GoJNI   :   GPS:     "gps"
-03-29 14:59:33.230  6057  6080 I GoJNI   :   Network: "network"
-03-29 14:59:33.230  6057  6080 I GoJNI   :   Passive: "passive"
-03-29 14:59:33.230  6057  6080 I GoJNI   : Location enabled: false
-03-29 14:59:33.230  6057  6080 I GoJNI   : === Provider Status ===
-03-29 14:59:33.230  6057  6080 I GoJNI   :   gps: enabled=false exists=true
-03-29 14:59:33.230  6057  6080 I GoJNI   :   network: enabled=false exists=true
-03-29 14:59:33.231  6057  6080 I GoJNI   :   passive: enabled=false exists=true
-03-29 14:59:33.231  6057  6080 I GoJNI   : === Fusion: Location from each provider ===
-03-29 14:59:33.231  6057  6080 I GoJNI   :   [gps] not enabled
-03-29 14:59:33.231  6057  6080 I GoJNI   :   [network] not enabled
-03-29 14:59:33.231  6057  6080 I GoJNI   :   [passive] not enabled
-03-29 14:59:33.231  6057  6080 I GoJNI   : === Comparison ===
-03-29 14:59:33.231  6057  6080 I GoJNI   : Need at least 2 provider results to compare.
-03-29 14:59:33.231  6057  6080 I GoJNI   : Location fusion example completed.
+03-29 15:52:41.364 26699 26721 I GoJNI   : === Provider Constants ===
+03-29 15:52:41.365 26699 26721 I GoJNI   :   GPS:     "gps"
+03-29 15:52:41.365 26699 26721 I GoJNI   :   Network: "network"
+03-29 15:52:41.365 26699 26721 I GoJNI   :   Passive: "passive"
+03-29 15:52:41.365 26699 26721 I GoJNI   : Location enabled: false
+03-29 15:52:41.365 26699 26721 I GoJNI   : === Provider Status ===
+03-29 15:52:41.365 26699 26721 I GoJNI   :   gps: enabled=false exists=true
+03-29 15:52:41.365 26699 26721 I GoJNI   :   network: enabled=false exists=true
+03-29 15:52:41.365 26699 26721 I GoJNI   :   passive: enabled=false exists=true
+03-29 15:52:41.365 26699 26721 I GoJNI   : === Fusion: Location from each provider ===
+03-29 15:52:41.365 26699 26721 I GoJNI   :   [gps] not enabled
+03-29 15:52:41.365 26699 26721 I GoJNI   :   [network] not enabled
+03-29 15:52:41.365 26699 26721 I GoJNI   :   [passive] not enabled
+03-29 15:52:41.365 26699 26721 I GoJNI   : === Comparison ===
+03-29 15:52:41.365 26699 26721 I GoJNI   : Need at least 2 provider results to compare.
+03-29 15:52:41.365 26699 26721 I GoJNI   : Location fusion example completed.

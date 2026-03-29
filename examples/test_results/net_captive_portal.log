@@ -32,19 +32,19 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 780 ms
+Install command complete in 814 ms
 Starting: Intent { cmp=center.dx.jni.examples.net_captive_portal/android.app.NativeActivity }
-03-29 14:56:10.019  4861  4886 I GoJNI   : === Captive Portal Detection ===
-03-29 14:56:10.019  4861  4886 I GoJNI   : Active network found
-03-29 14:56:10.019  4861  4886 I GoJNI   : Active network metered: false
-03-29 14:56:10.019  4861  4886 I GoJNI   : Default network active: true
-03-29 14:56:10.019  4861  4886 I GoJNI   : Interface: wlan0
-03-29 14:56:10.019  4861  4886 I GoJNI   : MTU: 0
-03-29 14:56:10.019  4861  4886 I GoJNI   : Private DNS active: true
-03-29 14:56:10.019  4861  4886 I GoJNI   : Link properties:
-03-29 14:56:10.019  4861  4886 I GoJNI   :   {InterfaceName: wlan0 LinkAddresses: [ fe80::5c18:f464:d108:f08e/64,192.168.0.159/24,fdd6:ab1a:7b3a:0:929a:e83c:eded:86aa/64,fdd6:ab1a:7b3a:0:5dcd:57da:bd29:cb15/64 ] DnsAddresses: [ /fdd6:ab1a:7b3a::1,/192.168.0.128,/192.168.0.64,/8.8.4.4 ] UsePrivateDns: true ValidatedPrivateDnsAddresses: [8.8.4.4] Domains: dx.center MTU: 0 ServerAddress: /192.168.0.134 TcpBufferSizes: 524288,2097152,8388608,262144,524288,4194304 Routes: [ fe80::/64 -> :: wlan0 mtu 0,fdd6:ab1a:7b3a:4::/64 -> fe80::1c00:373a:57ca:52d5 wlan0 mtu 0,fdd6:ab1a:7b3a::/48 -> fe80::7683:c2ff:fe48:94e0 wlan0 mtu 0,fdd6:ab1a:7b3a::/64 -> :: wlan0 mtu 0,192.168.0.0/24 -> 0.0.0.0 wlan0 mtu 0,0.0.0.0/0 -> 192.168.0.128 wlan0 mtu 0 ]}
-03-29 14:56:10.020  4861  4886 I GoJNI   : Note: Full captive portal detection requires
-03-29 14:56:10.020  4861  4886 I GoJNI   : NetworkCapabilities.hasCapability(NET_CAPABILITY_CAPTIVE_PORTAL).
-03-29 14:56:10.020  4861  4886 I GoJNI   : The NetworkCapabilities typed wrapper is package-private;
-03-29 14:56:10.020  4861  4886 I GoJNI   : use ConnectivityManager.NetworkCallback for runtime detection.
-03-29 14:56:10.020  4861  4886 I GoJNI   : Captive portal check complete.
+03-29 15:48:17.687 25663 25684 I GoJNI   : === Captive Portal Detection ===
+03-29 15:48:17.687 25663 25684 I GoJNI   : Active network found
+03-29 15:48:17.687 25663 25684 I GoJNI   : Active network metered: false
+03-29 15:48:17.687 25663 25684 I GoJNI   : Default network active: true
+03-29 15:48:17.687 25663 25684 I GoJNI   : Interface: wlan0
+03-29 15:48:17.687 25663 25684 I GoJNI   : MTU: 0
+03-29 15:48:17.687 25663 25684 I GoJNI   : Private DNS active: true
+03-29 15:48:17.687 25663 25684 I GoJNI   : Link properties:
+03-29 15:48:17.687 25663 25684 I GoJNI   :   {InterfaceName: wlan0 LinkAddresses: [ fe80::5c18:f464:d108:f08e/64,192.168.0.159/24,fdd6:ab1a:7b3a:0:929a:e83c:eded:86aa/64,fdd6:ab1a:7b3a:0:5dcd:57da:bd29:cb15/64 ] DnsAddresses: [ /fdd6:ab1a:7b3a::1,/192.168.0.128,/192.168.0.64,/8.8.4.4 ] UsePrivateDns: true ValidatedPrivateDnsAddresses: [8.8.4.4] Domains: dx.center MTU: 0 ServerAddress: /192.168.0.134 TcpBufferSizes: 524288,2097152,8388608,262144,524288,4194304 Routes: [ fe80::/64 -> :: wlan0 mtu 0,fdd6:ab1a:7b3a:4::/64 -> fe80::1c00:373a:57ca:52d5 wlan0 mtu 0,fdd6:ab1a:7b3a::/48 -> fe80::7683:c2ff:fe48:94e0 wlan0 mtu 0,fdd6:ab1a:7b3a::/64 -> :: wlan0 mtu 0,192.168.0.0/24 -> 0.0.0.0 wlan0 mtu 0,0.0.0.0/0 -> 192.168.0.128 wlan0 mtu 0 ]}
+03-29 15:48:17.687 25663 25684 I GoJNI   : Note: Full captive portal detection requires
+03-29 15:48:17.687 25663 25684 I GoJNI   : NetworkCapabilities.hasCapability(NET_CAPABILITY_CAPTIVE_PORTAL).
+03-29 15:48:17.687 25663 25684 I GoJNI   : The NetworkCapabilities typed wrapper is package-private;
+03-29 15:48:17.687 25663 25684 I GoJNI   : use ConnectivityManager.NetworkCallback for runtime detection.
+03-29 15:48:17.687 25663 25684 I GoJNI   : Captive portal check complete.
