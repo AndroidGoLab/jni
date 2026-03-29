@@ -40,7 +40,12 @@ Performing Incremental Install
 Performing Streamed Install
 adb: connect error for write: device '41041JEKB08092' not found
 Serving...
-Timed out waiting for data from device.
+adb: failed to run abb_exec. Error: device '41041JEKB08092' not found
+Performing Incremental Install
+
+Performing Streamed Install
+adb: connect error for write: device '41041JEKB08092' not found
+Serving...
 adb: failed to run abb_exec. Error: device '41041JEKB08092' not found
 Performing Incremental Install
 
