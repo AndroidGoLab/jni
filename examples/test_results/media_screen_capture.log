@@ -1,0 +1,25 @@
+03-29 15:17:07.564 16054 16079 I GoJNI   : === Screen Capture Demo ===
+03-29 15:17:07.564 16054 16079 I GoJNI   : Manager: obtained OK
+03-29 15:17:07.564 16054 16079 I GoJNI   : CaptureIntent: created OK
+03-29 15:17:07.564 16054 16079 I GoJNI   : API surface:
+03-29 15:17:07.564 16054 16079 I GoJNI   :   Manager methods:
+03-29 15:17:07.564 16054 16079 I GoJNI   :     CreateScreenCaptureIntent()
+03-29 15:17:07.564 16054 16079 I GoJNI   :     GetMediaProjection(code,data)
+03-29 15:17:07.564 16054 16079 I GoJNI   :   MediaProjection methods:
+03-29 15:17:07.564 16054 16079 I GoJNI   :     Stop()
+03-29 15:17:07.564 16054 16079 I GoJNI   :     UnregisterCallback(cb)
+03-29 15:17:07.564 16054 16079 I GoJNI   :   VirtualDisplay methods:
+03-29 15:17:07.565 16054 16079 I GoJNI   :     GetDisplay()
+03-29 15:17:07.565 16054 16079 I GoJNI   :     GetSurface()
+03-29 15:17:07.565 16054 16079 I GoJNI   :     Release()
+03-29 15:17:07.565 16054 16079 I GoJNI   :     Resize(w, h, dpi)
+03-29 15:17:07.565 16054 16079 I GoJNI   :     SetSurface(s)
+03-29 15:17:07.565 16054 16079 I GoJNI   : Capture workflow:
+03-29 15:17:07.565 16054 16079 I GoJNI   : 1. CreateScreenCaptureIntent
+03-29 15:17:07.565 16054 16079 I GoJNI   : 2. startActivityForResult
+03-29 15:17:07.565 16054 16079 I GoJNI   :    (user consent required)
+03-29 15:17:07.565 16054 16079 I GoJNI   : 3. GetMediaProjection
+03-29 15:17:07.565 16054 16079 I GoJNI   : 4. createVirtualDisplay
+03-29 15:17:07.565 16054 16079 I GoJNI   : 5. Read from Surface
+03-29 15:17:07.565 16054 16079 I GoJNI   : 6. Stop / Release
+03-29 15:17:07.565 16054 16079 I GoJNI   : Screen capture example complete.

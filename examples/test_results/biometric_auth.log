@@ -1,0 +1,59 @@
+rm -rf build
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=arm64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/biometric_auth/build/lib/arm64-v8a/libexample.so \
+	./examples/biometric_auth/
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=amd64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/biometric_auth/build/lib/x86_64/libexample.so \
+	./examples/biometric_auth/
+keytool -genkeypair -keystore build/debug.keystore -storepass android -alias debug \
+	-keyalg RSA -keysize 2048 -validity 10000 \
+	-dname "CN=Debug" -noprompt 2>/dev/null
+Command line args: [-genkeypair, -keystore, build/debug.keystore, -storepass, android, -alias, debug, -keyalg, RSA, -keysize, 2048, -validity, 10000, -dname, CN=Debug, -noprompt]
+/home/streaming/Android/Sdk/build-tools/35.0.0/aapt2 link --manifest build/AndroidManifest.xml \
+	-I /home/streaming/Android/Sdk/platforms/android-36/android.jar \
+	--min-sdk-version 24 \
+	--target-sdk-version 36 \
+	-o build/base.apk
+cd build && zip -r base.apk lib/
+  adding: lib/ (stored 0%)
+  adding: lib/arm64-v8a/ (stored 0%)
+  adding: lib/arm64-v8a/libexample.so (deflated 51%)
+  adding: lib/x86_64/ (stored 0%)
+  adding: lib/x86_64/libexample.so (deflated 50%)
+/home/streaming/Android/Sdk/build-tools/35.0.0/zipalign -f 4 build/base.apk build/aligned.apk
+/home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
+	--out build/biometric_auth.apk build/aligned.apk
+Built: build/biometric_auth.apk
+Serving...
+All files should be loaded. Notifying the device.
+Performing Incremental Install
+Success
+Install command complete in 1474 ms
+Starting: Intent { cmp=center.dx.jni.examples.biometric_auth/android.app.NativeActivity }
+03-29 15:15:42.604 14720 14742 I GoJNI   : === Biometric Authentication ===
+03-29 15:15:42.604 14720 14742 I GoJNI   : Hardware check (canAuthenticate):
+03-29 15:15:42.604 14720 14742 I GoJNI   :   default: NONE_ENROLLED
+03-29 15:15:42.604 14720 14742 I GoJNI   :   BIOMETRIC_STRONG: NONE_ENROLLED
+03-29 15:15:42.604 14720 14742 I GoJNI   :   BIOMETRIC_WEAK: NONE_ENROLLED
+03-29 15:15:42.604 14720 14742 I GoJNI   :   DEVICE_CREDENTIAL: NONE_ENROLLED
+03-29 15:15:42.604 14720 14742 I GoJNI   :   STRONG|CREDENTIAL: NONE_ENROLLED
+03-29 15:15:42.604 14720 14742 I GoJNI   : CryptoObject API surface:
+03-29 15:15:42.604 14720 14742 I GoJNI   :   GetCipher()
+03-29 15:15:42.604 14720 14742 I GoJNI   :   GetMac()
+03-29 15:15:42.604 14720 14742 I GoJNI   :   GetSignature()
+03-29 15:15:42.604 14720 14742 I GoJNI   :   GetIdentityCredential()
+03-29 15:15:42.604 14720 14742 I GoJNI   :   GetPresentationSession()
+03-29 15:15:42.604 14720 14742 I GoJNI   :   GetOperationHandle()
+03-29 15:15:42.604 14720 14742 I GoJNI   : AuthenticationCallback methods:
+03-29 15:15:42.604 14720 14742 I GoJNI   :   OnAuthenticationSucceeded(result)
+03-29 15:15:42.604 14720 14742 I GoJNI   :   OnAuthenticationFailed()
+03-29 15:15:42.604 14720 14742 I GoJNI   :   OnAuthenticationError(errorCode, errString)
+03-29 15:15:42.604 14720 14742 I GoJNI   :   OnAuthenticationHelp(helpCode, helpString)
+03-29 15:15:42.604 14720 14742 I GoJNI   : Constants:
+03-29 15:15:42.604 14720 14742 I GoJNI   :   BIOMETRIC_STRONG  = 0x000F
+03-29 15:15:42.604 14720 14742 I GoJNI   :   BIOMETRIC_WEAK    = 0x00FF
+03-29 15:15:42.604 14720 14742 I GoJNI   :   DEVICE_CREDENTIAL = 0x8000

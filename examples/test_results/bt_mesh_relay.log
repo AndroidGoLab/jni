@@ -1,0 +1,76 @@
+rm -rf build
+javac --release 17 -classpath /home/streaming/Android/Sdk/platforms/android-36/android.jar \
+	-d build/java ../../internal/testjvm/testdata/center/dx/jni/internal/GoInvocationHandler.java ../../internal/testjvm/testdata/center/dx/jni/internal/GoAbstractDispatch.java 
+/home/streaming/Android/Sdk/build-tools/35.0.0/d8 --lib /home/streaming/Android/Sdk/platforms/android-36/android.jar --output build \
+	$(find build/java -name '*.class')
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=arm64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/bt_mesh_relay/build/lib/arm64-v8a/libexample.so \
+	./examples/bt_mesh_relay/
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=amd64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/bt_mesh_relay/build/lib/x86_64/libexample.so \
+	./examples/bt_mesh_relay/
+keytool -genkeypair -keystore build/debug.keystore -storepass android -alias debug \
+	-keyalg RSA -keysize 2048 -validity 10000 \
+	-dname "CN=Debug" -noprompt 2>/dev/null
+Command line args: [-genkeypair, -keystore, build/debug.keystore, -storepass, android, -alias, debug, -keyalg, RSA, -keysize, 2048, -validity, 10000, -dname, CN=Debug, -noprompt]
+/home/streaming/Android/Sdk/build-tools/35.0.0/aapt2 link --manifest build/AndroidManifest.xml \
+	-I /home/streaming/Android/Sdk/platforms/android-36/android.jar \
+	--min-sdk-version 24 \
+	--target-sdk-version 36 \
+	-o build/base.apk
+  adding: classes.dex (deflated 45%)
+cd build && zip -r base.apk lib/
+  adding: lib/ (stored 0%)
+  adding: lib/arm64-v8a/ (stored 0%)
+  adding: lib/arm64-v8a/libexample.so (deflated 52%)
+  adding: lib/x86_64/ (stored 0%)
+  adding: lib/x86_64/libexample.so (deflated 50%)
+/home/streaming/Android/Sdk/build-tools/35.0.0/zipalign -f 4 build/base.apk build/aligned.apk
+/home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
+	--out build/bt_mesh_relay.apk build/aligned.apk
+Built: build/bt_mesh_relay.apk
+Serving...
+All files should be loaded. Notifying the device.
+Performing Incremental Install
+Success
+Install command complete in 1104 ms
+Starting: Intent { cmp=center.dx.jni.examples.bt_mesh_relay/android.app.NativeActivity }
+03-29 14:46:05.536 21575 21600 I GoJNI   : === Advertise mode constants ===
+03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseModeLowPower   = 0
+03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseModeBalanced   = 1
+03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseModeLowLatency = 2
+03-29 14:46:05.537 21575 21600 I GoJNI   : === Advertise TX power constants ===
+03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseTxPowerUltraLow = 0
+03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseTxPowerLow      = 1
+03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseTxPowerMedium   = 2
+03-29 14:46:05.537 21575 21600 I GoJNI   :   AdvertiseTxPowerHigh     = 3
+03-29 14:46:05.537 21575 21600 I GoJNI   : === Scan mode constants ===
+03-29 14:46:05.537 21575 21600 I GoJNI   :   ScanModeLowPower   = 0
+03-29 14:46:05.537 21575 21600 I GoJNI   :   ScanModeBalanced   = 1
+03-29 14:46:05.537 21575 21600 I GoJNI   :   ScanModeLowLatency = 2
+03-29 14:46:05.537 21575 21600 I GoJNI   : === BLE mesh data type constants ===
+03-29 14:46:05.537 21575 21600 I GoJNI   :   DataTypeMeshMessage = 42
+03-29 14:46:05.537 21575 21600 I GoJNI   :   DataTypeMeshBeacon  = 43
+03-29 14:46:05.537 21575 21600 I GoJNI   :   DataTypePbAdv       = 41
+03-29 14:46:05.537 21575 21600 I GoJNI   : Bluetooth enabled: true
+03-29 14:46:05.537 21575 21600 I GoJNI   : Multiple advertisement supported: true
+03-29 14:46:05.538 21575 21600 I GoJNI   : LE extended advertising supported: true
+03-29 14:46:05.538 21575 21600 I GoJNI   : Max advertising data length: 1650 bytes
+03-29 14:46:05.538 21575 21600 I GoJNI   : BLE scanner obtained: OK
+03-29 14:46:05.538 21575 21600 I GoJNI   : BLE advertiser obtained: OK
+03-29 14:46:05.538 21575 21600 I GoJNI   : === Mesh relay typed wrapper API ===
+03-29 14:46:05.538 21575 21600 I GoJNI   :   BluetoothLeScanner: StartScan, StopScan, FlushPendingScanResults
+03-29 14:46:05.538 21575 21600 I GoJNI   :   BluetoothLeAdvertiser: StartAdvertising, StopAdvertising,
+03-29 14:46:05.538 21575 21600 I GoJNI   :     StartAdvertisingSet, StopAdvertisingSet
+03-29 14:46:05.538 21575 21600 I GoJNI   :   ScanSettingsBuilder: SetScanMode, SetCallbackType, SetMatchMode,
+03-29 14:46:05.538 21575 21600 I GoJNI   :     SetNumOfMatches, SetReportDelay, SetPhy, SetLegacy, Build
+03-29 14:46:05.538 21575 21600 I GoJNI   :   AdvertiseSettingsBuilder: SetAdvertiseMode, SetTxPowerLevel,
+03-29 14:46:05.538 21575 21600 I GoJNI   :     SetConnectable, SetDiscoverable, SetTimeout, Build
+03-29 14:46:05.538 21575 21600 I GoJNI   :   AdvertiseDataBuilder: SetIncludeDeviceName, SetIncludeTxPowerLevel,
+03-29 14:46:05.538 21575 21600 I GoJNI   :     AddServiceUuid, AddServiceData, AddManufacturerData, Build
+03-29 14:46:05.538 21575 21600 I GoJNI   : Mesh relay capability check completed.
+03-29 14:46:05.538 21575 21600 I GoJNI   : No errors occurred during mesh relay demo.

@@ -1,0 +1,61 @@
+rm -rf build
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=arm64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/power_save_detect/build/lib/arm64-v8a/libexample.so \
+	./examples/power_save_detect/
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=amd64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/power_save_detect/build/lib/x86_64/libexample.so \
+	./examples/power_save_detect/
+keytool -genkeypair -keystore build/debug.keystore -storepass android -alias debug \
+	-keyalg RSA -keysize 2048 -validity 10000 \
+	-dname "CN=Debug" -noprompt 2>/dev/null
+Command line args: [-genkeypair, -keystore, build/debug.keystore, -storepass, android, -alias, debug, -keyalg, RSA, -keysize, 2048, -validity, 10000, -dname, CN=Debug, -noprompt]
+/home/streaming/Android/Sdk/build-tools/35.0.0/aapt2 link --manifest build/AndroidManifest.xml \
+	-I /home/streaming/Android/Sdk/platforms/android-36/android.jar \
+	--min-sdk-version 24 \
+	--target-sdk-version 36 \
+	-o build/base.apk
+cd build && zip -r base.apk lib/
+  adding: lib/ (stored 0%)
+  adding: lib/arm64-v8a/ (stored 0%)
+  adding: lib/arm64-v8a/libexample.so (deflated 51%)
+  adding: lib/x86_64/ (stored 0%)
+  adding: lib/x86_64/libexample.so (deflated 50%)
+/home/streaming/Android/Sdk/build-tools/35.0.0/zipalign -f 4 build/base.apk build/aligned.apk
+/home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
+	--out build/power_save_detect.apk build/aligned.apk
+Built: build/power_save_detect.apk
+Serving...
+All files should be loaded. Notifying the device.
+Performing Incremental Install
+Success
+Install command complete in 857 ms
+Starting: Intent { cmp=center.dx.jni.examples.power_save_detect/android.app.NativeActivity }
+03-29 15:18:38.235 17120 17144 I GoJNI   : === Power Save Detect ===
+03-29 15:18:38.235 17120 17144 I GoJNI   : power save mode: false
+03-29 15:18:38.235 17120 17144 I GoJNI   : interactive: true
+03-29 15:18:38.235 17120 17144 I GoJNI   : screen on: true
+03-29 15:18:38.235 17120 17144 I GoJNI   : Doze state:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   device idle: false
+03-29 15:18:38.235 17120 17144 I GoJNI   :   light idle: false
+03-29 15:18:38.235 17120 17144 I GoJNI   : Thermal:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   status: LIGHT (1)
+03-29 15:18:38.235 17120 17144 I GoJNI   :   headroom(10s): 0.775
+03-29 15:18:38.235 17120 17144 I GoJNI   : Low power standby:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   enabled: false
+03-29 15:18:38.235 17120 17144 I GoJNI   :   exempt: true
+03-29 15:18:38.235 17120 17144 I GoJNI   : Battery discharge:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   personalized: false
+03-29 15:18:38.235 17120 17144 I GoJNI   :   prediction: null
+03-29 15:18:38.235 17120 17144 I GoJNI   : sustained perf supported: false
+03-29 15:18:38.235 17120 17144 I GoJNI   : Thermal status constants:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   NONE      = 0
+03-29 15:18:38.235 17120 17144 I GoJNI   :   LIGHT     = 1
+03-29 15:18:38.235 17120 17144 I GoJNI   :   MODERATE  = 2
+03-29 15:18:38.235 17120 17144 I GoJNI   :   SEVERE    = 3
+03-29 15:18:38.235 17120 17144 I GoJNI   :   CRITICAL  = 4
+03-29 15:18:38.235 17120 17144 I GoJNI   :   EMERGENCY = 5
+03-29 15:18:38.235 17120 17144 I GoJNI   :   SHUTDOWN  = 6

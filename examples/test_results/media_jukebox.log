@@ -1,0 +1,18 @@
+03-29 15:17:05.209 15975 16000 I GoJNI   : === Media Jukebox Demo ===
+03-29 15:17:05.209 15975 16000 I GoJNI   : MediaPlayer created OK
+03-29 15:17:05.209 15975 16000 I GoJNI   : Duration (idle): 0 ms
+03-29 15:17:05.209 15975 16000 I GoJNI   : Position (idle): 0 ms
+03-29 15:17:05.209 15975 16000 I GoJNI   : IsPlaying (idle): false
+03-29 15:17:05.209 15975 16000 I GoJNI   : IsLooping (idle): false
+03-29 15:17:05.209 15975 16000 I GoJNI   : AudioSessionId: 65
+03-29 15:17:05.209 15975 16000 I GoJNI   : VideoWidth: 0
+03-29 15:17:05.209 15975 16000 I GoJNI   : VideoHeight: 0
+03-29 15:17:05.209 15975 16000 I GoJNI   : SetVolume(0.8, 0.8): OK
+03-29 15:17:05.209 15975 16000 I GoJNI   : SetLooping(true): OK
+03-29 15:17:05.209 15975 16000 I GoJNI   : IsLooping: false
+03-29 15:17:05.209 15975 16000 I GoJNI   : Setting data source...
+03-29 15:17:05.209 15975 16000 I GoJNI   : SetDataSource: java java.io.IOException: setDataSource failed.: status=0x80000000
+03-29 15:17:05.210 15975 16000 I GoJNI   : (expected on some devices)
+03-29 15:17:05.210 15975 16000 I GoJNI   : Reset: OK (back to idle)
+03-29 15:17:05.210 15975 16000 I GoJNI   : Release: OK
+03-29 15:17:05.210 15975 16000 I GoJNI   : Jukebox example complete.

@@ -1,0 +1,55 @@
+rm -rf build
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=arm64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/nfc_tag_writer/build/lib/arm64-v8a/libexample.so \
+	./examples/nfc_tag_writer/
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=amd64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/nfc_tag_writer/build/lib/x86_64/libexample.so \
+	./examples/nfc_tag_writer/
+keytool -genkeypair -keystore build/debug.keystore -storepass android -alias debug \
+	-keyalg RSA -keysize 2048 -validity 10000 \
+	-dname "CN=Debug" -noprompt 2>/dev/null
+Command line args: [-genkeypair, -keystore, build/debug.keystore, -storepass, android, -alias, debug, -keyalg, RSA, -keysize, 2048, -validity, 10000, -dname, CN=Debug, -noprompt]
+/home/streaming/Android/Sdk/build-tools/35.0.0/aapt2 link --manifest build/AndroidManifest.xml \
+	-I /home/streaming/Android/Sdk/platforms/android-36/android.jar \
+	--min-sdk-version 24 \
+	--target-sdk-version 36 \
+	-o build/base.apk
+cd build && zip -r base.apk lib/
+  adding: lib/ (stored 0%)
+  adding: lib/arm64-v8a/ (stored 0%)
+  adding: lib/arm64-v8a/libexample.so (deflated 51%)
+  adding: lib/x86_64/ (stored 0%)
+  adding: lib/x86_64/libexample.so (deflated 50%)
+/home/streaming/Android/Sdk/build-tools/35.0.0/zipalign -f 4 build/base.apk build/aligned.apk
+/home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
+	--out build/nfc_tag_writer.apk build/aligned.apk
+Built: build/nfc_tag_writer.apk
+Serving...
+All files should be loaded. Notifying the device.
+Performing Incremental Install
+Success
+Install command complete in 870 ms
+Starting: Intent { cmp=center.dx.jni.examples.nfc_tag_writer/android.app.NativeActivity }
+03-29 15:00:05.571  6242  6268 I GoJNI   : === NFC Tag Writer ===
+03-29 15:00:05.571  6242  6268 I GoJNI   : NFC enabled: false
+03-29 15:00:05.571  6242  6268 I GoJNI   : === Creating NDEF Records ===
+03-29 15:00:05.571  6242  6268 I GoJNI   : URI record created successfully.
+03-29 15:00:05.571  6242  6268 I GoJNI   :   TNF: 1 (WELL_KNOWN=1)
+03-29 15:00:05.571  6242  6268 I GoJNI   :   Record: NdefRecord tnf=1 type=55 payload=046769746875622E636F6D2F416E64726F6964476F4C61622F6A6E69
+03-29 15:00:05.571  6242  6268 I GoJNI   :   Byte size: 32 bytes
+03-29 15:00:05.572  6242  6268 I GoJNI   : === Text Record ===
+03-29 15:00:05.572  6242  6268 I GoJNI   :   TNF: 1
+03-29 15:00:05.572  6242  6268 I GoJNI   :   Record: NdefRecord tnf=1 type=54 payload=02656E48656C6C6F2066726F6D20476F204A4E4921
+03-29 15:00:05.572  6242  6268 I GoJNI   : === NDEF Message ===
+03-29 15:00:05.572  6242  6268 I GoJNI   : NewNdefMessage: java java.lang.NullPointerException: Attempt to get length of null array
+03-29 15:00:05.572  6242  6268 I GoJNI   : === Write-Ready Summary ===
+03-29 15:00:05.572  6242  6268 I GoJNI   : To write to a tag:
+03-29 15:00:05.572  6242  6268 I GoJNI   :   1. Enable reader mode with FlagReaderNfcA
+03-29 15:00:05.572  6242  6268 I GoJNI   :   2. Get Tag from onTagDiscovered callback
+03-29 15:00:05.572  6242  6268 I GoJNI   :   3. Connect via Ndef.get(tag)
+03-29 15:00:05.572  6242  6268 I GoJNI   :   4. Call ndef.writeNdefMessage(message)
+03-29 15:00:05.572  6242  6268 I GoJNI   : NFC tag writer example completed.

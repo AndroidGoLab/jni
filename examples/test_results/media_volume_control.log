@@ -1,0 +1,12 @@
+03-29 15:17:10.171 16124 16145 I GoJNI   : === Volume Control Demo ===
+03-29 15:17:10.171 16124 16145 I GoJNI   : Stream volumes:
+03-29 15:17:10.171 16124 16145 I GoJNI   :   VOICE_CALL: 5/15 (min=1 muted=false)
+03-29 15:17:10.171 16124 16145 I GoJNI   :   SYSTEM: 0/7 (min=0 muted=true)
+03-29 15:17:10.171 16124 16145 I GoJNI   :   RING: 0/7 (min=0 muted=true)
+03-29 15:17:10.171 16124 16145 I GoJNI   :   MUSIC: 8/25 (min=0 muted=false)
+03-29 15:17:10.171 16124 16145 I GoJNI   :   ALARM: 6/7 (min=1 muted=false)
+03-29 15:17:10.171 16124 16145 I GoJNI   :   NOTIFICATION: 0/7 (min=0 muted=true)
+03-29 15:17:10.171 16124 16145 I GoJNI   : Ringer mode: VIBRATE (1)
+03-29 15:17:10.172 16124 16145 I GoJNI   : Audio mode: NORMAL (0)
+03-29 15:17:10.172 16124 16145 I GoJNI   : Volume fixed: false
+03-29 15:17:10.172 16124 16145 I GoJNI   : Volume control example complete.

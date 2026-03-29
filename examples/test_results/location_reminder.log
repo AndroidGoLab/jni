@@ -1,0 +1,41 @@
+03-29 15:18:38.235 17120 17144 I GoJNI   : === Power Save Detect ===
+03-29 15:18:38.235 17120 17144 I GoJNI   : power save mode: false
+03-29 15:18:38.235 17120 17144 I GoJNI   : interactive: true
+03-29 15:18:38.235 17120 17144 I GoJNI   : screen on: true
+03-29 15:18:38.235 17120 17144 I GoJNI   : Doze state:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   device idle: false
+03-29 15:18:38.235 17120 17144 I GoJNI   :   light idle: false
+03-29 15:18:38.235 17120 17144 I GoJNI   : Thermal:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   status: LIGHT (1)
+03-29 15:18:38.235 17120 17144 I GoJNI   :   headroom(10s): 0.775
+03-29 15:18:38.235 17120 17144 I GoJNI   : Low power standby:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   enabled: false
+03-29 15:18:38.235 17120 17144 I GoJNI   :   exempt: true
+03-29 15:18:38.235 17120 17144 I GoJNI   : Battery discharge:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   personalized: false
+03-29 15:18:38.235 17120 17144 I GoJNI   :   prediction: null
+03-29 15:18:38.235 17120 17144 I GoJNI   : sustained perf supported: false
+03-29 15:18:38.235 17120 17144 I GoJNI   : Thermal status constants:
+03-29 15:18:38.235 17120 17144 I GoJNI   :   NONE      = 0
+03-29 15:18:38.235 17120 17144 I GoJNI   :   LIGHT     = 1
+03-29 15:18:38.235 17120 17144 I GoJNI   :   MODERATE  = 2
+03-29 15:18:38.235 17120 17144 I GoJNI   :   SEVERE    = 3
+03-29 15:18:38.235 17120 17144 I GoJNI   :   CRITICAL  = 4
+03-29 15:18:38.235 17120 17144 I GoJNI   :   EMERGENCY = 5
+03-29 15:18:38.235 17120 17144 I GoJNI   :   SHUTDOWN  = 6
+03-29 15:18:39.711 17069 17090 I GoJNI   : === Location Check ===
+03-29 15:18:39.711 17069 17090 I GoJNI   : Target: lat=40.7128 lon=-74.0060 (radius 1000 m)
+03-29 15:18:39.711 17069 17090 I GoJNI   : No cached location. Using simulated position.
+03-29 15:18:39.711 17069 17090 I GoJNI   : Current: lat=40.758000 lon=-73.985500 (simulated)
+03-29 15:18:39.711 17069 17090 I GoJNI   : Distance to target: 5315 m
+03-29 15:18:39.711 17069 17090 I GoJNI   : Status: FAR from target (4315 m away)
+03-29 15:18:39.711 17069 17090 I GoJNI   : === Alarm Manager ===
+03-29 15:18:39.711 17069 17090 I GoJNI   : Can schedule exact alarms: false
+03-29 15:18:39.711 17069 17090 I GoJNI   : No upcoming alarm clock set
+03-29 15:18:39.711 17069 17090 I GoJNI   : Alarm type constants:
+03-29 15:18:39.711 17069 17090 I GoJNI   :   RTC_WAKEUP:             0
+03-29 15:18:39.711 17069 17090 I GoJNI   :   ELAPSED_REALTIME_WAKEUP: 2
+03-29 15:18:39.711 17069 17090 I GoJNI   : Alarm intervals:
+03-29 15:18:39.711 17069 17090 I GoJNI   :   INTERVAL_HOUR:    3600000 ms
+03-29 15:18:39.711 17069 17090 I GoJNI   :   INTERVAL_DAY:     86400000 ms
+03-29 15:18:39.711 17069 17090 I GoJNI   : Location reminder example completed.

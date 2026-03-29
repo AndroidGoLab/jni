@@ -1,0 +1,69 @@
+rm -rf build
+javac --release 17 -classpath /home/streaming/Android/Sdk/platforms/android-36/android.jar \
+	-d build/java ../../internal/testjvm/testdata/center/dx/jni/internal/GoInvocationHandler.java ../../internal/testjvm/testdata/center/dx/jni/internal/GoAbstractDispatch.java 
+/home/streaming/Android/Sdk/build-tools/35.0.0/d8 --lib /home/streaming/Android/Sdk/platforms/android-36/android.jar --output build \
+	$(find build/java -name '*.class')
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=arm64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/bt_indoor_position/build/lib/arm64-v8a/libexample.so \
+	./examples/bt_indoor_position/
+cd ../.. && CGO_ENABLED=1 GOOS=android GOARCH=amd64 CC=/home/streaming/Android/Sdk/ndk/28.0.13004108/toolchains/llvm/prebuilt/linux-x86_64/bin/x86_64-linux-android24-clang \
+	CGO_LDFLAGS="-llog -landroid" \
+	go build -buildmode=c-shared \
+	-o examples/bt_indoor_position/build/lib/x86_64/libexample.so \
+	./examples/bt_indoor_position/
+keytool -genkeypair -keystore build/debug.keystore -storepass android -alias debug \
+	-keyalg RSA -keysize 2048 -validity 10000 \
+	-dname "CN=Debug" -noprompt 2>/dev/null
+Command line args: [-genkeypair, -keystore, build/debug.keystore, -storepass, android, -alias, debug, -keyalg, RSA, -keysize, 2048, -validity, 10000, -dname, CN=Debug, -noprompt]
+/home/streaming/Android/Sdk/build-tools/35.0.0/aapt2 link --manifest build/AndroidManifest.xml \
+	-I /home/streaming/Android/Sdk/platforms/android-36/android.jar \
+	--min-sdk-version 24 \
+	--target-sdk-version 36 \
+	-o build/base.apk
+  adding: classes.dex (deflated 45%)
+cd build && zip -r base.apk lib/
+  adding: lib/ (stored 0%)
+  adding: lib/arm64-v8a/ (stored 0%)
+  adding: lib/arm64-v8a/libexample.so (deflated 52%)
+  adding: lib/x86_64/ (stored 0%)
+  adding: lib/x86_64/libexample.so (deflated 50%)
+/home/streaming/Android/Sdk/build-tools/35.0.0/zipalign -f 4 build/base.apk build/aligned.apk
+/home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
+	--out build/bt_indoor_position.apk build/aligned.apk
+Built: build/bt_indoor_position.apk
+Serving...
+All files should be loaded. Notifying the device.
+Performing Incremental Install
+Success
+Install command complete in 544 ms
+Starting: Intent { cmp=center.dx.jni.examples.bt_indoor_position/android.app.NativeActivity }
+03-29 14:45:05.876 16829 16863 I GoJNI   : === BLE scan mode constants (for indoor positioning) ===
+03-29 14:45:05.876 16829 16863 I GoJNI   :   ScanModeLowPower   = 0
+03-29 14:45:05.876 16829 16863 I GoJNI   :   ScanModeBalanced   = 1
+03-29 14:45:05.876 16829 16863 I GoJNI   :   ScanModeLowLatency = 2
+03-29 14:45:05.876 16829 16863 I GoJNI   : === BLE callback type constants ===
+03-29 14:45:05.877 16829 16863 I GoJNI   :   CallbackTypeAllMatches = 1
+03-29 14:45:05.877 16829 16863 I GoJNI   :   CallbackTypeFirstMatch = 2
+03-29 14:45:05.877 16829 16863 I GoJNI   :   CallbackTypeMatchLost  = 4
+03-29 14:45:05.877 16829 16863 I GoJNI   : === BLE match constants ===
+03-29 14:45:05.877 16829 16863 I GoJNI   :   MatchNumOneAdvertisement = 1
+03-29 14:45:05.877 16829 16863 I GoJNI   :   MatchNumFewAdvertisement = 2
+03-29 14:45:05.877 16829 16863 I GoJNI   :   MatchNumMaxAdvertisement = 3
+03-29 14:45:05.877 16829 16863 I GoJNI   : === Distance estimation examples ===
+03-29 14:45:05.877 16829 16863 I GoJNI   : TX power=-59 dBm, path-loss exponent=2.5
+03-29 14:45:05.877 16829 16863 I GoJNI   :   RSSI=-50 dBm -> estimated distance=0.44 m
+03-29 14:45:05.877 16829 16863 I GoJNI   :   RSSI=-60 dBm -> estimated distance=1.10 m
+03-29 14:45:05.877 16829 16863 I GoJNI   :   RSSI=-70 dBm -> estimated distance=2.75 m
+03-29 14:45:05.877 16829 16863 I GoJNI   :   RSSI=-80 dBm -> estimated distance=6.92 m
+03-29 14:45:05.877 16829 16863 I GoJNI   :   RSSI=-90 dBm -> estimated distance=17.38 m
+03-29 14:45:05.877 16829 16863 I GoJNI   : Bluetooth enabled: true
+03-29 14:45:05.877 16829 16863 I GoJNI   : BLE scanner obtained: OK
+03-29 14:45:05.877 16829 16863 I GoJNI   : === PHY capabilities ===
+03-29 14:45:05.877 16829 16863 I GoJNI   : LE 2M PHY supported: true
+03-29 14:45:05.877 16829 16863 I GoJNI   : LE Coded PHY supported: true
+03-29 14:45:05.877 16829 16863 I GoJNI   : LE periodic advertising supported: true
+03-29 14:45:05.877 16829 16863 I GoJNI   : Offloaded scan batching supported: true
+03-29 14:45:05.877 16829 16863 I GoJNI   : Indoor positioning capability check completed.
+03-29 14:45:05.877 16829 16863 I GoJNI   : No errors occurred during indoor positioning demo.

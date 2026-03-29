@@ -1,0 +1,33 @@
+03-29 15:20:09.015 17972 17993 I GoJNI   : === Documents Picker ===
+03-29 15:20:09.015 17972 17993 I GoJNI   : Document columns:
+03-29 15:20:09.015 17972 17993 I GoJNI   :   DisplayName: _display_name
+03-29 15:20:09.015 17972 17993 I GoJNI   :   DocumentId:  document_id
+03-29 15:20:09.015 17972 17993 I GoJNI   :   MimeType:    mime_type
+03-29 15:20:09.015 17972 17993 I GoJNI   :   Size:        _size
+03-29 15:20:09.015 17972 17993 I GoJNI   :   Flags:       flags
+03-29 15:20:09.015 17972 17993 I GoJNI   :   LastModified: last_modified
+03-29 15:20:09.015 17972 17993 I GoJNI   : Root columns:
+03-29 15:20:09.015 17972 17993 I GoJNI   :   RootId:        root_id
+03-29 15:20:09.015 17972 17993 I GoJNI   :   Title:         title
+03-29 15:20:09.015 17972 17993 I GoJNI   :   Summary:       summary
+03-29 15:20:09.015 17972 17993 I GoJNI   :   AvailableBytes: available_bytes
+03-29 15:20:09.015 17972 17993 I GoJNI   :   CapacityBytes:  capacity_bytes
+03-29 15:20:09.015 17972 17993 I GoJNI   :   MimeTypes:     mime_types
+03-29 15:20:09.015 17972 17993 I GoJNI   : URI Builders:
+03-29 15:20:09.015 17972 17993 I GoJNI   :   BuildDocumentUri: OK
+03-29 15:20:09.015 17972 17993 I GoJNI   :   BuildRootUri: OK
+03-29 15:20:09.015 17972 17993 I GoJNI   :   BuildRootsUri: OK
+03-29 15:20:09.015 17972 17993 I GoJNI   :   BuildTreeDocUri: OK
+03-29 15:20:09.015 17972 17993 I GoJNI   :   BuildChildDocsUri: OK
+03-29 15:20:09.015 17972 17993 I GoJNI   :   BuildRecentDocsUri: OK
+03-29 15:20:09.015 17972 17993 I GoJNI   :   BuildSearchDocsUri: OK
+03-29 15:20:09.015 17972 17993 I GoJNI   : URI Classification:
+03-29 15:20:09.015 17972 17993 I GoJNI   :   IsDocumentUri(docUri): true
+03-29 15:20:09.015 17972 17993 I GoJNI   :   IsTreeUri(treeUri): true
+03-29 15:20:09.015 17972 17993 I GoJNI   :   IsRootsUri(rootsUri): true
+03-29 15:20:09.015 17972 17993 I GoJNI   : ID Extraction:
+03-29 15:20:09.015 17972 17993 I GoJNI   :   DocID: primary:Documents/test.txt
+03-29 15:20:09.015 17972 17993 I GoJNI   :   RootID: primary
+03-29 15:20:09.015 17972 17993 I GoJNI   :   TreeDocID: primary:Documents/test.txt
+03-29 15:20:09.015 17972 17993 I GoJNI   :   SearchQuery: *.pdf
+03-29 15:20:09.015 17972 17993 I GoJNI   : Documents picker example complete.

@@ -1,0 +1,14 @@
+03-29 15:17:12.985 16202 16226 I GoJNI   : === MediaSession Ctrl Demo ===
+03-29 15:17:12.985 16202 16226 I GoJNI   : Session created: tag=JNI_Session_Demo
+03-29 15:17:12.985 16202 16226 I GoJNI   : IsActive (initial): false
+03-29 15:17:12.985 16202 16226 I GoJNI   : SetActive(true): OK
+03-29 15:17:12.985 16202 16226 I GoJNI   : IsActive (after set): true
+03-29 15:17:12.986 16202 16226 I GoJNI   : SetFlags: MEDIA_BUTTONS|TRANSPORT
+03-29 15:17:12.986 16202 16226 I GoJNI   : SetQueueTitle: Demo Queue
+03-29 15:17:12.986 16202 16226 I GoJNI   : GetSessionToken: obtained OK
+03-29 15:17:12.986 16202 16226 I GoJNI   : GetController: obtained OK
+03-29 15:17:12.986 16202 16226 I GoJNI   : SetActive(false): OK
+03-29 15:17:12.986 16202 16226 I GoJNI   : IsActive (after deactivate): false
+03-29 15:17:12.986 16202 16226 I GoJNI   : --- SessionManager ---
+03-29 15:17:12.986 16202 16226 I GoJNI   : MediaKeyEventPkg: java java.lang.SecurityException: Missing permission to control media.
+03-29 15:17:12.986 16202 16226 I GoJNI   : Session ctrl example complete.

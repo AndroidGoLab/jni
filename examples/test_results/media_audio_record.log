@@ -1,0 +1,7 @@
+03-29 15:17:02.403 15898 15927 I GoJNI   : === Audio Record Demo ===
+03-29 15:17:02.403 15898 15927 I GoJNI   : MediaRecorder created OK
+03-29 15:17:02.403 15898 15927 I GoJNI   : AudioSource: MIC
+03-29 15:17:02.403 15898 15927 I GoJNI   : OutputFormat: 3GPP
+03-29 15:17:02.403 15898 15927 I GoJNI   : AudioEncoder: AMR_NB
+03-29 15:17:02.403 15898 15927 I GoJNI   : OutputFile: /sdcard/jni_audio_test.3gp
+03-29 15:17:02.403 15898 15927 I GoJNI   : ERROR: Prepare: java java.io.FileNotFoundException: /sdcard/jni_audio_test.3gp: open failed: EPERM (Operation not permitted)

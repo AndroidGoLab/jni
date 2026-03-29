@@ -1,0 +1,19 @@
+03-29 15:18:53.194 17306 17327 I GoJNI   : === Keyguard Lock State ===
+03-29 15:18:53.194 17306 17327 I GoJNI   : keyguard locked: false
+03-29 15:18:53.194 17306 17327 I GoJNI   : keyguard secure: false
+03-29 15:18:53.194 17306 17327 I GoJNI   : device locked: false
+03-29 15:18:53.194 17306 17327 I GoJNI   : device secure: false
+03-29 15:18:53.194 17306 17327 I GoJNI   : restricted input: false
+03-29 15:18:53.194 17306 17327 I GoJNI   : Confirm credential intent:
+03-29 15:18:53.194 17306 17327 I GoJNI   :   create: null (no secure lock)
+03-29 15:18:53.194 17306 17327 I GoJNI   : Keyguard lock:
+03-29 15:18:53.194 17306 17327 I GoJNI   :   create: OK (tag=go-jni-demo)
+03-29 15:18:53.194 17306 17327 I GoJNI   : Dismiss callback methods:
+03-29 15:18:53.194 17306 17327 I GoJNI   :   OnDismissSucceeded()
+03-29 15:18:53.194 17306 17327 I GoJNI   :   OnDismissError()
+03-29 15:18:53.194 17306 17327 I GoJNI   :   OnDismissCancelled()
+03-29 15:18:53.194 17306 17327 I GoJNI   : Locked state listener:
+03-29 15:18:53.194 17306 17327 I GoJNI   :   OnLockedStateChanged(isLocked)
+03-29 15:18:53.194 17306 17327 I GoJNI   : Summary:
+03-29 15:18:53.194 17306 17327 I GoJNI   :   Device does NOT have a secure lock screen.
+03-29 15:18:53.194 17306 17327 I GoJNI   :   Keyguard is NOT displayed (device unlocked).
