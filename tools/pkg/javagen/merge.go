@@ -114,9 +114,16 @@ func mergeClass(cls *Class, overlay *Overlay) (*MergedClass, error) {
 	}
 
 	// Compute constructor JNI signature from constructor_params.
+	// Overlay constructor_overrides take precedence over spec-level params.
 	if cls.Obtain == "constructor" {
-		mc.ConstructorJNISig = JNISignature(cls.ConstructorParams, "void")
-		for _, p := range cls.ConstructorParams {
+		ctorParams := cls.ConstructorParams
+		if overlay != nil {
+			if co, ok := overlay.ConstructorOverrides[cls.JavaClass]; ok {
+				ctorParams = co.Params
+			}
+		}
+		mc.ConstructorJNISig = JNISignature(ctorParams, "void")
+		for _, p := range ctorParams {
 			mc.ConstructorParams = append(mc.ConstructorParams, mergeParam(p, overlay))
 		}
 	}

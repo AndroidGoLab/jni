@@ -23,6 +23,28 @@ type Paint struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPaint creates a new android.graphics.Paint instance.
+func NewPaint(vm *jni.VM) (*Paint, error) {
+	var t Paint
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPaint)), midPaintCtor)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Ascent calls android.graphics.Paint.ascent.
 func (m *Paint) Ascent() (float32, error) {
 	var result float32

@@ -247,6 +247,9 @@ classes:
     - java_class: android.graphics.Canvas
       go_type: Canvas
       obtain: constructor
+      constructor_params:
+        - java_type: android.graphics.Bitmap
+          go_name: arg0
       methods:
         - java_method: clipOutPath
           go_name: ClipOutPath

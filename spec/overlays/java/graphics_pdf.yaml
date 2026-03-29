@@ -1,0 +1,5 @@
+constructor_overrides:
+  android.graphics.Canvas:
+    params:
+      - java_type: android.graphics.Bitmap
+        go_name: arg0

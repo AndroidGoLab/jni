@@ -10,11 +10,19 @@ import (
 
 // Overlay provides per-package customization applied on top of a Spec.
 type Overlay struct {
-	GoNameOverrides map[string]string             `yaml:"go_name_overrides"`
-	MethodGrouping  map[string][]string           `yaml:"method_grouping"`
-	ExtraMethods    []Method                      `yaml:"extra_methods"`
-	TypeOverrides   map[string]string             `yaml:"type_overrides"`
-	ConversionFuncs map[string]ConversionOverride `yaml:"conversion_funcs"`
+	GoNameOverrides      map[string]string                `yaml:"go_name_overrides"`
+	MethodGrouping       map[string][]string              `yaml:"method_grouping"`
+	ExtraMethods         []Method                         `yaml:"extra_methods"`
+	TypeOverrides        map[string]string                `yaml:"type_overrides"`
+	ConversionFuncs      map[string]ConversionOverride    `yaml:"conversion_funcs"`
+	ConstructorOverrides map[string]ConstructorOverride   `yaml:"constructor_overrides"`
+}
+
+// ConstructorOverride customizes the constructor for a specific Java class.
+// Keyed by Java class name (e.g. "android.graphics.Canvas") in the overlay's
+// constructor_overrides map.
+type ConstructorOverride struct {
+	Params []Param `yaml:"params"`
 }
 
 // LoadOverlay reads an overlay YAML file. If the file does not exist, an

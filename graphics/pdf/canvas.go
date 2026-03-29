@@ -23,6 +23,29 @@ type Canvas struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCanvas creates a new android.graphics.Canvas instance.
+func NewCanvas(vm *jni.VM, arg0 *jni.Object) (*Canvas, error) {
+	var t Canvas
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCanvas)), midCanvasCtor, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClipOutPath calls android.graphics.Canvas.clipOutPath.
 func (m *Canvas) ClipOutPath(arg0 *jni.Object) (bool, error) {
 	var result bool
