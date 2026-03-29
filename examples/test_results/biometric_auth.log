@@ -32,28 +32,29 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 1474 ms
+Install command complete in 813 ms
 Starting: Intent { cmp=center.dx.jni.examples.biometric_auth/android.app.NativeActivity }
-03-29 15:15:42.604 14720 14742 I GoJNI   : === Biometric Authentication ===
-03-29 15:15:42.604 14720 14742 I GoJNI   : Hardware check (canAuthenticate):
-03-29 15:15:42.604 14720 14742 I GoJNI   :   default: NONE_ENROLLED
-03-29 15:15:42.604 14720 14742 I GoJNI   :   BIOMETRIC_STRONG: NONE_ENROLLED
-03-29 15:15:42.604 14720 14742 I GoJNI   :   BIOMETRIC_WEAK: NONE_ENROLLED
-03-29 15:15:42.604 14720 14742 I GoJNI   :   DEVICE_CREDENTIAL: NONE_ENROLLED
-03-29 15:15:42.604 14720 14742 I GoJNI   :   STRONG|CREDENTIAL: NONE_ENROLLED
-03-29 15:15:42.604 14720 14742 I GoJNI   : CryptoObject API surface:
-03-29 15:15:42.604 14720 14742 I GoJNI   :   GetCipher()
-03-29 15:15:42.604 14720 14742 I GoJNI   :   GetMac()
-03-29 15:15:42.604 14720 14742 I GoJNI   :   GetSignature()
-03-29 15:15:42.604 14720 14742 I GoJNI   :   GetIdentityCredential()
-03-29 15:15:42.604 14720 14742 I GoJNI   :   GetPresentationSession()
-03-29 15:15:42.604 14720 14742 I GoJNI   :   GetOperationHandle()
-03-29 15:15:42.604 14720 14742 I GoJNI   : AuthenticationCallback methods:
-03-29 15:15:42.604 14720 14742 I GoJNI   :   OnAuthenticationSucceeded(result)
-03-29 15:15:42.604 14720 14742 I GoJNI   :   OnAuthenticationFailed()
-03-29 15:15:42.604 14720 14742 I GoJNI   :   OnAuthenticationError(errorCode, errString)
-03-29 15:15:42.604 14720 14742 I GoJNI   :   OnAuthenticationHelp(helpCode, helpString)
-03-29 15:15:42.604 14720 14742 I GoJNI   : Constants:
-03-29 15:15:42.604 14720 14742 I GoJNI   :   BIOMETRIC_STRONG  = 0x000F
-03-29 15:15:42.604 14720 14742 I GoJNI   :   BIOMETRIC_WEAK    = 0x00FF
-03-29 15:15:42.604 14720 14742 I GoJNI   :   DEVICE_CREDENTIAL = 0x8000
+03-29 16:06:09.867 30159 30184 I GoJNI   : === Biometric Authentication ===
+03-29 16:06:09.867 30159 30184 I GoJNI   : BiometricManager: obtained OK
+03-29 16:06:09.867 30159 30184 I GoJNI   :   ToString: android.hardware.biometrics.BiometricManager@a8e1b9b
+03-29 16:06:09.867 30159 30184 I GoJNI   : CanAuthenticate (default):
+03-29 16:06:09.867 30159 30184 I GoJNI   :   result: NONE_ENROLLED
+03-29 16:06:09.867 30159 30184 I GoJNI   : CanAuthenticate (typed):
+03-29 16:06:09.867 30159 30184 I GoJNI   :   BIOMETRIC_STRONG: NONE_ENROLLED
+03-29 16:06:09.867 30159 30184 I GoJNI   :   BIOMETRIC_WEAK: NONE_ENROLLED
+03-29 16:06:09.867 30159 30184 I GoJNI   :   DEVICE_CREDENTIAL: NONE_ENROLLED
+03-29 16:06:09.867 30159 30184 I GoJNI   :   STRONG|CREDENTIAL: NONE_ENROLLED
+03-29 16:06:09.867 30159 30184 I GoJNI   :   WEAK|CREDENTIAL: NONE_ENROLLED
+03-29 16:06:09.867 30159 30184 I GoJNI   : GetStrings:
+03-29 16:06:09.867 30159 30184 I GoJNI   :   BIOMETRIC_STRONG: android.hardware.biometrics.BiometricManager$Strings@fcd2b38
+03-29 16:06:09.867 30159 30184 I GoJNI   :   BIOMETRIC_WEAK: android.hardware.biometrics.BiometricManager$Strings@2d6a711
+03-29 16:06:09.867 30159 30184 I GoJNI   :   DEVICE_CREDENTIAL: android.hardware.biometrics.BiometricManager$Strings@4728076
+03-29 16:06:09.867 30159 30184 I GoJNI   :   STRONG|CREDENTIAL: android.hardware.biometrics.BiometricManager$Strings@928d677
+03-29 16:06:09.867 30159 30184 I GoJNI   :   WEAK|CREDENTIAL: android.hardware.biometrics.BiometricManager$Strings@ec5c2e4
+03-29 16:06:09.867 30159 30184 I GoJNI   : GetLastAuthenticationTime:
+03-29 16:06:09.867 30159 30184 I GoJNI   :   BIOMETRIC_STRONG: NEVER
+03-29 16:06:09.867 30159 30184 I GoJNI   :   BIOMETRIC_WEAK: error: java java.lang.IllegalArgumentException: Only BIOMETRIC_STRONG and DEVICE_CREDENTIAL authenticators may be used.
+03-29 16:06:09.867 30159 30184 I GoJNI   :   DEVICE_CREDENTIAL: NEVER
+03-29 16:06:09.867 30159 30184 I GoJNI   :   STRONG|CREDENTIAL: NEVER
+03-29 16:06:09.867 30159 30184 I GoJNI   :   WEAK|CREDENTIAL: error: java java.lang.IllegalArgumentException: Only BIOMETRIC_STRONG and DEVICE_CREDENTIAL authenticators may be used.
+03-29 16:06:09.867 30159 30184 I GoJNI   : Biometric auth example complete.

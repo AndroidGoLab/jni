@@ -34,38 +34,9 @@ cd build && zip -r base.apk lib/
 	--out build/bt_gatt_client.apk build/aligned.apk
 Built: build/bt_gatt_client.apk
 Serving...
-All files should be loaded. Notifying the device.
+Timed out waiting for data from device.
+adb: failed to run abb_exec. Error: device '41041JEKB08092' not found
 Performing Incremental Install
-Success
-Install command complete in 893 ms
-Starting: Intent { cmp=center.dx.jni.examples.bt_gatt_client/android.app.NativeActivity }
-03-29 15:44:34.059 24800 24822 I GoJNI   : === GATT Client Demo ===
-03-29 15:44:34.059 24800 24822 I GoJNI   : BluetoothManager: obtained OK
-03-29 15:44:34.059 24800 24822 I GoJNI   : Manager.ToString: android.bluetooth.BluetoothManager@efe2749
-03-29 15:44:34.059 24800 24822 I GoJNI   : Adapter obtained via Manager: OK
-03-29 15:44:34.060 24800 24822 I GoJNI   : Bluetooth enabled: true
-03-29 15:44:34.060 24800 24822 I GoJNI   : Adapter name: Pixel 8a
-03-29 15:44:34.060 24800 24822 I GoJNI   : Adapter address: 02:00:00:00:00:00
-03-29 15:44:34.060 24800 24822 I GoJNI   : Adapter state: 12
-03-29 15:44:34.060 24800 24822 I GoJNI   : Scan mode: 21
-03-29 15:44:34.060 24800 24822 I GoJNI   : === GATT connected devices (profile=7/GATT) ===
-03-29 15:44:34.060 24800 24822 I GoJNI   : Connected devices list: obtained OK
-03-29 15:44:34.060 24800 24822 I GoJNI   : === BLE capabilities ===
-03-29 15:44:34.060 24800 24822 I GoJNI   : BLE scanner: available
-03-29 15:44:34.060 24800 24822 I GoJNI   : Multiple advertisement supported: true
-03-29 15:44:34.060 24800 24822 I GoJNI   : LE 2M PHY supported: true
-03-29 15:44:34.060 24800 24822 I GoJNI   : LE Coded PHY supported: true
-03-29 15:44:34.060 24800 24822 I GoJNI   : LE extended advertising supported: true
-03-29 15:44:34.060 24800 24822 I GoJNI   : LE periodic advertising supported: true
-03-29 15:44:34.060 24800 24822 I GoJNI   : Offloaded filtering supported: true
-03-29 15:44:34.060 24800 24822 I GoJNI   : Offloaded scan batching supported: true
-03-29 15:44:34.060 24800 24822 I GoJNI   : Max advertising data length: 1650 bytes
-03-29 15:44:34.060 24800 24822 I GoJNI   : Max connected audio devices: 5
-03-29 15:44:34.060 24800 24822 I GoJNI   : LE audio supported: 10
-03-29 15:44:34.060 24800 24822 I GoJNI   : LE audio broadcast source supported: 10
-03-29 15:44:34.060 24800 24822 I GoJNI   : LE audio broadcast assistant supported: 10
-03-29 15:44:34.060 24800 24822 I GoJNI   : === Bonded devices ===
-03-29 15:44:34.060 24800 24822 I GoJNI   : Bonded devices set: obtained OK
-03-29 15:44:34.060 24800 24822 I GoJNI   : Is discovering: false
-03-29 15:44:34.060 24800 24822 I GoJNI   : GATT profile connection state: 0
-03-29 15:44:34.060 24800 24822 I GoJNI   : GATT client demo completed successfully.
+
+Performing Streamed Install
+adb: connect error for write: device '41041JEKB08092' not found

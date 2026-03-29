@@ -32,21 +32,21 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 836 ms
+Install command complete in 805 ms
 Starting: Intent { cmp=center.dx.jni.examples.location_reminder/android.app.NativeActivity }
-03-29 15:51:53.886 26495 26520 I GoJNI   : === Location Check ===
-03-29 15:51:53.886 26495 26520 I GoJNI   : Target: lat=40.7128 lon=-74.0060 (radius 1000 m)
-03-29 15:51:53.886 26495 26520 I GoJNI   : No cached location. Using simulated position.
-03-29 15:51:53.886 26495 26520 I GoJNI   : Current: lat=40.758000 lon=-73.985500 (simulated)
-03-29 15:51:53.886 26495 26520 I GoJNI   : Distance to target: 5315 m
-03-29 15:51:53.886 26495 26520 I GoJNI   : Status: FAR from target (4315 m away)
-03-29 15:51:53.886 26495 26520 I GoJNI   : === Alarm Manager ===
-03-29 15:51:53.886 26495 26520 I GoJNI   : Can schedule exact alarms: false
-03-29 15:51:53.886 26495 26520 I GoJNI   : No upcoming alarm clock set
-03-29 15:51:53.886 26495 26520 I GoJNI   : Alarm type constants:
-03-29 15:51:53.886 26495 26520 I GoJNI   :   RTC_WAKEUP:             0
-03-29 15:51:53.886 26495 26520 I GoJNI   :   ELAPSED_REALTIME_WAKEUP: 2
-03-29 15:51:53.886 26495 26520 I GoJNI   : Alarm intervals:
-03-29 15:51:53.886 26495 26520 I GoJNI   :   INTERVAL_HOUR:    3600000 ms
-03-29 15:51:53.886 26495 26520 I GoJNI   :   INTERVAL_DAY:     86400000 ms
-03-29 15:51:53.886 26495 26520 I GoJNI   : Location reminder example completed.
+03-29 16:11:05.157 31841 31864 I GoJNI   : === Location Check ===
+03-29 16:11:05.157 31841 31864 I GoJNI   : Target: lat=40.7128 lon=-74.0060 (radius 1000 m)
+03-29 16:11:05.157 31841 31864 I GoJNI   : No cached location. Using simulated position.
+03-29 16:11:05.157 31841 31864 I GoJNI   : Current: lat=40.758000 lon=-73.985500 (simulated)
+03-29 16:11:05.157 31841 31864 I GoJNI   : Distance to target: 5315 m
+03-29 16:11:05.157 31841 31864 I GoJNI   : Status: FAR from target (4315 m away)
+03-29 16:11:05.157 31841 31864 I GoJNI   : === Alarm Manager ===
+03-29 16:11:05.157 31841 31864 I GoJNI   : Can schedule exact alarms: false
+03-29 16:11:05.157 31841 31864 I GoJNI   : No upcoming alarm clock set
+03-29 16:11:05.157 31841 31864 I GoJNI   : Alarm type constants:
+03-29 16:11:05.157 31841 31864 I GoJNI   :   RTC_WAKEUP:             0
+03-29 16:11:05.157 31841 31864 I GoJNI   :   ELAPSED_REALTIME_WAKEUP: 2
+03-29 16:11:05.157 31841 31864 I GoJNI   : Alarm intervals:
+03-29 16:11:05.157 31841 31864 I GoJNI   :   INTERVAL_HOUR:    3600000 ms
+03-29 16:11:05.157 31841 31864 I GoJNI   :   INTERVAL_DAY:     86400000 ms
+03-29 16:11:05.157 31841 31864 I GoJNI   : Location reminder example completed.

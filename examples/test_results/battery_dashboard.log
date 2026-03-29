@@ -32,34 +32,34 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 825 ms
+Install command complete in 757 ms
 Starting: Intent { cmp=center.dx.jni.examples.battery_dashboard/android.app.NativeActivity }
-03-29 15:16:45.189 15637 15662 I GoJNI   : === Battery Dashboard ===
-03-29 15:16:45.189 15637 15662 I GoJNI   : charging: true
-03-29 15:16:45.189 15637 15662 I GoJNI   : capacity: 100%
-03-29 15:16:45.189 15637 15662 I GoJNI   : status: not charging (4)
-03-29 15:16:45.189 15637 15662 I GoJNI   : current now: -154375 uA
-03-29 15:16:45.189 15637 15662 I GoJNI   : current avg: 253125 uA
-03-29 15:16:45.189 15637 15662 I GoJNI   : charge counter: 4490000 uAh
-03-29 15:16:45.189 15637 15662 I GoJNI   : energy counter: -9223372036854775808 nWh
-03-29 15:16:45.189 15637 15662 I GoJNI   : String properties:
-03-29 15:16:45.189 15637 15662 I GoJNI   :   capacity: (empty)
-03-29 15:16:45.189 15637 15662 I GoJNI   :   charge_counter: (empty)
-03-29 15:16:45.189 15637 15662 I GoJNI   :   current_now: (empty)
-03-29 15:16:45.189 15637 15662 I GoJNI   :   current_avg: (empty)
-03-29 15:16:45.189 15637 15662 I GoJNI   :   status: (empty)
-03-29 15:16:45.189 15637 15662 I GoJNI   :   energy_counter: (empty)
-03-29 15:16:45.189 15637 15662 I GoJNI   : charge time remaining: ~0 min (0 ms)
-03-29 15:16:45.189 15637 15662 I GoJNI   : Property constants:
-03-29 15:16:45.189 15637 15662 I GoJNI   :   CAPACITY       = 4
-03-29 15:16:45.189 15637 15662 I GoJNI   :   CHARGE_COUNTER = 1
-03-29 15:16:45.189 15637 15662 I GoJNI   :   CURRENT_NOW    = 2
-03-29 15:16:45.189 15637 15662 I GoJNI   :   CURRENT_AVG    = 3
-03-29 15:16:45.189 15637 15662 I GoJNI   :   ENERGY_COUNTER = 5
-03-29 15:16:45.189 15637 15662 I GoJNI   :   STATUS         = 6
-03-29 15:16:45.189 15637 15662 I GoJNI   : Status constants:
-03-29 15:16:45.189 15637 15662 I GoJNI   :   UNKNOWN      = 1
-03-29 15:16:45.189 15637 15662 I GoJNI   :   CHARGING     = 2
-03-29 15:16:45.189 15637 15662 I GoJNI   :   DISCHARGING  = 3
-03-29 15:16:45.189 15637 15662 I GoJNI   :   NOT_CHARGING = 4
-03-29 15:16:45.189 15637 15662 I GoJNI   :   FULL         = 5
+03-29 16:07:32.128 30733 30759 I GoJNI   : === Battery Dashboard ===
+03-29 16:07:32.128 30733 30759 I GoJNI   : charging: true
+03-29 16:07:32.128 30733 30759 I GoJNI   : capacity: 100%
+03-29 16:07:32.128 30733 30759 I GoJNI   : status: full (5)
+03-29 16:07:32.128 30733 30759 I GoJNI   : current now: -5625 uA
+03-29 16:07:32.128 30733 30759 I GoJNI   : current avg: -30000 uA
+03-29 16:07:32.128 30733 30759 I GoJNI   : charge counter: 4546000 uAh
+03-29 16:07:32.128 30733 30759 I GoJNI   : energy counter: -9223372036854775808 nWh
+03-29 16:07:32.128 30733 30759 I GoJNI   : String properties:
+03-29 16:07:32.128 30733 30759 I GoJNI   :   capacity: (empty)
+03-29 16:07:32.128 30733 30759 I GoJNI   :   charge_counter: (empty)
+03-29 16:07:32.128 30733 30759 I GoJNI   :   current_now: (empty)
+03-29 16:07:32.128 30733 30759 I GoJNI   :   current_avg: (empty)
+03-29 16:07:32.128 30733 30759 I GoJNI   :   status: (empty)
+03-29 16:07:32.128 30733 30759 I GoJNI   :   energy_counter: (empty)
+03-29 16:07:32.128 30733 30759 I GoJNI   : charge time remaining: ~0 min (0 ms)
+03-29 16:07:32.128 30733 30759 I GoJNI   : Property constants:
+03-29 16:07:32.128 30733 30759 I GoJNI   :   CAPACITY       = 4
+03-29 16:07:32.128 30733 30759 I GoJNI   :   CHARGE_COUNTER = 1
+03-29 16:07:32.128 30733 30759 I GoJNI   :   CURRENT_NOW    = 2
+03-29 16:07:32.128 30733 30759 I GoJNI   :   CURRENT_AVG    = 3
+03-29 16:07:32.128 30733 30759 I GoJNI   :   ENERGY_COUNTER = 5
+03-29 16:07:32.128 30733 30759 I GoJNI   :   STATUS         = 6
+03-29 16:07:32.128 30733 30759 I GoJNI   : Status constants:
+03-29 16:07:32.128 30733 30759 I GoJNI   :   UNKNOWN      = 1
+03-29 16:07:32.128 30733 30759 I GoJNI   :   CHARGING     = 2
+03-29 16:07:32.128 30733 30759 I GoJNI   :   DISCHARGING  = 3
+03-29 16:07:32.128 30733 30759 I GoJNI   :   NOT_CHARGING = 4
+03-29 16:07:32.128 30733 30759 I GoJNI   :   FULL         = 5

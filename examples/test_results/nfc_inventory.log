@@ -32,34 +32,34 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 797 ms
+Install command complete in 758 ms
 Starting: Intent { cmp=center.dx.jni.examples.nfc_inventory/android.app.NativeActivity }
-03-29 15:54:34.716 27187 27212 I GoJNI   : === NFC Inventory Tracker ===
-03-29 15:54:34.716 27187 27212 I GoJNI   : NFC adapter: available, enabled=false
-03-29 15:54:34.716 27187 27212 I GoJNI   : Reader option supported: false
-03-29 15:54:34.716 27187 27212 I GoJNI   : Status: NFC not ready (continuing with demo)
-03-29 15:54:34.716 27187 27212 I GoJNI   : === Building NDEF Records ===
-03-29 15:54:34.716 27187 27212 I GoJNI   : Item 1: Laptop Dell XPS 15 (SKU-001)
-03-29 15:54:34.716 27187 27212 I GoJNI   :   URI record TNF: 1
-03-29 15:54:34.716 27187 27212 I GoJNI   :   Text record TNF: 1
-03-29 15:54:34.716 27187 27212 I GoJNI   :   Message size: 82 bytes
-03-29 15:54:34.716 27187 27212 I GoJNI   : Item 2: Monitor LG 27" (SKU-002)
-03-29 15:54:34.716 27187 27212 I GoJNI   :   URI record TNF: 1
-03-29 15:54:34.716 27187 27212 I GoJNI   :   Text record TNF: 1
-03-29 15:54:34.716 27187 27212 I GoJNI   :   Message size: 78 bytes
-03-29 15:54:34.716 27187 27212 I GoJNI   : Item 3: Keyboard Mechanical (SKU-003)
-03-29 15:54:34.716 27187 27212 I GoJNI   :   URI record TNF: 1
-03-29 15:54:34.716 27187 27212 I GoJNI   :   Text record TNF: 1
-03-29 15:54:34.716 27187 27212 I GoJNI   :   Message size: 83 bytes
-03-29 15:54:34.716 27187 27212 I GoJNI   : === Simulated Batch Scan ===
-03-29 15:54:34.716 27187 27212 I GoJNI   :   [14:49:34] FOUND SKU-001 tag=04:A1:B2:C3:D4:E5:F6
-03-29 15:54:34.716 27187 27212 I GoJNI   :   [14:51:34] FOUND SKU-002 tag=04:11:22:33:44:55:66
-03-29 15:54:34.716 27187 27212 I GoJNI   :   [14:53:34] FOUND SKU-003 tag=04:AA:BB:CC:DD:EE:FF
-03-29 15:54:34.716 27187 27212 I GoJNI   :   Scanned: 3/3 items
-03-29 15:54:34.716 27187 27212 I GoJNI   : === Batch Processing Workflow ===
-03-29 15:54:34.716 27187 27212 I GoJNI   :   1. Load expected inventory from database
-03-29 15:54:34.716 27187 27212 I GoJNI   :   2. enableReaderMode with NfcA + NfcB flags
-03-29 15:54:34.716 27187 27212 I GoJNI   :   3. For each tag: read NDEF, extract SKU
-03-29 15:54:34.716 27187 27212 I GoJNI   :   4. Match against expected inventory
-03-29 15:54:34.716 27187 27212 I GoJNI   :   5. Report found/missing items
-03-29 15:54:34.716 27187 27212 I GoJNI   : NFC inventory example completed.
+03-29 16:11:26.423 31937 31958 I GoJNI   : === NFC Inventory Tracker ===
+03-29 16:11:26.423 31937 31958 I GoJNI   : NFC adapter: available, enabled=false
+03-29 16:11:26.423 31937 31958 I GoJNI   : Reader option supported: false
+03-29 16:11:26.423 31937 31958 I GoJNI   : Status: NFC not ready (continuing with demo)
+03-29 16:11:26.423 31937 31958 I GoJNI   : === Building NDEF Records ===
+03-29 16:11:26.423 31937 31958 I GoJNI   : Item 1: Laptop Dell XPS 15 (SKU-001)
+03-29 16:11:26.423 31937 31958 I GoJNI   :   URI record TNF: 1
+03-29 16:11:26.423 31937 31958 I GoJNI   :   Text record TNF: 1
+03-29 16:11:26.423 31937 31958 I GoJNI   :   Message size: 82 bytes
+03-29 16:11:26.423 31937 31958 I GoJNI   : Item 2: Monitor LG 27" (SKU-002)
+03-29 16:11:26.423 31937 31958 I GoJNI   :   URI record TNF: 1
+03-29 16:11:26.423 31937 31958 I GoJNI   :   Text record TNF: 1
+03-29 16:11:26.423 31937 31958 I GoJNI   :   Message size: 78 bytes
+03-29 16:11:26.423 31937 31958 I GoJNI   : Item 3: Keyboard Mechanical (SKU-003)
+03-29 16:11:26.423 31937 31958 I GoJNI   :   URI record TNF: 1
+03-29 16:11:26.423 31937 31958 I GoJNI   :   Text record TNF: 1
+03-29 16:11:26.423 31937 31958 I GoJNI   :   Message size: 83 bytes
+03-29 16:11:26.423 31937 31958 I GoJNI   : === Simulated Batch Scan ===
+03-29 16:11:26.423 31937 31958 I GoJNI   :   [15:06:26] FOUND SKU-001 tag=04:A1:B2:C3:D4:E5:F6
+03-29 16:11:26.423 31937 31958 I GoJNI   :   [15:08:26] FOUND SKU-002 tag=04:11:22:33:44:55:66
+03-29 16:11:26.423 31937 31958 I GoJNI   :   [15:10:26] FOUND SKU-003 tag=04:AA:BB:CC:DD:EE:FF
+03-29 16:11:26.423 31937 31958 I GoJNI   :   Scanned: 3/3 items
+03-29 16:11:26.423 31937 31958 I GoJNI   : === Batch Processing Workflow ===
+03-29 16:11:26.423 31937 31958 I GoJNI   :   1. Load expected inventory from database
+03-29 16:11:26.423 31937 31958 I GoJNI   :   2. enableReaderMode with NfcA + NfcB flags
+03-29 16:11:26.423 31937 31958 I GoJNI   :   3. For each tag: read NDEF, extract SKU
+03-29 16:11:26.423 31937 31958 I GoJNI   :   4. Match against expected inventory
+03-29 16:11:26.423 31937 31958 I GoJNI   :   5. Report found/missing items
+03-29 16:11:26.423 31937 31958 I GoJNI   : NFC inventory example completed.

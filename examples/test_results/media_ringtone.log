@@ -32,6 +32,22 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 852 ms
+Install command complete in 776 ms
 Starting: Intent { cmp=center.dx.jni.examples.media_ringtone/android.app.NativeActivity }
-03-29 16:01:53.449 29066 29087 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 29087 (Thread-95), pid 29066 (.media_ringtone)
+03-29 16:17:01.434   490   520 I GoJNI   : === Ringtone Query Demo ===
+03-29 16:17:01.434   490   520 I GoJNI   : MediaStore version: eb865a46bd08df20
+03-29 16:17:01.434   490   520 I GoJNI   : ContentResolver: obtained
+03-29 16:17:01.434   490   520 I GoJNI   : Internal audio media:
+03-29 16:17:01.434   490   520 I GoJNI   :   Total entries: 212
+03-29 16:17:01.434   490   520 I GoJNI   :   [5] Palladium (audio/ogg)
+03-29 16:17:01.434   490   520 I GoJNI   :   [6] Mira (audio/ogg)
+03-29 16:17:01.434   490   520 I GoJNI   :   [7] Sirrah (audio/ogg)
+03-29 16:17:01.434   490   520 I GoJNI   :   ... and 209 more
+03-29 16:17:01.434   490   520 I GoJNI   : External audio media:
+03-29 16:17:01.434   490   520 I GoJNI   :   Total entries: 1
+03-29 16:17:01.434   490   520 I GoJNI   :   [24] recording (audio/mp4)
+03-29 16:17:01.434   490   520 I GoJNI   : MediaStore constants:
+03-29 16:17:01.434   490   520 I GoJNI   :   Authority: media
+03-29 16:17:01.434   490   520 I GoJNI   :   VOLUME_EXTERNAL: external
+03-29 16:17:01.434   490   520 I GoJNI   :   VOLUME_INTERNAL: internal
+03-29 16:17:01.434   490   520 I GoJNI   : Ringtone example complete.

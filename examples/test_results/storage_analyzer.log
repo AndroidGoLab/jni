@@ -32,16 +32,16 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 814 ms
+Install command complete in 778 ms
 Starting: Intent { cmp=center.dx.jni.examples.storage_analyzer/android.app.NativeActivity }
-03-29 15:18:08.521 16883 16907 I GoJNI   : === Storage Analyzer ===
-03-29 15:18:08.521 16883 16907 I GoJNI   : Primary volume:
-03-29 15:18:08.521 16883 16907 I GoJNI   :   description: Internal shared storage
-03-29 15:18:08.521 16883 16907 I GoJNI   :   state: mounted
-03-29 15:18:08.521 16883 16907 I GoJNI   :   primary: true
-03-29 15:18:08.521 16883 16907 I GoJNI   :   emulated: true
-03-29 15:18:08.521 16883 16907 I GoJNI   :   removable: false
-03-29 15:18:08.521 16883 16907 I GoJNI   :   uuid: (internal)
-03-29 15:18:08.521 16883 16907 I GoJNI   :   mediaStore: external_primary
-03-29 15:18:08.521 16883 16907 I GoJNI   :   toString: StorageVolume: Internal shared storage
-03-29 15:18:08.521 16883 16907 I GoJNI   : checkpoint supported: true
+03-29 16:08:34.160 31169 31196 I GoJNI   : === Storage Analyzer ===
+03-29 16:08:34.160 31169 31196 I GoJNI   : Primary volume:
+03-29 16:08:34.160 31169 31196 I GoJNI   :   description: Internal shared storage
+03-29 16:08:34.160 31169 31196 I GoJNI   :   state: mounted
+03-29 16:08:34.160 31169 31196 I GoJNI   :   primary: true
+03-29 16:08:34.160 31169 31196 I GoJNI   :   emulated: true
+03-29 16:08:34.160 31169 31196 I GoJNI   :   removable: false
+03-29 16:08:34.160 31169 31196 I GoJNI   :   uuid: (internal)
+03-29 16:08:34.160 31169 31196 I GoJNI   :   mediaStore: external_primary
+03-29 16:08:34.160 31169 31196 I GoJNI   :   toString: StorageVolume: Internal shared storage
+03-29 16:08:34.160 31169 31196 I GoJNI   : checkpoint supported: true

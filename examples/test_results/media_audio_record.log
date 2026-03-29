@@ -32,20 +32,20 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 992 ms
+Install command complete in 914 ms
 Starting: Intent { cmp=center.dx.jni.examples.media_audio_record/android.app.NativeActivity }
-03-29 15:59:34.642 28468 28490 I GoJNI   : === Audio Record Demo ===
-03-29 15:59:34.642 28468 28490 I GoJNI   : MediaRecorder created OK
-03-29 15:59:34.642 28468 28490 I GoJNI   : AudioSource: MIC
-03-29 15:59:34.642 28468 28490 I GoJNI   : OutputFormat: 3GPP
-03-29 15:59:34.642 28468 28490 I GoJNI   : AudioEncoder: AMR_NB
-03-29 15:59:34.642 28468 28490 I GoJNI   : OutputFile: /data/user/0/center.dx.jni.examples.media_audio_record/cache/jni_audio_test.3gp
-03-29 15:59:34.642 28468 28490 I GoJNI   : Prepare: OK
-03-29 15:59:34.642 28468 28490 I GoJNI   : Recording started...
-03-29 15:59:34.642 28468 28490 I GoJNI   :   t=1s amp=0
-03-29 15:59:34.642 28468 28490 I GoJNI   :   t=2s amp=256
-03-29 15:59:34.642 28468 28490 I GoJNI   :   t=3s amp=196
-03-29 15:59:34.642 28468 28490 I GoJNI   : Recording stopped
-03-29 15:59:34.642 28468 28490 I GoJNI   : Recorder released
-03-29 15:59:34.642 28468 28490 I GoJNI   : File created: /data/user/0/center.dx.jni.examples.media_audio_record/cache/jni_audio_test.3gp (7968 bytes)
-03-29 15:59:34.642 28468 28490 I GoJNI   : Audio record example complete.
+03-29 16:12:13.175 32137 32158 I GoJNI   : === Audio Record Demo ===
+03-29 16:12:13.175 32137 32158 I GoJNI   : MediaRecorder created OK
+03-29 16:12:13.175 32137 32158 I GoJNI   : AudioSource: MIC
+03-29 16:12:13.175 32137 32158 I GoJNI   : OutputFormat: 3GPP
+03-29 16:12:13.175 32137 32158 I GoJNI   : AudioEncoder: AMR_NB
+03-29 16:12:13.175 32137 32158 I GoJNI   : OutputFile: /data/user/0/center.dx.jni.examples.media_audio_record/cache/jni_audio_test.3gp
+03-29 16:12:13.175 32137 32158 I GoJNI   : Prepare: OK
+03-29 16:12:13.175 32137 32158 I GoJNI   : Recording started...
+03-29 16:12:13.175 32137 32158 I GoJNI   :   t=1s amp=0
+03-29 16:12:13.175 32137 32158 I GoJNI   :   t=2s amp=2888
+03-29 16:12:13.175 32137 32158 I GoJNI   :   t=3s amp=2453
+03-29 16:12:13.175 32137 32158 I GoJNI   : Recording stopped
+03-29 16:12:13.175 32137 32158 I GoJNI   : Recorder released
+03-29 16:12:13.175 32137 32158 I GoJNI   : File created: /data/user/0/center.dx.jni.examples.media_audio_record/cache/jni_audio_test.3gp (7936 bytes)
+03-29 16:12:13.175 32137 32158 I GoJNI   : Audio record example complete.

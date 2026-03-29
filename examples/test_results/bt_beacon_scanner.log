@@ -37,33 +37,33 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 951 ms
+Install command complete in 959 ms
 Starting: Intent { cmp=center.dx.jni.examples.bt_beacon_scanner/android.app.NativeActivity }
-03-29 15:43:46.356 24578 24602 I GoJNI   : === BLE Beacon Scanner Demo ===
-03-29 15:43:46.356 24578 24602 I GoJNI   : BluetoothManager: obtained OK
-03-29 15:43:46.356 24578 24602 I GoJNI   : Manager.ToString: android.bluetooth.BluetoothManager@d4a6313
-03-29 15:43:46.356 24578 24602 I GoJNI   : Bluetooth enabled: true
-03-29 15:43:46.356 24578 24602 I GoJNI   : Adapter name: Pixel 8a
-03-29 15:43:46.356 24578 24602 I GoJNI   : Adapter address: 02:00:00:00:00:00
-03-29 15:43:46.356 24578 24602 I GoJNI   : Adapter state: 12
-03-29 15:43:46.356 24578 24602 I GoJNI   : Scan mode: 21
-03-29 15:43:46.356 24578 24602 I GoJNI   : === LE Scanner ===
-03-29 15:43:46.356 24578 24602 I GoJNI   : BLE scanner: android.bluetooth.le.BluetoothLeScanner@4348a7c
-03-29 15:43:46.356 24578 24602 I GoJNI   : === Scanning capabilities ===
-03-29 15:43:46.356 24578 24602 I GoJNI   : LE 2M PHY supported: true
-03-29 15:43:46.356 24578 24602 I GoJNI   : LE Coded PHY supported: true
-03-29 15:43:46.356 24578 24602 I GoJNI   : LE extended advertising supported: true
-03-29 15:43:46.356 24578 24602 I GoJNI   : LE periodic advertising supported: true
-03-29 15:43:46.356 24578 24602 I GoJNI   : Offloaded filtering supported: true
-03-29 15:43:46.356 24578 24602 I GoJNI   : Offloaded scan batching supported: true
-03-29 15:43:46.356 24578 24602 I GoJNI   : Max advertising data length: 1650 bytes
-03-29 15:43:46.356 24578 24602 I GoJNI   : Max connected audio devices: 5
-03-29 15:43:46.356 24578 24602 I GoJNI   : LE audio supported: 10
-03-29 15:43:46.356 24578 24602 I GoJNI   : Multiple advertisement supported: true
-03-29 15:43:46.356 24578 24602 I GoJNI   : === LE Advertiser ===
-03-29 15:43:46.356 24578 24602 I GoJNI   : BLE advertiser: android.bluetooth.le.BluetoothLeAdvertiser@ad9f326
-03-29 15:43:46.356 24578 24602 I GoJNI   : === Bonded devices ===
-03-29 15:43:46.356 24578 24602 I GoJNI   : Bonded devices set: obtained OK
-03-29 15:43:46.356 24578 24602 I GoJNI   : GATT connected devices: obtained OK
-03-29 15:43:46.356 24578 24602 I GoJNI   : Is discovering: false
-03-29 15:43:46.356 24578 24602 I GoJNI   : BLE beacon scanner demo completed successfully.
+03-29 16:19:57.472  1450  1518 I GoJNI   : === BLE Beacon Scanner Demo ===
+03-29 16:19:57.473  1450  1518 I GoJNI   : BluetoothManager: obtained OK
+03-29 16:19:57.473  1450  1518 I GoJNI   : Manager.ToString: android.bluetooth.BluetoothManager@d4a6313
+03-29 16:19:57.473  1450  1518 I GoJNI   : Bluetooth enabled: true
+03-29 16:19:57.473  1450  1518 I GoJNI   : Adapter name: Pixel 8a
+03-29 16:19:57.473  1450  1518 I GoJNI   : Adapter address: 02:00:00:00:00:00
+03-29 16:19:57.473  1450  1518 I GoJNI   : Adapter state: 12
+03-29 16:19:57.473  1450  1518 I GoJNI   : Scan mode: 21
+03-29 16:19:57.473  1450  1518 I GoJNI   : === LE Scanner ===
+03-29 16:19:57.473  1450  1518 I GoJNI   : BLE scanner: android.bluetooth.le.BluetoothLeScanner@4348a7c
+03-29 16:19:57.473  1450  1518 I GoJNI   : === Scanning capabilities ===
+03-29 16:19:57.473  1450  1518 I GoJNI   : LE 2M PHY supported: true
+03-29 16:19:57.473  1450  1518 I GoJNI   : LE Coded PHY supported: true
+03-29 16:19:57.473  1450  1518 I GoJNI   : LE extended advertising supported: true
+03-29 16:19:57.473  1450  1518 I GoJNI   : LE periodic advertising supported: true
+03-29 16:19:57.473  1450  1518 I GoJNI   : Offloaded filtering supported: true
+03-29 16:19:57.473  1450  1518 I GoJNI   : Offloaded scan batching supported: true
+03-29 16:19:57.473  1450  1518 I GoJNI   : Max advertising data length: 1650 bytes
+03-29 16:19:57.473  1450  1518 I GoJNI   : Max connected audio devices: 5
+03-29 16:19:57.473  1450  1518 I GoJNI   : LE audio supported: 10
+03-29 16:19:57.473  1450  1518 I GoJNI   : Multiple advertisement supported: true
+03-29 16:19:57.473  1450  1518 I GoJNI   : === LE Advertiser ===
+03-29 16:19:57.473  1450  1518 I GoJNI   : BLE advertiser: android.bluetooth.le.BluetoothLeAdvertiser@ad9f326
+03-29 16:19:57.473  1450  1518 I GoJNI   : === Bonded devices ===
+03-29 16:19:57.473  1450  1518 I GoJNI   : Bonded devices set: obtained OK
+03-29 16:19:57.473  1450  1518 I GoJNI   : GATT connected devices: obtained OK
+03-29 16:19:57.473  1450  1518 I GoJNI   : Is discovering: false
+03-29 16:19:57.473  1450  1518 I GoJNI   : BLE beacon scanner demo completed successfully.

@@ -32,26 +32,23 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 686 ms
+Install command complete in 848 ms
 Starting: Intent { cmp=center.dx.jni.examples.vibrator_haptics/android.app.NativeActivity }
-03-29 15:15:09.512 13922 13954 I GoJNI   : === Permission Request ===
-03-29 15:15:09.512 13922 13954 I GoJNI   : Checking multiple dangerous permissions:
-03-29 15:15:09.512 13922 13954 I GoJNI   :   ACCESS_FINE_LOCATION:     GRANTED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   ACCESS_COARSE_LOCATION:   GRANTED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   CAMERA:                   GRANTED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   READ_CONTACTS:            GRANTED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   WRITE_CONTACTS:           DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   RECORD_AUDIO:             DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   READ_PHONE_STATE:         DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   READ_CALENDAR:            DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   WRITE_CALENDAR:           DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   BODY_SENSORS:             DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   : Summary: 4 granted, 6 denied
-03-29 15:15:09.512 13922 13954 I GoJNI   : Normal permissions (auto-granted):
-03-29 15:15:09.512 13922 13954 I GoJNI   :   INTERNET:                 DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   ACCESS_NETWORK_STATE:     DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   ACCESS_WIFI_STATE:        DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   VIBRATE:                  DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   :   WAKE_LOCK:                DENIED
-03-29 15:15:09.512 13922 13954 I GoJNI   : Package: center.dx.jni.examples.permission_request
-03-29 15:15:09.512 13922 13954 I GoJNI   : Permission request complete.
+03-29 16:19:09.843  1112  1160 I GoJNI   : === Vibrator Haptics ===
+03-29 16:19:09.843  1112  1160 I GoJNI   : Has vibrator: true
+03-29 16:19:09.843  1112  1160 I GoJNI   : Amplitude control: true
+03-29 16:19:09.843  1112  1160 I GoJNI   : Vibrator ID: -1
+03-29 16:19:09.843  1112  1160 I GoJNI   : Resonant frequency: NaN Hz
+03-29 16:19:09.843  1112  1160 I GoJNI   : Q factor: 3.87
+03-29 16:19:09.843  1112  1160 I GoJNI   : Envelope effects: false
+03-29 16:19:09.844  1112  1160 I GoJNI   : --- Pattern 1: Short pulse (100ms) ---
+03-29 16:19:09.844  1112  1160 I GoJNI   : Vibrating...
+03-29 16:19:09.844  1112  1160 I GoJNI   : --- Pattern 2: Medium pulse (300ms) ---
+03-29 16:19:09.844  1112  1160 I GoJNI   : Vibrating...
+03-29 16:19:09.844  1112  1160 I GoJNI   : --- Pattern 3: Three quick pulses ---
+03-29 16:19:09.844  1112  1160 I GoJNI   : Vibrating pattern: [0, 100, 100, 100, 100, 100] ms
+03-29 16:19:09.844  1112  1160 I GoJNI   :   (delay=0, on=100, off=100, on=100, off=100, on=100)
+03-29 16:19:09.844  1112  1160 I GoJNI   : --- Pattern 4: SOS Morse code ---
+03-29 16:19:09.844  1112  1160 I GoJNI   : Vibrating SOS: ... --- ...
+03-29 16:19:09.844  1112  1160 I GoJNI   : Vibration cancelled.
+03-29 16:19:09.844  1112  1160 I GoJNI   : Vibrator haptics example complete.

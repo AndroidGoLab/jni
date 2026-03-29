@@ -32,38 +32,38 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 780 ms
+Install command complete in 796 ms
 Starting: Intent { cmp=center.dx.jni.examples.env_path_resolver/android.app.NativeActivity }
-03-29 15:18:22.729 16972 16997 I GoJNI   : === Environment Path Resolver ===
-03-29 15:18:22.729 16972 16997 I GoJNI   : Standard directories (File objects):
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Root:            OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Data:            OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   DownloadCache:   OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   ExternalStorage: OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Storage:         OK
-03-29 15:18:22.729 16972 16997 I GoJNI   : Public directories (File objects):
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Music:         OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Podcasts:      OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Ringtones:     OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Alarms:        OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Notifications: OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Pictures:      OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Movies:        OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Download:      OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   DCIM:          OK
-03-29 15:18:22.729 16972 16997 I GoJNI   :   Documents:     OK
-03-29 15:18:22.729 16972 16997 I GoJNI   : External storage:
-03-29 15:18:22.729 16972 16997 I GoJNI   :   state: mounted
-03-29 15:18:22.729 16972 16997 I GoJNI   :   emulated: true
-03-29 15:18:22.729 16972 16997 I GoJNI   :   removable: false
-03-29 15:18:22.729 16972 16997 I GoJNI   :   manager: false
-03-29 15:18:22.729 16972 16997 I GoJNI   :   legacy: false
-03-29 15:18:22.729 16972 16997 I GoJNI   : Media state constants:
-03-29 15:18:22.729 16972 16997 I GoJNI   :   MOUNTED       = mounted
-03-29 15:18:22.729 16972 16997 I GoJNI   :   MOUNTED_RO    = mounted_ro
-03-29 15:18:22.729 16972 16997 I GoJNI   :   REMOVED       = removed
-03-29 15:18:22.729 16972 16997 I GoJNI   :   UNMOUNTED     = unmounted
-03-29 15:18:22.729 16972 16997 I GoJNI   :   BAD_REMOVAL   = bad_removal
-03-29 15:18:22.729 16972 16997 I GoJNI   :   CHECKING      = checking
-03-29 15:18:22.729 16972 16997 I GoJNI   :   EJECTING      = ejecting
-03-29 15:18:22.729 16972 16997 I GoJNI   :   UNKNOWN       = unknown
+03-29 16:08:55.474 31264 31286 I GoJNI   : === Environment Path Resolver ===
+03-29 16:08:55.474 31264 31286 I GoJNI   : Standard directories (File objects):
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Root:            OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Data:            OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   DownloadCache:   OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   ExternalStorage: OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Storage:         OK
+03-29 16:08:55.474 31264 31286 I GoJNI   : Public directories (File objects):
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Music:         OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Podcasts:      OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Ringtones:     OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Alarms:        OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Notifications: OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Pictures:      OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Movies:        OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Download:      OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   DCIM:          OK
+03-29 16:08:55.474 31264 31286 I GoJNI   :   Documents:     OK
+03-29 16:08:55.474 31264 31286 I GoJNI   : External storage:
+03-29 16:08:55.474 31264 31286 I GoJNI   :   state: mounted
+03-29 16:08:55.474 31264 31286 I GoJNI   :   emulated: true
+03-29 16:08:55.475 31264 31286 I GoJNI   :   removable: false
+03-29 16:08:55.475 31264 31286 I GoJNI   :   manager: false
+03-29 16:08:55.475 31264 31286 I GoJNI   :   legacy: false
+03-29 16:08:55.475 31264 31286 I GoJNI   : Media state constants:
+03-29 16:08:55.475 31264 31286 I GoJNI   :   MOUNTED       = mounted
+03-29 16:08:55.475 31264 31286 I GoJNI   :   MOUNTED_RO    = mounted_ro
+03-29 16:08:55.475 31264 31286 I GoJNI   :   REMOVED       = removed
+03-29 16:08:55.475 31264 31286 I GoJNI   :   UNMOUNTED     = unmounted
+03-29 16:08:55.475 31264 31286 I GoJNI   :   BAD_REMOVAL   = bad_removal
+03-29 16:08:55.475 31264 31286 I GoJNI   :   CHECKING      = checking
+03-29 16:08:55.475 31264 31286 I GoJNI   :   EJECTING      = ejecting
+03-29 16:08:55.475 31264 31286 I GoJNI   :   UNKNOWN       = unknown

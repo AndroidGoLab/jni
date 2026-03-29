@@ -32,10 +32,10 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 864 ms
+Install command complete in 821 ms
 Starting: Intent { cmp=center.dx.jni.examples.notif_alarm_trigger/android.app.NativeActivity }
-03-29 15:58:32.545 28252 28276 I GoJNI   : === Alarm + Notification ===
-03-29 15:58:32.545 28252 28276 I GoJNI   : can schedule: false
-03-29 15:58:32.545 28252 28276 I GoJNI   : exact alarms not permitted
-03-29 15:58:32.545 28252 28276 I GoJNI   : channel created
-03-29 15:58:32.545 28252 28276 I GoJNI   : notification posted!
+03-29 16:11:47.776 32030 32051 I GoJNI   : === Alarm + Notification ===
+03-29 16:11:47.776 32030 32051 I GoJNI   : can schedule: false
+03-29 16:11:47.776 32030 32051 I GoJNI   : exact alarms not permitted
+03-29 16:11:47.776 32030 32051 I GoJNI   : channel created
+03-29 16:11:47.776 32030 32051 I GoJNI   : notification posted!

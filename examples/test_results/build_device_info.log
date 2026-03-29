@@ -32,21 +32,21 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 826 ms
+Install command complete in 781 ms
 Starting: Intent { cmp=center.dx.jni.examples.build_device_info/android.app.NativeActivity }
-03-29 15:35:36.986 23245 23271 I GoJNI   : === Build Device Info ===
-03-29 15:35:36.986 23245 23271 I GoJNI   : android.os.Build:
-03-29 15:35:36.986 23245 23271 I GoJNI   :   MANUFACTURER = Google
-03-29 15:35:36.986 23245 23271 I GoJNI   :   MODEL        = Pixel 8a
-03-29 15:35:36.986 23245 23271 I GoJNI   :   BRAND        = google
-03-29 15:35:36.986 23245 23271 I GoJNI   :   DEVICE       = akita
-03-29 15:35:36.986 23245 23271 I GoJNI   :   PRODUCT      = akita
-03-29 15:35:36.986 23245 23271 I GoJNI   :   BOARD        = akita
-03-29 15:35:36.986 23245 23271 I GoJNI   :   HARDWARE     = akita
-03-29 15:35:36.986 23245 23271 I GoJNI   : android.os.Build.VERSION:
-03-29 15:35:36.986 23245 23271 I GoJNI   :   SDK_INT     = 36
-03-29 15:35:36.986 23245 23271 I GoJNI   :   RELEASE     = 16
-03-29 15:35:36.986 23245 23271 I GoJNI   :   CODENAME    = REL
-03-29 15:35:36.986 23245 23271 I GoJNI   :   INCREMENTAL = 2026031700
-03-29 15:35:36.986 23245 23271 I GoJNI   : Build static methods:
-03-29 15:35:36.986 23245 23271 I GoJNI   :   radioVersion: g5300o-251202-260127-B-14784800,g5300o-251202-260127-B-14784800
+03-29 16:08:13.770 31008 31031 I GoJNI   : === Build Device Info ===
+03-29 16:08:13.770 31008 31031 I GoJNI   : android.os.Build:
+03-29 16:08:13.770 31008 31031 I GoJNI   :   MANUFACTURER = Google
+03-29 16:08:13.770 31008 31031 I GoJNI   :   MODEL        = Pixel 8a
+03-29 16:08:13.770 31008 31031 I GoJNI   :   BRAND        = google
+03-29 16:08:13.770 31008 31031 I GoJNI   :   DEVICE       = akita
+03-29 16:08:13.770 31008 31031 I GoJNI   :   PRODUCT      = akita
+03-29 16:08:13.770 31008 31031 I GoJNI   :   BOARD        = akita
+03-29 16:08:13.770 31008 31031 I GoJNI   :   HARDWARE     = akita
+03-29 16:08:13.770 31008 31031 I GoJNI   : android.os.Build.VERSION:
+03-29 16:08:13.770 31008 31031 I GoJNI   :   SDK_INT     = 36
+03-29 16:08:13.770 31008 31031 I GoJNI   :   RELEASE     = 16
+03-29 16:08:13.770 31008 31031 I GoJNI   :   CODENAME    = REL
+03-29 16:08:13.770 31008 31031 I GoJNI   :   INCREMENTAL = 2026031700
+03-29 16:08:13.770 31008 31031 I GoJNI   : Build static methods:
+03-29 16:08:13.770 31008 31031 I GoJNI   :   radioVersion: g5300o-251202-260127-B-14784800,g5300o-251202-260127-B-14784800

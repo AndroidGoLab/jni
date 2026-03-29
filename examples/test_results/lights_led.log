@@ -32,52 +32,9 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 769 ms
+Install command complete in 763 ms
 Starting: Intent { cmp=center.dx.jni.examples.lights_led/android.app.NativeActivity }
-03-29 15:15:25.137 14223 14249 I GoJNI   : === Voice Command ===
-03-29 15:15:25.137 14223 14249 I GoJNI   : RecognitionAvailable: false
-03-29 15:15:25.137 14223 14249 I GoJNI   : OnDeviceRecognition: false
-03-29 15:15:25.137 14223 14249 I GoJNI   : RecognizerIntent Constants:
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ACTION_RECOGNIZE_SPEECH: android.speech.action.RECOGNIZE_SPEECH
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ACTION_WEB_SEARCH: android.speech.action.WEB_SEARCH
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ACTION_VOICE_SEARCH_HANDS_FREE: android.speech.action.VOICE_SEARCH_HANDS_FREE
-03-29 15:15:25.137 14223 14249 I GoJNI   :   EXTRA_LANGUAGE_MODEL: android.speech.extra.LANGUAGE_MODEL
-03-29 15:15:25.137 14223 14249 I GoJNI   :   EXTRA_LANGUAGE: android.speech.extra.LANGUAGE
-03-29 15:15:25.137 14223 14249 I GoJNI   :   EXTRA_PROMPT: android.speech.extra.PROMPT
-03-29 15:15:25.137 14223 14249 I GoJNI   :   EXTRA_MAX_RESULTS: android.speech.extra.MAX_RESULTS
-03-29 15:15:25.137 14223 14249 I GoJNI   :   EXTRA_PARTIAL_RESULTS: android.speech.extra.PARTIAL_RESULTS
-03-29 15:15:25.137 14223 14249 I GoJNI   :   EXTRA_PREFER_OFFLINE: android.speech.extra.PREFER_OFFLINE
-03-29 15:15:25.137 14223 14249 I GoJNI   :   LANGUAGE_MODEL_FREE_FORM: free_form
-03-29 15:15:25.137 14223 14249 I GoJNI   :   LANGUAGE_MODEL_WEB_SEARCH: web_search
-03-29 15:15:25.137 14223 14249 I GoJNI   : SpeechRecognizer Error Codes:
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ERROR_AUDIO: 3
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ERROR_CLIENT: 5
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ERROR_NETWORK: 2
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ERROR_NO_MATCH: 7
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ERROR_SERVER: 4
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ERROR_SPEECH_TIMEOUT: 6
-03-29 15:15:25.137 14223 14249 I GoJNI   :   ERROR_INSUFFICIENT_PERMISSIONS: 9
-03-29 15:15:25.137 14223 14249 I GoJNI   : Voice command complete.
-03-29 15:15:25.470 14265 14290 I GoJNI   : === Lights LED Control ===
-03-29 15:15:25.470 14265 14290 I GoJNI   : LightsManager obtained OK
-03-29 15:15:25.470 14265 14290 I GoJNI   : GetLights: error: java java.lang.SecurityException: Access denied, requires: android.permission.CONTROL_DEVICE_LIGHTS
-03-29 15:15:25.470 14265 14290 I GoJNI   : --- LED Control API Overview ---
-03-29 15:15:25.470 14265 14290 I GoJNI   :   LightsManager (android.hardware.lights.LightsManager):
-03-29 15:15:25.470 14265 14290 I GoJNI   :     GetLights() -> List<Light>
-03-29 15:15:25.470 14265 14290 I GoJNI   :     GetLightState(light) -> LightState
-03-29 15:15:25.470 14265 14290 I GoJNI   :     OpenSession() -> LightsSession
-03-29 15:15:25.470 14265 14290 I GoJNI   :   Light properties:
-03-29 15:15:25.470 14265 14290 I GoJNI   :     GetId, GetName, GetType, GetOrdinal
-03-29 15:15:25.470 14265 14290 I GoJNI   :     HasBrightnessControl, HasRgbControl
-03-29 15:15:25.470 14265 14290 I GoJNI   :   Light types:
-03-29 15:15:25.470 14265 14290 I GoJNI   :     Input=10001, KeyboardBacklight=10003
-03-29 15:15:25.470 14265 14290 I GoJNI   :     Microphone=8, PlayerId=10002
-03-29 15:15:25.470 14265 14290 I GoJNI   :   LED control workflow:
-03-29 15:15:25.470 14265 14290 I GoJNI   :     1. session := mgr.OpenSession()
-03-29 15:15:25.470 14265 14290 I GoJNI   :     2. builder := LightStateBuilder{}
-03-29 15:15:25.470 14265 14290 I GoJNI   :     3. builder.SetColor(0xFFFF0000) // red
-03-29 15:15:25.470 14265 14290 I GoJNI   :     4. state := builder.Build()
-03-29 15:15:25.470 14265 14290 I GoJNI   :     5. reqBuilder.AddLight(light, state)
-03-29 15:15:25.470 14265 14290 I GoJNI   :     6. session.RequestLights(reqBuilder.Build())
-03-29 15:15:25.470 14265 14290 I GoJNI   :     7. session.Close()
-03-29 15:15:25.470 14265 14290 I GoJNI   : Lights LED example complete.
+03-29 16:05:48.956 30065 30090 I GoJNI   : === Lights LED Control ===
+03-29 16:05:48.956 30065 30090 I GoJNI   : LightsManager: obtained OK
+03-29 16:05:48.956 30065 30090 I GoJNI   :   ToString: android.hardware.lights.SystemLightsManager@a8e1b9b
+03-29 16:05:48.956 30065 30090 I GoJNI   : GetLights: error: java java.lang.SecurityException: Access denied, requires: android.permission.CONTROL_DEVICE_LIGHTS

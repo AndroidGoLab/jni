@@ -32,10 +32,10 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 949 ms
+Install command complete in 781 ms
 Starting: Intent { cmp=center.dx.jni.examples.omapi_secure_element/android.app.NativeActivity }
-03-29 15:16:28.918 15551 15574 I GoJNI   : === OMAPI Secure Element ===
-03-29 15:16:28.918 15551 15574 I GoJNI   : SE service connected: false
-03-29 15:16:28.918 15551 15574 I GoJNI   : OMAPI version: 3.3
-03-29 15:16:28.918 15551 15574 I GoJNI   : getReaders: error: java java.lang.IllegalStateException: service not connected to system
-03-29 15:16:28.918 15551 15574 I GoJNI   : OMAPI secure element check complete.
+03-29 16:07:11.784 30599 30622 I GoJNI   : === OMAPI Secure Element ===
+03-29 16:07:11.784 30599 30622 I GoJNI   : SE service connected: false
+03-29 16:07:11.784 30599 30622 I GoJNI   : OMAPI version: 3.3
+03-29 16:07:11.784 30599 30622 I GoJNI   : getReaders: error: java java.lang.IllegalStateException: service not connected to system
+03-29 16:07:11.784 30599 30622 I GoJNI   : OMAPI secure element check complete.
