@@ -1,11 +1,11 @@
 //go:build android
 
-// Command bt_gatt_client demonstrates the GATT client API surface provided by
-// the bluetooth typed wrapper package. It checks BLE support, displays GATT
-// constants, and reports adapter capabilities relevant to GATT client usage.
+// Command bt_gatt_client demonstrates the GATT client API using the bluetooth
+// and bluetooth/le typed wrapper packages. It obtains a BluetoothManager, gets
+// the adapter via the manager, queries connected GATT devices, checks adapter
+// BLE capabilities, and retrieves the LE scanner.
 //
-// Required permissions (Android 12+): BLUETOOTH_SCAN, BLUETOOTH_CONNECT,
-// BLUETOOTH_ADVERTISE.
+// Required permissions (Android 12+): BLUETOOTH_SCAN, BLUETOOTH_CONNECT.
 package main
 
 /*
@@ -62,83 +62,223 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	// --- GATT constants ---
-	fmt.Fprintln(output, "=== GATT status constants ===")
-	fmt.Fprintf(output, "  GattSuccess = %d\n", bluetooth.GattSuccess)
-	fmt.Fprintf(output, "  GattFailure = %d\n", bluetooth.GattFailure)
+	fmt.Fprintln(output, "=== GATT Client Demo ===")
+	ui.RenderOutput()
 
-	fmt.Fprintln(output, "=== Connection state constants ===")
-	fmt.Fprintf(output, "  StateDisconnected  = %d\n", bluetooth.StateDisconnected)
-	fmt.Fprintf(output, "  StateConnecting    = %d\n", bluetooth.StateConnecting)
-	fmt.Fprintf(output, "  StateConnected     = %d\n", bluetooth.StateConnected)
-	fmt.Fprintf(output, "  StateDisconnecting = %d\n", bluetooth.StateDisconnecting)
-
-	fmt.Fprintln(output, "=== Characteristic property constants ===")
-	fmt.Fprintf(output, "  PropertyRead          = %d\n", bluetooth.PropertyRead)
-	fmt.Fprintf(output, "  PropertyWrite         = %d\n", bluetooth.PropertyWrite)
-	fmt.Fprintf(output, "  PropertyWriteNoResponse = %d\n", bluetooth.PropertyWriteNoResponse)
-	fmt.Fprintf(output, "  PropertyNotify        = %d\n", bluetooth.PropertyNotify)
-	fmt.Fprintf(output, "  PropertyIndicate      = %d\n", bluetooth.PropertyIndicate)
-
-	fmt.Fprintln(output, "=== Characteristic permission constants ===")
-	fmt.Fprintf(output, "  PermissionRead  = %d\n", bluetooth.PermissionRead)
-	fmt.Fprintf(output, "  PermissionWrite = %d\n", bluetooth.PermissionWrite)
-
-	fmt.Fprintln(output, "=== Write type constants ===")
-	fmt.Fprintf(output, "  WriteTypeDefault    = %d\n", bluetooth.WriteTypeDefault)
-	fmt.Fprintf(output, "  WriteTypeNoResponse = %d\n", bluetooth.WriteTypeNoResponse)
-	fmt.Fprintf(output, "  WriteTypeSigned     = %d\n", bluetooth.WriteTypeSigned)
-
-	// --- Adapter ---
-	adapter, err := bluetooth.NewAdapter(ctx)
+	// --- BluetoothManager ---
+	mgr, err := bluetooth.NewManager(ctx)
 	if err != nil {
-		return fmt.Errorf("bluetooth.NewAdapter: %w", err)
+		return fmt.Errorf("bluetooth.NewManager: %w", err)
 	}
-	defer adapter.Close()
+	defer mgr.Close()
+	fmt.Fprintln(output, "BluetoothManager: obtained OK")
+	ui.RenderOutput()
 
+	mgrStr, err := mgr.ToString()
+	if err != nil {
+		fmt.Fprintf(output, "Manager.ToString: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Manager.ToString: %s\n", mgrStr)
+	}
+
+	// --- Get adapter via Manager ---
+	adapterObj, err := mgr.GetAdapter()
+	if err != nil {
+		return fmt.Errorf("Manager.GetAdapter: %w", err)
+	}
+	if adapterObj == nil {
+		fmt.Fprintln(output, "BluetoothAdapter is null (Bluetooth may be disabled)")
+		return nil
+	}
+	adapter := &bluetooth.Adapter{VM: vm, Obj: adapterObj}
+	defer adapter.Close()
+	fmt.Fprintln(output, "Adapter obtained via Manager: OK")
+	ui.RenderOutput()
+
+	// --- Adapter state ---
 	enabled, err := adapter.IsEnabled()
 	if err != nil {
 		return fmt.Errorf("IsEnabled: %w", err)
 	}
-	fmt.Fprintf(output, "\nBluetooth enabled: %v\n", enabled)
+	fmt.Fprintf(output, "Bluetooth enabled: %v\n", enabled)
 	if !enabled {
 		fmt.Fprintln(output, "Bluetooth is off; enable it in Settings.")
 		return nil
 	}
 
-	// Check BLE support via adapter capabilities.
+	name, err := adapter.GetName()
+	if err != nil {
+		fmt.Fprintf(output, "GetName: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Adapter name: %s\n", name)
+	}
+
+	addr, err := adapter.GetAddress()
+	if err != nil {
+		fmt.Fprintf(output, "GetAddress: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Adapter address: %s\n", addr)
+	}
+
+	state, err := adapter.GetState()
+	if err != nil {
+		fmt.Fprintf(output, "GetState: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Adapter state: %d\n", state)
+	}
+
+	scanMode, err := adapter.GetScanMode()
+	if err != nil {
+		fmt.Fprintf(output, "GetScanMode: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Scan mode: %d\n", scanMode)
+	}
+	ui.RenderOutput()
+
+	// --- Query GATT connected devices via Manager ---
+	fmt.Fprintln(output, "\n=== GATT connected devices (profile=7/GATT) ===")
+	connDevs, err := mgr.GetConnectedDevices(int32(bluetooth.GattConst))
+	if err != nil {
+		fmt.Fprintf(output, "GetConnectedDevices(GATT): %v\n", err)
+	} else if connDevs == nil {
+		fmt.Fprintln(output, "Connected devices list: null")
+	} else {
+		fmt.Fprintln(output, "Connected devices list: obtained OK")
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(connDevs)
+			return nil
+		})
+	}
+	ui.RenderOutput()
+
+	// --- BLE capabilities ---
+	fmt.Fprintln(output, "\n=== BLE capabilities ===")
 	scannerObj, err := adapter.GetBluetoothLeScanner()
 	if err != nil {
-		fmt.Fprintf(output, "GetBluetoothLeScanner error: %v\n", err)
+		fmt.Fprintf(output, "GetBluetoothLeScanner: error (%v)\n", err)
 	} else if scannerObj == nil {
-		fmt.Fprintln(output, "BLE not supported (scanner is null)")
+		fmt.Fprintln(output, "BLE scanner: not available (null)")
 	} else {
-		_ = &le.BluetoothLeScanner{VM: vm, Obj: scannerObj}
-		fmt.Fprintln(output, "BLE supported: scanner available")
+		scanner := &le.BluetoothLeScanner{VM: vm, Obj: scannerObj}
+		_ = scanner
+		fmt.Fprintln(output, "BLE scanner: available")
 	}
 
 	multiAdv, err := adapter.IsMultipleAdvertisementSupported()
 	if err != nil {
-		fmt.Fprintf(output, "IsMultipleAdvertisementSupported error: %v\n", err)
+		fmt.Fprintf(output, "IsMultipleAdvertisementSupported: error (%v)\n", err)
 	} else {
 		fmt.Fprintf(output, "Multiple advertisement supported: %v\n", multiAdv)
 	}
 
-	// --- Show GATT client API surface ---
-	fmt.Fprintln(output, "\n=== GATT client typed wrapper API ===")
-	fmt.Fprintln(output, "  Gatt methods: Close, Connect, Disconnect, DiscoverServices,")
-	fmt.Fprintln(output, "    GetServices, GetService, ReadCharacteristic, WriteCharacteristic,")
-	fmt.Fprintln(output, "    SetCharacteristicNotification, RequestMtu, ReadRemoteRssi,")
-	fmt.Fprintln(output, "    ReadPhy, SetPreferredPhy, ReadDescriptor, WriteDescriptor,")
-	fmt.Fprintln(output, "    BeginReliableWrite, ExecuteReliableWrite, AbortReliableWrite,")
-	fmt.Fprintln(output, "    RequestConnectionPriority")
-	fmt.Fprintln(output, "  GattCallback methods: OnConnectionStateChange, OnServicesDiscovered,")
-	fmt.Fprintln(output, "    OnCharacteristicRead, OnCharacteristicWrite, OnCharacteristicChanged,")
-	fmt.Fprintln(output, "    OnDescriptorRead, OnDescriptorWrite, OnMtuChanged, OnReadRemoteRssi,")
-	fmt.Fprintln(output, "    OnPhyRead, OnPhyUpdate, OnReliableWriteCompleted, OnServiceChanged")
+	le2m, err := adapter.IsLe2MPhySupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsLe2MPhySupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "LE 2M PHY supported: %v\n", le2m)
+	}
+
+	leCoded, err := adapter.IsLeCodedPhySupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsLeCodedPhySupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "LE Coded PHY supported: %v\n", leCoded)
+	}
+
+	leExtAdv, err := adapter.IsLeExtendedAdvertisingSupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsLeExtendedAdvertisingSupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "LE extended advertising supported: %v\n", leExtAdv)
+	}
+
+	lePeriodicAdv, err := adapter.IsLePeriodicAdvertisingSupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsLePeriodicAdvertisingSupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "LE periodic advertising supported: %v\n", lePeriodicAdv)
+	}
+
+	offloadFilter, err := adapter.IsOffloadedFilteringSupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsOffloadedFilteringSupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Offloaded filtering supported: %v\n", offloadFilter)
+	}
+
+	offloadBatch, err := adapter.IsOffloadedScanBatchingSupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsOffloadedScanBatchingSupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Offloaded scan batching supported: %v\n", offloadBatch)
+	}
+
+	maxAdvLen, err := adapter.GetLeMaximumAdvertisingDataLength()
+	if err != nil {
+		fmt.Fprintf(output, "GetLeMaximumAdvertisingDataLength: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Max advertising data length: %d bytes\n", maxAdvLen)
+	}
+
+	maxAudioDev, err := adapter.GetMaxConnectedAudioDevices()
+	if err != nil {
+		fmt.Fprintf(output, "GetMaxConnectedAudioDevices: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Max connected audio devices: %d\n", maxAudioDev)
+	}
+
+	leAudio, err := adapter.IsLeAudioSupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsLeAudioSupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "LE audio supported: %d\n", leAudio)
+	}
+
+	leAudioBroadcast, err := adapter.IsLeAudioBroadcastSourceSupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsLeAudioBroadcastSourceSupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "LE audio broadcast source supported: %d\n", leAudioBroadcast)
+	}
+
+	leAudioAssist, err := adapter.IsLeAudioBroadcastAssistantSupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsLeAudioBroadcastAssistantSupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "LE audio broadcast assistant supported: %d\n", leAudioAssist)
+	}
+
+	// --- Bonded devices ---
+	fmt.Fprintln(output, "\n=== Bonded devices ===")
+	bondedObj, err := adapter.GetBondedDevices()
+	if err != nil {
+		fmt.Fprintf(output, "GetBondedDevices: error (%v)\n", err)
+	} else if bondedObj == nil {
+		fmt.Fprintln(output, "Bonded devices set: null")
+	} else {
+		fmt.Fprintln(output, "Bonded devices set: obtained OK")
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(bondedObj)
+			return nil
+		})
+	}
+
+	// --- Discovery state ---
+	discovering, err := adapter.IsDiscovering()
+	if err != nil {
+		fmt.Fprintf(output, "IsDiscovering: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Is discovering: %v\n", discovering)
+	}
+
+	// --- GATT profile connection state ---
+	gattState, err := adapter.GetProfileConnectionState(int32(bluetooth.GattConst))
+	if err != nil {
+		fmt.Fprintf(output, "GetProfileConnectionState(GATT): error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "GATT profile connection state: %d\n", gattState)
+	}
 
 	fmt.Fprintln(output, "\nGATT client demo completed successfully.")
-	fmt.Fprintln(output, "No errors occurred during GATT client lifecycle demo.")
-
 	return nil
 }

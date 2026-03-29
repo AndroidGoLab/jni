@@ -1,12 +1,11 @@
 //go:build android
 
-// Command bt_beacon_scanner demonstrates the BLE scanner API surface provided
-// by the bluetooth and bluetooth/le typed wrapper packages. It obtains the
-// adapter, checks BLE support, retrieves the LE scanner, and reports adapter
-// capabilities relevant to BLE beacon scanning.
+// Command bt_beacon_scanner demonstrates the BLE scanner API using the
+// bluetooth and bluetooth/le typed wrapper packages. It obtains the adapter,
+// checks all BLE scanning capabilities, retrieves the LE scanner, and queries
+// adapter properties relevant to beacon scanning.
 //
-// Required permissions (Android 12+): BLUETOOTH_SCAN, BLUETOOTH_CONNECT,
-// BLUETOOTH_ADVERTISE.
+// Required permissions (Android 12+): BLUETOOTH_SCAN, BLUETOOTH_CONNECT.
 package main
 
 /*
@@ -63,41 +62,68 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	// --- LE scan constants ---
-	fmt.Fprintln(output, "=== BLE scan mode constants ===")
-	fmt.Fprintf(output, "  ScanModeLowPower    = %d\n", le.ScanModeLowPower)
-	fmt.Fprintf(output, "  ScanModeBalanced    = %d\n", le.ScanModeBalanced)
-	fmt.Fprintf(output, "  ScanModeLowLatency  = %d\n", le.ScanModeLowLatency)
-	fmt.Fprintf(output, "  ScanModeOpportunistic = %d\n", le.ScanModeOpportunistic)
+	fmt.Fprintln(output, "=== BLE Beacon Scanner Demo ===")
+	ui.RenderOutput()
 
-	fmt.Fprintln(output, "=== BLE match mode constants ===")
-	fmt.Fprintf(output, "  MatchModeAggressive = %d\n", le.MatchModeAggressive)
-	fmt.Fprintf(output, "  MatchModeSticky     = %d\n", le.MatchModeSticky)
-
-	// --- Adapter ---
-	adapter, err := bluetooth.NewAdapter(ctx)
+	// --- BluetoothManager ---
+	mgr, err := bluetooth.NewManager(ctx)
 	if err != nil {
-		return fmt.Errorf("bluetooth.NewAdapter: %w", err)
+		return fmt.Errorf("bluetooth.NewManager: %w", err)
 	}
+	defer mgr.Close()
+	fmt.Fprintln(output, "BluetoothManager: obtained OK")
+
+	mgrStr, err := mgr.ToString()
+	if err == nil {
+		fmt.Fprintf(output, "Manager.ToString: %s\n", mgrStr)
+	}
+	ui.RenderOutput()
+
+	// --- Adapter via Manager ---
+	adapterObj, err := mgr.GetAdapter()
+	if err != nil {
+		return fmt.Errorf("Manager.GetAdapter: %w", err)
+	}
+	if adapterObj == nil {
+		fmt.Fprintln(output, "BluetoothAdapter is null")
+		return nil
+	}
+	adapter := &bluetooth.Adapter{VM: vm, Obj: adapterObj}
 	defer adapter.Close()
 
 	enabled, err := adapter.IsEnabled()
 	if err != nil {
 		return fmt.Errorf("IsEnabled: %w", err)
 	}
-	fmt.Fprintf(output, "\nBluetooth enabled: %v\n", enabled)
+	fmt.Fprintf(output, "Bluetooth enabled: %v\n", enabled)
 	if !enabled {
 		fmt.Fprintln(output, "Bluetooth is off; enable it in Settings.")
 		return nil
 	}
 
 	name, err := adapter.GetName()
-	if err != nil {
-		return fmt.Errorf("GetName: %w", err)
+	if err == nil {
+		fmt.Fprintf(output, "Adapter name: %s\n", name)
 	}
-	fmt.Fprintf(output, "Adapter name: %s\n", name)
+
+	addr, err := adapter.GetAddress()
+	if err == nil {
+		fmt.Fprintf(output, "Adapter address: %s\n", addr)
+	}
+
+	state, err := adapter.GetState()
+	if err == nil {
+		fmt.Fprintf(output, "Adapter state: %d\n", state)
+	}
+
+	scanMode, err := adapter.GetScanMode()
+	if err == nil {
+		fmt.Fprintf(output, "Scan mode: %d\n", scanMode)
+	}
+	ui.RenderOutput()
 
 	// --- LE Scanner ---
+	fmt.Fprintln(output, "\n=== LE Scanner ===")
 	scannerObj, err := adapter.GetBluetoothLeScanner()
 	if err != nil {
 		return fmt.Errorf("GetBluetoothLeScanner: %w", err)
@@ -106,55 +132,113 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintln(output, "BLE scanner not available (null)")
 		return nil
 	}
-	// Wrap the raw object in the typed wrapper to confirm it was obtained.
-	_ = &le.BluetoothLeScanner{VM: vm, Obj: scannerObj}
-	fmt.Fprintln(output, "BLE scanner obtained: OK")
-
-	// --- Adapter BLE capabilities ---
-	le2m, err := adapter.IsLe2MPhySupported()
-	if err != nil {
-		fmt.Fprintf(output, "IsLe2MPhySupported error: %v\n", err)
+	scanner := &le.BluetoothLeScanner{VM: vm, Obj: scannerObj}
+	scannerStr, err := scanner.ToString()
+	if err == nil {
+		fmt.Fprintf(output, "BLE scanner: %s\n", scannerStr)
 	} else {
+		fmt.Fprintln(output, "BLE scanner: obtained OK")
+	}
+	ui.RenderOutput()
+
+	// --- Scanning capabilities ---
+	fmt.Fprintln(output, "\n=== Scanning capabilities ===")
+
+	le2m, err := adapter.IsLe2MPhySupported()
+	if err == nil {
 		fmt.Fprintf(output, "LE 2M PHY supported: %v\n", le2m)
 	}
 
 	leCoded, err := adapter.IsLeCodedPhySupported()
-	if err != nil {
-		fmt.Fprintf(output, "IsLeCodedPhySupported error: %v\n", err)
-	} else {
+	if err == nil {
 		fmt.Fprintf(output, "LE Coded PHY supported: %v\n", leCoded)
 	}
 
 	leExtAdv, err := adapter.IsLeExtendedAdvertisingSupported()
-	if err != nil {
-		fmt.Fprintf(output, "IsLeExtendedAdvertisingSupported error: %v\n", err)
-	} else {
+	if err == nil {
 		fmt.Fprintf(output, "LE extended advertising supported: %v\n", leExtAdv)
 	}
 
+	lePeriodicAdv, err := adapter.IsLePeriodicAdvertisingSupported()
+	if err == nil {
+		fmt.Fprintf(output, "LE periodic advertising supported: %v\n", lePeriodicAdv)
+	}
+
 	offloadFilter, err := adapter.IsOffloadedFilteringSupported()
-	if err != nil {
-		fmt.Fprintf(output, "IsOffloadedFilteringSupported error: %v\n", err)
-	} else {
+	if err == nil {
 		fmt.Fprintf(output, "Offloaded filtering supported: %v\n", offloadFilter)
 	}
 
 	offloadBatch, err := adapter.IsOffloadedScanBatchingSupported()
-	if err != nil {
-		fmt.Fprintf(output, "IsOffloadedScanBatchingSupported error: %v\n", err)
-	} else {
+	if err == nil {
 		fmt.Fprintf(output, "Offloaded scan batching supported: %v\n", offloadBatch)
 	}
 
 	maxAdvLen, err := adapter.GetLeMaximumAdvertisingDataLength()
-	if err != nil {
-		fmt.Fprintf(output, "GetLeMaximumAdvertisingDataLength error: %v\n", err)
-	} else {
+	if err == nil {
 		fmt.Fprintf(output, "Max advertising data length: %d bytes\n", maxAdvLen)
 	}
 
-	fmt.Fprintln(output, "\nBLE beacon scanner capability check completed.")
-	fmt.Fprintln(output, "No errors occurred during BLE beacon scanner demo.")
+	maxAudioDev, err := adapter.GetMaxConnectedAudioDevices()
+	if err == nil {
+		fmt.Fprintf(output, "Max connected audio devices: %d\n", maxAudioDev)
+	}
 
+	leAudio, err := adapter.IsLeAudioSupported()
+	if err == nil {
+		fmt.Fprintf(output, "LE audio supported: %d\n", leAudio)
+	}
+
+	multiAdv, err := adapter.IsMultipleAdvertisementSupported()
+	if err == nil {
+		fmt.Fprintf(output, "Multiple advertisement supported: %v\n", multiAdv)
+	}
+	ui.RenderOutput()
+
+	// --- Advertiser availability ---
+	fmt.Fprintln(output, "\n=== LE Advertiser ===")
+	advObj, err := adapter.GetBluetoothLeAdvertiser()
+	if err != nil {
+		fmt.Fprintf(output, "GetBluetoothLeAdvertiser: error (%v)\n", err)
+	} else if advObj == nil {
+		fmt.Fprintln(output, "BLE advertiser: not available")
+	} else {
+		advertiser := &le.BluetoothLeAdvertiser{VM: vm, Obj: advObj}
+		advStr, err := advertiser.ToString()
+		if err == nil {
+			fmt.Fprintf(output, "BLE advertiser: %s\n", advStr)
+		} else {
+			fmt.Fprintln(output, "BLE advertiser: obtained OK")
+		}
+	}
+	ui.RenderOutput()
+
+	// --- Bonded devices ---
+	fmt.Fprintln(output, "\n=== Bonded devices ===")
+	bondedObj, err := adapter.GetBondedDevices()
+	if err != nil {
+		fmt.Fprintf(output, "GetBondedDevices: error (%v)\n", err)
+	} else if bondedObj == nil {
+		fmt.Fprintln(output, "Bonded devices: null")
+	} else {
+		fmt.Fprintln(output, "Bonded devices set: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(bondedObj); return nil })
+	}
+
+	// --- GATT connected devices ---
+	connDevs, err := mgr.GetConnectedDevices(int32(bluetooth.GattConst))
+	if err != nil {
+		fmt.Fprintf(output, "GetConnectedDevices(GATT): %v\n", err)
+	} else if connDevs != nil {
+		fmt.Fprintln(output, "GATT connected devices: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(connDevs); return nil })
+	}
+
+	discovering, err := adapter.IsDiscovering()
+	if err == nil {
+		fmt.Fprintf(output, "Is discovering: %v\n", discovering)
+	}
+
+	fmt.Fprintln(output, "\nBLE beacon scanner demo completed successfully.")
 	return nil
 }

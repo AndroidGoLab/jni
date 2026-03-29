@@ -1,9 +1,9 @@
 //go:build android
 
-// Command bt_mesh_relay demonstrates the BLE advertising and scanning API
-// surfaces using the bluetooth and bluetooth/le typed wrapper packages. It
-// obtains both the LE scanner and advertiser, reports advertising capabilities,
-// and displays the constants relevant to mesh relay operation.
+// Command bt_mesh_relay demonstrates BLE advertising and scanning capabilities
+// relevant to mesh relay operation using the bluetooth and bluetooth/le typed
+// wrapper packages. It obtains the adapter, checks advertising capabilities,
+// and retrieves both the LE scanner and advertiser.
 //
 // Required permissions (Android 12+): BLUETOOTH_SCAN, BLUETOOTH_CONNECT,
 // BLUETOOTH_ADVERTISE.
@@ -63,68 +63,115 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	// --- Advertise mode constants ---
-	fmt.Fprintln(output, "=== Advertise mode constants ===")
-	fmt.Fprintf(output, "  AdvertiseModeLowPower   = %d\n", le.AdvertiseModeLowPower)
-	fmt.Fprintf(output, "  AdvertiseModeBalanced   = %d\n", le.AdvertiseModeBalanced)
-	fmt.Fprintf(output, "  AdvertiseModeLowLatency = %d\n", le.AdvertiseModeLowLatency)
+	fmt.Fprintln(output, "=== Mesh Relay Demo ===")
+	ui.RenderOutput()
 
-	fmt.Fprintln(output, "=== Advertise TX power constants ===")
-	fmt.Fprintf(output, "  AdvertiseTxPowerUltraLow = %d\n", le.AdvertiseTxPowerUltraLow)
-	fmt.Fprintf(output, "  AdvertiseTxPowerLow      = %d\n", le.AdvertiseTxPowerLow)
-	fmt.Fprintf(output, "  AdvertiseTxPowerMedium   = %d\n", le.AdvertiseTxPowerMedium)
-	fmt.Fprintf(output, "  AdvertiseTxPowerHigh     = %d\n", le.AdvertiseTxPowerHigh)
-
-	fmt.Fprintln(output, "=== Scan mode constants ===")
-	fmt.Fprintf(output, "  ScanModeLowPower   = %d\n", le.ScanModeLowPower)
-	fmt.Fprintf(output, "  ScanModeBalanced   = %d\n", le.ScanModeBalanced)
-	fmt.Fprintf(output, "  ScanModeLowLatency = %d\n", le.ScanModeLowLatency)
-
-	fmt.Fprintln(output, "=== BLE mesh data type constants ===")
-	fmt.Fprintf(output, "  DataTypeMeshMessage = %d\n", le.DataTypeMeshMessage)
-	fmt.Fprintf(output, "  DataTypeMeshBeacon  = %d\n", le.DataTypeMeshBeacon)
-	fmt.Fprintf(output, "  DataTypePbAdv       = %d\n", le.DataTypePbAdv)
-
-	// --- Adapter ---
-	adapter, err := bluetooth.NewAdapter(ctx)
+	// --- BluetoothManager ---
+	mgr, err := bluetooth.NewManager(ctx)
 	if err != nil {
-		return fmt.Errorf("bluetooth.NewAdapter: %w", err)
+		return fmt.Errorf("bluetooth.NewManager: %w", err)
 	}
+	defer mgr.Close()
+	fmt.Fprintln(output, "BluetoothManager: obtained OK")
+
+	// --- Adapter via Manager ---
+	adapterObj, err := mgr.GetAdapter()
+	if err != nil {
+		return fmt.Errorf("Manager.GetAdapter: %w", err)
+	}
+	if adapterObj == nil {
+		fmt.Fprintln(output, "BluetoothAdapter is null")
+		return nil
+	}
+	adapter := &bluetooth.Adapter{VM: vm, Obj: adapterObj}
 	defer adapter.Close()
+	fmt.Fprintln(output, "Adapter obtained via Manager: OK")
+	ui.RenderOutput()
 
 	enabled, err := adapter.IsEnabled()
 	if err != nil {
 		return fmt.Errorf("IsEnabled: %w", err)
 	}
-	fmt.Fprintf(output, "\nBluetooth enabled: %v\n", enabled)
+	fmt.Fprintf(output, "Bluetooth enabled: %v\n", enabled)
 	if !enabled {
 		fmt.Fprintln(output, "Bluetooth is off; enable it in Settings.")
 		return nil
 	}
 
-	// --- Advertising capabilities ---
+	name, err := adapter.GetName()
+	if err == nil {
+		fmt.Fprintf(output, "Adapter name: %s\n", name)
+	}
+
+	state, err := adapter.GetState()
+	if err == nil {
+		fmt.Fprintf(output, "Adapter state: %d\n", state)
+	}
+	ui.RenderOutput()
+
+	// --- Mesh relay requires both scanning and advertising ---
+	fmt.Fprintln(output, "\n=== Advertising capabilities ===")
+
 	multiAdv, err := adapter.IsMultipleAdvertisementSupported()
 	if err != nil {
-		fmt.Fprintf(output, "IsMultipleAdvertisementSupported error: %v\n", err)
+		fmt.Fprintf(output, "IsMultipleAdvertisementSupported: error (%v)\n", err)
 	} else {
 		fmt.Fprintf(output, "Multiple advertisement supported: %v\n", multiAdv)
 	}
 
 	leExtAdv, err := adapter.IsLeExtendedAdvertisingSupported()
 	if err != nil {
-		fmt.Fprintf(output, "IsLeExtendedAdvertisingSupported error: %v\n", err)
+		fmt.Fprintf(output, "IsLeExtendedAdvertisingSupported: error (%v)\n", err)
 	} else {
-		fmt.Fprintf(output, "LE extended advertising supported: %v\n", leExtAdv)
+		fmt.Fprintf(output, "LE extended advertising: %v\n", leExtAdv)
+	}
+
+	lePeriodicAdv, err := adapter.IsLePeriodicAdvertisingSupported()
+	if err != nil {
+		fmt.Fprintf(output, "IsLePeriodicAdvertisingSupported: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "LE periodic advertising: %v\n", lePeriodicAdv)
 	}
 
 	maxAdvLen, err := adapter.GetLeMaximumAdvertisingDataLength()
 	if err != nil {
-		fmt.Fprintf(output, "GetLeMaximumAdvertisingDataLength error: %v\n", err)
+		fmt.Fprintf(output, "GetLeMaximumAdvertisingDataLength: error (%v)\n", err)
 	} else {
 		fmt.Fprintf(output, "Max advertising data length: %d bytes\n", maxAdvLen)
 	}
+	ui.RenderOutput()
 
-	// --- Get LE Scanner ---
+	// --- PHY capabilities (important for mesh range/throughput) ---
+	fmt.Fprintln(output, "\n=== PHY capabilities ===")
+
+	le2m, err := adapter.IsLe2MPhySupported()
+	if err == nil {
+		fmt.Fprintf(output, "LE 2M PHY supported: %v\n", le2m)
+	}
+
+	leCoded, err := adapter.IsLeCodedPhySupported()
+	if err == nil {
+		fmt.Fprintf(output, "LE Coded PHY supported: %v\n", leCoded)
+	}
+
+	leAudio, err := adapter.IsLeAudioSupported()
+	if err == nil {
+		fmt.Fprintf(output, "LE audio supported: %d\n", leAudio)
+	}
+
+	offloadFilter, err := adapter.IsOffloadedFilteringSupported()
+	if err == nil {
+		fmt.Fprintf(output, "Offloaded filtering: %v\n", offloadFilter)
+	}
+
+	offloadBatch, err := adapter.IsOffloadedScanBatchingSupported()
+	if err == nil {
+		fmt.Fprintf(output, "Offloaded scan batching: %v\n", offloadBatch)
+	}
+	ui.RenderOutput()
+
+	// --- LE Scanner ---
+	fmt.Fprintln(output, "\n=== LE Scanner ===")
 	scannerObj, err := adapter.GetBluetoothLeScanner()
 	if err != nil {
 		return fmt.Errorf("GetBluetoothLeScanner: %w", err)
@@ -133,10 +180,17 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintln(output, "BLE scanner not available")
 		return nil
 	}
-	_ = &le.BluetoothLeScanner{VM: vm, Obj: scannerObj}
-	fmt.Fprintln(output, "BLE scanner obtained: OK")
+	scanner := &le.BluetoothLeScanner{VM: vm, Obj: scannerObj}
+	scannerStr, err := scanner.ToString()
+	if err == nil {
+		fmt.Fprintf(output, "BLE scanner: %s\n", scannerStr)
+	} else {
+		fmt.Fprintln(output, "BLE scanner: obtained OK")
+	}
+	ui.RenderOutput()
 
-	// --- Get LE Advertiser ---
+	// --- LE Advertiser ---
+	fmt.Fprintln(output, "\n=== LE Advertiser ===")
 	advertiserObj, err := adapter.GetBluetoothLeAdvertiser()
 	if err != nil {
 		return fmt.Errorf("GetBluetoothLeAdvertiser: %w", err)
@@ -145,23 +199,40 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintln(output, "BLE advertiser not available")
 		return nil
 	}
-	_ = &le.BluetoothLeAdvertiser{VM: vm, Obj: advertiserObj}
-	fmt.Fprintln(output, "BLE advertiser obtained: OK")
+	advertiser := &le.BluetoothLeAdvertiser{VM: vm, Obj: advertiserObj}
+	advStr, err := advertiser.ToString()
+	if err == nil {
+		fmt.Fprintf(output, "BLE advertiser: %s\n", advStr)
+	} else {
+		fmt.Fprintln(output, "BLE advertiser: obtained OK")
+	}
+	ui.RenderOutput()
 
-	// --- Show mesh relay API surface ---
-	fmt.Fprintln(output, "\n=== Mesh relay typed wrapper API ===")
-	fmt.Fprintln(output, "  BluetoothLeScanner: StartScan, StopScan, FlushPendingScanResults")
-	fmt.Fprintln(output, "  BluetoothLeAdvertiser: StartAdvertising, StopAdvertising,")
-	fmt.Fprintln(output, "    StartAdvertisingSet, StopAdvertisingSet")
-	fmt.Fprintln(output, "  ScanSettingsBuilder: SetScanMode, SetCallbackType, SetMatchMode,")
-	fmt.Fprintln(output, "    SetNumOfMatches, SetReportDelay, SetPhy, SetLegacy, Build")
-	fmt.Fprintln(output, "  AdvertiseSettingsBuilder: SetAdvertiseMode, SetTxPowerLevel,")
-	fmt.Fprintln(output, "    SetConnectable, SetDiscoverable, SetTimeout, Build")
-	fmt.Fprintln(output, "  AdvertiseDataBuilder: SetIncludeDeviceName, SetIncludeTxPowerLevel,")
-	fmt.Fprintln(output, "    AddServiceUuid, AddServiceData, AddManufacturerData, Build")
+	// --- Bonded devices (mesh nodes may be bonded) ---
+	fmt.Fprintln(output, "\n=== Bonded devices ===")
+	bondedObj, err := adapter.GetBondedDevices()
+	if err != nil {
+		fmt.Fprintf(output, "GetBondedDevices: error (%v)\n", err)
+	} else if bondedObj == nil {
+		fmt.Fprintln(output, "Bonded devices: null")
+	} else {
+		fmt.Fprintln(output, "Bonded devices set: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(bondedObj); return nil })
+	}
 
-	fmt.Fprintln(output, "\nMesh relay capability check completed.")
-	fmt.Fprintln(output, "No errors occurred during mesh relay demo.")
+	// --- GATT connected devices via Manager ---
+	connDevs, err := mgr.GetConnectedDevices(int32(bluetooth.GattConst))
+	if err != nil {
+		fmt.Fprintf(output, "GetConnectedDevices(GATT): %v\n", err)
+	} else if connDevs != nil {
+		fmt.Fprintln(output, "GATT connected devices: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(connDevs); return nil })
+	}
 
+	// --- Mesh readiness summary ---
+	meshReady := multiAdv && (scannerObj != nil) && (advertiserObj != nil)
+	fmt.Fprintf(output, "\nMesh relay capable: %v\n", meshReady)
+
+	fmt.Fprintln(output, "\nMesh relay demo completed successfully.")
 	return nil
 }

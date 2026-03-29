@@ -1,8 +1,12 @@
 //go:build android
 
-// Command media_screen_capture demonstrates the MediaProjection API setup.
-// It obtains the MediaProjectionManager system service, creates a screen
-// capture intent, and describes the projection workflow using typed wrappers.
+// Command media_screen_capture demonstrates the MediaProjection API using the
+// typed wrapper package. It obtains the MediaProjectionManager, creates a
+// screen capture intent, and calls ToString on the manager to verify it works.
+//
+// Getting an actual MediaProjection requires user consent via
+// startActivityForResult, which is not possible from NativeActivity without
+// a Java activity. This example demonstrates the available API surface.
 package main
 
 /*
@@ -61,23 +65,32 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "=== Screen Capture Demo ===")
 	ui.RenderOutput()
 
-	// Obtain MediaProjectionManager.
+	// --- Obtain MediaProjectionManager ---
 	mgr, err := projection.NewMediaProjectionManager(ctx)
 	if err != nil {
 		return fmt.Errorf("NewMediaProjectionManager: %w", err)
 	}
 	defer mgr.Close()
-	fmt.Fprintln(output, "Manager: obtained OK")
+	fmt.Fprintln(output, "MediaProjectionManager: obtained OK")
 	ui.RenderOutput()
 
-	// Create a screen capture intent.
+	// --- ToString ---
+	mgrStr, err := mgr.ToString()
+	if err != nil {
+		fmt.Fprintf(output, "Manager.ToString: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Manager.ToString: %s\n", mgrStr)
+	}
+	ui.RenderOutput()
+
+	// --- CreateScreenCaptureIntent (no-arg) ---
 	captureIntent, err := mgr.CreateScreenCaptureIntent0()
 	if err != nil {
-		fmt.Fprintf(output, "CreateScreenCaptureIntent: %v\n", err)
+		fmt.Fprintf(output, "CreateScreenCaptureIntent0: error (%v)\n", err)
 	} else if captureIntent == nil || captureIntent.Ref() == 0 {
-		fmt.Fprintln(output, "CaptureIntent: null")
+		fmt.Fprintln(output, "CreateScreenCaptureIntent0: null")
 	} else {
-		fmt.Fprintln(output, "CaptureIntent: created OK")
+		fmt.Fprintln(output, "CreateScreenCaptureIntent0: created OK")
 		vm.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(captureIntent)
 			return nil
@@ -85,39 +98,47 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	ui.RenderOutput()
 
-	// Describe the projection API surface.
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "API surface:")
-	fmt.Fprintln(output, "  Manager methods:")
-	fmt.Fprintln(output, "    CreateScreenCaptureIntent()")
-	fmt.Fprintln(output, "    GetMediaProjection(code,data)")
+	// --- CreateScreenCaptureIntent (with MediaProjectionConfig) ---
+	// The 1-arg overload requires a MediaProjectionConfig (API 34+).
+	// We pass nil to test availability; it will error on older APIs.
+	captureIntent2, err := mgr.CreateScreenCaptureIntent1_1(nil)
+	if err != nil {
+		fmt.Fprintf(output, "CreateScreenCaptureIntent1_1(nil): %v (expected on API < 34)\n", err)
+	} else if captureIntent2 == nil || captureIntent2.Ref() == 0 {
+		fmt.Fprintln(output, "CreateScreenCaptureIntent1_1(nil): null")
+	} else {
+		fmt.Fprintln(output, "CreateScreenCaptureIntent1_1(nil): created OK")
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(captureIntent2)
+			return nil
+		})
+	}
 	ui.RenderOutput()
 
-	fmt.Fprintln(output, "  MediaProjection methods:")
-	fmt.Fprintln(output, "    Stop()")
-	fmt.Fprintln(output, "    UnregisterCallback(cb)")
+	// --- GetMediaProjection ---
+	// Requires a valid result code and intent data from startActivityForResult.
+	// We call with invalid args (-1, nil) to demonstrate the API is available.
+	projObj, err := mgr.GetMediaProjection(-1, nil)
+	if err != nil {
+		fmt.Fprintf(output, "GetMediaProjection(-1, nil): %v (expected)\n", err)
+	} else if projObj == nil || projObj.Ref() == 0 {
+		fmt.Fprintln(output, "GetMediaProjection(-1, nil): null (no consent)")
+	} else {
+		// Wrap in typed struct and query.
+		proj := &projection.MediaProjection{VM: vm, Obj: projObj}
+		projStr, err := proj.ToString()
+		if err == nil {
+			fmt.Fprintf(output, "MediaProjection.ToString: %s\n", projStr)
+		}
+		// Stop the projection.
+		if err := proj.Stop(); err != nil {
+			fmt.Fprintf(output, "MediaProjection.Stop: %v\n", err)
+		} else {
+			fmt.Fprintln(output, "MediaProjection.Stop: OK")
+		}
+	}
 	ui.RenderOutput()
 
-	fmt.Fprintln(output, "  VirtualDisplay methods:")
-	fmt.Fprintln(output, "    GetDisplay()")
-	fmt.Fprintln(output, "    GetSurface()")
-	fmt.Fprintln(output, "    Release()")
-	fmt.Fprintln(output, "    Resize(w, h, dpi)")
-	fmt.Fprintln(output, "    SetSurface(s)")
-	ui.RenderOutput()
-
-	// Workflow summary.
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "Capture workflow:")
-	fmt.Fprintln(output, "1. CreateScreenCaptureIntent")
-	fmt.Fprintln(output, "2. startActivityForResult")
-	fmt.Fprintln(output, "   (user consent required)")
-	fmt.Fprintln(output, "3. GetMediaProjection")
-	fmt.Fprintln(output, "4. createVirtualDisplay")
-	fmt.Fprintln(output, "5. Read from Surface")
-	fmt.Fprintln(output, "6. Stop / Release")
-
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "Screen capture example complete.")
+	fmt.Fprintln(output, "\nScreen capture demo completed successfully.")
 	return nil
 }
