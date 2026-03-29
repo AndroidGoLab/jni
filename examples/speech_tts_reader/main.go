@@ -1,8 +1,8 @@
 //go:build android
 
-// Command speech_tts_reader initializes a TextToSpeech engine with a
-// proper OnInitListener callback, queries engine properties, and
-// demonstrates the TTS lifecycle (init -> query -> speak -> shutdown).
+// Command speech_tts_reader initializes a TextToSpeech engine with a proper
+// OnInitListener callback, queries engine properties, and demonstrates the
+// TTS lifecycle (init -> query -> speak -> shutdown).
 package main
 
 /*
@@ -63,6 +63,25 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
+	// Set the proxy class loader so NewProxy can find APK adapter classes.
+	err = vm.Do(func(env *jni.Env) error {
+		cls := env.GetObjectClass(ctx.Obj)
+		mid, err := env.GetMethodID(cls, "getClassLoader", "()Ljava/lang/ClassLoader;")
+		if err != nil {
+			return fmt.Errorf("get getClassLoader: %w", err)
+		}
+		cl, err := env.CallObjectMethod(ctx.Obj, mid)
+		if err != nil {
+			return fmt.Errorf("getClassLoader: %w", err)
+		}
+		globalCL := env.NewGlobalRef(cl)
+		jni.SetProxyClassLoader(globalCL)
+		return nil
+	})
+	if err != nil {
+		fmt.Fprintf(output, "SetProxyClassLoader: %v (continuing)\n", err)
+	}
+
 	// Create OnInitListener proxy to receive TTS init callback.
 	var initStatus int32
 	var initOnce sync.Once
@@ -81,7 +100,17 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 			[]*jni.Class{listenerCls},
 			func(env *jni.Env, method string, args []*jni.Object) (*jni.Object, error) {
 				if method == "onInit" && len(args) > 0 {
-					// Extract status from Integer arg.
+					// Extract status from the Integer argument.
+					intCls, err := env.FindClass("java/lang/Integer")
+					if err == nil {
+						intValMid, err := env.GetMethodID(intCls, "intValue", "()I")
+						if err == nil {
+							val, err := env.CallIntMethod(args[0], intValMid)
+							if err == nil {
+								initStatus = val
+							}
+						}
+					}
 					initOnce.Do(func() { close(initDone) })
 				}
 				return nil, nil
@@ -95,12 +124,15 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		return nil
 	})
 	if err != nil {
-		// If proxy creation fails (e.g. missing proxy classes), fall back
-		// to showing TTS constants and API surface without init.
 		fmt.Fprintf(output, "OnInitListener proxy: %v\n", err)
 		fmt.Fprintln(output, "Falling back to TTS constants display.")
 		ui.RenderOutput()
 
+		// Show TTS constants even without proxy.
+		fmt.Fprintf(output, "\nTTS constants: Success=%d, Error=%d\n", speech.Success, speech.Error)
+		fmt.Fprintf(output, "Queue modes: Add=%d, Flush=%d\n", speech.QueueAdd, speech.QueueFlush)
+		fmt.Fprintf(output, "Lang results: Available=%d, MissingData=%d, NotSupported=%d\n",
+			speech.LangAvailable, speech.LangMissingData, speech.LangNotSupported)
 		fmt.Fprintln(output, "\nTTS Reader complete (proxy unavailable).")
 		return nil
 	}
@@ -116,7 +148,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		}
 	}()
 
-	fmt.Fprintln(output, "OnInitListener proxy created OK")
+	fmt.Fprintln(output, "OnInitListener proxy: created OK")
 	ui.RenderOutput()
 
 	// Create TTS with context and listener.
@@ -130,42 +162,119 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		return fmt.Errorf("NewTextToSpeech: %w", err)
 	}
 	defer tts.Close()
-	fmt.Fprintln(output, "TTS engine created OK")
+	fmt.Fprintln(output, "TTS engine: created OK")
 	ui.RenderOutput()
 
 	// Wait for init callback (up to 5 seconds).
 	select {
 	case <-initDone:
-		fmt.Fprintf(output, "TTS init callback received (status=%d)\n", initStatus)
+		fmt.Fprintf(output, "TTS init callback: status=%d (Success=%d)\n", initStatus, speech.Success)
 	case <-time.After(5 * time.Second):
-		fmt.Fprintln(output, "TTS init callback not received in 5s (continuing anyway)")
+		fmt.Fprintln(output, "TTS init callback: not received in 5s (continuing)")
 	}
 	ui.RenderOutput()
 
-	// Query engine properties.
+	// --- Query engine properties ---
 	engine, err := tts.GetDefaultEngine()
 	if err != nil {
-		fmt.Fprintf(output, "DefaultEngine: error (%v)\n", err)
+		fmt.Fprintf(output, "GetDefaultEngine: error (%v)\n", err)
 	} else {
-		fmt.Fprintf(output, "DefaultEngine: %s\n", engine)
+		fmt.Fprintf(output, "Default engine: %s\n", engine)
 	}
 
 	maxLen, err := tts.GetMaxSpeechInputLength()
 	if err != nil {
-		fmt.Fprintf(output, "MaxInputLen: error (%v)\n", err)
+		fmt.Fprintf(output, "GetMaxSpeechInputLength: error (%v)\n", err)
 	} else {
-		fmt.Fprintf(output, "MaxInputLen: %d\n", maxLen)
+		fmt.Fprintf(output, "Max speech input length: %d\n", maxLen)
 	}
 
 	speaking, err := tts.IsSpeaking()
 	if err != nil {
 		fmt.Fprintf(output, "IsSpeaking: error (%v)\n", err)
 	} else {
-		fmt.Fprintf(output, "IsSpeaking: %v\n", speaking)
+		fmt.Fprintf(output, "Is speaking: %v\n", speaking)
+	}
+
+	defaultsEnforced, err := tts.AreDefaultsEnforced()
+	if err != nil {
+		fmt.Fprintf(output, "AreDefaultsEnforced: error (%v)\n", err)
+	} else {
+		fmt.Fprintf(output, "Defaults enforced: %v\n", defaultsEnforced)
+	}
+
+	enginesObj, err := tts.GetEngines()
+	if err != nil {
+		fmt.Fprintf(output, "GetEngines: error (%v)\n", err)
+	} else if enginesObj == nil {
+		fmt.Fprintln(output, "GetEngines: null")
+	} else {
+		fmt.Fprintln(output, "Engines list: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(enginesObj); return nil })
+	}
+
+	availLangs, err := tts.GetAvailableLanguages()
+	if err != nil {
+		fmt.Fprintf(output, "GetAvailableLanguages: error (%v)\n", err)
+	} else if availLangs == nil {
+		fmt.Fprintln(output, "GetAvailableLanguages: null")
+	} else {
+		fmt.Fprintln(output, "Available languages: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(availLangs); return nil })
+	}
+
+	defaultLang, err := tts.GetDefaultLanguage()
+	if err != nil {
+		fmt.Fprintf(output, "GetDefaultLanguage: error (%v)\n", err)
+	} else if defaultLang == nil {
+		fmt.Fprintln(output, "GetDefaultLanguage: null")
+	} else {
+		fmt.Fprintln(output, "Default language: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(defaultLang); return nil })
+	}
+
+	curLang, err := tts.GetLanguage()
+	if err != nil {
+		fmt.Fprintf(output, "GetLanguage: error (%v)\n", err)
+	} else if curLang == nil {
+		fmt.Fprintln(output, "GetLanguage: null")
+	} else {
+		fmt.Fprintln(output, "Current language: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(curLang); return nil })
+	}
+
+	defaultVoice, err := tts.GetDefaultVoice()
+	if err != nil {
+		fmt.Fprintf(output, "GetDefaultVoice: error (%v)\n", err)
+	} else if defaultVoice == nil {
+		fmt.Fprintln(output, "GetDefaultVoice: null")
+	} else {
+		fmt.Fprintln(output, "Default voice: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(defaultVoice); return nil })
+	}
+
+	curVoice, err := tts.GetVoice()
+	if err != nil {
+		fmt.Fprintf(output, "GetVoice: error (%v)\n", err)
+	} else if curVoice == nil {
+		fmt.Fprintln(output, "GetVoice: null")
+	} else {
+		fmt.Fprintln(output, "Current voice: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(curVoice); return nil })
+	}
+
+	voicesObj, err := tts.GetVoices()
+	if err != nil {
+		fmt.Fprintf(output, "GetVoices: error (%v)\n", err)
+	} else if voicesObj == nil {
+		fmt.Fprintln(output, "GetVoices: null")
+	} else {
+		fmt.Fprintln(output, "Voices set: obtained OK")
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(voicesObj); return nil })
 	}
 	ui.RenderOutput()
 
-	// Set pitch and rate.
+	// --- Set pitch and rate ---
 	if rc, err := tts.SetPitch(1.0); err == nil {
 		fmt.Fprintf(output, "SetPitch(1.0): rc=%d\n", rc)
 	}
@@ -173,10 +282,16 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintf(output, "SetSpeechRate(1.0): rc=%d\n", rc)
 	}
 
-	// Stop and shutdown.
+	// --- Stop and shutdown ---
 	if rc, err := tts.Stop(); err == nil {
 		fmt.Fprintf(output, "Stop: rc=%d\n", rc)
 	}
+
+	ttsStr, err := tts.ToString()
+	if err == nil {
+		fmt.Fprintf(output, "TTS.ToString: %s\n", ttsStr)
+	}
+
 	if err := tts.Shutdown(); err == nil {
 		fmt.Fprintln(output, "Shutdown: OK")
 	}

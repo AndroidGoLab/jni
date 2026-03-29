@@ -1,8 +1,8 @@
 //go:build android
 
-// Command biometric_auth demonstrates the BiometricPrompt authentication
-// API surface. It checks biometric hardware availability and queries
-// authenticator support for strong, weak, and device credential types.
+// Command biometric_auth demonstrates the BiometricManager API by making
+// real calls: CanAuthenticate with multiple authenticator types, GetStrings,
+// GetLastAuthenticationTime, and ToString.
 package main
 
 /*
@@ -77,25 +77,36 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "=== Biometric Authentication ===")
 
-	// --- Check hardware availability ---
+	// 1. Obtain BiometricManager.
 	mgr, err := biometric.NewManager(ctx)
 	if err != nil {
 		return fmt.Errorf("biometric.NewManager: %w", err)
 	}
 	defer mgr.Close()
 
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "Hardware check (canAuthenticate):")
+	fmt.Fprintln(output, "BiometricManager: obtained OK")
 
-	// No-arg canAuthenticate (API 28+).
-	result, err := mgr.CanAuthenticate0()
+	// 2. ToString.
+	str, err := mgr.ToString()
 	if err != nil {
-		fmt.Fprintf(output, "  default: error: %v\n", err)
+		fmt.Fprintf(output, "  ToString: error: %v\n", err)
 	} else {
-		fmt.Fprintf(output, "  default: %s\n", canAuthResultName(result))
+		fmt.Fprintf(output, "  ToString: %s\n", str)
 	}
 
-	// Typed canAuthenticate (API 30+).
+	// 3. CanAuthenticate0 (no-arg, API 28+).
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "CanAuthenticate (default):")
+	result, err := mgr.CanAuthenticate0()
+	if err != nil {
+		fmt.Fprintf(output, "  error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  result: %s\n", canAuthResultName(result))
+	}
+
+	// 4. CanAuthenticate1_1 with various authenticator types (API 30+).
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "CanAuthenticate (typed):")
 	type authQuery struct {
 		name string
 		flag int32
@@ -105,6 +116,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		{"BIOMETRIC_WEAK", int32(biometric.BiometricWeak)},
 		{"DEVICE_CREDENTIAL", int32(biometric.DeviceCredential)},
 		{"STRONG|CREDENTIAL", int32(biometric.BiometricStrong) | int32(biometric.DeviceCredential)},
+		{"WEAK|CREDENTIAL", int32(biometric.BiometricWeak) | int32(biometric.DeviceCredential)},
 	}
 	for _, q := range queries {
 		r, err := mgr.CanAuthenticate1_1(q.flag)
@@ -115,30 +127,44 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		}
 	}
 
-	// --- CryptoObject API surface ---
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "CryptoObject API surface:")
-	fmt.Fprintln(output, "  GetCipher()")
-	fmt.Fprintln(output, "  GetMac()")
-	fmt.Fprintln(output, "  GetSignature()")
-	fmt.Fprintln(output, "  GetIdentityCredential()")
-	fmt.Fprintln(output, "  GetPresentationSession()")
-	fmt.Fprintln(output, "  GetOperationHandle()")
+	// 5. GetStrings for each authenticator type (API 31+).
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "GetStrings:")
+	for _, q := range queries {
+		stringsObj, err := mgr.GetStrings(q.flag)
+		if err != nil {
+			fmt.Fprintf(output, "  %s: error: %v\n", q.name, err)
+		} else if stringsObj == nil || stringsObj.Ref() == 0 {
+			fmt.Fprintf(output, "  %s: (null)\n", q.name)
+		} else {
+			// Wrap the returned object as ManagerStrings and call its methods.
+			ms := biometric.ManagerStrings{VM: vm, Obj: stringsObj}
+			msStr, _ := ms.ToString()
+			fmt.Fprintf(output, "  %s: %s\n", q.name, msStr)
+			vm.Do(func(env *jni.Env) error {
+				env.DeleteGlobalRef(stringsObj)
+				return nil
+			})
+		}
+	}
 
-	// --- Authentication callback types ---
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "AuthenticationCallback methods:")
-	fmt.Fprintln(output, "  OnAuthenticationSucceeded(result)")
-	fmt.Fprintln(output, "  OnAuthenticationFailed()")
-	fmt.Fprintln(output, "  OnAuthenticationError(errorCode, errString)")
-	fmt.Fprintln(output, "  OnAuthenticationHelp(helpCode, helpString)")
+	// 6. GetLastAuthenticationTime for each authenticator type (API 34+).
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "GetLastAuthenticationTime:")
+	for _, q := range queries {
+		ts, err := mgr.GetLastAuthenticationTime(q.flag)
+		if err != nil {
+			fmt.Fprintf(output, "  %s: error: %v\n", q.name, err)
+		} else {
+			if ts == biometric.BiometricNoAuthentication {
+				fmt.Fprintf(output, "  %s: NEVER\n", q.name)
+			} else {
+				fmt.Fprintf(output, "  %s: %d ms since epoch\n", q.name, ts)
+			}
+		}
+	}
 
-	// --- Constants ---
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "Constants:")
-	fmt.Fprintf(output, "  BIOMETRIC_STRONG  = 0x%04X\n", biometric.BiometricStrong)
-	fmt.Fprintf(output, "  BIOMETRIC_WEAK    = 0x%04X\n", biometric.BiometricWeak)
-	fmt.Fprintf(output, "  DEVICE_CREDENTIAL = 0x%04X\n", biometric.DeviceCredential)
-
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "Biometric auth example complete.")
 	return nil
 }

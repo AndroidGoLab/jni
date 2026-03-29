@@ -1,8 +1,9 @@
 //go:build android
 
 // Command nsd_service_browser demonstrates NSD (Network Service Discovery).
-// It creates an NsdManager and shows available NSD API surface including
-// the ServiceInfo type and protocol constants.
+// It obtains the NsdManager system service, exercises its typed methods,
+// and displays all NSD constants including protocol types, failure codes,
+// and state values.
 package main
 
 /*
@@ -51,6 +52,37 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
+// newServiceInfo creates a new NsdServiceInfo via its no-arg constructor.
+// The wrapper package does not export a constructor, so we use the init-provided
+// class to construct one.
+func newServiceInfo(vm *jni.VM) (*nsd.ServiceInfo, error) {
+	var si nsd.ServiceInfo
+	si.VM = vm
+	err := vm.Do(func(env *jni.Env) error {
+		if err := nsd.Init(env); err != nil {
+			return err
+		}
+		cls, err := env.FindClass("android/net/nsd/NsdServiceInfo")
+		if err != nil {
+			return fmt.Errorf("FindClass NsdServiceInfo: %w", err)
+		}
+		mid, err := env.GetMethodID(cls, "<init>", "()V")
+		if err != nil {
+			return fmt.Errorf("GetMethodID <init>: %w", err)
+		}
+		obj, err := env.NewObject(cls, mid)
+		if err != nil {
+			return fmt.Errorf("NewObject: %w", err)
+		}
+		si.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &si, nil
+}
+
 func run(vm *jni.VM, output *bytes.Buffer) error {
 	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
@@ -60,43 +92,199 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "=== NSD Service Browser ===")
 
-	// Obtain the NsdManager system service.
+	// 1. Obtain the NsdManager system service.
 	nsdMgr, err := nsd.NewManager(ctx)
 	if err != nil {
 		return fmt.Errorf("nsd.NewManager: %w", err)
 	}
 	defer nsdMgr.Close()
-	fmt.Fprintln(output, "NsdManager obtained")
+	fmt.Fprintln(output, "NsdManager: obtained OK")
 
-	// Show NSD constants.
-	fmt.Fprintf(output, "Protocol DNS-SD: %d\n", nsd.ProtocolDnsSd)
-	fmt.Fprintf(output, "NSD state enabled: %d\n", nsd.NsdStateEnabled)
-	fmt.Fprintf(output, "NSD state disabled: %d\n", nsd.NsdStateDisabled)
+	// 2. NsdManager.ToString.
+	mgrStr, err := nsdMgr.ToString()
+	if err != nil {
+		fmt.Fprintf(output, "  ToString: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  ToString: %s\n", mgrStr)
+	}
 
-	// Note: DiscoverServices requires a DiscoveryListener callback object.
-	// Since callback proxy support is needed, we demonstrate the available
-	// API surface without starting actual discovery.
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "NsdManager methods available:")
-	fmt.Fprintln(output, "  DiscoverServices3      (NsdServiceInfo, ProtocolType, DiscoveryListener)")
-	fmt.Fprintln(output, "  DiscoverServices3_3    (serviceType string, protocolType int, listener)")
-	fmt.Fprintln(output, "  StopServiceDiscovery   (listener)")
-	fmt.Fprintln(output, "  RegisterService3       (NsdServiceInfo, protocolType, listener)")
-	fmt.Fprintln(output, "  ResolveService2        (NsdServiceInfo, listener)")
-	fmt.Fprintln(output, "  UnregisterService      (listener)")
+	// 3. Show NSD constants.
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "NSD constants:")
+	fmt.Fprintf(output, "  ProtocolDnsSd: %d\n", nsd.ProtocolDnsSd)
+	fmt.Fprintf(output, "  NsdStateEnabled: %d\n", nsd.NsdStateEnabled)
+	fmt.Fprintf(output, "  NsdStateDisabled: %d\n", nsd.NsdStateDisabled)
+	fmt.Fprintf(output, "  FailureAlreadyActive: %d\n", nsd.FailureAlreadyActive)
+	fmt.Fprintf(output, "  FailureBadParameters: %d\n", nsd.FailureBadParameters)
+	fmt.Fprintf(output, "  FailureInternalError: %d\n", nsd.FailureInternalError)
+	fmt.Fprintf(output, "  FailureMaxLimit: %d\n", nsd.FailureMaxLimit)
+	fmt.Fprintf(output, "  FailureOperationNotRunning: %d\n", nsd.FailureOperationNotRunning)
 
-	// Show NsdServiceInfo type is available.
-	fmt.Fprintln(output, "")
-	fmt.Fprintln(output, "NsdServiceInfo methods available:")
-	fmt.Fprintln(output, "  GetServiceName, GetServiceType, GetPort")
-	fmt.Fprintln(output, "  GetHost, GetHostAddresses, GetHostname")
-	fmt.Fprintln(output, "  SetServiceName, SetServiceType, SetPort")
-	fmt.Fprintln(output, "  SetAttribute, RemoveAttribute, ToString")
+	// 4-19. Create an NsdServiceInfo and exercise all typed setters/getters.
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "NsdServiceInfo round-trip test:")
 
-	// TODO: Start actual _http._tcp discovery once callback proxy
-	// support is wired up for NSD discovery listeners.
+	si, err := newServiceInfo(vm)
+	if err != nil {
+		fmt.Fprintf(output, "  create: %v\n", err)
+		fmt.Fprintln(output)
+		fmt.Fprintln(output, "NSD service browser example complete.")
+		return nil
+	}
+	defer func() {
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(si.Obj)
+			return nil
+		})
+	}()
 
-	fmt.Fprintln(output, "")
+	// 4. SetServiceName.
+	if err := si.SetServiceName("GoTestService"); err != nil {
+		fmt.Fprintf(output, "  SetServiceName: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "  SetServiceName('GoTestService'): OK")
+	}
+
+	// 5. SetServiceType.
+	if err := si.SetServiceType("_http._tcp"); err != nil {
+		fmt.Fprintf(output, "  SetServiceType: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "  SetServiceType('_http._tcp'): OK")
+	}
+
+	// 6. SetPort.
+	if err := si.SetPort(8080); err != nil {
+		fmt.Fprintf(output, "  SetPort: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "  SetPort(8080): OK")
+	}
+
+	// 7. SetAttribute.
+	if err := si.SetAttribute("path", "/api/v1"); err != nil {
+		fmt.Fprintf(output, "  SetAttribute(path): %v\n", err)
+	} else {
+		fmt.Fprintln(output, "  SetAttribute('path', '/api/v1'): OK")
+	}
+
+	// 8. SetAttribute (second).
+	if err := si.SetAttribute("version", "2.0"); err != nil {
+		fmt.Fprintf(output, "  SetAttribute(version): %v\n", err)
+	} else {
+		fmt.Fprintln(output, "  SetAttribute('version', '2.0'): OK")
+	}
+
+	// 9. GetServiceName.
+	name, err := si.GetServiceName()
+	if err != nil {
+		fmt.Fprintf(output, "  GetServiceName: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  GetServiceName: %s\n", name)
+	}
+
+	// 10. GetServiceType.
+	svcType, err := si.GetServiceType()
+	if err != nil {
+		fmt.Fprintf(output, "  GetServiceType: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  GetServiceType: %s\n", svcType)
+	}
+
+	// 11. GetPort.
+	port, err := si.GetPort()
+	if err != nil {
+		fmt.Fprintf(output, "  GetPort: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  GetPort: %d\n", port)
+	}
+
+	// 12. GetHost.
+	host, err := si.GetHost()
+	if err != nil {
+		fmt.Fprintf(output, "  GetHost: error: %v\n", err)
+	} else if host == nil || host.Ref() == 0 {
+		fmt.Fprintln(output, "  GetHost: (null) -- not set")
+	} else {
+		fmt.Fprintf(output, "  GetHost: obtained (ref=%d)\n", host.Ref())
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(host)
+			return nil
+		})
+	}
+
+	// 13. GetHostname (API 34+).
+	hostname, err := si.GetHostname()
+	if err != nil {
+		fmt.Fprintf(output, "  GetHostname: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  GetHostname: %q\n", hostname)
+	}
+
+	// 14. GetHostAddresses.
+	addrs, err := si.GetHostAddresses()
+	if err != nil {
+		fmt.Fprintf(output, "  GetHostAddresses: %v\n", err)
+	} else if addrs == nil || addrs.Ref() == 0 {
+		fmt.Fprintln(output, "  GetHostAddresses: (null)")
+	} else {
+		fmt.Fprintf(output, "  GetHostAddresses: list obtained\n")
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(addrs)
+			return nil
+		})
+	}
+
+	// 15. GetNetwork.
+	network, err := si.GetNetwork()
+	if err != nil {
+		fmt.Fprintf(output, "  GetNetwork: %v\n", err)
+	} else if network == nil || network.Ref() == 0 {
+		fmt.Fprintln(output, "  GetNetwork: (null) -- not set")
+	} else {
+		fmt.Fprintln(output, "  GetNetwork: obtained")
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(network)
+			return nil
+		})
+	}
+
+	// 16. GetSubtypes (API 34+).
+	subtypes, err := si.GetSubtypes()
+	if err != nil {
+		fmt.Fprintf(output, "  GetSubtypes: %v\n", err)
+	} else if subtypes == nil || subtypes.Ref() == 0 {
+		fmt.Fprintln(output, "  GetSubtypes: (null)")
+	} else {
+		fmt.Fprintln(output, "  GetSubtypes: set obtained")
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(subtypes)
+			return nil
+		})
+	}
+
+	// 17. DescribeContents.
+	dc, err := si.DescribeContents()
+	if err != nil {
+		fmt.Fprintf(output, "  DescribeContents: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  DescribeContents: %d\n", dc)
+	}
+
+	// 18. RemoveAttribute.
+	if err := si.RemoveAttribute("version"); err != nil {
+		fmt.Fprintf(output, "  RemoveAttribute('version'): %v\n", err)
+	} else {
+		fmt.Fprintln(output, "  RemoveAttribute('version'): OK")
+	}
+
+	// 19. ToString.
+	siStr, err := si.ToString()
+	if err != nil {
+		fmt.Fprintf(output, "  ToString: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  ToString: %s\n", siStr)
+	}
+
+	fmt.Fprintln(output)
 	fmt.Fprintln(output, "NSD service browser example complete.")
 	return nil
 }

@@ -1,8 +1,8 @@
 //go:build android
 
 // Command keystore_encrypt demonstrates the Android KeyStore typed wrapper
-// constants for key management parameters: purposes, algorithms, block modes,
-// encryption padding, and digests.
+// by obtaining the KeyStoreManager system service and calling its methods,
+// and by querying supplementary attestation info for each security level.
 package main
 
 /*
@@ -52,83 +52,130 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
-	_ = vm // VM is available but not needed for constant display.
+	ctx, err := ui.GetAppContext(vm)
+	if err != nil {
+		return fmt.Errorf("get context: %w", err)
+	}
+	defer ctx.Close()
 
 	fmt.Fprintln(output, "=== KeyStore Encrypt ===")
 	fmt.Fprintln(output)
 
-	// --- KeyGenParameterSpec purpose constants ---
-	fmt.Fprintln(output, "KeyGenParameterSpec constants:")
-	fmt.Fprintf(output, "  PURPOSE_ENCRYPT   = %d\n", keystore.PurposeEncrypt)
-	fmt.Fprintf(output, "  PURPOSE_DECRYPT   = %d\n", keystore.PurposeDecrypt)
-	fmt.Fprintf(output, "  PURPOSE_SIGN      = %d\n", keystore.PurposeSign)
-	fmt.Fprintf(output, "  PURPOSE_VERIFY    = %d\n", keystore.PurposeVerify)
-	fmt.Fprintf(output, "  PURPOSE_WRAP_KEY  = %d\n", keystore.PurposeWrapKey)
-	fmt.Fprintf(output, "  PURPOSE_AGREE_KEY = %d\n", keystore.PurposeAgreeKey)
-	fmt.Fprintf(output, "  PURPOSE_ATTEST_KEY= %d\n", keystore.PurposeAttestKey)
+	// 1. Obtain the KeyStoreManager system service.
+	mgr, err := keystore.NewKeyStoreManager(ctx)
+	if err != nil {
+		fmt.Fprintf(output, "KeyStoreManager: %v\n", err)
+		fmt.Fprintln(output, "(Requires API 35+, falling back to constant display)")
+		fmt.Fprintln(output)
 
-	// --- Key algorithm constants ---
+		// Even without the manager, show that constants are real values
+		// by exercising them (these are compile-time constants from the wrapper).
+		fmt.Fprintf(output, "PURPOSE_ENCRYPT   = %d\n", keystore.PurposeEncrypt)
+		fmt.Fprintf(output, "PURPOSE_DECRYPT   = %d\n", keystore.PurposeDecrypt)
+		fmt.Fprintf(output, "PURPOSE_SIGN      = %d\n", keystore.PurposeSign)
+		fmt.Fprintf(output, "PURPOSE_VERIFY    = %d\n", keystore.PurposeVerify)
+		fmt.Fprintf(output, "PURPOSE_WRAP_KEY  = %d\n", keystore.PurposeWrapKey)
+		fmt.Fprintf(output, "PURPOSE_AGREE_KEY = %d\n", keystore.PurposeAgreeKey)
+		fmt.Fprintf(output, "PURPOSE_ATTEST_KEY= %d\n", keystore.PurposeAttestKey)
+		return nil
+	}
+	defer mgr.Close()
+
+	fmt.Fprintln(output, "KeyStoreManager: obtained OK")
+
+	// 2. ToString
+	str, err := mgr.ToString()
+	if err != nil {
+		fmt.Fprintf(output, "  ToString: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  ToString: %s\n", str)
+	}
+
+	// 3. GetSupplementaryAttestationInfo for each security level.
+	type secLevel struct {
+		name  string
+		level int32
+	}
+	levels := []secLevel{
+		{"SOFTWARE", int32(keystore.SecurityLevelSoftware)},
+		{"TRUSTED_ENVIRONMENT", int32(keystore.SecurityLevelTrustedEnvironment)},
+		{"STRONGBOX", int32(keystore.SecurityLevelStrongbox)},
+		{"UNKNOWN_SECURE", int32(keystore.SecurityLevelUnknownSecure)},
+	}
+
 	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Key algorithms:")
-	fmt.Fprintf(output, "  AES         = %s\n", keystore.KeyAlgorithmAes)
-	fmt.Fprintf(output, "  RSA         = %s\n", keystore.KeyAlgorithmRsa)
-	fmt.Fprintf(output, "  EC          = %s\n", keystore.KeyAlgorithmEc)
-	fmt.Fprintf(output, "  3DES        = %s\n", keystore.KeyAlgorithm3des)
-	fmt.Fprintf(output, "  HMAC_SHA1   = %s\n", keystore.KeyAlgorithmHmacSha1)
-	fmt.Fprintf(output, "  HMAC_SHA224 = %s\n", keystore.KeyAlgorithmHmacSha224)
-	fmt.Fprintf(output, "  HMAC_SHA256 = %s\n", keystore.KeyAlgorithmHmacSha256)
-	fmt.Fprintf(output, "  HMAC_SHA384 = %s\n", keystore.KeyAlgorithmHmacSha384)
-	fmt.Fprintf(output, "  HMAC_SHA512 = %s\n", keystore.KeyAlgorithmHmacSha512)
+	fmt.Fprintln(output, "Supplementary attestation info:")
+	for _, lvl := range levels {
+		info, err := mgr.GetSupplementaryAttestationInfo(lvl.level)
+		if err != nil {
+			fmt.Fprintf(output, "  %s (%d): %v\n", lvl.name, lvl.level, err)
+		} else if info == nil || info.Ref() == 0 {
+			fmt.Fprintf(output, "  %s (%d): (null)\n", lvl.name, lvl.level)
+		} else {
+			fmt.Fprintf(output, "  %s (%d): obtained (ref=%d)\n", lvl.name, lvl.level, info.Ref())
+			vm.Do(func(env *jni.Env) error {
+				env.DeleteGlobalRef(info)
+				return nil
+			})
+		}
+	}
 
-	// --- Block mode constants ---
+	// 4. Try GetGrantedKeyFromId with a test ID (will likely fail, but exercises the call).
 	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Block modes:")
-	fmt.Fprintf(output, "  CBC = %s\n", keystore.BlockModeCbc)
-	fmt.Fprintf(output, "  GCM = %s\n", keystore.BlockModeGcm)
-	fmt.Fprintf(output, "  CTR = %s\n", keystore.BlockModeCtr)
-	fmt.Fprintf(output, "  ECB = %s\n", keystore.BlockModeEcb)
+	fmt.Fprintln(output, "Granted key lookups (test IDs):")
+	testIDs := []int64{0, 1, -1}
+	for _, id := range testIDs {
+		key, err := mgr.GetGrantedKeyFromId(id)
+		if err != nil {
+			fmt.Fprintf(output, "  GetGrantedKeyFromId(%d): %v\n", id, err)
+		} else if key == nil || key.Ref() == 0 {
+			fmt.Fprintf(output, "  GetGrantedKeyFromId(%d): (null)\n", id)
+		} else {
+			fmt.Fprintf(output, "  GetGrantedKeyFromId(%d): obtained\n", id)
+			vm.Do(func(env *jni.Env) error {
+				env.DeleteGlobalRef(key)
+				return nil
+			})
+		}
+	}
 
-	// --- Encryption padding constants ---
+	// 5. Try GetGrantedKeyPairFromId.
 	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Encryption padding:")
-	fmt.Fprintf(output, "  NONE      = %s\n", keystore.EncryptionPaddingNone)
-	fmt.Fprintf(output, "  PKCS7     = %s\n", keystore.EncryptionPaddingPkcs7)
-	fmt.Fprintf(output, "  RSA_OAEP  = %s\n", keystore.EncryptionPaddingRsaOaep)
-	fmt.Fprintf(output, "  RSA_PKCS1 = %s\n", keystore.EncryptionPaddingRsaPkcs1)
+	fmt.Fprintln(output, "Granted key pair lookups:")
+	for _, id := range testIDs {
+		pair, err := mgr.GetGrantedKeyPairFromId(id)
+		if err != nil {
+			fmt.Fprintf(output, "  GetGrantedKeyPairFromId(%d): %v\n", id, err)
+		} else if pair == nil || pair.Ref() == 0 {
+			fmt.Fprintf(output, "  GetGrantedKeyPairFromId(%d): (null)\n", id)
+		} else {
+			fmt.Fprintf(output, "  GetGrantedKeyPairFromId(%d): obtained\n", id)
+			vm.Do(func(env *jni.Env) error {
+				env.DeleteGlobalRef(pair)
+				return nil
+			})
+		}
+	}
 
-	// --- Digest constants ---
+	// 6. Try GetGrantedCertificateChainFromId.
 	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Digests:")
-	fmt.Fprintf(output, "  NONE   = %s\n", keystore.DigestNone)
-	fmt.Fprintf(output, "  MD5    = %s\n", keystore.DigestMd5)
-	fmt.Fprintf(output, "  SHA1   = %s\n", keystore.DigestSha1)
-	fmt.Fprintf(output, "  SHA224 = %s\n", keystore.DigestSha224)
-	fmt.Fprintf(output, "  SHA256 = %s\n", keystore.DigestSha256)
-	fmt.Fprintf(output, "  SHA384 = %s\n", keystore.DigestSha384)
-	fmt.Fprintf(output, "  SHA512 = %s\n", keystore.DigestSha512)
+	fmt.Fprintln(output, "Granted certificate chain lookups:")
+	for _, id := range testIDs {
+		chain, err := mgr.GetGrantedCertificateChainFromId(id)
+		if err != nil {
+			fmt.Fprintf(output, "  GetGrantedCertificateChainFromId(%d): %v\n", id, err)
+		} else if chain == nil || chain.Ref() == 0 {
+			fmt.Fprintf(output, "  GetGrantedCertificateChainFromId(%d): (null)\n", id)
+		} else {
+			fmt.Fprintf(output, "  GetGrantedCertificateChainFromId(%d): obtained\n", id)
+			vm.Do(func(env *jni.Env) error {
+				env.DeleteGlobalRef(chain)
+				return nil
+			})
+		}
+	}
 
-	// --- Signature padding constants ---
 	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Signature padding:")
-	fmt.Fprintf(output, "  RSA_PKCS1 = %s\n", keystore.SignaturePaddingRsaPkcs1)
-	fmt.Fprintf(output, "  RSA_PSS   = %s\n", keystore.SignaturePaddingRsaPss)
-
-	// --- Security level constants ---
-	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Security levels:")
-	fmt.Fprintf(output, "  SOFTWARE            = %d\n", keystore.SecurityLevelSoftware)
-	fmt.Fprintf(output, "  TRUSTED_ENVIRONMENT = %d\n", keystore.SecurityLevelTrustedEnvironment)
-	fmt.Fprintf(output, "  STRONGBOX           = %d\n", keystore.SecurityLevelStrongbox)
-	fmt.Fprintf(output, "  UNKNOWN             = %d\n", keystore.SecurityLevelUnknown)
-	fmt.Fprintf(output, "  UNKNOWN_SECURE      = %d\n", keystore.SecurityLevelUnknownSecure)
-
-	// --- Origin constants ---
-	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Key origins:")
-	fmt.Fprintf(output, "  GENERATED        = %d\n", keystore.OriginGenerated)
-	fmt.Fprintf(output, "  IMPORTED         = %d\n", keystore.OriginImported)
-	fmt.Fprintf(output, "  SECURELY_IMPORTED= %d\n", keystore.OriginSecurelyImported)
-	fmt.Fprintf(output, "  UNKNOWN          = %d\n", keystore.OriginUnknown)
-
+	fmt.Fprintln(output, "KeyStore encrypt example complete.")
 	return nil
 }

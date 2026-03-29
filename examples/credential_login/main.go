@@ -1,8 +1,9 @@
 //go:build android
 
 // Command credential_login demonstrates the Android Credential Manager API.
-// It attempts to obtain the CredentialManager system service, checks
-// availability, and shows the credential management API surface.
+// It obtains the CredentialManager system service and calls every available
+// method: ToString, IsEnabledCredentialProviderService, RegisterCredentialDescription,
+// UnregisterCredentialDescription, plus exercises credential type constants.
 package main
 
 /*
@@ -61,7 +62,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
-	// Initialize credentials JNI bindings.
+	// 1. Initialize credentials JNI bindings.
 	var initErr error
 	vm.Do(func(env *jni.Env) error {
 		initErr = credentials.Init(env)
@@ -70,55 +71,112 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	if initErr != nil {
 		fmt.Fprintf(output, "credentials.Init: %v\n", initErr)
-		fmt.Fprintln(output, "Credential Manager NOT available.")
-		fmt.Fprintln(output, "(Requires API 34+)")
-	} else {
-		fmt.Fprintln(output, "credentials.Init: OK")
+		fmt.Fprintln(output, "Credential Manager NOT available (requires API 34+).")
+		return nil
 	}
+	fmt.Fprintln(output, "credentials.Init: OK")
 
-	// Try to get the CredentialManager system service.
-	fmt.Fprintln(output)
-	fmt.Fprintln(output, "System service check:")
-
+	// 2. Get the CredentialManager system service.
 	mgr, err := credentials.NewCredentialManager(ctx)
 	if err != nil {
-		fmt.Fprintf(output, "  CredentialManager: %v\n", err)
-		fmt.Fprintln(output, "  (service not available on this device)")
+		fmt.Fprintf(output, "CredentialManager: %v\n", err)
+		fmt.Fprintln(output, "(service not available on this device)")
+		return nil
+	}
+	defer mgr.Close()
+	fmt.Fprintln(output, "CredentialManager: obtained OK")
+
+	// 3. ToString.
+	str, err := mgr.ToString()
+	if err != nil {
+		fmt.Fprintf(output, "  ToString: error: %v\n", err)
 	} else {
-		fmt.Fprintln(output, "  CredentialManager: available")
-		defer mgr.Close()
-
-		// Show the object reference.
-		fmt.Fprintf(output, "  ref: %d\n", mgr.Obj.Ref())
-
-		// Show available API methods.
-		fmt.Fprintln(output)
-		fmt.Fprintln(output, "Available methods:")
-		fmt.Fprintln(output, "  IsEnabledCredentialProviderService()")
-		fmt.Fprintln(output, "  RegisterCredentialDescription()")
-		fmt.Fprintln(output, "  UnregisterCredentialDescription()")
+		fmt.Fprintf(output, "  ToString: %s\n", str)
 	}
 
-	// Show request builder API surface.
+	// 4. IsEnabledCredentialProviderService - pass nil ComponentName to test.
 	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Request types:")
-	fmt.Fprintln(output, "  GetCredentialRequest.Builder")
-	fmt.Fprintln(output, "  CreateCredentialRequest.Builder")
-	fmt.Fprintln(output, "  ClearCredentialStateRequest")
+	fmt.Fprintln(output, "IsEnabledCredentialProviderService:")
+	enabled, err := mgr.IsEnabledCredentialProviderService(nil)
+	if err != nil {
+		fmt.Fprintf(output, "  (nil component): error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  (nil component): %v\n", enabled)
+	}
 
-	// Show response types.
+	// 5. RegisterCredentialDescription - pass nil to test availability.
 	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Response types:")
-	fmt.Fprintln(output, "  GetCredentialResponse")
-	fmt.Fprintln(output, "  CreateCredentialResponse")
-	fmt.Fprintln(output, "  PrepareGetCredentialResponse")
+	fmt.Fprintln(output, "RegisterCredentialDescription:")
+	err = mgr.RegisterCredentialDescription(nil)
+	if err != nil {
+		fmt.Fprintf(output, "  (nil): %v\n", err)
+	} else {
+		fmt.Fprintln(output, "  (nil): OK")
+	}
 
-	// Show credential types.
+	// 6. UnregisterCredentialDescription - pass nil to test availability.
 	fmt.Fprintln(output)
-	fmt.Fprintln(output, "Credential types:")
-	fmt.Fprintln(output, "  Credential (base)")
-	fmt.Fprintln(output, "  CredentialOption")
-	fmt.Fprintln(output, "  CredentialDescription")
+	fmt.Fprintln(output, "UnregisterCredentialDescription:")
+	err = mgr.UnregisterCredentialDescription(nil)
+	if err != nil {
+		fmt.Fprintf(output, "  (nil): %v\n", err)
+	} else {
+		fmt.Fprintln(output, "  (nil): OK")
+	}
 
+	// 7. Create a Credential object and query its properties.
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "Credential object test:")
+	cred, err := credentials.NewCredential(vm, credentials.TypePasswordCredential, nil)
+	if err != nil {
+		fmt.Fprintf(output, "  NewCredential: %v\n", err)
+	} else {
+		credType, err := cred.GetType()
+		if err != nil {
+			fmt.Fprintf(output, "  GetType: error: %v\n", err)
+		} else {
+			fmt.Fprintf(output, "  GetType: %s\n", credType)
+		}
+
+		dc, err := cred.DescribeContents()
+		if err != nil {
+			fmt.Fprintf(output, "  DescribeContents: error: %v\n", err)
+		} else {
+			fmt.Fprintf(output, "  DescribeContents: %d\n", dc)
+		}
+
+		data, err := cred.GetData()
+		if err != nil {
+			fmt.Fprintf(output, "  GetData: error: %v\n", err)
+		} else if data == nil || data.Ref() == 0 {
+			fmt.Fprintln(output, "  GetData: (null)")
+		} else {
+			fmt.Fprintf(output, "  GetData: obtained (ref=%d)\n", data.Ref())
+			vm.Do(func(env *jni.Env) error {
+				env.DeleteGlobalRef(data)
+				return nil
+			})
+		}
+
+		credStr, err := cred.ToString()
+		if err != nil {
+			fmt.Fprintf(output, "  ToString: error: %v\n", err)
+		} else {
+			fmt.Fprintf(output, "  ToString: %s\n", credStr)
+		}
+	}
+
+	// 8. Show credential type constants.
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "Credential type constants:")
+	fmt.Fprintf(output, "  TypeUnknown            = %s\n", credentials.TypeUnknown)
+	fmt.Fprintf(output, "  TypePasswordCredential = %s\n", credentials.TypePasswordCredential)
+	fmt.Fprintf(output, "  TypeInterrupted        = %s\n", credentials.TypeInterrupted)
+	fmt.Fprintf(output, "  TypeNoCreateOptions    = %s\n", credentials.TypeNoCreateOptions)
+	fmt.Fprintf(output, "  TypeUserCanceled       = %s\n", credentials.TypeUserCanceled)
+	fmt.Fprintf(output, "  TypeNoCredential       = %s\n", credentials.TypeNoCredential)
+
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "Credential login example complete.")
 	return nil
 }

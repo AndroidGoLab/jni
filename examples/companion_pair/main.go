@@ -1,8 +1,9 @@
 //go:build android
 
 // Command companion_pair uses CompanionDeviceManager to demonstrate
-// the device association API surface. Checks availability and shows
-// pairing workflow concepts.
+// the device association API. It calls GetAssociations, GetMyAssociations,
+// BuildAssociationCancellationIntent, ToString, and exercises device
+// profile constants.
 package main
 
 /*
@@ -62,7 +63,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "=== Companion Pair ===")
 
-	// Check if Bluetooth and BLE are available (prerequisites).
+	// 1-3. Check hardware prerequisites using PackageManager.
 	pmObj, err := ctx.GetPackageManager()
 	if err == nil && pmObj != nil && pmObj.Ref() != 0 {
 		mgr := pm.PackageManager{VM: vm, Obj: pmObj}
@@ -77,7 +78,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintf(output, "  WiFi: %v\n", hasWifi)
 	}
 
-	// Try to obtain CompanionDeviceManager.
+	// 4. Obtain CompanionDeviceManager.
 	cdm, err := companion.NewDeviceManager(ctx)
 	if err != nil {
 		if strings.Contains(err.Error(), "service not available") {
@@ -89,23 +90,103 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer cdm.Close()
 
-	fmt.Fprintln(output, "\nCompanionDeviceManager: available")
+	fmt.Fprintln(output, "\nCompanionDeviceManager: obtained OK")
 
-	// Pairing workflow overview.
-	fmt.Fprintln(output, "\nPairing Workflow:")
-	fmt.Fprintln(output, "  1. Build AssociationRequest")
-	fmt.Fprintln(output, "     (filter by BT, BLE, or WiFi)")
-	fmt.Fprintln(output, "  2. Call CDM.associate(request, callback)")
-	fmt.Fprintln(output, "  3. System shows device picker")
-	fmt.Fprintln(output, "  4. Callback receives IntentSender")
-	fmt.Fprintln(output, "  5. Launch IntentSender for result")
-	fmt.Fprintln(output, "  6. Get device info from result Intent")
+	// 5. ToString.
+	str, err := cdm.ToString()
+	if err != nil {
+		fmt.Fprintf(output, "  ToString: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  ToString: %s\n", str)
+	}
 
-	// Note about filtered generic methods.
-	fmt.Fprintln(output, "\nNote: GetAssociations and")
-	fmt.Fprintln(output, "GetMyAssociations return generic")
-	fmt.Fprintln(output, "types (List<>) and are filtered.")
+	// 6. GetAssociations (returns List<String> on older APIs, List<AssociationInfo> on newer).
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "GetAssociations:")
+	assocObj, err := cdm.GetAssociations()
+	if err != nil {
+		fmt.Fprintf(output, "  error: %v\n", err)
+	} else if assocObj == nil || assocObj.Ref() == 0 {
+		fmt.Fprintln(output, "  (null)")
+	} else {
+		fmt.Fprintf(output, "  list obtained (ref=%d)\n", assocObj.Ref())
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(assocObj)
+			return nil
+		})
+	}
 
-	fmt.Fprintln(output, "\nCompanion pair complete.")
+	// 7. GetMyAssociations (API 33+).
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "GetMyAssociations:")
+	myAssocObj, err := cdm.GetMyAssociations()
+	if err != nil {
+		fmt.Fprintf(output, "  error: %v\n", err)
+	} else if myAssocObj == nil || myAssocObj.Ref() == 0 {
+		fmt.Fprintln(output, "  (null)")
+	} else {
+		fmt.Fprintf(output, "  list obtained (ref=%d)\n", myAssocObj.Ref())
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(myAssocObj)
+			return nil
+		})
+	}
+
+	// 8. BuildAssociationCancellationIntent (API 33+).
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "BuildAssociationCancellationIntent:")
+	cancelIntent, err := cdm.BuildAssociationCancellationIntent()
+	if err != nil {
+		fmt.Fprintf(output, "  error: %v\n", err)
+	} else if cancelIntent == nil || cancelIntent.Ref() == 0 {
+		fmt.Fprintln(output, "  (null)")
+	} else {
+		fmt.Fprintf(output, "  intent obtained (ref=%d)\n", cancelIntent.Ref())
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(cancelIntent)
+			return nil
+		})
+	}
+
+	// 9. HasNotificationAccess (pass nil as ComponentName).
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "HasNotificationAccess (nil component):")
+	hasNotif, err := cdm.HasNotificationAccess(nil)
+	if err != nil {
+		fmt.Fprintf(output, "  error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "  result: %v\n", hasNotif)
+	}
+
+	// 10. DetachSystemDataTransport with a dummy association ID (API 35+).
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "DetachSystemDataTransport(0):")
+	err = cdm.DetachSystemDataTransport(0)
+	if err != nil {
+		fmt.Fprintf(output, "  error: %v\n", err)
+	} else {
+		fmt.Fprintln(output, "  OK")
+	}
+
+	// 11. Device profile constants.
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "Device profiles:")
+	fmt.Fprintf(output, "  WATCH                  = %s\n", companion.DeviceProfileWatch)
+	fmt.Fprintf(output, "  COMPUTER               = %s\n", companion.DeviceProfileComputer)
+	fmt.Fprintf(output, "  APP_STREAMING          = %s\n", companion.DeviceProfileAppStreaming)
+	fmt.Fprintf(output, "  AUTOMOTIVE_PROJECTION  = %s\n", companion.DeviceProfileAutomotiveProjection)
+	fmt.Fprintf(output, "  GLASSES                = %s\n", companion.DeviceProfileGlasses)
+	fmt.Fprintf(output, "  NEARBY_DEVICE_STREAMING= %s\n", companion.DeviceProfileNearbyDeviceStreaming)
+
+	// 12. Event constants.
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "Presence event constants:")
+	fmt.Fprintf(output, "  BLE_APPEARED           = %d\n", companion.EventBleAppeared)
+	fmt.Fprintf(output, "  BLE_DISAPPEARED        = %d\n", companion.EventBleDisappeared)
+	fmt.Fprintf(output, "  BT_CONNECTED           = %d\n", companion.EventBtConnected)
+	fmt.Fprintf(output, "  BT_DISCONNECTED        = %d\n", companion.EventBtDisconnected)
+
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "Companion pair example complete.")
 	return nil
 }

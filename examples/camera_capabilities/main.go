@@ -1,9 +1,9 @@
 //go:build android
 
 // Command camera_capabilities enumerates all cameras via CameraManager,
-// reports the camera ID list, and shows what the typed camera API provides.
-// CameraCharacteristics details require raw JNI (the wrapper is not exported),
-// so this example demonstrates the CameraManager typed API surface.
+// calls GetCameraIdList, GetCameraCharacteristics, GetCameraExtensionCharacteristics,
+// GetTorchStrengthLevel, IsCameraDeviceSetupSupported, GetCameraDeviceSetup,
+// GetConcurrentCameraIds, and ToString for each camera.
 package main
 
 /*
@@ -53,7 +53,7 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 }
 
 // extractCameraIDs converts the Java String[] from GetCameraIdList into Go strings.
-func extractCameraIDs(vm *jni.VM, idArray *jni.Object) ([]string, error) {
+func extractCameraIDs(vm *jni.VM, idArray *jni.GlobalRef) ([]string, error) {
 	var ids []string
 	err := vm.Do(func(env *jni.Env) error {
 		if idArray == nil {
@@ -81,6 +81,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	}
 	defer ctx.Close()
 
+	// 1. Obtain CameraManager.
 	mgr, err := camera.NewManager(ctx)
 	if err != nil {
 		return fmt.Errorf("camera.NewManager: %w", err)
@@ -89,6 +90,15 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	fmt.Fprintln(output, "=== Camera Capabilities ===")
 
+	// 2. ToString.
+	mgrStr, err := mgr.ToString()
+	if err != nil {
+		fmt.Fprintf(output, "CameraManager ToString: error: %v\n", err)
+	} else {
+		fmt.Fprintf(output, "CameraManager: %s\n", mgrStr)
+	}
+
+	// 3. GetCameraIdList.
 	idArray, err := mgr.GetCameraIdList()
 	if err != nil {
 		return fmt.Errorf("GetCameraIdList: %w", err)
@@ -112,50 +122,78 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	for _, id := range cameraIDs {
 		fmt.Fprintf(output, "Camera [%s]:\n", id)
 
-		// GetCameraCharacteristics returns an opaque object; we show it was obtained.
+		// 4. GetCameraCharacteristics.
 		chars, err := mgr.GetCameraCharacteristics(id)
 		if err != nil {
 			fmt.Fprintf(output, "  Characteristics: error (%v)\n", err)
 		} else if chars != nil && chars.Ref() != 0 {
-			fmt.Fprintf(output, "  Characteristics: obtained\n")
+			fmt.Fprintln(output, "  Characteristics: obtained")
 			vm.Do(func(env *jni.Env) error {
 				env.DeleteGlobalRef(chars)
 				return nil
 			})
 		}
 
-		// Check torch strength (API 33+).
+		// 5. GetCameraExtensionCharacteristics (API 31+).
+		extChars, err := mgr.GetCameraExtensionCharacteristics(id)
+		if err != nil {
+			fmt.Fprintf(output, "  ExtensionCharacteristics: %v\n", err)
+		} else if extChars != nil && extChars.Ref() != 0 {
+			fmt.Fprintln(output, "  ExtensionCharacteristics: obtained")
+			vm.Do(func(env *jni.Env) error {
+				env.DeleteGlobalRef(extChars)
+				return nil
+			})
+		}
+
+		// 6. GetTorchStrengthLevel (API 33+).
 		torchLevel, err := mgr.GetTorchStrengthLevel(id)
 		if err != nil {
-			fmt.Fprintf(output, "  Torch strength: not available (%v)\n", err)
+			fmt.Fprintf(output, "  Torch strength: %v\n", err)
 		} else {
 			fmt.Fprintf(output, "  Torch strength level: %d\n", torchLevel)
 		}
 
-		// Check device setup support (API 35+).
+		// 7. IsCameraDeviceSetupSupported (API 35+).
 		setupSupported, err := mgr.IsCameraDeviceSetupSupported(id)
 		if err != nil {
-			fmt.Fprintf(output, "  Device setup: not available\n")
+			fmt.Fprintln(output, "  Device setup supported: not available")
 		} else {
 			fmt.Fprintf(output, "  Device setup supported: %v\n", setupSupported)
+		}
+
+		// 8. GetCameraDeviceSetup (API 35+).
+		deviceSetup, err := mgr.GetCameraDeviceSetup(id)
+		if err != nil {
+			fmt.Fprintf(output, "  GetCameraDeviceSetup: %v\n", err)
+		} else if deviceSetup != nil && deviceSetup.Ref() != 0 {
+			fmt.Fprintln(output, "  GetCameraDeviceSetup: obtained")
+			vm.Do(func(env *jni.Env) error {
+				env.DeleteGlobalRef(deviceSetup)
+				return nil
+			})
+		} else {
+			fmt.Fprintln(output, "  GetCameraDeviceSetup: (null)")
 		}
 
 		fmt.Fprintln(output)
 	}
 
-	// Check concurrent camera support (API 30+).
+	// 9. GetConcurrentCameraIds (API 30+).
 	concurrentObj, err := mgr.GetConcurrentCameraIds()
 	if err != nil {
-		fmt.Fprintf(output, "Concurrent camera IDs: not available (%v)\n", err)
+		fmt.Fprintf(output, "Concurrent camera IDs: %v\n", err)
 	} else if concurrentObj != nil && concurrentObj.Ref() != 0 {
 		fmt.Fprintln(output, "Concurrent camera IDs: obtained (Set<Set<String>>)")
 		vm.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(concurrentObj)
 			return nil
 		})
+	} else {
+		fmt.Fprintln(output, "Concurrent camera IDs: (null)")
 	}
 
-	fmt.Fprintln(output, "")
+	fmt.Fprintln(output)
 	fmt.Fprintln(output, "Camera capabilities enumeration complete.")
 	return nil
 }
