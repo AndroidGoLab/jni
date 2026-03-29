@@ -66,6 +66,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("create player: %w", err)
 	}
+	if p == nil || p.Obj == nil || p.Obj.Ref() == 0 {
+		return fmt.Errorf("create player: returned null")
+	}
 	fmt.Fprintln(output, "MediaPlayer created OK")
 	ui.RenderOutput()
 

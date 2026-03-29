@@ -86,7 +86,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("Manager.GetAdapter: %w", err)
 	}
-	if adapterObj == nil {
+	if adapterObj == nil || adapterObj.Ref() == 0 {
 		fmt.Fprintln(output, "BluetoothAdapter is null (Bluetooth may be disabled)")
 		return nil
 	}
@@ -140,7 +140,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	connDevs, err := mgr.GetConnectedDevices(int32(bluetooth.GattConst))
 	if err != nil {
 		fmt.Fprintf(output, "GetConnectedDevices(GATT): %v\n", err)
-	} else if connDevs == nil {
+	} else if connDevs == nil || connDevs.Ref() == 0 {
 		fmt.Fprintln(output, "Connected devices list: null")
 	} else {
 		fmt.Fprintln(output, "Connected devices list: obtained OK")
@@ -156,7 +156,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	scannerObj, err := adapter.GetBluetoothLeScanner()
 	if err != nil {
 		fmt.Fprintf(output, "GetBluetoothLeScanner: error (%v)\n", err)
-	} else if scannerObj == nil {
+	} else if scannerObj == nil || scannerObj.Ref() == 0 {
 		fmt.Fprintln(output, "BLE scanner: not available (null)")
 	} else {
 		scanner := &le.BluetoothLeScanner{VM: vm, Obj: scannerObj}
@@ -253,7 +253,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	bondedObj, err := adapter.GetBondedDevices()
 	if err != nil {
 		fmt.Fprintf(output, "GetBondedDevices: error (%v)\n", err)
-	} else if bondedObj == nil {
+	} else if bondedObj == nil || bondedObj.Ref() == 0 {
 		fmt.Fprintln(output, "Bonded devices set: null")
 	} else {
 		fmt.Fprintln(output, "Bonded devices set: obtained OK")

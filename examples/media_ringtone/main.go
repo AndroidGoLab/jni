@@ -74,17 +74,12 @@ func queryAudioEntries(
 	}
 
 	cursor := &resolver.Cursor{VM: vm, Obj: (*jni.GlobalRef)(unsafe.Pointer(cursorObj))}
-	defer cursor.Close()
-	defer func() {
-		vm.Do(func(env *jni.Env) error {
-			env.DeleteGlobalRef(cursorObj)
-			return nil
-		})
-	}()
 
 	count, err := cursor.GetCount()
 	if err != nil {
 		fmt.Fprintf(output, "  (getCount failed: %v)\n", err)
+		_ = cursor.Close()
+		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(cursorObj); return nil })
 		return
 	}
 	fmt.Fprintf(output, "  Total entries: %d\n", count)
@@ -95,7 +90,7 @@ func queryAudioEntries(
 	mimeCol, _ := cursor.GetColumnIndex("mime_type")
 
 	shown := 0
-	for shown < maxEntries {
+	for shown < maxEntries && shown < 3 {
 		moved, err := cursor.MoveToNext()
 		if err != nil || !moved {
 			break
@@ -118,9 +113,12 @@ func queryAudioEntries(
 		shown++
 	}
 
-	if int(count) > maxEntries {
-		fmt.Fprintf(output, "  ... and %d more\n", int(count)-maxEntries)
+	if int(count) > shown {
+		fmt.Fprintf(output, "  ... and %d more\n", int(count)-shown)
 	}
+
+	_ = cursor.Close()
+	vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(cursorObj); return nil })
 }
 
 func run(vm *jni.VM, output *bytes.Buffer) error {
@@ -137,6 +135,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	store, err := media.NewMediaStore(vm)
 	if err != nil {
 		return fmt.Errorf("NewMediaStore: %w", err)
+	}
+	if store == nil || store.Obj == nil || store.Obj.Ref() == 0 {
+		return fmt.Errorf("NewMediaStore: returned null")
 	}
 	defer func() {
 		vm.Do(func(env *jni.Env) error {

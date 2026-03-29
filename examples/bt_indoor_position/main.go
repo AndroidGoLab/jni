@@ -109,7 +109,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("Manager.GetAdapter: %w", err)
 	}
-	if adapterObj == nil {
+	if adapterObj == nil || adapterObj.Ref() == 0 {
 		fmt.Fprintln(output, "BluetoothAdapter is null")
 		return nil
 	}
@@ -153,7 +153,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("GetBluetoothLeScanner: %w", err)
 	}
-	if scannerObj == nil {
+	if scannerObj == nil || scannerObj.Ref() == 0 {
 		fmt.Fprintln(output, "BLE scanner not available")
 		return nil
 	}
@@ -225,7 +225,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	advObj, err := adapter.GetBluetoothLeAdvertiser()
 	if err != nil {
 		fmt.Fprintf(output, "GetBluetoothLeAdvertiser: error (%v)\n", err)
-	} else if advObj == nil {
+	} else if advObj == nil || advObj.Ref() == 0 {
 		fmt.Fprintln(output, "BLE advertiser: not available")
 	} else {
 		advertiser := &le.BluetoothLeAdvertiser{VM: vm, Obj: advObj}
@@ -240,14 +240,22 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	// --- Bonded devices ---
 	bondedObj, err := adapter.GetBondedDevices()
-	if err == nil && bondedObj != nil {
+	if err != nil {
+		fmt.Fprintf(output, "\nGetBondedDevices: error (%v)\n", err)
+	} else if bondedObj == nil || bondedObj.Ref() == 0 {
+		fmt.Fprintln(output, "\nBonded devices: null")
+	} else {
 		fmt.Fprintln(output, "\nBonded devices set: obtained OK")
 		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(bondedObj); return nil })
 	}
 
 	// --- GATT connected devices ---
 	connDevs, err := mgr.GetConnectedDevices(int32(bluetooth.GattConst))
-	if err == nil && connDevs != nil {
+	if err != nil {
+		fmt.Fprintf(output, "GetConnectedDevices(GATT): %v\n", err)
+	} else if connDevs == nil || connDevs.Ref() == 0 {
+		fmt.Fprintln(output, "GATT connected devices: null")
+	} else {
 		fmt.Fprintln(output, "GATT connected devices: obtained OK")
 		vm.Do(func(env *jni.Env) error { env.DeleteGlobalRef(connDevs); return nil })
 	}
