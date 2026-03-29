@@ -34,3 +34,10 @@ Performing Incremental Install
 Success
 Install command complete in 778 ms
 Starting: Intent { cmp=center.dx.jni.examples.notif_grouped/android.app.NativeActivity }
+03-29 15:58:59.776 28359 28380 I GoJNI   : === Grouped Notifs ===
+03-29 15:58:59.777 28359 28380 I GoJNI   : channel created
+03-29 15:58:59.777 28359 28380 I GoJNI   : posted: Message from Alice
+03-29 15:58:59.777 28359 28380 I GoJNI   : posted: Message from Bob
+03-29 15:58:59.777 28359 28380 I GoJNI   : posted: Message from Carol
+03-29 15:58:59.777 28359 28380 I GoJNI   : summary posted!
+03-29 15:58:59.777 28359 28380 I GoJNI   : total: 3 + summary

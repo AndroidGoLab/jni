@@ -32,30 +32,12 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 744 ms
+Install command complete in 813 ms
 Starting: Intent { cmp=center.dx.jni.examples.media_screen_capture/android.app.NativeActivity }
-03-29 15:34:30.917 22703 22728 I GoJNI   : === Screen Capture Demo ===
-03-29 15:34:30.917 22703 22728 I GoJNI   : Manager: obtained OK
-03-29 15:34:30.917 22703 22728 I GoJNI   : CaptureIntent: created OK
-03-29 15:34:30.917 22703 22728 I GoJNI   : API surface:
-03-29 15:34:30.917 22703 22728 I GoJNI   :   Manager methods:
-03-29 15:34:30.917 22703 22728 I GoJNI   :     CreateScreenCaptureIntent()
-03-29 15:34:30.917 22703 22728 I GoJNI   :     GetMediaProjection(code,data)
-03-29 15:34:30.917 22703 22728 I GoJNI   :   MediaProjection methods:
-03-29 15:34:30.917 22703 22728 I GoJNI   :     Stop()
-03-29 15:34:30.917 22703 22728 I GoJNI   :     UnregisterCallback(cb)
-03-29 15:34:30.917 22703 22728 I GoJNI   :   VirtualDisplay methods:
-03-29 15:34:30.917 22703 22728 I GoJNI   :     GetDisplay()
-03-29 15:34:30.917 22703 22728 I GoJNI   :     GetSurface()
-03-29 15:34:30.917 22703 22728 I GoJNI   :     Release()
-03-29 15:34:30.917 22703 22728 I GoJNI   :     Resize(w, h, dpi)
-03-29 15:34:30.917 22703 22728 I GoJNI   :     SetSurface(s)
-03-29 15:34:30.917 22703 22728 I GoJNI   : Capture workflow:
-03-29 15:34:30.917 22703 22728 I GoJNI   : 1. CreateScreenCaptureIntent
-03-29 15:34:30.917 22703 22728 I GoJNI   : 2. startActivityForResult
-03-29 15:34:30.917 22703 22728 I GoJNI   :    (user consent required)
-03-29 15:34:30.917 22703 22728 I GoJNI   : 3. GetMediaProjection
-03-29 15:34:30.917 22703 22728 I GoJNI   : 4. createVirtualDisplay
-03-29 15:34:30.917 22703 22728 I GoJNI   : 5. Read from Surface
-03-29 15:34:30.917 22703 22728 I GoJNI   : 6. Stop / Release
-03-29 15:34:30.917 22703 22728 I GoJNI   : Screen capture example complete.
+03-29 16:00:24.981 28689 28710 I GoJNI   : === Screen Capture Demo ===
+03-29 16:00:24.981 28689 28710 I GoJNI   : MediaProjectionManager: obtained OK
+03-29 16:00:24.981 28689 28710 I GoJNI   : Manager.ToString: android.media.projection.MediaProjectionManager@928d677
+03-29 16:00:24.981 28689 28710 I GoJNI   : CreateScreenCaptureIntent0: created OK
+03-29 16:00:24.981 28689 28710 I GoJNI   : CreateScreenCaptureIntent1_1(nil): created OK
+03-29 16:00:24.981 28689 28710 I GoJNI   : GetMediaProjection(-1, nil): null (no consent)
+03-29 16:00:24.981 28689 28710 I GoJNI   : Screen capture demo completed successfully.

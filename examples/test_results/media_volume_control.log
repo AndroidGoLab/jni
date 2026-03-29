@@ -32,17 +32,17 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 724 ms
+Install command complete in 836 ms
 Starting: Intent { cmp=center.dx.jni.examples.media_volume_control/android.app.NativeActivity }
-03-29 15:34:55.010 22963 22986 I GoJNI   : === Volume Control Demo ===
-03-29 15:34:55.010 22963 22986 I GoJNI   : Stream volumes:
-03-29 15:34:55.010 22963 22986 I GoJNI   :   VOICE_CALL: 5/15 (min=1 muted=false)
-03-29 15:34:55.010 22963 22986 I GoJNI   :   SYSTEM: 0/7 (min=0 muted=true)
-03-29 15:34:55.010 22963 22986 I GoJNI   :   RING: 0/7 (min=0 muted=true)
-03-29 15:34:55.010 22963 22986 I GoJNI   :   MUSIC: 8/25 (min=0 muted=false)
-03-29 15:34:55.010 22963 22986 I GoJNI   :   ALARM: 6/7 (min=1 muted=false)
-03-29 15:34:55.010 22963 22986 I GoJNI   :   NOTIFICATION: 0/7 (min=0 muted=true)
-03-29 15:34:55.010 22963 22986 I GoJNI   : Ringer mode: VIBRATE (1)
-03-29 15:34:55.010 22963 22986 I GoJNI   : Audio mode: NORMAL (0)
-03-29 15:34:55.010 22963 22986 I GoJNI   : Volume fixed: false
-03-29 15:34:55.010 22963 22986 I GoJNI   : Volume control example complete.
+03-29 16:00:46.914 28782 28807 I GoJNI   : === Volume Control Demo ===
+03-29 16:00:46.914 28782 28807 I GoJNI   : Stream volumes:
+03-29 16:00:46.914 28782 28807 I GoJNI   :   VOICE_CALL: 5/15 (min=1 muted=false)
+03-29 16:00:46.914 28782 28807 I GoJNI   :   SYSTEM: 0/7 (min=0 muted=true)
+03-29 16:00:46.914 28782 28807 I GoJNI   :   RING: 0/7 (min=0 muted=true)
+03-29 16:00:46.914 28782 28807 I GoJNI   :   MUSIC: 8/25 (min=0 muted=false)
+03-29 16:00:46.914 28782 28807 I GoJNI   :   ALARM: 6/7 (min=1 muted=false)
+03-29 16:00:46.914 28782 28807 I GoJNI   :   NOTIFICATION: 0/7 (min=0 muted=true)
+03-29 16:00:46.914 28782 28807 I GoJNI   : Ringer mode: VIBRATE (1)
+03-29 16:00:46.914 28782 28807 I GoJNI   : Audio mode: NORMAL (0)
+03-29 16:00:46.914 28782 28807 I GoJNI   : Volume fixed: false
+03-29 16:00:46.914 28782 28807 I GoJNI   : Volume control example complete.

@@ -32,23 +32,23 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 680 ms
+Install command complete in 769 ms
 Starting: Intent { cmp=center.dx.jni.examples.media_jukebox/android.app.NativeActivity }
-03-29 15:34:10.433 22575 22596 I GoJNI   : === Media Jukebox Demo ===
-03-29 15:34:10.434 22575 22596 I GoJNI   : MediaPlayer created OK
-03-29 15:34:10.434 22575 22596 I GoJNI   : Duration (idle): 0 ms
-03-29 15:34:10.434 22575 22596 I GoJNI   : Position (idle): 0 ms
-03-29 15:34:10.434 22575 22596 I GoJNI   : IsPlaying (idle): false
-03-29 15:34:10.434 22575 22596 I GoJNI   : IsLooping (idle): false
-03-29 15:34:10.434 22575 22596 I GoJNI   : AudioSessionId: 73
-03-29 15:34:10.434 22575 22596 I GoJNI   : VideoWidth: 0
-03-29 15:34:10.434 22575 22596 I GoJNI   : VideoHeight: 0
-03-29 15:34:10.434 22575 22596 I GoJNI   : SetVolume(0.8, 0.8): OK
-03-29 15:34:10.434 22575 22596 I GoJNI   : SetLooping(true): OK
-03-29 15:34:10.434 22575 22596 I GoJNI   : IsLooping: false
-03-29 15:34:10.434 22575 22596 I GoJNI   : Setting data source...
-03-29 15:34:10.434 22575 22596 I GoJNI   : SetDataSource: java java.io.IOException: setDataSource failed.: status=0x80000000
-03-29 15:34:10.434 22575 22596 I GoJNI   : (expected on some devices)
-03-29 15:34:10.434 22575 22596 I GoJNI   : Reset: OK (back to idle)
-03-29 15:34:10.434 22575 22596 I GoJNI   : Release: OK
-03-29 15:34:10.434 22575 22596 I GoJNI   : Jukebox example complete.
+03-29 16:00:01.730 28588 28614 I GoJNI   : === Media Jukebox Demo ===
+03-29 16:00:01.730 28588 28614 I GoJNI   : MediaPlayer created OK
+03-29 16:00:01.730 28588 28614 I GoJNI   : Duration (idle): 0 ms
+03-29 16:00:01.730 28588 28614 I GoJNI   : Position (idle): 0 ms
+03-29 16:00:01.730 28588 28614 I GoJNI   : IsPlaying (idle): false
+03-29 16:00:01.730 28588 28614 I GoJNI   : IsLooping (idle): false
+03-29 16:00:01.730 28588 28614 I GoJNI   : AudioSessionId: 97
+03-29 16:00:01.730 28588 28614 I GoJNI   : VideoWidth: 0
+03-29 16:00:01.730 28588 28614 I GoJNI   : VideoHeight: 0
+03-29 16:00:01.730 28588 28614 I GoJNI   : SetVolume(0.8, 0.8): OK
+03-29 16:00:01.730 28588 28614 I GoJNI   : SetLooping(true): OK
+03-29 16:00:01.730 28588 28614 I GoJNI   : IsLooping: false
+03-29 16:00:01.730 28588 28614 I GoJNI   : Setting data source...
+03-29 16:00:01.730 28588 28614 I GoJNI   : SetDataSource: java java.io.IOException: setDataSource failed.: status=0x80000000
+03-29 16:00:01.730 28588 28614 I GoJNI   : (expected on some devices)
+03-29 16:00:01.730 28588 28614 I GoJNI   : Reset: OK (back to idle)
+03-29 16:00:01.730 28588 28614 I GoJNI   : Release: OK
+03-29 16:00:01.730 28588 28614 I GoJNI   : Jukebox example complete.

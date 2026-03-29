@@ -32,27 +32,27 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 861 ms
+Install command complete in 924 ms
 Starting: Intent { cmp=center.dx.jni.examples.camera_qr_scanner/android.app.NativeActivity }
-03-29 15:13:23.075 11098 11126 I GoJNI   : === Camera QR Scanner Setup ===
-03-29 15:13:23.075 11098 11126 I GoJNI   : Step 1: Enumerating cameras...
-03-29 15:13:23.075 11098 11126 I GoJNI   :   Found 2 camera(s)
-03-29 15:13:23.075 11098 11126 I GoJNI   :     Camera ID: 0
-03-29 15:13:23.075 11098 11126 I GoJNI   :     Camera ID: 1
-03-29 15:13:23.075 11098 11126 I GoJNI   : Step 2: Reading camera characteristics...
-03-29 15:13:23.075 11098 11126 I GoJNI   :   Camera [0]: characteristics obtained
-03-29 15:13:23.075 11098 11126 I GoJNI   :   Camera [1]: characteristics obtained
-03-29 15:13:23.075 11098 11126 I GoJNI   :   Selected camera for QR scanning: 0
-03-29 15:13:23.075 11098 11126 I GoJNI   : Step 3: QR scanning setup workflow
-03-29 15:13:23.075 11098 11126 I GoJNI   :   For QR scanning, the typical Camera2 workflow is:
-03-29 15:13:23.075 11098 11126 I GoJNI   :   1. CameraManager.openCamera(cameraId, callback, handler)
-03-29 15:13:23.075 11098 11126 I GoJNI   :   2. Create CaptureRequest.Builder for TEMPLATE_PREVIEW
-03-29 15:13:23.075 11098 11126 I GoJNI   :   3. Set up ImageReader with YUV_420_888 format
-03-29 15:13:23.075 11098 11126 I GoJNI   :   4. Add ImageReader surface as capture target
-03-29 15:13:23.075 11098 11126 I GoJNI   :   5. Create CameraCaptureSession
-03-29 15:13:23.075 11098 11126 I GoJNI   :   6. Start repeating request for preview frames
-03-29 15:13:23.075 11098 11126 I GoJNI   :   7. Process frames in ImageReader.OnImageAvailableListener
-03-29 15:13:23.075 11098 11126 I GoJNI   :   8. Feed frames to a QR decode library
-03-29 15:13:23.075 11098 11126 I GoJNI   :   Camera 0 is ready for openCamera() call
-03-29 15:13:23.075 11098 11126 I GoJNI   :   (openCamera requires a CameraDevice.StateCallback proxy)
-03-29 15:13:23.075 11098 11126 I GoJNI   : QR scanner camera setup complete.
+03-29 16:03:14.365 29380 29403 I GoJNI   : === Camera QR Scanner Setup ===
+03-29 16:03:14.365 29380 29403 I GoJNI   : Step 1: Enumerating cameras...
+03-29 16:03:14.365 29380 29403 I GoJNI   :   Found 2 camera(s)
+03-29 16:03:14.365 29380 29403 I GoJNI   :     Camera ID: 0
+03-29 16:03:14.365 29380 29403 I GoJNI   :     Camera ID: 1
+03-29 16:03:14.365 29380 29403 I GoJNI   : Step 2: Reading camera characteristics...
+03-29 16:03:14.365 29380 29403 I GoJNI   :   Camera [0]: characteristics obtained
+03-29 16:03:14.365 29380 29403 I GoJNI   :   Camera [1]: characteristics obtained
+03-29 16:03:14.365 29380 29403 I GoJNI   :   Selected camera for QR scanning: 0
+03-29 16:03:14.365 29380 29403 I GoJNI   : Step 3: QR scanning setup workflow
+03-29 16:03:14.365 29380 29403 I GoJNI   :   For QR scanning, the typical Camera2 workflow is:
+03-29 16:03:14.365 29380 29403 I GoJNI   :   1. CameraManager.openCamera(cameraId, callback, handler)
+03-29 16:03:14.365 29380 29403 I GoJNI   :   2. Create CaptureRequest.Builder for TEMPLATE_PREVIEW
+03-29 16:03:14.365 29380 29403 I GoJNI   :   3. Set up ImageReader with YUV_420_888 format
+03-29 16:03:14.365 29380 29403 I GoJNI   :   4. Add ImageReader surface as capture target
+03-29 16:03:14.365 29380 29403 I GoJNI   :   5. Create CameraCaptureSession
+03-29 16:03:14.365 29380 29403 I GoJNI   :   6. Start repeating request for preview frames
+03-29 16:03:14.365 29380 29403 I GoJNI   :   7. Process frames in ImageReader.OnImageAvailableListener
+03-29 16:03:14.365 29380 29403 I GoJNI   :   8. Feed frames to a QR decode library
+03-29 16:03:14.365 29380 29403 I GoJNI   :   Camera 0 is ready for openCamera() call
+03-29 16:03:14.365 29380 29403 I GoJNI   :   (openCamera requires a CameraDevice.StateCallback proxy)
+03-29 16:03:14.365 29380 29403 I GoJNI   : QR scanner camera setup complete.

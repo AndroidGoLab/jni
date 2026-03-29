@@ -32,19 +32,19 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 857 ms
+Install command complete in 798 ms
 Starting: Intent { cmp=center.dx.jni.examples.media_session_ctrl/android.app.NativeActivity }
-03-29 15:35:16.201 23077 23098 I GoJNI   : === MediaSession Ctrl Demo ===
-03-29 15:35:16.201 23077 23098 I GoJNI   : Session created: tag=JNI_Session_Demo
-03-29 15:35:16.201 23077 23098 I GoJNI   : IsActive (initial): false
-03-29 15:35:16.201 23077 23098 I GoJNI   : SetActive(true): OK
-03-29 15:35:16.201 23077 23098 I GoJNI   : IsActive (after set): true
-03-29 15:35:16.201 23077 23098 I GoJNI   : SetFlags: MEDIA_BUTTONS|TRANSPORT
-03-29 15:35:16.201 23077 23098 I GoJNI   : SetQueueTitle: Demo Queue
-03-29 15:35:16.201 23077 23098 I GoJNI   : GetSessionToken: obtained OK
-03-29 15:35:16.202 23077 23098 I GoJNI   : GetController: obtained OK
-03-29 15:35:16.202 23077 23098 I GoJNI   : SetActive(false): OK
-03-29 15:35:16.202 23077 23098 I GoJNI   : IsActive (after deactivate): false
-03-29 15:35:16.202 23077 23098 I GoJNI   : --- SessionManager ---
-03-29 15:35:16.202 23077 23098 I GoJNI   : MediaKeyEventPkg: java java.lang.SecurityException: Missing permission to control media.
-03-29 15:35:16.202 23077 23098 I GoJNI   : Session ctrl example complete.
+03-29 16:01:08.474 28876 28901 I GoJNI   : === MediaSession Ctrl Demo ===
+03-29 16:01:08.474 28876 28901 I GoJNI   : Session created: tag=JNI_Session_Demo
+03-29 16:01:08.474 28876 28901 I GoJNI   : IsActive (initial): false
+03-29 16:01:08.474 28876 28901 I GoJNI   : SetActive(true): OK
+03-29 16:01:08.474 28876 28901 I GoJNI   : IsActive (after set): true
+03-29 16:01:08.474 28876 28901 I GoJNI   : SetFlags: MEDIA_BUTTONS|TRANSPORT
+03-29 16:01:08.474 28876 28901 I GoJNI   : SetQueueTitle: Demo Queue
+03-29 16:01:08.474 28876 28901 I GoJNI   : GetSessionToken: obtained OK
+03-29 16:01:08.474 28876 28901 I GoJNI   : GetController: obtained OK
+03-29 16:01:08.474 28876 28901 I GoJNI   : SetActive(false): OK
+03-29 16:01:08.474 28876 28901 I GoJNI   : IsActive (after deactivate): false
+03-29 16:01:08.474 28876 28901 I GoJNI   : --- SessionManager ---
+03-29 16:01:08.474 28876 28901 I GoJNI   : MediaKeyEventPkg: java java.lang.SecurityException: Missing permission to control media.
+03-29 16:01:08.475 28876 28901 I GoJNI   : Session ctrl example complete.
