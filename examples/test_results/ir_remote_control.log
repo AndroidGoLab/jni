@@ -32,15 +32,15 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 498 ms
+Install command complete in 787 ms
 Starting: Intent { cmp=center.dx.jni.examples.ir_remote_control/android.app.NativeActivity }
-03-29 15:14:17.777 12836 12859 I GoJNI   : === IR Remote Control ===
-03-29 15:14:17.777 12836 12859 I GoJNI   : ConsumerIrManager not available on this device
-03-29 15:14:17.777 12836 12859 I GoJNI   : IR remote control requires a device with an IR blaster.
-03-29 15:14:17.777 12836 12859 I GoJNI   : Common devices with IR: some Samsung, Xiaomi, Huawei phones
-03-29 15:14:17.777 12836 12859 I GoJNI   : API surface available:
-03-29 15:14:17.777 12836 12859 I GoJNI   :   ConsumerIrManager.HasIrEmitter() -> bool
-03-29 15:14:17.777 12836 12859 I GoJNI   :   ConsumerIrManager.GetCarrierFrequencies() -> []CarrierFrequencyRange
-03-29 15:14:17.777 12836 12859 I GoJNI   :   ConsumerIrManager.Transmit(frequency, pattern)
-03-29 15:14:17.777 12836 12859 I GoJNI   :   CarrierFrequencyRange.GetMinFrequency() -> int
-03-29 15:14:17.777 12836 12859 I GoJNI   :   CarrierFrequencyRange.GetMaxFrequency() -> int
+03-29 16:04:23.506 29679 29700 I GoJNI   : === IR Remote Control ===
+03-29 16:04:23.506 29679 29700 I GoJNI   : ConsumerIrManager not available on this device
+03-29 16:04:23.506 29679 29700 I GoJNI   : IR remote control requires a device with an IR blaster.
+03-29 16:04:23.506 29679 29700 I GoJNI   : Common devices with IR: some Samsung, Xiaomi, Huawei phones
+03-29 16:04:23.506 29679 29700 I GoJNI   : API surface available:
+03-29 16:04:23.506 29679 29700 I GoJNI   :   ConsumerIrManager.HasIrEmitter() -> bool
+03-29 16:04:23.506 29679 29700 I GoJNI   :   ConsumerIrManager.GetCarrierFrequencies() -> []CarrierFrequencyRange
+03-29 16:04:23.506 29679 29700 I GoJNI   :   ConsumerIrManager.Transmit(frequency, pattern)
+03-29 16:04:23.506 29679 29700 I GoJNI   :   CarrierFrequencyRange.GetMinFrequency() -> int
+03-29 16:04:23.506 29679 29700 I GoJNI   :   CarrierFrequencyRange.GetMaxFrequency() -> int
