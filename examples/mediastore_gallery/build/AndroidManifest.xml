@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="center.dx.jni.examples.mediastore_gallery">
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <application android:label="mediastore_gallery" android:hasCode="false" android:debuggable="true">
+        <meta-data android:name="example.permissions" android:value="android.permission.READ_MEDIA_IMAGES,android.permission.READ_EXTERNAL_STORAGE" />
+        <activity android:name="android.app.NativeActivity"
+                  android:exported="true"
+                  android:configChanges="orientation|keyboardHidden">
+            <meta-data android:name="android.app.lib_name" android:value="example" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
