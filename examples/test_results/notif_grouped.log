@@ -32,12 +32,5 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 984 ms
+Install command complete in 778 ms
 Starting: Intent { cmp=center.dx.jni.examples.notif_grouped/android.app.NativeActivity }
-03-29 15:06:04.406  7884  7909 I GoJNI   : === Grouped Notifs ===
-03-29 15:06:04.406  7884  7909 I GoJNI   : channel created
-03-29 15:06:04.406  7884  7909 I GoJNI   : posted: Message from Alice
-03-29 15:06:04.406  7884  7909 I GoJNI   : posted: Message from Bob
-03-29 15:06:04.406  7884  7909 I GoJNI   : posted: Message from Carol
-03-29 15:06:04.407  7884  7909 I GoJNI   : summary posted!
-03-29 15:06:04.407  7884  7909 I GoJNI   : total: 3 + summary

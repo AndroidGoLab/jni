@@ -32,19 +32,19 @@ Serving...
 All files should be loaded. Notifying the device.
 Performing Incremental Install
 Success
-Install command complete in 849 ms
+Install command complete in 823 ms
 Starting: Intent { cmp=center.dx.jni.examples.notif_progress/android.app.NativeActivity }
-03-29 15:04:22.169  7547  7569 I GoJNI   : === Progress Notif ===
-03-29 15:04:22.169  7547  7569 I GoJNI   : channel created
-03-29 15:04:22.169  7547  7569 I GoJNI   : progress: 0%
-03-29 15:04:22.169  7547  7569 I GoJNI   : progress: 10%
-03-29 15:04:22.169  7547  7569 I GoJNI   : progress: 20%
-03-29 15:04:22.169  7547  7569 I GoJNI   : progress: 30%
-03-29 15:04:22.169  7547  7569 I GoJNI   : progress: 40%
-03-29 15:04:22.169  7547  7569 I GoJNI   : progress: 50%
-03-29 15:04:22.169  7547  7569 I GoJNI   : progress: 60%
-03-29 15:04:22.169  7547  7569 I GoJNI   : progress: 70%
-03-29 15:04:22.170  7547  7569 I GoJNI   : progress: 80%
-03-29 15:04:22.170  7547  7569 I GoJNI   : progress: 90%
-03-29 15:04:22.170  7547  7569 I GoJNI   : progress: 100%
-03-29 15:04:22.170  7547  7569 I GoJNI   : download complete!
+03-29 15:58:08.155 28150 28172 I GoJNI   : === Progress Notif ===
+03-29 15:58:08.155 28150 28172 I GoJNI   : channel created
+03-29 15:58:08.155 28150 28172 I GoJNI   : progress: 0%
+03-29 15:58:08.155 28150 28172 I GoJNI   : progress: 10%
+03-29 15:58:08.156 28150 28172 I GoJNI   : progress: 20%
+03-29 15:58:08.156 28150 28172 I GoJNI   : progress: 30%
+03-29 15:58:08.156 28150 28172 I GoJNI   : progress: 40%
+03-29 15:58:08.156 28150 28172 I GoJNI   : progress: 50%
+03-29 15:58:08.156 28150 28172 I GoJNI   : progress: 60%
+03-29 15:58:08.156 28150 28172 I GoJNI   : progress: 70%
+03-29 15:58:08.156 28150 28172 I GoJNI   : progress: 80%
+03-29 15:58:08.156 28150 28172 I GoJNI   : progress: 90%
+03-29 15:58:08.156 28150 28172 I GoJNI   : progress: 100%
+03-29 15:58:08.156 28150 28172 I GoJNI   : download complete!
