@@ -23,6 +23,33 @@ type Log struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.util.Log.toString.
+func (m *Log) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLogToString == nil {
+			callErr = fmt.Errorf("android.util.Log.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLogToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // D2 calls android.util.Log.d.
 func (m *Log) D2(arg0 string, arg1 string) (int32, error) {
 	var result int32

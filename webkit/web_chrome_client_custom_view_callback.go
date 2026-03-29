@@ -44,3 +44,30 @@ func (m *WebChromeClientCustomViewCallback) OnCustomViewHidden() error {
 	})
 	return callErr
 }
+
+// ToString calls android.webkit.WebChromeClient$CustomViewCallback.toString.
+func (m *WebChromeClientCustomViewCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWebChromeClientCustomViewCallbackToString == nil {
+			callErr = fmt.Errorf("android.webkit.WebChromeClient$CustomViewCallback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWebChromeClientCustomViewCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

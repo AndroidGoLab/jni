@@ -20,7 +20,13 @@ import (
 /*
 #include <android/native_activity.h>
 #include <android/native_window.h>
+#include <android/log.h>
+#include <stdlib.h>
 #include <string.h>
+
+static void logcatPrint(const char* tag, const char* msg) {
+    __android_log_print(ANDROID_LOG_INFO, tag, "%s", msg);
+}
 
 // Render a bitmap's pixels onto the native window surface.
 static int renderBitmapToWindow(ANativeWindow* window, void* pixels, int width, int height) {
@@ -174,6 +180,15 @@ func OnNativeWindowCreated(windowPtr unsafe.Pointer) {
 	startExample()
 }
 
+// logToLogcat writes a message to Android logcat with the given tag.
+func logToLogcat(tag, msg string) {
+	cTag := C.CString(tag)
+	cMsg := C.CString(msg)
+	C.logcatPrint(cTag, cMsg)
+	C.free(unsafe.Pointer(cTag))
+	C.free(unsafe.Pointer(cMsg))
+}
+
 func startExample() {
 	if exampleStarted {
 		return
@@ -188,6 +203,18 @@ func startExample() {
 			}
 			appendToOutputBuf(localBuf.Bytes())
 		}
+
+		// Write output to logcat so test_all_apks.sh can detect it.
+		text := snapshotOutputBuf()
+		if text == "" {
+			text = "(no output)"
+		}
+		for _, line := range strings.Split(text, "\n") {
+			if line != "" {
+				logToLogcat("GoJNI", line)
+			}
+		}
+
 		RenderOutput()
 	}()
 }

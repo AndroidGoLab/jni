@@ -49,3 +49,30 @@ func (m *ActionProviderVisibilityListener) OnActionProviderVisibilityChanged(arg
 	})
 	return callErr
 }
+
+// ToString calls android.view.ActionProvider$VisibilityListener.toString.
+func (m *ActionProviderVisibilityListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActionProviderVisibilityListenerToString == nil {
+			callErr = fmt.Errorf("android.view.ActionProvider$VisibilityListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActionProviderVisibilityListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

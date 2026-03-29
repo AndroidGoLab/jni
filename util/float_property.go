@@ -45,3 +45,30 @@ func (m *FloatProperty) Set(arg0 *jni.Object, arg1 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.util.FloatProperty.toString.
+func (m *FloatProperty) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFloatPropertyToString == nil {
+			callErr = fmt.Errorf("android.util.FloatProperty.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFloatPropertyToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

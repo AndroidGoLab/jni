@@ -183,6 +183,33 @@ func (m *NfcBarcode) IsConnected() (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.nfc.tech.NfcBarcode.toString.
+func (m *NfcBarcode) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNfcBarcodeToString == nil {
+			callErr = fmt.Errorf("android.nfc.tech.NfcBarcode.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNfcBarcodeToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Get calls android.nfc.tech.NfcBarcode.get.
 func (m *NfcBarcode) Get(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

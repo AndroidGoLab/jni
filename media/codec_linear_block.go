@@ -104,6 +104,33 @@ func (m *CodecLinearBlock) Recycle() error {
 	return callErr
 }
 
+// ToString calls android.media.MediaCodec$LinearBlock.toString.
+func (m *CodecLinearBlock) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecLinearBlockToString == nil {
+			callErr = fmt.Errorf("android.media.MediaCodec$LinearBlock.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecLinearBlockToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsCodecCopyFreeCompatible calls android.media.MediaCodec$LinearBlock.isCodecCopyFreeCompatible.
 func (m *CodecLinearBlock) IsCodecCopyFreeCompatible(arg0 *jni.Object) (bool, error) {
 	var result bool

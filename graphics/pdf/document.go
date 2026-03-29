@@ -177,3 +177,30 @@ func (m *Document) WriteTo(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.graphics.pdf.PdfDocument.toString.
+func (m *Document) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDocumentToString == nil {
+			callErr = fmt.Errorf("android.graphics.pdf.PdfDocument.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDocumentToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

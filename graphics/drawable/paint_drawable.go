@@ -90,3 +90,30 @@ func (m *PaintDrawable) SetCornerRadius(arg0 float32) error {
 	})
 	return callErr
 }
+
+// ToString calls android.graphics.drawable.PaintDrawable.toString.
+func (m *PaintDrawable) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPaintDrawableToString == nil {
+			callErr = fmt.Errorf("android.graphics.drawable.PaintDrawable.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPaintDrawableToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -45,6 +45,33 @@ func NewDateUtils(vm *jni.VM) (*DateUtils, error) {
 	return &t, nil
 }
 
+// ToString calls android.text.format.DateUtils.toString.
+func (m *DateUtils) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDateUtilsToString == nil {
+			callErr = fmt.Errorf("android.text.format.DateUtils.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDateUtilsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // FormatDateRange5 calls android.text.format.DateUtils.formatDateRange.
 func (m *DateUtils) FormatDateRange5(
 	arg0 *jni.Object,

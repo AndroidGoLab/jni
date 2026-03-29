@@ -73,3 +73,30 @@ func (m *SettingsPreferenceServiceClient) Close() error {
 	})
 	return callErr
 }
+
+// ToString calls android.service.settings.preferences.SettingsPreferenceServiceClient.toString.
+func (m *SettingsPreferenceServiceClient) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSettingsPreferenceServiceClientToString == nil {
+			callErr = fmt.Errorf("android.service.settings.preferences.SettingsPreferenceServiceClient.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSettingsPreferenceServiceClientToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

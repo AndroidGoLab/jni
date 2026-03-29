@@ -1655,6 +1655,33 @@ func (m *ContentResolver) Update4_1(
 	return result, callErr
 }
 
+// ToString calls android.content.ContentResolver.toString.
+func (m *ContentResolver) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midContentResolverToString == nil {
+			callErr = fmt.Errorf("android.content.ContentResolver.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midContentResolverToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // AddPeriodicSync calls android.content.ContentResolver.addPeriodicSync.
 func (m *ContentResolver) AddPeriodicSync(
 	arg0 *jni.Object,

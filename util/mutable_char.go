@@ -45,3 +45,30 @@ func NewMutableChar(vm *jni.VM, arg0 uint16) (*MutableChar, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.util.MutableChar.toString.
+func (m *MutableChar) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMutableCharToString == nil {
+			callErr = fmt.Errorf("android.util.MutableChar.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMutableCharToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

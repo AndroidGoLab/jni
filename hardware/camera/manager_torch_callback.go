@@ -111,3 +111,30 @@ func (m *ManagerTorchCallback) OnTorchStrengthLevelChanged(arg0 string, arg1 int
 	})
 	return callErr
 }
+
+// ToString calls android.hardware.camera2.CameraManager$TorchCallback.toString.
+func (m *ManagerTorchCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerTorchCallbackToString == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraManager$TorchCallback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerTorchCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

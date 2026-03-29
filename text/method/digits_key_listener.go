@@ -115,6 +115,33 @@ func (m *DigitsKeyListener) GetInputType() (int32, error) {
 	return result, callErr
 }
 
+// ToString calls android.text.method.DigitsKeyListener.toString.
+func (m *DigitsKeyListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDigitsKeyListenerToString == nil {
+			callErr = fmt.Errorf("android.text.method.DigitsKeyListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDigitsKeyListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance0 calls android.text.method.DigitsKeyListener.getInstance.
 func (m *DigitsKeyListener) GetInstance0() (*jni.Object, error) {
 	var result *jni.Object

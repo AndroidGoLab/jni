@@ -77,3 +77,30 @@ func (m *GetCredentialException) GetType() (string, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.credentials.GetCredentialException.toString.
+func (m *GetCredentialException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGetCredentialExceptionToString == nil {
+			callErr = fmt.Errorf("android.credentials.GetCredentialException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGetCredentialExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

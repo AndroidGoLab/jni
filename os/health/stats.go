@@ -555,3 +555,30 @@ func (m *Stats) HasTimers(arg0 int32) (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.os.health.HealthStats.toString.
+func (m *Stats) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midStatsToString == nil {
+			callErr = fmt.Errorf("android.os.health.HealthStats.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midStatsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

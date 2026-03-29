@@ -405,6 +405,33 @@ func (m *DateIntervalFormat) SetTimeZone(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.icu.text.DateIntervalFormat.toString.
+func (m *DateIntervalFormat) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDateIntervalFormatToString == nil {
+			callErr = fmt.Errorf("android.icu.text.DateIntervalFormat.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDateIntervalFormatToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance1 calls android.icu.text.DateIntervalFormat.getInstance.
 func (m *DateIntervalFormat) GetInstance1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,33 @@ type MeasureUnitComplexity struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.icu.util.MeasureUnit$Complexity.toString.
+func (m *MeasureUnitComplexity) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMeasureUnitComplexityToString == nil {
+			callErr = fmt.Errorf("android.icu.util.MeasureUnit$Complexity.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMeasureUnitComplexityToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.icu.util.MeasureUnit$Complexity.values.
 func (m *MeasureUnitComplexity) Values() (*jni.Object, error) {
 	var result *jni.Object

@@ -252,3 +252,30 @@ func (m *ImageWriterBuilder) SetWidthAndHeight(arg0 int32, arg1 int32) (*jni.Obj
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.ImageWriter$Builder.toString.
+func (m *ImageWriterBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midImageWriterBuilderToString == nil {
+			callErr = fmt.Errorf("android.media.ImageWriter$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midImageWriterBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

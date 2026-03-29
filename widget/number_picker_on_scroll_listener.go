@@ -45,3 +45,30 @@ func (m *NumberPickerOnScrollListener) OnScrollStateChange(arg0 *jni.Object, arg
 	})
 	return callErr
 }
+
+// ToString calls android.widget.NumberPicker$OnScrollListener.toString.
+func (m *NumberPickerOnScrollListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNumberPickerOnScrollListenerToString == nil {
+			callErr = fmt.Errorf("android.widget.NumberPicker$OnScrollListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNumberPickerOnScrollListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

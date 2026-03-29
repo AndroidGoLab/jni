@@ -92,3 +92,30 @@ func (m *FeatureGroupInfo) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 	})
 	return callErr
 }
+
+// ToString calls android.content.pm.FeatureGroupInfo.toString.
+func (m *FeatureGroupInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFeatureGroupInfoToString == nil {
+			callErr = fmt.Errorf("android.content.pm.FeatureGroupInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFeatureGroupInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

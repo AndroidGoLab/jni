@@ -181,3 +181,30 @@ func (m *MultiResolutionStreamInfo) HashCode() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.hardware.camera2.params.MultiResolutionStreamInfo.toString.
+func (m *MultiResolutionStreamInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMultiResolutionStreamInfoToString == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.MultiResolutionStreamInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMultiResolutionStreamInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

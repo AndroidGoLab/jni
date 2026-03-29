@@ -45,3 +45,30 @@ func (m *AllocationOnBufferAvailableListener) OnBufferAvailable(arg0 *jni.Object
 	})
 	return callErr
 }
+
+// ToString calls android.renderscript.Allocation$OnBufferAvailableListener.toString.
+func (m *AllocationOnBufferAvailableListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAllocationOnBufferAvailableListenerToString == nil {
+			callErr = fmt.Errorf("android.renderscript.Allocation$OnBufferAvailableListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAllocationOnBufferAvailableListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

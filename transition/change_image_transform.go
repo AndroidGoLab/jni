@@ -160,3 +160,30 @@ func (m *ChangeImageTransform) GetTransitionProperties() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.transition.ChangeImageTransform.toString.
+func (m *ChangeImageTransform) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midChangeImageTransformToString == nil {
+			callErr = fmt.Errorf("android.transition.ChangeImageTransform.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midChangeImageTransformToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

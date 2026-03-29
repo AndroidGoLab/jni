@@ -45,3 +45,30 @@ func (m *MediaPlayerOnCompletionListener) OnCompletion(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.media.MediaPlayer$OnCompletionListener.toString.
+func (m *MediaPlayerOnCompletionListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerOnCompletionListenerToString == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer$OnCompletionListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaPlayerOnCompletionListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

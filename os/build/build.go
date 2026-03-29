@@ -45,6 +45,33 @@ func NewBuild(vm *jni.VM) (*Build, error) {
 	return &t, nil
 }
 
+// ToString calls android.os.Build.toString.
+func (m *Build) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBuildToString == nil {
+			callErr = fmt.Errorf("android.os.Build.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBuildToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetFingerprintedPartitions calls android.os.Build.getFingerprintedPartitions.
 func (m *Build) GetFingerprintedPartitions() (*jni.Object, error) {
 	var result *jni.Object

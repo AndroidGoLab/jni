@@ -158,3 +158,30 @@ func (m *WalletCardBuilder) SetNonPaymentCardSecondaryImage(arg0 *jni.Object) (*
 	})
 	return result, callErr
 }
+
+// ToString calls android.service.quickaccesswallet.WalletCard$Builder.toString.
+func (m *WalletCardBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWalletCardBuilderToString == nil {
+			callErr = fmt.Errorf("android.service.quickaccesswallet.WalletCard$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWalletCardBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

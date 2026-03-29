@@ -23,6 +23,33 @@ type DisplayContextType struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.icu.text.DisplayContext$Type.toString.
+func (m *DisplayContextType) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDisplayContextTypeToString == nil {
+			callErr = fmt.Errorf("android.icu.text.DisplayContext$Type.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDisplayContextTypeToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.icu.text.DisplayContext$Type.values.
 func (m *DisplayContextType) Values() (*jni.Object, error) {
 	var result *jni.Object

@@ -49,3 +49,30 @@ func (m *MessageQueueIdleHandler) QueueIdle() (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.os.MessageQueue$IdleHandler.toString.
+func (m *MessageQueueIdleHandler) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMessageQueueIdleHandlerToString == nil {
+			callErr = fmt.Errorf("android.os.MessageQueue$IdleHandler.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMessageQueueIdleHandlerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

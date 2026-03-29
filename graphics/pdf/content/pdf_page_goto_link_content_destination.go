@@ -170,3 +170,30 @@ func (m *PdfPageGotoLinkContentDestination) WriteToParcel(arg0 *jni.Object, arg1
 	})
 	return callErr
 }
+
+// ToString calls android.graphics.pdf.content.PdfPageGotoLinkContent$Destination.toString.
+func (m *PdfPageGotoLinkContentDestination) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPdfPageGotoLinkContentDestinationToString == nil {
+			callErr = fmt.Errorf("android.graphics.pdf.content.PdfPageGotoLinkContent$Destination.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPdfPageGotoLinkContentDestinationToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

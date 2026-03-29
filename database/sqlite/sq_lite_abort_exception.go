@@ -44,3 +44,30 @@ func NewSQLiteAbortException(vm *jni.VM) (*SQLiteAbortException, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.database.sqlite.SQLiteAbortException.toString.
+func (m *SQLiteAbortException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSQLiteAbortExceptionToString == nil {
+			callErr = fmt.Errorf("android.database.sqlite.SQLiteAbortException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSQLiteAbortExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

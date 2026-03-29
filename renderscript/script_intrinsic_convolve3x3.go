@@ -179,6 +179,33 @@ func (m *ScriptIntrinsicConvolve3x3) SetInput(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.renderscript.ScriptIntrinsicConvolve3x3.toString.
+func (m *ScriptIntrinsicConvolve3x3) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScriptIntrinsicConvolve3x3ToString == nil {
+			callErr = fmt.Errorf("android.renderscript.ScriptIntrinsicConvolve3x3.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScriptIntrinsicConvolve3x3ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Create calls android.renderscript.ScriptIntrinsicConvolve3x3.create.
 func (m *ScriptIntrinsicConvolve3x3) Create(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

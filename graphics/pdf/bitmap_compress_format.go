@@ -23,6 +23,33 @@ type BitmapCompressFormat struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.graphics.Bitmap$CompressFormat.toString.
+func (m *BitmapCompressFormat) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBitmapCompressFormatToString == nil {
+			callErr = fmt.Errorf("android.graphics.Bitmap$CompressFormat.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBitmapCompressFormatToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.graphics.Bitmap$CompressFormat.values.
 func (m *BitmapCompressFormat) Values() (*jni.Object, error) {
 	var result *jni.Object

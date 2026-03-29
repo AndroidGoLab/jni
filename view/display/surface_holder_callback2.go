@@ -45,3 +45,30 @@ func (m *SurfaceHolderCallback2) SurfaceRedrawNeeded(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.view.SurfaceHolder$Callback2.toString.
+func (m *SurfaceHolderCallback2) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSurfaceHolderCallback2ToString == nil {
+			callErr = fmt.Errorf("android.view.SurfaceHolder$Callback2.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSurfaceHolderCallback2ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

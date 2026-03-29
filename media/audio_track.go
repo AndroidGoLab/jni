@@ -1855,6 +1855,33 @@ func (m *AudioTrack) Write4_4(
 	return result, callErr
 }
 
+// ToString calls android.media.AudioTrack.toString.
+func (m *AudioTrack) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioTrackToString == nil {
+			callErr = fmt.Errorf("android.media.AudioTrack.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioTrackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMaxVolume calls android.media.AudioTrack.getMaxVolume.
 func (m *AudioTrack) GetMaxVolume() (float32, error) {
 	var result float32

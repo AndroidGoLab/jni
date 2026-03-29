@@ -23,6 +23,33 @@ type ContractContacts struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.provider.ContactsContract$Contacts.toString.
+func (m *ContractContacts) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midContractContactsToString == nil {
+			callErr = fmt.Errorf("android.provider.ContactsContract$Contacts.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midContractContactsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetLookupUri2 calls android.provider.ContactsContract$Contacts.getLookupUri.
 func (m *ContractContacts) GetLookupUri2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

@@ -114,3 +114,30 @@ func (m *OverlayViewOnGestureListener) OnGestureStarted(arg0 *jni.Object, arg1 *
 	})
 	return callErr
 }
+
+// ToString calls android.gesture.GestureOverlayView$OnGestureListener.toString.
+func (m *OverlayViewOnGestureListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midOverlayViewOnGestureListenerToString == nil {
+			callErr = fmt.Errorf("android.gesture.GestureOverlayView$OnGestureListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midOverlayViewOnGestureListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

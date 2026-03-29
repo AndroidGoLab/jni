@@ -23,6 +23,33 @@ type EGL15 struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.opengl.EGL15.toString.
+func (m *EGL15) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midEGL15ToString == nil {
+			callErr = fmt.Errorf("android.opengl.EGL15.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midEGL15ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // EglClientWaitSync calls android.opengl.EGL15.eglClientWaitSync.
 func (m *EGL15) EglClientWaitSync(
 	arg0 *jni.Object,

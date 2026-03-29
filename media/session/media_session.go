@@ -532,3 +532,30 @@ func (m *MediaSession) SetSessionActivity(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.media.session.MediaSession.toString.
+func (m *MediaSession) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaSessionToString == nil {
+			callErr = fmt.Errorf("android.media.session.MediaSession.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaSessionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

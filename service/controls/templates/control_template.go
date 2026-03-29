@@ -75,6 +75,33 @@ func (m *ControlTemplate) GetTemplateType() (int32, error) {
 	return result, callErr
 }
 
+// ToString calls android.service.controls.templates.ControlTemplate.toString.
+func (m *ControlTemplate) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midControlTemplateToString == nil {
+			callErr = fmt.Errorf("android.service.controls.templates.ControlTemplate.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midControlTemplateToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetErrorTemplate calls android.service.controls.templates.ControlTemplate.getErrorTemplate.
 func (m *ControlTemplate) GetErrorTemplate() (*jni.Object, error) {
 	var result *jni.Object

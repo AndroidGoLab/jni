@@ -88,3 +88,30 @@ func (m *UnlocalizedNumberFormatter) Locale1_1(arg0 *jni.Object) (*jni.Object, e
 	})
 	return result, callErr
 }
+
+// ToString calls android.icu.number.UnlocalizedNumberFormatter.toString.
+func (m *UnlocalizedNumberFormatter) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUnlocalizedNumberFormatterToString == nil {
+			callErr = fmt.Errorf("android.icu.number.UnlocalizedNumberFormatter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUnlocalizedNumberFormatterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

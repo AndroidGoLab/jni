@@ -135,3 +135,30 @@ func (m *WebHistoryItem) GetUrl() (string, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.webkit.WebHistoryItem.toString.
+func (m *WebHistoryItem) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWebHistoryItemToString == nil {
+			callErr = fmt.Errorf("android.webkit.WebHistoryItem.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWebHistoryItemToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

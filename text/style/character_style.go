@@ -78,6 +78,33 @@ func (m *CharacterStyle) UpdateDrawState(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.text.style.CharacterStyle.toString.
+func (m *CharacterStyle) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCharacterStyleToString == nil {
+			callErr = fmt.Errorf("android.text.style.CharacterStyle.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCharacterStyleToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Wrap calls android.text.style.CharacterStyle.wrap.
 func (m *CharacterStyle) Wrap(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

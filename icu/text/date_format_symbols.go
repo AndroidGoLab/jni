@@ -980,6 +980,33 @@ func (m *DateFormatSymbols) SetZoneStrings(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.icu.text.DateFormatSymbols.toString.
+func (m *DateFormatSymbols) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDateFormatSymbolsToString == nil {
+			callErr = fmt.Errorf("android.icu.text.DateFormatSymbols.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDateFormatSymbolsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAvailableLocales calls android.icu.text.DateFormatSymbols.getAvailableLocales.
 func (m *DateFormatSymbols) GetAvailableLocales() (*jni.Object, error) {
 	var result *jni.Object

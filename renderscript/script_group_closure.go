@@ -109,3 +109,30 @@ func (m *ScriptGroupClosure) GetReturn() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.renderscript.ScriptGroup$Closure.toString.
+func (m *ScriptGroupClosure) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScriptGroupClosureToString == nil {
+			callErr = fmt.Errorf("android.renderscript.ScriptGroup$Closure.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScriptGroupClosureToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

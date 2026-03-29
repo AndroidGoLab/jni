@@ -50,3 +50,30 @@ func NewCursorWindowAllocationException(vm *jni.VM, arg0 string) (*CursorWindowA
 	}
 	return &t, nil
 }
+
+// ToString calls android.database.CursorWindowAllocationException.toString.
+func (m *CursorWindowAllocationException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCursorWindowAllocationExceptionToString == nil {
+			callErr = fmt.Errorf("android.database.CursorWindowAllocationException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCursorWindowAllocationExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

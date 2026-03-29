@@ -256,3 +256,30 @@ func (m *RemoteControlClient) SetTransportControlFlags(arg0 int32) error {
 	})
 	return callErr
 }
+
+// ToString calls android.media.RemoteControlClient.toString.
+func (m *RemoteControlClient) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRemoteControlClientToString == nil {
+			callErr = fmt.Errorf("android.media.RemoteControlClient.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRemoteControlClientToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

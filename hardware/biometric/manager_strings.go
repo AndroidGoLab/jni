@@ -118,3 +118,30 @@ func (m *ManagerStrings) GetSettingName() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.hardware.biometrics.BiometricManager$Strings.toString.
+func (m *ManagerStrings) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerStringsToString == nil {
+			callErr = fmt.Errorf("android.hardware.biometrics.BiometricManager$Strings.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerStringsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

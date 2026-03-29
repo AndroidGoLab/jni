@@ -2033,6 +2033,33 @@ func (m *MediaPlayer) Stop() error {
 	return callErr
 }
 
+// ToString calls android.media.MediaPlayer.toString.
+func (m *MediaPlayer) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerToString == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaPlayerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Create2 calls android.media.MediaPlayer.create.
 func (m *MediaPlayer) Create2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

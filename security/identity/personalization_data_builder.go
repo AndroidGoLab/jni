@@ -87,3 +87,30 @@ func (m *PersonalizationDataBuilder) Build() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.security.identity.PersonalizationData$Builder.toString.
+func (m *PersonalizationDataBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPersonalizationDataBuilderToString == nil {
+			callErr = fmt.Errorf("android.security.identity.PersonalizationData$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPersonalizationDataBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

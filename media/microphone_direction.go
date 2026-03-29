@@ -78,3 +78,30 @@ func (m *MicrophoneDirection) SetPreferredMicrophoneFieldDimension(arg0 float32)
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.MicrophoneDirection.toString.
+func (m *MicrophoneDirection) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMicrophoneDirectionToString == nil {
+			callErr = fmt.Errorf("android.media.MicrophoneDirection.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMicrophoneDirectionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

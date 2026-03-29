@@ -23,6 +23,33 @@ type Os struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.system.Os.toString.
+func (m *Os) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midOsToString == nil {
+			callErr = fmt.Errorf("android.system.Os.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midOsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Accept calls android.system.Os.accept.
 func (m *Os) Accept(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

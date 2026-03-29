@@ -75,6 +75,33 @@ func (m *FontScaleConverter) ConvertSpToDp(arg0 float32) (float32, error) {
 	return result, callErr
 }
 
+// ToString calls android.content.res.FontScaleConverter.toString.
+func (m *FontScaleConverter) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFontScaleConverterToString == nil {
+			callErr = fmt.Errorf("android.content.res.FontScaleConverter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFontScaleConverterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // ForScale calls android.content.res.FontScaleConverter.forScale.
 func (m *FontScaleConverter) ForScale(arg0 float32) (*jni.Object, error) {
 	var result *jni.Object

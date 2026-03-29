@@ -3666,6 +3666,33 @@ func (m *Window) UnregisterScrollCaptureCallback(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.view.Window.toString.
+func (m *Window) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWindowToString == nil {
+			callErr = fmt.Errorf("android.view.Window.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWindowToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDefaultFeatures calls android.view.Window.getDefaultFeatures.
 func (m *Window) GetDefaultFeatures(arg0 *jni.Object) (int32, error) {
 	var result int32

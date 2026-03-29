@@ -312,6 +312,33 @@ func (m *CurrencyPluralInfo) SetPluralRules(arg0 string) error {
 	return callErr
 }
 
+// ToString calls android.icu.text.CurrencyPluralInfo.toString.
+func (m *CurrencyPluralInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCurrencyPluralInfoToString == nil {
+			callErr = fmt.Errorf("android.icu.text.CurrencyPluralInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCurrencyPluralInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance0 calls android.icu.text.CurrencyPluralInfo.getInstance.
 func (m *CurrencyPluralInfo) GetInstance0() (*jni.Object, error) {
 	var result *jni.Object

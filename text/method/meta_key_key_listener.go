@@ -142,6 +142,33 @@ func (m *MetaKeyKeyListener) OnKeyUp(
 	return result, callErr
 }
 
+// ToString calls android.text.method.MetaKeyKeyListener.toString.
+func (m *MetaKeyKeyListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMetaKeyKeyListenerToString == nil {
+			callErr = fmt.Errorf("android.text.method.MetaKeyKeyListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMetaKeyKeyListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // AdjustMetaAfterKeypress1 calls android.text.method.MetaKeyKeyListener.adjustMetaAfterKeypress.
 func (m *MetaKeyKeyListener) AdjustMetaAfterKeypress1(arg0 *jni.Object) error {
 

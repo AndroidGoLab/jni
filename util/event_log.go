@@ -23,6 +23,33 @@ type EventLog struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.util.EventLog.toString.
+func (m *EventLog) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midEventLogToString == nil {
+			callErr = fmt.Errorf("android.util.EventLog.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midEventLogToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetTagCode calls android.util.EventLog.getTagCode.
 func (m *EventLog) GetTagCode(arg0 string) (int32, error) {
 	var result int32

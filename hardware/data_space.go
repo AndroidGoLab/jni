@@ -23,6 +23,33 @@ type DataSpace struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.hardware.DataSpace.toString.
+func (m *DataSpace) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDataSpaceToString == nil {
+			callErr = fmt.Errorf("android.hardware.DataSpace.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDataSpaceToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetRange calls android.hardware.DataSpace.getRange.
 func (m *DataSpace) GetRange(arg0 int32) (int32, error) {
 	var result int32

@@ -392,3 +392,30 @@ func (m *E2eeContactKeysManagerE2eeContactKey) WriteToParcel(arg0 *jni.Object, a
 	})
 	return callErr
 }
+
+// ToString calls android.provider.E2eeContactKeysManager$E2eeContactKey.toString.
+func (m *E2eeContactKeysManagerE2eeContactKey) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midE2eeContactKeysManagerE2eeContactKeyToString == nil {
+			callErr = fmt.Errorf("android.provider.E2eeContactKeysManager$E2eeContactKey.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midE2eeContactKeysManagerE2eeContactKeyToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

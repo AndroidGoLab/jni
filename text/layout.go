@@ -1880,6 +1880,33 @@ func (m *Layout) IsRtlCharAt(arg0 int32) (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.text.Layout.toString.
+func (m *Layout) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLayoutToString == nil {
+			callErr = fmt.Errorf("android.text.Layout.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLayoutToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDesiredWidth2 calls android.text.Layout.getDesiredWidth.
 func (m *Layout) GetDesiredWidth2(arg0 string, arg1 *jni.Object) (float32, error) {
 	var result float32

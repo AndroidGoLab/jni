@@ -679,6 +679,33 @@ func (m *SmsManager) SetSmscAddress(arg0 string) (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.telephony.SmsManager.toString.
+func (m *SmsManager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSmsManagerToString == nil {
+			callErr = fmt.Errorf("android.telephony.SmsManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSmsManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDefault calls android.telephony.SmsManager.getDefault.
 func (m *SmsManager) GetDefault() (*jni.Object, error) {
 	var result *jni.Object

@@ -47,3 +47,30 @@ func (m *LeadingMarginSpanLeadingMarginSpan2) GetLeadingMarginLineCount() (int32
 	})
 	return result, callErr
 }
+
+// ToString calls android.text.style.LeadingMarginSpan$LeadingMarginSpan2.toString.
+func (m *LeadingMarginSpanLeadingMarginSpan2) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLeadingMarginSpanLeadingMarginSpan2ToString == nil {
+			callErr = fmt.Errorf("android.text.style.LeadingMarginSpan$LeadingMarginSpan2.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLeadingMarginSpanLeadingMarginSpan2ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

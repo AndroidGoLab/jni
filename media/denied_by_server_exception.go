@@ -50,3 +50,30 @@ func NewDeniedByServerException(vm *jni.VM, arg0 string) (*DeniedByServerExcepti
 	}
 	return &t, nil
 }
+
+// ToString calls android.media.DeniedByServerException.toString.
+func (m *DeniedByServerException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeniedByServerExceptionToString == nil {
+			callErr = fmt.Errorf("android.media.DeniedByServerException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeniedByServerExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -138,6 +138,33 @@ func (m *AllocationAdapter) SetZ(arg0 int32) error {
 	return callErr
 }
 
+// ToString calls android.renderscript.AllocationAdapter.toString.
+func (m *AllocationAdapter) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAllocationAdapterToString == nil {
+			callErr = fmt.Errorf("android.renderscript.AllocationAdapter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAllocationAdapterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Create1D calls android.renderscript.AllocationAdapter.create1D.
 func (m *AllocationAdapter) Create1D(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

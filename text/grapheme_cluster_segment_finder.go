@@ -154,3 +154,30 @@ func (m *GraphemeClusterSegmentFinder) PreviousStartBoundary(arg0 int32) (int32,
 	})
 	return result, callErr
 }
+
+// ToString calls android.text.GraphemeClusterSegmentFinder.toString.
+func (m *GraphemeClusterSegmentFinder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGraphemeClusterSegmentFinderToString == nil {
+			callErr = fmt.Errorf("android.text.GraphemeClusterSegmentFinder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGraphemeClusterSegmentFinderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

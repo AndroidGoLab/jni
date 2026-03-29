@@ -23,6 +23,33 @@ type Scale struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.icu.number.Scale.toString.
+func (m *Scale) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScaleToString == nil {
+			callErr = fmt.Errorf("android.icu.number.Scale.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScaleToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // ByBigDecimal calls android.icu.number.Scale.byBigDecimal.
 func (m *Scale) ByBigDecimal(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

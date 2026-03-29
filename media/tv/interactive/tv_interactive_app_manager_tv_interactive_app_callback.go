@@ -139,3 +139,30 @@ func (m *TvInteractiveAppManagerTvInteractiveAppCallback) OnTvInteractiveAppServ
 	})
 	return callErr
 }
+
+// ToString calls android.media.tv.interactive.TvInteractiveAppManager$TvInteractiveAppCallback.toString.
+func (m *TvInteractiveAppManagerTvInteractiveAppCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTvInteractiveAppManagerTvInteractiveAppCallbackToString == nil {
+			callErr = fmt.Errorf("android.media.tv.interactive.TvInteractiveAppManager$TvInteractiveAppCallback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTvInteractiveAppManagerTvInteractiveAppCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

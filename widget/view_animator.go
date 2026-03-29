@@ -600,3 +600,30 @@ func (m *ViewAnimator) ShowPrevious() error {
 	})
 	return callErr
 }
+
+// ToString calls android.widget.ViewAnimator.toString.
+func (m *ViewAnimator) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midViewAnimatorToString == nil {
+			callErr = fmt.Errorf("android.widget.ViewAnimator.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midViewAnimatorToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

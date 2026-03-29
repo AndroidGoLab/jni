@@ -99,3 +99,30 @@ func (m *DeviceInfoPortInfo) GetType() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.midi.MidiDeviceInfo$PortInfo.toString.
+func (m *DeviceInfoPortInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeviceInfoPortInfoToString == nil {
+			callErr = fmt.Errorf("android.media.midi.MidiDeviceInfo$PortInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeviceInfoPortInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

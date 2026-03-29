@@ -23,6 +23,33 @@ type NoiseSuppressor struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.media.audiofx.NoiseSuppressor.toString.
+func (m *NoiseSuppressor) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNoiseSuppressorToString == nil {
+			callErr = fmt.Errorf("android.media.audiofx.NoiseSuppressor.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNoiseSuppressorToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Create calls android.media.audiofx.NoiseSuppressor.create.
 func (m *NoiseSuppressor) Create(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object

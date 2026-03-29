@@ -45,6 +45,33 @@ func NewETC1Util(vm *jni.VM) (*ETC1Util, error) {
 	return &t, nil
 }
 
+// ToString calls android.opengl.ETC1Util.toString.
+func (m *ETC1Util) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midETC1UtilToString == nil {
+			callErr = fmt.Errorf("android.opengl.ETC1Util.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midETC1UtilToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CompressTexture calls android.opengl.ETC1Util.compressTexture.
 func (m *ETC1Util) CompressTexture(
 	arg0 *jni.Object,

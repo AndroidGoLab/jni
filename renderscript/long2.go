@@ -44,3 +44,30 @@ func NewLong2(vm *jni.VM) (*Long2, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.renderscript.Long2.toString.
+func (m *Long2) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLong2ToString == nil {
+			callErr = fmt.Errorf("android.renderscript.Long2.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLong2ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -152,3 +152,30 @@ func (m *MediaSessionManagerRemoteUserInfo) HashCode() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.session.MediaSessionManager$RemoteUserInfo.toString.
+func (m *MediaSessionManagerRemoteUserInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaSessionManagerRemoteUserInfoToString == nil {
+			callErr = fmt.Errorf("android.media.session.MediaSessionManager$RemoteUserInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaSessionManagerRemoteUserInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

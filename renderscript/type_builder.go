@@ -260,3 +260,30 @@ func (m *TypeBuilder) SetZ(arg0 int32) (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.renderscript.Type$Builder.toString.
+func (m *TypeBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTypeBuilderToString == nil {
+			callErr = fmt.Errorf("android.renderscript.Type$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTypeBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -55,6 +55,33 @@ func (m *CaseMap) OmitUnchangedText() (*jni.Object, error) {
 	return result, callErr
 }
 
+// ToString calls android.icu.text.CaseMap.toString.
+func (m *CaseMap) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCaseMapToString == nil {
+			callErr = fmt.Errorf("android.icu.text.CaseMap.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCaseMapToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Fold calls android.icu.text.CaseMap.fold.
 func (m *CaseMap) Fold() (*jni.Object, error) {
 	var result *jni.Object

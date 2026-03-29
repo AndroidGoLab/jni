@@ -275,6 +275,33 @@ func (m *ImageWriter) QueueInputImage(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.media.ImageWriter.toString.
+func (m *ImageWriter) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midImageWriterToString == nil {
+			callErr = fmt.Errorf("android.media.ImageWriter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midImageWriterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // NewInstance2 calls android.media.ImageWriter.newInstance.
 func (m *ImageWriter) NewInstance2(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object

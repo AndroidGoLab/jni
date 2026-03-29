@@ -61,6 +61,33 @@ func (m *EditableFactory) NewEditable(arg0 string) (*jni.Object, error) {
 	return result, callErr
 }
 
+// ToString calls android.text.Editable$Factory.toString.
+func (m *EditableFactory) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midEditableFactoryToString == nil {
+			callErr = fmt.Errorf("android.text.Editable$Factory.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midEditableFactoryToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance calls android.text.Editable$Factory.getInstance.
 func (m *EditableFactory) GetInstance() (*jni.Object, error) {
 	var result *jni.Object

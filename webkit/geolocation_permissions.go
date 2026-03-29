@@ -101,6 +101,33 @@ func (m *GeolocationPermissions) ClearAll() error {
 	return callErr
 }
 
+// ToString calls android.webkit.GeolocationPermissions.toString.
+func (m *GeolocationPermissions) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGeolocationPermissionsToString == nil {
+			callErr = fmt.Errorf("android.webkit.GeolocationPermissions.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGeolocationPermissionsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance calls android.webkit.GeolocationPermissions.getInstance.
 func (m *GeolocationPermissions) GetInstance() (*jni.Object, error) {
 	var result *jni.Object

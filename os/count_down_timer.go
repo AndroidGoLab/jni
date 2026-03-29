@@ -67,3 +67,30 @@ func (m *CountDownTimer) OnTick(arg0 int64) error {
 	})
 	return callErr
 }
+
+// ToString calls android.os.CountDownTimer.toString.
+func (m *CountDownTimer) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCountDownTimerToString == nil {
+			callErr = fmt.Errorf("android.os.CountDownTimer.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCountDownTimerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

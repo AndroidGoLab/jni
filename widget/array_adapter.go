@@ -439,6 +439,33 @@ func (m *ArrayAdapter) SetNotifyOnChange(arg0 bool) error {
 	return callErr
 }
 
+// ToString calls android.widget.ArrayAdapter.toString.
+func (m *ArrayAdapter) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midArrayAdapterToString == nil {
+			callErr = fmt.Errorf("android.widget.ArrayAdapter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midArrayAdapterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CreateFromResource calls android.widget.ArrayAdapter.createFromResource.
 func (m *ArrayAdapter) CreateFromResource(
 	arg0 *jni.Object,

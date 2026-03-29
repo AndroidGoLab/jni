@@ -244,6 +244,33 @@ func (m *ContentRating) HashCode() (int32, error) {
 	return result, callErr
 }
 
+// ToString calls android.media.tv.TvContentRating.toString.
+func (m *ContentRating) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midContentRatingToString == nil {
+			callErr = fmt.Errorf("android.media.tv.TvContentRating.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midContentRatingToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CreateRating calls android.media.tv.TvContentRating.createRating.
 func (m *ContentRating) CreateRating(
 	arg0 string,

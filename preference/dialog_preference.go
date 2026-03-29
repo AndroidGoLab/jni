@@ -580,3 +580,30 @@ func (m *DialogPreference) SetPositiveButtonText1_1(arg0 string) error {
 	})
 	return callErr
 }
+
+// ToString calls android.preference.DialogPreference.toString.
+func (m *DialogPreference) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDialogPreferenceToString == nil {
+			callErr = fmt.Errorf("android.preference.DialogPreference.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDialogPreferenceToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

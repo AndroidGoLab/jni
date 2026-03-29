@@ -475,6 +475,33 @@ func (m *JetPlayer) TriggerClip(arg0 int32) (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.media.JetPlayer.toString.
+func (m *JetPlayer) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midJetPlayerToString == nil {
+			callErr = fmt.Errorf("android.media.JetPlayer.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midJetPlayerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetJetPlayer calls android.media.JetPlayer.getJetPlayer.
 func (m *JetPlayer) GetJetPlayer() (*jni.Object, error) {
 	var result *jni.Object

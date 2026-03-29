@@ -45,6 +45,33 @@ func NewGLES10Ext(vm *jni.VM) (*GLES10Ext, error) {
 	return &t, nil
 }
 
+// ToString calls android.opengl.GLES10Ext.toString.
+func (m *GLES10Ext) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGLES10ExtToString == nil {
+			callErr = fmt.Errorf("android.opengl.GLES10Ext.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGLES10ExtToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GlQueryMatrixxOES4 calls android.opengl.GLES10Ext.glQueryMatrixxOES.
 func (m *GLES10Ext) GlQueryMatrixxOES4(
 	arg0 *jni.Object,

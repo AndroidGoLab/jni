@@ -73,6 +73,33 @@ func (m *MeasureUnitMeasurePrefix) GetPower() (int32, error) {
 	return result, callErr
 }
 
+// ToString calls android.icu.util.MeasureUnit$MeasurePrefix.toString.
+func (m *MeasureUnitMeasurePrefix) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMeasureUnitMeasurePrefixToString == nil {
+			callErr = fmt.Errorf("android.icu.util.MeasureUnit$MeasurePrefix.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMeasureUnitMeasurePrefixToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.icu.util.MeasureUnit$MeasurePrefix.values.
 func (m *MeasureUnitMeasurePrefix) Values() (*jni.Object, error) {
 	var result *jni.Object

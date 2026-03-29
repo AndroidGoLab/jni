@@ -45,3 +45,30 @@ func NewCheckBoxPreference(vm *jni.VM, arg0 *jni.Object) (*CheckBoxPreference, e
 	}
 	return &t, nil
 }
+
+// ToString calls android.preference.CheckBoxPreference.toString.
+func (m *CheckBoxPreference) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCheckBoxPreferenceToString == nil {
+			callErr = fmt.Errorf("android.preference.CheckBoxPreference.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCheckBoxPreferenceToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

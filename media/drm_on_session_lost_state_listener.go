@@ -45,3 +45,30 @@ func (m *DrmOnSessionLostStateListener) OnSessionLostState(arg0 *jni.Object, arg
 	})
 	return callErr
 }
+
+// ToString calls android.media.MediaDrm$OnSessionLostStateListener.toString.
+func (m *DrmOnSessionLostStateListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDrmOnSessionLostStateListenerToString == nil {
+			callErr = fmt.Errorf("android.media.MediaDrm$OnSessionLostStateListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDrmOnSessionLostStateListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

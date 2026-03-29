@@ -23,6 +23,33 @@ type ContractDirectory struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.provider.ContactsContract$Directory.toString.
+func (m *ContractDirectory) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midContractDirectoryToString == nil {
+			callErr = fmt.Errorf("android.provider.ContactsContract$Directory.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midContractDirectoryToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsEnterpriseDirectoryId calls android.provider.ContactsContract$Directory.isEnterpriseDirectoryId.
 func (m *ContractDirectory) IsEnterpriseDirectoryId(arg0 int64) (bool, error) {
 	var result bool

@@ -79,3 +79,30 @@ func (m *Session2CommandResult) GetResultData() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.Session2Command$Result.toString.
+func (m *Session2CommandResult) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSession2CommandResultToString == nil {
+			callErr = fmt.Errorf("android.media.Session2Command$Result.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSession2CommandResultToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

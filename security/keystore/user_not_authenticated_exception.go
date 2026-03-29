@@ -44,3 +44,30 @@ func NewUserNotAuthenticatedException(vm *jni.VM) (*UserNotAuthenticatedExceptio
 	}
 	return &t, nil
 }
+
+// ToString calls android.security.keystore.UserNotAuthenticatedException.toString.
+func (m *UserNotAuthenticatedException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUserNotAuthenticatedExceptionToString == nil {
+			callErr = fmt.Errorf("android.security.keystore.UserNotAuthenticatedException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUserNotAuthenticatedExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

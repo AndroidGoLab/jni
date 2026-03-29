@@ -184,3 +184,30 @@ func (m *ElevationGainedRecordBuilder) SetStartZoneOffset(arg0 *jni.Object) (*jn
 	})
 	return result, callErr
 }
+
+// ToString calls android.health.connect.datatypes.ElevationGainedRecord$Builder.toString.
+func (m *ElevationGainedRecordBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midElevationGainedRecordBuilderToString == nil {
+			callErr = fmt.Errorf("android.health.connect.datatypes.ElevationGainedRecord$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midElevationGainedRecordBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -55,3 +55,30 @@ func (m *VolumeAutomation) CreateVolumeShaper(arg0 *jni.Object) (*jni.Object, er
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.VolumeAutomation.toString.
+func (m *VolumeAutomation) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midVolumeAutomationToString == nil {
+			callErr = fmt.Errorf("android.media.VolumeAutomation.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midVolumeAutomationToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

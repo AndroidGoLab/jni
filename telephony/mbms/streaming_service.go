@@ -108,3 +108,30 @@ func (m *StreamingService) GetPlaybackUri() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.telephony.mbms.StreamingService.toString.
+func (m *StreamingService) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midStreamingServiceToString == nil {
+			callErr = fmt.Errorf("android.telephony.mbms.StreamingService.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midStreamingServiceToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -87,3 +87,30 @@ func (m *AvailableNetworkInfoBuilder) SetPriority(arg0 int32) (*jni.Object, erro
 	})
 	return result, callErr
 }
+
+// ToString calls android.telephony.AvailableNetworkInfo$Builder.toString.
+func (m *AvailableNetworkInfoBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAvailableNetworkInfoBuilderToString == nil {
+			callErr = fmt.Errorf("android.telephony.AvailableNetworkInfo$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAvailableNetworkInfoBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

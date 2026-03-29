@@ -50,3 +50,30 @@ func NewNoSuchPropertyException(vm *jni.VM, arg0 string) (*NoSuchPropertyExcepti
 	}
 	return &t, nil
 }
+
+// ToString calls android.util.NoSuchPropertyException.toString.
+func (m *NoSuchPropertyException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNoSuchPropertyExceptionToString == nil {
+			callErr = fmt.Errorf("android.util.NoSuchPropertyException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNoSuchPropertyExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

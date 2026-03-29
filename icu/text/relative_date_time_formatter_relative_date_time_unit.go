@@ -23,6 +23,33 @@ type RelativeDateTimeFormatterRelativeDateTimeUnit struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.icu.text.RelativeDateTimeFormatter$RelativeDateTimeUnit.toString.
+func (m *RelativeDateTimeFormatterRelativeDateTimeUnit) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRelativeDateTimeFormatterRelativeDateTimeUnitToString == nil {
+			callErr = fmt.Errorf("android.icu.text.RelativeDateTimeFormatter$RelativeDateTimeUnit.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRelativeDateTimeFormatterRelativeDateTimeUnitToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.icu.text.RelativeDateTimeFormatter$RelativeDateTimeUnit.values.
 func (m *RelativeDateTimeFormatterRelativeDateTimeUnit) Values() (*jni.Object, error) {
 	var result *jni.Object

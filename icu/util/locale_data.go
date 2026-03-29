@@ -105,6 +105,33 @@ func (m *LocaleData) SetNoSubstitute(arg0 bool) error {
 	return callErr
 }
 
+// ToString calls android.icu.util.LocaleData.toString.
+func (m *LocaleData) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLocaleDataToString == nil {
+			callErr = fmt.Errorf("android.icu.util.LocaleData.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLocaleDataToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetCLDRVersion calls android.icu.util.LocaleData.getCLDRVersion.
 func (m *LocaleData) GetCLDRVersion() (*jni.Object, error) {
 	var result *jni.Object

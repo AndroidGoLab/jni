@@ -514,6 +514,33 @@ func (m *Transliterator) Transliterate1_5(arg0 string) (string, error) {
 	return result, callErr
 }
 
+// ToString calls android.icu.text.Transliterator.toString.
+func (m *Transliterator) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTransliteratorToString == nil {
+			callErr = fmt.Errorf("android.icu.text.Transliterator.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTransliteratorToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CreateFromRules calls android.icu.text.Transliterator.createFromRules.
 func (m *Transliterator) CreateFromRules(
 	arg0 string,

@@ -290,3 +290,30 @@ func (m *MandatoryStreamCombinationMandatoryStreamInformation) IsUltraHighResolu
 	})
 	return result, callErr
 }
+
+// ToString calls android.hardware.camera2.params.MandatoryStreamCombination$MandatoryStreamInformation.toString.
+func (m *MandatoryStreamCombinationMandatoryStreamInformation) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMandatoryStreamCombinationMandatoryStreamInformationToString == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.MandatoryStreamCombination$MandatoryStreamInformation.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMandatoryStreamCombinationMandatoryStreamInformationToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

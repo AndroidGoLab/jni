@@ -45,6 +45,33 @@ func NewThumbnailUtils(vm *jni.VM) (*ThumbnailUtils, error) {
 	return &t, nil
 }
 
+// ToString calls android.media.ThumbnailUtils.toString.
+func (m *ThumbnailUtils) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midThumbnailUtilsToString == nil {
+			callErr = fmt.Errorf("android.media.ThumbnailUtils.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midThumbnailUtilsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CreateAudioThumbnail3 calls android.media.ThumbnailUtils.createAudioThumbnail.
 func (m *ThumbnailUtils) CreateAudioThumbnail3(
 	arg0 *jni.Object,

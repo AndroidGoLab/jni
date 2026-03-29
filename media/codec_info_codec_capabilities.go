@@ -297,6 +297,33 @@ func (m *CodecInfoCodecCapabilities) IsFormatSupported(arg0 *jni.Object) (bool, 
 	return result, callErr
 }
 
+// ToString calls android.media.MediaCodecInfo$CodecCapabilities.toString.
+func (m *CodecInfoCodecCapabilities) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoCodecCapabilitiesToString == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$CodecCapabilities.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoCodecCapabilitiesToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CreateFromProfileLevel calls android.media.MediaCodecInfo$CodecCapabilities.createFromProfileLevel.
 func (m *CodecInfoCodecCapabilities) CreateFromProfileLevel(
 	arg0 string,

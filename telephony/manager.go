@@ -3786,6 +3786,33 @@ func (m *Manager) UnregisterTelephonyCallback(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.telephony.TelephonyManager.toString.
+func (m *Manager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerToString == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMaximumCallComposerPictureSize calls android.telephony.TelephonyManager.getMaximumCallComposerPictureSize.
 func (m *Manager) GetMaximumCallComposerPictureSize() (int64, error) {
 	var result int64

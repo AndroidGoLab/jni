@@ -45,6 +45,33 @@ func NewGLDebugHelper(vm *jni.VM) (*GLDebugHelper, error) {
 	return &t, nil
 }
 
+// ToString calls android.opengl.GLDebugHelper.toString.
+func (m *GLDebugHelper) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGLDebugHelperToString == nil {
+			callErr = fmt.Errorf("android.opengl.GLDebugHelper.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGLDebugHelperToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Wrap3 calls android.opengl.GLDebugHelper.wrap.
 func (m *GLDebugHelper) Wrap3(
 	arg0 *jni.Object,

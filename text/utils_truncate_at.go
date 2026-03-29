@@ -23,6 +23,33 @@ type UtilsTruncateAt struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.text.TextUtils$TruncateAt.toString.
+func (m *UtilsTruncateAt) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUtilsTruncateAtToString == nil {
+			callErr = fmt.Errorf("android.text.TextUtils$TruncateAt.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUtilsTruncateAtToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.text.TextUtils$TruncateAt.values.
 func (m *UtilsTruncateAt) Values() (*jni.Object, error) {
 	var result *jni.Object

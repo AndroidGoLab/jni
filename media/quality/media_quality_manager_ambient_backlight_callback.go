@@ -45,3 +45,30 @@ func (m *MediaQualityManagerAmbientBacklightCallback) OnAmbientBacklightEvent(ar
 	})
 	return callErr
 }
+
+// ToString calls android.media.quality.MediaQualityManager$AmbientBacklightCallback.toString.
+func (m *MediaQualityManagerAmbientBacklightCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaQualityManagerAmbientBacklightCallbackToString == nil {
+			callErr = fmt.Errorf("android.media.quality.MediaQualityManager$AmbientBacklightCallback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaQualityManagerAmbientBacklightCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

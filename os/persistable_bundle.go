@@ -246,6 +246,33 @@ func (m *PersistableBundle) WriteToStream(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.os.PersistableBundle.toString.
+func (m *PersistableBundle) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPersistableBundleToString == nil {
+			callErr = fmt.Errorf("android.os.PersistableBundle.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPersistableBundleToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // ReadFromStream calls android.os.PersistableBundle.readFromStream.
 func (m *PersistableBundle) ReadFromStream(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

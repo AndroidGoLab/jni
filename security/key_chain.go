@@ -45,6 +45,33 @@ func NewKeyChain(vm *jni.VM) (*KeyChain, error) {
 	return &t, nil
 }
 
+// ToString calls android.security.KeyChain.toString.
+func (m *KeyChain) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midKeyChainToString == nil {
+			callErr = fmt.Errorf("android.security.KeyChain.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midKeyChainToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // ChoosePrivateKeyAlias6 calls android.security.KeyChain.choosePrivateKeyAlias.
 func (m *KeyChain) ChoosePrivateKeyAlias6(
 	arg0 *jni.Object,

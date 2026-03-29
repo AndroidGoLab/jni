@@ -88,3 +88,30 @@ func (m *PluginStub) GetFullScreenView(arg0 int32, arg1 *jni.Object) (*jni.Objec
 	})
 	return result, callErr
 }
+
+// ToString calls android.webkit.PluginStub.toString.
+func (m *PluginStub) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPluginStubToString == nil {
+			callErr = fmt.Errorf("android.webkit.PluginStub.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPluginStubToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

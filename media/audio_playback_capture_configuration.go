@@ -182,3 +182,30 @@ func (m *AudioPlaybackCaptureConfiguration) GetMediaProjection() (*jni.Object, e
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.AudioPlaybackCaptureConfiguration.toString.
+func (m *AudioPlaybackCaptureConfiguration) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioPlaybackCaptureConfigurationToString == nil {
+			callErr = fmt.Errorf("android.media.AudioPlaybackCaptureConfiguration.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioPlaybackCaptureConfigurationToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

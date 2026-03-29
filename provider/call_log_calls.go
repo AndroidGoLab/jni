@@ -23,6 +23,33 @@ type CallLogCalls struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.provider.CallLog$Calls.toString.
+func (m *CallLogCalls) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCallLogCallsToString == nil {
+			callErr = fmt.Errorf("android.provider.CallLog$Calls.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCallLogCallsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetLastOutgoingCall calls android.provider.CallLog$Calls.getLastOutgoingCall.
 func (m *CallLogCalls) GetLastOutgoingCall(arg0 *jni.Object) (string, error) {
 	var result string

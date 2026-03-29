@@ -106,3 +106,30 @@ func (m *SectionIndexer) GetSections() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.widget.SectionIndexer.toString.
+func (m *SectionIndexer) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSectionIndexerToString == nil {
+			callErr = fmt.Errorf("android.widget.SectionIndexer.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSectionIndexerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

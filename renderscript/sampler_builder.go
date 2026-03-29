@@ -169,3 +169,30 @@ func (m *SamplerBuilder) SetWrapT(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.renderscript.Sampler$Builder.toString.
+func (m *SamplerBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSamplerBuilderToString == nil {
+			callErr = fmt.Errorf("android.renderscript.Sampler$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSamplerBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

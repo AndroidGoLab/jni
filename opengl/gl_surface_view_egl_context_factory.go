@@ -86,3 +86,30 @@ func (m *GLSurfaceViewEGLContextFactory) DestroyContext(
 	})
 	return callErr
 }
+
+// ToString calls android.opengl.GLSurfaceView$EGLContextFactory.toString.
+func (m *GLSurfaceViewEGLContextFactory) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGLSurfaceViewEGLContextFactoryToString == nil {
+			callErr = fmt.Errorf("android.opengl.GLSurfaceView$EGLContextFactory.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGLSurfaceViewEGLContextFactoryToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -267,3 +267,30 @@ func (m *MedicalDataSourceBuilder) SetPackageName(arg0 string) (*jni.Object, err
 	})
 	return result, callErr
 }
+
+// ToString calls android.health.connect.datatypes.MedicalDataSource$Builder.toString.
+func (m *MedicalDataSourceBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMedicalDataSourceBuilderToString == nil {
+			callErr = fmt.Errorf("android.health.connect.datatypes.MedicalDataSource$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMedicalDataSourceBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

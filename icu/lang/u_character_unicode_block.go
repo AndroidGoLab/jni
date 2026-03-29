@@ -48,6 +48,33 @@ func (m *UCharacterUnicodeBlock) GetID() (int32, error) {
 	return result, callErr
 }
 
+// ToString calls android.icu.lang.UCharacter$UnicodeBlock.toString.
+func (m *UCharacterUnicodeBlock) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUCharacterUnicodeBlockToString == nil {
+			callErr = fmt.Errorf("android.icu.lang.UCharacter$UnicodeBlock.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUCharacterUnicodeBlockToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // ForName calls android.icu.lang.UCharacter$UnicodeBlock.forName.
 func (m *UCharacterUnicodeBlock) ForName(arg0 string) (*jni.Object, error) {
 	var result *jni.Object

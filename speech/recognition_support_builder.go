@@ -206,3 +206,30 @@ func (m *RecognitionSupportBuilder) Build() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.speech.RecognitionSupport$Builder.toString.
+func (m *RecognitionSupportBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecognitionSupportBuilderToString == nil {
+			callErr = fmt.Errorf("android.speech.RecognitionSupport$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecognitionSupportBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

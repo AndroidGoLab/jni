@@ -145,6 +145,33 @@ func (m *Rfc822Tokenizer) TerminateToken(arg0 string) (*jni.Object, error) {
 	return result, callErr
 }
 
+// ToString calls android.text.util.Rfc822Tokenizer.toString.
+func (m *Rfc822Tokenizer) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRfc822TokenizerToString == nil {
+			callErr = fmt.Errorf("android.text.util.Rfc822Tokenizer.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRfc822TokenizerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Tokenize calls android.text.util.Rfc822Tokenizer.tokenize.
 func (m *Rfc822Tokenizer) Tokenize(arg0 string) (*jni.Object, error) {
 	var result *jni.Object

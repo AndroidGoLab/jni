@@ -211,3 +211,30 @@ func (m *CredentialDataResultEntries) GetStatus(arg0 string, arg1 string) (int32
 	})
 	return result, callErr
 }
+
+// ToString calls android.security.identity.CredentialDataResult$Entries.toString.
+func (m *CredentialDataResultEntries) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCredentialDataResultEntriesToString == nil {
+			callErr = fmt.Errorf("android.security.identity.CredentialDataResult$Entries.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCredentialDataResultEntriesToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

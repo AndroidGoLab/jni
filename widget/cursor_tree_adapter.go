@@ -747,3 +747,30 @@ func (m *CursorTreeAdapter) GetChild2_1(arg0 int32, arg1 int32) (*jni.Object, er
 	})
 	return result, callErr
 }
+
+// ToString calls android.widget.CursorTreeAdapter.toString.
+func (m *CursorTreeAdapter) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCursorTreeAdapterToString == nil {
+			callErr = fmt.Errorf("android.widget.CursorTreeAdapter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCursorTreeAdapterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

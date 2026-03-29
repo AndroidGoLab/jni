@@ -45,3 +45,30 @@ func (m *ParcelFileDescriptorOnCloseListener) OnClose(arg0 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.os.ParcelFileDescriptor$OnCloseListener.toString.
+func (m *ParcelFileDescriptorOnCloseListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midParcelFileDescriptorOnCloseListenerToString == nil {
+			callErr = fmt.Errorf("android.os.ParcelFileDescriptor$OnCloseListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midParcelFileDescriptorOnCloseListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

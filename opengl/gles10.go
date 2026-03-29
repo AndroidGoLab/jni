@@ -45,6 +45,33 @@ func NewGLES10(vm *jni.VM) (*GLES10, error) {
 	return &t, nil
 }
 
+// ToString calls android.opengl.GLES10.toString.
+func (m *GLES10) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGLES10ToString == nil {
+			callErr = fmt.Errorf("android.opengl.GLES10.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGLES10ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GlActiveTexture calls android.opengl.GLES10.glActiveTexture.
 func (m *GLES10) GlActiveTexture(arg0 int32) error {
 

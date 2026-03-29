@@ -170,6 +170,33 @@ func (m *ScannerConnection) ScanFile2_1(arg0 string, arg1 string) error {
 	return callErr
 }
 
+// ToString calls android.media.MediaScannerConnection.toString.
+func (m *ScannerConnection) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScannerConnectionToString == nil {
+			callErr = fmt.Errorf("android.media.MediaScannerConnection.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScannerConnectionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // ScanFile4 calls android.media.MediaScannerConnection.scanFile.
 func (m *ScannerConnection) ScanFile4(
 	arg0 *jni.Object,

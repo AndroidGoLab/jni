@@ -45,3 +45,30 @@ func NewLinearGradient(vm *jni.VM, arg0 float32, arg1 float32, arg2 float32, arg
 	}
 	return &t, nil
 }
+
+// ToString calls android.graphics.LinearGradient.toString.
+func (m *LinearGradient) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLinearGradientToString == nil {
+			callErr = fmt.Errorf("android.graphics.LinearGradient.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLinearGradientToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

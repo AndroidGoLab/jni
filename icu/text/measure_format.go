@@ -416,6 +416,33 @@ func (m *MeasureFormat) ParseObject2_1(arg0 string, arg1 *jni.Object) (*jni.Obje
 	return result, callErr
 }
 
+// ToString calls android.icu.text.MeasureFormat.toString.
+func (m *MeasureFormat) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMeasureFormatToString == nil {
+			callErr = fmt.Errorf("android.icu.text.MeasureFormat.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMeasureFormatToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetCurrencyFormat0 calls android.icu.text.MeasureFormat.getCurrencyFormat.
 func (m *MeasureFormat) GetCurrencyFormat0() (*jni.Object, error) {
 	var result *jni.Object

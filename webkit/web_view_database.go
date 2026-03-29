@@ -265,6 +265,33 @@ func (m *WebViewDatabase) SetHttpAuthUsernamePassword(
 	return callErr
 }
 
+// ToString calls android.webkit.WebViewDatabase.toString.
+func (m *WebViewDatabase) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWebViewDatabaseToString == nil {
+			callErr = fmt.Errorf("android.webkit.WebViewDatabase.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWebViewDatabaseToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance calls android.webkit.WebViewDatabase.getInstance.
 func (m *WebViewDatabase) GetInstance(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

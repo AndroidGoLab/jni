@@ -23,6 +23,33 @@ type ContractCalendarEntity struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.provider.CalendarContract$CalendarEntity.toString.
+func (m *ContractCalendarEntity) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midContractCalendarEntityToString == nil {
+			callErr = fmt.Errorf("android.provider.CalendarContract$CalendarEntity.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midContractCalendarEntityToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // NewEntityIterator calls android.provider.CalendarContract$CalendarEntity.newEntityIterator.
 func (m *ContractCalendarEntity) NewEntityIterator(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

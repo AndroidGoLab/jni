@@ -23,6 +23,33 @@ type SmsMessageMessageClass struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.telephony.SmsMessage$MessageClass.toString.
+func (m *SmsMessageMessageClass) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSmsMessageMessageClassToString == nil {
+			callErr = fmt.Errorf("android.telephony.SmsMessage$MessageClass.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSmsMessageMessageClassToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.telephony.SmsMessage$MessageClass.values.
 func (m *SmsMessageMessageClass) Values() (*jni.Object, error) {
 	var result *jni.Object

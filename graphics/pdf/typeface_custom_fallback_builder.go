@@ -159,6 +159,33 @@ func (m *TypefaceCustomFallbackBuilder) SetSystemFallback(arg0 string) (*jni.Obj
 	return result, callErr
 }
 
+// ToString calls android.graphics.Typeface$CustomFallbackBuilder.toString.
+func (m *TypefaceCustomFallbackBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTypefaceCustomFallbackBuilderToString == nil {
+			callErr = fmt.Errorf("android.graphics.Typeface$CustomFallbackBuilder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTypefaceCustomFallbackBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMaxCustomFallbackCount calls android.graphics.Typeface$CustomFallbackBuilder.getMaxCustomFallbackCount.
 func (m *TypefaceCustomFallbackBuilder) GetMaxCustomFallbackCount() (int32, error) {
 	var result int32

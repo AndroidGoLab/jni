@@ -51,3 +51,30 @@ func (m *GpsStatusNmeaListener) OnNmeaReceived(arg0 int64, arg1 string) error {
 	})
 	return callErr
 }
+
+// ToString calls android.location.GpsStatus$NmeaListener.toString.
+func (m *GpsStatusNmeaListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGpsStatusNmeaListenerToString == nil {
+			callErr = fmt.Errorf("android.location.GpsStatus$NmeaListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGpsStatusNmeaListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

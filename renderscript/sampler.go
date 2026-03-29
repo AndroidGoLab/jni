@@ -176,6 +176,33 @@ func (m *Sampler) GetWrapT() (*jni.Object, error) {
 	return result, callErr
 }
 
+// ToString calls android.renderscript.Sampler.toString.
+func (m *Sampler) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSamplerToString == nil {
+			callErr = fmt.Errorf("android.renderscript.Sampler.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSamplerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CLAMP_LINEAR calls android.renderscript.Sampler.CLAMP_LINEAR.
 func (m *Sampler) CLAMP_LINEAR(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

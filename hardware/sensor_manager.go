@@ -671,6 +671,33 @@ func (m *SensorManager) UnregisterListener2_3(arg0 *jni.Object, arg1 int32) erro
 	return callErr
 }
 
+// ToString calls android.hardware.SensorManager.toString.
+func (m *SensorManager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSensorManagerToString == nil {
+			callErr = fmt.Errorf("android.hardware.SensorManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSensorManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAltitude calls android.hardware.SensorManager.getAltitude.
 func (m *SensorManager) GetAltitude(arg0 float32, arg1 float32) (float32, error) {
 	var result float32

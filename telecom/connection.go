@@ -1994,6 +1994,33 @@ func (m *Connection) SetVideoState(arg0 int32) error {
 	return callErr
 }
 
+// ToString calls android.telecom.Connection.toString.
+func (m *Connection) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midConnectionToString == nil {
+			callErr = fmt.Errorf("android.telecom.Connection.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midConnectionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CapabilitiesToString calls android.telecom.Connection.capabilitiesToString.
 func (m *Connection) CapabilitiesToString(arg0 int32) (string, error) {
 	var result string

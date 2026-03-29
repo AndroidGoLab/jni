@@ -162,3 +162,30 @@ func (m *WebResourceRequest) IsRedirect() (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.webkit.WebResourceRequest.toString.
+func (m *WebResourceRequest) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWebResourceRequestToString == nil {
+			callErr = fmt.Errorf("android.webkit.WebResourceRequest.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWebResourceRequestToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

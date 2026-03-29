@@ -45,3 +45,30 @@ func NewSumPathEffect(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*SumPathE
 	}
 	return &t, nil
 }
+
+// ToString calls android.graphics.SumPathEffect.toString.
+func (m *SumPathEffect) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSumPathEffectToString == nil {
+			callErr = fmt.Errorf("android.graphics.SumPathEffect.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSumPathEffectToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -23,6 +23,33 @@ type MediaStoreFiles struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.provider.MediaStore$Files.toString.
+func (m *MediaStoreFiles) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaStoreFilesToString == nil {
+			callErr = fmt.Errorf("android.provider.MediaStore$Files.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaStoreFilesToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetContentUri1 calls android.provider.MediaStore$Files.getContentUri.
 func (m *MediaStoreFiles) GetContentUri1(arg0 string) (*jni.Object, error) {
 	var result *jni.Object

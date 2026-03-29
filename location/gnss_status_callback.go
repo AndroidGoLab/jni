@@ -112,3 +112,30 @@ func (m *GnssStatusCallback) OnStopped() error {
 	})
 	return callErr
 }
+
+// ToString calls android.location.GnssStatus$Callback.toString.
+func (m *GnssStatusCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGnssStatusCallbackToString == nil {
+			callErr = fmt.Errorf("android.location.GnssStatus$Callback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGnssStatusCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

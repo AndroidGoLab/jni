@@ -256,3 +256,30 @@ func (m *AudioRecordBuilder) SetPrivacySensitive(arg0 bool) (*jni.Object, error)
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.AudioRecord$Builder.toString.
+func (m *AudioRecordBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioRecordBuilderToString == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioRecordBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

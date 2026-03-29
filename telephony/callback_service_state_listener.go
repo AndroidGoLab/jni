@@ -45,3 +45,30 @@ func (m *CallbackServiceStateListener) OnServiceStateChanged(arg0 *jni.Object) e
 	})
 	return callErr
 }
+
+// ToString calls android.telephony.TelephonyCallback$ServiceStateListener.toString.
+func (m *CallbackServiceStateListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCallbackServiceStateListenerToString == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyCallback$ServiceStateListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCallbackServiceStateListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

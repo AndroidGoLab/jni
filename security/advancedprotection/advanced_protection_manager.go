@@ -141,3 +141,30 @@ func (m *AdvancedProtectionManager) UnregisterAdvancedProtectionCallback(arg0 *j
 	})
 	return callErr
 }
+
+// ToString calls android.security.advancedprotection.AdvancedProtectionManager.toString.
+func (m *AdvancedProtectionManager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAdvancedProtectionManagerToString == nil {
+			callErr = fmt.Errorf("android.security.advancedprotection.AdvancedProtectionManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAdvancedProtectionManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

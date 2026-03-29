@@ -346,3 +346,30 @@ func (m *CallCallback) OnVideoCallChanged(arg0 *jni.Object, arg1 *jni.Object) er
 	})
 	return callErr
 }
+
+// ToString calls android.telecom.Call$Callback.toString.
+func (m *CallCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCallCallbackToString == nil {
+			callErr = fmt.Errorf("android.telecom.Call$Callback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCallCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

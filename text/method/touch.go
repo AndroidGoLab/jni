@@ -23,6 +23,33 @@ type Touch struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.text.method.Touch.toString.
+func (m *Touch) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTouchToString == nil {
+			callErr = fmt.Errorf("android.text.method.Touch.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTouchToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInitialScrollX calls android.text.method.Touch.getInitialScrollX.
 func (m *Touch) GetInitialScrollX(arg0 *jni.Object, arg1 *jni.Object) (int32, error) {
 	var result int32

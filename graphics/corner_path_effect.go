@@ -45,3 +45,30 @@ func NewCornerPathEffect(vm *jni.VM, arg0 float32) (*CornerPathEffect, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.graphics.CornerPathEffect.toString.
+func (m *CornerPathEffect) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCornerPathEffectToString == nil {
+			callErr = fmt.Errorf("android.graphics.CornerPathEffect.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCornerPathEffectToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

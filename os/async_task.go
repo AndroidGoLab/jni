@@ -179,6 +179,33 @@ func (m *AsyncTask) IsCancelled() (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.os.AsyncTask.toString.
+func (m *AsyncTask) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAsyncTaskToString == nil {
+			callErr = fmt.Errorf("android.os.AsyncTask.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAsyncTaskToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Execute calls android.os.AsyncTask.execute.
 func (m *AsyncTask) Execute(arg0 *jni.Object) error {
 

@@ -50,3 +50,30 @@ func NewFileUriExposedException(vm *jni.VM, arg0 string) (*FileUriExposedExcepti
 	}
 	return &t, nil
 }
+
+// ToString calls android.os.FileUriExposedException.toString.
+func (m *FileUriExposedException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFileUriExposedExceptionToString == nil {
+			callErr = fmt.Errorf("android.os.FileUriExposedException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFileUriExposedExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -23,6 +23,33 @@ type UserDictionaryWords struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.provider.UserDictionary$Words.toString.
+func (m *UserDictionaryWords) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUserDictionaryWordsToString == nil {
+			callErr = fmt.Errorf("android.provider.UserDictionary$Words.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUserDictionaryWordsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // AddWord4 calls android.provider.UserDictionary$Words.addWord.
 func (m *UserDictionaryWords) AddWord4(
 	arg0 *jni.Object,

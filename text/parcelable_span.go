@@ -47,3 +47,30 @@ func (m *ParcelableSpan) GetSpanTypeId() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.text.ParcelableSpan.toString.
+func (m *ParcelableSpan) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midParcelableSpanToString == nil {
+			callErr = fmt.Errorf("android.text.ParcelableSpan.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midParcelableSpanToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

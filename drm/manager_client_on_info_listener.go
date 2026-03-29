@@ -45,3 +45,30 @@ func (m *ManagerClientOnInfoListener) OnInfo(arg0 *jni.Object, arg1 *jni.Object)
 	})
 	return callErr
 }
+
+// ToString calls android.drm.DrmManagerClient$OnInfoListener.toString.
+func (m *ManagerClientOnInfoListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerClientOnInfoListenerToString == nil {
+			callErr = fmt.Errorf("android.drm.DrmManagerClient$OnInfoListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerClientOnInfoListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

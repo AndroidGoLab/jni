@@ -23,6 +23,33 @@ type Secure struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.provider.Settings$Secure.toString.
+func (m *Secure) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSecureToString == nil {
+			callErr = fmt.Errorf("android.provider.Settings$Secure.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSecureToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetFloat2 calls android.provider.Settings$Secure.getFloat.
 func (m *Secure) GetFloat2(arg0 *jni.Object, arg1 string) (float32, error) {
 	var result float32

@@ -1433,3 +1433,30 @@ func (m *RuleBasedCollator) CloneAsThawed0_2() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.icu.text.RuleBasedCollator.toString.
+func (m *RuleBasedCollator) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRuleBasedCollatorToString == nil {
+			callErr = fmt.Errorf("android.icu.text.RuleBasedCollator.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRuleBasedCollatorToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

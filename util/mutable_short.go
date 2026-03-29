@@ -45,3 +45,30 @@ func NewMutableShort(vm *jni.VM, arg0 int16) (*MutableShort, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.util.MutableShort.toString.
+func (m *MutableShort) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMutableShortToString == nil {
+			callErr = fmt.Errorf("android.util.MutableShort.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMutableShortToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

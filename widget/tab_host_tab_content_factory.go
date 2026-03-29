@@ -60,3 +60,30 @@ func (m *TabHostTabContentFactory) CreateTabContent(arg0 string) (*jni.Object, e
 	})
 	return result, callErr
 }
+
+// ToString calls android.widget.TabHost$TabContentFactory.toString.
+func (m *TabHostTabContentFactory) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTabHostTabContentFactoryToString == nil {
+			callErr = fmt.Errorf("android.widget.TabHost$TabContentFactory.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTabHostTabContentFactoryToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

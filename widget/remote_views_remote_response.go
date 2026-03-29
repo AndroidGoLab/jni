@@ -62,6 +62,33 @@ func (m *RemoteViewsRemoteResponse) AddSharedElement(arg0 int32, arg1 string) (*
 	return result, callErr
 }
 
+// ToString calls android.widget.RemoteViews$RemoteResponse.toString.
+func (m *RemoteViewsRemoteResponse) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRemoteViewsRemoteResponseToString == nil {
+			callErr = fmt.Errorf("android.widget.RemoteViews$RemoteResponse.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRemoteViewsRemoteResponseToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // FromFillInIntent calls android.widget.RemoteViews$RemoteResponse.fromFillInIntent.
 func (m *RemoteViewsRemoteResponse) FromFillInIntent(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

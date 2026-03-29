@@ -270,6 +270,33 @@ func (m *Buffer) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 	return callErr
 }
 
+// ToString calls android.hardware.HardwareBuffer.toString.
+func (m *Buffer) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBufferToString == nil {
+			callErr = fmt.Errorf("android.hardware.HardwareBuffer.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBufferToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Create calls android.hardware.HardwareBuffer.create.
 func (m *Buffer) Create(
 	arg0 int32,

@@ -44,3 +44,30 @@ func NewSecureKeyImportUnavailableException(vm *jni.VM) (*SecureKeyImportUnavail
 	}
 	return &t, nil
 }
+
+// ToString calls android.security.keystore.SecureKeyImportUnavailableException.toString.
+func (m *SecureKeyImportUnavailableException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSecureKeyImportUnavailableExceptionToString == nil {
+			callErr = fmt.Errorf("android.security.keystore.SecureKeyImportUnavailableException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSecureKeyImportUnavailableExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

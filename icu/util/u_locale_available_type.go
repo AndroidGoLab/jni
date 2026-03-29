@@ -23,6 +23,33 @@ type ULocaleAvailableType struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.icu.util.ULocale$AvailableType.toString.
+func (m *ULocaleAvailableType) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midULocaleAvailableTypeToString == nil {
+			callErr = fmt.Errorf("android.icu.util.ULocale$AvailableType.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midULocaleAvailableTypeToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.icu.util.ULocale$AvailableType.values.
 func (m *ULocaleAvailableType) Values() (*jni.Object, error) {
 	var result *jni.Object

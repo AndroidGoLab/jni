@@ -571,6 +571,33 @@ func (m *DynamicLayoutBuilder) SetUseLineSpacingFromFallbacks(arg0 bool) (*jni.O
 	return result, callErr
 }
 
+// ToString calls android.text.DynamicLayout$Builder.toString.
+func (m *DynamicLayoutBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDynamicLayoutBuilderToString == nil {
+			callErr = fmt.Errorf("android.text.DynamicLayout$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDynamicLayoutBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Obtain calls android.text.DynamicLayout$Builder.obtain.
 func (m *DynamicLayoutBuilder) Obtain(
 	arg0 string,

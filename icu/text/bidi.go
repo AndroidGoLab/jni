@@ -1342,6 +1342,33 @@ func (m *Bidi) WriteReordered(arg0 int32) (string, error) {
 	return result, callErr
 }
 
+// ToString calls android.icu.text.Bidi.toString.
+func (m *Bidi) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBidiToString == nil {
+			callErr = fmt.Errorf("android.icu.text.Bidi.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBidiToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetBaseDirection calls android.icu.text.Bidi.getBaseDirection.
 func (m *Bidi) GetBaseDirection(arg0 string) (int8, error) {
 	var result int8

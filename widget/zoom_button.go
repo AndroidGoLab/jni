@@ -239,3 +239,30 @@ func (m *ZoomButton) SetZoomSpeed(arg0 int64) error {
 	})
 	return callErr
 }
+
+// ToString calls android.widget.ZoomButton.toString.
+func (m *ZoomButton) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midZoomButtonToString == nil {
+			callErr = fmt.Errorf("android.widget.ZoomButton.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midZoomButtonToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

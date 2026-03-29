@@ -334,3 +334,30 @@ func (m *Matrix2f) Transpose() error {
 	})
 	return callErr
 }
+
+// ToString calls android.renderscript.Matrix2f.toString.
+func (m *Matrix2f) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMatrix2fToString == nil {
+			callErr = fmt.Errorf("android.renderscript.Matrix2f.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMatrix2fToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

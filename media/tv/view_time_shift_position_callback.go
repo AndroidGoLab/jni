@@ -78,3 +78,30 @@ func (m *ViewTimeShiftPositionCallback) OnTimeShiftStartPositionChanged(arg0 str
 	})
 	return callErr
 }
+
+// ToString calls android.media.tv.TvView$TimeShiftPositionCallback.toString.
+func (m *ViewTimeShiftPositionCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midViewTimeShiftPositionCallbackToString == nil {
+			callErr = fmt.Errorf("android.media.tv.TvView$TimeShiftPositionCallback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midViewTimeShiftPositionCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -454,3 +454,30 @@ func (m *PromptBuilder) SetTitle(arg0 string) (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.hardware.biometrics.BiometricPrompt$Builder.toString.
+func (m *PromptBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPromptBuilderToString == nil {
+			callErr = fmt.Errorf("android.hardware.biometrics.BiometricPrompt$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPromptBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -88,3 +88,30 @@ func (m *ScientificNotation) WithMinExponentDigits(arg0 int32) (*jni.Object, err
 	})
 	return result, callErr
 }
+
+// ToString calls android.icu.number.ScientificNotation.toString.
+func (m *ScientificNotation) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScientificNotationToString == nil {
+			callErr = fmt.Errorf("android.icu.number.ScientificNotation.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScientificNotationToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

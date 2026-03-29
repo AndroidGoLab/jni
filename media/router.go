@@ -527,3 +527,30 @@ func (m *Router) SelectRoute(arg0 int32, arg1 *jni.Object) error {
 	})
 	return callErr
 }
+
+// ToString calls android.media.MediaRouter.toString.
+func (m *Router) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouterToString == nil {
+			callErr = fmt.Errorf("android.media.MediaRouter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

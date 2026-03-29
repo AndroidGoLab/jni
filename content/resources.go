@@ -1695,6 +1695,33 @@ func (m *Resources) UpdateConfiguration(arg0 *jni.Object, arg1 *jni.Object) erro
 	return callErr
 }
 
+// ToString calls android.content.res.Resources.toString.
+func (m *Resources) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midResourcesToString == nil {
+			callErr = fmt.Errorf("android.content.res.Resources.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midResourcesToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAttributeSetSourceResId calls android.content.res.Resources.getAttributeSetSourceResId.
 func (m *Resources) GetAttributeSetSourceResId(arg0 *jni.Object) (int32, error) {
 	var result int32

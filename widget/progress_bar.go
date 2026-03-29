@@ -1450,3 +1450,30 @@ func (m *ProgressBar) SetStateDescription(arg0 string) error {
 	})
 	return callErr
 }
+
+// ToString calls android.widget.ProgressBar.toString.
+func (m *ProgressBar) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midProgressBarToString == nil {
+			callErr = fmt.Errorf("android.widget.ProgressBar.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midProgressBarToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -23,6 +23,33 @@ type VoicemailContractVoicemails struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.provider.VoicemailContract$Voicemails.toString.
+func (m *VoicemailContractVoicemails) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midVoicemailContractVoicemailsToString == nil {
+			callErr = fmt.Errorf("android.provider.VoicemailContract$Voicemails.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midVoicemailContractVoicemailsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // BuildSourceUri calls android.provider.VoicemailContract$Voicemails.buildSourceUri.
 func (m *VoicemailContractVoicemails) BuildSourceUri(arg0 string) (*jni.Object, error) {
 	var result *jni.Object

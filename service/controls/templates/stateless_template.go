@@ -75,3 +75,30 @@ func (m *StatelessTemplate) GetTemplateType() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.service.controls.templates.StatelessTemplate.toString.
+func (m *StatelessTemplate) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midStatelessTemplateToString == nil {
+			callErr = fmt.Errorf("android.service.controls.templates.StatelessTemplate.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midStatelessTemplateToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

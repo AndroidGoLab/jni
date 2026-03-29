@@ -715,3 +715,30 @@ func (m *LinearLayout) GenerateLayoutParams1_1(arg0 *jni.Object) (*jni.Object, e
 	})
 	return result, callErr
 }
+
+// ToString calls android.widget.LinearLayout.toString.
+func (m *LinearLayout) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLinearLayoutToString == nil {
+			callErr = fmt.Errorf("android.widget.LinearLayout.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLinearLayoutToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

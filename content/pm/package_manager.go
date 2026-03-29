@@ -5124,6 +5124,33 @@ func (m *PackageManager) VerifyPendingInstall(arg0 int32, arg1 int32) error {
 	return callErr
 }
 
+// ToString calls android.content.pm.PackageManager.toString.
+func (m *PackageManager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerToString == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetVerifiedSigningInfo calls android.content.pm.PackageManager.getVerifiedSigningInfo.
 func (m *PackageManager) GetVerifiedSigningInfo(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object

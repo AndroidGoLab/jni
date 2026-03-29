@@ -250,3 +250,30 @@ func (m *DeviceInfo) IsOperationSupported(arg0 int32) (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.mtp.MtpDeviceInfo.toString.
+func (m *DeviceInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeviceInfoToString == nil {
+			callErr = fmt.Errorf("android.mtp.MtpDeviceInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeviceInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -591,6 +591,33 @@ func (m *LayoutInflater) SetFilter(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.view.LayoutInflater.toString.
+func (m *LayoutInflater) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLayoutInflaterToString == nil {
+			callErr = fmt.Errorf("android.view.LayoutInflater.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLayoutInflaterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // From calls android.view.LayoutInflater.from.
 func (m *LayoutInflater) From(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

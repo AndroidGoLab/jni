@@ -123,6 +123,33 @@ func (m *NodeInfoRangeInfo) GetType() (int32, error) {
 	return result, callErr
 }
 
+// ToString calls android.view.accessibility.AccessibilityNodeInfo$RangeInfo.toString.
+func (m *NodeInfoRangeInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNodeInfoRangeInfoToString == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityNodeInfo$RangeInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNodeInfoRangeInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Obtain calls android.view.accessibility.AccessibilityNodeInfo$RangeInfo.obtain.
 func (m *NodeInfoRangeInfo) Obtain(
 	arg0 int32,

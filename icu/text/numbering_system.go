@@ -151,6 +151,33 @@ func (m *NumberingSystem) IsAlgorithmic() (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.icu.text.NumberingSystem.toString.
+func (m *NumberingSystem) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNumberingSystemToString == nil {
+			callErr = fmt.Errorf("android.icu.text.NumberingSystem.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNumberingSystemToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAvailableNames calls android.icu.text.NumberingSystem.getAvailableNames.
 func (m *NumberingSystem) GetAvailableNames() (*jni.Object, error) {
 	var result *jni.Object

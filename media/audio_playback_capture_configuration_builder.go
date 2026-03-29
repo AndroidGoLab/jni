@@ -186,3 +186,30 @@ func (m *AudioPlaybackCaptureConfigurationBuilder) ExcludeUsage(arg0 int32) (*jn
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.AudioPlaybackCaptureConfiguration$Builder.toString.
+func (m *AudioPlaybackCaptureConfigurationBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioPlaybackCaptureConfigurationBuilderToString == nil {
+			callErr = fmt.Errorf("android.media.AudioPlaybackCaptureConfiguration$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioPlaybackCaptureConfigurationBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

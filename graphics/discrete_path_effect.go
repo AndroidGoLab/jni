@@ -45,3 +45,30 @@ func NewDiscretePathEffect(vm *jni.VM, arg0 float32, arg1 float32) (*DiscretePat
 	}
 	return &t, nil
 }
+
+// ToString calls android.graphics.DiscretePathEffect.toString.
+func (m *DiscretePathEffect) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDiscretePathEffectToString == nil {
+			callErr = fmt.Errorf("android.graphics.DiscretePathEffect.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDiscretePathEffectToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

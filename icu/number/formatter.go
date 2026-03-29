@@ -23,6 +23,33 @@ type Formatter struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.icu.number.NumberFormatter.toString.
+func (m *Formatter) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFormatterToString == nil {
+			callErr = fmt.Errorf("android.icu.number.NumberFormatter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFormatterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // With calls android.icu.number.NumberFormatter.with.
 func (m *Formatter) With() (*jni.Object, error) {
 	var result *jni.Object

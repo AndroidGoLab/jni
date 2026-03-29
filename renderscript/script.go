@@ -422,3 +422,30 @@ func (m *Script) SetVar2_7(arg0 int32, arg1 int64) error {
 	})
 	return callErr
 }
+
+// ToString calls android.renderscript.Script.toString.
+func (m *Script) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScriptToString == nil {
+			callErr = fmt.Errorf("android.renderscript.Script.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScriptToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

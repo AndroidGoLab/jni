@@ -45,6 +45,33 @@ func NewHideReturnsTransformationMethod(vm *jni.VM) (*HideReturnsTransformationM
 	return &t, nil
 }
 
+// ToString calls android.text.method.HideReturnsTransformationMethod.toString.
+func (m *HideReturnsTransformationMethod) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midHideReturnsTransformationMethodToString == nil {
+			callErr = fmt.Errorf("android.text.method.HideReturnsTransformationMethod.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midHideReturnsTransformationMethodToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance calls android.text.method.HideReturnsTransformationMethod.getInstance.
 func (m *HideReturnsTransformationMethod) GetInstance() (*jni.Object, error) {
 	var result *jni.Object

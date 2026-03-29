@@ -531,3 +531,30 @@ func (m *MediaItemInfoBuilder) SetVideoSize(arg0 *jni.Object) (*jni.Object, erro
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.metrics.MediaItemInfo$Builder.toString.
+func (m *MediaItemInfoBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaItemInfoBuilderToString == nil {
+			callErr = fmt.Errorf("android.media.metrics.MediaItemInfo$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaItemInfoBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

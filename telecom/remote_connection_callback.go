@@ -453,3 +453,30 @@ func (m *RemoteConnectionCallback) OnVoipAudioChanged(arg0 *jni.Object, arg1 boo
 	})
 	return callErr
 }
+
+// ToString calls android.telecom.RemoteConnection$Callback.toString.
+func (m *RemoteConnectionCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRemoteConnectionCallbackToString == nil {
+			callErr = fmt.Errorf("android.telecom.RemoteConnection$Callback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRemoteConnectionCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

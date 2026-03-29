@@ -163,3 +163,30 @@ func (m *CaptureResult) GetSequenceId() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.hardware.camera2.CaptureResult.toString.
+func (m *CaptureResult) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCaptureResultToString == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CaptureResult.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCaptureResultToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

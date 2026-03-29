@@ -779,6 +779,33 @@ func (m *TimeZone) CloneAsThawed0_1() (*jni.Object, error) {
 	return result, callErr
 }
 
+// ToString calls android.icu.util.TimeZone.toString.
+func (m *TimeZone) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTimeZoneToString == nil {
+			callErr = fmt.Errorf("android.icu.util.TimeZone.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTimeZoneToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CountEquivalentIDs calls android.icu.util.TimeZone.countEquivalentIDs.
 func (m *TimeZone) CountEquivalentIDs(arg0 string) (int32, error) {
 	var result int32

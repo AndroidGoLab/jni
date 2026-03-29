@@ -23,6 +23,33 @@ type Utils struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.text.TextUtils.toString.
+func (m *Utils) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUtilsToString == nil {
+			callErr = fmt.Errorf("android.text.TextUtils.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUtilsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CommaEllipsize calls android.text.TextUtils.commaEllipsize.
 func (m *Utils) CommaEllipsize(
 	arg0 string,

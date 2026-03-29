@@ -50,3 +50,30 @@ func (m *ShaperGlyphsConsumer) Accept(
 	})
 	return callErr
 }
+
+// ToString calls android.text.TextShaper$GlyphsConsumer.toString.
+func (m *ShaperGlyphsConsumer) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midShaperGlyphsConsumerToString == nil {
+			callErr = fmt.Errorf("android.text.TextShaper$GlyphsConsumer.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midShaperGlyphsConsumerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

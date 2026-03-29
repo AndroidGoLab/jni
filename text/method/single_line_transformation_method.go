@@ -45,6 +45,33 @@ func NewSingleLineTransformationMethod(vm *jni.VM) (*SingleLineTransformationMet
 	return &t, nil
 }
 
+// ToString calls android.text.method.SingleLineTransformationMethod.toString.
+func (m *SingleLineTransformationMethod) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSingleLineTransformationMethodToString == nil {
+			callErr = fmt.Errorf("android.text.method.SingleLineTransformationMethod.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSingleLineTransformationMethodToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance calls android.text.method.SingleLineTransformationMethod.getInstance.
 func (m *SingleLineTransformationMethod) GetInstance() (*jni.Object, error) {
 	var result *jni.Object

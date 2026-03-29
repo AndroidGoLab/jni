@@ -208,6 +208,33 @@ func (m *CredentialStore) GetSupportedDocTypes() (*jni.Object, error) {
 	return result, callErr
 }
 
+// ToString calls android.security.identity.IdentityCredentialStore.toString.
+func (m *CredentialStore) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCredentialStoreToString == nil {
+			callErr = fmt.Errorf("android.security.identity.IdentityCredentialStore.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCredentialStoreToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDirectAccessInstance calls android.security.identity.IdentityCredentialStore.getDirectAccessInstance.
 func (m *CredentialStore) GetDirectAccessInstance(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

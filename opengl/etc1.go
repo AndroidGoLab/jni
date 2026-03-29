@@ -45,6 +45,33 @@ func NewETC1(vm *jni.VM) (*ETC1, error) {
 	return &t, nil
 }
 
+// ToString calls android.opengl.ETC1.toString.
+func (m *ETC1) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midETC1ToString == nil {
+			callErr = fmt.Errorf("android.opengl.ETC1.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midETC1ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // DecodeBlock calls android.opengl.ETC1.decodeBlock.
 func (m *ETC1) DecodeBlock(arg0 *jni.Object, arg1 *jni.Object) error {
 

@@ -23,6 +23,33 @@ type RangeFormatterRangeIdentityResult struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.icu.number.NumberRangeFormatter$RangeIdentityResult.toString.
+func (m *RangeFormatterRangeIdentityResult) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRangeFormatterRangeIdentityResultToString == nil {
+			callErr = fmt.Errorf("android.icu.number.NumberRangeFormatter$RangeIdentityResult.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRangeFormatterRangeIdentityResultToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.icu.number.NumberRangeFormatter$RangeIdentityResult.values.
 func (m *RangeFormatterRangeIdentityResult) Values() (*jni.Object, error) {
 	var result *jni.Object

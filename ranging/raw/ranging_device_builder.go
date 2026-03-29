@@ -219,3 +219,30 @@ func (m *RangingDeviceBuilder) SetUwbRangingParams(arg0 *jni.Object) (*jni.Objec
 	})
 	return result, callErr
 }
+
+// ToString calls android.ranging.raw.RawRangingDevice$Builder.toString.
+func (m *RangingDeviceBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRangingDeviceBuilderToString == nil {
+			callErr = fmt.Errorf("android.ranging.raw.RawRangingDevice$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRangingDeviceBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

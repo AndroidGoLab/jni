@@ -733,6 +733,33 @@ func (m *Collator) CloneAsThawed0_1() (*jni.Object, error) {
 	return result, callErr
 }
 
+// ToString calls android.icu.text.Collator.toString.
+func (m *Collator) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCollatorToString == nil {
+			callErr = fmt.Errorf("android.icu.text.Collator.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCollatorToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAvailableLocales calls android.icu.text.Collator.getAvailableLocales.
 func (m *Collator) GetAvailableLocales() (*jni.Object, error) {
 	var result *jni.Object

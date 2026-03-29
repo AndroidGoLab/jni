@@ -45,6 +45,33 @@ func NewDebug(vm *jni.VM) (*Debug, error) {
 	return &t, nil
 }
 
+// ToString calls android.view.ViewDebug.toString.
+func (m *Debug) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDebugToString == nil {
+			callErr = fmt.Errorf("android.view.ViewDebug.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDebugToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // DumpCapturedView calls android.view.ViewDebug.dumpCapturedView.
 func (m *Debug) DumpCapturedView(arg0 string, arg1 *jni.Object) error {
 

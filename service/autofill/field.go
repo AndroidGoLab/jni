@@ -118,3 +118,30 @@ func (m *Field) GetValue() (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.service.autofill.Field.toString.
+func (m *Field) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFieldToString == nil {
+			callErr = fmt.Errorf("android.service.autofill.Field.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFieldToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

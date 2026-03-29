@@ -50,3 +50,30 @@ func (m *UtilsStringSplitter) SetString(arg0 string) error {
 	})
 	return callErr
 }
+
+// ToString calls android.text.TextUtils$StringSplitter.toString.
+func (m *UtilsStringSplitter) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUtilsStringSplitterToString == nil {
+			callErr = fmt.Errorf("android.text.TextUtils$StringSplitter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUtilsStringSplitterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -192,3 +192,30 @@ func (m *ContentView) SetZOrderedOnTop(arg0 bool) (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.widget.inline.InlineContentView.toString.
+func (m *ContentView) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midContentViewToString == nil {
+			callErr = fmt.Errorf("android.widget.inline.InlineContentView.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midContentViewToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

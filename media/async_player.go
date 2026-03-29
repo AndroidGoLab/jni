@@ -138,3 +138,30 @@ func (m *AsyncPlayer) Stop() error {
 	})
 	return callErr
 }
+
+// ToString calls android.media.AsyncPlayer.toString.
+func (m *AsyncPlayer) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAsyncPlayerToString == nil {
+			callErr = fmt.Errorf("android.media.AsyncPlayer.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAsyncPlayerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

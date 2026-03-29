@@ -926,3 +926,30 @@ func (m *ApnSettingBuilder) SetUser(arg0 string) (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.telephony.data.ApnSetting$Builder.toString.
+func (m *ApnSettingBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midApnSettingBuilderToString == nil {
+			callErr = fmt.Errorf("android.telephony.data.ApnSetting$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midApnSettingBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

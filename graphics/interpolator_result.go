@@ -23,6 +23,33 @@ type InterpolatorResult struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.graphics.Interpolator$Result.toString.
+func (m *InterpolatorResult) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInterpolatorResultToString == nil {
+			callErr = fmt.Errorf("android.graphics.Interpolator$Result.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInterpolatorResultToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.graphics.Interpolator$Result.values.
 func (m *InterpolatorResult) Values() (*jni.Object, error) {
 	var result *jni.Object

@@ -75,3 +75,30 @@ func (m *CommandAction) GetActionType() (int32, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.service.controls.actions.CommandAction.toString.
+func (m *CommandAction) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCommandActionToString == nil {
+			callErr = fmt.Errorf("android.service.controls.actions.CommandAction.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCommandActionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

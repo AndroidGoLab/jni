@@ -44,3 +44,30 @@ func NewDouble3(vm *jni.VM) (*Double3, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.renderscript.Double3.toString.
+func (m *Double3) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDouble3ToString == nil {
+			callErr = fmt.Errorf("android.renderscript.Double3.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDouble3ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -160,3 +160,30 @@ func (m *RegistrationManagerRegistrationCallback) OnUnregistered(arg0 *jni.Objec
 	})
 	return callErr
 }
+
+// ToString calls android.telephony.ims.RegistrationManager$RegistrationCallback.toString.
+func (m *RegistrationManagerRegistrationCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRegistrationManagerRegistrationCallbackToString == nil {
+			callErr = fmt.Errorf("android.telephony.ims.RegistrationManager$RegistrationCallback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRegistrationManagerRegistrationCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

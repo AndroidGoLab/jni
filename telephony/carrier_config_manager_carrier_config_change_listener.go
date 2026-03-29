@@ -50,3 +50,30 @@ func (m *CarrierConfigManagerCarrierConfigChangeListener) OnCarrierConfigChanged
 	})
 	return callErr
 }
+
+// ToString calls android.telephony.CarrierConfigManager$CarrierConfigChangeListener.toString.
+func (m *CarrierConfigManagerCarrierConfigChangeListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCarrierConfigManagerCarrierConfigChangeListenerToString == nil {
+			callErr = fmt.Errorf("android.telephony.CarrierConfigManager$CarrierConfigChangeListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCarrierConfigManagerCarrierConfigChangeListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -91,3 +91,30 @@ func (m *CameraExtensionSessionStateCallback) OnConfigured(arg0 *jni.Object) err
 	})
 	return callErr
 }
+
+// ToString calls android.hardware.camera2.CameraExtensionSession$StateCallback.toString.
+func (m *CameraExtensionSessionStateCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraExtensionSessionStateCallbackToString == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraExtensionSession$StateCallback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraExtensionSessionStateCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

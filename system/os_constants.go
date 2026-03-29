@@ -23,6 +23,33 @@ type OsConstants struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.system.OsConstants.toString.
+func (m *OsConstants) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midOsConstantsToString == nil {
+			callErr = fmt.Errorf("android.system.OsConstants.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midOsConstantsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // S_ISBLK calls android.system.OsConstants.S_ISBLK.
 func (m *OsConstants) S_ISBLK(arg0 int32) (bool, error) {
 	var result bool

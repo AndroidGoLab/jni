@@ -45,6 +45,33 @@ func NewPixelFormat(vm *jni.VM) (*PixelFormat, error) {
 	return &t, nil
 }
 
+// ToString calls android.graphics.PixelFormat.toString.
+func (m *PixelFormat) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPixelFormatToString == nil {
+			callErr = fmt.Errorf("android.graphics.PixelFormat.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPixelFormatToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // FormatHasAlpha calls android.graphics.PixelFormat.formatHasAlpha.
 func (m *PixelFormat) FormatHasAlpha(arg0 int32) (bool, error) {
 	var result bool

@@ -234,6 +234,33 @@ func (m *Type) HasMipmaps() (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.renderscript.Type.toString.
+func (m *Type) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTypeToString == nil {
+			callErr = fmt.Errorf("android.renderscript.Type.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTypeToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CreateX calls android.renderscript.Type.createX.
 func (m *Type) CreateX(
 	arg0 *jni.Object,

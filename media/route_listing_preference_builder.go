@@ -124,3 +124,30 @@ func (m *RouteListingPreferenceBuilder) SetUseSystemOrdering(arg0 bool) (*jni.Ob
 	})
 	return result, callErr
 }
+
+// ToString calls android.media.RouteListingPreference$Builder.toString.
+func (m *RouteListingPreferenceBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouteListingPreferenceBuilderToString == nil {
+			callErr = fmt.Errorf("android.media.RouteListingPreference$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouteListingPreferenceBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

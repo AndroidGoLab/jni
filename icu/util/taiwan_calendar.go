@@ -71,3 +71,30 @@ func (m *TaiwanCalendar) GetType() (string, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.icu.util.TaiwanCalendar.toString.
+func (m *TaiwanCalendar) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTaiwanCalendarToString == nil {
+			callErr = fmt.Errorf("android.icu.util.TaiwanCalendar.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTaiwanCalendarToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -268,6 +268,33 @@ func (m *ScriptIntrinsicColorMatrix) SetYUVtoRGB() error {
 	return callErr
 }
 
+// ToString calls android.renderscript.ScriptIntrinsicColorMatrix.toString.
+func (m *ScriptIntrinsicColorMatrix) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScriptIntrinsicColorMatrixToString == nil {
+			callErr = fmt.Errorf("android.renderscript.ScriptIntrinsicColorMatrix.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScriptIntrinsicColorMatrixToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Create1 calls android.renderscript.ScriptIntrinsicColorMatrix.create.
 func (m *ScriptIntrinsicColorMatrix) Create1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

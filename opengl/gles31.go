@@ -23,6 +23,33 @@ type GLES31 struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.opengl.GLES31.toString.
+func (m *GLES31) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGLES31ToString == nil {
+			callErr = fmt.Errorf("android.opengl.GLES31.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGLES31ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GlActiveShaderProgram calls android.opengl.GLES31.glActiveShaderProgram.
 func (m *GLES31) GlActiveShaderProgram(arg0 int32, arg1 int32) error {
 

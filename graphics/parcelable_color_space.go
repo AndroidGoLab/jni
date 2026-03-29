@@ -179,6 +179,33 @@ func (m *ParcelableColorSpace) WriteToParcel(arg0 *jni.Object, arg1 int32) error
 	return callErr
 }
 
+// ToString calls android.graphics.ParcelableColorSpace.toString.
+func (m *ParcelableColorSpace) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midParcelableColorSpaceToString == nil {
+			callErr = fmt.Errorf("android.graphics.ParcelableColorSpace.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midParcelableColorSpaceToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsParcelable calls android.graphics.ParcelableColorSpace.isParcelable.
 func (m *ParcelableColorSpace) IsParcelable(arg0 *jni.Object) (bool, error) {
 	var result bool

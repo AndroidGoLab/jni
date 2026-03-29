@@ -100,3 +100,30 @@ func (m *ViewDragShadowBuilder) OnProvideShadowMetrics(arg0 *jni.Object, arg1 *j
 	})
 	return callErr
 }
+
+// ToString calls android.view.View$DragShadowBuilder.toString.
+func (m *ViewDragShadowBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midViewDragShadowBuilderToString == nil {
+			callErr = fmt.Errorf("android.view.View$DragShadowBuilder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midViewDragShadowBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

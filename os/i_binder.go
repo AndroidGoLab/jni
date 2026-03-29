@@ -272,6 +272,33 @@ func (m *IBinder) UnlinkToDeath(arg0 *jni.Object, arg1 int32) (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.os.IBinder.toString.
+func (m *IBinder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIBinderToString == nil {
+			callErr = fmt.Errorf("android.os.IBinder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIBinderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSuggestedMaxIpcSizeBytes calls android.os.IBinder.getSuggestedMaxIpcSizeBytes.
 func (m *IBinder) GetSuggestedMaxIpcSizeBytes() (int32, error) {
 	var result int32

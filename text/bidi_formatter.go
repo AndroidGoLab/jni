@@ -455,6 +455,33 @@ func (m *BidiFormatter) UnicodeWrap2_7(arg0 string, arg1 bool) (string, error) {
 	return result, callErr
 }
 
+// ToString calls android.text.BidiFormatter.toString.
+func (m *BidiFormatter) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBidiFormatterToString == nil {
+			callErr = fmt.Errorf("android.text.BidiFormatter.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBidiFormatterToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance0 calls android.text.BidiFormatter.getInstance.
 func (m *BidiFormatter) GetInstance0() (*jni.Object, error) {
 	var result *jni.Object

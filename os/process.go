@@ -45,6 +45,33 @@ func NewProcess(vm *jni.VM) (*Process, error) {
 	return &t, nil
 }
 
+// ToString calls android.os.Process.toString.
+func (m *Process) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midProcessToString == nil {
+			callErr = fmt.Errorf("android.os.Process.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midProcessToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAppUidForSdkSandboxUid calls android.os.Process.getAppUidForSdkSandboxUid.
 func (m *Process) GetAppUidForSdkSandboxUid(arg0 int32) (int32, error) {
 	var result int32

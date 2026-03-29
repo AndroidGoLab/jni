@@ -186,3 +186,30 @@ func (m *GnssAntennaInfoBuilder) SetSignalGainCorrections(arg0 *jni.Object) (*jn
 	})
 	return result, callErr
 }
+
+// ToString calls android.location.GnssAntennaInfo$Builder.toString.
+func (m *GnssAntennaInfoBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGnssAntennaInfoBuilderToString == nil {
+			callErr = fmt.Errorf("android.location.GnssAntennaInfo$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGnssAntennaInfoBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -799,3 +799,30 @@ func (m *ZenPolicyBuilder) ShowStatusBarIcons(arg0 bool) (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.service.notification.ZenPolicy$Builder.toString.
+func (m *ZenPolicyBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midZenPolicyBuilderToString == nil {
+			callErr = fmt.Errorf("android.service.notification.ZenPolicy$Builder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midZenPolicyBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

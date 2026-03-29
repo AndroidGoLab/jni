@@ -621,3 +621,30 @@ func (m *KeyProtection) IsUserPresenceRequired() (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.security.keystore.KeyProtection.toString.
+func (m *KeyProtection) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midKeyProtectionToString == nil {
+			callErr = fmt.Errorf("android.security.keystore.KeyProtection.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midKeyProtectionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

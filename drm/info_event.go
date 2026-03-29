@@ -51,3 +51,30 @@ func NewInfoEvent(vm *jni.VM, arg0 int32, arg1 int32, arg2 string) (*InfoEvent, 
 	}
 	return &t, nil
 }
+
+// ToString calls android.drm.DrmInfoEvent.toString.
+func (m *InfoEvent) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInfoEventToString == nil {
+			callErr = fmt.Errorf("android.drm.DrmInfoEvent.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInfoEventToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

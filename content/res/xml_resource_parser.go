@@ -72,3 +72,30 @@ func (m *XmlResourceParser) GetAttributeNamespace(arg0 int32) (string, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.content.res.XmlResourceParser.toString.
+func (m *XmlResourceParser) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midXmlResourceParserToString == nil {
+			callErr = fmt.Errorf("android.content.res.XmlResourceParser.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midXmlResourceParserToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

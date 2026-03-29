@@ -45,6 +45,33 @@ func NewMatrix(vm *jni.VM) (*Matrix, error) {
 	return &t, nil
 }
 
+// ToString calls android.opengl.Matrix.toString.
+func (m *Matrix) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMatrixToString == nil {
+			callErr = fmt.Errorf("android.opengl.Matrix.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMatrixToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // FrustumM calls android.opengl.Matrix.frustumM.
 func (m *Matrix) FrustumM(
 	arg0 *jni.Object,

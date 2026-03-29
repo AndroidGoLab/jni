@@ -45,6 +45,33 @@ func NewGLES30(vm *jni.VM) (*GLES30, error) {
 	return &t, nil
 }
 
+// ToString calls android.opengl.GLES30.toString.
+func (m *GLES30) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGLES30ToString == nil {
+			callErr = fmt.Errorf("android.opengl.GLES30.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGLES30ToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GlBeginQuery calls android.opengl.GLES30.glBeginQuery.
 func (m *GLES30) GlBeginQuery(arg0 int32, arg1 int32) error {
 

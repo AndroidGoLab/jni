@@ -23,6 +23,33 @@ type ContractChannels struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.media.tv.TvContract$Channels.toString.
+func (m *ContractChannels) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midContractChannelsToString == nil {
+			callErr = fmt.Errorf("android.media.tv.TvContract$Channels.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midContractChannelsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetVideoResolution calls android.media.tv.TvContract$Channels.getVideoResolution.
 func (m *ContractChannels) GetVideoResolution(arg0 string) (string, error) {
 	var result string

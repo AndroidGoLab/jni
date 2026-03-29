@@ -918,3 +918,30 @@ func (m *ManagerClient) SaveRights(
 	})
 	return result, callErr
 }
+
+// ToString calls android.drm.DrmManagerClient.toString.
+func (m *ManagerClient) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerClientToString == nil {
+			callErr = fmt.Errorf("android.drm.DrmManagerClient.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerClientToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

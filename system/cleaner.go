@@ -23,6 +23,33 @@ type Cleaner struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.system.SystemCleaner.toString.
+func (m *Cleaner) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCleanerToString == nil {
+			callErr = fmt.Errorf("android.system.SystemCleaner.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCleanerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Cleaner calls android.system.SystemCleaner.cleaner.
 func (m *Cleaner) Cleaner() (*jni.Object, error) {
 	var result *jni.Object

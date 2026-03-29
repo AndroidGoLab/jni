@@ -44,3 +44,30 @@ func NewICUUncheckedIOException(vm *jni.VM) (*ICUUncheckedIOException, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.icu.util.ICUUncheckedIOException.toString.
+func (m *ICUUncheckedIOException) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midICUUncheckedIOExceptionToString == nil {
+			callErr = fmt.Errorf("android.icu.util.ICUUncheckedIOException.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midICUUncheckedIOExceptionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -45,6 +45,33 @@ func NewGLU(vm *jni.VM) (*GLU, error) {
 	return &t, nil
 }
 
+// ToString calls android.opengl.GLU.toString.
+func (m *GLU) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGLUToString == nil {
+			callErr = fmt.Errorf("android.opengl.GLU.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGLUToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GluErrorString calls android.opengl.GLU.gluErrorString.
 func (m *GLU) GluErrorString(arg0 int32) (string, error) {
 	var result string

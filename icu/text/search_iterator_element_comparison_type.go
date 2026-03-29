@@ -23,6 +23,33 @@ type SearchIteratorElementComparisonType struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.icu.text.SearchIterator$ElementComparisonType.toString.
+func (m *SearchIteratorElementComparisonType) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchIteratorElementComparisonTypeToString == nil {
+			callErr = fmt.Errorf("android.icu.text.SearchIterator$ElementComparisonType.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchIteratorElementComparisonTypeToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.icu.text.SearchIterator$ElementComparisonType.values.
 func (m *SearchIteratorElementComparisonType) Values() (*jni.Object, error) {
 	var result *jni.Object

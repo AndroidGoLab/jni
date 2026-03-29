@@ -365,3 +365,30 @@ func (m *TtsSpanElectronicBuilder) SetUsername(arg0 string) (*jni.Object, error)
 	})
 	return result, callErr
 }
+
+// ToString calls android.text.style.TtsSpan$ElectronicBuilder.toString.
+func (m *TtsSpanElectronicBuilder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTtsSpanElectronicBuilderToString == nil {
+			callErr = fmt.Errorf("android.text.style.TtsSpan$ElectronicBuilder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTtsSpanElectronicBuilderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

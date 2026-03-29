@@ -1159,3 +1159,30 @@ func (m *Animation) WillChangeTransformationMatrix() (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.view.animation.Animation.toString.
+func (m *Animation) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAnimationToString == nil {
+			callErr = fmt.Errorf("android.view.animation.Animation.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAnimationToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

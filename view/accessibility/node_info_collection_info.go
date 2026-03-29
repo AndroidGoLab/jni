@@ -175,6 +175,33 @@ func (m *NodeInfoCollectionInfo) IsHierarchical() (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.view.accessibility.AccessibilityNodeInfo$CollectionInfo.toString.
+func (m *NodeInfoCollectionInfo) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNodeInfoCollectionInfoToString == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityNodeInfo$CollectionInfo.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNodeInfoCollectionInfoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Obtain3 calls android.view.accessibility.AccessibilityNodeInfo$CollectionInfo.obtain.
 func (m *NodeInfoCollectionInfo) Obtain3(
 	arg0 int32,

@@ -7,7 +7,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR/.."
 
-export ANDROID_SDK="${ANDROID_SDK:-$HOME/android-sdk}"
+export ANDROID_SDK="${ANDROID_SDK:-${ANDROID_HOME:-$HOME/Android/Sdk}}"
 ADB="$ANDROID_SDK/platform-tools/adb"
 RESULTS_DIR="$SCRIPT_DIR/test_results"
 SCREENSHOTS_DIR="$RESULTS_DIR/screenshots"
@@ -16,8 +16,17 @@ mkdir -p "$RESULTS_DIR" "$SCREENSHOTS_DIR"
 # Wait for device
 "$ADB" wait-for-device
 
+# Wake the device and dismiss lock screen (NativeActivity needs a visible window)
+"$ADB" shell input keyevent KEYCODE_WAKEUP 2>/dev/null || true
+sleep 1
+"$ADB" shell input swipe 540 2000 540 1000 300 2>/dev/null || true
+sleep 1
+# Keep screen on during tests
+"$ADB" shell settings put system screen_off_timeout 1800000 2>/dev/null || true
+"$ADB" shell svc power stayon true 2>/dev/null || true
+
 # Set up mock location provider on emulator (requires root)
-"$ADB" root >/dev/null 2>&1 && sleep 2
+"$ADB" root >/dev/null 2>&1 && sleep 2 || true
 "$ADB" shell appops set com.android.shell android:mock_location allow 2>/dev/null || true
 "$ADB" shell cmd location providers add-test-provider gps \
     --requiresNetwork false --requiresSatellite false --requiresCell false \
@@ -93,7 +102,7 @@ for i in "${!EXAMPLES[@]}"; do
 
     # Launch
     echo "  Running..."
-    "$ADB" shell am start -n "$pkg/center.dx.jni.example.ExampleActivity" >> "$result_file" 2>&1
+    "$ADB" shell am start -n "$pkg/android.app.NativeActivity" >> "$result_file" 2>&1
 
     # Wait for output (the app writes to logcat with tag GoJNI)
     # Poll for up to 30 seconds

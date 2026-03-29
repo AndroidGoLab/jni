@@ -751,6 +751,33 @@ func (m *Manager) SendAccessibilityEvent(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.view.accessibility.AccessibilityManager.toString.
+func (m *Manager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerToString == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsAccessibilityButtonSupported calls android.view.accessibility.AccessibilityManager.isAccessibilityButtonSupported.
 func (m *Manager) IsAccessibilityButtonSupported() (bool, error) {
 	var result bool

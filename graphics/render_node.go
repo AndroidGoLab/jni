@@ -1895,3 +1895,30 @@ func (m *RenderNode) SetUseCompositingLayer(arg0 bool, arg1 *jni.Object) (bool, 
 	})
 	return result, callErr
 }
+
+// ToString calls android.graphics.RenderNode.toString.
+func (m *RenderNode) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRenderNodeToString == nil {
+			callErr = fmt.Errorf("android.graphics.RenderNode.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRenderNodeToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

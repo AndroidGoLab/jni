@@ -124,6 +124,33 @@ func (m *Crypto) SetMediaDrmSession(arg0 *jni.Object) error {
 	return callErr
 }
 
+// ToString calls android.media.MediaCrypto.toString.
+func (m *Crypto) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCryptoToString == nil {
+			callErr = fmt.Errorf("android.media.MediaCrypto.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCryptoToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsCryptoSchemeSupported calls android.media.MediaCrypto.isCryptoSchemeSupported.
 func (m *Crypto) IsCryptoSchemeSupported(arg0 *jni.Object) (bool, error) {
 	var result bool

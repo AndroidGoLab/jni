@@ -94,3 +94,30 @@ func (m *ManagerUssdResponseCallback) OnReceiveUssdResponseFailed(
 	})
 	return callErr
 }
+
+// ToString calls android.telephony.TelephonyManager$UssdResponseCallback.toString.
+func (m *ManagerUssdResponseCallback) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerUssdResponseCallbackToString == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager$UssdResponseCallback.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerUssdResponseCallbackToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

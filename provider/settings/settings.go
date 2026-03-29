@@ -45,6 +45,33 @@ func NewSettings(vm *jni.VM) (*Settings, error) {
 	return &t, nil
 }
 
+// ToString calls android.provider.Settings.toString.
+func (m *Settings) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSettingsToString == nil {
+			callErr = fmt.Errorf("android.provider.Settings.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSettingsToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CanDrawOverlays calls android.provider.Settings.canDrawOverlays.
 func (m *Settings) CanDrawOverlays(arg0 *jni.Object) (bool, error) {
 	var result bool

@@ -307,3 +307,30 @@ func (m *Manager) VerifyInputEvent(arg0 *jni.Object) (*jni.Object, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.hardware.input.InputManager.toString.
+func (m *Manager) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerToString == nil {
+			callErr = fmt.Errorf("android.hardware.input.InputManager.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

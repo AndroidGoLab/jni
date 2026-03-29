@@ -45,3 +45,30 @@ func NewMutableDouble(vm *jni.VM, arg0 float64) (*MutableDouble, error) {
 	}
 	return &t, nil
 }
+
+// ToString calls android.util.MutableDouble.toString.
+func (m *MutableDouble) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMutableDoubleToString == nil {
+			callErr = fmt.Errorf("android.util.MutableDouble.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMutableDoubleToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

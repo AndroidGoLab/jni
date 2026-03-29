@@ -48,6 +48,33 @@ func (m *VibrationEffect) DescribeContents() (int32, error) {
 	return result, callErr
 }
 
+// ToString calls android.os.VibrationEffect.toString.
+func (m *VibrationEffect) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midVibrationEffectToString == nil {
+			callErr = fmt.Errorf("android.os.VibrationEffect.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midVibrationEffectToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // CreateOneShot calls android.os.VibrationEffect.createOneShot.
 func (m *VibrationEffect) CreateOneShot(arg0 int64, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object

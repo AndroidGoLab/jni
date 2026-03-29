@@ -155,6 +155,33 @@ func (m *MimeTypeMap) HasMimeType(arg0 string) (bool, error) {
 	return result, callErr
 }
 
+// ToString calls android.webkit.MimeTypeMap.toString.
+func (m *MimeTypeMap) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMimeTypeMapToString == nil {
+			callErr = fmt.Errorf("android.webkit.MimeTypeMap.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMimeTypeMapToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetFileExtensionFromUrl calls android.webkit.MimeTypeMap.getFileExtensionFromUrl.
 func (m *MimeTypeMap) GetFileExtensionFromUrl(arg0 string) (string, error) {
 	var result string

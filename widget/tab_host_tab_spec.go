@@ -257,3 +257,30 @@ func (m *TabHostTabSpec) SetIndicator2_2(arg0 string, arg1 *jni.Object) (*jni.Ob
 	})
 	return result, callErr
 }
+
+// ToString calls android.widget.TabHost$TabSpec.toString.
+func (m *TabHostTabSpec) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTabHostTabSpecToString == nil {
+			callErr = fmt.Errorf("android.widget.TabHost$TabSpec.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTabHostTabSpecToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

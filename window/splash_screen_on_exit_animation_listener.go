@@ -45,3 +45,30 @@ func (m *SplashScreenOnExitAnimationListener) OnSplashScreenExit(arg0 *jni.Objec
 	})
 	return callErr
 }
+
+// ToString calls android.window.SplashScreen$OnExitAnimationListener.toString.
+func (m *SplashScreenOnExitAnimationListener) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSplashScreenOnExitAnimationListenerToString == nil {
+			callErr = fmt.Errorf("android.window.SplashScreen$OnExitAnimationListener.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSplashScreenOnExitAnimationListenerToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

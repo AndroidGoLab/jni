@@ -442,3 +442,30 @@ func (m *DeviceConnection) SetInterface(arg0 *jni.Object) (bool, error) {
 	})
 	return result, callErr
 }
+
+// ToString calls android.hardware.usb.UsbDeviceConnection.toString.
+func (m *DeviceConnection) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeviceConnectionToString == nil {
+			callErr = fmt.Errorf("android.hardware.usb.UsbDeviceConnection.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeviceConnectionToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

@@ -8068,3 +8068,30 @@ func (m *TextView) ShowContextMenu2_1(arg0 float32, arg1 float32) (bool, error) 
 	})
 	return result, callErr
 }
+
+// ToString calls android.widget.TextView.toString.
+func (m *TextView) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTextViewToString == nil {
+			callErr = fmt.Errorf("android.widget.TextView.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTextViewToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}

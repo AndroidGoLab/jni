@@ -23,6 +23,33 @@ type FormatterSignDisplay struct {
 	Obj *jni.GlobalRef
 }
 
+// ToString calls android.icu.number.NumberFormatter$SignDisplay.toString.
+func (m *FormatterSignDisplay) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFormatterSignDisplayToString == nil {
+			callErr = fmt.Errorf("android.icu.number.NumberFormatter$SignDisplay.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFormatterSignDisplayToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Values calls android.icu.number.NumberFormatter$SignDisplay.values.
 func (m *FormatterSignDisplay) Values() (*jni.Object, error) {
 	var result *jni.Object

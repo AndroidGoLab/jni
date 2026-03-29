@@ -262,6 +262,33 @@ func (m *Geocoder) GetFromLocationName7_3(
 	return callErr
 }
 
+// ToString calls android.location.Geocoder.toString.
+func (m *Geocoder) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGeocoderToString == nil {
+			callErr = fmt.Errorf("android.location.Geocoder.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGeocoderToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsPresent calls android.location.Geocoder.isPresent.
 func (m *Geocoder) IsPresent() (bool, error) {
 	var result bool

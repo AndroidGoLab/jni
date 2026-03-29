@@ -45,6 +45,33 @@ func NewGravity(vm *jni.VM) (*Gravity, error) {
 	return &t, nil
 }
 
+// ToString calls android.view.Gravity.toString.
+func (m *Gravity) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGravityToString == nil {
+			callErr = fmt.Errorf("android.view.Gravity.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGravityToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // Apply5 calls android.view.Gravity.apply.
 func (m *Gravity) Apply5(
 	arg0 int32,

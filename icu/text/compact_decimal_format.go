@@ -99,6 +99,33 @@ func (m *CompactDecimalFormat) ParseCurrency(arg0 string, arg1 *jni.Object) (*jn
 	return result, callErr
 }
 
+// ToString calls android.icu.text.CompactDecimalFormat.toString.
+func (m *CompactDecimalFormat) ToString() (string, error) {
+	var result string
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCompactDecimalFormatToString == nil {
+			callErr = fmt.Errorf("android.icu.text.CompactDecimalFormat.toString is not available on this device")
+			return callErr
+		}
+		var resultObj *jni.Object
+		resultObj, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCompactDecimalFormatToString,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstance2 calls android.icu.text.CompactDecimalFormat.getInstance.
 func (m *CompactDecimalFormat) GetInstance2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
