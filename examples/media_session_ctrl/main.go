@@ -66,12 +66,22 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	// NewMediaSession(vm, context, tag)
 	sess, err := session.NewMediaSession(vm, ctx.Obj, "JNI_Session_Demo")
 	if err != nil {
-		return fmt.Errorf("NewMediaSession: %w", err)
+		fmt.Fprintf(output, "NewMediaSession: %v\n", err)
+		fmt.Fprintln(output, "\nSession ctrl example complete (session unavailable).")
+		return nil
+	}
+	if sess == nil || sess.Obj == nil || sess.Obj.Ref() == 0 {
+		fmt.Fprintln(output, "MediaSession: null")
+		fmt.Fprintln(output, "\nSession ctrl example complete (session null).")
+		return nil
 	}
 	defer func() {
 		sess.Release()
 		vm.Do(func(env *jni.Env) error {
-			env.DeleteGlobalRef(sess.Obj)
+			if sess.Obj != nil {
+				env.DeleteGlobalRef(sess.Obj)
+				sess.Obj = nil
+			}
 			return nil
 		})
 	}()
@@ -171,6 +181,8 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	mgr, err := session.NewMediaSessionManager(ctx)
 	if err != nil {
 		fmt.Fprintf(output, "NewMediaSessionManager: %v\n", err)
+	} else if mgr == nil || mgr.Obj == nil || mgr.Obj.Ref() == 0 {
+		fmt.Fprintln(output, "MediaSessionManager: null")
 	} else {
 		defer mgr.Close()
 

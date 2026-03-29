@@ -66,75 +66,108 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	// Create a MediaRecorder using the typed constructor.
 	rec, err := recorder.NewMediaRecorder(vm, ctx.Obj)
 	if err != nil {
-		return fmt.Errorf("create recorder: %w", err)
+		fmt.Fprintf(output, "create recorder: %v\n", err)
+		fmt.Fprintln(output, "Audio record example complete (recorder unavailable).")
+		return nil
 	}
+	if rec == nil || rec.Obj == nil || rec.Obj.Ref() == 0 {
+		fmt.Fprintln(output, "MediaRecorder: null")
+		fmt.Fprintln(output, "Audio record example complete (recorder null).")
+		return nil
+	}
+	defer func() {
+		vm.Do(func(env *jni.Env) error {
+			if rec.Obj != nil {
+				env.DeleteGlobalRef(rec.Obj)
+				rec.Obj = nil
+			}
+			return nil
+		})
+	}()
 	fmt.Fprintln(output, "MediaRecorder created OK")
 	ui.RenderOutput()
 
 	// Output file path in app cache directory.
 	// Use app-private storage since /sdcard requires MANAGE_EXTERNAL_STORAGE on Android 11+.
 	var outPath string
-	vm.Do(func(env *jni.Env) error {
-		actCls := env.GetObjectClass(ctx.Obj)
-		mid, err := env.GetMethodID(actCls, "getCacheDir", "()Ljava/io/File;")
-		if err != nil {
-			return err
-		}
-		dirObj, err := env.CallObjectMethod(ctx.Obj, mid)
-		if err != nil || dirObj == nil {
-			return fmt.Errorf("getCacheDir: %w", err)
-		}
-		fileCls := env.GetObjectClass(dirObj)
-		pathMid, err := env.GetMethodID(fileCls, "getAbsolutePath", "()Ljava/lang/String;")
-		if err != nil {
-			return err
-		}
-		pathObj, err := env.CallObjectMethod(dirObj, pathMid)
-		if err != nil {
-			return err
-		}
-		outPath = env.GoString((*jni.String)(unsafe.Pointer(pathObj))) + "/jni_audio_test.3gp"
-		return nil
-	})
+	cacheDirObj, err := ctx.GetCacheDir()
+	if err != nil {
+		fmt.Fprintf(output, "getCacheDir: %v\n", err)
+	} else if cacheDirObj == nil || cacheDirObj.Ref() == 0 {
+		fmt.Fprintln(output, "getCacheDir: null")
+	} else {
+		// Get absolute path string from the File object.
+		vm.Do(func(env *jni.Env) error {
+			fileCls := env.GetObjectClass(cacheDirObj)
+			pathMid, err := env.GetMethodID(fileCls, "getAbsolutePath", "()Ljava/lang/String;")
+			if err != nil {
+				return err
+			}
+			pathObj, err := env.CallObjectMethod(cacheDirObj, pathMid)
+			if err != nil {
+				return err
+			}
+			if pathObj != nil && pathObj.Ref() != 0 {
+				outPath = env.GoString((*jni.String)(unsafe.Pointer(pathObj))) + "/jni_audio_test.3gp"
+			}
+			return nil
+		})
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(cacheDirObj)
+			return nil
+		})
+	}
 	if outPath == "" {
 		outPath = "/data/local/tmp/jni_audio_test.3gp"
 	}
 
 	// Configure audio recording.
 	if err := rec.SetAudioSource(recorder.AudioSourceMIC); err != nil {
-		return fmt.Errorf("SetAudioSource: %w", err)
+		fmt.Fprintf(output, "SetAudioSource: %v\n", err)
+		fmt.Fprintln(output, "Audio record example complete (MIC unavailable).")
+		return nil
 	}
 	fmt.Fprintln(output, "AudioSource: MIC")
 	ui.RenderOutput()
 
 	if err := rec.SetOutputFormat(recorder.OutputFormatThreeGPP); err != nil {
-		return fmt.Errorf("SetOutputFormat: %w", err)
+		fmt.Fprintf(output, "SetOutputFormat: %v\n", err)
+		fmt.Fprintln(output, "Audio record example complete.")
+		return nil
 	}
 	fmt.Fprintln(output, "OutputFormat: 3GPP")
 	ui.RenderOutput()
 
 	if err := rec.SetAudioEncoder(recorder.AudioEncoderAMRNB); err != nil {
-		return fmt.Errorf("SetAudioEncoder: %w", err)
+		fmt.Fprintf(output, "SetAudioEncoder: %v\n", err)
+		fmt.Fprintln(output, "Audio record example complete.")
+		return nil
 	}
 	fmt.Fprintln(output, "AudioEncoder: AMR_NB")
 	ui.RenderOutput()
 
 	if err := rec.SetOutputFile1_2(outPath); err != nil {
-		return fmt.Errorf("SetOutputFile: %w", err)
+		fmt.Fprintf(output, "SetOutputFile: %v\n", err)
+		fmt.Fprintln(output, "Audio record example complete.")
+		return nil
 	}
 	fmt.Fprintf(output, "OutputFile: %s\n", outPath)
 	ui.RenderOutput()
 
 	// Prepare the recorder.
 	if err := rec.Prepare(); err != nil {
-		return fmt.Errorf("Prepare: %w", err)
+		fmt.Fprintf(output, "Prepare: %v\n", err)
+		fmt.Fprintln(output, "Audio record example complete.")
+		return nil
 	}
 	fmt.Fprintln(output, "Prepare: OK")
 	ui.RenderOutput()
 
 	// Start recording.
 	if err := rec.Start(); err != nil {
-		return fmt.Errorf("Start: %w", err)
+		fmt.Fprintf(output, "Start: %v\n", err)
+		fmt.Fprintln(output, "Audio record example complete.")
+		return nil
 	}
 	fmt.Fprintln(output, "Recording started...")
 	ui.RenderOutput()
@@ -166,15 +199,6 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		fmt.Fprintln(output, "Recorder released")
 	}
 	ui.RenderOutput()
-
-	// Clean up global ref.
-	vm.Do(func(env *jni.Env) error {
-		if rec.Obj != nil {
-			env.DeleteGlobalRef(rec.Obj)
-			rec.Obj = nil
-		}
-		return nil
-	})
 
 	// Verify the output file was created.
 	info, err := os.Stat(outPath)

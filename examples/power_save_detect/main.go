@@ -81,7 +81,14 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	mgr, err := power.NewManager(ctx)
 	if err != nil {
-		return fmt.Errorf("power.NewManager: %w", err)
+		fmt.Fprintf(output, "power.NewManager: %v\n", err)
+		fmt.Fprintln(output, "Power save detect example complete (manager unavailable).")
+		return nil
+	}
+	if mgr == nil || mgr.Obj == nil || mgr.Obj.Ref() == 0 {
+		fmt.Fprintln(output, "PowerManager: null")
+		fmt.Fprintln(output, "Power save detect example complete (manager null).")
+		return nil
 	}
 	defer mgr.Close()
 
@@ -180,10 +187,14 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	prediction, err := mgr.GetBatteryDischargePrediction()
 	if err != nil {
 		fmt.Fprintf(output, "  prediction: error: %v\n", err)
-	} else if prediction == nil {
+	} else if prediction == nil || prediction.Ref() == 0 {
 		fmt.Fprintln(output, "  prediction: null")
 	} else {
 		fmt.Fprintln(output, "  prediction: (Duration object returned)")
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(prediction)
+			return nil
+		})
 	}
 
 	// --- Sustained performance ---
@@ -206,5 +217,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintf(output, "  EMERGENCY = %d\n", power.ThermalStatusEmergency)
 	fmt.Fprintf(output, "  SHUTDOWN  = %d\n", power.ThermalStatusShutdown)
 
+	fmt.Fprintln(output)
+	fmt.Fprintln(output, "Power save detect example complete.")
 	return nil
 }

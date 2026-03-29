@@ -68,7 +68,14 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	// --- Obtain MediaProjectionManager ---
 	mgr, err := projection.NewMediaProjectionManager(ctx)
 	if err != nil {
-		return fmt.Errorf("NewMediaProjectionManager: %w", err)
+		fmt.Fprintf(output, "NewMediaProjectionManager: %v\n", err)
+		fmt.Fprintln(output, "\nScreen capture demo completed (manager unavailable).")
+		return nil
+	}
+	if mgr == nil || mgr.Obj == nil || mgr.Obj.Ref() == 0 {
+		fmt.Fprintln(output, "MediaProjectionManager: null")
+		fmt.Fprintln(output, "\nScreen capture demo completed (manager null).")
+		return nil
 	}
 	defer mgr.Close()
 	fmt.Fprintln(output, "MediaProjectionManager: obtained OK")
@@ -136,6 +143,10 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		} else {
 			fmt.Fprintln(output, "MediaProjection.Stop: OK")
 		}
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(projObj)
+			return nil
+		})
 	}
 	ui.RenderOutput()
 

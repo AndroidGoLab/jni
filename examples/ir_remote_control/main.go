@@ -65,32 +65,34 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	mgr, err := ir.NewConsumerIrManager(ctx)
 	if err != nil {
+		fmt.Fprintf(output, "NewConsumerIrManager: %v\n", err)
 		if strings.Contains(err.Error(), "service not available") {
-			fmt.Fprintln(output, "ConsumerIrManager not available on this device")
-			fmt.Fprintln(output, "")
 			fmt.Fprintln(output, "IR remote control requires a device with an IR blaster.")
 			fmt.Fprintln(output, "Common devices with IR: some Samsung, Xiaomi, Huawei phones")
-			fmt.Fprintln(output, "")
-			fmt.Fprintln(output, "API surface available:")
-			fmt.Fprintln(output, "  ConsumerIrManager.HasIrEmitter() -> bool")
-			fmt.Fprintln(output, "  ConsumerIrManager.GetCarrierFrequencies() -> []CarrierFrequencyRange")
-			fmt.Fprintln(output, "  ConsumerIrManager.Transmit(frequency, pattern)")
-			fmt.Fprintln(output, "  CarrierFrequencyRange.GetMinFrequency() -> int")
-			fmt.Fprintln(output, "  CarrierFrequencyRange.GetMaxFrequency() -> int")
-			return nil
 		}
-		return fmt.Errorf("ir.NewConsumerIrManager: %w", err)
+		fmt.Fprintln(output, "\nIR remote control example complete.")
+		return nil
 	}
+	if mgr == nil || mgr.Obj == nil || mgr.Obj.Ref() == 0 {
+		fmt.Fprintln(output, "ConsumerIrManager: null")
+		fmt.Fprintln(output, "\nIR remote control example complete.")
+		return nil
+	}
+	defer mgr.Close()
+	fmt.Fprintln(output, "ConsumerIrManager: obtained OK")
 
 	// Check IR emitter
 	hasIR, err := mgr.HasIrEmitter()
 	if err != nil {
-		return fmt.Errorf("HasIrEmitter: %w", err)
+		fmt.Fprintf(output, "HasIrEmitter: error (%v)\n", err)
+		fmt.Fprintln(output, "\nIR remote control example complete.")
+		return nil
 	}
 	fmt.Fprintf(output, "Has IR emitter: %v\n", hasIR)
 
 	if !hasIR {
 		fmt.Fprintln(output, "Device reports no IR emitter")
+		fmt.Fprintln(output, "\nIR remote control example complete.")
 		return nil
 	}
 
@@ -99,8 +101,10 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "Supported carrier frequencies:")
 	freqArrayObj, err := mgr.GetCarrierFrequencies()
 	if err != nil {
-		fmt.Fprintf(output, "  Error: %v\n", err)
-	} else if freqArrayObj != nil {
+		fmt.Fprintf(output, "  GetCarrierFrequencies: error (%v)\n", err)
+	} else if freqArrayObj == nil || freqArrayObj.Ref() == 0 {
+		fmt.Fprintln(output, "  GetCarrierFrequencies: null")
+	} else {
 		vm.Do(func(env *jni.Env) error {
 			arr := (*jni.ObjectArray)(unsafe.Pointer(freqArrayObj))
 			n := env.GetArrayLength((*jni.Array)(unsafe.Pointer(arr)))
@@ -118,7 +122,12 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 			}
 			return nil
 		})
+		vm.Do(func(env *jni.Env) error {
+			env.DeleteGlobalRef(freqArrayObj)
+			return nil
+		})
 	}
+	ui.RenderOutput()
 
 	// Transmit a sample NEC TV power toggle at 38kHz
 	// NEC protocol: 9ms mark, 4.5ms space, then 32 bits of data
@@ -126,7 +135,6 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "")
 	fmt.Fprintln(output, "Transmitting sample NEC power toggle at 38kHz...")
 
-	// Build the int[] pattern via JNI
 	// Samsung TV power: address=0x07, command=0x02
 	necPattern := []int32{
 		// Leader: 9000us mark, 4500us space
@@ -147,6 +155,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		560,
 	}
 
+	// Build the int[] pattern via JNI and transmit.
 	var patternObj *jni.Object
 	vm.Do(func(env *jni.Env) error {
 		intArr := env.NewIntArray(int32(len(necPattern)))
@@ -158,7 +167,9 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		return nil
 	})
 
-	if patternObj != nil {
+	if patternObj == nil {
+		fmt.Fprintln(output, "Failed to create pattern array")
+	} else {
 		carrierFreq := int32(38000)
 		if err := mgr.Transmit(carrierFreq, patternObj); err != nil {
 			fmt.Fprintf(output, "Transmit error: %v\n", err)

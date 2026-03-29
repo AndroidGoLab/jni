@@ -60,7 +60,14 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 
 	mgr, err := audiomanager.NewAudioManager(ctx)
 	if err != nil {
-		return fmt.Errorf("audiomanager.NewAudioManager: %w", err)
+		fmt.Fprintf(output, "audiomanager.NewAudioManager: %v\n", err)
+		fmt.Fprintln(output, "Volume control example complete (manager unavailable).")
+		return nil
+	}
+	if mgr == nil || mgr.Obj == nil || mgr.Obj.Ref() == 0 {
+		fmt.Fprintln(output, "AudioManager: null")
+		fmt.Fprintln(output, "Volume control example complete (manager null).")
+		return nil
 	}
 	defer mgr.Close()
 
