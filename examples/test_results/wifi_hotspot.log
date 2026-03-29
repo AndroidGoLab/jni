@@ -28,29 +28,26 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/wifi_hotspot.apk build/aligned.apk
 Built: build/wifi_hotspot.apk
-Serving...
-All files should be loaded. Notifying the device.
-Performing Incremental Install
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/wifi_hotspot/build/wifi_hotspot.apk: 1 file pushed, 0 skipped. 250.1 MB/s (3506707 bytes in 0.013s)
 Success
-Install command complete in 889 ms
 Starting: Intent { cmp=center.dx.jni.examples.wifi_hotspot/android.app.NativeActivity }
-03-29 15:50:05.355 26095 26116 I GoJNI   : === WiFi Hotspot ===
-03-29 15:50:05.355 26095 26116 I GoJNI   : WiFi enabled: true
-03-29 15:50:05.355 26095 26116 I GoJNI   : WiFi state: enabled (3)
-03-29 15:50:05.355 26095 26116 I GoJNI   : Band support:
-03-29 15:50:05.355 26095 26116 I GoJNI   :   2.4 GHz: true
-03-29 15:50:05.355 26095 26116 I GoJNI   :   5 GHz: true
-03-29 15:50:05.355 26095 26116 I GoJNI   :   6 GHz: true
-03-29 15:50:05.355 26095 26116 I GoJNI   :   60 GHz: false
-03-29 15:50:05.355 26095 26116 I GoJNI   : Hotspot capabilities:
-03-29 15:50:05.355 26095 26116 I GoJNI   :   STA+AP concurrency: true
-03-29 15:50:05.355 26095 26116 I GoJNI   :   Bridged AP: false
-03-29 15:50:05.355 26095 26116 I GoJNI   :   STA+Bridged AP: false
-03-29 15:50:05.355 26095 26116 I GoJNI   :   Dual band simultaneous: false
-03-29 15:50:05.355 26095 26116 I GoJNI   : Additional features:
-03-29 15:50:05.355 26095 26116 I GoJNI   :   Easy Connect (DPP): true
-03-29 15:50:05.355 26095 26116 I GoJNI   :   Enhanced Open (OWE): true
-03-29 15:50:05.356 26095 26116 I GoJNI   :   WPA3-SAE: true
-03-29 15:50:05.356 26095 26116 I GoJNI   :   Max signal level: 4
-03-29 15:50:05.356 26095 26116 I GoJNI   :   Multi-internet mode: disabled (0)
-03-29 15:50:05.356 26095 26116 I GoJNI   : WiFi hotspot example complete.
+03-29 17:17:47.093 20863 20885 I GoJNI   : === WiFi Hotspot ===
+03-29 17:17:47.093 20863 20885 I GoJNI   : WiFi enabled: true
+03-29 17:17:47.093 20863 20885 I GoJNI   : WiFi state: enabled (3)
+03-29 17:17:47.093 20863 20885 I GoJNI   : Band support:
+03-29 17:17:47.093 20863 20885 I GoJNI   :   2.4 GHz: true
+03-29 17:17:47.093 20863 20885 I GoJNI   :   5 GHz: true
+03-29 17:17:47.093 20863 20885 I GoJNI   :   6 GHz: true
+03-29 17:17:47.093 20863 20885 I GoJNI   :   60 GHz: false
+03-29 17:17:47.093 20863 20885 I GoJNI   : Hotspot capabilities:
+03-29 17:17:47.093 20863 20885 I GoJNI   :   STA+AP concurrency: true
+03-29 17:17:47.093 20863 20885 I GoJNI   :   Bridged AP: false
+03-29 17:17:47.093 20863 20885 I GoJNI   :   STA+Bridged AP: false
+03-29 17:17:47.093 20863 20885 I GoJNI   :   Dual band simultaneous: false
+03-29 17:17:47.094 20863 20885 I GoJNI   : Additional features:
+03-29 17:17:47.094 20863 20885 I GoJNI   :   Easy Connect (DPP): true
+03-29 17:17:47.094 20863 20885 I GoJNI   :   Enhanced Open (OWE): true
+03-29 17:17:47.094 20863 20885 I GoJNI   :   WPA3-SAE: true
+03-29 17:17:47.094 20863 20885 I GoJNI   :   Max signal level: 4
+03-29 17:17:47.097 20863 20885 I GoJNI   :   Multi-internet mode: disabled (0)
+03-29 17:17:47.097 20863 20885 I GoJNI   : WiFi hotspot example complete.

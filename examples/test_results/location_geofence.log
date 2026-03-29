@@ -28,23 +28,20 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/location_geofence.apk build/aligned.apk
 Built: build/location_geofence.apk
-Serving...
-All files should be loaded. Notifying the device.
-Performing Incremental Install
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/location_geofence/build/location_geofence.apk: 1 file pushed, 0 skipped. 471.7 MB/s (3527187 bytes in 0.007s)
 Success
-Install command complete in 854 ms
 Starting: Intent { cmp=center.dx.jni.examples.location_geofence/android.app.NativeActivity }
-03-29 15:50:55.274 26294 26315 I GoJNI   : === Geofence Configuration ===
-03-29 15:50:55.274 26294 26315 I GoJNI   :   Center: lat=37.4220 lon=-122.0841
-03-29 15:50:55.274 26294 26315 I GoJNI   :   Radius: 500 m
-03-29 15:50:55.274 26294 26315 I GoJNI   : === Searching for location ===
-03-29 15:50:55.274 26294 26315 I GoJNI   :   gps: not enabled
-03-29 15:50:55.274 26294 26315 I GoJNI   :   network: not enabled
-03-29 15:50:55.274 26294 26315 I GoJNI   :   passive: not enabled
-03-29 15:50:55.274 26294 26315 I GoJNI   : No cached location available.
-03-29 15:50:55.274 26294 26315 I GoJNI   : Using simulated position: lat=37.4225 lon=-122.0840
-03-29 15:50:55.274 26294 26315 I GoJNI   : === Geofence Check ===
-03-29 15:50:55.274 26294 26315 I GoJNI   :   Device:   lat=37.422500 lon=-122.084000 (simulated)
-03-29 15:50:55.274 26294 26315 I GoJNI   :   Distance: 56.3 m
-03-29 15:50:55.274 26294 26315 I GoJNI   :   Status:   INSIDE geofence (500 m radius)
-03-29 15:50:55.274 26294 26315 I GoJNI   : Location geofence example completed.
+03-29 17:18:28.185 21741 21825 I GoJNI   : === Geofence Configuration ===
+03-29 17:18:28.185 21741 21825 I GoJNI   :   Center: lat=37.4220 lon=-122.0841
+03-29 17:18:28.185 21741 21825 I GoJNI   :   Radius: 500 m
+03-29 17:18:28.185 21741 21825 I GoJNI   : === Searching for location ===
+03-29 17:18:28.185 21741 21825 I GoJNI   :   gps: not enabled
+03-29 17:18:28.185 21741 21825 I GoJNI   :   network: not enabled
+03-29 17:18:28.185 21741 21825 I GoJNI   :   passive: not enabled
+03-29 17:18:28.185 21741 21825 I GoJNI   : No cached location available.
+03-29 17:18:28.186 21741 21825 I GoJNI   : Using simulated position: lat=37.4225 lon=-122.0840
+03-29 17:18:28.186 21741 21825 I GoJNI   : === Geofence Check ===
+03-29 17:18:28.186 21741 21825 I GoJNI   :   Device:   lat=37.422500 lon=-122.084000 (simulated)
+03-29 17:18:28.186 21741 21825 I GoJNI   :   Distance: 56.3 m
+03-29 17:18:28.186 21741 21825 I GoJNI   :   Status:   INSIDE geofence (500 m radius)
+03-29 17:18:28.186 21741 21825 I GoJNI   : Location geofence example completed.

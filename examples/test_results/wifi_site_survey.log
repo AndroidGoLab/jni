@@ -28,34 +28,31 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/wifi_site_survey.apk build/aligned.apk
 Built: build/wifi_site_survey.apk
-Serving...
-All files should be loaded. Notifying the device.
-Performing Incremental Install
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/wifi_site_survey/build/wifi_site_survey.apk: 1 file pushed, 0 skipped. 872.3 MB/s (3514899 bytes in 0.004s)
 Success
-Install command complete in 816 ms
 Starting: Intent { cmp=center.dx.jni.examples.wifi_site_survey/android.app.NativeActivity }
-03-29 15:47:00.373 25351 25372 I GoJNI   : === WiFi Site Survey ===
-03-29 15:47:00.374 25351 25372 I GoJNI   : WiFi enabled: true
-03-29 15:47:00.374 25351 25372 I GoJNI   : WiFi state: ENABLED (3)
-03-29 15:47:00.374 25351 25372 I GoJNI   : Scan started: false
-03-29 15:47:00.374 25351 25372 I GoJNI   : Current connection:
-03-29 15:47:00.374 25351 25372 I GoJNI   :   SSID: <unknown ssid>
-03-29 15:47:00.374 25351 25372 I GoJNI   :   BSSID: 02:00:00:00:00:00
-03-29 15:47:00.374 25351 25372 I GoJNI   :   RSSI: -47 dBm
-03-29 15:47:00.374 25351 25372 I GoJNI   :   Frequency: 5180 MHz
-03-29 15:47:00.374 25351 25372 I GoJNI   :   Link speed: 300 Mbps
-03-29 15:47:00.374 25351 25372 I GoJNI   :   Network ID: -1
-03-29 15:47:00.374 25351 25372 I GoJNI   :   MAC: 02:00:00:00:00:00
-03-29 15:47:00.374 25351 25372 I GoJNI   :   Hidden SSID: false
-03-29 15:47:00.374 25351 25372 I GoJNI   :   Rx link speed: 300 Mbps
-03-29 15:47:00.374 25351 25372 I GoJNI   :   Tx link speed: 300 Mbps
-03-29 15:47:00.374 25351 25372 I GoJNI   :   WiFi standard: 11n (4)
-03-29 15:47:00.374 25351 25372 I GoJNI   : Capabilities:
-03-29 15:47:00.374 25351 25372 I GoJNI   :   Scan always available: true
-03-29 15:47:00.374 25351 25372 I GoJNI   :   5 GHz supported: true
-03-29 15:47:00.374 25351 25372 I GoJNI   :   6 GHz supported: true
-03-29 15:47:00.374 25351 25372 I GoJNI   :   60 GHz supported: false
-03-29 15:47:00.374 25351 25372 I GoJNI   :   P2P supported: true
-03-29 15:47:00.374 25351 25372 I GoJNI   :   TDLS supported: true
-03-29 15:47:00.374 25351 25372 I GoJNI   :   Max signal level: 4
-03-29 15:47:00.374 25351 25372 I GoJNI   : WiFi site survey complete.
+03-29 17:15:29.842 19017 19044 I GoJNI   : === WiFi Site Survey ===
+03-29 17:15:29.843 19017 19044 I GoJNI   : WiFi enabled: true
+03-29 17:15:29.843 19017 19044 I GoJNI   : WiFi state: ENABLED (3)
+03-29 17:15:29.843 19017 19044 I GoJNI   : Scan started: false
+03-29 17:15:29.843 19017 19044 I GoJNI   : Current connection:
+03-29 17:15:29.843 19017 19044 I GoJNI   :   SSID: <unknown ssid>
+03-29 17:15:29.843 19017 19044 I GoJNI   :   BSSID: 02:00:00:00:00:00
+03-29 17:15:29.843 19017 19044 I GoJNI   :   RSSI: -47 dBm
+03-29 17:15:29.843 19017 19044 I GoJNI   :   Frequency: 5180 MHz
+03-29 17:15:29.843 19017 19044 I GoJNI   :   Link speed: 300 Mbps
+03-29 17:15:29.843 19017 19044 I GoJNI   :   Network ID: -1
+03-29 17:15:29.843 19017 19044 I GoJNI   :   MAC: 02:00:00:00:00:00
+03-29 17:15:29.843 19017 19044 I GoJNI   :   Hidden SSID: false
+03-29 17:15:29.843 19017 19044 I GoJNI   :   Rx link speed: 300 Mbps
+03-29 17:15:29.843 19017 19044 I GoJNI   :   Tx link speed: 300 Mbps
+03-29 17:15:29.843 19017 19044 I GoJNI   :   WiFi standard: 11n (4)
+03-29 17:15:29.843 19017 19044 I GoJNI   : Capabilities:
+03-29 17:15:29.843 19017 19044 I GoJNI   :   Scan always available: true
+03-29 17:15:29.843 19017 19044 I GoJNI   :   5 GHz supported: true
+03-29 17:15:29.843 19017 19044 I GoJNI   :   6 GHz supported: true
+03-29 17:15:29.843 19017 19044 I GoJNI   :   60 GHz supported: false
+03-29 17:15:29.843 19017 19044 I GoJNI   :   P2P supported: true
+03-29 17:15:29.843 19017 19044 I GoJNI   :   TDLS supported: true
+03-29 17:15:29.844 19017 19044 I GoJNI   :   Max signal level: 4
+03-29 17:15:29.844 19017 19044 I GoJNI   : WiFi site survey complete.

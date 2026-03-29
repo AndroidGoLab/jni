@@ -28,10 +28,28 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/bt_classic_discovery.apk build/aligned.apk
 Built: build/bt_classic_discovery.apk
-Serving...
-adb: failed to run abb_exec. Error: device '41041JEKB08092' not found
-Performing Incremental Install
-
-Performing Streamed Install
-adb: connect error for write: device '41041JEKB08092' not found
-Serving...
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/bt_classic_discovery/build/bt_classic_discovery.apk: 1 file pushed, 0 skipped. 401.3 MB/s (3506707 bytes in 0.008s)
+Success
+Starting: Intent { cmp=center.dx.jni.examples.bt_classic_discovery/android.app.NativeActivity }
+03-29 17:13:08.889 17248 17271 I GoJNI   : === Device type constants ===
+03-29 17:13:08.889 17248 17271 I GoJNI   :   DeviceTypeClassic = 1
+03-29 17:13:08.889 17248 17271 I GoJNI   :   DeviceTypeLe      = 2
+03-29 17:13:08.889 17248 17271 I GoJNI   :   DeviceTypeDual    = 3
+03-29 17:13:08.890 17248 17271 I GoJNI   : === Bond state constants ===
+03-29 17:13:08.890 17248 17271 I GoJNI   :   BondNone    = 10
+03-29 17:13:08.890 17248 17271 I GoJNI   :   BondBonding = 11
+03-29 17:13:08.890 17248 17271 I GoJNI   :   BondBonded  = 12
+03-29 17:13:08.890 17248 17271 I GoJNI   : === Adapter state constants ===
+03-29 17:13:08.890 17248 17271 I GoJNI   :   StateOff       = 10
+03-29 17:13:08.890 17248 17271 I GoJNI   :   StateTurningOn = 11
+03-29 17:13:08.890 17248 17271 I GoJNI   :   StateOn        = 12
+03-29 17:13:08.890 17248 17271 I GoJNI   :   StateTurningOff = 13
+03-29 17:13:08.890 17248 17271 I GoJNI   : Bluetooth enabled: true
+03-29 17:13:08.890 17248 17271 I GoJNI   : Adapter name: Pixel 8a
+03-29 17:13:08.891 17248 17271 I GoJNI   : Adapter state: On (12)
+03-29 17:13:08.891 17248 17271 I GoJNI   : Scan mode: Connectable (21)
+03-29 17:13:08.891 17248 17271 I GoJNI   : StartDiscovery result: false
+03-29 17:13:08.891 17248 17271 I GoJNI   : IsDiscovering: false
+03-29 17:13:08.891 17248 17271 I GoJNI   : IsDiscovering (after 3s): false
+03-29 17:13:08.891 17248 17271 I GoJNI   : CancelDiscovery result: true
+03-29 17:13:08.891 17248 17271 I GoJNI   : No errors occurred during classic Bluetooth discovery.

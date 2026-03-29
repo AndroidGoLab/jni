@@ -33,44 +33,6 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/bt_indoor_position.apk build/aligned.apk
 Built: build/bt_indoor_position.apk
-Serving...
-All files should be loaded. Notifying the device.
-Performing Incremental Install
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/bt_indoor_position/build/bt_indoor_position.apk: 1 file pushed, 0 skipped. 152.2 MB/s (3596900 bytes in 0.023s)
 Success
-Install command complete in 963 ms
 Starting: Intent { cmp=center.dx.jni.examples.bt_indoor_position/android.app.NativeActivity }
-03-29 15:45:38.830 25023 25050 I GoJNI   : === Indoor Positioning Demo ===
-03-29 15:45:38.830 25023 25050 I GoJNI   : === Distance estimation examples ===
-03-29 15:45:38.830 25023 25050 I GoJNI   : TX power=-59 dBm, path-loss exponent=2.5
-03-29 15:45:38.830 25023 25050 I GoJNI   :   RSSI=-50 dBm -> distance=0.44 m
-03-29 15:45:38.830 25023 25050 I GoJNI   :   RSSI=-60 dBm -> distance=1.10 m
-03-29 15:45:38.830 25023 25050 I GoJNI   :   RSSI=-70 dBm -> distance=2.75 m
-03-29 15:45:38.830 25023 25050 I GoJNI   :   RSSI=-80 dBm -> distance=6.92 m
-03-29 15:45:38.830 25023 25050 I GoJNI   :   RSSI=-90 dBm -> distance=17.38 m
-03-29 15:45:38.830 25023 25050 I GoJNI   : BluetoothManager: obtained OK
-03-29 15:45:38.830 25023 25050 I GoJNI   : Manager.ToString: android.bluetooth.BluetoothManager@efe2749
-03-29 15:45:38.830 25023 25050 I GoJNI   : Bluetooth enabled: true
-03-29 15:45:38.830 25023 25050 I GoJNI   : Adapter name: Pixel 8a
-03-29 15:45:38.830 25023 25050 I GoJNI   : Adapter address: 02:00:00:00:00:00
-03-29 15:45:38.830 25023 25050 I GoJNI   : Adapter state: 12
-03-29 15:45:38.830 25023 25050 I GoJNI   : Scan mode: 21
-03-29 15:45:38.830 25023 25050 I GoJNI   : === LE Scanner ===
-03-29 15:45:38.830 25023 25050 I GoJNI   : BLE scanner: android.bluetooth.le.BluetoothLeScanner@4348a7c
-03-29 15:45:38.830 25023 25050 I GoJNI   : === PHY capabilities ===
-03-29 15:45:38.830 25023 25050 I GoJNI   : LE 2M PHY supported: true
-03-29 15:45:38.830 25023 25050 I GoJNI   : LE Coded PHY supported: true
-03-29 15:45:38.830 25023 25050 I GoJNI   : LE periodic advertising supported: true
-03-29 15:45:38.830 25023 25050 I GoJNI   : LE extended advertising supported: true
-03-29 15:45:38.830 25023 25050 I GoJNI   : Offloaded scan batching supported: true
-03-29 15:45:38.830 25023 25050 I GoJNI   : Offloaded filtering supported: true
-03-29 15:45:38.830 25023 25050 I GoJNI   : Multiple advertisement supported: true
-03-29 15:45:38.830 25023 25050 I GoJNI   : Max advertising data length: 1650 bytes
-03-29 15:45:38.830 25023 25050 I GoJNI   : Max connected audio devices: 5
-03-29 15:45:38.830 25023 25050 I GoJNI   : LE audio supported: 10
-03-29 15:45:38.830 25023 25050 I GoJNI   : === LE Advertiser ===
-03-29 15:45:38.830 25023 25050 I GoJNI   : BLE advertiser: android.bluetooth.le.BluetoothLeAdvertiser@ad9f326
-03-29 15:45:38.830 25023 25050 I GoJNI   : Bonded devices set: obtained OK
-03-29 15:45:38.831 25023 25050 I GoJNI   : GATT connected devices: obtained OK
-03-29 15:45:38.831 25023 25050 I GoJNI   : Is discovering: false
-03-29 15:45:38.831 25023 25050 I GoJNI   : GATT profile connection state: 0
-03-29 15:45:38.831 25023 25050 I GoJNI   : Indoor positioning demo completed successfully.

@@ -28,23 +28,20 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/location_passive.apk build/aligned.apk
 Built: build/location_passive.apk
-Serving...
-All files should be loaded. Notifying the device.
-Performing Incremental Install
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/location_passive/build/location_passive.apk: 1 file pushed, 0 skipped. 206.7 MB/s (3596819 bytes in 0.017s)
 Success
-Install command complete in 915 ms
 Starting: Intent { cmp=center.dx.jni.examples.location_passive/android.app.NativeActivity }
-03-29 15:52:18.089 26596 26617 I GoJNI   : === Passive Location Provider ===
-03-29 15:52:18.089 26596 26617 I GoJNI   : Provider constant: "passive"
-03-29 15:52:18.089 26596 26617 I GoJNI   : Passive provider enabled: false
-03-29 15:52:18.089 26596 26617 I GoJNI   : === All Provider Status ===
-03-29 15:52:18.089 26596 26617 I GoJNI   :   gps: enabled=false
-03-29 15:52:18.089 26596 26617 I GoJNI   :   network: enabled=false
-03-29 15:52:18.089 26596 26617 I GoJNI   :   passive: enabled=false
-03-29 15:52:18.089 26596 26617 I GoJNI   : === Passive Location ===
-03-29 15:52:18.089 26596 26617 I GoJNI   : No cached passive location available.
-03-29 15:52:18.089 26596 26617 I GoJNI   : (Passive provider reuses fixes from other apps.)
-03-29 15:52:18.089 26596 26617 I GoJNI   : Try running a maps app first, then retry.
-03-29 15:52:18.089 26596 26617 I GoJNI   : === GPS Last Known (for comparison) ===
-03-29 15:52:18.089 26596 26617 I GoJNI   : No cached GPS location.
-03-29 15:52:18.089 26596 26617 I GoJNI   : Passive location example completed.
+03-29 17:19:26.793 23575 23597 I GoJNI   : === Passive Location Provider ===
+03-29 17:19:26.793 23575 23612 I GoJNI   : Provider constant: "passive"
+03-29 17:19:26.793 23575 23612 I GoJNI   : Passive provider enabled: false
+03-29 17:19:26.793 23575 23612 I GoJNI   : === All Provider Status ===
+03-29 17:19:26.793 23575 23612 I GoJNI   :   gps: enabled=false
+03-29 17:19:26.793 23575 23612 I GoJNI   :   network: enabled=false
+03-29 17:19:26.793 23575 23612 I GoJNI   :   passive: enabled=false
+03-29 17:19:26.793 23575 23612 I GoJNI   : === Passive Location ===
+03-29 17:19:26.793 23575 23612 I GoJNI   : No cached passive location available.
+03-29 17:19:26.794 23575 23612 I GoJNI   : (Passive provider reuses fixes from other apps.)
+03-29 17:19:26.794 23575 23612 I GoJNI   : Try running a maps app first, then retry.
+03-29 17:19:26.795 23575 23612 I GoJNI   : === GPS Last Known (for comparison) ===
+03-29 17:19:26.795 23575 23612 I GoJNI   : No cached GPS location.
+03-29 17:19:26.795 23575 23612 I GoJNI   : Passive location example completed.

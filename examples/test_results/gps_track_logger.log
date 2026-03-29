@@ -33,12 +33,9 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/gps_track_logger.apk build/aligned.apk
 Built: build/gps_track_logger.apk
-Serving...
-All files should be loaded. Notifying the device.
-Performing Incremental Install
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/gps_track_logger/build/gps_track_logger.apk: 1 file pushed, 0 skipped. 425.5 MB/s (3600996 bytes in 0.008s)
 Success
-Install command complete in 803 ms
 Starting: Intent { cmp=center.dx.jni.examples.gps_track_logger/android.app.NativeActivity }
-03-29 15:50:32.926 26198 26220 I GoJNI   : GPS provider enabled: false
-03-29 15:50:32.926 26198 26220 I GoJNI   : GPS provider is not enabled. Enable GPS and retry.
-03-29 15:50:32.926 26198 26220 I GoJNI   : GPS track logger example completed.
+03-29 17:18:08.755 21208 21232 I GoJNI   : GPS provider enabled: false
+03-29 17:18:08.755 21208 21232 I GoJNI   : GPS provider is not enabled. Enable GPS and retry.
+03-29 17:18:08.755 21208 21232 I GoJNI   : GPS track logger example completed.

@@ -28,22 +28,19 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/wifi_rtt_ranging.apk build/aligned.apk
 Built: build/wifi_rtt_ranging.apk
-Serving...
-All files should be loaded. Notifying the device.
-Performing Incremental Install
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/wifi_rtt_ranging/build/wifi_rtt_ranging.apk: 1 file pushed, 0 skipped. 279.4 MB/s (3547667 bytes in 0.012s)
 Success
-Install command complete in 795 ms
 Starting: Intent { cmp=center.dx.jni.examples.wifi_rtt_ranging/android.app.NativeActivity }
-03-29 15:48:50.691 25774 25795 I GoJNI   : === WiFi RTT Ranging ===
-03-29 15:48:50.691 25774 25795 I GoJNI   : WifiRttManager obtained
-03-29 15:48:50.691 25774 25795 I GoJNI   : RTT available: false
-03-29 15:48:50.691 25774 25795 I GoJNI   : RTT characteristics: obtained
-03-29 15:48:50.691 25774 25795 I GoJNI   : WiFi enabled: true
-03-29 15:48:50.691 25774 25795 I GoJNI   : Scanning for RTT-capable APs...
-03-29 15:48:50.691 25774 25795 I GoJNI   : Scan results obtained (List object)
-03-29 15:48:50.691 25774 25795 I GoJNI   : Note: Iterating Java List<ScanResult> requires raw JNI;
-03-29 15:48:50.691 25774 25795 I GoJNI   : use WifiManager.GetConnectionInfo() for current AP info.
-03-29 15:48:50.691 25774 25795 I GoJNI   : Current AP RSSI: -49 dBm
-03-29 15:48:50.691 25774 25795 I GoJNI   : Current AP frequency: 5180 MHz
-03-29 15:48:50.691 25774 25795 I GoJNI   : Link speed: 300 Mbps
-03-29 15:48:50.691 25774 25795 I GoJNI   : WiFi RTT ranging example complete.
+03-29 17:16:48.478 19967 19989 I GoJNI   : === WiFi RTT Ranging ===
+03-29 17:16:48.478 19967 19989 I GoJNI   : WifiRttManager obtained
+03-29 17:16:48.478 19967 19989 I GoJNI   : RTT available: false
+03-29 17:16:48.478 19967 19989 I GoJNI   : RTT characteristics: obtained
+03-29 17:16:48.478 19967 19989 I GoJNI   : WiFi enabled: true
+03-29 17:16:48.478 19967 19989 I GoJNI   : Scanning for RTT-capable APs...
+03-29 17:16:48.478 19967 19989 I GoJNI   : Scan results obtained (List object)
+03-29 17:16:48.478 19967 19989 I GoJNI   : Note: Iterating Java List<ScanResult> requires raw JNI;
+03-29 17:16:48.478 19967 19989 I GoJNI   : use WifiManager.GetConnectionInfo() for current AP info.
+03-29 17:16:48.478 19967 19989 I GoJNI   : Current AP RSSI: -46 dBm
+03-29 17:16:48.478 19967 19989 I GoJNI   : Current AP frequency: 5180 MHz
+03-29 17:16:48.478 19967 19989 I GoJNI   : Link speed: 300 Mbps
+03-29 17:16:48.478 19967 19989 I GoJNI   : WiFi RTT ranging example complete.

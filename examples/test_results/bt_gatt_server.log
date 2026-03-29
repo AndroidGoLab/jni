@@ -33,11 +33,7 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/bt_gatt_server.apk build/aligned.apk
 Built: build/bt_gatt_server.apk
-Serving...
-Timed out waiting for data from device.
-Timed out waiting for data from device.
-adb: failed to run abb_exec. Error: device '41041JEKB08092' not found
-Performing Incremental Install
-
-Performing Streamed Install
-adb: connect error for write: device '41041JEKB08092' not found
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/bt_gatt_server/build/bt_gatt_server.apk: 1 file pushed, 0 skipped. 124.4 MB/s (3588708 bytes in 0.028s)
+Success
+Starting: Intent { cmp=center.dx.jni.examples.bt_gatt_server/android.app.NativeActivity }
+03-29 17:13:49.422 17764 17785 F libc    : Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0 in tid 17785 (Thread-12), pid 17764 (.bt_gatt_server)

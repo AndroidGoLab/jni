@@ -28,26 +28,23 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/bt_audio_routing.apk build/aligned.apk
 Built: build/bt_audio_routing.apk
-Serving...
-All files should be loaded. Notifying the device.
-Performing Incremental Install
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/bt_audio_routing/build/bt_audio_routing.apk: 1 file pushed, 0 skipped. 203.1 MB/s (3506707 bytes in 0.016s)
 Success
-Install command complete in 886 ms
 Starting: Intent { cmp=center.dx.jni.examples.bt_audio_routing/android.app.NativeActivity }
-03-29 15:45:10.827 24911 24937 I GoJNI   : === Connection state constants ===
-03-29 15:45:10.827 24911 24937 I GoJNI   :   StateDisconnected  = 0
-03-29 15:45:10.827 24911 24937 I GoJNI   :   StateConnecting    = 1
-03-29 15:45:10.827 24911 24937 I GoJNI   :   StateConnected     = 2
-03-29 15:45:10.827 24911 24937 I GoJNI   :   StateDisconnecting = 3
-03-29 15:45:10.827 24911 24937 I GoJNI   : Bluetooth enabled: true
-03-29 15:45:10.827 24911 24937 I GoJNI   : Adapter name: Pixel 8a
-03-29 15:45:10.827 24911 24937 I GoJNI   : === Audio profile connection states ===
-03-29 15:45:10.827 24911 24937 I GoJNI   :   A2DP: disconnected (state=0)
-03-29 15:45:10.827 24911 24937 I GoJNI   :   Headset: disconnected (state=0)
-03-29 15:45:10.827 24911 24937 I GoJNI   :   HearingAid: disconnected (state=0)
-03-29 15:45:10.827 24911 24937 I GoJNI   : Max connected audio devices: 5
-03-29 15:45:10.827 24911 24937 I GoJNI   : LE Audio supported: 10
-03-29 15:45:10.827 24911 24937 I GoJNI   : LE Audio broadcast source supported: 10
-03-29 15:45:10.827 24911 24937 I GoJNI   : LE Audio broadcast assistant supported: 10
-03-29 15:45:10.827 24911 24937 I GoJNI   : Audio routing analysis completed.
-03-29 15:45:10.827 24911 24937 I GoJNI   : No errors occurred during audio routing analysis.
+03-29 17:14:09.415 18028 18051 I GoJNI   : === Connection state constants ===
+03-29 17:14:09.416 18028 18051 I GoJNI   :   StateDisconnected  = 0
+03-29 17:14:09.416 18028 18051 I GoJNI   :   StateConnecting    = 1
+03-29 17:14:09.416 18028 18051 I GoJNI   :   StateConnected     = 2
+03-29 17:14:09.416 18028 18051 I GoJNI   :   StateDisconnecting = 3
+03-29 17:14:09.416 18028 18051 I GoJNI   : Bluetooth enabled: true
+03-29 17:14:09.416 18028 18051 I GoJNI   : Adapter name: Pixel 8a
+03-29 17:14:09.416 18028 18051 I GoJNI   : === Audio profile connection states ===
+03-29 17:14:09.416 18028 18051 I GoJNI   :   A2DP: disconnected (state=0)
+03-29 17:14:09.416 18028 18051 I GoJNI   :   Headset: disconnected (state=0)
+03-29 17:14:09.416 18028 18051 I GoJNI   :   HearingAid: disconnected (state=0)
+03-29 17:14:09.416 18028 18051 I GoJNI   : Max connected audio devices: 5
+03-29 17:14:09.416 18028 18051 I GoJNI   : LE Audio supported: 10
+03-29 17:14:09.416 18028 18051 I GoJNI   : LE Audio broadcast source supported: 10
+03-29 17:14:09.416 18028 18051 I GoJNI   : LE Audio broadcast assistant supported: 10
+03-29 17:14:09.417 18028 18051 I GoJNI   : Audio routing analysis completed.
+03-29 17:14:09.417 18028 18051 I GoJNI   : No errors occurred during audio routing analysis.

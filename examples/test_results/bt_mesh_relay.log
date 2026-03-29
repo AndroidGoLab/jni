@@ -33,35 +33,7 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/bt_mesh_relay.apk build/aligned.apk
 Built: build/bt_mesh_relay.apk
-Serving...
-All files should be loaded. Notifying the device.
-Performing Incremental Install
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/bt_mesh_relay/build/bt_mesh_relay.apk: 1 file pushed, 0 skipped. 182.2 MB/s (3572324 bytes in 0.019s)
 Success
-Install command complete in 877 ms
 Starting: Intent { cmp=center.dx.jni.examples.bt_mesh_relay/android.app.NativeActivity }
-03-29 15:46:32.828 25245 25267 I GoJNI   : === Mesh Relay Demo ===
-03-29 15:46:32.828 25245 25267 I GoJNI   : BluetoothManager: obtained OK
-03-29 15:46:32.828 25245 25267 I GoJNI   : Adapter obtained via Manager: OK
-03-29 15:46:32.828 25245 25267 I GoJNI   : Bluetooth enabled: true
-03-29 15:46:32.828 25245 25267 I GoJNI   : Adapter name: Pixel 8a
-03-29 15:46:32.828 25245 25267 I GoJNI   : Adapter state: 12
-03-29 15:46:32.828 25245 25267 I GoJNI   : === Advertising capabilities ===
-03-29 15:46:32.828 25245 25267 I GoJNI   : Multiple advertisement supported: true
-03-29 15:46:32.828 25245 25267 I GoJNI   : LE extended advertising: true
-03-29 15:46:32.828 25245 25267 I GoJNI   : LE periodic advertising: true
-03-29 15:46:32.828 25245 25267 I GoJNI   : Max advertising data length: 1650 bytes
-03-29 15:46:32.828 25245 25267 I GoJNI   : === PHY capabilities ===
-03-29 15:46:32.828 25245 25267 I GoJNI   : LE 2M PHY supported: true
-03-29 15:46:32.828 25245 25267 I GoJNI   : LE Coded PHY supported: true
-03-29 15:46:32.828 25245 25267 I GoJNI   : LE audio supported: 10
-03-29 15:46:32.828 25245 25267 I GoJNI   : Offloaded filtering: true
-03-29 15:46:32.828 25245 25267 I GoJNI   : Offloaded scan batching: true
-03-29 15:46:32.828 25245 25267 I GoJNI   : === LE Scanner ===
-03-29 15:46:32.828 25245 25267 I GoJNI   : BLE scanner: android.bluetooth.le.BluetoothLeScanner@57dd268
-03-29 15:46:32.828 25245 25267 I GoJNI   : === LE Advertiser ===
-03-29 15:46:32.828 25245 25267 I GoJNI   : BLE advertiser: android.bluetooth.le.BluetoothLeAdvertiser@c464b67
-03-29 15:46:32.828 25245 25267 I GoJNI   : === Bonded devices ===
-03-29 15:46:32.828 25245 25267 I GoJNI   : Bonded devices set: obtained OK
-03-29 15:46:32.828 25245 25267 I GoJNI   : GATT connected devices: obtained OK
-03-29 15:46:32.828 25245 25267 I GoJNI   : Mesh relay capable: true
-03-29 15:46:32.828 25245 25267 I GoJNI   : Mesh relay demo completed successfully.
+03-29 17:15:09.263 18750 18777 F libc    : Fatal signal 11 (SIGSEGV), code 1 (SEGV_MAPERR), fault addr 0x0 in tid 18777 (Thread-12), pid 18750 (s.bt_mesh_relay)

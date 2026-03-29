@@ -33,21 +33,6 @@ cd build && zip -r base.apk lib/
 /home/streaming/Android/Sdk/build-tools/35.0.0/apksigner sign --ks build/debug.keystore --ks-pass pass:android \
 	--out build/bt_beacon_scanner.apk build/aligned.apk
 Built: build/bt_beacon_scanner.apk
-Serving...
-adb: failed to run abb_exec. Error: device '41041JEKB08092' not found
-Performing Incremental Install
-
-Performing Streamed Install
-adb: connect error for write: device '41041JEKB08092' not found
-Serving...
-adb: failed to run abb_exec. Error: device '41041JEKB08092' not found
-Performing Incremental Install
-
-Performing Streamed Install
-adb: connect error for write: device '41041JEKB08092' not found
-Serving...
-adb: failed to run abb_exec. Error: device '41041JEKB08092' not found
-Performing Incremental Install
-
-Performing Streamed Install
-adb: connect error for write: device '41041JEKB08092' not found
+/home/streaming/go/src/github.com/xaionaro-go/jni/examples/bt_beacon_scanner/build/bt_beacon_scanner.apk: 1 file pushed, 0 skipped. 274.3 MB/s (3580516 bytes in 0.012s)
+Success
+Starting: Intent { cmp=center.dx.jni.examples.bt_beacon_scanner/android.app.NativeActivity }
